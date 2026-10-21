@@ -2,6 +2,7 @@
 // A teherbíró réteg mélységével változik, melyik megoldás működik.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { MarchingCubes } from 'three/addons/objects/MarchingCubes.js';
 import { $, h, fmt, clamp } from './core.js';
 
 const TYPES = [
@@ -33,6 +34,7 @@ export function initHero() {
   catch (e) { box.append(h('div', { class: 'h3-lab', style: { left: '50%', top: '50%' } }, 'A 3D nézethez WebGL kell.')); return; }
   renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
   renderer.setClearColor(0x1d2a37);
+  renderer.localClippingEnabled = true;
   box.prepend(renderer.domElement);
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0x1d2a37, 70, 140);
@@ -53,7 +55,7 @@ export function initHero() {
   const clearLabels = () => { labels.splice(0).forEach((l) => l.el.remove()); };
 
   // talajtömb: a homlokzat felé (z+) nyitott metszet → a rétegek dobozok
-  function soil() {
+  function soil(xray = false) {
     const g = new THREE.Group();
     const layers = [
       { top: 0, bot: 1.2, c: 0x7b6a52 },                       // feltöltés
@@ -63,8 +65,8 @@ export function initHero() {
     for (const L of layers) {
       const hh = L.bot - L.top; if (hh <= 0.01) continue;
       const dz = ZC + Z;
-      const m = new THREE.Mesh(new THREE.BoxGeometry(W, hh, dz), mat(L.c));
-      m.position.set(0, -L.top - hh / 2, -Z + dz / 2);
+      const m = new THREE.Mesh(new THREE.BoxGeometry(W, hh, dz), xray ? mat(L.c, { transparent: true, opacity: 0.42, depthWrite: false }) : mat(L.c));
+      m.position.set(0, -L.top - hh / 2, -Z + dz / 2); if (xray) m.renderOrder = 1;
       g.add(m);
       const e = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry), new THREE.LineBasicMaterial({ color: 0x2b241c, transparent: true, opacity: 0.35 }));
       e.position.copy(m.position); g.add(e);
@@ -110,24 +112,84 @@ export function initHero() {
       const a = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(x, y - 0.7, z), 1.4, color, 0.5, 0.35); g.add(a);
     }
   };
+  // ---- feszültséghagyma: rugalmas féltér, egyenletesen terhelt B×L lemez alatt (Boussinesq, Steinbrenner-féle sarokpont-képlet)
+  const RB = 13.2, RL = 11.2, BASE = 1.5, QK = 60; // lemez mérete (x, z), alapsík a terep alatt, talpnyomás kPa – szemléltető
+  const bz0 = -5.6;
+  const Icorner = (a, b, z) => { const m = a / z, n = b / z, m2 = m * m, n2 = n * n, V = m2 + n2 + 1, V1 = m2 * n2, sv = Math.sqrt(V); return ((2 * m * n * sv / (V + V1)) * ((V + 1) / V) + Math.atan2(2 * m * n * sv, V - V1)) / (4 * Math.PI); };
+  const g4 = (a, b, z) => Math.sign(a) * Math.sign(b) * Icorner(Math.abs(a), Math.abs(b), z);
+  const Iz = (x, zz, d) => { if (d <= 1e-3) return 0; const x1 = -RB / 2 - x, x2 = RB / 2 - x, y1 = -RL / 2 - zz, y2 = RL / 2 - zz; return g4(x2, y2, d) - g4(x1, y2, d) - g4(x2, y1, d) + g4(x1, y1, d); };
+  const sv0 = (t) => (t <= GW ? 18 * t : 18 * GW + 10 * (t - GW)); // hatékony önsúlyfeszültség (γ = 18, γ′ = 10 kN/m³)
+  // határmélység: ahol Δσz = 0,2·σ′v0 (a lemez középvonalában)
+  const HM = (() => { let lo = 0.5, hi = 60; for (let k = 0; k < 60; k++) { const m = (lo + hi) / 2; if (QK * Iz(0, 0, m) > 0.2 * sv0(BASE + m)) lo = m; else hi = m; } return (lo + hi) / 2; })();
+  let stressG = null;
+  function stress() {
+    if (stressG) return stressG;
+    const G = new THREE.Group(); world.add(G); stressG = G;
+    const clipBack = new THREE.Plane(new THREE.Vector3(0, 0, -1), ZC); // a metszősík mögötti fél: z ≤ ZC
+    // 3D izobár-felületek (marching cubes)
+    const N = 44, hx = 13, hy = 14, hz = 11, cx = 0, cy = -BASE - 12.6, cz = bz0, half = N / 2;
+    const field = new Float32Array(N * N * N);
+    for (let k = 0; k < N; k++) {
+      const wz = cz + hz * (k - half) / half;
+      for (let j = 0; j < N; j++) {
+        const wy = cy + hy * (j - half) / half, d = -BASE - wy;
+        for (let i = 0; i < N; i++) {
+          const wx = cx + hx * (i - half) / half;
+          field[k * N * N + j * N + i] = (i === 0 || j === 0 || k === 0 || i === N - 1 || j === N - 1 || k === N - 1 || d < 0.08 || wy < -BOT + 0.3) ? 0 : Iz(wx, wz - bz0, d);
+        }
+      }
+    }
+    [[0.1, 0xf6dc8b, 0.15], [0.2, 0xf2c14e, 0.22], [0.5, 0xf0864a, 0.32], [0.8, 0xd9481a, 0.45]].forEach(([iso, col, op], n) => {
+      const m = new MarchingCubes(N, new THREE.MeshStandardMaterial({ color: col, transparent: true, opacity: op, depthWrite: false, side: THREE.DoubleSide, roughness: 0.55, clippingPlanes: [clipBack] }), false, false, 60000);
+      m.isolation = iso; m.field.set(field); m.update();
+      m.position.set(cx, cy, cz); m.scale.set(hx, hy, hz); m.renderOrder = 3 + n; G.add(m);
+    });
+    // a metszősíkon: Δσz/q színezés + izobárvonalak + határmélység
+    const cw = 480, top = -BASE, bot = -BOT + 0.6, ch = Math.round(cw * (top - bot) / W);
+    const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+    const c = cv.getContext('2d'), img = c.createImageData(cw, ch);
+    const zz = ZC - bz0, val = new Float32Array(cw * ch);
+    for (let py = 0; py < ch; py++) { const d = (py + 0.5) / ch * (top - bot); for (let px = 0; px < cw; px++) { const x = -W / 2 + (px + 0.5) / cw * W; val[py * cw + px] = Iz(x, zz, d); } }
+    const LV = [0.8, 0.5, 0.2, 0.1];
+    for (let py = 0; py < ch; py++) for (let px = 0; px < cw; px++) {
+      const v = val[py * cw + px], o = (py * cw + px) * 4;
+      const t = Math.min(1, v);
+      img.data[o] = 240; img.data[o + 1] = Math.round(205 - 150 * t); img.data[o + 2] = Math.round(110 - 85 * t);
+      img.data[o + 3] = v < 0.04 ? 0 : Math.round(40 + 110 * Math.min(1, v / 0.9));
+      if (px < cw - 1 && py < ch - 1) for (const L of LV) {
+        const a = v - L, b = val[py * cw + px + 1] - L, e = val[(py + 1) * cw + px] - L;
+        if ((a > 0) !== (b > 0) || (a > 0) !== (e > 0)) { img.data[o] = 60; img.data[o + 1] = 28; img.data[o + 2] = 12; img.data[o + 3] = 235; }
+      }
+    }
+    c.putImageData(img, 0, 0);
+    // izobár-értékek a középvonal mellett
+    c.font = '700 15px "JetBrains Mono", monospace'; c.fillStyle = '#3c1c0c'; c.textBaseline = 'middle';
+    for (const L of LV) { let py = 0; while (py < ch - 1 && val[py * cw + Math.round(cw / 2)] > L) py++; c.fillText(String(L).replace('.', ',') + ' q', cw / 2 + 6, Math.min(ch - 10, py + 9)); }
+    // határmélység: szaggatott vonal
+    const hy0 = HM / (top - bot) * ch; c.strokeStyle = '#1a6fb0'; c.lineWidth = 3; c.setLineDash([12, 8]); c.beginPath(); c.moveTo(0, hy0); c.lineTo(cw, hy0); c.stroke();
+    const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(W, top - bot), new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }));
+    face.position.set(0, (top + bot) / 2, ZC + 0.03); face.renderOrder = 8; G.add(face);
+    return G;
+  }
   function rebuild() {
     world.remove(dyn); dyn.traverse((o) => { o.geometry?.dispose?.(); }); dyn = new THREE.Group(); world.add(dyn);
     clearLabels();
-    dyn.add(soil());
+    dyn.add(soil(type === 'sik'));
+    if (stressG) stressG.visible = false;
     const bz = -5.6; // épület közepe z
     let msg = '';
     if (type === 'sik') {
       const soft = Math.max(0, D - 1.6);
-      const s = clamp(soft * 0.045, 0, 0.9);            // szemléltető (nagyítva)
-      const tilt = clamp(soft * 0.0022, 0, 0.045);
-      const raft = new THREE.Mesh(new THREE.BoxGeometry(13.2, 0.9, 11.2), concM); raft.position.set(0, -1.05 - s, bz); raft.rotation.z = tilt; dyn.add(raft);
-      dyn.add(building(0.6 + s, tilt));
-      // feszültséghagyma
-      const bulb = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 16, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0xf0864a, transparent: true, opacity: 0.16, depthWrite: false, side: THREE.DoubleSide }));
-      bulb.scale.set(8.5, 13, 7.5); bulb.position.set(0, -1.5 - s, bz); dyn.add(bulb);
-      addLabel('feszültséghagyma', new THREE.Vector3(0, -8, ZC + 0.4));
+      const s = clamp(soft * 0.045, 0, 0.9);            // egyenletes süllyedés, szemléltető (nagyítva)
+      const raft = new THREE.Mesh(new THREE.BoxGeometry(RB, 0.9, RL), concM); raft.position.set(0, -1.05 - s, bz); dyn.add(raft);
+      dyn.add(building(0.6 + s, 0));
+      const st = stress(); st.visible = true; st.position.y = -s;
+      addLabel('feszültséghagyma: Δσz/q izobárok', new THREE.Vector3(-RB / 2 - 1.5, -BASE - 7, ZC + 0.3));
+      addLabel(`határmélység ≈ ${fmt(HM, 1)} m (Δσz = 0,2·σ′v0)`, new THREE.Vector3(-W / 2 + 6.5, -BASE - HM - s + 0.8, ZC + 0.3), 'blue');
+      const reach = BASE + HM;
       if (D <= 3) { msg = `<b>Síkalap elég</b>A teherbíró réteg ${fmt(D, 1)} m-en kezdődik: a síkalap (vagy egy kissé mélyített síkalap) közvetlenül ráállhat.`; }
-      else { msg = `<b>Itt a síkalap kevés</b>Az alaplemez alatt ${fmt(soft, 1)} m puha réteg van – a feszültséghagyma ebben dolgozik. Nagy és egyenlőtlen süllyedés várható (az ábrán nagyítva). A terhet le kell vinni a mélybe.`; }
+      else { msg = `<b>Itt a síkalap kevés</b>A lemez alatti feszültséghagyma (rugalmas féltér, Boussinesq–Steinbrenner) a terep alatt kb. ${fmt(reach, 1)} m-ig, a határmélységig hat${D >= reach ? ' – végig a puha rétegben' : `, és ebből ${fmt(soft, 1)} m a puha rétegbe esik`}. Nagy süllyedés várható (az ábrán nagyítva). A terhet le kell vinni a mélybe.`; }
     }
     if (type === 'colop') {
       const L = D + 2.2; // a teherbíró rétegbe 2,2 m befogás

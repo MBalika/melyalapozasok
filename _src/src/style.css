@@ -635,3 +635,4 @@ figure.fig-ppt figcaption { font-size: 13px; color: var(--muted); margin-top: 6p
 .reveal.in { opacity: 1; transform: none; }
 .grid2 > .callout, .grid3 > .callout, .two-col > .callout { align-content: start; margin: 0; }
 .hero-3d .h3-lab.acc { color: #1d0e05; background: #f0864a; border-color: #f0864a; }
+.hero-3d .h3-lab.blue { color: #fff; background: #1a6fb0; border-color: #1a6fb0; }
