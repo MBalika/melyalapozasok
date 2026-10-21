@@ -305,3 +305,6 @@ ol.alap-legend .alap-k-ok { color: var(--ok); } ol.alap-legend .alap-k-acc { col
 .tt-legend .ar { width: 18px; height: 3px; border-radius: 2px; position: relative; }
 .tt-legend .ar::after { content: ""; position: absolute; right: -3px; top: -4px; border-left: 7px solid currentColor; border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent; }
 .tt-legend .ar.ld { background: var(--ink); color: var(--ink); } .tt-legend .ar.sk { background: var(--ok); color: var(--ok); } .tt-legend .ar.bs { background: var(--accent); color: var(--accent); } .tt-legend .ar.ea { background: var(--steel); color: var(--steel); }
+
+/* a fejezet elején álló három tény középre rendezve */
+#alapok .factbar.alap-facts3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 280px)); justify-content: center; }
