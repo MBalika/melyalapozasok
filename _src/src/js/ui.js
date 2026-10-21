@@ -85,6 +85,49 @@ function initNav() {
   addEventListener('scroll', upd, { passive: true });
   addEventListener('resize', upd);
   upd();
+  initJump();
+}
+
+/* ---------------------------------------------------------------- pontos ugrás a belső linkekre
+   A lusta widgetek és képek ugrás közben megváltoztatják a fölöttük lévő tartalom magasságát, ezért
+   a sima (smooth) görgetés rossz helyen állna meg. Itt azonnal a célhoz ugrunk, majd ~3 s-ig
+   képkockánként utánaigazítunk, amíg a cél a fejléc alatt stabilan a helyén nem marad. */
+let jumpTok = 0;
+function jumpTo(el, push) {
+  const tok = ++jumpTok;
+  const off = () => (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--top-h')) || 62) + 12;
+  const go = () => { const y = scrollY + el.getBoundingClientRect().top - off(); window.scrollTo({ top: Math.max(0, y), behavior: 'instant' }); };
+  go();
+  if (push && el.id) try { history.pushState(null, '', '#' + el.id); } catch (e) { /* */ }
+  const t0 = performance.now(); let stable = 0;
+  const cancel = () => { jumpTok++; };
+  const opts = { once: true, passive: true };
+  addEventListener('wheel', cancel, opts); addEventListener('touchstart', cancel, opts); addEventListener('keydown', cancel, opts);
+  const tick = () => {
+    if (tok !== jumpTok) return;
+    const d = el.getBoundingClientRect().top - off();
+    if (Math.abs(d) > 2) { go(); stable = 0; } else stable++;
+    if (performance.now() - t0 < 3000 && stable < 45) requestAnimationFrame(tick);
+    else { removeEventListener('wheel', cancel); removeEventListener('touchstart', cancel); removeEventListener('keydown', cancel); }
+  };
+  requestAnimationFrame(tick);
+}
+function initJump() {
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const id = decodeURIComponent(a.getAttribute('href').slice(1));
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    jumpTo(el, true);
+  });
+  addEventListener('popstate', () => { const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) jumpTo(el, false); });
+  if (location.hash) {
+    const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (el) addEventListener('load', () => jumpTo(el, false), { once: true });
+  }
 }
 
 /* ---------------------------------------------------------------- saját videók */
