@@ -25,15 +25,15 @@ function top(x) { // a talaj felszíne (m)
 const FILL = 1.2; // feltöltés vastagsága
 
 export const TT_SCENES = [
-  { k: 'colop', t: 'Cölöpalap', s: 'karcsú elemek a teherbíró rétegbe', x0: 34, x1: 330, c: 'var(--accent)',
+  { k: 'colop', t: 'Cölöpalap', s: 'karcsú elemek a teherbíró rétegbe', x0: 34, x1: 330, zh: 520, c: 'var(--accent)',
     o: 'Karcsú, egyedi elemek viszik le a terhet a teherbíró rétegbe – a talpukon és a köpenyükön.' },
-  { k: 'resfal', t: 'Résfal', s: 'fal a talajban: alap és határolás', x0: 330, x1: 660, c: 'var(--g4)',
+  { k: 'resfal', t: 'Résfal', s: 'fal a talajban: alap és határolás', x0: 330, x1: 660, zh: 615, c: 'var(--g4)',
     o: 'Folytonos vasbeton fal a talajban: alap és munkatérhatárolás egyben – a mélygarázs falát is adja.' },
-  { k: 'kut', t: 'Kútalap', s: 'süllyesztett, nagy átmérőjű testek', x0: 660, x1: 930, c: 'var(--g5)',
+  { k: 'kut', t: 'Kútalap', s: 'süllyesztett, nagy átmérőjű testek', x0: 660, x1: 930, zh: 470, c: 'var(--g5)',
     o: 'Nagy átmérőjű, süllyesztett, majd kibetonozott testek egyedi pillérek alatt; felül gerendarács köti össze őket.' },
-  { k: 'szekreny', t: 'Szekrény · keszon', s: 'az építmény alaprajzán süllyesztve', x0: 930, x1: 1240, c: 'var(--g5)',
+  { k: 'szekreny', t: 'Szekrény · keszon', s: 'az építmény alaprajzán süllyesztve', x0: 930, x1: 1240, zh: 480, c: 'var(--g5)',
     o: 'Egyetlen nagy, az építmény alaprajzával azonos test – a folyómederben álló hídpillérek klasszikus alapja.' },
-  { k: 'atmeneti', t: 'Átmeneti megoldások', s: 'markolt tömbalap · merev betétek', x0: 1240, x1: 1520, c: 'var(--g3)',
+  { k: 'atmeneti', t: 'Átmeneti megoldások', s: 'markolt tömbalap · merev betétek', x0: 1240, x1: 1520, zh: 440, c: 'var(--g3)',
     o: 'A sík- és a mélyalap határán: markolt tömbalap, illetve merev betétes talajjavítás teherelosztó réteggel.' },
 ];
 
@@ -90,8 +90,8 @@ function sceneColop(g) {
   });
   for (const cx of [105, 167, 229]) F(g, cx, raftTop - 70, cx, raftTop - 6, 'load');
   flow(g, `M167 ${raftTop - 90} V${raftBot} M105 ${raftBot} V${Y(bt(105) + 2)} M229 ${raftBot} V${Y(bt(229) + 2)}`);
-  lead(g, 270, raftTop + 8, 300, G - 34); T(g, 300, G - 40, 'vb. lemez', 'tt-lab', { 'text-anchor': 'middle' });
-  lead(g, 260, Y(6), 300, Y(5.2)); T(g, 302, Y(5.2) - 6, 'cölöpök', 'tt-lab', { 'text-anchor': 'middle' });
+  lead(g, 272, raftTop + 8, 296, G - 34); T(g, 322, G - 40, 'vb. lemez', 'tt-lab', { 'text-anchor': 'end' });
+  lead(g, 260, Y(6), 296, Y(5.2)); T(g, 322, Y(5.2) - 6, 'cölöpök', 'tt-lab', { 'text-anchor': 'end' });
 }
 function sceneResfal(g) {
   const L0 = 346, L1 = 360, R0 = 630, R1 = 644, yb = Y(hc(346) + 1.5);
@@ -112,21 +112,20 @@ function sceneResfal(g) {
   for (const cx of [353, 637]) { F(g, cx, G - 80, cx, G - 16, 'load'); }
   F(g, 495, G - 90, 495, G - 16, 'load');
   for (const [cx, sgn] of [[L0, -1], [R1, 1]]) {
-    for (let d = 1.2; d < 8.6; d += 1.9) F(g, cx + sgn * 30, Y(d), cx + sgn * 3, Y(d), 'earth', d * 0.06);
+    for (let d = 1.2; d < 8.6; d += 1.9) F(g, cx + sgn * 24, Y(d), cx + sgn * 3, Y(d), 'earth', d * 0.06);
     for (let d = 10.6; d < hc(346) + 1.2; d += 2.1) F(g, cx + sgn * 9, Y(d) + 16, cx + sgn * 9, Y(d), 'skin', d * 0.06);
   }
   F(g, 353, yb + 22, 353, yb + 3, 'base', 1.3); F(g, 637, yb + 22, 637, yb + 3, 'base', 1.3);
   flow(g, `M353 ${G - 100} V${yb} M637 ${G - 100} V${yb}`);
   T(g, 495, Y(1.75), 'mélygarázs', 'tt-sm', { 'text-anchor': 'middle' });
   lead(g, 344, Y(13.5), 372, Y(12.6)); T(g, 374, Y(12.6) + 5, 'résfal', 'tt-lab');
-  T(g, L0 - 34, Y(5.2) - 2, 'föld- és', 'tt-sm', { 'text-anchor': 'end' }); T(g, L0 - 34, Y(5.2) + 15, 'víznyomás', 'tt-sm', { 'text-anchor': 'end' });
 }
 function sceneKut(g) {
   const cols = [705, 795, 885], beamT = G - 12, beamB = G + 6;
   // csarnok
-  P(g, `M680 ${G - 150} L795 ${G - 196} L910 ${G - 150} Z`, 'f-bld2 tt-bld');
-  for (const cx of cols) R(g, cx - 5, G - 152, 10, 140, 'f-conc2');
-  R(g, 680, G - 152, 230, 6, 'f-bld2');
+  P(g, `M680 ${G - 120} L795 ${G - 160} L910 ${G - 120} Z`, 'f-bld2 tt-bld');
+  for (const cx of cols) R(g, cx - 5, G - 122, 10, 110, 'f-conc2');
+  R(g, 680, G - 124, 230, 6, 'f-bld2');
   conc(g, 680, beamT, 230, beamB - beamT); // gerendarács (teteje vízszintes)
   for (const cx of cols) {
     const yb = Y(bt(cx) + 0.6), x = cx - 18;
@@ -136,12 +135,11 @@ function sceneKut(g) {
     R(g, x, beamB, 36, yb - beamB, 's-ink', { fill: 'none', 'stroke-width': 1.2, opacity: 0.6 });
     for (let d = 2.4; d < bt(cx) - 0.4; d += 2.6) { F(g, x - 8, Y(d) + 14, x - 8, Y(d), 'skin', d * 0.08); F(g, x + 44, Y(d) + 14, x + 44, Y(d), 'skin', d * 0.08); }
     for (const dx of [8, 18, 28]) F(g, x + dx, yb + 26, x + dx, yb + 3, 'base', 1.0);
-    F(g, cx, G - 110, cx, beamT - 4, 'load');
+    F(g, cx, G - 96, cx, beamT - 4, 'load');
   }
-  flow(g, cols.map((cx) => `M${cx} ${G - 130} V${Y(bt(cx) + 0.6)}`).join(' '));
+  flow(g, cols.map((cx) => `M${cx} ${G - 110} V${Y(bt(cx) + 0.6)}`).join(' '));
   lead(g, 900, beamT + 6, 918, G - 40); T(g, 920, G - 46, 'gerendarács', 'tt-lab', { 'text-anchor': 'end' });
-  lead(g, 813, Y(4.2), 846, Y(3.4)); T(g, 848, Y(3.4) - 2, 'kút', 'tt-lab');
-  T(g, 848, Y(3.4) + 16, 'Ø 0,8–3,0' + NB + 'm', 'tt-sm');
+  lead(g, 795, Y(bt(795) + 0.7), 795, Y(9.4)); T(g, 795, Y(9.4) + 20, 'kút: Ø 0,8–3,0' + NB + 'm, 4–8' + NB + 'm', 'tt-lab', { 'text-anchor': 'middle' });
 }
 function sceneSzekreny(g) {
   const cx = 1085, x0 = 1015, x1 = 1155, yt = Y(4.2), yb = Y(bt(cx) + 1.0);
@@ -158,8 +156,8 @@ function sceneSzekreny(g) {
   T(g, cx, yb - 17, 'egykori munkakamra', 'tt-xs', { 'text-anchor': 'middle' });
   for (let d = 5.6; d < bt(cx) + 0.4; d += 1.7) { F(g, x0 - 9, Y(d) + 14, x0 - 9, Y(d), 'skin', d * 0.08); F(g, x1 + 9, Y(d) + 14, x1 + 9, Y(d), 'skin', d * 0.08); }
   for (let x = x0 + 12; x <= x1 - 10; x += 24) F(g, x, yb + 26, x, yb + 3, 'base', 1.1);
-  F(g, cx, 60, cx, 120, 'load');
-  flow(g, `M${cx} 70 V${yb}`);
+  F(g, cx, 76, cx, 120, 'load');
+  flow(g, `M${cx} 80 V${yb}`);
   T(g, 985, Y(1.9), 'folyó', 'tt-sm t-water');
   lead(g, x1 - 6, yt + 30, 1200, Y(2.6)); T(g, 1200, Y(2.6) - 6, 'szekrény', 'tt-lab', { 'text-anchor': 'middle' });
 }
@@ -222,14 +220,8 @@ function panorama(root) {
   // mélységléc
   const rl = svg('g', { class: 'tt-ruler' }, s);
   P(rl, `M28 ${G} V${H - 6}`, 'tt-rl');
-  for (let d = 0; d * S < H - G - 8; d += 5) { P(rl, `M22 ${Y(d)} H34`, 'tt-rl'); T(rl, 18, Y(d) + 5, d === 0 ? '0' : '−' + d, 'tt-xs', { 'text-anchor': 'end' }); }
-  T(rl, 18, Y(25) + 5, 'm', 'tt-xs', { 'text-anchor': 'end' });
-  // rétegnevek
-  const ln = svg('g', { class: 'tt-lnames' }, s);
-  T(ln, 40, Y(0.85), 'feltöltés', 'tt-xs');
-  T(ln, 40, Y(4.6), 'puha', 'tt-xs'); T(ln, 40, Y(4.6) + 14, 'agyag', 'tt-xs');
-  T(ln, 40, Y(13.9), 'teherbíró', 'tt-xs tt-good'); T(ln, 40, Y(13.9) + 14, 'kavics', 'tt-xs tt-good');
-  T(ln, 40, Y(21.2), 'kemény', 'tt-xs'); T(ln, 40, Y(21.2) + 14, 'agyag', 'tt-xs');
+  for (let d = 0; d <= 20; d += 5) { P(rl, `M22 ${Y(d)} H34`, 'tt-rl'); T(rl, 18, Y(d) + 5, d === 0 ? '0' : '−' + d, 'tt-xs', { 'text-anchor': 'end' }); }
+  T(rl, 18, Y(21.4) + 5, 'm', 'tt-xs', { 'text-anchor': 'end' });
   // jelenetek
   const groups = {};
   for (const sc of TT_SCENES) {
@@ -250,6 +242,7 @@ register('alap-tipusterkep', (root) => {
   const { viz, out } = shell(root, { layout: 'wide' });
   const bar = h('div', { class: 'tt-bar' }); viz.append(bar);
   const view = h('div', { class: 'tt-view' }); viz.append(view);
+  viz.append(h('div', { class: 'tt-legend', html: '<span><i class="sw f-l1"></i>feltöltés</span><span><i class="sw f-l2"></i>puha agyag</span><span><i class="sw f-l3"></i>teherbíró homokos kavics</span><span><i class="sw f-l4"></i>kemény agyag</span><span><i class="ln gw"></i>talajvízszint</span><span><i class="ar ld"></i>teher</span><span><i class="ar sk"></i>köpenymenti ellenállás</span><span><i class="ar bs"></i>talpellenállás</span><span><i class="ar ea"></i>föld- és víznyomás</span>' }));
   const { s, groups } = panorama(view);
   const sg = seg(bar, { label: '', options: [{ v: 'all', t: 'Mind' }, ...TT_SCENES.map((sc) => ({ v: sc.k, t: sc.t }))], value: 'all' });
   const cards = $$('.alap-ttc');
@@ -260,7 +253,7 @@ register('alap-tipusterkep', (root) => {
     for (const sc of TT_SCENES) groups[sc.k].classList.toggle('dim', k !== 'all' && sc.k !== k);
     cards.forEach((c) => { c.classList.toggle('on', c.dataset.tt === k); c.classList.toggle('dim', k !== 'all' && c.dataset.tt !== k); });
     const sc = TT_SCENES.find((q) => q.k === k);
-    if (narrow() && sc) { const pad = 6; s.setAttribute('viewBox', `${sc.x0 - pad} 0 ${sc.x1 - sc.x0 + 2 * pad} ${H}`); view.classList.add('zoom'); }
+    if (narrow() && sc) { const pad = 10; s.setAttribute('viewBox', `${sc.x0 - pad} 0 ${sc.x1 - sc.x0 + 2 * pad} ${sc.zh}`); view.classList.add('zoom'); }
     else { s.setAttribute('viewBox', `0 0 ${W} ${H}`); view.classList.remove('zoom'); }
     s.style.aspectRatio = s.getAttribute('viewBox').split(' ').slice(2).join(' / ');
     if (sc) {
@@ -268,7 +261,7 @@ register('alap-tipusterkep', (root) => {
       info.append(h('span', { class: 'tt-dotc', style: `background:${sc.c}` }), h('div', {}, h('b', {}, sc.t), h('span', {}, ' – ' + sc.o + ' '), h('a', { href: '#alap-tt-' + sc.k }, 'Adatlap ↓')));
     } else {
       info.innerHTML = '';
-      info.append(h('div', {}, h('b', {}, 'Öt megoldás egy metszeten. '), h('span', {}, 'Koppints egy típusra (a metszeten vagy a gombokon): kiemelődik, a nyilak a teher útját mutatják, és lent megjelölődik az adatlapja.')));
+      info.append(h('div', {}, h('b', {}, 'Öt megoldás egy metszeten. '), h('span', {}, 'Válassz egy típust a metszeten vagy a gombokkal – lent az adatlapja is kiemelődik.')));
     }
   }
   sg.on(apply);

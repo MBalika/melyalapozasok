@@ -1,6 +1,7 @@
 // C01 – Mi a mélyalapozás? Okok, döntés-widget, tornyok léptékben, kimosáslabor, talp és köpeny, a cölöpalap részei
 import { $, $$, h, svg, figure, clear, fmt, clamp, lerp, register, shell, slider, seg, toggle, stat, verdict, arrow, pathD, loop } from './core.js';
 import { defineQuiz } from './ui.js';
+import './alap_tt.js';
 
 const NB = ' ';
 const T = (parent, x, y, text, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text, ...o }, parent);

@@ -15,7 +15,104 @@
   </div>
 
   <!-- 1.1 ------------------------------------------------------------ -->
-  <div class="sub" id="alap-mikor"><span class="tag">1.1</span><h3>Mikor kell mélyalap?</h3></div>
+  <div class="sub" id="alap-mi"><span class="tag">1.1</span><h3>Mi a mélyalap? – talp és köpeny</h3></div>
+  <div class="two-col">
+    <div class="prose">
+      <p>A síkalap a terhet <b>a talpán</b> adja át: a talpfeszültség a felső, sokszor gyenge rétegeket terheli, ezek pedig összenyomódnak. A mélyalap a terhet a mélyebben fekvő, jobb teherbírású rétegbe viszi le, és közben a <b>köpenyén</b> is súrlódással, tapadással ad át terhet a talajnak.</p>
+      <p>A cölöpnél ezt a két részt külön néven is nevezzük: <b>talp- vagy csúcsellenállás</b> (a talpon, nyomással) és <b>köpenymenti (palást-) ellenállás</b> (a köpeny mentén, nyírással). Hogy melyik dominál, az a cölöp besorolását is eldönti – erről a következő fejezetben lesz szó.</p>
+      <ul>
+        <li><b>Síkalap:</b> a teher csak a talpon jut a talajba, és a felső rétegekben oszlik szét.</li>
+        <li><b>Mélyalap:</b> a teher a talpon és a köpenyen át a mélyebb, jobb teherbírású rétegbe jut.</li>
+        <li><b>A cölöp teherbírása:</b> <span class="nw">R<sub>c</sub> = R<sub>b</sub> + R<sub>s</sub></span> – talp- és köpenymenti ellenállás összege.</li>
+      </ul>
+    </div>
+    <div class="alap-elvfig" data-w="alap-elv" role="img" aria-label="Síkalap és cölöp teherátadása: a síkalap csak a talpán, a cölöp a talpán és a köpenyén is ad át terhet"></div>
+  </div>
+
+  <!-- 1.2 ------------------------------------------------------------ -->
+  <div class="sub" id="alap-fajtak"><span class="tag">1.2</span><h3>A mélyalapozás típusai</h3></div>
+  <div class="prose">
+    <p>A mélyalapoknak három fő családja van: a <b>cölöpalapozás</b> (karcsú, mélyre vezetett elemek), a <b>résfalas alapozás</b> (folytonos fal a talajban) és a <b>kút- és szekrényalapozás</b> (nagy keresztmetszetű, süllyesztett testek, amelyeket nagy méretük miatt „mélyített síkalapnak” is neveznek). A sík- és a mélyalapok határán állnak az <b>átmeneti megoldások</b>. Ma messze a cölöpalap a leggyakoribb, ezért ezzel foglalkozunk a legrészletesebben (C02–C06); a résfal (C07) és a kút-, szekrény- és keszonalapozás (C08) külön fejezetet kap. A lap tetején lévő 3D metszeten is kipróbálhatod, hogyan viszi le a terhet a síkalap, a cölöpalap, a résfal és a kútalap.</p>
+  </div>
+
+  <div class="alap-tree" data-w="alap-tipusok" role="figure" aria-label="A mélyalapozás típusainak rendszere">
+    <div class="at-root"><b>Mélyalapozás</b><small>teherközvetítő elem a szerkezet és a mélyebb teherbíró réteg között</small></div>
+    <div class="at-fam">
+      <div class="at-br" style="--c: var(--accent)">
+        <a class="at-node" href="#alap-tt-colop"><span class="alap-ti" data-ti="colop"></span><span class="at-t"><b>Cölöpalap</b><small>karcsú, mélyre vezetett elemek</small></span></a>
+        <div class="at-leaves"><a href="#elore">talajkiszorításos</a><a href="#furt">talajhelyettesítéses</a><a href="#egyeb">egyéb: mikrocölöp, jet, keverés</a></div>
+      </div>
+      <div class="at-br" style="--c: var(--g4)">
+        <a class="at-node" href="#alap-tt-resfal"><span class="alap-ti" data-ti="resfal"></span><span class="at-t"><b>Résfal</b><small>folytonos fal a talajban</small></span></a>
+        <div class="at-leaves"><a href="#resfal">résfal réstáblákból</a><a href="#resfal">réspillér (barett)</a></div>
+      </div>
+      <div class="at-br" style="--c: var(--g5)">
+        <a class="at-node" href="#alap-tt-kut"><span class="alap-ti" data-ti="kut"></span><span class="at-t"><b>„Mélyített síkalapok”</b><small>nagy, süllyesztett testek</small></span></a>
+        <div class="at-leaves"><a href="#kut">kútalap</a><a href="#kut">szekrényalap · keszon</a></div>
+      </div>
+    </div>
+    <a class="at-side" href="#alap-tt-atmeneti" style="--c: var(--g3)"><b>Átmeneti megoldások</b><span>markolt tömbalap · kombinált alapozás (merev betétes talajjavítás)</span></a>
+  </div>
+
+  <div class="w alap-tt" data-w="alap-tipusterkep" data-title="Öt megoldás egy metszeten" data-sub="Koppints egy típusra a metszeten vagy a gombokon: kiemelődik, és a nyilak a teher útját mutatják. Szemléltető metszet, a vízszintes lépték torzított."></div>
+
+  <div class="alap-ttcs">
+    <article class="alap-ttc" id="alap-tt-colop" data-tt="colop" style="--c: var(--accent)">
+      <h4>Cölöpalap</h4>
+      <p class="ttc-lead">Karcsú, egyedi teherátadó elemek; a fejüket vasbeton fejtömb, lemez vagy gerendarács fogja össze. Ma messze ez a leggyakoribb mélyalap.</p>
+      <div class="ttc-row"><span class="ttc-k">Alak, méret</span><p>Mikrocölöp kb. 10–30 cm, „normál” cölöp 25 (30)–80 cm, nagyátmérőjű 80 cm felett; hossza néhány métertől több tíz méterig.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Teherátadás</span><p>Pontszerűen, a talpán (csúcsán) és a köpenye mentén; az arány szerint álló, lebegő vagy vegyes cölöp. Húzást és vízszintes terhet is felvehet.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Készítés</span><p>Előregyártva leverik, levibrálják, lesajtolják vagy lecsavarják (talajkiszorításos), vagy helyben fúrják és kibetonozzák (talajhelyettesítéses).</p></div>
+      <div class="ttc-row"><span class="ttc-k">Mikor választjuk?</span><p>Ha gyenge rétegek alatt mélyen van a teherbíró réteg, nagy a teher, szigorú a süllyedéskorlát, vagy kimosás, felúszás fenyeget.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Példa</span><p>Toronyházak, hidak, szélerőművek, csarnokok – a Taipei 101 nagy átmérőjű fúrt cölöpökön áll.</p></div>
+      <a class="ttc-go" href="#rendszer">Részletesen: C02–C06 →</a>
+    </article>
+    <article class="alap-ttc" id="alap-tt-resfal" data-tt="resfal" style="--c: var(--g4)">
+      <h4>Résfal</h4>
+      <p class="ttc-lead">Folytonos, síkbeli vasbeton szerkezet – fal a talajban. Bentonitzagy védelmében réselik, vasalják, majd alulról felfelé kibetonozzák.</p>
+      <div class="ttc-row"><span class="ttc-k">Alak, méret</span><p>Vastagsága 40–120 cm; egy réstábla jellemzően 2,8–5,6 m (legfeljebb 8–10 m) hosszú; mélysége általában 15–30 m.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Teherátadás</span><p>Vonalmenti alap: a falon lefelé jutó teher a talpán és a két oldalán adódik át; közben a földet és a talajvizet is megtámasztja.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Készítés</span><p>Résvezető gerenda, majd réselés zagy alatt markolóval vagy marótárcsás géppel, vasalókosár, végül betonozás kontraktorcsővel.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Mikor választjuk?</span><p>Mélygarázs, aluljáró, metróállomás: ott, ahol munkatérhatárolás, végleges oldalfal és alap egyben kell, talajvíz alatt, szomszéd épületek mellett.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Példa</span><p>A 4-es metró állomásai (a Fővám téren 48,3 m mély résfal), belvárosi mélygarázsok.</p></div>
+      <a class="ttc-go" href="#resfal">Részletesen: C07 →</a>
+    </article>
+    <article class="alap-ttc" id="alap-tt-kut" data-tt="kut" style="--c: var(--g5)">
+      <h4>Kútalap</h4>
+      <p class="ttc-lead">Nagy átmérőjű, alul-felül nyitott köpenyfal, amelyet belülről kotorva, a saját súlyánál fogva süllyesztenek a teherbíró rétegig, majd kibetonoznak.</p>
+      <div class="ttc-row"><span class="ttc-k">Alak, méret</span><p>Átmérője 0,8–3,0 m, hossza 4–8 m; alul vágóél, felül vasbeton gerendarács vagy lemez köti össze a kutakat.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Teherátadás</span><p>Pontszerűen, egyedi pillérek és falak alatt – a nagy talpfelületén és kisebb részben a köpenyén.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Készítés</span><p>Vasbeton köpeny vagy kútgyűrűk süllyesztése „csipegető” markolóval; ma inkább acél köpenycsövet vibrálnak le, és visszahúzás közben betonoznak.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Mikor választjuk?</span><p>Ha a teherbíró réteg nincs túl mélyen, főleg magas talajvíznél, amikor az alapsíkot a vízszint alá kell vinni.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Példa</span><p>Csarnok- és hídpillérek, régebbi ipari épületek alapjai.</p></div>
+      <a class="ttc-go" href="#kut">Részletesen: C08 →</a>
+    </article>
+    <article class="alap-ttc" id="alap-tt-szekreny" data-tt="szekreny" style="--c: var(--g5)">
+      <h4>Szekrényalap · keszon</h4>
+      <p class="ttc-lead">A kútalap „nagy testvére”: a szekrény alaprajza azonos az építményével (pl. hídpillér vagy teljes épület). A keszon felül zárt szekrény, a vizet sűrített levegő szorítja ki belőle.</p>
+      <div class="ttc-row"><span class="ttc-k">Alak, méret</span><p>Az építmény alaprajzával egyező, nagy test; ütemenként 6–8 m-t építenek rá, jól kotorható talajban 40–50 m mélyre is lejut.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Teherátadás</span><p>Egyetlen nagy testként, főleg a talpán (és a köpenyén) a teherbíró rétegbe.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Készítés</span><p>Nyitott szekrény belső kotrással; alulról zárt úsztatva, vízzel süllyesztve; keszon túlnyomásos munkakamrával (legfeljebb 3,2–3,5 bar), zsilipekkel.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Mikor választjuk?</span><p>Folyómederben álló hídpillérek alá, ahol a kimosási mélység alá kell lejutni; ma már ritkán, a cölöpök kiszorították.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Példa</span><p>A régebbi budapesti Duna-hidak pillérei; egy genfi mélygarázs szekrénye.</p></div>
+      <a class="ttc-go" href="#kut">Részletesen: C08 →</a>
+    </article>
+    <article class="alap-ttc" id="alap-tt-atmeneti" data-tt="atmeneti" style="--c: var(--g3)">
+      <h4>Átmeneti megoldások</h4>
+      <p class="ttc-lead">A sík- és a mélyalap határa nem éles. Ide tartozik a markolt tömbalap és a kombinált alapozás, például a merev betétes talajjavítás – ez talajjavítás, nem cölöpalap.</p>
+      <div class="ttc-row"><span class="ttc-k">Alak, méret</span><p>Tömbalap: kötött talajban, talajvíz felett kb. 5–6 m-ig markolt tömb. Merev betétek: jellemzően vasalatlan beton- vagy habarcsoszlopok a lemez alatt.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Teherátadás</span><p>A tömbalap főleg a talpán. A merev betéteknél a teherelosztó szemcsés rétegben boltozódás alakul ki: a teher egy része a betétekre, más része a köztes talajra jut; a betétek felső szakaszán negatív köpenysúrlódás ébred.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Készítés</span><p>A tömböt megtámasztás nélkül markolják és rögtön kibetonozzák; a betéteket nem kötik be mereven a szerkezetbe (pl. az alaplemezbe).</p></div>
+      <div class="ttc-row"><span class="ttc-k">Mikor választjuk?</span><p>Tömbalapot közepes teherhez, nem túl mélyen fekvő jó réteghez; merev betéteket nagy, egyenletes terhű lemezek (csarnokpadló, tartály, töltés) süllyedésének csökkentésére.</p></div>
+      <div class="ttc-row"><span class="ttc-k">Példa</span><p>Kisebb épületek tömbalapjai; logisztikai csarnokok, tartályok merev betétes talajjavításon.</p></div>
+      <a class="ttc-go" href="#egyeb">Merev betétek, kőoszlopok: C06 →</a>
+    </article>
+  </div>
+
+  <div class="callout tudtad"><b class="t">Melyik a leggyakoribb?</b><p>Ma messze a cölöpalap. A résfalat elsősorban munkatérhatárolásra használjuk, ritkábban csak alapozásra – a mélygarázsoknál gyakran egyszerre mindkettő. A kút- és szekrényalapozás a múlt század „klasszikus” módszere volt; a cölöpök és a korszerű munkatérhatárolások miatt ma egyre ritkábban készül.</p></div>
+
+  <!-- 1.3 ------------------------------------------------------------ -->
+  <div class="sub" id="alap-mikor"><span class="tag">1.3</span><h3>Mikor kell mélyalap?</h3></div>
   <div class="prose">
     <p>Az alapozási rendszereknek két nagy családja van: a <b>síkalapok</b> és a <b>mélyalapok</b>. A múlt század végéig a síkalapozás dominált, az utóbbi két-három évtizedben azonban egyre nagyobb szerepet kapnak a mélyalapozási rendszerek. Mélyalapot akkor választunk, ha a síkalap valamiért nem elég – vagy egyszerűen drágább lenne.</p>
   </div>
@@ -25,8 +122,8 @@
 
   <div class="w" data-w="alap-dontes" data-title="Síkalap vagy mélyalap?" data-sub="Állítsd be az altalajt és az épületet – a widget megmutatja, mi szól a síkalap ellen, és mit választanál."></div>
 
-  <!-- 1.2 ------------------------------------------------------------ -->
-  <div class="sub" id="alap-tornyok"><span class="tag">1.2</span><h3>Óriások és az alapjuk</h3></div>
+  <!-- 1.4 ------------------------------------------------------------ -->
+  <div class="sub" id="alap-tornyok"><span class="tag">1.4</span><h3>Óriások és az alapjuk</h3></div>
   <div class="prose">
     <p>A felhőkarcolók és a tornyok a mélyalapozás leglátványosabb esetei. A <b>nagy teher</b> mellett gyakran a <b>kedvezőtlen altalaj</b> és a <b>szigorú süllyedési kritérium</b> is a mélybe kényszeríti az alapot. Az alábbi ábrán minden építmény és az alapja <b>ugyanabban a léptékben</b> szerepel. Nézd meg, milyen mélyre kell nyúlnia az alapnak – és vedd észre, hogy ezt nem az épület magassága, hanem az <b>altalaj</b> dönti el.</p>
   </div>
@@ -43,8 +140,8 @@
   </div>
   <div class="callout tudtad"><b class="t">Tudtad?</b><p>A <b>Burdzs Kalifa</b> (828 m) majdnem kétszer olyan magas, mint a Petronas-tornyok, mégis „csak” kb. 43 m hosszú cölöpökön áll. A Petronas alatt viszont 100 m‑nél is hosszabb réselt vasbeton elemek (barettek) kellettek, mert ott a teherbíró réteg nagyon mélyen fekszik. Az alap mélységét tehát elsősorban a talaj szabja meg.</p></div>
 
-  <!-- 1.3 ------------------------------------------------------------ -->
-  <div class="sub" id="alap-kimosas"><span class="tag">1.3</span><h3>Ha a víz kimossa az alapot</h3></div>
+  <!-- 1.5 ------------------------------------------------------------ -->
+  <div class="sub" id="alap-kimosas"><span class="tag">1.5</span><h3>Ha a víz kimossa az alapot</h3></div>
   <div class="two-col alap-kim">
     <div class="prose">
       <p>A folyómederben álló hídpillér körül a víz örvénylik: a pillér homlokánál lefelé forduló áramlás és a pillér tövénél kialakuló <b>patkóörvény</b> kiszedi a mederanyagot, a pillér körül <b>kimélyülés</b> (kimosás, kiüregelés) alakul ki. Árvízkor ez néhány óra alatt több métert is elérhet.</p>
@@ -55,31 +152,8 @@
   </div>
   <div class="w" data-w="alap-kimosas" data-title="Kimosáslabor a hídpillér körül" data-sub="Növeld a víz sebességét, és nézd, mi történik a síkalappal és a cölöpalappal."></div>
 
-  <!-- 1.4 ------------------------------------------------------------ -->
-  <div class="sub" id="alap-mi"><span class="tag">1.4</span><h3>Talp és köpeny</h3></div>
-  <div class="two-col">
-    <div class="prose">
-      <p>A síkalap a terhet <b>a talpán</b> adja át: a talpfeszültség a felső, sokszor gyenge rétegeket terheli, ezek pedig összenyomódnak. A mélyalap a terhet a mélyebben fekvő, jobb teherbírású rétegbe viszi le, és közben a <b>köpenyén</b> is súrlódással, tapadással ad át terhet a talajnak.</p>
-      <p>A cölöpnél ezt a két részt külön néven is nevezzük: <b>talp- vagy csúcsellenállás</b> (a talpon, nyomással) és <b>köpenymenti (palást-) ellenállás</b> (a köpeny mentén, nyírással). Hogy melyik dominál, az a cölöp besorolását is eldönti – erről a következő fejezetben lesz szó.</p>
-      <ul>
-        <li><b>Síkalap:</b> a teher csak a talpon jut a talajba, és a felső rétegekben oszlik szét.</li>
-        <li><b>Mélyalap:</b> a teher a talpon és a köpenyen át a mélyebb, jobb teherbírású rétegbe jut.</li>
-        <li><b>A cölöp teherbírása:</b> <span class="nw">R<sub>c</sub> = R<sub>b</sub> + R<sub>s</sub></span> – talp- és köpenymenti ellenállás összege.</li>
-      </ul>
-    </div>
-    <div class="alap-elvfig" data-w="alap-elv" role="img" aria-label="Síkalap és cölöp teherátadása: a síkalap csak a talpán, a cölöp a talpán és a köpenyén is ad át terhet"></div>
-  </div>
-
-  <h4 class="h4">A mélyalapozás fajtái</h4>
-  <div class="grid3 alap-types" data-w="alap-tipusok">
-    <div class="card accent"><div class="alap-ti" data-ti="colop"></div><h4>Cölöpalapozás</h4><p>Karcsú, mélyre vezetett teherátadó elemek, a fejeiket tömb, lemez vagy gerendarács fogja össze. Ma messze ez a <b>leggyakoribb</b> mélyalap.</p></div>
-    <div class="card accent"><div class="alap-ti" data-ti="resfal"></div><h4>Résfalas alapozás</h4><p>Folytonos, síkbeli szerkezet – fal a talajban. Elsősorban <b>munkatérhatárolásra</b> használjuk, ritkábban csak alapozásra; gyakran egyszerre mindkettő.</p></div>
-    <div class="card accent"><div class="alap-ti" data-ti="kut"></div><h4>Kút- és szekrényalapozás</h4><p>Nagy keresztmetszetű, saját súlyuknál fogva <b>süllyesztett</b> testek. A cölöpök és a korszerű munkatérhatárolások miatt ma egyre ritkábban készülnek.</p></div>
-  </div>
-  <div class="callout"><b class="t">„Átmeneti” megoldások</b><p>A sík- és a mélyalapok határa nem éles. A <b>markolt tömbalap</b> megtámasztás nélkül, markolóval kiemelt és rögtön kibetonozott tömb; kötött talajban, talajvíz felett kb. 5–6 m‑ig készül, és kútalapnak is nevezik. A <b>kombinált alapozásnál</b> – például a <b>merev betétes talajjavításnál</b> (<i>rigid inclusion</i>) – a talajba merev, cölöpszerű elemeket (jellemzően vasalatlan beton- vagy habarcsoszlopokat) építenek, de ezeket nem kötik be mereven a szerkezetbe (pl. az alaplemezbe): a kettő közé egy teherelosztó szemcsés réteg kerül, amelyben boltozódás alakul ki, így a teher egy része a köztes talajra, más része a merev elemekre jut. Ez talajjavítás, nem cölöpalap.</p></div>
-
-  <!-- 1.5 ------------------------------------------------------------ -->
-  <div class="sub" id="alap-reszek"><span class="tag">1.5</span><h3>A cölöpalap részei</h3></div>
+  <!-- 1.6 ------------------------------------------------------------ -->
+  <div class="sub" id="alap-reszek"><span class="tag">1.6</span><h3>A cölöpalap részei</h3></div>
   <div class="two-col alap-parts">
     <figure class="alap-isofig">
 <svg class="alap-iso" viewBox="32 93 691 750" role="img" aria-label="Cölöpalapozás sémája: 1 – a felépítmény pillérei és födéme, 2 – gerendarács, 3 – cölöpfejek, 4 – cölöpök, 5 – teherbíró réteg; nyilak mutatják a teher útját">

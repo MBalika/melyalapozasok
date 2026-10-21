@@ -439,27 +439,22 @@ register('rsz-atmero', (root) => {
 });
 
 /* ================================================================ 2.6 családfa */
-const TREE = { t: 'Mélyalapozások', c: [
-  { t: 'Cölöpök', c: [
-    { t: 'Talajkiszorításos', g: 1, c: [
-      { t: 'Előregyártott: fa, acél, vasbeton', h: '#elore', yt: 1 },
-      { t: 'Talajcsavar', h: '#elore', yt: 1 },
-      { t: 'Franki-cölöp', h: '#helyszini', yt: 1 },
-      { t: 'Csavart cölöp', h: '#helyszini', yt: 1 }] },
-    { t: 'Talajhelyettesítéses', g: 2, c: [
-      { t: 'CFA-cölöp', h: '#furt', yt: 1 },
-      { t: 'Béléscsöves fúrt cölöp', h: '#furt', yt: 1 },
-      { t: 'Bentonitzagyos fúrt cölöp', h: '#furt', yt: 1 },
-      { t: 'Megtámasztás nélküli furat', h: '#furt' }] },
-    { t: 'Egyéb', g: 3, c: [
-      { t: 'Mikrocölöp', h: '#egyeb', yt: 1 },
-      { t: 'Jet-grouting', h: '#egyeb', yt: 1 },
-      { t: 'Mélykeverés', h: '#egyeb', yt: 1 },
-      { t: 'Kavicscölöp, kőoszlop', h: '#egyeb', yt: 1 }] }] },
-  { t: 'Résfal', g: 4, h: '#resfal', yt: 1 },
-  { t: '„Mélyített síkalapok”', g: 5, c: [
-    { t: 'Kútalap', h: '#kut' },
-    { t: 'Szekrényalap, keszon', h: '#kut' }] }] };
+const TREE = { t: 'Cölöpök', c: [
+  { t: 'Talajkiszorításos', g: 1, c: [
+    { t: 'Előregyártott: fa, acél, vasbeton', h: '#elore', yt: 1 },
+    { t: 'Talajcsavar', h: '#elore', yt: 1 },
+    { t: 'Franki-cölöp', h: '#helyszini', yt: 1 },
+    { t: 'Csavart cölöp', h: '#helyszini', yt: 1 }] },
+  { t: 'Talajhelyettesítéses', g: 2, c: [
+    { t: 'CFA-cölöp', h: '#furt', yt: 1 },
+    { t: 'Béléscsöves fúrt cölöp', h: '#furt', yt: 1 },
+    { t: 'Bentonitzagyos fúrt cölöp', h: '#furt', yt: 1 },
+    { t: 'Megtámasztás nélküli furat', h: '#furt' }] },
+  { t: 'Egyéb', g: 3, c: [
+    { t: 'Mikrocölöp', h: '#egyeb', yt: 1 },
+    { t: 'Jet-grouting', h: '#egyeb', yt: 1 },
+    { t: 'Mélykeverés', h: '#egyeb', yt: 1 },
+    { t: 'Kavicscölöp, kőoszlop', h: '#egyeb', yt: 1 }] }] };
 register('rsz-fa', (root) => {
   const nodes = [];
   (function walk(n, d, g, parent) { const me = { ...n, d, g: n.g ?? g, parent }; nodes.push(me); me.kids = (n.c || []).map((c) => walk(c, d + 1, me.g, me)); return me; })(TREE, 0, 0, null);
@@ -471,12 +466,12 @@ register('rsz-fa', (root) => {
     let H, pos = new Map();
     if (mode === 'h') {
       const rowH = 34, leaves = nodes.filter((n) => !n.kids.length);
-      const cols = [0.16, 0.2, 0.22, 0.3].map((f) => f * W), gap = (W - cols.reduce((a, b) => a + b, 0)) / 3;
-      const cx = [0]; for (let i = 1; i < 4; i++) cx[i] = cx[i - 1] + cols[i - 1] + gap;
+      const cols = [0.2, 0.26, 0.38].map((f) => f * W), gap = (W - cols.reduce((a, b) => a + b, 0)) / 2;
+      const cx = [0]; for (let i = 1; i < 3; i++) cx[i] = cx[i - 1] + cols[i - 1] + gap;
       leaves.forEach((n, i) => pos.set(n, { y: 10 + i * rowH }));
       const setY = (n) => { if (!n.kids.length) return pos.get(n).y; const ys = n.kids.map(setY); const y = (Math.min(...ys) + Math.max(...ys)) / 2; pos.set(n, { y }); return y; };
       setY(nodes[0]);
-      for (const n of nodes) { const p = pos.get(n); p.x = cx[n.d]; p.w = cols[n.d] - (n.d === 3 ? 0 : 4); }
+      for (const n of nodes) { const p = pos.get(n); p.x = cx[n.d]; p.w = cols[n.d] - (n.d === 2 ? 0 : 4); }
       H = 10 + leaves.length * rowH + 4;
     } else {
       const rowH = 38;

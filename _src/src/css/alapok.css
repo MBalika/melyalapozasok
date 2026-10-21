@@ -179,3 +179,129 @@ ol.alap-legend .alap-k-ok { color: var(--ok); } ol.alap-legend .alap-k-acc { col
   .rsz-tg { display: block; }
 }
 @media (max-width: 560px) { .rsz-types { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ================================================================ 1.2 a mélyalapozás típusai */
+/* ---- rendszerfa (szervezeti ábra) */
+.alap-tree { margin: 22px 0 26px; display: grid; gap: 0; }
+.alap-tree a { text-decoration: none; color: inherit; }
+.at-root { justify-self: center; text-align: center; padding: 12px 22px; border-radius: 14px; background: var(--plan); color: var(--plan-ink); box-shadow: var(--shadow); position: relative; max-width: 520px; }
+.at-root b { display: block; font-family: var(--f-display); font-size: 26px; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.05; }
+.at-root small { display: block; font-size: 13px; color: #b8c4cf; margin-top: 3px; text-align: center; }
+.at-fam { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 34px; position: relative; }
+/* összekötők: függőleges a gyökértől, vízszintes gerinc, függőleges ágak */
+.at-fam::before { content: ""; position: absolute; top: 0; left: 50%; height: 17px; border-left: 2px solid var(--line2); }
+.at-fam::after { content: ""; position: absolute; top: 17px; left: calc(100% / 6); right: calc(100% / 6); border-top: 2px solid var(--line2); }
+.at-br { position: relative; display: flex; flex-direction: column; gap: 10px; }
+.at-br::before { content: ""; position: absolute; top: -17px; left: 50%; height: 17px; border-left: 2px solid var(--line2); }
+.at-node { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1.5px solid color-mix(in srgb, var(--c) 55%, var(--line)); border-top: 5px solid var(--c); box-shadow: var(--shadow); transition: transform 0.15s, box-shadow 0.15s; }
+.at-node:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.at-node .alap-ti { width: 92px; flex: none; margin: 0; }
+.at-t b { display: block; font-family: var(--f-display); font-size: 22px; line-height: 1.05; letter-spacing: 0.02em; color: var(--c); }
+.at-t small { display: block; font-size: 13px; color: var(--muted); line-height: 1.3; margin-top: 2px; text-align: left; }
+.at-leaves { display: flex; flex-wrap: wrap; gap: 6px; padding-left: 14px; border-left: 2px solid color-mix(in srgb, var(--c) 50%, var(--line)); margin-left: 22px; }
+.at-leaves a { font-size: 13.5px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 35%, var(--line)); color: var(--ink); white-space: nowrap; }
+.at-leaves a:hover { background: color-mix(in srgb, var(--c) 22%, var(--surface)); }
+.at-side { margin-top: 16px; justify-self: center; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; padding: 9px 16px; border-radius: 12px; border: 1.5px dashed color-mix(in srgb, var(--c) 60%, var(--line)); background: color-mix(in srgb, var(--c) 6%, var(--surface)); }
+.at-side b { color: var(--c); font-family: var(--f-display); font-size: 19px; letter-spacing: 0.02em; }
+.at-side span { font-size: 14px; color: var(--ink2); }
+@media (max-width: 860px) {
+  .at-fam { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 18px; padding-left: 18px; }
+  .at-fam::before { left: 50%; height: 18px; }
+  .at-fam::after { top: 18px; left: 8px; right: auto; bottom: 30px; border-top: 0; border-left: 2px solid var(--line2); width: 0; }
+  .at-fam::before { display: none; }
+  .at-br::before { top: 30px; left: -10px; width: 10px; height: 0; border-left: 0; border-top: 2px solid var(--line2); }
+  .at-root { justify-self: stretch; max-width: none; }
+  .at-side { justify-self: stretch; }
+}
+@media (max-width: 420px) { .at-node .alap-ti { width: 72px; } .at-t b { font-size: 20px; } }
+
+/* ---- terepmetszet-panoráma */
+.alap-tt .w-viz { padding: 12px; }
+.tt-bar .seg { flex-wrap: wrap; }
+.tt-view { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--sky); }
+.tt-svg { width: 100%; height: auto; display: block; aspect-ratio: 1520 / 700; }
+.tt-view.zoom .tt-svg { animation: tt-in 0.35s ease; }
+@keyframes tt-in { from { opacity: 0.3; } to { opacity: 1; } }
+@media (max-width: 680px) {
+  .tt-view:not(.zoom) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tt-view:not(.zoom) .tt-svg { min-width: 860px; }
+}
+.tt-svg .tt-lab { font: 650 19px var(--f-body); fill: var(--ink); }
+.tt-svg .tt-sm { font: 550 16px var(--f-body); fill: var(--ink2); }
+.tt-svg .tt-xs { font: 600 13.5px var(--f-body); fill: var(--ink2); }
+.tt-svg .tt-good { font-weight: 800; fill: var(--ink); }
+.tt-svg .tt-tit { font: 800 27px var(--f-display); letter-spacing: 0.05em; fill: var(--c); }
+.tt-svg .tt-sub { font: 500 15.5px var(--f-body); fill: var(--muted); }
+.tt-svg .t-water { fill: var(--water); }
+.tt-lead { fill: none; stroke: var(--ink2); stroke-width: 1.2; }
+.tt-dot { fill: var(--ink2); }
+.tt-layer { fill: none; stroke: var(--soil-line); stroke-width: 1.2; opacity: 0.8; }
+.tt-ground { fill: none; stroke: var(--soil-line); stroke-width: 2; }
+.tt-river { fill: var(--water-soft); }
+.tt-wl { fill: none; stroke: var(--water); stroke-width: 2.4; }
+.tt-gw { fill: none; stroke: var(--water); stroke-width: 1.8; stroke-dasharray: 9 6; }
+.tt-rl { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+.tt-sep { fill: none; stroke: var(--line2); stroke-width: 1.2; stroke-dasharray: 3 6; }
+.tt-bld { stroke: var(--building2); stroke-width: 1; }
+.tt-win { fill: var(--building2); opacity: 0.85; }
+.tt-air { fill: var(--surface2); }
+.tt-car { fill: var(--steelm); opacity: 0.85; }
+.tt-chamber { fill: none; stroke: var(--ink2); stroke-width: 1.4; stroke-dasharray: 5 4; }
+.tt-arch { fill: none; stroke: var(--g3); stroke-width: 2.2; }
+.tt-roof { fill: none; stroke: var(--steelm2); stroke-width: 3; }
+.tt-hit { fill: transparent; }
+.tt-scene { cursor: pointer; outline: none; transition: opacity 0.3s, filter 0.3s; }
+.tt-scene:hover .tt-hit { fill: color-mix(in srgb, var(--c) 7%, transparent); }
+.tt-scene:focus-visible .tt-hit { stroke: var(--c); stroke-width: 3; }
+.tt-scene.dim { opacity: 0.16; filter: grayscale(0.6); }
+/* erőnyilak + teherút */
+.tt-f line { stroke: currentColor; stroke-width: 2.4; }
+.tt-f path { fill: currentColor; }
+.tt-load { color: var(--ink); } .tt-load line { stroke-width: 3.4; }
+.tt-skin { color: var(--ok); }
+.tt-base { color: var(--accent); }
+.tt-earth { color: var(--steel); }
+.tt-flowline { fill: none; stroke: var(--c); stroke-width: 7; stroke-linecap: round; opacity: 0.32; stroke-dasharray: 12 16; }
+.alap-tt[data-sel="all"] .tt-flowline { opacity: 0.16; }
+@media (prefers-reduced-motion: no-preference) {
+  .tt-scene:not(.dim) .tt-f { animation: tt-pulse 2.6s ease-in-out infinite; animation-delay: var(--dl, 0s); }
+  .tt-scene:not(.dim) .tt-flowline { animation: tt-flow 1.5s linear infinite; }
+}
+@keyframes tt-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes tt-flow { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -28; } }
+.alap-tt .w-out { display: block; }
+.tt-info { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.5; color: var(--ink2); }
+.tt-info b { color: var(--ink); }
+.tt-info a { font-weight: 650; white-space: nowrap; }
+.tt-dotc { flex: none; width: 12px; height: 12px; border-radius: 50%; margin-top: 6px; }
+
+/* ---- adatlapok: 3 + 2 kártya, a sorok egy vonalban (subgrid) */
+.alap-ttcs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; margin: 18px 0 22px; }
+.alap-ttc { grid-column: span 2; grid-row: span 8; display: grid; grid-template-rows: subgrid; row-gap: 8px; align-content: start; padding: 16px 18px 14px; border-radius: 16px; background: var(--surface); border: 1.5px solid var(--line); border-top: 6px solid var(--c); box-shadow: var(--shadow); cursor: pointer; transition: opacity 0.25s, box-shadow 0.25s, transform 0.25s, border-color 0.25s; scroll-margin-top: calc(var(--top-h) + 14px); }
+.alap-ttc:nth-child(4), .alap-ttc:nth-child(5) { grid-column: span 3; }
+.alap-ttc h4 { margin: 0; font-family: var(--f-display); font-size: 24px; letter-spacing: 0.02em; color: var(--c); line-height: 1.05; }
+.alap-ttc .ttc-lead { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink); }
+.ttc-row { border-top: 1px solid var(--line); padding-top: 7px; }
+.ttc-k { display: block; font: 700 11.5px var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--c); margin-bottom: 2px; }
+.ttc-row p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink2); }
+.ttc-go { align-self: end; justify-self: start; font-weight: 700; font-size: 14px; color: var(--c); text-decoration: none; padding-top: 4px; }
+.ttc-go:hover { text-decoration: underline; }
+.alap-ttc.on { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 30%, transparent), var(--shadow-lg); transform: translateY(-2px); }
+.alap-ttc.dim { opacity: 0.5; }
+@media (max-width: 980px) {
+  .alap-ttcs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .alap-ttc, .alap-ttc:nth-child(4), .alap-ttc:nth-child(5) { grid-column: span 1; }
+  .alap-ttc:nth-child(5) { grid-column: 1 / -1; }
+}
+@media (max-width: 620px) {
+  .alap-ttcs { grid-template-columns: minmax(0, 1fr); }
+  .alap-ttc, .alap-ttc:nth-child(5) { grid-column: auto; grid-row: auto; display: flex; flex-direction: column; gap: 8px; }
+}
+.tt-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink2); padding: 2px 4px 0; }
+.tt-legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.tt-legend .sw { width: 16px; height: 12px; border-radius: 3px; border: 1px solid var(--line2); }
+.tt-legend .f-l1 { background: var(--soilC); } .tt-legend .f-l2 { background: var(--soilB); } .tt-legend .f-l3 { background: var(--soilD); } .tt-legend .f-l4 { background: var(--soilE); }
+.tt-legend .ln { width: 18px; border-top: 2px dashed var(--water); }
+.tt-legend .ar { width: 18px; height: 3px; border-radius: 2px; position: relative; }
+.tt-legend .ar::after { content: ""; position: absolute; right: -3px; top: -4px; border-left: 7px solid currentColor; border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent; }
+.tt-legend .ar.ld { background: var(--ink); color: var(--ink); } .tt-legend .ar.sk { background: var(--ok); color: var(--ok); } .tt-legend .ar.bs { background: var(--accent); color: var(--accent); } .tt-legend .ar.ea { background: var(--steel); color: var(--steel); }
