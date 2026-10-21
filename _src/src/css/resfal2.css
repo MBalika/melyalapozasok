@@ -1,0 +1,77 @@
+/* C07 Résfalak – saját ábrák és rendezett elrendezés (G5) */
+svg.rf-svg { width: 100%; height: auto; display: block; }
+svg.rf-svg .rf-t { font: 600 15px var(--f-body); fill: var(--ink2); }
+svg.rf-svg .rf-ts { font: 600 13px var(--f-body); fill: var(--ink2); }
+svg.rf-svg .rf-tn { font: 700 13px var(--f-mono); fill: var(--ink); }
+svg.rf-svg .rf-tb { font: 800 17px var(--f-display); fill: var(--ink); letter-spacing: 0.03em; text-transform: uppercase; }
+svg.rf-svg .rf-tbig { font: 700 26px var(--f-body); font-style: italic; fill: var(--ink); }
+svg.rf-svg .rf-badge { font: 800 15px var(--f-mono); fill: #fff; }
+svg.rf-svg .rf-onfill { paint-order: stroke; stroke: var(--surface); stroke-width: 3.5px; stroke-linejoin: round; }
+svg.rf-svg .t-water { fill: var(--water); }
+svg.rf-svg .t-bad { fill: var(--bad); }
+
+/* ábrakártya: keret + ábra + felirat */
+.rf-figcard { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 14px 12px; box-shadow: var(--shadow); min-width: 0; display: flex; flex-direction: column; }
+.rf-figcard > .rf-figbox { flex: 1; display: flex; align-items: center; }
+.rf-figcard > .rf-figbox > svg, .rf-figcard > .rf-figbox > div { width: 100%; }
+.rf-figcard figcaption, .rf-figcap { font-size: 13.5px; color: var(--muted); line-height: 1.45; margin-top: 10px; text-align: justify; hyphens: manual; }
+.rf-figcard figcaption b { color: var(--ink); }
+.rf-figcard.photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); cursor: zoom-in; }
+.rf-figwide { margin: 18px 0; }
+.rf-row { display: grid; gap: 18px; margin: 18px 0; align-items: stretch; }
+.rf-row.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rf-row.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.rf-row.c2-wide { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+@media (max-width: 900px) { .rf-row.c3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rf-row.c3 > :last-child { grid-column: 1 / -1; } }
+@media (max-width: 680px) { .rf-row.c2, .rf-row.c3, .rf-row.c2-wide { grid-template-columns: minmax(0, 1fr); } .rf-row.c3 > :last-child { grid-column: auto; } }
+.rf-stack { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.rf-stack > * { margin: 0 !important; }
+.rf-stack > .rf-grow { flex: 1; }
+
+/* 7.1: tények négy oszlopban, alkalmazási kártya + videó */
+.factbar.rf-fb4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 800px) { .factbar.rf-fb4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.rf-row .vcard { margin: 0; height: 100%; }
+.rf-row > .card { display: flex; flex-direction: column; }
+.rf-row > .card ul { margin: 0; }
+.rf-cols2 { columns: 2; column-gap: 34px; }
+.rf-cols2 li { break-inside: avoid; }
+@media (max-width: 680px) { .rf-cols2 { columns: 1; } }
+
+/* 7.2: a hat lépés kártyái */
+.rf-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 18px 0 22px; }
+@media (max-width: 900px) { .rf-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .rf-steps { grid-template-columns: minmax(0, 1fr); } }
+.rf-step { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+.rf-stepviz { border-bottom: 1px solid var(--line); }
+.rf-step figcaption { padding: 10px 14px 12px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: baseline; }
+.rf-stepn { grid-row: span 2; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--grp); color: #fff; font: 800 15px/1 var(--f-mono); align-self: start; }
+.rf-step figcaption b { font: 800 19px/1.1 var(--f-display); text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink); }
+.rf-stepd { font-size: 14px; line-height: 1.45; color: var(--ink2); text-align: justify; hyphens: manual; }
+
+/* a fotókártyák szövege */
+.rf-figcard h5 { font: 800 20px/1.1 var(--f-display); text-transform: uppercase; letter-spacing: 0.02em; margin: 12px 0 4px; color: var(--ink); }
+.rf-figcard > p { margin: 0; font-size: 15px; line-height: 1.55; text-align: justify; hyphens: manual; }
+/* gépkártyák ábrával */
+.rf-machine { display: flex; flex-direction: column; }
+.rf-machine .rf-figbox { margin: -4px -4px 12px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+
+/* a zagy útja – jelmagyarázat */
+.rf-legend { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 24px; font-size: 14px; color: var(--ink2); }
+.rf-legend li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: baseline; text-align: left; }
+.rf-legend li > i { font: 800 12px/1 var(--f-mono); font-style: normal; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--grp); color: #fff; }
+@media (max-width: 680px) { .rf-legend { grid-template-columns: minmax(0, 1fr); } }
+
+/* széles ábrák keskeny kijelzőn vízszintesen görgethetők, hogy a feliratok olvashatók maradjanak */
+.rf-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+@media (max-width: 760px) {
+  .rf-scroll > svg.rf-zagy { min-width: 720px; }
+  .rf-scroll > svg.rf-beton { min-width: 760px; }
+  .rf-scroll > svg.rf-press { min-width: 470px; }
+  .rf-scrollhint { display: block; }
+}
+.rf-scrollhint { display: none; font: 600 11.5px/1.2 var(--f-mono); color: var(--muted); margin: 6px 0 0; letter-spacing: 0.04em; }
+
+/* képletek a nyomásábra mellett */
+.rf-stack .formula { margin: 0; }
+.rf-stack .formula .fl { flex-basis: 100%; }

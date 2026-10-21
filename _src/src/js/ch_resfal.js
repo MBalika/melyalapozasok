@@ -1,6 +1,7 @@
 // C07 – Résfalak: anatómia, réstábla-építő, gépválasztó, silóhatás, résállékonyság-labor, kvíz
 import { register, shell, slider, seg, toggle, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop } from './core.js';
 import { defineQuiz } from './ui.js';
+import './rf_figs.js';
 
 /* ------------------------------------------------------------------ rajzsegédek */
 const T = (p, x, y, s, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: s, ...o }, p);

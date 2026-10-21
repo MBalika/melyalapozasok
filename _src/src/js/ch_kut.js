@@ -1,6 +1,7 @@
 // C08 – Kút-, szekrény- és keszonalapozás: kútsüllyesztő, acél köpenycsöves kút, szekrénytípusok, keszon-nyomás, elferdülés-monitor, kvíz
 import { register, shell, slider, seg, toggle, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop } from './core.js';
 import { defineQuiz } from './ui.js';
+import './kut_figs.js';
 
 /* ------------------------------------------------------------------ rajzsegédek */
 const T = (p, x, y, s, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: s, ...o }, p);

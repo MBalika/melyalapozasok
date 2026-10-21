@@ -1,0 +1,55 @@
+/* G3 – C04/C05: saját fázisábrák, kártyás elrendezés, egyforma magas fotósorok */
+
+/* fázissor: N egyforma kártya, mobilon vízszintesen görgethető szalag */
+.g3-phases { display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 12px; margin: 18px 0 24px; }
+.g3-ph { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 8px 8px 12px; box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0; }
+.g3-ph .g3-svg { width: 100%; height: auto; display: block; border-radius: 9px; overflow: hidden; }
+.g3-ph figcaption { margin-top: 9px; padding: 0 3px; font-size: 13.5px; line-height: 1.45; color: var(--ink2); }
+.g3-ph figcaption span { display: block; text-align: justify; hyphens: manual; }
+.g3-ph figcaption b { display: flex; align-items: center; gap: 7px; font-family: var(--f-display); font-size: 17px; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; line-height: 1.1; text-align: left; }
+.g3-ph figcaption b i { font-style: normal; flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--grp); color: #fff; display: grid; place-items: center; font: 800 12.5px/1 var(--f-mono); }
+@media (max-width: 980px) {
+  .g3-phases { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(170px, 31%); overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 2px 10px; scrollbar-width: thin; }
+  .g3-ph { scroll-snap-align: start; }
+}
+@media (max-width: 560px) { .g3-phases { grid-auto-columns: minmax(160px, 47%); } }
+.g3-swipe { display: none; font: 600 12px var(--f-mono); color: var(--muted); letter-spacing: 0.06em; margin: -14px 0 18px; }
+@media (max-width: 980px) { .g3-swipe { display: block; } }
+
+/* két egyforma magas fénykép egymás mellett (képarány szerinti szélesség) */
+.g3-just { display: flex; gap: 16px; margin: 18px 0 24px; align-items: flex-start; }
+.g3-just figure { flex: var(--ar, 1.5) 1 0; margin: 0; min-width: 0; cursor: zoom-in; }
+.g3-just img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); background: var(--surface3); }
+.g3-just figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+@media (max-width: 600px) { .g3-just { flex-direction: column; } .g3-just figure { flex: none; width: 100%; } }
+
+/* szöveg + kártya egymás mellett, függőlegesen középre igazítva */
+.g3-mid { align-items: center; }
+
+/* lépéskártyák (5.1) és megtámasztási módok (5.3) */
+.g3-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 16px 0 20px; }
+.g3-step { position: relative; padding-top: 16px; }
+.g3-step .n { width: 38px; height: 38px; border-radius: 50%; background: var(--grp); color: #fff; display: grid; place-items: center; font: 900 21px/1 var(--f-display); margin-bottom: 8px; }
+.g3-step h4 { font-size: 21px; margin-bottom: 2px; }
+.g3-step .tools { font: 600 12px/1.45 var(--f-mono); color: var(--grp); letter-spacing: 0.02em; margin: 0 0 8px; }
+@media (max-width: 760px) { .g3-steps { grid-template-columns: minmax(0, 1fr); } }
+
+.g3-meth { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0 20px; }
+.g3-meth .card { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; align-items: start; }
+.g3-meth .g3-mini svg { width: 92px; height: auto; display: block; border-radius: 9px; border: 1px solid var(--line); }
+.g3-meth h4 { font-size: 21px; }
+@media (max-width: 760px) { .g3-meth { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 420px) { .g3-meth .card { grid-template-columns: 72px minmax(0, 1fr); gap: 12px; } .g3-meth .g3-mini svg { width: 72px; } }
+
+/* szöveg + illusztráció 3:2 arányban, középre igazítva */
+.g3-split { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 28px; align-items: center; margin: 8px 0 18px; }
+.g3-split > figure { margin: 0; }
+.g3-split.rev { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+@media (max-width: 880px) { .g3-split, .g3-split.rev { grid-template-columns: minmax(0, 1fr); gap: 18px; } }
+
+/* a 3×3-as fejezetnavigáció (C05) */
+#furt .furt-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* sok (6–7) keskeny panel: a felirat rövid címke, nem sorkizárt bekezdés */
+.g3-phases.g3-many .g3-ph figcaption { font-size: 12.8px; line-height: 1.35; }
+.g3-phases.g3-many .g3-ph figcaption span { text-align: left; color: var(--muted); }
+.g3-phases.g3-many .g3-ph figcaption b { font-size: 15.5px; }

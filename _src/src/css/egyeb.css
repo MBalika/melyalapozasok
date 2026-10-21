@@ -8,15 +8,7 @@
 .egy-uses { margin: 18px 0; }
 .egy-uses .card h4 { font-size: 21px; }
 .egy-n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 900 19px/1 var(--f-display); color: #fff; background: var(--grp); margin-bottom: 8px; }
-.egy-pair { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 14px; align-items: start; }
-.egy-pair2 { gap: 12px; align-items: start; }
-.egy-pair2 .fig-ppt, .egy-pair .fig-ppt { margin: 0; }
-.egy-fig-wide, figure.fig-ppt.egy-fig-wide { max-width: 720px; margin-left: auto; margin-right: auto; }
-.egy-narrow { max-width: 260px; justify-self: center; }
-.egy-narrow img { max-height: 460px; width: auto; }
 .egy-yt2 { margin-top: 4px; }
-@media (max-width: 680px) { .egy-pair2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .egy-narrow { max-width: 200px; } }
-@media (max-width: 420px) { .egy-pair { grid-template-columns: minmax(0, 1fr); } }
 
 /* kevert talaj (mélykeverés) */
 .egy-mix { fill: color-mix(in srgb, var(--grout) 58%, var(--soilC)); }
@@ -36,9 +28,81 @@
 svg .egy-sl { font: 600 11.5px var(--f-body); fill: var(--ink); opacity: 0.82; }
 /* BME mini kártya a szöveges hasáb alján */
 .egy-ytm { width: 100%; max-width: 440px; margin-top: 18px; }
-/* magas kép (mélyvibrátor) */
-.egy-tall img { max-height: 400px; width: auto; margin-inline: auto; }
 /* keskeny nézet: nagyobb feliratok a levágott ábrákon */
 svg.egy-sm .egy-sl, svg.egy-sm .t-sm { font-size: 14px; }
 svg.egy-sm .t-lab { font-size: 14px !important; }
 svg.egy-sm .t-num { font-size: 14px; }
+
+/* ---------------------------------------------------------------- saját SVG-ábrák (2. kör) */
+#egyeb { --mach: #e3a73b; --mach2: #c38a26; --jet: #2a8fd0; }
+.egy-sfig { margin: 0; min-width: 0; }
+.egy-sfig > svg.egy-svg { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); background: var(--surface2); }
+.egy-sfig figcaption { font-size: 13.5px; line-height: 1.45; color: var(--muted); margin-top: 8px; text-align: left; }
+.egy-sfig figcaption b { display: block; font: 800 18px/1.15 var(--f-display); letter-spacing: 0.02em; color: var(--ink); margin-bottom: 3px; text-align: left; }
+/* rácsok: egyforma cellák, felül igazítva */
+.egy-uses8 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 14px; margin: 22px 0 8px; align-items: start; }
+.egy-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 14px; margin: 14px 0 22px; align-items: start; }
+@media (max-width: 980px) { .egy-uses8, .egy-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .egy-uses8 { gap: 14px 10px; } .egy-sfig figcaption { font-size: 13px; } .egy-sfig figcaption b { font-size: 16.5px; } }
+/* sorok */
+@media (min-width: 881px) { .egy-titanrow { grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); } .egy-panelrow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .egy-vidrow { grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr); } }
+.egy-titanrow { align-items: start; }
+.egy-titanrow .egy-photo { margin: 18px 0 0; }
+.egy-titanrow .egy-photo img { width: 100%; aspect-ratio: 21 / 10; object-fit: cover; object-position: 50% 40%; }
+.egy-panelrow { align-items: center; margin-top: 26px; }
+.egy-vidrow { align-items: center; }
+.egy-vidrow .egy-ytm { margin-top: 0; max-width: none; }
+@media (max-width: 880px) { .egy-vidrow .egy-ytm { max-width: 440px; } .egy-titan { max-width: 520px; } }
+
+/* rajzelemek */
+svg .egy-gl { stroke: var(--soil-line); stroke-width: 1.6; fill: none; }
+svg .egy-ol { stroke: var(--ink2); stroke-width: 1.2; fill: none; opacity: 0.75; }
+svg .egy-ar { stroke: var(--ink); stroke-width: 2; fill: none; }
+svg .egy-ar.egy-thin { stroke-width: 1.4; opacity: 0.8; }
+svg .egy-ar.egy-up { stroke: var(--water); stroke-width: 3; }
+svg .egy-up-t { fill: var(--water); font: 800 17px var(--f-display); }
+svg .egy-bad { stroke: var(--bad); fill: none; }
+svg .egy-wl { stroke: var(--water); stroke-width: 1.6; fill: none; }
+svg .egy-wlt { fill: var(--water); }
+svg .egy-mach { fill: var(--mach); } svg .egy-mach2 { fill: var(--mach2); }
+svg .egy-mast { fill: var(--steelm2); }
+svg .egy-grt { stroke: var(--grout); stroke-width: 8; stroke-linecap: round; fill: none; }
+svg .egy-bar { stroke: var(--steel); stroke-width: 2.6; stroke-linecap: round; fill: none; }
+svg .egy-dsh { stroke: var(--line2); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+svg .egy-pw { fill: var(--grout); }
+svg .egy-slip { stroke: var(--bad); stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+svg .egy-czone { fill: color-mix(in srgb, var(--soilD) 70%, var(--ink) 12%); stroke: none; }
+svg .egy-gsoil { fill: color-mix(in srgb, var(--concrete2) 72%, var(--soilE)); stroke: none; }
+svg .egy-gbody { fill: color-mix(in srgb, var(--grout) 78%, var(--water) 22%); stroke: none; }
+svg .egy-barf { fill: var(--steelm); stroke: var(--steelm2); stroke-width: 1.2; }
+svg .egy-thread { stroke: var(--steelm2); stroke-width: 1.6; }
+svg .egy-coup { fill: var(--ink2); }
+svg .egy-cent { fill: var(--surface); stroke: var(--ink2); stroke-width: 1.4; }
+svg .egy-cent2 { stroke: var(--ink2); stroke-width: 1.6; fill: none; }
+svg .egy-cut { fill: var(--surface); stroke: var(--steelm2); stroke-width: 1.2; }
+svg .egy-bit { fill: var(--steelm2); }
+svg .egy-plate { fill: var(--ink2); }
+svg .egy-nut { fill: var(--steelm2); stroke: var(--ink2); stroke-width: 1; }
+svg .egy-ld { stroke: var(--ink2); stroke-width: 1.1; fill: none; }
+svg .egy-ldot { fill: var(--ink); }
+svg .egy-L { font: 600 17px var(--f-body); fill: var(--ink); }
+svg .egy-Ls { font: 600 13px var(--f-body); fill: var(--ink2); }
+svg .egy-T { font: 800 19px var(--f-display); fill: var(--grp); letter-spacing: 0.06em; text-transform: uppercase; }
+svg .egy-rod { stroke: var(--steelm2); stroke-width: 4; fill: none; }
+svg .egy-jcol { fill: var(--grout); stroke: var(--ink2); stroke-width: 1.2; }
+svg .egy-jcol2 { fill: color-mix(in srgb, var(--grout) 85%, var(--water) 15%); stroke: var(--ink2); stroke-width: 1.2; }
+svg .egy-monitor { fill: var(--ink2); }
+svg .egy-jetl { stroke: var(--jet); stroke-width: 3; stroke-linecap: round; fill: none; }
+svg .egy-jetl2 { stroke: var(--jet); stroke-width: 1.4; stroke-linecap: round; fill: none; opacity: 0.55; }
+svg .egy-spoil { fill: var(--grout); stroke: var(--ink2); stroke-width: 1; }
+svg .egy-cutl { stroke: var(--bad); stroke-width: 1.8; stroke-dasharray: 5 4; fill: none; }
+svg .egy-panel { stroke: var(--grp); stroke-width: 9; stroke-linecap: round; fill: none; }
+svg .egy-hole { fill: var(--surface); stroke: var(--ink); stroke-width: 2.4; }
+svg .egy-pface { fill: var(--grout); stroke: var(--ink2); stroke-width: 1.4; }
+svg .egy-pface2 { fill: color-mix(in srgb, var(--grout) 78%, var(--ink) 10%); stroke: var(--ink2); stroke-width: 1.4; }
+svg .egy-blade { stroke: var(--ink2); stroke-width: 3.2; stroke-linecap: round; }
+svg .egy-mixf { fill: color-mix(in srgb, var(--grout) 68%, var(--soilC)); }
+svg .egy-mixf2 { fill: color-mix(in srgb, var(--grout) 40%, var(--soilC)); }
+svg .egy-mixc { fill: color-mix(in srgb, var(--grout) 55%, var(--soilC)); stroke: var(--ink2); stroke-width: 1.2; opacity: 0.95; }
+svg .egy-vib { fill: var(--steelm); stroke: var(--steelm2); stroke-width: 1.2; }
+svg .egy-ovl { fill: color-mix(in srgb, var(--grout) 60%, var(--ink) 25%); }

@@ -1,6 +1,7 @@
 // C05 – Fúrt (talajhelyettesítéses) cölöpök: fúrófejek, furatállékonyság-labor, kontraktorcsöves betonozás, CFA-monitor, technológiaválasztó, kvíz
 import { register, shell, slider, seg, toggle, select, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop, onTheme } from './core.js';
 import { defineQuiz } from './ui.js';
+import './g3_phases.js';
 
 /* ------------------------------------------------------------------ rajzsegédek */
 const T = (p, x, y, s, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: s, ...o }, p);

@@ -1,6 +1,7 @@
 // ch_helyszini – C04 Franki és csavart cölöpök: kiszorítás vs helyettesítés szemcseszimuláció, Franki-lépések, csavart cölöp monitor, kvíz
 import { register, shell, slider, seg, toggle, select, stat, verdict, figure, svg, h, fmt, clear, clamp, lerp, smooth, pathD, loop, fitCanvas, cssVar, onTheme } from './core.js';
 import { defineQuiz } from './ui.js';
+import './g3_phases.js';
 
 const txt = (p, x, y, s, cls = 't-lab', extra = {}) => svg('text', { x, y, class: cls, text: s, ...extra }, p);
 const rect = (p, x, y, w, hh, style, extra = {}) => svg('rect', { x, y, width: Math.max(0, w), height: Math.max(0, hh), style, ...extra }, p);
