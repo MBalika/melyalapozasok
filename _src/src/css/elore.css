@@ -1,0 +1,57 @@
+/* C03 Előregyártott cölöpök (elo-) és C04 Franki és csavart cölöpök (hsz-) */
+
+/* anyagkártyák keresztmetszet-ikonnal */
+.elo-mat .card { display: flex; flex-direction: column; }
+.elo-xs { width: 120px; height: 70px; display: block; margin: 0 0 8px; }
+.elo-mat .card p.small { margin-top: auto; padding-top: 6px; }
+
+/* módszer-értékelő sávok */
+.elo-rates { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.elo-rate { display: grid; grid-template-columns: 82px auto; align-items: center; gap: 4px 10px; font-size: 13px; }
+.elo-rate .l { color: var(--muted); font-weight: 600; }
+.elo-rate .n { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+.elo-meter { display: inline-flex; gap: 4px; }
+.elo-meter i { width: 18px; height: 10px; border-radius: 3px; background: var(--surface3); border: 1px solid var(--line2); }
+.elo-meter i.on { background: var(--grp); border-color: transparent; }
+.elo-note { margin: 0; text-align: left; }
+
+/* gombsor a szimulátorokban */
+.elo-btns, .hsz-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.elo-btns .btn, .hsz-btns .btn { flex: 1 1 auto; justify-content: center; }
+
+/* Franki-lépések */
+.hsz-steps { display: flex; flex-wrap: wrap; gap: 6px; }
+.hsz-steps button { flex: 1 1 calc(25% - 6px); min-width: 0; padding: 7px 6px; font-size: 13px; }
+.hsz-cap { font-size: 12.5px; color: var(--muted); margin: 0; text-align: left; }
+
+/* összevető táblázat */
+.hsz-cmp td b { white-space: nowrap; }
+.hsz-cmp td:first-child { font-weight: 700; white-space: nowrap; }
+
+/* fúrófej-kártyák */
+.hsz-heads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hsz-heads .card svg { width: 100%; height: 150px; display: block; margin-bottom: 8px; }
+@media (max-width: 760px) { .hsz-heads { grid-template-columns: minmax(0, 1fr); } .hsz-heads .card svg { height: 120px; } }
+
+/* a vibrálás-labor és a verés-szimulátor gombjai mobilon */
+@media (max-width: 520px) {
+  .elo-rate { grid-template-columns: 70px auto; }
+  .hsz-steps button { flex-basis: calc(50% - 6px); }
+}
+.elo-tstat .stat-v { font-family: var(--f-body); font-size: 15px; font-weight: 650; line-height: 1.35; }
+
+/* szemcseszimuláció vezérlősora */
+.hsz-row { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 22px; }
+.hsz-row > .ctl { flex: 1 1 220px; min-width: 0; }
+.hsz-row > .tog { flex: 0 1 auto; }
+canvas.hsz-cv { width: 100%; display: block; }
+canvas.hsz-cv { max-width: 900px; margin: 0 auto; }
+
+/* keskeny kijelzőn a széles ábrák SVG-feliratai nagyobbak (a viewBox miatt különben olvashatatlanok) */
+@media (max-width: 600px) {
+  [data-w^="elo-"] svg.fig .t-sm, [data-w^="hsz-"] svg.fig .t-sm { font-size: 17px; }
+  [data-w^="elo-"] svg.fig .t-num, [data-w^="hsz-"] svg.fig .t-num { font-size: 17px; }
+  [data-w^="elo-"] svg.fig .t-lab, [data-w^="hsz-"] svg.fig .t-lab { font-size: 17px; }
+  [data-w^="elo-"] svg.fig .t-big, [data-w^="hsz-"] svg.fig .t-big { font-size: 24px; }
+  [data-w="hsz-reszecske"] svg.fig .t-sm { font-size: 19px; }
+}

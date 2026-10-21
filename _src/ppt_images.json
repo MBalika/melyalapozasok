@@ -1,0 +1,1187 @@
+[
+{
+"slide": 1,
+"n": 1,
+"file": "img/s001-1.jpg",
+"w": 1400,
+"h": 161,
+"title": "Alapozás – mélyalapozások",
+"name": "Picture 1"
+},
+{
+"slide": 1,
+"n": 2,
+"file": "img/s001-2.jpg",
+"w": 369,
+"h": 103,
+"title": "Alapozás – mélyalapozások",
+"name": "Kép 6"
+},
+{
+"slide": 3,
+"n": 1,
+"file": "img/s003-1.jpg",
+"w": 415,
+"h": 332,
+"title": "Nagy terhelések – CN Tower",
+"name": "Picture 2"
+},
+{
+"slide": 3,
+"n": 2,
+"file": "img/s003-2.jpg",
+"w": 341,
+"h": 603,
+"title": "Nagy terhelések – CN Tower",
+"name": "Picture 2"
+},
+{
+"slide": 4,
+"n": 1,
+"file": "img/s004-1.jpg",
+"w": 1328,
+"h": 920,
+"title": "Nagy terhelések – Taipei 101",
+"name": "Picture 4"
+},
+{
+"slide": 4,
+"n": 2,
+"file": "img/s004-2.jpg",
+"w": 1400,
+"h": 1050,
+"title": "Nagy terhelések – Taipei 101",
+"name": "Picture 2"
+},
+{
+"slide": 4,
+"n": 3,
+"file": "img/s004-3.jpg",
+"w": 570,
+"h": 795,
+"title": "Nagy terhelések – Taipei 101",
+"name": "Picture 3"
+},
+{
+"slide": 5,
+"n": 1,
+"file": "img/s005-1.jpg",
+"w": 445,
+"h": 593,
+"title": "Nagy terhelések és kedvezőtlen altalaj",
+"name": "Picture 4"
+},
+{
+"slide": 5,
+"n": 2,
+"file": "img/s005-2.jpg",
+"w": 338,
+"h": 450,
+"title": "Nagy terhelések és kedvezőtlen altalaj",
+"name": "Picture 2"
+},
+{
+"slide": 6,
+"n": 1,
+"file": "img/s006-1.jpg",
+"w": 825,
+"h": 1260,
+"title": "Szigorú süllyedési kritériumok",
+"name": "Kép 1"
+},
+{
+"slide": 6,
+"n": 2,
+"file": "img/s006-2.jpg",
+"w": 550,
+"h": 366,
+"title": "Szigorú süllyedési kritériumok",
+"name": "Picture 4"
+},
+{
+"slide": 7,
+"n": 1,
+"file": "img/s007-1.jpg",
+"w": 929,
+"h": 509,
+"title": "Cölöpalapozás sémája és erőjátéka",
+"name": "Picture 4"
+},
+{
+"slide": 9,
+"n": 1,
+"file": "img/s009-1.jpg",
+"w": 1230,
+"h": 703,
+"title": "Cölöpök csoportosítása – igénybevétel szerint",
+"name": "Kép 4"
+},
+{
+"slide": 13,
+"n": 1,
+"file": "img/s013-1.jpg",
+"w": 510,
+"h": 482,
+"title": "Fa cölöpök",
+"name": "Picture 4"
+},
+{
+"slide": 15,
+"n": 1,
+"file": "img/s015-1.jpg",
+"w": 256,
+"h": 192,
+"title": "Acél cölöpök",
+"name": "Picture 12"
+},
+{
+"slide": 15,
+"n": 2,
+"file": "img/s015-2.jpg",
+"w": 431,
+"h": 298,
+"title": "Acél cölöpök",
+"name": "Picture 6"
+},
+{
+"slide": 18,
+"n": 1,
+"file": "img/s018-1.jpg",
+"w": 150,
+"h": 150,
+"title": "Előregyártott vasbeton cölöpök",
+"name": "Picture 6"
+},
+{
+"slide": 18,
+"n": 2,
+"file": "img/s018-2.jpg",
+"w": 640,
+"h": 480,
+"title": "Előregyártott vasbeton cölöpök",
+"name": "Picture 2"
+},
+{
+"slide": 18,
+"n": 3,
+"file": "img/s018-3.jpg",
+"w": 252,
+"h": 196,
+"title": "Előregyártott vasbeton cölöpök",
+"name": "Picture 4"
+},
+{
+"slide": 20,
+"n": 1,
+"file": "img/s020-1.jpg",
+"w": 294,
+"h": 392,
+"title": "Cölöpverő gépek",
+"name": "Picture 2"
+},
+{
+"slide": 20,
+"n": 2,
+"file": "img/s020-2.jpg",
+"w": 350,
+"h": 524,
+"title": "Cölöpverő gépek",
+"name": "Picture 4"
+},
+{
+"slide": 20,
+"n": 3,
+"file": "img/s020-3.jpg",
+"w": 459,
+"h": 612,
+"title": "Cölöpverő gépek",
+"name": "Picture 5"
+},
+{
+"slide": 21,
+"n": 1,
+"file": "img/s021-1.jpg",
+"w": 465,
+"h": 619,
+"title": "Cölöpverés a gyakorlatban",
+"name": "Picture 4"
+},
+{
+"slide": 21,
+"n": 2,
+"file": "img/s021-2.jpg",
+"w": 464,
+"h": 619,
+"title": "Cölöpverés a gyakorlatban",
+"name": "Picture 5"
+},
+{
+"slide": 22,
+"n": 1,
+"file": "img/s022-1.jpg",
+"w": 431,
+"h": 574,
+"title": "Cölöpfejezés",
+"name": "Picture 4"
+},
+{
+"slide": 22,
+"n": 2,
+"file": "img/s022-2.jpg",
+"w": 436,
+"h": 582,
+"title": "Cölöpfejezés",
+"name": "Picture 5"
+},
+{
+"slide": 22,
+"n": 3,
+"file": "img/s022-3.jpg",
+"w": 839,
+"h": 629,
+"title": "Cölöpfejezés",
+"name": "Picture 4"
+},
+{
+"slide": 23,
+"n": 1,
+"file": "img/s023-1.jpg",
+"w": 696,
+"h": 510,
+"title": "Talajcsavarok",
+"name": "Kép 1"
+},
+{
+"slide": 23,
+"n": 2,
+"file": "img/s023-2.jpg",
+"w": 619,
+"h": 640,
+"title": "Talajcsavarok",
+"name": "Kép 3"
+},
+{
+"slide": 23,
+"n": 3,
+"file": "img/s023-3.jpg",
+"w": 666,
+"h": 362,
+"title": "Talajcsavarok",
+"name": "Picture 2"
+},
+{
+"slide": 23,
+"n": 4,
+"file": "img/s023-4.jpg",
+"w": 395,
+"h": 221,
+"title": "Talajcsavarok",
+"name": "Kép 6"
+},
+{
+"slide": 24,
+"n": 1,
+"file": "img/s024-1.jpg",
+"w": 600,
+"h": 338,
+"title": "Talajcsavarok alkalmazása",
+"name": "Picture 2"
+},
+{
+"slide": 24,
+"n": 2,
+"file": "img/s024-2.jpg",
+"w": 640,
+"h": 360,
+"title": "Talajcsavarok alkalmazása",
+"name": "Picture 12"
+},
+{
+"slide": 24,
+"n": 3,
+"file": "img/s024-3.jpg",
+"w": 261,
+"h": 193,
+"title": "Talajcsavarok alkalmazása",
+"name": "Picture 4"
+},
+{
+"slide": 27,
+"n": 1,
+"file": "img/s027-1.jpg",
+"w": 500,
+"h": 383,
+"title": "FRANKI cölöp – a készítés lépései",
+"name": "Picture 2"
+},
+{
+"slide": 28,
+"n": 1,
+"file": "img/s028-1.jpg",
+"w": 640,
+"h": 427,
+"title": "FRANKI cölöp – kiszélesedő talp",
+"name": "Picture 2"
+},
+{
+"slide": 28,
+"n": 2,
+"file": "img/s028-2.jpg",
+"w": 285,
+"h": 338,
+"title": "FRANKI cölöp – kiszélesedő talp",
+"name": "Picture 2"
+},
+{
+"slide": 30,
+"n": 1,
+"file": "img/s030-1.jpg",
+"w": 1338,
+"h": 794,
+"title": "Csavart cölöp – talajkiszorítás fúrás közben",
+"name": "Kép 1",
+"from": "render"
+},
+{
+"slide": 31,
+"n": 1,
+"file": "img/s031-1.jpg",
+"w": 500,
+"h": 376,
+"title": "Csavart cölöp rendszerek",
+"name": "Picture 4"
+},
+{
+"slide": 31,
+"n": 2,
+"file": "img/s031-2.jpg",
+"w": 451,
+"h": 386,
+"title": "Csavart cölöp rendszerek",
+"name": "Picture 2"
+},
+{
+"slide": 31,
+"n": 3,
+"file": "img/s031-3.jpg",
+"w": 188,
+"h": 268,
+"title": "Csavart cölöp rendszerek",
+"name": "Kép 4"
+},
+{
+"slide": 31,
+"n": 4,
+"file": "img/s031-4.jpg",
+"w": 137,
+"h": 367,
+"title": "Csavart cölöp rendszerek",
+"name": "Kép 6"
+},
+{
+"slide": 34,
+"n": 1,
+"file": "img/s034-1.jpg",
+"w": 487,
+"h": 343,
+"title": "Talajkiemelés eszközei",
+"name": "Picture 2"
+},
+{
+"slide": 34,
+"n": 2,
+"file": "img/s034-2.jpg",
+"w": 397,
+"h": 527,
+"title": "Talajkiemelés eszközei",
+"name": "Kép 4"
+},
+{
+"slide": 34,
+"n": 3,
+"file": "img/s034-3.jpg",
+"w": 500,
+"h": 375,
+"title": "Talajkiemelés eszközei",
+"name": "Picture 6"
+},
+{
+"slide": 34,
+"n": 4,
+"file": "img/s034-4.jpg",
+"w": 448,
+"h": 336,
+"title": "Talajkiemelés eszközei",
+"name": "Picture 4"
+},
+{
+"slide": 35,
+"n": 1,
+"file": "img/s035-1.jpg",
+"w": 972,
+"h": 729,
+"title": "Armatúra elhelyezése",
+"name": "Picture 9"
+},
+{
+"slide": 35,
+"n": 2,
+"file": "img/s035-2.jpg",
+"w": 414,
+"h": 637,
+"title": "Armatúra elhelyezése",
+"name": "Picture 5"
+},
+{
+"slide": 36,
+"n": 1,
+"file": "img/s036-1.jpg",
+"w": 208,
+"h": 242,
+"title": "Betonozás",
+"name": "Kép 3"
+},
+{
+"slide": 36,
+"n": 2,
+"file": "img/s036-2.jpg",
+"w": 892,
+"h": 524,
+"title": "Betonozás",
+"name": "Kép 4"
+},
+{
+"slide": 38,
+"n": 1,
+"file": "img/s038-1.jpg",
+"w": 932,
+"h": 615,
+"title": "CFA cölöp – a készítés fázisai",
+"name": "Kép 3"
+},
+{
+"slide": 39,
+"n": 1,
+"file": "img/s039-1.jpg",
+"w": 960,
+"h": 1280,
+"title": "CFA – kitűzés, pontraállás",
+"name": "Kép 3"
+},
+{
+"slide": 39,
+"n": 2,
+"file": "img/s039-2.jpg",
+"w": 579,
+"h": 777,
+"title": "CFA – kitűzés, pontraállás",
+"name": "Kép 4"
+},
+{
+"slide": 41,
+"n": 1,
+"file": "img/s041-1.jpg",
+"w": 1041,
+"h": 613,
+"title": "CFA – betonozás",
+"name": "Kép 3"
+},
+{
+"slide": 41,
+"n": 2,
+"file": "img/s041-2.jpg",
+"w": 972,
+"h": 729,
+"title": "CFA – betonozás",
+"name": "Picture 14"
+},
+{
+"slide": 42,
+"n": 1,
+"file": "img/s042-1.jpg",
+"w": 759,
+"h": 677,
+"title": "CFA – betonnyomás mérése",
+"name": "Kép 3"
+},
+{
+"slide": 43,
+"n": 1,
+"file": "img/s043-1.jpg",
+"w": 955,
+"h": 636,
+"title": "CFA – a cölöpvasalás elhelyezése",
+"name": "Kép 3"
+},
+{
+"slide": 43,
+"n": 2,
+"file": "img/s043-2.jpg",
+"w": 972,
+"h": 729,
+"title": "CFA – a cölöpvasalás elhelyezése",
+"name": "Picture 9"
+},
+{
+"slide": 46,
+"n": 1,
+"file": "img/s046-1.jpg",
+"w": 1192,
+"h": 515,
+"title": "Köpenycsöves cölöp – a készítés fázisai",
+"name": "Kép 1"
+},
+{
+"slide": 49,
+"n": 1,
+"file": "img/s049-1.jpg",
+"w": 782,
+"h": 484,
+"title": "Megtámasztás nélküli furat",
+"name": "Picture 3"
+},
+{
+"slide": 51,
+"n": 1,
+"file": "img/s051-1.jpg",
+"w": 530,
+"h": 501,
+"title": "Bentonitzagyos cölöp – építési fázisok",
+"name": "Picture 2"
+},
+{
+"slide": 55,
+"n": 1,
+"file": "img/s055-1.jpg",
+"w": 605,
+"h": 371,
+"title": "Mikrocölöpök – definíció és felhasználás",
+"name": "Picture 2"
+},
+{
+"slide": 57,
+"n": 1,
+"file": "img/s057-1.jpg",
+"w": 513,
+"h": 720,
+"title": "Merevbetétes (injektálásos) mikrocölöp",
+"name": "Picture 2"
+},
+{
+"slide": 57,
+"n": 2,
+"file": "img/s057-2.jpg",
+"w": 800,
+"h": 500,
+"title": "Merevbetétes (injektálásos) mikrocölöp",
+"name": "Picture 4"
+},
+{
+"slide": 60,
+"n": 1,
+"file": "img/s060-1.jpg",
+"w": 487,
+"h": 389,
+"title": "Jet grouting – a berendezés",
+"name": "Picture 2"
+},
+{
+"slide": 60,
+"n": 2,
+"file": "img/s060-2.jpg",
+"w": 200,
+"h": 300,
+"title": "Jet grouting – a berendezés",
+"name": "Picture 4"
+},
+{
+"slide": 61,
+"n": 1,
+"file": "img/s061-1.jpg",
+"w": 500,
+"h": 273,
+"title": "Jet-oszlop készítésének fázisai",
+"name": "Kép 3"
+},
+{
+"slide": 62,
+"n": 1,
+"file": "img/s062-1.jpg",
+"w": 430,
+"h": 656,
+"title": "Jet grouting – fúróberendezés és fúvókafej",
+"name": "Picture 4"
+},
+{
+"slide": 62,
+"n": 2,
+"file": "img/s062-2.jpg",
+"w": 422,
+"h": 606,
+"title": "Jet grouting – fúróberendezés és fúvókafej",
+"name": "Picture 5"
+},
+{
+"slide": 63,
+"n": 1,
+"file": "img/s063-1.jpg",
+"w": 549,
+"h": 731,
+"title": "Jet grouting – gépek a munkaterületen",
+"name": "Picture 2"
+},
+{
+"slide": 63,
+"n": 2,
+"file": "img/s063-2.jpg",
+"w": 548,
+"h": 734,
+"title": "Jet grouting – gépek a munkaterületen",
+"name": "Picture 3"
+},
+{
+"slide": 64,
+"n": 1,
+"file": "img/s064-1.jpg",
+"w": 713,
+"h": 534,
+"title": "Jet grouting – munka szűk helyen",
+"name": "Picture 4"
+},
+{
+"slide": 64,
+"n": 2,
+"file": "img/s064-2.jpg",
+"w": 480,
+"h": 640,
+"title": "Jet grouting – munka szűk helyen",
+"name": "Picture 4"
+},
+{
+"slide": 65,
+"n": 1,
+"file": "img/s065-1.jpg",
+"w": 1400,
+"h": 798,
+"title": "Feltárt jet-oszlopok",
+"name": "Picture 4"
+},
+{
+"slide": 67,
+"n": 1,
+"file": "img/s067-1.jpg",
+"w": 253,
+"h": 545,
+"title": "Jet panelek kivitelezése",
+"name": "Picture 7"
+},
+{
+"slide": 68,
+"n": 1,
+"file": "img/s068-1.jpg",
+"w": 431,
+"h": 574,
+"title": "Jet grouting – aláfalazás",
+"name": "Picture 4"
+},
+{
+"slide": 68,
+"n": 2,
+"file": "img/s068-2.jpg",
+"w": 431,
+"h": 574,
+"title": "Jet grouting – aláfalazás",
+"name": "Picture 5"
+},
+{
+"slide": 69,
+"n": 1,
+"file": "img/s069-1.jpg",
+"w": 1400,
+"h": 1050,
+"title": "Feltárt jet-oszlopok a munkagödörben",
+"name": "Picture 4"
+},
+{
+"slide": 70,
+"n": 1,
+"file": "img/s070-1.jpg",
+"w": 656,
+"h": 492,
+"title": "Jet-oszlopok régi falazat alatt",
+"name": "Picture 4"
+},
+{
+"slide": 70,
+"n": 2,
+"file": "img/s070-2.jpg",
+"w": 801,
+"h": 601,
+"title": "Jet-oszlopok régi falazat alatt",
+"name": "Picture 4"
+},
+{
+"slide": 72,
+"n": 1,
+"file": "img/s072-1.jpg",
+"w": 525,
+"h": 259,
+"title": "Mélykeverés – a technológia",
+"name": "Picture 2"
+},
+{
+"slide": 73,
+"n": 1,
+"file": "img/s073-1.jpg",
+"w": 400,
+"h": 432,
+"title": "Mélykeverés a gyakorlatban",
+"name": "Picture 4"
+},
+{
+"slide": 73,
+"n": 2,
+"file": "img/s073-2.jpg",
+"w": 200,
+"h": 140,
+"title": "Mélykeverés a gyakorlatban",
+"name": "Picture 2"
+},
+{
+"slide": 75,
+"n": 1,
+"file": "img/s075-1.jpg",
+"w": 778,
+"h": 807,
+"title": "Kavicscölöp – készítés és gépek",
+"name": "Picture 4"
+},
+{
+"slide": 75,
+"n": 2,
+"file": "img/s075-2.jpg",
+"w": 616,
+"h": 1388,
+"title": "Kavicscölöp – készítés és gépek",
+"name": "Picture 3"
+},
+{
+"slide": 78,
+"n": 1,
+"file": "img/s078-1.jpg",
+"w": 500,
+"h": 397,
+"title": "A réselés menete szakaszos réselésnél",
+"name": "Kép 6"
+},
+{
+"slide": 79,
+"n": 1,
+"file": "img/s079-1.jpg",
+"w": 259,
+"h": 194,
+"title": "1. Résvezető gerenda készítése",
+"name": "Picture 4"
+},
+{
+"slide": 79,
+"n": 2,
+"file": "img/s079-2.jpg",
+"w": 737,
+"h": 550,
+"title": "1. Résvezető gerenda készítése",
+"name": "Kép 10",
+"from": "render"
+},
+{
+"slide": 80,
+"n": 1,
+"file": "img/s080-1.jpg",
+"w": 560,
+"h": 262,
+"title": "2. Földkiemelés",
+"name": "Kép 3"
+},
+{
+"slide": 80,
+"n": 2,
+"file": "img/s080-2.jpg",
+"w": 354,
+"h": 472,
+"title": "2. Földkiemelés",
+"name": "Picture 2"
+},
+{
+"slide": 81,
+"n": 1,
+"file": "img/s081-1.jpg",
+"w": 839,
+"h": 629,
+"title": "Földkiemelés – hydrofraiser",
+"name": "Picture 4"
+},
+{
+"slide": 81,
+"n": 2,
+"file": "img/s081-2.jpg",
+"w": 907,
+"h": 773,
+"title": "Földkiemelés – hydrofraiser",
+"name": "Picture 5"
+},
+{
+"slide": 82,
+"n": 1,
+"file": "img/s082-1.jpg",
+"w": 877,
+"h": 522,
+"title": "Hydrofraiser – marótárcsák",
+"name": "Picture 4"
+},
+{
+"slide": 82,
+"n": 2,
+"file": "img/s082-2.jpg",
+"w": 440,
+"h": 507,
+"title": "Hydrofraiser – marótárcsák",
+"name": "Picture 4"
+},
+{
+"slide": 83,
+"n": 1,
+"file": "img/s083-1.jpg",
+"w": 940,
+"h": 790,
+"title": "Zagykezelő berendezés",
+"name": "Picture 2"
+},
+{
+"slide": 83,
+"n": 2,
+"file": "img/s083-2.jpg",
+"w": 876,
+"h": 657,
+"title": "Zagykezelő berendezés",
+"name": "Picture 4"
+},
+{
+"slide": 84,
+"n": 1,
+"file": "img/s084-1.jpg",
+"w": 1157,
+"h": 702,
+"title": "3. Bentonitos résiszap-zagy",
+"name": "Kép 3"
+},
+{
+"slide": 85,
+"n": 1,
+"file": "img/s085-1.jpg",
+"w": 1400,
+"h": 1050,
+"title": "Kiemelés réskanállal",
+"name": "Kép 3",
+"from": "render"
+},
+{
+"slide": 86,
+"n": 1,
+"file": "img/s086-1.jpg",
+"w": 803,
+"h": 611,
+"title": "4. Szakaszoló palló",
+"name": "Kép 4",
+"from": "render"
+},
+{
+"slide": 86,
+"n": 2,
+"file": "img/s086-2.jpg",
+"w": 816,
+"h": 611,
+"title": "4. Szakaszoló palló",
+"name": "Kép 7",
+"from": "render"
+},
+{
+"slide": 86,
+"n": 3,
+"file": "img/s086-3.jpg",
+"w": 886,
+"h": 611,
+"title": "4. Szakaszoló palló",
+"name": "Kép 9",
+"from": "render"
+},
+{
+"slide": 87,
+"n": 1,
+"file": "img/s087-1.jpg",
+"w": 819,
+"h": 611,
+"title": "Szakaszoló elemek és felületek",
+"name": "Kép 3",
+"from": "render"
+},
+{
+"slide": 87,
+"n": 2,
+"file": "img/s087-2.jpg",
+"w": 1134,
+"h": 611,
+"title": "Szakaszoló elemek és felületek",
+"name": "Kép 6",
+"from": "render"
+},
+{
+"slide": 87,
+"n": 3,
+"file": "img/s087-3.jpg",
+"w": 492,
+"h": 489,
+"title": "Szakaszoló elemek és felületek",
+"name": "Kép 8",
+"from": "render"
+},
+{
+"slide": 87,
+"n": 4,
+"file": "img/s087-4.jpg",
+"w": 755,
+"h": 489,
+"title": "Szakaszoló elemek és felületek",
+"name": "Kép 10",
+"from": "render"
+},
+{
+"slide": 88,
+"n": 1,
+"file": "img/s088-1.jpg",
+"w": 963,
+"h": 733,
+"title": "5. Résarmatúra beemelése",
+"name": "Kép 6",
+"from": "render"
+},
+{
+"slide": 88,
+"n": 2,
+"file": "img/s088-2.jpg",
+"w": 554,
+"h": 733,
+"title": "5. Résarmatúra beemelése",
+"name": "Kép 8",
+"from": "render"
+},
+{
+"slide": 89,
+"n": 1,
+"file": "img/s089-1.jpg",
+"w": 1332,
+"h": 1222,
+"title": "Résarmatúra – kialakítás",
+"name": "Kép 3",
+"from": "render"
+},
+{
+"slide": 89,
+"n": 2,
+"file": "img/s089-2.jpg",
+"w": 923,
+"h": 1222,
+"title": "Résarmatúra – kialakítás",
+"name": "Kép 6",
+"from": "render"
+},
+{
+"slide": 90,
+"n": 1,
+"file": "img/s090-1.jpg",
+"w": 1226,
+"h": 917,
+"title": "6. Réstábla betonozása",
+"name": "Kép 7",
+"from": "render"
+},
+{
+"slide": 90,
+"n": 2,
+"file": "img/s090-2.jpg",
+"w": 1180,
+"h": 917,
+"title": "6. Réstábla betonozása",
+"name": "Kép 9",
+"from": "render"
+},
+{
+"slide": 91,
+"n": 1,
+"file": "img/s091-1.jpg",
+"w": 513,
+"h": 510,
+"title": "Elkészült résfal felületek",
+"name": "Kép 3",
+"from": "render"
+},
+{
+"slide": 91,
+"n": 2,
+"file": "img/s091-2.jpg",
+"w": 385,
+"h": 510,
+"title": "Elkészült résfal felületek",
+"name": "Kép 6",
+"from": "render"
+},
+{
+"slide": 91,
+"n": 3,
+"file": "img/s091-3.jpg",
+"w": 865,
+"h": 510,
+"title": "Elkészült résfal felületek",
+"name": "Kép 8",
+"from": "render"
+},
+{
+"slide": 91,
+"n": 4,
+"file": "img/s091-4.jpg",
+"w": 678,
+"h": 510,
+"title": "Elkészült résfal felületek",
+"name": "Kép 10",
+"from": "render"
+},
+{
+"slide": 92,
+"n": 1,
+"file": "img/s092-1.jpg",
+"w": 953,
+"h": 577,
+"title": "7. Fejgerenda",
+"name": "Kép 4",
+"from": "render"
+},
+{
+"slide": 92,
+"n": 2,
+"file": "img/s092-2.jpg",
+"w": 434,
+"h": 577,
+"title": "7. Fejgerenda",
+"name": "Kép 7",
+"from": "render"
+},
+{
+"slide": 92,
+"n": 3,
+"file": "img/s092-3.jpg",
+"w": 1057,
+"h": 577,
+"title": "7. Fejgerenda",
+"name": "Kép 9",
+"from": "render"
+},
+{
+"slide": 95,
+"n": 1,
+"file": "img/s095-1.jpg",
+"w": 1284,
+"h": 819,
+"title": "Kútalap – kialakítás és méretek",
+"name": "Kép 1"
+},
+{
+"slide": 96,
+"n": 1,
+"file": "img/s096-1.jpg",
+"w": 642,
+"h": 379,
+"title": "Kútalapozás sémája és erőjátéka",
+"name": "Picture 5"
+},
+{
+"slide": 97,
+"n": 1,
+"file": "img/s097-1.jpg",
+"w": 876,
+"h": 574,
+"title": "Kútalap változatai és a vágóél",
+"name": "Picture 4"
+},
+{
+"slide": 98,
+"n": 1,
+"file": "img/s098-1.jpg",
+"w": 376,
+"h": 667,
+"title": "Kútalap kivitelezése",
+"name": "Picture 2"
+},
+{
+"slide": 98,
+"n": 2,
+"file": "img/s098-2.jpg",
+"w": 376,
+"h": 667,
+"title": "Kútalap kivitelezése",
+"name": "Picture 4"
+},
+{
+"slide": 98,
+"n": 3,
+"file": "img/s098-3.jpg",
+"w": 453,
+"h": 918,
+"title": "Kútalap kivitelezése",
+"name": "Picture 10"
+},
+{
+"slide": 100,
+"n": 1,
+"file": "img/s100-1.jpg",
+"w": 720,
+"h": 448,
+"title": "Keszonos alapozás",
+"name": "Picture 4"
+},
+{
+"slide": 101,
+"n": 1,
+"file": "img/s101-1.jpg",
+"w": 500,
+"h": 671,
+"title": "Szekrényalapozás – elvi vázlat",
+"name": "Picture 2"
+},
+{
+"slide": 102,
+"n": 1,
+"file": "img/s102-1.jpg",
+"w": 887,
+"h": 605,
+"title": "A szekrény süllyesztésének ütemei",
+"name": "Picture 4"
+},
+{
+"slide": 103,
+"n": 1,
+"file": "img/s103-1.jpg",
+"w": 1400,
+"h": 952,
+"title": "Szekrényalapozás – merevítő rekeszfalak",
+"name": "Picture 4",
+"from": "render"
+},
+{
+"slide": 105,
+"n": 1,
+"file": "img/s105-1.jpg",
+"w": 1400,
+"h": 161,
+"title": "Ez a fejlesztés a „Gyakorlatorientált felsőoktatás infrastrukturális és készségfejlesztése a BME-n” című projekt keretében valósult meg (Projektazonosító: RRF-2.1.2-21-2022-00005), az Európai Unió és Magyarország Kormánya által finanszírozott Helyreállítási és Ellenállóképességi Eszközből nyújtott, vissza nem térítendő támogatásnak köszönhetően.",
+"name": "Picture 1"
+}
+]

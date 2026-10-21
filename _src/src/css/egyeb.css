@@ -1,0 +1,44 @@
+/* C06 – Egyéb cölöpök (egy-) */
+#egyeb img { height: auto; }
+.egy-ti { width: 100%; height: auto; display: block; border-radius: 10px; margin-bottom: 12px; border: 1px solid var(--line); background: var(--surface2); }
+.egy-types { margin: 8px 0 10px; }
+.egy-types .card h4, .egy-jets .card h4, .egy-ways .card h4 { font-size: 22px; }
+.egy-types .card-link:hover h4 { color: var(--grp); }
+.egy-jets { margin: 10px 0 12px; }
+.egy-uses { margin: 18px 0; }
+.egy-uses .card h4 { font-size: 21px; }
+.egy-n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 900 19px/1 var(--f-display); color: #fff; background: var(--grp); margin-bottom: 8px; }
+.egy-pair { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 14px; align-items: start; }
+.egy-pair2 { gap: 12px; align-items: start; }
+.egy-pair2 .fig-ppt, .egy-pair .fig-ppt { margin: 0; }
+.egy-fig-wide { max-width: 720px; }
+.egy-narrow { max-width: 260px; justify-self: center; }
+.egy-narrow img { max-height: 460px; width: auto; }
+.egy-yt2 { margin-top: 4px; }
+@media (max-width: 680px) { .egy-pair2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .egy-narrow { max-width: 200px; } }
+@media (max-width: 420px) { .egy-pair { grid-template-columns: minmax(0, 1fr); } }
+
+/* kevert talaj (mélykeverés) */
+.egy-mix { fill: color-mix(in srgb, var(--grout) 58%, var(--soilC)); }
+
+/* „Mit csinál a talajjal?” – adatlista */
+.egy-dl { margin: 0; display: grid; gap: 8px; }
+.egy-dl dt { font: 700 11px/1.2 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--grp); }
+.egy-dl dd { margin: 0 0 4px; font-size: 14px; line-height: 1.45; text-align: left; hyphens: manual; }
+
+/* jet-oszlopgyár vászon */
+.egy-cv { border-radius: 12px; border: 1px solid var(--line); }
+
+/* összevető táblázat */
+.egy-table td:first-child { white-space: nowrap; }
+
+/* talajfeliratok az ábrákon (halo nélkül, jól olvashatóan a talajszíneken) */
+svg .egy-sl { font: 600 11.5px var(--f-body); fill: var(--ink); opacity: 0.82; }
+/* BME mini kártya a szöveges hasáb alján */
+.egy-ytm { width: 100%; max-width: 440px; margin-top: 18px; }
+/* magas kép (mélyvibrátor) */
+.egy-tall img { max-height: 400px; width: auto; margin-inline: auto; }
+/* keskeny nézet: nagyobb feliratok a levágott ábrákon */
+svg.egy-sm .egy-sl, svg.egy-sm .t-sm { font-size: 14px; }
+svg.egy-sm .t-lab { font-size: 14px !important; }
+svg.egy-sm .t-num { font-size: 14px; }

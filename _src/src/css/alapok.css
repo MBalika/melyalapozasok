@@ -1,0 +1,113 @@
+/* C01–C02 (F1): Mi a mélyalapozás? · Cölöpök rendszere – prefixek: alap-, rsz- */
+
+/* ---- 1.1 okok */
+.alap-reasons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 18px 0; }
+@media (max-width: 980px) { .alap-reasons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .alap-reasons { grid-template-columns: minmax(0, 1fr); } }
+.alap-ok { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 14px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.alap-ok b { display: block; font-family: var(--f-display); font-size: 20px; font-weight: 800; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 4px; text-align: left; }
+.alap-ok p { margin: 0; font-size: 14px; line-height: 1.45; color: var(--ink2); }
+.alap-oki { width: 96px; height: auto; display: block; border-radius: 9px; overflow: hidden; border: 1px solid var(--line); }
+
+/* ---- döntés-widget: indoklás */
+ul.alap-why { margin: 8px 0 0; padding-left: 0; list-style: none; display: grid; gap: 5px; }
+ul.alap-why li { position: relative; padding-left: 22px; font-size: 14px; text-align: left; }
+ul.alap-why li::before { position: absolute; left: 0; top: 0; font-weight: 800; }
+ul.alap-why li.bad::before { content: "✗"; color: var(--bad); }
+ul.alap-why li.warn::before { content: "!"; color: var(--warn); left: 5px; }
+ul.alap-why li.ok::before { content: "✓"; color: var(--ok); }
+.verdict p { margin: 4px 0 0; }
+
+/* ---- tornyok léptékben */
+.alap-twbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.alap-twbar .seg { flex: 0 1 auto; }
+.alap-twsel { flex: 1 1 420px !important; }
+.alap-twfig .alap-tw { cursor: pointer; outline: none; }
+.alap-twfig .alap-tw:hover .f-bld2, .alap-twfig .alap-tw:focus-visible .f-bld2 { fill: color-mix(in srgb, var(--grp) 45%, var(--building2)); }
+.alap-sheet { border-radius: 12px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--grp); }
+.alap-sh-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 8px; }
+.alap-sh-h b { font-family: var(--f-display); font-size: 26px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; }
+.alap-sh-h span { font: 600 12px var(--f-mono); color: var(--muted); letter-spacing: 0.05em; }
+.alap-sheet .chips { margin-bottom: 8px; }
+.alap-sheet .chip { white-space: normal; text-align: left; }
+.alap-sheet p { margin: 0 0 6px; font-size: 15px; }
+.alap-sheet p:last-child { margin-bottom: 0; }
+.alap-sh-l { color: var(--ink2); }
+
+/* ---- kimosás: YouTube-mini */
+.alap-ytbox { display: grid; gap: 10px; align-content: start; }
+.alap-ytbox .ytm { width: 100%; }
+
+/* ---- talp és köpeny ábra, fajták ikonjai */
+.alap-elvfig { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+.alap-elvfig svg { width: 100%; height: auto; display: block; }
+.alap-ti { margin: -4px -4px 10px; }
+.alap-tii { width: 100%; height: auto; display: block; border-radius: 9px; border: 1px solid var(--line); }
+
+/* ---- 2.4 készítés – ikonok */
+.rsz-kic { margin: -4px -4px 10px; }
+.rsz-kis { width: 100%; height: auto; display: block; border-radius: 9px; border: 1px solid var(--line); }
+
+/* ---- 2.4 rendező játék */
+.rsz-gbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.rsz-score { font-size: 14px; color: var(--ink2); }
+.rsz-score b { font-family: var(--f-mono); }
+.rsz-pool { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; min-height: 58px; border-radius: 14px; border: 1.5px dashed var(--line2); background: var(--surface2); }
+.rsz-pool:empty::after { content: "Minden kártya a helyén van."; color: var(--muted); font-size: 14px; align-self: center; }
+.rsz-chip { border: 1.5px solid var(--line2); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 8px 14px; font-weight: 650; font-size: 14px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; box-shadow: 0 1px 2px rgba(0,0,0,0.08); transition: background 0.15s, border-color 0.15s, box-shadow 0.15s; position: relative; }
+.rsz-chip:hover { border-color: var(--grp); }
+.rsz-chip.sel { border-color: var(--grp); background: color-mix(in srgb, var(--grp) 14%, var(--surface)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--grp) 25%, transparent); }
+.rsz-chip.drag { z-index: 30; cursor: grabbing; box-shadow: var(--shadow-lg); transition: none; }
+.rsz-chip.placed { cursor: default; }
+.rsz-chip.ok { border-color: transparent; background: var(--ok-soft); color: var(--ok); }
+.rsz-chip.bad { animation: rsz-shake 0.4s; border-color: var(--bad); }
+@keyframes rsz-shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+.rsz-bins { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.rsz-bin { border-radius: 14px; border: 2px solid var(--line); background: var(--surface); min-height: 150px; padding: 10px; transition: border-color 0.15s, background 0.15s; outline: none; }
+.rsz-bin[data-k="h"] { --c: var(--g2); } .rsz-bin[data-k="k"] { --c: var(--g1); }
+.rsz-bin-h { display: flex; flex-direction: column; gap: 1px; padding: 2px 4px 8px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.rsz-bin-h b { font-family: var(--f-display); font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; color: var(--c); line-height: 1.05; }
+.rsz-bin-h small { font-size: 12.5px; color: var(--muted); }
+.rsz-bin-l { display: flex; flex-wrap: wrap; gap: 6px; }
+.rsz-bin.armed { border-style: dashed; border-color: var(--c); cursor: pointer; }
+.rsz-bin.hover, .rsz-bin.armed:hover, .rsz-bin:focus-visible { border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, var(--surface)); }
+.rsz-fb { min-height: 72px; }
+@media (max-width: 520px) { .rsz-bin-h b { font-size: 17px; } .rsz-chip { font-size: 13px; padding: 7px 11px; } .rsz-bin { padding: 8px; } }
+
+/* ---- 2.5 átmérő-skála */
+svg .rsz-off { fill: var(--line2); }
+
+/* ---- 2.6 családfa */
+.rsz-tree { margin: 18px 0 8px; padding: 12px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.rsz-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.rsz-link { stroke: var(--c); stroke-width: 1.6; opacity: 0.65; }
+.rsz-n rect { fill: var(--surface); stroke: var(--c); stroke-width: 1.5; }
+.rsz-n text { font: 600 13px var(--f-body); fill: var(--ink); }
+.rsz-n.root rect { fill: var(--ink); stroke: var(--ink); }
+.rsz-n.root text { fill: var(--bg); font: 800 15px var(--f-display); letter-spacing: 0.06em; text-transform: uppercase; }
+.rsz-n.int rect { fill: color-mix(in srgb, var(--c) 18%, var(--surface)); }
+.rsz-n.int text { font-weight: 700; }
+.rsz-n.leaf text { font-size: 12.5px; }
+.rsz-a { cursor: pointer; }
+.rsz-a:hover .rsz-n rect, .rsz-a:focus-visible .rsz-n rect { stroke-width: 2.6; fill: color-mix(in srgb, var(--c) 12%, var(--surface)); }
+.rsz-yt rect { fill: #ff0000; } .rsz-yt path { fill: #fff; }
+.rsz-go { fill: var(--c) !important; font-weight: 800 !important; }
+.rsz-ytdot { display: inline-block; width: 20px; height: 14px; border-radius: 4px; background: #ff0000; vertical-align: -2px; position: relative; }
+.rsz-ytdot::after { content: ""; position: absolute; left: 8px; top: 3.5px; border-left: 6px solid #fff; border-top: 3.5px solid transparent; border-bottom: 3.5px solid transparent; }
+.rsz-ictl { max-width: 460px; }
+.rsz-dgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.87fr); gap: 16px; align-items: start; }
+@media (max-width: 680px) { .rsz-dgrid { grid-template-columns: minmax(0, 1fr); } .rsz-dman { max-width: 230px; margin: 0 auto; } }
+
+/* mobil: a méretarányosan kicsinyített SVG-ábrákon nagyobb betű (az SVG-egységek a kicsinyítéssel együtt zsugorodnak) */
+@media (max-width: 640px) {
+  :is([data-w^="alap-"], [data-w^="rsz-"]):not([data-w="rsz-fa"]) svg .t-sm { font-size: 18px; }
+  :is([data-w^="alap-"], [data-w^="rsz-"]):not([data-w="rsz-fa"]) svg .t-lab { font-size: 19px; }
+  :is([data-w^="alap-"], [data-w^="rsz-"]):not([data-w="rsz-fa"]) svg .t-num { font-size: 19px; }
+  :is([data-w^="alap-"], [data-w^="rsz-"]):not([data-w="rsz-fa"]) svg .t-big { font-size: 22px; }
+  .alap-elvfig[data-w="alap-elv"] svg text.t-lab, .alap-elvfig[data-w="alap-elv"] svg text.t-sm { font-size: 15px; }
+  .w[data-w="alap-tornyok"] svg text.t-num { font-size: 30px; }
+  .w[data-w="alap-tornyok"] svg text.t-sm { font-size: 26px; }
+  .rsz-dchart .t-sm, .rsz-dchart .t-lab { font-size: 13px !important; }
+  .rsz-dman .t-sm, .rsz-dman .t-num { font-size: 15px !important; }
+}
+@media (max-width: 640px) { .alap-twfig .alap-sc { display: none; } }

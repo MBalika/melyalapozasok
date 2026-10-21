@@ -1,0 +1,59 @@
+/* C07 Résfalak + C08 Kút, szekrény, keszon (F5) */
+.rf-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); gap: 8px; margin: 6px 0 8px; }
+.rf-nav a { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px 9px; border-radius: 12px; border: 1px solid var(--line); border-left: 4px solid var(--grp); background: var(--surface); text-decoration: none; color: var(--ink); box-shadow: var(--shadow); transition: transform 0.15s, box-shadow 0.15s; }
+.rf-nav a:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.rf-nav a span { font: 700 11px/1 var(--f-mono); color: var(--grp); letter-spacing: 0.08em; }
+.rf-nav a b { font: 800 18px/1.1 var(--f-display); text-transform: uppercase; letter-spacing: 0.02em; }
+@media (max-width: 600px) { .rf-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rf-nav a b { font-size: 16px; } }
+
+/* anatómia, típusok – információs sáv és jelmagyarázat */
+.rf-info { min-height: 4.6em; padding: 10px 14px; border-radius: 12px; background: var(--surface2); border-left: 4px solid var(--grp); font-size: 15px; }
+.rf-info b { display: block; font: 800 20px/1.1 var(--f-display); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 4px; color: var(--grp); }
+.rf-info span { display: block; text-align: justify; hyphens: manual; }
+.rf-leg { display: flex; flex-wrap: wrap; gap: 6px; }
+.rf-legi { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line2); background: var(--surface); border-radius: 999px; padding: 4px 11px 4px 4px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink2); }
+.rf-legi i { font: 800 11.5px/1 var(--f-mono); font-style: normal; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--grp); color: #fff; }
+.rf-legi:hover, .rf-legi.on { border-color: var(--grp); background: color-mix(in srgb, var(--grp) 12%, var(--surface)); color: var(--ink); }
+.rf-hot { cursor: pointer; outline: none; }
+.rf-hot circle { transition: r 0.15s; }
+.rf-hot:hover circle, .rf-hot.on circle, .rf-hot:focus-visible circle { fill: var(--accent); r: 13px; }
+.kut-tip { cursor: pointer; outline: none; }
+.kut-tip > rect:first-child { transition: opacity 0.15s; }
+.kut-tip.on > text:first-of-type { fill: var(--grp); }
+.kut-tip.on { filter: drop-shadow(0 0 0 transparent); }
+.kut-tip:not(.on) { opacity: 0.62; transition: opacity 0.2s; }
+.kut-tip:hover { opacity: 1; }
+
+/* kiírások */
+.rf-span { grid-column: 1 / -1; }
+.rf-why { margin: 6px 0 0; padding-left: 1.2em; }
+.rf-why li { margin: 2px 0; }
+.verdict p { margin: 4px 0 0; }
+.rf-dots { margin-left: auto; }
+.rf-dots button { min-width: 34px; padding: 6px 8px; font-family: var(--f-mono); }
+@media (max-width: 700px) { .rf-dots { margin-left: 0; } }
+.kut-msg { font-size: 13.5px; color: var(--muted); font-weight: 600; }
+.w-ctrls .btn-sm { align-self: flex-start; }
+
+/* képletek */
+.rf-frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 2px; line-height: 1.15; }
+.rf-frac > span:first-child { border-bottom: 1.2px solid currentColor; padding: 0 3px 1px; }
+.rf-frac > span:last-child { padding: 1px 3px 0; }
+.rf-schnee .f { font-size: 1.22em; }
+.rf-figw { max-width: 760px; margin-inline: auto; }
+.rf-figw img { width: 100%; }
+
+/* ábrák */
+.rf-labfig, .rf-epfig, .kut-sfig { touch-action: pan-y; }
+.rf-lab .w-ctrls { gap: 10px; }
+
+.factbar.rf-fb2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rf-pair img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+figure.fig-ppt.rf-figw { max-width: 600px; margin: 22px auto; }
+/* keskeny kijelzőn az ábrák vízszintesen görgethetők, hogy a feliratok olvashatók maradjanak */
+@media (max-width: 640px) {
+  #resfal .w-viz, #kut .w-viz { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #resfal .w-viz > svg.fig, #kut .w-viz > svg.fig { min-width: 540px; }
+  #resfal .w-viz > svg.rf-anatfig { min-width: 640px; }
+  .rf-info { min-height: 0; }
+}

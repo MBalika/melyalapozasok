@@ -1,0 +1,2 @@
+{ "name": "melyalapozasok", "version": "1.0.0", "private": true, "type": "module",
+  "dependencies": { "three": "0.169.0", "esbuild": "0.24.0", "@fontsource/big-shoulders-display": "^5.1.0", "@fontsource/public-sans": "^5.1.0", "@fontsource/jetbrains-mono": "^5.1.0" } }

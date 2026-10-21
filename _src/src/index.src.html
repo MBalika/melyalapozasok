@@ -1,0 +1,113 @@
+<a class="sr" href="#alapok">Ugrás a tartalomhoz</a>
+
+<!-- közös SVG-minták (sraffozások) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="pat-soil" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2.5" r="0.9" style="fill:var(--ink)" opacity=".26"/><circle cx="7" cy="7" r="0.7" style="fill:var(--ink)" opacity=".2"/></pattern>
+    <pattern id="pat-sand" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="0.7" style="fill:var(--ink)" opacity=".3"/><circle cx="5" cy="4.5" r="0.55" style="fill:var(--ink)" opacity=".24"/></pattern>
+    <pattern id="pat-clay" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><line x1="0" y1="0" x2="0" y2="9" style="stroke:var(--ink)" stroke-width="1" opacity=".2"/></pattern>
+    <pattern id="pat-gravel" width="14" height="12" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.4" fill="none" style="stroke:var(--ink)" stroke-width=".8" opacity=".3"/><circle cx="11" cy="9" r="1.8" fill="none" style="stroke:var(--ink)" stroke-width=".8" opacity=".3"/></pattern>
+    <pattern id="pat-peat" width="12" height="8" patternUnits="userSpaceOnUse"><path d="M0 6 q3 -4 6 0 t6 0" fill="none" style="stroke:var(--ink)" stroke-width=".8" opacity=".28"/><path d="M3 2h2M8 3h2" style="stroke:var(--ink)" stroke-width=".8" opacity=".25"/></pattern>
+    <pattern id="pat-rock" width="16" height="12" patternUnits="userSpaceOnUse"><path d="M0 6h16M8 0v6M4 6v6M12 6v6" fill="none" style="stroke:var(--ink)" stroke-width=".8" opacity=".25"/></pattern>
+    <pattern id="pat-conc" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="3" r="1" style="fill:var(--ink)" opacity=".2"/><path d="M6.5 7 l2 -1.5 l.6 2.2z" style="fill:var(--ink)" opacity=".18"/></pattern>
+    <pattern id="pat-water" width="16" height="8" patternUnits="userSpaceOnUse"><path d="M0 4 q4 -3 8 0 t8 0" fill="none" style="stroke:var(--water)" stroke-width="1" opacity=".55"/></pattern>
+    <pattern id="pat-slurry" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" style="fill:var(--bento)" opacity=".55"/><circle cx="6" cy="6" r=".6" style="fill:var(--bento)" opacity=".45"/></pattern>
+    <pattern id="pat-timber" width="12" height="6" patternUnits="userSpaceOnUse"><path d="M0 3 q6 -2 12 0" fill="none" style="stroke:var(--timber2)" stroke-width=".8" opacity=".7"/></pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:context-stroke"/></marker>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#bevezeto" aria-label="Mélyalapozások – az oldal teteje">
+      <svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#16212c"/><circle cx="18" cy="18" r="10.5" fill="none" stroke="#f0864a" stroke-width="2.6"/><circle cx="18" cy="18" r="5" fill="#f0864a"/><path d="M18 3v5M18 28v5M3 18h5M28 18h5" stroke="#c9d3dc" stroke-width="2"/></svg>
+      <span><b>Mélyalapozások</b><small>BME · Alapozás · 8. előadás</small></span>
+    </a>
+    <nav class="topnav" id="topnav" aria-label="Fejezetek"></nav>
+    <div class="rigro" title="Melyik cölöpnél (fejezetnél) tartasz"><i></i><span>fúrás alatt</span><b id="rigPile">C00</b></div>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Téma váltása"></button>
+    <button class="iconbtn menubtn" id="menuBtn" type="button" aria-label="Fejezetek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<div class="navsheet" id="navsheet" hidden>
+  <div class="navsheet-in">
+    <h4>Cölöpkiosztási terv – válassz cölöpöt (fejezetet)</h4>
+    <nav class="navplan" id="navplan"></nav>
+  </div>
+</div>
+
+<nav class="pilerail" id="pilerail" aria-label="Cölöpsor – fejezetek"></nav>
+
+<section class="hero" id="bevezeto">
+  <div class="wrap hero-in">
+    <div>
+      <div class="hero-kicker">Interaktív tananyag · BME Alapozás</div>
+      <h1>Mély&shy;alapozások <span>ahol a síkalap már nem elég</span></h1>
+      <p class="hero-lead">Ha a teherbíró réteg mélyen van, ha a süllyedést szigorúan korlátozni kell, vagy ha a víz kimoshatja az alapot, a terhet le kell vinni a mélybe. Ez az oldal végigvezet a cölöpöktől a résfalon át a keszonig. Közben 3D-ben építhetsz cölöpöt, laborokban kísérletezhetsz, és valós felvételeken is megnézheted a gépeket.</p>
+      <div class="hero-stats">
+        <div><b>12</b><span>cölöp = fejezet</span></div>
+        <div><b>13</b><span>BME-videó</span></div>
+        <div><b>5</b><span>magyarázó animáció</span></div>
+        <div><b>3D</b><span>cölöpépítő</span></div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-acc" href="#alapok">Kezdjük a kitűzéssel ↓</a>
+        <a class="btn btn-ghost" href="#szimulator">3D cölöpépítő</a>
+        <a class="btn btn-ghost" href="#videotar">Videótár</a>
+      </div>
+    </div>
+    <div class="hero-viz">
+      <div class="hero-3d" id="hero3d"><span class="h3-tag">3D metszet · forgasd meg</span></div>
+      <div class="hero-ctl">
+        <div class="hseg" id="heroType" role="radiogroup" aria-label="Alapozás módja"></div>
+        <label for="heroDepth">Teherbíró réteg</label>
+        <input id="heroDepth" type="range" min="2" max="24" step="0.5" value="12">
+        <output id="heroDepthVal">12,0 m</output>
+      </div>
+      <div class="hero-verdict" id="heroVerdict"></div>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+
+<!--CHAPTERS-->
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p><b>Mélyalapozások</b> – interaktív segédanyag a BME Építőmérnöki Kar Alapozás tárgyához (8. előadás).</p>
+      <p>A laborok, kalkulátorok és a 3D cölöpépítő egyszerűsített, <b>szemléltető</b> modellek: a megértést segítik, tervezésre nem valók. A cölöpök tényleges méretezését későbbi geotechnikai tárgyakban tanuljátok.</p>
+      <p class="small">A valós felvételek a BME Építőmérnöki Kar YouTube-csatornájáról valók; a magyarázó animációk three.js-szel készültek.</p>
+    </div>
+    <div>
+      <h4 class="h4 mt0">Kapcsolódó oldalak</h4>
+      <div class="links">
+        <a href="https://sikalapoktervezese.vercel.app" target="_blank" rel="noopener">Síkalapok tervezése <small>↗</small></a>
+        <a href="https://vedekezesakarossullyedesekellen.vercel.app" target="_blank" rel="noopener">Védekezés a káros süllyedések ellen <small>↗</small></a>
+        <a href="https://kedvezotlen-altalaj.vercel.app" target="_blank" rel="noopener">Alapozás kedvezőtlen altalajon <small>↗</small></a>
+        <a href="https://munkaterhatarolasok.vercel.app" target="_blank" rel="noopener">Munkatérhatárolások <small>↗</small></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="vmodal" hidden role="dialog" aria-modal="true" aria-labelledby="vmTitle">
+  <div class="modal-box">
+    <div class="modal-bar"><b id="vmTitle"></b><button class="x" id="vmClose" type="button" aria-label="Bezárás">×</button></div>
+    <iframe id="vmFrame" title="Magyarázó animáció" allow="autoplay; fullscreen" src="about:blank"></iframe>
+    <div class="modal-nav"><button id="vmPrev" type="button">← Előző</button><span id="vmInfo"></span><button id="vmNext" type="button">Következő →</button></div>
+  </div>
+</div>
+<div class="modal" id="ytmodal" hidden role="dialog" aria-modal="true" aria-labelledby="ytTitle">
+  <div class="modal-box">
+    <div class="modal-bar"><b id="ytTitle"></b><button class="x" id="ytClose" type="button" aria-label="Bezárás">×</button></div>
+    <iframe id="ytFrame" title="YouTube-videó" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" src="about:blank"></iframe>
+    <div class="modal-nav"><span id="ytInfo"></span><a id="ytOpen" href="#" target="_blank" rel="noopener">Megnyitás a YouTube-on ↗</a></div>
+  </div>
+</div>
+<div class="lightbox" id="lightbox" hidden><img alt=""><p></p></div>
+<span class="hyphenate sr" aria-hidden="true">elválasztás</span>
