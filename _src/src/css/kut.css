@@ -74,3 +74,10 @@
 .kut-rules { margin: 6px 0 0; padding-left: 1.3em; }
 .kut-rules li { margin: 4px 0; }
 .kf .kf-fb { stroke: var(--steelm2); stroke-width: 1.6; fill: none; }
+/* mobilon a nagy ábrák vízszintesen görgethetők, hogy a feliratok olvashatók maradjanak */
+@media (max-width: 680px) {
+  #kut .kf-fig > .kf-svg { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #kut .kf-fig > .kf-svg > svg.kf { min-width: 600px; }
+  #kut .kf-row.kf-3.kf-text { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 230px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  #kut .kf-row.kf-3.kf-text > .kf-cell { scroll-snap-align: start; }
+}

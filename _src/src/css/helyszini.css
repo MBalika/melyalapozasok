@@ -55,3 +55,4 @@
 .g3-phases.g3-many .g3-ph figcaption b { font-size: 15.5px; }
 .g3-svg .g3-lab { font: 600 11px var(--f-body); fill: var(--ink2); }
 .g3-svg .t-sm { font-size: 10px; }
+@media (max-width: 560px) { #furt .furt-nav { gap: 6px; } #furt .furt-nav a { padding: 8px 8px; } #furt .furt-nav a b { font-size: 14.5px; letter-spacing: 0; } }

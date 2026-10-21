@@ -226,7 +226,7 @@ function figEro(el) {
   P(s, poly(mp, false), 'kf-momL');
   L(s, xs[0] - 8, m0, xs[2] + 8, m0, 'kf-ln');
   T(s, xs[0] - 14, m0 + 5, 'M', 'kf-t kf-acc-t', { 'text-anchor': 'end' });
-  T(s, (xs[0] + xs[1]) / 2, m0 + 0.15625 * k + 20, '+', 'kf-t', { 'text-anchor': 'middle' });
+  T(s, (xs[0] + xs[1]) / 2 - 26, m0 + 0.15625 * k - 4, '+', 'kf-t');
   T(s, xs[1] + 12, m0 - 0.1875 * k + 4, '−', 'kf-t');
   // kutak
   for (const x of xs) {

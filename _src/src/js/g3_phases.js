@@ -152,7 +152,7 @@ const PH = {
     ['Hagyma', 'újabb adagok: kiszélesedő talp', (g, S) => {
       rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 26, 238, 22); bulb(g, S.cx, 262, 30, 22); conc(g, S.cx - 11, 226, 22, 12); R(g, S.cx - 8, 120, 16, 20, 'f-steel2'); L(g, S.cx, 9, S.cx, 120, 's-muted', 1.2);
       P(g, `M${S.cx - 44} 18 q14 -10 26 6`, 's-acc', { fill: 'none', 'stroke-width': 2.2 }); arrow(g, S.cx - 20, 20, S.cx - 16, 30, { cls: 's-acc', w: 2.2, head: 7 }); T(g, S.cx - 46, 40, 'beton', 'start', 't-sm halo');
-      lab(g, S.cx + 26, 262, 'hagyma', 1, S.cx + 40);
+      lab(g, S.cx + 26, 262, 'hagyma', 1, S.cx + 33);
     }],
     ['Vasalás', 'a kosár a csőbe, a hagymáig', (g, S) => {
       rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 26, 238, 22); bulb(g, S.cx, 262, 30, 22); cage(g, S.cx, 22, 258, 20); L(g, S.cx, 9, S.cx, 22, 's-muted', 1.2);
