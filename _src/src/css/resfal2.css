@@ -75,3 +75,14 @@ svg.rf-svg .t-bad { fill: var(--bad); }
 /* képletek a nyomásábra mellett */
 .rf-stack .formula { margin: 0; }
 .rf-stack .formula .fl { flex-basis: 100%; }
+
+/* igazítások */
+.rf-stack > .callout { align-content: start; }
+.rf-figcard.photo > .rf-figbox { flex: none; }
+.rf-cols2 > li:first-child { margin-top: 0; }
+.factbar.rf-col { grid-template-columns: minmax(0, 1fr); grid-auto-rows: 1fr; margin: 0; }
+.rf-row > .factbar.rf-col { height: 100%; }
+.rf-row > .callout { margin: 0; align-content: start; }
+.rf-rules ul { columns: 2; column-gap: 34px; }
+.rf-rules li { break-inside: avoid; }
+@media (max-width: 760px) { .rf-rules ul { columns: 1; } }

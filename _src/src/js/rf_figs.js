@@ -244,7 +244,6 @@ function renderGrab(el) {
   dimH(s, cx - w / 2, cx + w / 2, yb + 22, '≈ 2,8 m – egy harapás', { dy: 18 });
   T(s, 98, TY3 + 36, 'zagy', 'rf-ts rf-onfill');
   T(s, 350, TY3 + 36, 'talaj', 'rf-ts rf-onfill', { 'text-anchor': 'end' });
-  T(s, 14, 28, 'leengedés → harapás → kiemelés → ürítés', 'rf-ts');
 }
 function renderCutter(el) {
   const W = 360, H = 240;
@@ -278,7 +277,7 @@ function renderCutter(el) {
   const bits = [[150, 222], [164, 206], [196, 210], [210, 224], [174, 186], [186, 196], [180, 166], [172, 146], [186, 120], [178, 96], [184, 70], [176, 44], [182, 20]];
   for (const [x, y] of bits) C(s, x, y, 3.6, 'f-soilB', { style: 'stroke:var(--ink);stroke-width:.6' });
   ar(s, 180, 150, 180, 112, 'var(--ink)', 2, 7); ar(s, 180, 70, 180, 30, 'var(--ink)', 2, 7);
-  lead(s, 194, 18, 300, 22, 'szívócső', { cls: 'rf-ts', anchor: 'end' });
+  T(s, 200, 104, 'szívócső', 'rf-ts rf-onfill');
   T(s, 180, 236, 'a tárcsák a fenéken a csonk felé hordják a törmeléket', 'rf-ts rf-onfill', { 'text-anchor': 'middle' });
 }
 
@@ -386,12 +385,12 @@ function renderPress(el) {
   L(s, 46, Y(hw), X0 - 34, Y(hw), 'stroke:var(--water);stroke-width:1.4;stroke-dasharray:6 4'); L(s, X0, Y(hw), W - 10, Y(hw), 'stroke:var(--water);stroke-width:1.4;stroke-dasharray:6 4');
   P(s, `M${80} ${Y(hw) - 1} l 6 -9 h -12 z`, '', { style: 'fill:var(--water)' });
   T(s, 92, Y(hw) - 4, 'talajvízszint', 'rf-ts t-water');
-  T(s, X0 - 54, Y(t) - 4, 'zagyszint', 'rf-ts', { 'text-anchor': 'end' });
+  T(s, X0 - 17, y0 - 12, 'zagyszint', 'rf-ts', { 'text-anchor': 'middle' });
   // feliratok
   TH(s, X0 - 110, Y(15), sub('σ', 'p'), 'rf-tbig', { 'text-anchor': 'middle' });
-  T(s, X0 - 110, Y(15) + 22, 'zagynyomás', 'rf-ts', { 'text-anchor': 'middle' });
+  T(s, X0 - 110, Y(15) + 34, 'zagynyomás', 'rf-ts', { 'text-anchor': 'middle' });
   TH(s, X0 + 64, Y(16.2), sub('σ', 'v'), 'rf-tbig', { 'text-anchor': 'middle' });
-  T(s, X0 + 64, Y(16.2) + 22, 'víznyomás', 'rf-ts', { 'text-anchor': 'middle' });
+  T(s, X0 + 64, Y(16.2) + 34, 'víznyomás', 'rf-ts', { 'text-anchor': 'middle' });
   const [zA, aA] = pts[Math.round(11 / dz)];
   lead(s, X0 + (sv(zA) + aA) * kx, Y(zA), 520, Y(8.6), '', {});
   TH(s, 520, Y(8.6), `${sub('σ', 'v')} + ${sub('σ', 'x')}`, 'rf-t');
@@ -408,7 +407,7 @@ function renderPress(el) {
 
 /* ================================================================== 6. Betonozás: fúrt cölöp és réstábla */
 function renderBeton(el) {
-  const W = 1000, H = 600;
+  const W = 1000, H = 580;
   const s = mk(el, W, H, 'Fúrt cölöp és réstábla betonozása: munkaszint, betonozási és visszavésési szint, betonszint, armatúra, betonozó tölcsér és csövek', 'rf-beton');
   const TY6 = 150, BOT6 = 540, Bz = 430; // terep, talp, pillanatnyi betonszint
   const LV = [[TY6, 'munkaszint'], [TY6 + 22, 'betonozási szint'], [TY6 + 46, 'visszavésési szint'], [Bz, 'betonszint']];
@@ -447,13 +446,12 @@ function renderBeton(el) {
   R(s, x0 + 208, py + 7, 168, 26, '', { style: 'fill:none;stroke:var(--rebar);stroke-width:1.6', rx: 6 });
   for (const x of tx) { C(s, x, py + 20, 11, '', { style: 'fill:var(--surface);stroke:var(--ink);stroke-width:1.4' }); C(s, x, py + 20, 3.5, 'f-ink'); }
   dimH(s, x0, x1, 24, 'panel hossza', { ext: 28 });
-  dimV(s, x1 + 78, py, py + 40, 'falvastagság', { dx: 10, anchor: 'start' });
-  L(s, x1 + 60, py, x1 + 84, py, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3'); L(s, x1 + 60, py + 40, x1 + 84, py + 40, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3');
-  lead(s, tx[0] + 10, TY6 - 44, 420, 126, 'betonozó tölcsér', { cls: 'rf-ts' });
-  lead(s, tx[1] + 1, 490, 640, 572, 'betonozó csövek (kontraktorcső)', { cls: 'rf-ts', anchor: 'middle' });
-  lead(s, x0 + 40, 500, 250, 572, 'résbeton, cölöpbeton', { cls: 'rf-ts', anchor: 'middle' });
-  lead(s, x0 + 380, 330, 760, 330, 'armatúra', { cls: 'rf-ts' });
-  T(s, (x0 + x1) / 2, 116, 'réstábla – felülnézet és hosszmetszet', 'rf-tb', { 'text-anchor': 'middle' });
+  T(s, tx[0] + 22, TY6 - 34, 'betonozó tölcsér', 'rf-ts');
+  T(s, tx[1] + 10, 372, 'betonozó cső', 'rf-ts rf-onfill');
+  T(s, tx[1] + 10, 389, '(kontraktorcső)', 'rf-ts rf-onfill');
+  T(s, x0 + 196, Bz + 62, 'friss beton', 'rf-ts rf-onfill', { 'text-anchor': 'middle' });
+  lead(s, x0 + 380, 300, 760, 300, 'armatúra', { cls: 'rf-ts' });
+  T(s, (x0 + x1) / 2, BOT6 + 22, 'réstábla – felülnézet és hosszmetszet', 'rf-tb', { 'text-anchor': 'middle' });
   T(s, x0 + 8, 260, 'zagy', 'rf-ts rf-onfill');
   // ---------- résfal keresztmetszet
   const cx0 = 860, cw = 44;
@@ -484,15 +482,16 @@ function renderShapes(el) {
   for (const [x, t] of lb) T(s, x, 158, t, 'rf-ts', { 'text-anchor': 'middle' });
 }
 function renderCover(el) {
-  const s = mk(el, 480, 170, 'Vasalási részlet: szabad távolság az acélbetétek között és betontakarás');
-  P(s, 'M60 30 H 440 V 150 H 100 Q 60 150 60 110 Z', '', { style: 'fill:var(--concrete);stroke:var(--ink);stroke-width:1.6' });
-  P(s, 'M60 30 H 440 V 150 H 100 Q 60 150 60 110 Z', '', { fill: 'url(#pat-conc)' });
-  P(s, 'M440 112 H 120 Q 96 112 96 88 V 30', '', { style: 'fill:none;stroke:var(--rebar);stroke-width:5;stroke-linecap:round' });
-  for (const x of [150, 330]) C(s, x, 98, 12, 'f-rebar', { style: 'stroke:var(--ink);stroke-width:1.2' });
-  dimH(s, 162, 318, 70, 'szabad távolság', { dy: -10 });
-  dimV(s, 458, 112, 150, 'betontakarás', { dx: -12, anchor: 'end' });
-  L(s, 440, 112, 470, 112, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3'); L(s, 440, 150, 470, 150, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3');
-  lead(s, 336, 106, 380, 140, 'acélbetétek', { cls: 'rf-ts' });
+  const s = mk(el, 480, 190, 'Vasalási részlet: szabad távolság az acélbetétek között és betontakarás');
+  P(s, 'M60 30 H 400 V 150 H 100 Q 60 150 60 110 Z', '', { style: 'fill:var(--concrete);stroke:var(--ink);stroke-width:1.6' });
+  P(s, 'M60 30 H 400 V 150 H 100 Q 60 150 60 110 Z', '', { fill: 'url(#pat-conc)' });
+  P(s, 'M400 112 H 120 Q 96 112 96 88 V 30', '', { style: 'fill:none;stroke:var(--rebar);stroke-width:5;stroke-linecap:round' });
+  for (const x of [150, 300]) C(s, x, 98, 12, 'f-rebar', { style: 'stroke:var(--ink);stroke-width:1.2' });
+  dimH(s, 162, 288, 70, 'szabad távolság', { dy: -10 });
+  dimV(s, 426, 114.5, 150, '', {});
+  L(s, 400, 114.5, 434, 114.5, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3'); L(s, 400, 150, 434, 150, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3');
+  T(s, 426, 176, 'betontakarás', 'rf-ts', { 'text-anchor': 'middle' });
+  lead(s, 296, 106, 214, 140, 'acélbetétek', { cls: 'rf-ts rf-onfill', anchor: 'end' });
 }
 
 /* ------------------------------------------------------------------ indítás */

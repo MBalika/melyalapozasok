@@ -190,18 +190,18 @@ const PH = {
     }],
   ] },
   cfa: { W: 230, prof: 'cfa', items: [
-    ['Kitűzés, pontraállás', 'Kitűzik a cölöp helyét, a gép pontraáll. Az üreges fúrószár alját csapóajtó zárja.', (g, S) => {
+    ['Kitűzés, pontraállás', 'Kitűzik a cölöp helyét, és a gép pontraáll. Az üreges fúrószár alját elvesző sapka vagy „csapóajtó” zárja.', (g, S) => {
       rig(g, S, 22); auger(g, S.cx, 36, S.GY - 2, 30); lab(g, S.cx, S.GY + 1, 'csapóajtó', -1, S.cx - 34);
     }],
-    ['Furatkészítés', 'A spirált földkitermelés nélkül hajtják le; a spirálon maradó talajdugó támasztja a furat falát.', (g, S) => {
+    ['Furatkészítés', 'A spirált földkitermelés nélkül hajtják le: a furadék csak részben nyomódik ki, a spirálon maradó talajdugó folyamatosan támasztja a furat falát.', (g, S) => {
       rig(g, S, 22); auger(g, S.cx, 36, 292, 30, 'f-soilC', S.GY); heap(g, S.cx - 44, 22)(S); heap(g, S.cx + 20, 18)(S); rot(g, S.cx, 58, 20);
       lab(g, S.cx - 15, 160, 'talajdugó', -1, S.cx - 34);
     }],
-    ['Betonozás', 'A fúrószáron át túlnyomással betont pumpálnak; a beton feltolja a spirált, amit húzással segítenek.', (g, S) => {
+    ['Betonozás', 'A fúrószáron át túlnyomással betont pumpálnak, amely feltolja a spirált – ezt húzással segítik. Vibrálni nem kell: a folyós beton nyomás alatt öntömörödik.', (g, S) => {
       rig(g, S, 22); conc(g, S.cx - 15, 204, 30, 88, true); auger(g, S.cx, 36, 204, 30, 'f-soilC', S.GY); up(g, S.cx - 34, 200, 160);
       truck(g, 6, S.GY - 3); hose(g, 34, S.GY - 26, S.cx - 11, 32); lab(g, S.cx + 15, 250, 'beton', 1, S.cx + 30);
     }],
-    ['Vasalás', 'A cölöpöt a munkaszintig betonozzák, a vasalókosarat a friss betonba süllyesztik.', (g, S) => {
+    ['Vasalás', 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalókosarat a friss betonba süllyesztik.', (g, S) => {
       conc(g, S.cx - 15, S.GY, 30, 208, true); cage(g, S.cx, S.GY - 36, 240, 26); down(g, S.cx + 32, S.GY - 30, S.GY + 20);
       lab(g, S.cx - 13, 170, 'kosár', -1, S.cx - 32);
     }],

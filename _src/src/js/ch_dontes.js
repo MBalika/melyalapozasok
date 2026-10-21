@@ -570,3 +570,30 @@ defineQuiz('dnt', 'Kvíz – melyiket válasszam?', [
 ]);
 
 void GUARD;
+
+/* ---- C11 videótár: a BME-felvételek csoportjainak rendezett elrendezése (G1)
+   A ui.js a #ytlib-be csoportonként (fejléc + rács) tölti a kártyákat. A kevés elemű csoportokat
+   (3 + 1, illetve 1 + a lejátszási listák) egy sorba rendezzük, hogy ne maradjon félig üres sor. */
+function vtLayout() {
+  const lib = document.getElementById('ytlib');
+  if (!lib || lib.dataset.vtl) return;
+  const kids = [...lib.children];
+  const groups = [];
+  for (let i = 0; i + 1 < kids.length; i += 2) if (kids[i].classList.contains('vgroup')) groups.push([kids[i], kids[i + 1]]);
+  if (groups.length < 4) return;
+  const n = (g) => g[1].children.length;
+  if (n(groups[1]) + n(groups[2]) !== 4 || n(groups[3]) !== 1) return;
+  lib.dataset.vtl = '1';
+  const mk = (cls, span) => { const d = document.createElement('div'); d.className = cls; if (span) d.style.setProperty('--n', span); return d; };
+  const cell = (g) => { const c = mk('vt-ycell', n(g)); c.append(g[0], g[1]); return c; };
+  const r1 = mk('vt-yrow'); r1.append(cell(groups[1]), cell(groups[2]));
+  const r2 = mk('vt-yrow'); r2.append(cell(groups[3]));
+  const lists = document.querySelector('#videotar .vt-lists');
+  if (lists) {
+    const c = mk('vt-ycell vt-ylists', 3);
+    const hd = mk('vgroup grp6'); hd.textContent = 'A teljes lejátszási listák';
+    c.append(hd, lists); r2.append(c);
+  }
+  lib.append(r1, r2);
+}
+if (typeof window !== 'undefined') setTimeout(vtLayout, 0);
