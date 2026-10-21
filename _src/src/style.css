@@ -275,7 +275,7 @@ main .btn { text-align: left; }
 .ch-kicker .id::before { content: "◉ "; color: var(--grp); }
 .ch h2 { font-size: clamp(40px, 5.6vw, 68px); font-weight: 900; text-transform: uppercase; letter-spacing: 0.015em; }
 @media (max-width: 440px) { .ch h2 { font-size: clamp(30px, 8.4vw, 40px); } }
-.ch-lead { font-size: 18.5px; line-height: 1.55; color: var(--ink2); max-width: 46em; margin: 4px 0 22px; }
+.ch-lead { font-size: 18.5px; line-height: 1.55; color: var(--ink2); max-width: none; margin: 4px 0 22px; }
 @media (max-width: 600px) { .ch { padding-block: 46px 20px; } .ch-head { grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; } .ch-pile { width: 70px; } .ch-lead { font-size: 17px; } }
 .grp0 { --grp: var(--g0); } .grp1 { --grp: var(--g1); } .grp2 { --grp: var(--g2); } .grp3 { --grp: var(--g3); } .grp4 { --grp: var(--g4); } .grp5 { --grp: var(--g5); } .grp6 { --grp: var(--g6); }
 
@@ -283,7 +283,7 @@ main .btn { text-align: left; }
 .sub h3 { font-size: clamp(30px, 3.8vw, 42px); font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; }
 .sub .tag { font-family: var(--f-mono); font-size: 12px; font-weight: 700; color: var(--grp); border: 1.5px solid var(--grp); padding: 3px 8px 2px; border-radius: 999px; letter-spacing: 0.06em; transform: translateY(-5px); background: var(--surface); }
 h4.h4 { font-family: var(--f-display); font-size: 24px; font-weight: 800; margin: 26px 0 10px; letter-spacing: 0.02em; text-transform: uppercase; }
-.prose { max-width: 50em; }
+.prose { max-width: none; }
 .prose ul, .prose ol, ul.list { margin: 0 0 1em; padding-left: 1.25em; }
 .prose li, ul.list li { margin: 0.25em 0; }
 .prose li::marker, ul.list li::marker { color: var(--grp); font-weight: 700; }

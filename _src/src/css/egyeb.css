@@ -11,7 +11,7 @@
 .egy-pair { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 14px; align-items: start; }
 .egy-pair2 { gap: 12px; align-items: start; }
 .egy-pair2 .fig-ppt, .egy-pair .fig-ppt { margin: 0; }
-.egy-fig-wide { max-width: 720px; }
+.egy-fig-wide, figure.fig-ppt.egy-fig-wide { max-width: 720px; margin-left: auto; margin-right: auto; }
 .egy-narrow { max-width: 260px; justify-self: center; }
 .egy-narrow img { max-height: 460px; width: auto; }
 .egy-yt2 { margin-top: 4px; }
