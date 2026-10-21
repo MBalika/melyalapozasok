@@ -322,7 +322,7 @@ register('kut-keszon', (root) => {
   ctrls.append(bReq, h('p', { class: 'ctl-hint', html: 'A talaj pórusai a folyóval közlekednek: a vágóél szintjén h<sub>v</sub> = h<sub>1</sub> + h<sub>2</sub> vízoszlop nyomása hat.' }));
   const W = 640, H = 420;
   const fig = figure(viz, W, H, 'fig');
-  const oReq = stat(out, { label: 'Szükséges túlnyomás', unit: 'bar', d: 2 }), oHv = stat(out, { label: 'Vízoszlop a vágóél felett', unit: 'm', d: 1 }), oCh = stat(out, { label: 'Munkakamra' }), oZs = stat(out, { label: 'Zsilipelés kifelé (szemléltető)' });
+  const oReq = stat(out, { label: 'Szükséges túlnyomás', unit: 'bar', d: 2 }), oHv = stat(out, { label: 'Vízoszlop a vágóél felett', unit: 'm', d: 1 }), oCh = stat(out, { label: 'Munkakamra' }), oZs = stat(out, { label: 'Zsilipelés kifelé (szemléltető)', unit: 'perc' });
   const vd = verdict(out); vd.el.classList.add('rf-span');
   let st = {};
   const calc = () => {
@@ -397,7 +397,7 @@ register('kut-keszon', (root) => {
     T(fig, zx0, zy0 - 18, 'ZSILIPELÉS KIFELÉ', 't-sm', { style: 'letter-spacing:.06em;font-weight:700' }); T(fig, zx0 - 4, zy0 - 6, 'bar', 't-sm', { 'text-anchor': 'end' });
     L(fig, zx0, zy0, zx0, zy1, 'stroke:var(--ink);stroke-width:1'); L(fig, zx0, zy1, zx1, zy1, 'stroke:var(--ink);stroke-width:1');
     T(fig, zx0 - 4, zy0 + 4, fmt(Math.max(p, 0.5), 1), 't-sm', { 'text-anchor': 'end' }); T(fig, zx0 - 4, zy1, '0', 't-sm', { 'text-anchor': 'end' });
-    T(fig, zx1, zy1 + 14, `${Math.floor(tot / 60)} ó ${Math.round(tot % 60)} p`, 't-sm', { 'text-anchor': 'end' });
+    T(fig, zx1, zy1 + 14, `${Math.round(tot)} perc`, 't-sm', { 'text-anchor': 'end' });
     const n = 6, pmax = Math.max(p, 0.5), yp = (q) => zy1 - (zy1 - zy0) * q / pmax;
     const wts = [...Array(n)].map((_, i) => 0.08 + 0.24 * i / (n - 1)), ws = wts.reduce((a2, b2) => a2 + b2, 0);
     const pts = [[zx0, yp(p)]];
@@ -416,7 +416,7 @@ register('kut-keszon', (root) => {
     oHv.set(hv);
     oCh.set(0, ch === 'száraz' ? 'ok' : ch === 'szökik' ? 'warn' : 'bad', ch === 'szökik' ? 'szökik a levegő' : ch);
     const tot = zsilip(p);
-    oZs.set(0, null, `≈&nbsp;${Math.floor(tot / 60)}&nbsp;ó&nbsp;${Math.round(tot % 60)}&nbsp;p`);
+    oZs.set(0, null, `≈&nbsp;${Math.round(tot)}`);
     let s = 'ok', ttl = 'Száraz munkakamra', tx = 'A levegő nyomása épp kiszorítja a vizet a vágóél alól – lehet dolgozni.';
     if (ch === 'vizes') { s = 'warn'; ttl = 'Betör a víz'; tx = `Kevés a nyomás: a víz ${fmt(st.hin, 1)} m magasan áll a kamrában. Emeld a kompresszor nyomását!`; }
     if (ch === 'elöntve') { s = 'bad'; ttl = 'Elárasztva!'; tx = 'A túlnyomás messze kevesebb a víznyomásnál: a munkakamrát elönti a víz.'; }

@@ -10,12 +10,12 @@ const L = (g, x1, y1, x2, y2, cls, w = 1.5, extra = {}) => svg('line', { x1, y1,
 const P = (g, d, cls, extra = {}) => svg('path', { d, class: cls, ...extra }, g);
 const T = (g, x, y, s, anchor = 'start', cls = 't-sm halo') => svg('text', { x, y, class: cls, 'text-anchor': anchor, text: s }, g);
 
-function lab(g, x, y, s, side = 1, lx = null) {
+function lab(g, x, y, s, side = 1, lx = null, cls = 'g3-lab halo') {
   // felirat vezetővonallal: (x,y) a pont, a szöveg oldalra
   const tx = lx ?? x + side * 16;
   L(g, x, y, tx - side * 2, y, 's-muted', 1);
   svg('circle', { cx: x, cy: y, r: 1.8, class: 'f-ink' }, g);
-  T(g, tx, y + 3.5, s, side > 0 ? 'start' : 'end', 't-lab halo');
+  T(g, tx, y + 3.5, s, side > 0 ? 'start' : 'end', cls);
 }
 
 function ground(g, S, prof) {
@@ -191,7 +191,7 @@ const PH = {
   ] },
   cfa: { W: 230, prof: 'cfa', items: [
     ['Kitűzés, pontraállás', 'Kitűzik a cölöp helyét, és a gép pontraáll. Az üreges fúrószár alját elvesző sapka vagy „csapóajtó” zárja.', (g, S) => {
-      rig(g, S, 22); auger(g, S.cx, 36, S.GY - 2, 30); lab(g, S.cx, S.GY + 1, 'csapóajtó', -1, S.cx - 34);
+      rig(g, S, 22); auger(g, S.cx, 36, S.GY - 2, 30); lab(g, S.cx + 2, S.GY + 1, 'csapóajtó', 1, S.cx + 30);
     }],
     ['Furatkészítés', 'A spirált földkitermelés nélkül hajtják le: a furadék csak részben nyomódik ki, a spirálon maradó talajdugó folyamatosan támasztja a furat falát.', (g, S) => {
       rig(g, S, 22); auger(g, S.cx, 36, 292, 30, 'f-soilC', S.GY); heap(g, S.cx - 44, 22)(S); heap(g, S.cx + 20, 18)(S); rot(g, S.cx, 58, 20);
@@ -221,15 +221,15 @@ const PH = {
     }],
     ['Betonozás', 'Betonozó csővel betonoznak, közben a béléscsövet folyamatosan visszahúzzák.', (g, S) => {
       conc(g, S.cx - 15, 176, 30, 94, true); casing(g, S.cx, S.GY - 50, 212, 30); hole(g, S.cx, S.GY - 50, 176, 30); water(g, S.cx, 116, 176, 30); cage(g, S.cx, 30, 266, 26); funnel(g, S.cx, 28, 236);
-      up(g, S.cx - 36, 200, 160); up(g, S.cx + 36, 200, 160); truck(g, 4, S.GY - 3);
+      up(g, S.cx - 36, 200, 160); up(g, S.cx + 36, 200, 160); truck(g, 4, S.GY - 3); hose(g, 30, S.GY - 26, S.cx - 14, 30);
     }],
     ['Kész cölöp', 'A visszanyert cső helyén kész vasbeton cölöp marad.', (g, S) => {
       conc(g, S.cx - 15, S.GY, 30, 190); cage(g, S.cx, S.GY - 14, 266, 26); lab(g, S.cx + 15, 160, 'vb. cölöp', 1, S.cx + 30);
     }],
   ] },
-  zagy: { W: 160, prof: 'zagy', items: [
+  zagy: { W: 184, prof: 'zagy', items: [
     ['Előkészítés', 'pontraállás, előfúrás, vezetőcső', (g, S) => {
-      rig(g, S, 22); casing(g, S.cx, S.GY - 10, S.GY + 32, 34); shortAuger(g, S.cx, 36, S.GY + 26, 28); lab(g, S.cx + 20, S.GY + 22, 'vezetőcső', 1, S.cx + 34);
+      rig(g, S, 22); casing(g, S.cx, S.GY - 10, S.GY + 32, 34); shortAuger(g, S.cx, 36, S.GY + 26, 28); lab(g, S.cx + 20, S.GY + 24, 'vezetőcső', 1, S.cx + 30);
     }],
     ['Zagy betöltése', 'bentonitos fúrófolyadék a furatba', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY - 4, S.GY + 40, 30); P(g, `M8 ${S.GY - 30} H${S.cx - 8} v22`, 's-ink', { fill: 'none', 'stroke-width': 4, opacity: 0.7 });
@@ -241,7 +241,7 @@ const PH = {
     }],
     ['Kontraktorcső', 'talptisztítás, kosár, a betonozás indul', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY + 2, 280, 30); conc(g, S.cx - 15, 280, 30, 18, true); cage(g, S.cx, S.GY - 18, 296, 26); funnel(g, S.cx, 30, 290);
-      lab(g, S.cx + 4, 220, 'kontraktorcső', 1, S.cx + 22);
+      lab(g, S.cx + 4, 220, 'kontraktorcső', 1, S.cx + 16, 't-sm halo');
     }],
     ['Betonozás', 'alulról a terepszintig, a zagy kiszorul', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); conc(g, S.cx - 15, S.GY + 10, 30, 288 - S.GY, true); slurry(g, S.cx, S.GY + 2, S.GY + 10, 30); cage(g, S.cx, S.GY - 18, 296, 26); funnel(g, S.cx, 30, 200);
@@ -256,8 +256,7 @@ const PH = {
       rig(g, S, 22); hole(g, S.cx, S.GY, 244, 34); shortAuger(g, S.cx, 36, 244, 30); lab(g, S.cx + 17, 170, 'a fal megáll', 1, S.cx + 30);
     }],
     ['Betonozás', 'A kiemelés után rögtön betonoznak, tölcsérrel, gravitációsan.', (g, S) => {
-      hole(g, S.cx, S.GY, 244, 34); conc(g, S.cx - 17, 176, 34, 68, true); funnel(g, S.cx, 40, 226); truck(g, 8, S.GY - 3);
-      P(g, `M${S.cx - 46} ${S.GY - 40} q20 -10 30 4`, 's-acc', { fill: 'none', 'stroke-width': 2.2 }); lab(g, S.cx + 17, 210, 'beton', 1, S.cx + 30);
+      hole(g, S.cx, S.GY, 244, 34); conc(g, S.cx - 17, 176, 34, 68, true); funnel(g, S.cx, 40, 226); truck(g, 8, S.GY - 3); hose(g, 34, S.GY - 26, S.cx - 14, 42); lab(g, S.cx + 17, 210, 'beton', 1, S.cx + 30);
     }],
   ] },
 };

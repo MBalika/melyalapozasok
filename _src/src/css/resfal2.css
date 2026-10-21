@@ -5,7 +5,8 @@ svg.rf-svg .rf-ts { font: 600 13px var(--f-body); fill: var(--ink2); }
 svg.rf-svg .rf-tn { font: 700 13px var(--f-mono); fill: var(--ink); }
 svg.rf-svg .rf-tb { font: 800 17px var(--f-display); fill: var(--ink); letter-spacing: 0.03em; text-transform: uppercase; }
 svg.rf-svg .rf-tbig { font: 700 26px var(--f-body); font-style: italic; fill: var(--ink); }
-svg.rf-svg .rf-badge { font: 800 15px var(--f-mono); fill: #fff; }
+svg.rf-svg .rf-badge { font: 800 15px var(--f-mono); fill: var(--surface); }
+svg.rf-svg .rf-tn15 { font-size: 15px; }
 svg.rf-svg .rf-onfill { paint-order: stroke; stroke: var(--surface); stroke-width: 3.5px; stroke-linejoin: round; }
 svg.rf-svg .t-water { fill: var(--water); }
 svg.rf-svg .t-bad { fill: var(--bad); }
@@ -45,7 +46,7 @@ svg.rf-svg .t-bad { fill: var(--bad); }
 .rf-step { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
 .rf-stepviz { border-bottom: 1px solid var(--line); }
 .rf-step figcaption { padding: 10px 14px 12px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: baseline; }
-.rf-stepn { grid-row: span 2; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--grp); color: #fff; font: 800 15px/1 var(--f-mono); align-self: start; }
+.rf-stepn { grid-row: span 2; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--grp); color: var(--surface); font: 800 15px/1 var(--f-mono); align-self: start; }
 .rf-step figcaption b { font: 800 19px/1.1 var(--f-display); text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink); }
 .rf-stepd { font-size: 14px; line-height: 1.45; color: var(--ink2); text-align: justify; hyphens: manual; }
 
@@ -57,10 +58,10 @@ svg.rf-svg .t-bad { fill: var(--bad); }
 .rf-machine .rf-figbox { margin: -4px -4px 12px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
 
 /* a zagy útja – jelmagyarázat */
-.rf-legend { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 24px; font-size: 14px; color: var(--ink2); }
-.rf-legend li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: baseline; text-align: left; }
-.rf-legend li > i { font: 800 12px/1 var(--f-mono); font-style: normal; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--grp); color: #fff; }
-@media (max-width: 680px) { .rf-legend { grid-template-columns: minmax(0, 1fr); } }
+.rf-legend { list-style: none; padding: 0; margin: 12px 0 0; columns: 2; column-gap: 28px; font-size: 14px; color: var(--ink2); }
+.rf-legend li { break-inside: avoid; margin: 0 0 6px; display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: baseline; text-align: left; }
+.rf-legend li > i { font: 800 12px/1 var(--f-mono); font-style: normal; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--grp); color: var(--surface); }
+@media (max-width: 680px) { .rf-legend { columns: 1; } }
 
 /* széles ábrák keskeny kijelzőn vízszintesen görgethetők, hogy a feliratok olvashatók maradjanak */
 .rf-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
@@ -86,3 +87,5 @@ svg.rf-svg .t-bad { fill: var(--bad); }
 .rf-rules ul { columns: 2; column-gap: 34px; }
 .rf-rules li { break-inside: avoid; }
 @media (max-width: 760px) { .rf-rules ul { columns: 1; } }
+
+.factbar.rf-col .fact { display: flex; flex-direction: column; justify-content: center; }

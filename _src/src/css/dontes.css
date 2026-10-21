@@ -185,6 +185,7 @@ table.dnt-tab td { line-height: 1.4; }
 #ytlib .vt-yrow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start; }
 #ytlib .vt-ycell { grid-column: span var(--n, 1); min-width: 0; }
 #ytlib .vt-ycell > .ytgrid { grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); }
+#ytlib .vt-ycell > .vgroup { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #ytlib .vt-ylists .vt-lists { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin: 0; }
 @media (max-width: 980px) {
   #ytlib .vt-yrow { grid-template-columns: minmax(0, 1fr); gap: 0; }

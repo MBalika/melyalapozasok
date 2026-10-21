@@ -36,12 +36,12 @@ function lead(p, x1, y1, x2, y2, s, anchor = 'start', cls = 'kf-t') {
   const dx = anchor === 'end' ? -4 : anchor === 'middle' ? 0 : 4;
   return T(p, x2 + dx, y2 + 5, s, cls + ' halo', { 'text-anchor': anchor });
 }
-function dimV(p, x, y1, y2, s, side = 1, cls = 'kf-n') {
-  G(p);
+function dimV(p, x, y1, y2, s, side = 1, cls = 'kf-n', rot = false) {
   L(p, x, y1, x, y2, 'kf-dim');
   L(p, x - 5, y1, x + 5, y1, 'kf-dim'); L(p, x - 5, y2, x + 5, y2, 'kf-dim');
-  const t = T(p, x + side * 7, (y1 + y2) / 2 + 5, s, cls + ' halo', { 'text-anchor': side > 0 ? 'start' : 'end' });
-  return t;
+  const my = (y1 + y2) / 2;
+  if (rot) { const tx = x + side * 12; return T(p, tx, my, s, cls + ' halo', { 'text-anchor': 'middle', transform: `rotate(-90 ${tx} ${my})`, dy: side > 0 ? '0.35em' : '0.35em' }); }
+  return T(p, x + side * 7, my + 5, s, cls + ' halo', { 'text-anchor': side > 0 ? 'start' : 'end' });
 }
 function dimH(p, x1, x2, y, s, cls = 'kf-n') {
   L(p, x1, y, x2, y, 'kf-dim');
@@ -52,7 +52,7 @@ function dimH(p, x1, x2, y, s, cls = 'kf-n') {
 function lvl(p, x, y, s, anchor = 'start') {
   P(p, poly([[x, y], [x - 6, y - 9], [x + 6, y - 9]]), 'kf-lvl');
   L(p, x - 14, y, x + 14, y, 'kf-ln');
-  T(p, x + (anchor === 'end' ? -10 : 10), y - 12, s, 'kf-n halo', { 'text-anchor': anchor });
+  T(p, x + (anchor === 'end' ? -10 : 9), y - 4, s, 'kf-n halo', { 'text-anchor': anchor });
 }
 function soil(p, x, y, w, hh, cls = 'f-soilA', pat = 'pat-sand', op = 0.8) {
   R(p, x, y, w, hh, cls);
@@ -381,58 +381,52 @@ function figEdge(el) { panels(el, (el.dataset.v || 'vb,szog,elo,geo').split(',')
 
 /* ====================================================================== E) nyitott szekrény: metszet + alaprajz */
 function figNyitott(el) {
-  const W = 360, H = 420, s = mk(el, W, H, 'Nyitott süllyesztett szekrény metszete: vágóél körben, rekeszfalak, víz alatti kotrás, 6–8 m-es ütemek');
-  const WL = 70, GY = 120;
-  R(s, 0, 0, W, WL, 'f-sky', { opacity: 0.5 });
-  water(s, 0, WL, W, GY - WL);
-  soil(s, 0, GY, W, 200, 'f-soilA', 'pat-sand');
-  soil(s, 0, GY + 200, W, H - GY - 200, 'f-soilD', 'pat-gravel');
-  L(s, 0, GY, W, GY, 'kf-gl');
-  const x0 = 70, x1 = 290, t = 18, top = 40, yb = 360;
-  // belső tér: víz a külső vízszintig (víz alatti kotrás)
+  const W = 680, H = 420, s = mk(el, W, H, 'Nyitott süllyesztett szekrény: metszet (vágóél körben, rekeszfalak, víz alatti kotrás, 6–8 m-es ütemek) és alaprajz (cellák)');
+  const WL = 92, GY = 140, SW = 400;
+  R(s, 0, 0, SW, WL, 'f-sky', { opacity: 0.45 });
+  water(s, 0, WL, SW, GY - WL);
+  soil(s, 0, GY, SW, 190, 'f-soilA', 'pat-sand');
+  soil(s, 0, GY + 190, SW, H - GY - 190, 'f-soilD', 'pat-gravel');
+  L(s, 0, GY, SW, GY, 'kf-gl');
+  const x0 = 96, x1 = 304, t = 16, top = 56, yb = 372;
   R(s, x0 + t, WL, x1 - x0 - 2 * t, yb - 14 - WL, 'f-water', { opacity: 0.85 });
   R(s, x0 + t, top, x1 - x0 - 2 * t, WL - top, 'kf-void');
-  // külső falak nagy vágóéllel
   conc(s, poly([[x0, top], [x0 + t, top], [x0 + t, yb - 46], [x0 + 4, yb], [x0 - 8, yb], [x0 - 8, yb - 40], [x0, yb - 46]]));
   conc(s, poly([[x1, top], [x1 - t, top], [x1 - t, yb - 46], [x1 - 4, yb], [x1 + 8, yb], [x1 + 8, yb - 40], [x1, yb - 46]]));
-  // rekeszfalak (a vágóél fölött végződnek)
-  for (const x of [143, 217]) conc(s, poly([[x - 6, top], [x + 6, top], [x + 6, yb - 66], [x, yb - 50], [x - 6, yb - 66]]));
-  // ütemek
-  for (const y of [126, 212]) { L(s, x0 - 24, y, x1 + 24, y, 'kf-joint2'); }
-  T(s, x1 + 26, 86, '3.', 'kf-n halo'); T(s, x1 + 26, 172, '2.', 'kf-n halo'); T(s, x1 + 26, 288, '1.', 'kf-n halo');
-  T(s, x1 + 26, 306, 'ütem', 'kf-s halo');
-  dimV(s, 22, 126, 212, '6–8 m', 1, 'kf-s');
-  // markolók a cellákban
-  for (const [x, yy] of [[107, yb - 22], [253, yb - 30]]) { L(s, x, 6, x, yy - 30, 'kf-rope'); grab(s, x, yy, 22, 0.5); }
-  lead(s, x0 - 6, yb - 6, 30, H - 22, 'vágóél körben', 'start', 'kf-s');
-  lead(s, 217, 200, 300, H - 22, 'rekeszfal', 'start', 'kf-s');
-  T(s, W / 2, 26, 'víz alatti kotrás a cellákban', 'kf-s halo', { 'text-anchor': 'middle' });
-}
-function figAlaprajz(el) {
-  const W = 300, H = 420, s = mk(el, W, H, 'A nyitott szekrény alaprajza: az építmény alaprajzával azonos, rekeszfalakkal cellákra osztva');
-  const x0 = 46, y0 = 70, w = 208, hh = 290, t = 12;
-  R(s, x0, y0, w, hh, 'f-conc kf-edge'); R(s, x0, y0, w, hh, '', { fill: 'url(#pat-conc)' });
-  const cw = (w - 2 * t - 6) / 2, ch = (hh - 2 * t - 12) / 3;
+  for (const x of [165, 235]) conc(s, poly([[x - 6, top], [x + 6, top], [x + 6, yb - 66], [x, yb - 50], [x - 6, yb - 66]]));
+  for (const y of [150, 252]) L(s, x0 - 22, y, x1 + 22, y, 'kf-joint2');
+  for (const [y, n] of [[104, '3.'], [204, '2.'], [316, '1.']]) T(s, x1 + 18, y, n, 'kf-n halo');
+  T(s, x1 + 18, 334, 'ütem', 'kf-s halo');
+  dimV(s, 40, 150, 252, '6–8 m', 1, 'kf-s');
+  for (const [x, yy] of [[130, yb - 22], [270, yb - 30]]) { L(s, x, 30, x, yy - 30, 'kf-rope'); grab(s, x, yy, 22, 0.5); }
+  lead(s, x0 - 6, yb - 6, 14, H - 16, 'vágóél körben', 'start', 'kf-s');
+  lead(s, 235, 290, 330, H - 16, 'rekeszfal', 'start', 'kf-s');
+  T(s, SW / 2, 22, 'metszet: víz alatti kotrás a cellákban', 'kf-s halo', { 'text-anchor': 'middle' });
+  // alaprajz
+  const px = 440, py = 70, pw = 200, ph = 270, tt = 12;
+  R(s, px, py, pw, ph, 'f-conc kf-edge'); R(s, px, py, pw, ph, '', { fill: 'url(#pat-conc)' });
+  const cw = (pw - 2 * tt - 6) / 2, ch = (ph - 2 * tt - 12) / 3;
   for (let i = 0; i < 2; i++) for (let j = 0; j < 3; j++) {
-    const cx = x0 + t + i * (cw + 6), cy = y0 + t + j * (ch + 6);
+    const cx = px + tt + i * (cw + 6), cy = py + tt + j * (ch + 6);
     R(s, cx, cy, cw, ch, 'f-water', { opacity: 0.85 });
     grab(s, cx + cw / 2, cy + ch / 2 + 14, 18, 0.5);
   }
-  T(s, W / 2, 40, 'alaprajz', 'kf-t halo', { 'text-anchor': 'middle' });
-  T(s, W / 2, y0 + hh + 34, 'cellák a rekeszfalak között', 'kf-s halo', { 'text-anchor': 'middle' });
-  T(s, W / 2, y0 + hh + 54, '= az építmény alaprajza', 'kf-s halo', { 'text-anchor': 'middle' });
+  T(s, px + pw / 2, 40, 'alaprajz', 'kf-t halo', { 'text-anchor': 'middle' });
+  T(s, px + pw / 2, py + ph + 30, 'cellák a rekeszfalak között;', 'kf-s halo', { 'text-anchor': 'middle' });
+  T(s, px + pw / 2, py + ph + 50, 'a külső körvonal = az építményé', 'kf-s halo', { 'text-anchor': 'middle' });
 }
 
 /* ====================================================================== F) a genfi szekrény ütemei */
-const GF = { W: 230, H: 470, Y0: 150, k: 10.6, x0: 62, x1: 178 };
+const GF = { W: 240, H: 470, Y0: 150, k: 10.6, x0: 92, x1: 196 };
 const gy = (z) => GF.Y0 - z * GF.k;
 const LAYERS = [
-  [0, -3, 'f-soilD', 'pat-gravel'], [-3, -5, 'f-soilA', 'pat-sand'], [-5, -6.5, 'f-soilA', 'pat-soil'], [-6.5, -9, 'f-soilC', 'pat-sand'],
-  [-9, -22, 'f-soilC', 'pat-soil'], [-22, -28, 'f-soilB', 'pat-clay'], [-28, -40, 'f-soilE', 'pat-clay'],
+  [0, -3, 'f-soilD', 'pat-gravel'], [-3, -6.5, 'f-soilA', 'pat-sand'], [-6.5, -9, 'f-soilC', 'pat-sand'],
+  [-9, -22, 'f-soilC', 'pat-soil'], [-22, -28, 'f-soilB', 'pat-clay'], [-28, -30.2, 'f-soilE', 'pat-clay'],
 ];
 function gSoil(s, cut = null) {
-  for (const [a, b, cls, pat] of LAYERS) soil(s, 0, gy(a), GF.W, gy(b) - gy(a), cls, pat);
-  if (cut) P(s, poly(cut), 'kf-void');
+  R(s, 0, 0, GF.W, gy(0), 'f-sky', { opacity: 0.35 });
+  for (const [a, b, cls, pat] of LAYERS) soil(s, 0, gy(a), GF.W, Math.min(GF.H, gy(b)) - gy(a), cls, pat);
+  if (cut) P(s, poly(cut), 'f-sky', { opacity: 0.35 });
   L(s, 0, gy(0), GF.W, gy(0), 'kf-gl');
 }
 function gBox(s, zt, zb, floors) {
@@ -445,37 +439,36 @@ function gBox(s, zt, zb, floors) {
   R(s, x0, yt - 4, x1 - x0, 6, 'f-conc2 kf-edge');
 }
 function gWater(s) { L(s, 0, gy(-3.8), GF.W, gy(-3.8), 'kf-wl', { 'stroke-dasharray': '7 4' }); }
+const LX = 14; // a szintjelek helye (bal szél)
 const geneva = {
   u1: (s) => {
     gSoil(s); gWater(s);
     gBox(s, 3, -10, 3);
-    // tixotróp folyadék besajtolása a köpeny mellé
     for (const x of [GF.x0 - 7, GF.x1 + 1]) R(s, x, gy(0), 6, gy(-8) - gy(0), 'f-bento', { opacity: 0.9 });
-    R(s, GF.x0 + 20, gy(-8.2) - 12, 40, 12, 'f-steel2', { rx: 3 });
-    lvl(s, 24, gy(0), '±0,00'); lvl(s, 24, gy(-3.8) + 0.1, '−3,80');
-    lvl(s, 24, gy(-10), '−10,0');
-    dimV(s, GF.x1 + 24, gy(3), gy(-10), '13,0 m', 1, 'kf-s');
-    T(s, GF.x0 - 12, gy(-1.6), 'c', 'kf-t kf-acc-t halo', { 'text-anchor': 'end' });
-    T(s, GF.x0 + 70, gy(-8.2) - 16, 'b', 'kf-t kf-acc-t halo');
-    T(s, 10, gy(-3.8) + 18, 'a', 'kf-t kf-acc-t halo');
+    R(s, GF.x0 + 22, gy(-8.4) - 12, 40, 12, 'f-steel2', { rx: 3 });
+    lvl(s, LX, gy(0), '±0,00'); lvl(s, LX, gy(-3.8), '−3,80'); lvl(s, LX, gy(-10), '−10,0');
+    dimV(s, GF.x1 + 24, gy(3), gy(-10), '13,0 m', 1, 'kf-s', true);
+    T(s, GF.x0 - 14, gy(-6), 'c', 'kf-t kf-acc-t halo', { 'text-anchor': 'end' });
+    T(s, GF.x0 + 70, gy(-8.4) - 2, 'b', 'kf-t kf-acc-t halo');
+    T(s, LX + 26, gy(-3.8) + 18, 'a', 'kf-t kf-acc-t halo');
   },
   u2: (s) => {
     gSoil(s); gWater(s);
     gBox(s, 10, -14.5, 8);
     for (const x of [GF.x0 - 7, GF.x1 + 1]) R(s, x, gy(0), 6, gy(-12.5) - gy(0), 'f-bento', { opacity: 0.9 });
-    lvl(s, 24, gy(0), '±0,00'); lvl(s, 24, gy(-14.5), '−14,50');
-    dimV(s, GF.x1 + 24, gy(10), gy(-14.5), '24,5 m', 1, 'kf-s');
+    lvl(s, LX, gy(0), '±0,00'); lvl(s, LX, gy(-14.5), '−14,50');
+    dimV(s, GF.x1 + 24, gy(10), gy(-14.5), '24,5 m', 1, 'kf-s', true);
     dimH(s, GF.x0, GF.x1, gy(10) - 14, 'D = 57,0 m', 'kf-s');
   },
   u3: (s) => {
     gSoil(s, [[GF.x0 - 40, gy(0)], [GF.x0 - 8, gy(-3.5)], [GF.x1 + 8, gy(-3.5)], [GF.x1 + 40, gy(0)]]);
     gWater(s);
     gBox(s, -3.5, -28, 8);
-    // cementhabarcs-injektálás a bentonit kiszorítására
-    for (const x of [GF.x0 - 7, GF.x1 + 1]) { R(s, x, gy(-3.5), 6, gy(-26) - gy(-3.5), 'f-grout', { opacity: 0.95 }); }
-    for (const z of [-10, -18]) { arw(s, GF.x0 - 30, gy(z), GF.x0 - 9, gy(z), 'kf-ar kf-acc', 7); }
-    lvl(s, 24, gy(-3.5), '−3,50'); lvl(s, 24, gy(-28), '−28,0');
-    T(s, GF.x0 - 32, gy(-14) - 2, 'd', 'kf-t kf-acc-t halo', { 'text-anchor': 'end' });
+    for (const x of [GF.x0 - 7, GF.x1 + 1]) R(s, x, gy(-3.5), 6, gy(-26) - gy(-3.5), 'f-grout', { opacity: 0.95 });
+    for (const z of [-10, -18]) arw(s, GF.x0 - 34, gy(z), GF.x0 - 10, gy(z), 'kf-ar kf-acc', 7);
+    lvl(s, LX, gy(0), '±0,00'); lvl(s, LX, gy(-28), '−28,0');
+    lvl(s, GF.x1 + 30, gy(-3.5), '−3,50', 'end');
+    T(s, GF.x0 - 38, gy(-14) + 6, 'd', 'kf-t kf-acc-t halo', { 'text-anchor': 'end' });
   },
 };
 function figGenf(el) { panels(el, (el.dataset.v || 'u1,u2,u3').split(','), GF.W, GF.H, geneva); }
@@ -511,8 +504,8 @@ function figGenfKesz(el) {
     for (let x = a + 30; x < b - 10; x += 30) L(s, x, y(23.7), x, y(0), 'kf-ln', { opacity: 0.35 });
   }
   lvl(s, 40, y(23.7), '+23,70'); lvl(s, 40, y(0), '±0,00'); lvl(s, 40, y(-28), '−28,0');
-  dimV(s, W - 40, y(-4), y(-22.9), '7 × 2,70 m', -1, 'kf-s');
-  dimV(s, W - 16, y(0), y(-27.9), '27,9 m', -1, 'kf-s');
+  dimV(s, W - 46, y(-4), y(-22.9), '7 × 2,70 m', 1, 'kf-s', true);
+  dimV(s, W - 18, y(0), y(-27.9), '27,9 m', 1, 'kf-s', true);
   lead(s, 340, y(-12), 392, y(-30.8), 'rámpa', 'start', 'kf-s');
   lead(s, x0 + 40, y(-26.2), 70, y(-33), 'fenéklemez', 'start', 'kf-s');
   lead(s, x1 + 14, y(-27.4), x1 + 30, y(-32.4), 'vágóél', 'start', 'kf-s');
@@ -520,12 +513,12 @@ function figGenfKesz(el) {
 
 /* ====================================================================== H) keszon anatómiája */
 function figKeszon(el) {
-  const W = 560, H = 480, s = mk(el, W, H, 'Keszon (légnyomásos szekrény) metszete: munkakamra túlnyomásos levegőben, aknacső, személy- és anyagzsilip, kompresszor');
+  const W = 560, H = 430, s = mk(el, W, H, 'Keszon (légnyomásos szekrény) metszete: munkakamra túlnyomásos levegőben, aknacső, személy- és anyagzsilip, kompresszor');
   const WL = 120, BED = 232;
   R(s, 0, 0, W, WL, 'f-sky', { opacity: 0.45 });
   water(s, 0, WL, W, BED - WL);
   soil(s, 0, BED, W, H - BED, 'f-soilA', 'pat-sand');
-  soil(s, 0, 400, W, H - 400, 'f-soilD', 'pat-gravel');
+  soil(s, 0, 396, W, H - 396, 'f-soilD', 'pat-gravel');
   L(s, 0, BED, W, BED, 'kf-gl');
   const x0 = 150, x1 = 410, ce = 380, ch = 54, roof = 30;
   // munkakamra (túlnyomás) + vágóél
@@ -541,16 +534,17 @@ function figKeszon(el) {
   // kompresszor egy uszályon + légvezeték
   R(s, 444, WL - 20, 100, 22, 'f-steel2 kf-edge', { rx: 4 });
   R(s, 462, WL - 56, 64, 36, 'f-grp kf-edge', { rx: 4 });
-  P(s, `M462 ${WL - 40} H${sx + 30}`, 'kf-pipe', { fill: 'none' });
+  P(s, `M462 ${WL - 40} H${mx + 22} V${ce - ch - 2}`, 'kf-pipe', { fill: 'none' });
+  T(s, mx + 30, 178, 'légvezeték', 'kf-s halo');
   // emberek, föld a kamrában
   person(s, 210, ce - 6, 1); person(s, 268, ce - 6, 1); person(s, 330, ce - 6, 1);
   P(s, `M${x0 + 30} ${ce} Q${(x0 + x1) / 2} ${ce - 10} ${x1 - 30} ${ce}`, 'kf-ln', { fill: 'none', 'stroke-dasharray': '4 3' });
   // a levegő kiszorítja a vizet: nyilak a vágóél alatt kifelé
   for (const [x, dx] of [[x0 + 8, -26], [x1 - 8, 26]]) arw(s, x, ce - 4, x + dx, ce - 4, 'kf-ar kf-water', 7);
   // h_v méret
-  dimV(s, 70, WL, ce, 'h_v', 1, 'kf-t');
+  dimV(s, 70, WL, ce, 'h_v', -1, 'kf-t');
   T(s, 14, WL - 8, 'vízszint', 'kf-s halo');
-  T(s, 14, BED + 22, 'mederfenék', 'kf-s halo');
+  T(s, W - 14, BED + 22, 'mederfenék', 'kf-s halo', { 'text-anchor': 'end' });
   lead(s, sx, 54, 150, 20, 'személyzsilip', 'end', 'kf-s');
   lead(s, mx + 28, 56, 430, 20, 'anyagzsilip', 'start', 'kf-s');
   T(s, 494, WL - 64, 'kompresszor', 'kf-s halo', { 'text-anchor': 'middle' });
@@ -561,7 +555,7 @@ function figKeszon(el) {
   lead(s, x1 - 3, ce - 2, 470, 356, 'vágóél', 'start', 'kf-s');
 }
 
-const FIGS = { kotro: figKotro, sema: figSema, ero: figEro, valt: figValt, edge: figEdge, nyitott: figNyitott, alaprajz: figAlaprajz, genf: figGenf, genfkesz: figGenfKesz, keszon: figKeszon };
+const FIGS = { kotro: figKotro, sema: figSema, ero: figEro, valt: figValt, edge: figEdge, nyitott: figNyitott, genf: figGenf, genfkesz: figGenfKesz, keszon: figKeszon };
 function initKutFigs() {
   document.querySelectorAll('[data-kfig]').forEach((el) => {
     if (el.dataset.kready) return; el.dataset.kready = '1';

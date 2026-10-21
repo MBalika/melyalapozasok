@@ -584,6 +584,9 @@ function vtLayout() {
   const n = (g) => g[1].children.length;
   if (n(groups[1]) + n(groups[2]) !== 4 || n(groups[3]) !== 1) return;
   lib.dataset.vtl = '1';
+  // a keskeny (egykártyás) oszlopok fejléce egy sorba férjen, hogy a kártyák teteje egy vonalba essen
+  groups[2][0].textContent = 'Résfal'; groups[2][0].title = 'A Befogott támszerkezetek lejátszási listából';
+  groups[3][0].textContent = 'Kimosás'; groups[3][0].title = 'Miért kell mélyre menni? – kimosás a hídpillér körül';
   const mk = (cls, span) => { const d = document.createElement('div'); d.className = cls; if (span) d.style.setProperty('--n', span); return d; };
   const cell = (g) => { const c = mk('vt-ycell', n(g)); c.append(g[0], g[1]); return c; };
   const r1 = mk('vt-yrow'); r1.append(cell(groups[1]), cell(groups[2]));

@@ -1,5 +1,5 @@
 /* C08 – saját ábrák (kut_figs.js) és a fejezet elrendezése */
-#kut .kf { width: 100%; height: auto; display: block; overflow: visible; }
+#kut .kf { width: 100%; height: auto; display: block; overflow: hidden; }
 .kf .kf-t { font: 650 17px var(--f-body); fill: var(--ink2); }
 .kf .kf-s { font: 600 14px var(--f-body); fill: var(--ink2); }
 .kf .kf-n { font: 700 14px var(--f-mono); fill: var(--ink); }
@@ -46,7 +46,7 @@
 .kf-fig > figcaption { font-size: 13.5px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
 .kf-row { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 12px; align-items: stretch; }
 .kf-2 { --n: 2; } .kf-3 { --n: 3; } .kf-4 { --n: 4; } .kf-6 { --n: 6; }
-.kf-cell { display: flex; flex-direction: column; justify-content: space-between; padding: 8px 8px 10px; }
+.kf-cell { display: flex; flex-direction: column; justify-content: flex-start; padding: 8px 8px 10px; }
 .kf-cap { margin: 8px 2px 0; font: 700 14.5px/1.3 var(--f-body); color: var(--ink); text-align: center; }
 .kf-cap small { display: block; font-weight: 500; font-size: 13px; color: var(--muted); margin-top: 3px; }
 .kf-row.kf-text .kf-cap { text-align: left; font-weight: 500; font-size: 14px; color: var(--ink2); }
@@ -70,7 +70,7 @@
 .f-bento-bg { background: var(--bento); } .f-grout-bg { background: var(--grout); }
 .kf-wl-bg { background: transparent; border: none !important; border-top: 2px dashed var(--water) !important; height: 0 !important; border-radius: 0 !important; }
 #kut .two-col.kut-eq { align-items: stretch; }
-#kut .two-col.kut-eq > .callout { align-content: start; }
+#kut .two-col.kut-eq > .callout { align-content: center; }
 .kut-rules { margin: 6px 0 0; padding-left: 1.3em; }
 .kut-rules li { margin: 4px 0; }
 .kf .kf-fb { stroke: var(--steelm2); stroke-width: 1.6; fill: none; }
