@@ -1,5 +1,6 @@
 // Belépési pont
 import { bootWidgets, bootAll } from './core.js';
+import { LAYOUT } from './layout.js';
 import { initUI, startGuard } from './ui.js';
 import { initHero } from './hero.js';
 import './ch_alapok.js';
@@ -18,3 +19,4 @@ initUI();
 try { initHero(); } catch (e) { console.error('Hős hiba', e); }
 if (/[?&]all\b/.test(location.search)) bootAll(); else bootWidgets();
 startGuard();
+try { LAYOUT.start(); } catch (e) { console.error('Elrendezés hiba', e); }
