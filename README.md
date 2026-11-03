@@ -24,3 +24,8 @@ npm install
 python3 build.py          # → ../index.html
 # részleges fejlesztői build:  BUILD_ID=x MODULES=ch_furt CHAPTERS=05 python3 build.py  → ../dev-x.html
 ```
+
+
+## Videók zenéje
+
+A videók zenéje (2026-11) valódi hangszerek felvett mintáiból készült – zongora, vonósok, akusztikus és elektromos gitár, basszusgitár, fúvósok, akusztikus dob –, ütemre igazítva a képhez; a gép- és effekthangok a korábbi hangkönyvtárból vannak. Hangminták: Salamander Grand Piano (Alexander Holm, CC BY 3.0); tonejs-instruments (nbrosowsky; VSCO2, Karoryfer, Iowa, Freesound – CC BY 3.0); Tone.js dobminták.
