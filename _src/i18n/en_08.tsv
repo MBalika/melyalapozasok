@@ -1,0 +1,89 @@
+9b58f97	Trench stability – why doesn’t it collapse?
+eba8f41	Trench stability decides <b>how long a panel</b> can be excavated at once. The minimum length is 2.8 m – one bite of the grab. It is influenced by the <b>soil</b>, the <b>groundwater level</b>, <b>surface loads</b>, the <b>depth of the trench</b>, the <b>guide wall</b>, the <b>quality of the slurry</b> and the <b>length of the trench</b>.
+288aa3b	The wall of the trench is pressed by groundwater and soil from outside, and by the slurry from inside. The slurry pressure must balance the water pressure and the earth pressure together. As the slurry is only slightly heavier than water, “winning” needs a head advantage: the <b>slurry level in the trench must always be at least 1.0–1.5 m above the groundwater table</b>.
+eb8d593	Pressures on the right-hand wall of the trench: from inside the slurry pressure (σ<sub>p</sub>, drawn to the left), from outside the water pressure (σ<sub>v</sub>) and the earth pressure (σ<sub>x</sub>). For a panel of finite length, σ<sub>x</sub> falls short of the Rankine value because of arching. Illustrative numerical example: sand, φ = 32°, h = 2.0 m, t = 0.5 m, ρ = 1.10 g/cm³, L = 5.6 m.
+ee0dbab	<span class="f">σ<sub>p</sub> = (z − t)·γ<sub>b</sub></span>⏎        <span class="fl"><i>slurry pressure</i> – z: depth below ground level, t: depth of the slurry level, γ<sub>b</sub>: unit weight of the bentonite slurry</span>
+bcb2b4f	<span class="f">σ<sub>v</sub> = (z − h)·γ<sub>v</sub></span>⏎        <span class="fl"><i>water pressure</i> – h: depth of the groundwater table, γ<sub>v</sub>: unit weight of water (≈ 10 kN/m³)</span>
+f12f5d6	The condition of equilibrium
+cff0d3a	The trench stands at every depth if σ<sub>p</sub> ≥ σ<sub>v</sub> + σ<sub>x</sub>. In the example, at the bottom a slurry pressure of 211 kPa faces 199 kPa of water and earth pressure – with Rankine earth pressure (246 kPa) the trench would collapse. The difference is provided by <b>arching</b>.
+cf764d0	Silo effect: the earth pressure does not grow indefinitely
+57e1d69	For a long, plane wall the earth pressure increases linearly with depth (Rankine). A panel, however, is <b>of finite length</b>: at both ends of the panel the soil wedge that “wants” to move leans on the adjacent soil at rest, and <b>arching</b> develops – as in a grain silo, where because of wall friction the pressure does not grow indefinitely even at the bottom. So the earth pressure <b>tends to a limit</b> with depth. The most commonly used expression for this is the <b>Schneebeli formula</b> (but many others exist):
+08a250f	<span class="f">σ<sub>x</sub> = <span class="rf-frac"><span>L·γ</span><span>sin 2φ</span></span>·K<sub>a</sub>·(1 − e<sup>−z·sin 2φ / L</sup>) − <span class="rf-frac"><span>c</span><span>tan φ</span></span>·(1 − K<sub>a</sub>)</span>⏎    <span class="fl">L: trench length · γ: unit weight of the soil · φ, c: shear strength parameters · K<sub>a</sub> = tan²(45° − φ/2). At small depth it gives back the Rankine value K<sub>a</sub>·γ·z − 2c·√K<sub>a</sub>, at great depth the earth pressure (for c = 0) tends to L·γ·K<sub>a</sub>/sin 2φ.</span>
+2c8a9d5	The point in one sentence
+51ee173	<b>Shorter panel → stronger arching → smaller earth pressure → more stable trench.</b> That is why a panel of arbitrary length cannot be opened, and why 2.8–5.6 m is the typical panel length.
+7e4b8db	The silo effect at a glance
+5775923	Trench stability lab
+9e4f793	If the slurry level drops…
+5053596	A sudden loss of slurry – if the slurry leaks, for example, into a coarse gravel layer, an old sewer or a cellar – can reduce the level difference relative to the groundwater within minutes. Then slurry must be topped up immediately, which is why there is always a reserve at the plant. You can try what happens with the <b>slurry level</b> slider of the lab.
+1d58edf	Concreting, inspection
+ae067a5	Concreting follows the rules of <b>underwater concreting</b>, with a concreting hopper and a tremie pipe: the concrete fills the trench from the bottom up while displacing the lighter slurry – the slurry is pumped out and returned to the plant. The end of the tremie pipe is always immersed in the fresh concrete, so the concrete does not mix with the slurry.
+cbfd454	Underwater concreting: one concreting pipe (tremie) goes into a bored pile and two into a panel; the concrete fills the bore or the trench from the bottom. The head, concreted up to the casting level and mixed with slurry, is broken back to the cut-off level.
+575f47a	The rules of concreting
+4aa26b6	Concreting must start <b>as soon as possible</b> after excavation is finished, but no later than <b>4–5 hours</b> afterwards.
+2ef7156	Before that, <b>base cleaning</b> is needed: the soil and sand grains settled at the bottom of the trench must be removed.
+fef4642	<b>Continuous</b> concreting is required, without interruption.
+e6009f5	The top approx. <b>30–50 cm</b> of the wall is mixed with slurry; it must be broken out, chiselled and re-concreted – the <b>capping beam</b> sits on it.
+7e8eb73	After the wall is finished, the concrete quality is usually checked by <b>radioactive isotope</b> or <b>seismic</b> testing.
+a6cd2bc	Plan of trench-built structural elements: a panel can be straight, but also T-shaped or cross-shaped.
+afb4422	Reinforcement detail: the concrete must also flow between the bars (clear spacing) and reach the required cover everywhere.
+5208e7e	What we see after excavation
+27607dc	Concreting a panel from a truck mixer on a city-centre site
+847b36f	Concreting on a city-centre infill site
+8fa610f	A completed diaphragm wall after excavating the pit
+387b980	A completed diaphragm wall after excavating the pit
+0676886	Diaphragm wall surface with vertical slurry streaks
+f7a33f3	The vertical “streaks” of slurry on the surface
+b92a65d	Panel joint of a diaphragm wall
+c9513e3	The joint between two panels
+90a2b3f	A defect on the surface of a diaphragm wall
+579860b	Defect: inclusion, honeycombing
+eecab31	Rough, honeycombed diaphragm wall surface
+e5b0806	Rough, honeycombed surface
+49d3c43	Reinforcement of the capping beam on top of the diaphragm wall
+df7b8b1	Reinforcement of the capping beam on the trimmed wall head
+57a481f	When yes, when no?
+d426d55	a layout that can be varied in any plan shape
+0573d7a	high bearing capacity, small settlement
+2a9ec74	structures can be built that could not be solved economically otherwise, e.g. underground garages
+7c65c04	carries both horizontal and vertical loads
+493bd76	no groundwater lowering is needed
+a44a13f	any depth, without formwork or strutting
+b923bdf	relatively free of noise and vibration
+a575d53	easy to connect to the superstructure, can be load-tested
+a99a45f	It is a problem if…
+9750e36	there is rock or very hard clay – then it can only be built with a hydrofraise
+172c865	old building remains or utilities turn up in the panels
+4164029	there are cavities or cellars
+76341d4	trench stability can only be ensured with great difficulty: soft clay, peat, flowing (submerged) sand, very high groundwater table
+b9d5f01	Wall and foundation in one
+3a53163	For a city-centre underground car park the diaphragm wall works three times: during construction it <b>supports the excavation</b> and keeps out the groundwater, later it becomes the <b>permanent side wall</b> of the car park, and it carries the load of the building above it down as a <b>deep foundation</b>. The levels are often built from the top down (“top-down”): the floor slabs are at the same time the props of the wall.
+691dad6	<span class="id">C08</span><span>Deep foundations</span><span>Sunk bodies</span>
+29285a1	Well, box and caisson foundations
+59b3aa4	Before piling rigs flooded everything, deep foundations were <b>sunk</b>: a large reinforced concrete shell was built at ground level, the soil was removed from beneath it from inside, and it slowly descended under its own weight to the bearing stratum. Today it is almost completely being pushed out, but in the last century this was the “classic” deep foundation – the piers of the older Danube bridges in Budapest were built this way too.
+cf11d16	<a href="#kut-elv"><span>8.1</span><b>The principle of sinking</b></a>⏎    <a href="#kut-kut"><span>8.2</span><b>Well foundations</b></a>⏎    <a href="#kut-szekreny"><span>8.3</span><b>Box foundations</b></a>⏎    <a href="#kut-keszon"><span>8.4</span><b>Caisson</b></a>⏎    <a href="#kut-ferde"><span>8.5</span><b>If it tilts…</b></a>⏎    <a href="#kut-osszevet"><span>8.6</span><b>Comparison</b></a>
+88f0eeb	The principle of sinking
+80cea19	The essence of both methods is the same: a <b>reinforced concrete shell wall</b> of varying – even very large – diameter is sunk <b>under its own weight</b> while the soil is removed from inside with a “clamshell” grab. When the required level (the bearing stratum) has been reached, either a <b>base slab</b> is made or the well is completely <b>filled with concrete</b> – the latter is not typical for box foundations.
+3ffb31b	The body sinks if its <b>weight</b> (plus any ballast) overcomes the <b>friction on the shell</b> and the <b>soil resistance under the cutting edge</b>. Below the groundwater, buoyancy reduces the effective weight. So sinking is a continuous balancing act: the grab also removes the soil from under the cutting edge, and the shell friction is reduced by lubrication or a shoulder offset.
+ac60803	It is typically <b>economical</b> (and competitive with piles) if the bearing stratum is <b>not too deep</b>. It was used most often when the groundwater was high and the foundation level had to be taken below the water table: meanwhile the shell prevents the working space from collapsing.
+c34570e	Excavation in a well foundation: the slewing excavator “picks” the soil out of the inside of the shell with a grab bucket, and the well sinks under its own weight.
+6a002a1	<span class="f">G + G<sub>b</sub> − U &gt; S + R<sub>v</sub></span>⏎    <span class="fl"><i>condition for sinking</i> – G: weight of the shell, G<sub>b</sub>: ballast, U: buoyancy below the groundwater, S: shell friction, R<sub>v</sub>: soil resistance under the cutting edge</span>
+9b3bc07	Well sinker
+9e4600d	Well foundations
+2604ee9	Well foundations are used to found individual <b>columns</b> or <b>walls</b>: they support the structure <b>at discrete points</b>, and at the top they are tied together and capped by a reinforced concrete <b>grillage</b> or a reinforced concrete <b>slab</b> – similarly to the way piles are tied together by the pile grillage.
+a988a1f	a large-diameter <b>ring wall</b> open at the top and bottom: shell wall + cutting edge,
+5218f40	formerly always made of reinforced concrete (not only cylindrical but also conical), today also of steel,
+225e42a	a <b>bottom plug</b> at the base, lean concrete fill inside,
+1d915ed	it could be made in one piece over its full length, or from precast elements, <b>well rings</b>,
+9b76e76	the shell friction can be reduced with <b>bentonite slurry</b> or <b>single-sized rounded gravel</b>.
+635695a	<b>0.8–3.0<small>m</small></b><span>diameter of the well</span>
+b096af0	<b>4–8<small>m</small></b><span>length of the well</span>
+5f0d16e	<b>5–6<small>m</small></b><span>up to this depth an unsupported excavated bore is also called an “excavated block foundation” or well foundation</span>
+822ee5b	Scheme and load transfer of a well foundation
+8d523c6	Wells, grillage, superstructure<small>the top of the grillage is horizontal, the beams have a rectangular cross-section</small>
+033d8c3	The load path<small>column load F → spanning beam (M) → R onto the well → base and shaft resistance</small>
+58538b0	The wells are tied together by a spanning, distributing reinforced concrete grillage (or slab). The columns of the superstructure can also stand between the wells: the grillage carries their load to the wells in bending, and the wells carry it to the bearing stratum.
+e25c1f3	Variants of well foundations
+0f49130	The shell can be cylindrical or widening downwards (tapered), and it can project all round at the bottom (shoulder offset). In that case the cutting edge cuts a larger hole than the shell above it, so the upper part of the wall does not rub against the soil all the way; thixotropic slurry or rolling gravel can be placed in the resulting gap.
+1f67c24	The cutting edge – the “blade” of the well
+1bd7667	The lower end of the shell is a tapering <b>cutting edge</b> ending in an edge: this penetrates the soil while the grab removes the soil inside. It can be made purely of <b>reinforced concrete</b>, with <b>steel angle edge reinforcement</b>, or with a protruding <b>steel pre-cutting edge</b>; a cutting-edge ring is often placed around it. The inclination of the inner sloping face from the vertical is at most approx. 35°, and the external shoulder offset reduces the shell friction.
+d4a4e82	Cutting-edge details in vertical section (outside face of the shell on the left). The dimensions show typical steel sections.

@@ -1,6 +1,6 @@
 // C10 – Melyiket válasszam? Esettanulmány-játék, technológia-mátrix, döntési fa, kvíz
 // C11 – Videótár: nézési útvonal (a #vlib és a #ytlib tartalmát a ui.js tölti)
-import { register, shell, seg, h, svg, figure, clear, arrow, wrapText, GUARD } from './core.js';
+import { register, shell, seg, h, svg, figure, clear, arrow, wrapText, GUARD, EN } from './core.js';
 import { defineQuiz, ytMini } from './ui.js';
 import { VIDEOS, YT } from './data.js';
 
@@ -80,7 +80,7 @@ const SKETCH = {
   },
   pince(g) {
     const y0 = 70, p = (H - y0) / 10;
-    ground(g, y0, p, [[1.5, 'f-soilC', 'pat-soil', 'feltöltés'], [6, 'f-soilB', 'pat-clay', 'puha agyag'], [null, 'f-soilD', 'pat-gravel', 'kavics']]);
+    ground(g, y0, p, [[1.5, 'f-soilC', 'pat-soil', 'feltöltés'], [6, 'f-soilB', 'pat-clay', 'puha agyag'], [null, 'f-soilD', 'pat-gravel', EN ? 'gravel' : 'kavics']]);
     ghost(g, 70, 6, 220, 22, '+ 2 új emelet');
     bld(g, 70, 28, 220, y0 - 28);
     svg('rect', { x: 80, y: y0, width: 200, height: 30, fill: 'var(--surface)', stroke: 'var(--line2)' }, g);
@@ -354,7 +354,7 @@ register('dnt-matrix', (root) => {
     rows.sort((a, b) => (b.score - a.score) || (TECH.indexOf(a.t) - TECH.indexOf(b.t)));
     const ok = rows.filter((r) => r.st !== 'bad').length, ex = rows.length - ok;
     sum.innerHTML = on.size
-      ? `<b>${ok}</b> technológia jöhet szóba${ex ? `, <b>${ex}</b> kiesik` : ''}. ` + (ok ? 'Elöl a leginkább illők.' : 'Ilyen feltételekkel egyik sem megy magától – kombinált megoldás vagy más elrendezés kell.')
+      ? `<b>${ok}</b> ${EN ? (ok === 1 ? 'technology is possible' : 'technologies are possible') : 'technológia jöhet szóba'}${ex ? `, <b>${ex}</b> kiesik` : ''}. ` + (ok ? 'Elöl a leginkább illők.' : 'Ilyen feltételekkel egyik sem megy magától – kombinált megoldás vagy más elrendezés kell.')
       : 'Nincs bekapcsolt feltétel – mind a 15 technológia látszik. Kapcsolj be egy vagy több feltételt!';
     for (const r of rows) {
       const [gt, gi] = GROUPS[r.t.g];

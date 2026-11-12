@@ -1,0 +1,99 @@
+8999187	Soft clay, dense gravel below
+972f6f8	dense sandy gravel
+f4ed4fd	Loose sand, dense sand below
+d1d5672	Thick clay, no better layer
+cea22ac	medium–hard clay (stiffening with depth)
+606366b	Stratification
+b23b187	Top of the better layer
+4266f01	Base resistance R<sub>b</sub>
+7e7cc71	Shaft resistance R<sub>s</sub>
+f9581ef	Total R
+b1e38a1	Share of the base
+97c851b	embedment ${fmt(c.emb, 1)}${NB}m
+09973f2	END-BEARING
+18910d9	FRICTION
+3d5acd3	End-bearing pile
+16c9df1	${fmt(100 * c.f, 0)}${NB}% of the resistance comes from the base: the pile “stands” in the better layer, with weaker soil along the shaft.
+3ef97ab	Friction pile
+56f266c	${fmt(100 * (1 - c.f), 0)}${NB}% of the resistance comes from the shaft – most of the load is transferred along the shaft of the long pile, and the base plays a smaller role.
+773c1be	Mixed (combined) pile
+9c7972f	The tip and the shaft contribute to the resistance in similar proportions (between 33 and 66 %).
+3b150c4	 <b>The tip is still in the ${c.P.L[0].n} layer</b> – lengthen the pile so that it reaches the better layer!
+2afef99	 The embedment is still very small – an end-bearing pile must be socketed into the bearing stratum to an adequate depth.
+cc48ade	<b>Illustrative model:</b> R<sub>s</sub> = Σ π·D·q<sub>s</sub>·Δz and R<sub>b</sub> = (π·D²/4)·q<sub>b</sub>, with simplified q<sub>s</sub> and q<sub>b</sub> values assumed layer by layer. The pile diameter is drawn distorted. The real resistance is determined in later geotechnical courses, by load tests and standard methods.
+269fa30	Building
+43eefed	Wind on the tower
+3280f72	Uplift
+105c126	Braking force
+34895b1	Vertical load
+9ede2cb	negative: resultant upwards (e.g. buoyancy on an underground car park)
+241e5ff	Horizontal force
+0ead87d	Height of the horizontal force
+0a8ff11	above the pile cap; M = H · h
+347e26c	Maximum compressive force
+5895587	Maximum tensile force
+2c17db7	Moment M = H · h
+610a451	Horizontal force per pile
+137fadb	All piles are in tension
+63c8c2d	The resultant points upwards (uplift): the piles anchor. The load is taken by the shaft only, in the opposite direction to the usual – the base does not work.
+4e60860	The outer pile has gone into tension
+f71f0b5	Because of the large eccentricity (M = ${fmt(M, 0)}${NB}kNm), tension develops on the windward side: there only the shaft works, in the opposite direction. The pile on the other side is in compression with ${kN(mx)}.
+a15a59e	All piles are in compression
+c03a7a9	The piles transfer the load to the soil by compression at the tip and by shear along the shaft.
+a4864ff	 Because of the horizontal force, <b>bending and shear</b> develop in the piles besides the compressive force.
+816aa1b	buoyancy
+5a73256	<b>Illustrative model:</b> rigid pile cap, identical piles, P<sub>i</sub> = N/n + M·x<sub>i</sub>/Σx<sub>i</sub>² (pile spacing 2.5 m). The horizontal force is shared equally between the piles.
+c515cf2	loosens slightly
+df3656c	cast in place
+65900a8	The soil is drilled out with a continuous auger; the soil on the auger supports the bore, and the concrete is placed through the drill stem.
+df8e1cc	Cased bored pile
+cac0ecf	The soil is excavated under the protection of the casing, then concreted while the casing is withdrawn.
+724afc6	The bore is supported by bentonite slurry, the soil is excavated, and the concrete is placed through a tremie pipe.
+2a7776e	Bored pile without support
+b919f9a	In cohesive soil above the groundwater the bore stands by itself for a short time – it must be concreted immediately after excavation.
+41dce22	A rectangular element excavated with a diaphragm wall grab under slurry – the Petronas Towers stand on these too.
+025fadd	Driven reinforced concrete pile
+ac2761a	precast
+863ddbd	It is driven into the ground with a pile driver: it pushes the soil sideways and compacts it.
+e352e6b	While vibrated, the pile displaces the soil around it.
+c70651b	It is screwed in “like a corkscrew”, cuts a thread into the soil and does not bring it up.
+a554171	Timber pile
+9837e0a	A driven hardwood pile – it often “turns up” under old buildings.
+37dfd43	The casing is driven down with the dry concrete plug inside it, then a base bulb is rammed out – it displaces the soil throughout.
+ebe9419	Screw pile (e.g. Omega, FDP)
+cf05826	The special drilling head pushes aside and compacts the soil while drilling, bringing up hardly any spoil.
+d4c65d9	In softer soil it is “pressed” down without driving or vibration – with little noise, for piles of lower capacity.
+11047e1	Technologies waiting to be sorted
+9297672	the soil is removed
+e7936c6	pushed aside, compacted
+267d7d4	Solution
+4713cb1	<b>Get started!</b>Which technology removes the soil, and which pushes it aside?
+d2ae5cd	Sorted: <b>${state.done}/${ITEMS.length}</b> · right first time: <b>${state.first}</b>
+c6c9179	<b>✗ Not quite – ${it.t}</b>${it.e}
+19da863	<b>Done! ${state.first}/${ITEMS.length} right first time</b>Remember: large-diameter piles (above 80 cm) are all made by replacement, and displacement piles can be either precast or cast in place.
+943ecc5	<b>Solution</b>Every technology is in its place. Press the “Start again” button and try it from memory!
+3332b26	Spun RC pile
+57d5b72	Square RC pile (side)
+b13420f	Screw pile
+909eb72	Franki pile (tube → finished)
+5efe8d6	In the drawing on the left, the pile and the person (1.75 m) are to scale.
+cec73d5	Category
+39e1c20	Shaft area per 1 m length
+302553f	TO SCALE
+ed2c9f4	normal
+cca1bc4	large-diameter
+7c1b985	micropile
+1e63076	“normal” pile
+97de13e	 A diameter this large can be made <b>only with replacement</b> technology.
+b5536a0	 Micropiles are used mainly for underpinning; their base resistance is neglected.
+e355ad4	Possible: 
+ac93f31	There is no typical technology in this range.
+b24a61a	Piles
+3267fb2	Precast: timber, steel, reinforced concrete
+8103ae5	Other
+9217e89	Gravel pile, stone column
+682c654	Quiz – classification of piles
+ec12019	For an end-bearing pile, at least what share of the resistance comes from the tip (base) resistance?
+7c21c07	2/3
+fd340f9	1/3
+e8c3a59	half

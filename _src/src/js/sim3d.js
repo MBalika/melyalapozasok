@@ -3,7 +3,7 @@
 // ellenőrző lista és cölöpcsoport-nézet (3×3 cölöp + vasbeton fejtömb).
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { register, h, $$, fmt, clamp, lerp, slider, seg, toggle, select, stat, cssVar, onTheme, shell, isDark } from './core.js';
+import { register, h, $$, fmt, clamp, lerp, slider, seg, toggle, select, stat, cssVar, onTheme, shell, isDark, EN } from './core.js';
 import { defineQuiz, ytMini } from './ui.js';
 
 const TAU = Math.PI * 2;
@@ -153,7 +153,7 @@ function evaluate(S) {
   const Lact = M.stuck || L;
   const toeA = layerAt(P, Lact - 0.01);
   if (P.bear) {
-    if (Lact < P.bear) add('bad', 'A talp a puha rétegben áll', `A teherbíró ${layerAt(P, P.bear + 0.1).n} csak −${fmt(P.bear, 1)} m-en kezdődik, a cölöp talpa (−${fmt(Lact, 1)} m) ${/^[aáeéiíoóöőuúüű]/i.test(toeA.n) ? 'az' : 'a'} ${toeA.n} rétegben van: kicsi teherbírás, nagy süllyedés.`);
+    if (Lact < P.bear) add('bad', 'A talp a puha rétegben áll', `A teherbíró ${layerAt(P, P.bear + 0.1).n} csak −${fmt(P.bear, 1)} m-en kezdődik, a cölöp talpa (−${fmt(Lact, 1)} m) ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(toeA.n) ? 'az' : 'a')} ${toeA.n} rétegben van: kicsi teherbírás, nagy süllyedés.`);
     else add('ok', `A talp a teherbíró rétegben`, `A cölöp ${fmt(Lact - P.bear, 1)} m-re hatol a teherbíró rétegbe (−${fmt(P.bear, 1)} m).`);
   } else add('info', 'Nincs kiemelkedő teherbíró réteg', 'A talp környékén nincs jobb réteg – a hosszabb cölöp köpenye dolgozik többet.');
 

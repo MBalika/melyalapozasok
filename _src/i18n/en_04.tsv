@@ -1,0 +1,140 @@
+cc165d1	Recoverable for temporary use
+6e041c3	Limitations
+4f5d3d4	Small loads – for light structures
+ae69d1c	Short, typically 2–3 m
+ea087fa	Cannot be screwed into stony, hard ground
+91b976c	The steel must be protected against corrosion
+1d251fa	Photos – installation and use
+30a86a7	Two people screwing in a ground screw by hand with a bar
+0553d3f	Installation by hand: with a bar pushed through, by two people
+0bd6c7b	A rotary head mounted on a small excavator drives a ground screw
+484be24	Machine installation with a rotary head mounted on a small excavator
+ed5a900	A timber-frame house on ground screws
+0f80121	A lightweight house on ground screws
+7edb7c4	Steel substructure of a solar park on ground screws
+1975575	Substructure of a solar park
+c0b5bcf	Ground screws at the edge of a garden for the foundation of a fence
+37025d9	Fence foundation with ground screws
+bf794e3	Test yourself
+d7697cf	<span class="id">C04</span><span>Displacement · cast in place</span>
+38ba89f	Franki and screw piles
+a1d82a4	Soil displacement also works without a finished element. For the <b>Franki pile</b> a casing tube is driven down and the concrete is worked in place by ramming; for the <b>screw pile</b> a special drilling head pushes aside and compacts the soil while drilling, and the concrete is then placed through the drill stem. Both are cast-in-place reinforced concrete piles – and neither brings up any significant amount of soil: it stays in place, only denser.
+a40dbf7	<b>3<small>t</small></b><span>mass of the Franki drop hammer – it rams the concrete plug inside the tube</span>
+dd44e93	<b>2–3<small>MN</small></b><span>achievable resistance of a Franki pile (2000–3000 kN), with a length of at most 16–18 m</span>
+fe3b065	<b>≈ 60<small>cm</small></b><span>diameter of the finished Franki pile from a casing of 46–52 cm</span>
+a2be83b	<b>300–600<small>mm</small></b><span>usual diameters of screw piles; maximum length approx. 20 m</span>
+8466981	What happens to the soil?
+7ee5d59	The fate of the soil around the pile depends on the technology. With <b>replacement</b> the soil is removed (bored out) and the hole is filled with concrete – meanwhile the wall of the bore may <b>loosen</b> slightly. With <b>displacement</b> practically no soil comes up: the pile or the drilling head pushes the soil sideways, the grains are pressed together, and the soil is <b>compacted</b>.
+a0280a1	Denser soil gives more friction along the shaft. So for a precast (driven) pile both the base and the shaft resistance increase, and for a cast-in-place screw pile primarily the <b>shaft resistance</b>.
+e75a8ce	Displacement or replacement – particle simulation
+89c7942	Franki pile – rammed base, “bulb”
+4908ac3	The Franki pile is a driven, “monolithic” concrete pile of high bearing capacity, made with a recovered casing. Most often approx. <b>1 m of dry concrete</b> (or gravel) is placed in the bottom of a casing tube <b>46–52 cm in diameter</b>, with 30 mm wall thickness and 13 m long (extendable), and rammed inside the tube with a <b>3 t drop hammer</b>. Through friction the plug drags the tube down with it – the tube goes down without any soil or water getting into it.
+87035ae	In the bearing stratum the tube is fixed to the driving frame, and the concrete is driven out of it by heavy ramming. When only 30–40 cm of concrete is left in the tube, further batches are rammed out one after another: this forms the enlarged <b>“bulb”</b> at the base. Finally – after the reinforcement is placed – the tube is withdrawn while more concrete is added and rammed.
+c420c83	The seven steps of making a Franki pile
+480deed	← swipe sideways for the steps →
+9769051	A disappearing classic
+19f0d23	In Hungary it was widely used until the end of the last century – mainly for the foundations of bridges and industrial buildings – but by now it has almost completely disappeared.
+cdd49a2	Franki pile step by step
+dbeac2a	A row of excavated Franki piles with different bulbous bases
+8fd3479	Excavated Franki piles – the bulbs of the bases are clearly visible
+ae2f502	A person standing next to a large excavated pile bulb
+b7aef03	An excavated bulb – the compacted concrete base greatly increases the bearing capacity
+94a00e0	Screw pile – drilling without spoil
+52bee43	Over the past two decades the bored, cast-in-place <b>displacement screw pile</b> has been gaining more and more ground. At the end of the hollow drill stem there is a special drilling head: the rig drives it down by rotating and pushing, and the head <b>pushes aside and compacts</b> the soil around itself – and does not bring it up. At the required depth <b>concreting under pressure</b> starts through the drill stem, while the stem is continuously rotated and withdrawn; finally the reinforcement cage is vibrated into the fresh pile.
+d403935	Its advantages are that there is no dynamic effect or noise, and only a little spoil comes to the surface – no need to arrange its removal and disposal. Because of the compaction, its specific bearing capacity is greater than that of a replacement pile of the same size. A modern rig continuously measures and records the drilling and concreting data.
+fc2027b	The five steps of making a screw pile
+a1dfef7	Where does it work well?
+fe76953	In loose or medium-dense granular, intermediate or weakly cohesive (soft–firm) soil it is economical and fast for founding moderately loaded industrial facilities. Its spread may be limited at most by the lower structural capacity due to the smaller diameter.
+ec8a851	Smooth shaft
+ebe3b7f	The displacement head leaves a pile with a smooth shaft. Such systems include Omega, Fundex, De Waal and CHD.
+1c6a8f8	Threaded shaft
+e38ca7e	The screw-shaped head “cuts” a pile with a threaded shaft into the soil – the threads further improve the contact with the soil. An example is Screwsol.
+6ae3320	=
+3994383	“Full displacement”: the thick drill tube and the displacement body push the whole pile volume of soil sideways; practically nothing comes to the surface.
+6b5c986	The drawings of the drilling heads are illustrative sketches; the companies have developed different drilling heads, and the details differ between systems.
+cec501f	Screw pile – on the rig operator’s monitor
+c2c4fb6	Drilling rig with a displacement drilling head hanging on the mast
+50f8ab6	Drilling rig with a displacement drilling head – smooth-shaft system
+751712f	A thick drill tube under the rig, with a displacement body at its bottom
+4692121	Thick drill tube with a displacement body – “full displacement”
+c95a3c2	An orange displacement drilling head on display next to a rig
+a64096f	A displacement drilling head close up
+e5f3ba9	A threaded displacement drilling head hanging from a crane
+3d0ce75	Threaded displacement head – it leaves a threaded shaft behind
+c28703a	Side by side
+f6817e4	Pile
+e053201	Diameter, length
+fbcb150	Noise, vibration
+8e89732	Spoil
+0551374	When is it good?
+123ffbf	Driven precast RC
+e9e615a	displacement, finished element
+e093065	<b>30×30–40×40 cm</b>, 4–12 m; tubular pile D = 25–50 cm, 20–22 m
+4cf7480	loud noise and strong vibration
+4cef9a2	none
+7de8655	open site, no hard intercalated layer
+3d2d761	=
+30d74fe	displacement, rammed in place
+2cf4f99	<b>≈ 60 cm</b>, at most 16–18 m; bulbous base
+2963829	ramming: significant
+79eb7e1	large load, good bearing stratum at the base
+35e8f3a	Screw (cast in place)
+be74a41	displacement, bored, concreted under pressure
+e778c56	<b>300–600 mm</b>, up to approx. 20 m
+074ea64	no dynamic effect
+650c8ab	little
+4e391a8	loose–medium granular, soft cohesive soil, moderate load
+e8c666d	CFA (for comparison)
+bf629fd	replacement, continuous auger
+2d97eb8	<b>40–120 cm</b>, 6–22 (24) m
+9334b36	low noise and vibration
+34856a0	the full pile volume
+5a512d1	any soil except loose, flowing soils (see <a href="#furt">C05</a>)
+8693404	<span class="id">C05</span><span>Replacement</span>
+80e05e2	Bored piles
+44a5b4d	With a bored pile the soil is not pushed aside but removed, and the hole is filled with concrete. This is replacement: the pile is always made on site, with a circular cross-section, of concrete or reinforced concrete, and as there is no driving it is typically quiet and low in vibration. In return, an empty bore gapes in the ground for a while – and this bore has to stay intact until the concrete is in place.
+c53116e	Sections of the chapter
+9de2a5f	<a href="#furt-lepesek"><span>5.1</span><b>The three steps</b></a>⏎    <a href="#furt-kiemeles"><span>5.2</span><b>Soil removal</b></a>⏎    <a href="#furt-allek"><span>5.3</span><b>Bore stability</b></a>⏎    <a href="#furt-beton"><span>5.4</span><b>Concreting, reinforcement</b></a>⏎    <a href="#furt-cfa"><span>5.5</span><b>CFA pile</b></a>⏎    <a href="#furt-kopeny"><span>5.6</span><b>Cased pile</b></a>⏎    <a href="#furt-zagy"><span>5.7</span><b>Bentonite-supported pile</b></a>⏎    <a href="#furt-nelkul"><span>5.8</span><b>Without support</b></a>⏎    <a href="#furt-valaszto"><span>5.9</span><b>Which one to choose?</b></a>
+477c34f	The three steps
+b83f7f8	Every replacement pile can be broken down into the same three steps – the technologies differ only in what tools they use for each step, in what order, and how far the steps are done “at once”:
+485f204	Soil removal
+6d87d44	short auger · continuous auger · grab · drilling bucket
+5161b53	The soil is removed with a short or continuous auger, a grab or a drilling bucket, possibly with flushing.
+83c661a	Bore stability
+7d5140e	casing · bentonite slurry · soil on the auger · not needed
+d8025ba	With a casing, with bentonite slurry, with the soil remaining on the auger – or, if the bore stands by itself, without support.
+6e69f32	Pile construction
+22a6bb4	concreting – reinforcement · reinforcement – concreting
+e114276	Concreting, then pushing the reinforcement into the fresh concrete – or the other way round: first the reinforcement cage into the bore, then concreting.
+3154ebd	The most delicate is the second step. Until the concrete is in place, the wall of the bore is a free surface: if it is not held, it collapses, loosened soil collects at the bottom, and the finished pile cannot do what it was designed for, either at its base or along its shaft.
+f07d4a1	The bored pile family tree
+1df1879	Click a technology to jump to the relevant part of the chapter.
+04ec954	Classification of replacement (bored) piles
+a05f5d0	Replacement (bored) pile
+eee3a75	Partial displacement
+8d383de	<a class="ft-n ft-leaf" href="#furt-cfa">Continuous flight auger (CFA)</a>
+9755d7f	Replacement
+7bf7f27	With casing
+70a4e1e	<a class="ft-n ft-leaf" href="#furt-kopeny">recovered casing</a>
+d5b0db4	<a class="ft-n ft-leaf" href="#furt-kopeny">permanent casing</a>
+f5eb07d	Without casing
+e83095d	<a class="ft-n ft-leaf" href="#furt-nelkul">unsupported</a>
+3922a50	<a class="ft-n ft-leaf" href="#furt-zagy">supported by bentonite slurry</a>
+ea43a47	Why is CFA “partial”?
+1d3d227	When the continuous auger is screwed down, the spoil is only partly pressed out of the bore; the rest stays on the auger and supports the wall. So part of the soil is not removed but pushed sideways – which is why CFA is classed among the partial displacement bored piles. Full displacement is achieved by the drilling head of the screw pile, which brings up almost no spoil.
+a237d2d	Piling rig drilling with a short auger
+c4f850a	<b>Short auger</b>mainly in cohesive soil; it fills up, is lifted out and spun clean
+9dab818	Continuous flight auger on the piling rig
+26c0601	<b>Continuous auger</b>in any soil – the tool of the CFA pile
+bcb2488	Cylindrical grab
+2e434d2	<b>Grab</b>in any soil; often under the protection of a casing
+df6b81e	Large piling rig working with a drilling bucket
+491cd31	<b>Drilling bucket</b>mainly in granular soil; the bottom of the bucket can be opened
+344be20	The tools are often combined: at the top, rubble fill is removed with a grab, and below it drilling continues with an auger. In <b>flush drilling</b> the drilling head only breaks up and loosens the soil at the bottom of the bore, and the material is carried out by the flushing fluid.
+7f472af	The short auger and the drilling bucket work in cycles: down, fill, up, empty – and again. The continuous auger, by contrast, penetrates to the full depth in a single pass; the spoil stays between its flights, so no separate bore support is needed.
+b77c91e	Keep the base clean!
+8ac5ea0	Loosened, settled or collapsed soil must never remain at the bottom of the bore under the pile: it can greatly reduce the base resistance of the pile. That is why the base is cleaned before concreting (with a drilling bucket, a cleaning bucket, or by exchanging the slurry in a slurry-supported bore).
+c76dbb1	How the drilling tool works
+127c4b2	One of the most critical parts of pile construction. The wall of the bore can be held in four ways:
+ff2fe35	With a casing
+341d1e7	A steel tube is driven down in parallel with soil removal, preventing the soil and groundwater from breaking in – but moving and extending it is cumbersome and slow. In granular soil the casing always goes <em>ahead</em> of the excavation; below water, the water removed from the bore has to be replaced.

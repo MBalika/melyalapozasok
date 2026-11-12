@@ -1,0 +1,188 @@
+e3fabc2	Replacement, bore stability, concreting – first the principle, then the CFA and the casing rig.
+458d344	Micropiles, jet grouting, mixing
+a26b267	Underpinning from the cellar, a 400–600 bar jet, soil mixed in place, stone columns.
+6f5031a	Why doesn’t the slurry-filled trench collapse? Then the real grab and the concreting.
+f566017	Well, box, caisson
+b15d812	Sinking under self-weight, cutting edge, excess pressure and airlocks – only an animation exists for this.
+09ddc23	Revision before the exam
+9001662	A summary with a quiz, then decision situations and 40 true/false statements.
+b9fcdcd	Animation: 
+f4cba35	Animation · ${VIDX[n] + 1} / ${VIDEOS.length}
+841c2c0	BME recording: 
+760f981	Quiz – which one to choose?
+16ebe89	Which is <b>not</b> a limitation of pile driving?
+bce9b26	Loose, medium-dense sand
+06cfae8	Rock, rocky ground
+c4649b3	Hard clay
+e2c2047	Fill with large blocks
+6970760	In rock, hard (stony) clay, strongly cemented soil and fill with large blocks the pile cannot be driven – often even a thin such intercalation stops it. In loose and medium-dense sand driving (vibrating) works well, and the displacement even compacts the soil.
+37a63e2	Which technology is chosen <b>specifically where noise and vibration are restricted</b>?
+28ca6b2	CFA pile
+f318787	Vibrated steel tubular pile
+72485bf	CFA is made by drilling, it is low in noise and vibration, and it progresses fast. Driven and vibrated piles, and ramming the Franki pile, come with significant noise and vibration.
+094f648	A pile 120 cm in diameter and 35 m long is needed in silty soil with a high water content. Which is the safe choice?
+388f630	The casing supports the wall of the bore until concreting, so it is safe even in silty soil with a high water content; it is made with diameters of 80–180 cm and lengths of 15–50 (100) m. CFA is at most 22–24 m.
+285d673	When is a well foundation economical?
+827dcee	If the bearing stratum is not too deep and the groundwater is high
+855f1e7	If the bearing stratum is 40 m deep
+8f68008	If a foundation has to be taken into rock without vibration
+8752406	If we are founding a lightweight house
+4df734b	A well foundation is typically 4–8 m long and 0.8–3.0 m in diameter; it is competitive with piles if the bearing stratum is not too deep, especially with high groundwater, when the foundation level has to be taken below the water table.
+01b08e1	A diaphragm wall has to be taken into rock. What would you excavate the trench with?
+c6a04bb	With a rope-suspended grab
+02c08f0	With a Kelly-bar grab
+4b19698	With a short auger
+c702359	In rock and very hard clay a diaphragm wall can only be built with a hydrofraise (a reverse-circulation trench cutter with cutter wheels). It is very expensive, but it gives an accurate trench to great depth, in any soil and rock.
+272d527	In which soil is trench stability <b>difficult</b> to ensure?
+69abdc7	In peat, soft clay, flowing sand
+4371dac	In dense sandy gravel above the groundwater
+6a255e8	In hard clay above the groundwater
+9adc193	In medium-dense sand with deep groundwater
+44c37c6	In soft clay, peat, flowing (submerged) sand and with a very high groundwater table, the slurry can hardly support the wall of the trench – in such cases the diaphragm wall reaches its limits.
+de8ecc3	Where are ground screws typically used?
+fd3d4dc	Under solar parks, fences, lightweight houses
+dae8889	Under the river pier of a long-span bridge
+54c64e6	As the watertight side wall of an underground car park
+8c8e9c5	For the 40 m deep foundation of a tower
+17ac17e	The ground screw is for founding lightly loaded structures; it is typically at most 2–3 m long, can be installed by machine or by hand, and is easy to recover – also for temporary, mobile structures.
+7362a36	In which soil is the cast-in-place (displacement) screw pile <b>not</b> suitable?
+0157edd	In rock, a very dense, hard layer
+af0309a	In medium-dense granular soil
+a17ea33	In soft–firm cohesive soil
+ca702f9	The displacement drilling head works well in loose to medium-dense granular, intermediate and soft–firm cohesive soil: it pushes aside and compacts the soil. It cannot penetrate a hard, very dense layer.
+e7b4ed6	Which statement is true of large-diameter piles (above 80 cm)?
+2468c4f	They are made exclusively with replacement technology
+9ecd5ec	They are made mainly precast and driven
+8f42037	They can only be ground screws
+0065489	They are always made of timber
+27c99cb	Piles with a diameter above 80 cm are made exclusively with replacement technology – by cased or bentonite-supported drilling, or with a larger CFA rig.
+b311494	From the Embedded retaining structures playlist
+1b36f3d	Scour
+d0ff6f1	Why go deep? – scour around a bridge pier
+0d03120	The complete playlists
+606f9de	Steps
+dca1c67	▶ Play
+a4c2b0f	❚❚ Pause
+bd5a18a	State
+a2b2b6b	Initial state
+9baf555	The strip footing of the old masonry wall is overloaded: the pressure under the footing on the soft layer is high, the wall has settled and cracked – or storeys are to be added, which would bring even more load. The bearing stratum lies deeper.
+f8d3e82	Drilling
+176c279	Drilling from the cellar
+f9cf6e3	The small drilling rig fits into the cellar. They drill obliquely down through the existing footing to the bearing stratum; along the wall the inclination of the piles alternates. No driving, no vibration – the house can remain occupied.
+7ca01d0	Grouting
+340a350	Core and grouting
+78dc5a7	A steel core is placed in the bore (or the hollow drill rod stays in), and the grout is injected from the bottom up. In the bearing stratum the cement body and the permeated, rough sleeve form.
+20a0658	Connection
+b139172	Connection to the foundation
+4045ba9	The upper part of the pile is bonded to the old structure by grouting within the existing footing (with a new reinforced concrete capping beam if needed). It is often preloaded with a jack so that the load is transferred immediately.
+89293c3	The micropiles transfer the load of the wall to the bearing stratum along their shafts – no base resistance is assumed. The pressure under the old footing decreases and the settlement stops; the basement can even be deepened.
+0cd0838	<b>Illustrative figure</b>, with distorted scale: in reality the micropiles are typically 6–15 m long, closely spaced along the wall, with alternating inclination. How the load is shared between the footing and the piles depends on the preloading and on further settlement.
+38be008	Section: old wall with a strip footing, cellar, soft layer and a deeper bearing stratum; the micropiles are installed from the cellar, through the footing
+ed59a57	Load on the old footing
+b7696b5	Load on the micropiles
+768c08b	What works in the pile
+71bb718	soft clay, fill
+45dc3be	bearing stratum (gravelly sand)
+3aef0a2	low headroom
+7d00bd0	street side
+82d1e33	compact drilling rig
+fa28b66	the next pile
+f411289	(in another plane)
+1f12381	cement body + sleeve
+941c447	cement body + permeated sleeve
+cb64a84	connection into
+81131de	connection: grouted into
+3c85aac	the footing + new capping beam
+31738e4	preloading with a jack
+f7d377c	pressure under the footing
+b2944e7	shaft (base ≈ 0)
+dae0cb3	shaft – developing
+a85e105	Self-drilling bar Ø30/11
+25c1446	Self-drilling bar Ø40/16
+46814f1	Steel tube 114.3×9
+56e6bf7	<b>Illustrative model:</b> a bar on an elastic foundation.<br>Lateral subgrade reaction of the soil: <i>k</i> ≈ 67·<i>c</i><sub>u</sub>; λ = (<i>EI</i>/<i>k</i>)<sup>¼</sup>.<br>Without a free length: <i>N</i><sub>cr</sub> = 2·√(<i>k</i>·<i>EI</i>),<br>with a free length: <i>N</i><sub>cr</sub> ≈ π²·<i>EI</i> / (<i>L</i><sub>f</sub> + π·λ/√2)².<br>The stiffness of the cement body is taken as <i>E</i> ≈ 10 GPa, uncracked; the values are without partial factors. Design requires the standard verification.
+144663d	the stiffness of the cement body is also included
+c273078	Undrained shear strength
+34236b2	Free (unsupported) length
+651079f	e.g. a cavity, a deepened cellar, very loose fill under the pile head
+ba557b9	On the left the micropile in the soil with its buckled shape, on the right the critical force as a function of the undrained shear strength
+74845ae	Bending stiffness <i>EI</i>
+910551c	Critical (buckling) force <i>N</i><sub>cr</sub>
+0de710e	Yield force of the steel <i>N</i><sub>pl</sub>
+572ed70	Governing
+0933b43	pile cap, footing
+f7fa131	half-wave
+c37247c	check separately
+a0d214e	 – yielding of the steel
+4757108	buckling
+a9be369	yielding of the steel
+9540203	Buckling governs
+7885582	The soil is so soft (or the free length so long) that the pile buckles (${fmt(R.Ncr, 0)} kN) before the steel yields (${fmt(R.Npl, 0)} kN). Then buckling must be checked separately – a stiffer core, a larger cement body, or eliminating the free length helps.
+6e1e38f	Enough for now – but it must be checked
+6d0b38d	c<sub>u</sub> < 10 kPa: buckling must be checked separately. In this model the critical force (${fmt(R.Ncr, 0)} kN) still exceeds the yield force, but cracking of the cement body or a small cavity quickly reverses this.
+69c5904	The soil supports the pile
+a3decef	The critical force (${fmt(R.Ncr, 0)} kN) is greater than the yield force (${fmt(R.Npl, 0)} kN): the lateral support is enough for buckling not to govern. Switch off the stiffness of the cement body, or add a free length – and watch the curve!
+8315238	Double with air
+4ab8d01	<b>Illustrative model.</b> The diameter has been scaled from the soil, the variant, the pressure and the lifting speed into the typical ranges (at most 60–70 cm in clay, 150–200 cm in gravel). The real diameter is verified on site with trial columns and excavation.
+28ff065	Variant
+dadbefb	Pressure
+54c7564	the usual range is 400–600 bar
+e164dc6	Lifting speed
+82b2f7a	Rotation speed
+52d002e	Column spacing in the wall
+e2daa0f	the return path of the spoil is blocked
+51265f6	On the left, making a jet column in side view; on the right, the overlapping column wall in plan
+2e2b324	water jet
+b25462d	air shroud
+daf6d63	gap in the wall
+379e9c4	Column diameter <i>D</i>
+d58d272	Lift per revolution
+2956e80	Wall thickness at the overlap <i>t</i>
+67a8d08	gap!
+b5b3f5b	Risk of hydraulic fracturing
+40f6f3f	The returning spoil cannot escape to the surface along the hole: the pressure of the 400–600 bar jet builds up in the soil. The soil fractures, and the surface – and the neighbouring building – may be lifted. The outflow of spoil must be watched all the time!
+442447e	A gap remains in the wall
+807b2eb	The column spacing (${fmt(s, 2)} m) is not smaller than the diameter (approx. ${fmt(D, 2)} m): the columns do not intersect, and the wall is not watertight. Reduce the spacing or increase the diameter.
+d3df46a	Thin overlap – risky
+4704ddc	At the overlap the wall is only approx. ${fmt(t, 2)} m thick. A 1 % drilling deviation already means 10 cm at a depth of 10 m – deeper down a gap can easily open.
+6ed72d8	Helical defects
+730afa0	A lift of ${fmt(R.dz, 1)} cm per revolution is too much: the jet does not “sweep” the whole shaft, and untreated soil may remain in the column along a helix. Slow down or rotate faster.
+12b08fa	A closed, overlapping jet wall
+ce0fa6a	Columns of approx. ${fmt(D, 2)} m every ${fmt(s, 2)} m: a continuous wall approx. ${fmt(t, 2)} m thick at the overlap.
+ca00001	1 · drilling
+5126f9b	2 · grouting upwards
+9142c88	3 · finished column
+2213f89	plan · row of columns
+21555f5	hollow, extendable steel bar with a sacrificial drill bit
+0db7338	drills it out and grouts the bore and its surroundings while drilling
+7a655ad	steel bar + cement body + permeated soil sleeve, Ø 10–30 cm
+8d88dc7	underpinning, strengthening in tight spaces, against uplift
+a4d8e79	drill rod with the monitor at its bottom, with 2–5 mm nozzles
+d32e751	breaks it up with a 400–600 bar jet, mixes it with binder, partly replaces it
+05edb30	“soilcrete” column, its diameter depends on the soil
+753d4a0	underpinning, excavations, cut-off walls
+fc579ae	rotating, bladed mixing shaft
+a1dad95	mixes it mechanically with the binder in place – both downwards and upwards
+b0f1fdb	mixed column (block, wall), size ≈ that of the tool
+d065173	improving soft soil, under embankments, cut-off walls
+6771435	vibrating probe (depth vibrator), gravel fed at its tip
+e4bcdb9	displaces it and compacts the gravel into the soil in stages
+596c3bc	compacted gravel column – a granular “pile”
+ffa929f	reducing settlement, speeding up consolidation
+b199975	<b>Illustrative animation</b>, with distorted scale and speeded up.
+a03db5a	Animation: the tool of the chosen technology penetrates the soft soil and forms the element
+35b4d86	▶ Continue
+8b4ff67	<dt>Tool</dt><dd>${G.tool}</dd><dt>With the soil</dt><dd>${G.soil}</dd><dt>What remains</dt><dd>${G.left}</dd><dt>Typical use</dt><dd>${G.use}</dd>
+886f2e6	1 · drilling and grouting at once
+e3818fd	2 · the grout sets, the bar stays in
+a5178ca	3 · finished micropile
+bd1b902	1 · penetration
+8db58ae	2 · feeding gravel, compaction
+935c898	2 · grouting while rotating, upwards
+fbbf8dc	2 · mixing while withdrawing
+36abc38	3 · finished element
+b8c03ff	compaction
+9fb71b9	Quiz – micropiles, jet grouting, mixing
+0fb8137	What is the maximum shaft diameter of a <b>bored</b> micropile?
+fadda6b	The shaft diameter of a bored micropile is at most 250–300 mm; the 150 mm limit applies to the largest cross-sectional dimension of a <b>driven</b> micropile.
+a23cca8	What is neglected when calculating the resistance of a slender micropile?

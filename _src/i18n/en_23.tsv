@@ -1,0 +1,142 @@
+cd6a297	with an auger or drilling bucket, under slurry
+048b32d	Tremie pipe
+6da5a62	base cleaning, cage, concreting starts
+04f2268	from the bottom to ground level, the slurry is displaced
+228e935	Guide tube out
+f6cb593	removing the guide tube, the pile is finished
+9a5d4f9	With a short auger (or a grab) in cohesive soil above the groundwater: the wall of the bore stands without support.
+3768e26	the wall stands
+96d11ed	Concreting immediately after excavation, through a hopper, by gravity.
+b2b8b20	The 3D view needs WebGL.
+6ff57ed	stress bulb: Δσz/q isobars
+741a5c6	influence depth ≈ ${fmt(HM, 1)} m (Δσz = 0.2·σ′v0)
+f5c3f77	<b>A shallow foundation is enough</b>The bearing stratum starts at ${fmt(D, 1)} m: the shallow foundation (or a slightly deepened one) can stand directly on it.
+dcd7650	<b>A shallow foundation is not enough here</b>The stress bulb below the raft (elastic half-space, Boussinesq–Steinbrenner) acts to approx. 
+ae1dd87	 m below ground level, down to the influence depth
+a9f3dd4	 – entirely within the soft layer
+bdfc7c4	, of which ${fmt(soft, 1)} m falls in the soft layer
+dd9ca0c	. Large settlement is expected (exaggerated in the figure). The load must be carried down to depth.
+8d91902	<b>Pile foundation: 9 piles, L ≈ ${fmt(L, 1)} m</b>The piles pass through the soft layer and are socketed ${fmt(2.2, 1)} m into the bearing stratum. They transfer the load along their shafts and at their bases – the slab tying their heads together distributes the load of the building onto them.
+749a61d	two basement levels
+af7875f	<b>Diaphragm wall: retaining wall and foundation in one</b>The ${fmt(Lw, 1)} m deep diaphragm wall first supports the excavation below the groundwater, then becomes the permanent wall of the basement levels and the foundation of the building. It pays off where a deep basement is needed right next to the neighbour.
+7f425f2	well foundation Ø2.5 m
+4246c4d	<b>Well foundation: still competitive here</b>The bearing stratum is at ${fmt(D, 1)} m – the wells (diameter 0.8–3.0 m, length 4–8 m) are sunk by their own weight while the soil is removed from inside.
+83756e6	<b>Not worth it this deep</b>At ${fmt(D, 1)} m depth a well foundation is no longer economical: wells are typically 4–8 m long. For a deeper bearing stratum we choose piles or a diaphragm wall.
+dedcefa	bearing stratum −${fmt(D, 1)} m
+91bb8e9	Sinking a well foundation: the slewing excavator removes the soil from inside the reinforced concrete shell with a grab bucket
+c00e51a	sinks
+844deda	under its
+7df62bd	own weight
+ce377d6	reinforced concrete shell wall
+609f534	grab bucket
+d8850e1	cutting edge
+95c4972	slewing excavator
+2e8f438	Scheme of a well foundation: the wells are tied together by a spanning, distributing reinforced concrete grillage, on which the superstructure stands
+d743b81	spanning, distributing
+b94b247	superstructure
+81b001d	Load transfer of a well foundation: the column load is carried to the wells by the spanning beam, and by the wells to the bearing stratum
+20d24cb	bending moment diagram
+09d1aae	spanning beam
+e2ea26f	well
+84b78ae	well rings
+7cf76db	shoulder offset
+b53f70e	shell widening downwards
+2106da1	steel edge 100×10
+54c130c	every 25 cm
+c7aca58	outside
+6af46f7	steel pre-cutting edge
+d9b939b	Open sunk box: section (cutting edge all round, cross walls, underwater dredging, stages of 6–8 m) and plan (cells)
+be6184a	stage
+4b2f6f2	cutting edge all round
+211c1bb	section: underwater dredging in the cells
+77c1a12	cells between the cross walls;
+f036289	the outer outline = that of the structure
+318ee26	Section of the finished sunk box: seven garage levels, with two building blocks above
+3819233	ramp
+9fa40e8	Section of a caisson (pneumatic box): working chamber under compressed air, shaft tube, personnel and material airlocks, compressor
+05088cb	air line
+e7b95da	shaft tube
+aa51e96	pier body
+775fefc	(excess pressure)
+bf3aad1	well figure error
+4c1706f	Layout
+1d9f19e	Hero error
+82fdb9b	Layout error
+eddf58f	A pair of reinforced concrete beams is built on both sides of the trench: it marks out and guides the trench.
+921c1b3	Primary bites
+47f5b2d	The two ends of the primary panel are bitten out; the space of the excavated soil is immediately filled with slurry.
+42b41be	The middle of the panel
+2a0a2c2	After the middle bite the primary panel stands open over its full length – under slurry.
+cf63438	Reinforcement, concreting
+30b2cdf	The reinforcement cage is lifted in (1–3 pieces depending on the length), then concreting from the bottom through two tremie pipes.
+14aed6d	Secondary panel
+b3959ca	Between two finished primary panels the secondary panel is bitten out.
+d66b2c3	After the secondary panel is reinforced and concreted, the panels form a continuous wall.
+9577157	Step ${n}: ${STEPS[n - 1][0]}
+c182d0d	Section of an L-shaped guide wall
+6bb4b35	Section of a straight guide wall
+4926aea	strut
+0cde665	Diaphragm wall grab: the open grab in the slurry-filled trench
+615a04d	≈ 2.8 m – one bite
+20df2cd	Hydrofraise: two counter-rotating cutter wheels, with the suction inlet in the middle
+fc9d52d	suction pipe
+ff61728	the cuttings enter the suction inlet
+1758b2b	The slurry path in hydrofraise trenching: cutter wheel, suction pump, desander, tank, pumps, mixer, bentonite silo
+3c19547	cleaned and fresh slurry
+a4f622b	Slurry pressure and water and earth pressure on the wall of the trench with depth
+8831ee2	slurry pressure
+a55c2c5	water pressure
+c202031	with arching
+12ce15b	Rankine
+900f629	Concreting a bored pile and a panel: working level, casting and cut-off levels, concrete level, reinforcement, concreting hopper and pipes
+11e2327	casting level
+0c304ed	cut-off level
+64ac905	pile diameter
+3f8ee25	drilling depth
+a3d8df5	guide tube
+44a3a80	reinforcement
+449fb41	bored pile
+c9ec0a4	concreting hopper
+6ab0409	concreting pipe
+462a18b	(tremie pipe)
+9fc4f0e	panel – plan and longitudinal section
+18f4163	wall thickness
+b68c954	guide wall
+c1ff4e5	section of the diaphragm wall
+08f1ef1	Sections of structural elements that can be built as diaphragm walls: circular, rectangular, T-shaped and cross-shaped
+f78dfd1	pile
+84f0edc	panel
+a3fff36	T-shaped
+f412d5b	Reinforcement detail: clear spacing between the bars and concrete cover
+8fe0e54	clear spacing
+35cabb0	concrete cover
+392072b	reinforcing bars
+c725cb0	No such diaphragm wall figure:
+f1510f9	Diaphragm wall figure error:
+862cedb	peat
+4d2ffb7	sandy gravel (dense)
+0517b0d	A · Soft clay over the gravel bearing stratum
+6cd120a	B · Thick sand, high groundwater
+a760e38	C · Peat, blocky fill
+4f24ebe	blocky fill
+535a54a	D · Hard clay, deep groundwater
+c367d08	CFA – continuous auger
+2ed31fc	Withdrawn too fast
+a3d01c3	Cased bored
+a9c2baf	No water replacement in the casing
+de8cd37	Bentonite-supported bored
+27ab0dd	The slurry level drops
+f241cc0	Bored, unsupported
+ba837a0	Driven precast reinforced concrete
+1fb4163	Displacement screw
+8c5bae5	Micropile (hollow bar)
+83a4111	other (micropile)
+c60e26b	CFA pile too long
+0f785df	With a continuous auger a pile at most approx. <b>22–24 m</b> long can be made – here ${fmt(L, 1)} m would be needed. A longer pile needs a cased or slurry-supported bored pile.
+bc610b7	At the limit of CFA length
+0c163a5	${fmt(L, 1)} m: a CFA pile is typically at most 22–24 m long.
+6f26cd3	CFA: the soil plug supports the bore
+278949f	The soil plug remaining on the auger supports the wall of the bore; no separate support is needed. Fast, low in noise and vibration; an automatic record is made for every pile.
+e8668b6	Sand below the groundwater
+2c23d75	In fine sand below the groundwater a CFA pile needs particular care (it is not even recommended in loose, flowing soil): control of drilling and concrete pressure is critical.
+7822e4c	If the auger is withdrawn faster than the concrete fills its place, the pile narrows (here between approx. −${fmt(M.neck[0], 1)} and −${fmt(M.neck[1], 1)} m). In the rig’s record the volume and pressure of the concrete reveal this immediately.

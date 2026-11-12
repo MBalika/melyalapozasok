@@ -645,3 +645,15 @@ main .rag, footer .rag, .hero-lead.rag { text-align: left !important; }
 .bal-float::after { content: ""; display: table; clear: both; }
 .bal-fl-r { float: right; margin: 0 0 16px 28px; }
 .bal-fl-l { float: left; margin: 0 28px 16px 0; }
+
+/* nyelvváltó (HU | EN): a kitöltött az aktuális nyelv; mobilon csak a másik nyelv kódja */
+.langbtn { flex: none; display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--line2, var(--line)); background: var(--surface); border-radius: 999px; text-decoration: none; font-family: var(--f-mono); font-size: 12.5px; font-weight: 500; letter-spacing: .04em; }
+.langbtn b, .langbtn span { display: inline-grid; place-items: center; min-width: 30px; padding: 4px 8px; border-radius: 999px; }
+.langbtn b { background: var(--ink); color: var(--surface); font-weight: 500; }
+.langbtn span { color: var(--muted); }
+.langbtn:hover span { background: var(--surface2, var(--surface)); color: var(--ink); }
+@media (max-width: 560px) { .langbtn b { display: none; } .langbtn span { min-width: 0; padding: 5px 9px; color: var(--ink); } }
+/* keskeny videókártya */
+@media (max-width: 960px) { .rf-row.c2 .vcard, .rf-row.c3 .vcard, .rf-row.c2-wide .vcard, .grid2 .vcard { grid-template-columns: minmax(0, 1fr); } }
+/* angol márka-alcím */
+html[lang^=en] .brand small { white-space: nowrap; }

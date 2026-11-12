@@ -1,0 +1,165 @@
+8310d0c	RC slab
+b8becdd	former working chamber
+59e63f7	All
+c9ad6c9	Data sheet ↓
+17140a4	Basement level
+0523256	None
+e1dea67	1 level
+195b3f6	2 levels
+3d9957d	below ground level
+c438bd7	soft clay
+f7b3d0a	Toronto, Canada
+d01eacc	Taipei, Taiwan
+fc0840c	Kuala Lumpur, Malaysia
+df35c81	Burj Khalifa
+4ed8510	ground level ±0
+4a8864a	sandy gravel (bed)
+3597e15	Slab
+6b3dbcd	reinforced concrete slab
+e07af13	Because concreting is impossible in the river bed.
+230e044	sandy gravel
+8c4001c	fine sand
+7427747	Danube
+7de6790	Ground screws
+fa03c19	On ground screws
+abec2b3	A logistics hall on loose sand
+ec955d0	<b>Exactly!</b> 
+1e16cf5	soft soil
+49f31d4	rare today
+eddcc07	very fast
+87b9672	≤ approx. 20 m
+451424a	adapted to the task
+b327f92	≤ 60–70 cm (clay), 150–200 cm (gravel)
+b429aa3	Group
+e8bc21f	, <b>${ex}</b> excluded
+770dcad	needs care
+f54f740	Less ▴
+307a73c	Yes
+2319ab6	No
+78822bb	← Back
+8511957	Recommendation
+8a6e2ed	Ground screw
+1d0c84a	With a hydrofraise
+6b608d4	In loose sand
+1e2ecc6	Load
+16dde08	Cross-section
+395550b	free length
+bca7414	Gravel
+3e73d08	Sand
+b848fb9	Silt
+936752f	Clay
+e76de3a	Single
+775e61d	Double with water
+6e616ac	Triple
+b82cd39	cm/min
+376315f	1/min
+4944f28	soilcrete (jet column)
+bca5101	Columns for 10 m of wall
+fe096fa	approx. 250–300 mm
+a2a0a66	always, in any soil
+0291174	the same in all of them
+194abd0	nothing, the work is just slower
+8e3ebf5	Suitable soil
+40177f5	Noise
+9e6042d	loose sand
+e97ecae	RC 30×30 cm
+3c828da	RC 40×40 cm
+41eace1	Hammer
+53d2418	Soil profile
+f888897	Advancing…
+65290d2	design base
+c079769	Loose sand
+524e788	m/min
+84c10eb	Soft, silty clay
+9758a42	Stable
+dc75b3e	Collapses
+b012cb4	For which soil?
+b86e808	1 · down into the bore
+7b585ea	Bentonite slurry
+eaa729f	The bore collapses.
+e11c101	The base may soften.
+2f05ef6	The bore
+61af960	design: ${fmt(z, 0)} m
+5dfe30d	collapsed soil at the base
+c646ab2	starting…
+8f64502	it’s out!
+ecf2a02	Concrete placed
+77a87d8	A lot of concrete was used.
+1a361cf	Too much concrete.
+41da4c3	slower, needs a slurry plant
+9109066	Not suitable
+3d4b6df	Bulb
+e5d4f3b	Threaded
+36b628e	300–600 mm, approx. 20 m
+76a4da3	Ballast (e.g. concrete blocks)
+1528bd9	↺ Back to ground level
+3ba088d	It doesn’t budge
+731a7d2	Stops at ${fmt(m.zs, 1)} m
+a33484e	Working chamber
+c4c5f46	${Math.round(tot)} min
+20e6988	The soil has loosened
+337dd4b	The right
+1c3af4c	The left
+2ec19e2	The noise
+7084607	${fmt(100 * c.f, 0)}${NB}% base
+6890246	Situation
+9548c4c	Barrette (grabbed element)
+c1fe4fa	Cross-section A = π·D²/4
+99ef6d1	exactly 50 %
+f3a4152	Capping beam
+271e02d	sand, gravel
+7de9e3f	Excavated soil
+4b60c65	 · primary
+5bb5677	 · secondary
+78a6827	Sand, gravel
+bcfd83a	Rankine at 30 m
+c8114c0	Gravelly sand
+7f4c01f	Soft clay
+ea2e1db	Slurry level above GWT
+85b6f17	η<sub>min</sub> with Rankine
+95d4f0a	1.0–1.5 m
+a2c3dc6	10–20 cm
+60bcfca	Calcium bentonite with cement
+c458092	7 days
+954fc2f	No such widget:
+a4c4e08	Widget error:
+c09e836	bentonite slurry
+8c43958	single jet
+2afa3a9	double jet
+1537540	triple jet
+dd8b1a5	Basics
+f72f0d3	System
+cea0809	Franki, screw
+b11706e	Test
+2885216	silty clay
+5f28236	Ø ≈ 60 cm, at most 16–18 m
+4945c2b	fresh concrete
+17e1df9	slurry out
+95eab10	Ø8 link
+e851947	Ø12 anchor
+9d8e674	soil-laden slurry
+0389d6b	panel length
+2f2d896	The wall of the bore collapses!
+44c8b35	The bore collapses!
+7db2697	Unusual cross-section
+acc71ba	The length can be at most approx. 16–18 m.
+4da4e36	Full section
+d57a665	Excavated soil
+4c8ffb6	The bore collapses!
+3f58175	Refusal!
+544a478	CFA: D = 40–120 cm, L at most 22–24 m.
+042cd03	Slurry-supported: D = 80–180 cm, L = 15–50 m.
+8c50b35	Screw: D = 300–600 mm, L at most approx. 20 m.
+5aba3c1	base: ${pct(cap.Rb / R)} %
+cb7bfa6	${cnt('bad')} errors
+af2659e	${cnt('ok')} OK
+3abe76b	None of them
+d962c52	<b>Correct.</b> 
+2306d01	True
+e7676db	False
+6888643	True.
+1337f76	False.
+c0043ee	=
+8e1113a	<span>The pile refused at ${fmt(st.z, 2)} m in ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a')} <b>${lt.n}</b> layer (set ${fmt(last10, 0)} mm for the last 10 blows). ${lt.hard ? 'Egy vékony kemény betelepülés is megállíthatja a vert cölöpöt – ki kell emelni, más szelvény vagy más technológia kell.' : 'Növeld az energiát, vagy válassz más cölöpöt.'}</span>
+b4618fe	<span>The base is now in ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a')} <b>${lt.n}</b> layer, at a depth of ${fmt(st.z, 2)} m.</span>
+834cd58	The bearing stratum (${layerAt(P, P.bear + 0.1).n}) starts only at −${fmt(P.bear, 1)} m; the pile base (−${fmt(Lact, 1)} m) is in ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(toeA.n) ? 'az' : 'a')} ${toeA.n} layer: low bearing capacity, large settlement.

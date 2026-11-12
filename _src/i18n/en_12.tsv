@@ -1,0 +1,234 @@
+6e3c571	The sketches are <b>illustrative</b>, not to scale. In some situations several technologies could be used – here we always look for the most obvious one.
+c0e74f6	Flawless! We would happily trust you with a foundation design.
+f2ec26e	Very good – it is worth thinking through the wrong ones once more.
+09a0a5e	It is worth going through the technology matrix and the chapters once more.
+d65a779	Again
+f6e8c7a	Sketch: 
+81500da	Score: ${score} / ${CASES.length}
+269731d	Result
+dbd7581	Next situation →
+bb2382b	<b>This is not the best answer.</b> 
+5ce0396	Replacement
+6d5ac41	Other pile
+372e865	Well, box
+68d5b2e	very durable below water, needs treatment above it
+6d78a55	driving: noise, vibration
+2008344	hardwood only; must be protected against insects and fungi
+3fe7324	It is driven into the ground: noise and vibration.
+c333833	It cannot be driven through a hard, stony layer.
+018c770	A thin element (10–15 cm).
+ac7c889	At most 8–10 m long.
+d8bbac0	It needs a driving rig.
+766c3fc	Not excavation support.
+a885611	Steel tubular and H-pile
+c99fb5c	tube or “H” section
+d14897b	≤ 15–20 m (extendable)
+debb951	tube: soft at the top, dense granular below; the H-section also gets through harder layers
+69f1b6c	corrosion protection needed
+e6fd716	driving, vibrating: noise, vibration
+e13ffb1	recoverable; expensive material
+ea3e48f	Driving, vibrating: noise and vibration.
+03a6fec	The H-section is easier to drive, but driving is limited in rock and hard clay.
+9b26a3c	Large-diameter piles are made only by replacement.
+43e8374	Typically at most 15–20 m.
+7772cac	It needs a driving rig or a vibrator.
+92dc97b	As piles it is not a watertight wall (that is what sheet piles are for).
+4406360	Precast RC pile (driven, vibrated)
+3f37c14	30×30, 40×40 cm; spun: Ø 25–50 cm
+2e81d35	4–12 m; spun at most 20–22 m
+07de0e7	no: rock, hard clay, cemented soil, blocky fill; vibration mainly in granular soil
+4c8de47	no obstacle
+b72be04	fast (made in advance)
+b09759b	factory element; the head is broken back to the design level
+1436b93	Driving causes significant noise and vibration – next to a sensitive neighbour it is the riskiest.
+25f4918	It cannot be driven into rock, hard clay, or a cemented or blocky layer – even a thin intercalation can stop it.
+eb2f367	Even as a spun tubular pile at most 20–22 m.
+1ab85bd	It needs a large driving rig.
+4f0cb3a	Ground screw (steel screw pile)
+9cbd648	hollow shaft, a thread every 40–60 cm
+edd563e	where it can cut a thread into the soil
+7ab63ae	vibration-free (screwing)
+89b313e	small load; recoverable, can be unscrewed
+cda61e7	It goes down by screwing: free of vibration and noise.
+111d789	It cannot cut a thread into hard, stony soil.
+5349296	A small cross-section element.
+a68c9af	Typically at most 2–3 m long.
+d95e056	For new lightweight structures with small loads, not for strengthening.
+8fb5010	Franki pile
+04b01ae	tube diameter 46–52 cm; the finished pile approx. 60 cm
+137da53	the casing is driven into the bearing stratum
+fb85a04	ramming with a 3 t drop hammer: noise, vibration
+ea7bef1	slow
+8dbcdbb	2000–3000 kN; almost disappeared today
+2f3173d	Ramming with the drop hammer comes with noise and vibration.
+bde2d1b	A driven technology: it gets through hard, stony layers with difficulty.
+4ca185f	The finished diameter is approx. 60 cm.
+3ed7e5e	At most 16–18 m long.
+fade35f	It needs a tall driving frame.
+2600cc6	Screw pile (Omega, FDP, Fundex, Screwsol)
+3312d84	loose–medium-dense granular, intermediate, soft–firm cohesive
+463884b	no dynamic effect or noise
+ab58aea	little spoil; the smaller diameter limits the bearing capacity
+ee1daec	No dynamic effect or noise.
+937bc9a	For loose to medium-dense soils; the displacement head cannot penetrate a hard layer.
+2234f96	Diameter 300–600 mm.
+2748e7f	At most approx. 20 m long.
+89cfd16	It needs a large drilling rig.
+30eb2f7	Not watertight excavation support.
+02ec3a5	CFA pile (continuous auger)
+b12b1d8	in any soil except loose, flowing soils; particular care in fine sand
+04a31ef	supported by the soil plug remaining on the auger
+37e9aa4	little noise, little vibration
+1af0146	fast drilling, simple machinery
+c62ec46	automatic monitoring: concrete pressure, volume, a record for every pile
+f513f2c	Chosen specifically where noise and vibration are restricted.
+ee02275	With a special drilling head it can also drill very hard soil and softer rock.
+baef8d9	The larger diameters (100–120 cm) are also available.
+0d65bda	At most 22–24 m long.
+f5fbab0	It needs a tall drilling rig.
+16343fd	As a pile row it is watertight only if the piles intersect.
+76ffade	Not recommended for loose, flowing soil; particular care is needed in saturated fine sand.
+37519de	Cased bored pile
+e4e1d5d	even in particularly unfavourable soils
+9b52f6d	safe even in silty soil with a high water content
+e3492a0	the casing goes down by rotation or vibration
+2646849	slower, complex machinery
+4c9e537	the casing must go ahead of the excavation; below the groundwater, water replacement in the bore
+f2be30d	With a vibration limit, the casing must be installed by rotation (not by vibration).
+2035df1	For large diameters (min. 80 cm).
+d85a742	15–50, even 100 m long.
+0424bb8	The casing supports the bore until concreting.
+cc6c0e2	the slurry displaces the groundwater and supports the wall
+e5f9be8	slower, complex machinery, slurry plant
+bce699e	base cleaning; concreting through a tremie pipe
+c1cf2da	By drilling with slurry support: no driving.
+898f97e	To great depth: the capacity of the rig is not a limit.
+14e3f86	It needs a large drilling rig and a slurry plant.
+0ad9fac	As a pile it is not excavation support.
+1141f7b	The slurry displaces the groundwater.
+2c7e31c	Unsupported bored pile
+6c348e2	with a short auger or a grab
+6ca802f	≤ 8–10 m (excavated block foundation up to 5–6 m)
+d5a5aab	cohesive soil only
+34f7675	above the groundwater only
+0f3e874	concrete immediately after excavation
+2b79673	Simple drilling, no driving.
+aef7b9b	Below the groundwater the bore collapses – support is needed.
+42e9050	A bore at most 8–10 m deep is stable.
+92095c1	For large diameters the stability of the bore is questionable.
+d10ca76	It needs a drilling rig.
+77cee94	bored ≤ 300 mm, driven ≤ 150 mm
+42f8f5e	in heterogeneous soil and rock too
+594c8b8	low, small rig
+9d418e2	moderate
+9a8597b	calculated without base resistance; buckling if c<sub>u</sub> < 10 kPa; a load test is justified
+84f3466	It can be made in places with difficult access and low headroom – ideal for underpinning.
+30cbc14	With a small rig, low in vibration.
+b6e3222	Shaft diameter at most 300 mm.
+ff94999	A slender element: only the shaft carries load; buckling in soft soil.
+9a7508b	It can also form a retaining wall, but it is not typical for a watertight excavation.
+5e5e2f3	any soil, weak rock too
+8fb3b79	a low-permeability cut-off wall can also be made
+3627c0f	no driving; a jet at 400–600 bar
+1dcc3c0	the diameter depends on the soil; risk of hydraulic fracturing and heave
+de28739	In tight spaces too, for strengthening foundations and underpinning.
+be0e63d	Drilling and grouting: no driving.
+7f30cb0	In cohesive, hard soil the column is smaller (at most 60–70 cm in clay).
+e869217	Large diameters only in coarse-grained soil (150–200 cm in gravel).
+bd193c3	Good for excavation support and as a low-permeability cut-off wall, but watertightness is delicate.
+02f58fa	40–120 cm thick; panel 2.8–5.6 m
+9b146fa	6–30 m, even 120–150 m
+4c4fb93	difficult: soft clay, peat, flowing sand; in rock only with a hydrofraise
+73fb514	watertight; the slurry level at least 1.0–1.5 m above the groundwater
+55cfd2e	relatively quiet, free of vibration
+5c77ec7	moderate; expensive machines
+c131b2c	can be load-tested; isotope or seismic concrete testing
+58c4fe3	Watertight, stiff: it can also be the permanent side wall of an underground car park.
+aaaecd8	Relatively free of noise and vibration.
+15c0a3b	In rock and very hard clay only with a hydrofraise – very expensive.
+61df62b	Generally 15–30 m, but 120–150 m ones have also been built.
+4df9bf8	Large cross-section, high bearing capacity, small settlement.
+eb18cd9	It needs a large trenching rig and a slurry plant.
+4a1a3d7	No groundwater lowering is needed.
+799fb26	soil that can be excavated, bearing stratum not too deep
+dc6b207	advantageous with high groundwater
+613f1c9	today: the casing is vibrated
+8342008	today with a recovered steel casing, tremie concreting
+912a718	Economical only to 4–8 m.
+4df4019	Used with high groundwater, with the foundation level below water.
+f84fcea	Large diameter (0.8–3.0 m).
+38d6c62	Today’s steel casing is installed by vibration.
+4469bc4	It needs a grab and a crane.
+148c3e1	Box foundation, caisson
+1109023	its plan is that of the structure
+6ed0bc7	open box down to 40–50 m
+6850147	soil that can be dredged easily
+393e93d	caisson: at most 3.2–3.5 bar excess pressure
+a090a3d	very slow (stages of 6–8 m)
+1d53b1d	tilting, subsidence crater: continuous monitoring; being pushed out
+9f924e0	In easily dredged soil it can be sunk to 40–50 m.
+bf399b9	Under the whole structure (e.g. a bridge pier).
+d970861	In hard soil that is difficult to dredge it gets stuck and may tilt.
+ceecfb8	A large structure built in stages.
+99838be	Underground car parks have also been built this way, but today the diaphragm wall is typical.
+a6cd65d	For a caisson the excess pressure is at most 3.2–3.5 bar – it does not work in deeper water.
+a66d827	Vibration and noise limit
+24e7e24	Groundwater above the base level
+1a0bf5c	saturated, loose layers
+9034680	Hard clay, rock
+46db13c	cemented, blocky layer
+ad9cee9	diameter greater than 80 cm
+d552bf8	large load per pile
+069c733	Bearing stratum deeper than 25 m
+13f8ac7	a long element is needed
+dfcc8d4	Low headroom
+4afaba1	strengthening an existing building
+72550b3	A watertight excavation is also needed
+da90357	e.g. an underground car park
+6cec69d	<b>An indicative comparison</b> with typical values. The limits are not sharp: with a special rig or an additional method, a technology may also be feasible in an “excluded” situation – the final word is the designer’s.
+6742096	Site conditions
+0fadecb	Clear conditions
+ad953b6	Diameter, size
+959ceb5	Length, depth
+e8f0d70	Groundwater
+f42f22a	Speed, machinery
+7731a88	Inspection, points to watch
+6eac328	Site conditions – switch on what is true:
+4dde5d5	The best fits come first.
+dae982b	Under these conditions none of them works on its own – a combined solution or a different layout is needed.
+d2758bc	No condition switched on – all 15 technologies are shown. Switch on one or more conditions!
+6d7cc01	possible
+8aa0290	More features ▾
+2e2b035	Is a shallow foundation adequate?
+43428d1	The bearing stratum is shallow, the settlement is acceptable, and there is no risk of scour or sliding.
+95db303	Does an existing building have to be strengthened, from a tight, low space?
+54c42b3	For example an added storey, deepening a basement, an overloaded old foundation.
+f5060ec	Is an excavation below the groundwater also needed, directly on the site boundary?
+31da4de	For example an underground car park or an underpass next to neighbouring buildings.
+57ec762	Is the bearing stratum shallow (4–8 m), with high groundwater, under a few heavily loaded columns?
+f319dcf	The classic well foundation situation.
+3d35c66	Is a diameter larger than 80 cm or a pile longer than approx. 24 m needed?
+1f9a63d	Large loads, deep-lying bearing stratum.
+02d72cc	Is there a strict vibration and noise limit?
+cf604ff	Sensitive neighbour, city centre, hospital, old buildings.
+a2d228c	If a shallow foundation is adequate, it is usually the simplest and cheapest solution. A deep foundation is needed if the bearing stratum is deep, the settlement with a shallow foundation is unacceptable, scour or sliding is a threat, or if it is more economical overall.
+ff72d71	Micropile or jet grouting
+1291cf7	In a place with difficult access and limited headroom, the micropile is made with a small rig and transfers the load to the deeper, better layer (underpinning). Jet grouting is also suitable for strengthening foundations, deepening the foundation level and underpinning, in any soil.
+1386988	The diaphragm wall is watertight and stiff, it is built relatively free of noise and vibration, it needs no groundwater lowering, and it can be part of the permanent structure – the side wall, even the foundation, of the underground car park.
+006a7e9	Well foundation – or a short bored pile
+5e6cbb9	The well foundation is economical if the bearing stratum is not too deep, and especially with high groundwater, when the foundation level has to be taken below the water table. Today it is made as an excavated foundation with a recovered steel casing – but a short bored pile is often its competitor.
+df3a7bd	Cased or bentonite-supported bored pile
+961167f	Large-diameter piles (above 80 cm) can only be made by replacement. The casing is safe even in unfavourable silty soil (80–180 cm, 15–50, even 100 m), and bentonite-supported drilling works in any soil and to great depth (80–180 cm, 15–50 m).
+75a66e6	CFA or screw pile
+d9b9591	With a noise and vibration limit, CFA is the obvious choice: fast, monitored, 40–120 cm, 6–22 (24) m. In loose to medium-dense granular and intermediate soil the screw pile is also good: no dynamic effect or noise, and hardly any spoil.
+765d4d2	Driven precast, CFA or screw pile
+8532937	Without a vibration limit, the driven precast pile may also come into question – if there is no rock, hard clay, cemented or blocky layer in its path – and the displacement even compacts the soil. The final decision is made by the soil, the load and the economy.
+3d4672c	Question ${SPINE.indexOf(id) + 1}
+015daff	Start again
+b923b6e	Design of shallow foundations ↗
+cf9fd72	Go to the chapter →
+93d2a41	Back to this question
+4691543	Start: what is a deep foundation?
+792e267	When is a deep foundation needed, how do the base and the shaft transfer the load – and what kinds of piles are there.
+402b800	Displacement piles
+0e032d9	Driving, vibrating, screwing, the Franki bulb: the soil is pushed aside and compacted.

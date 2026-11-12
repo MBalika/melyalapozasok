@@ -1,0 +1,78 @@
+78f2941	The 3D view needs WebGL, which this browser does not support right now.<br>The controls, the ratio bar and the checklist still work.
+87a10e6	3D pile builder – section
+564f226	groundwater −${fmt(M.gw, 1)} m
+9e26c25	bearing stratum −${fmt(M.P.bear, 0)} m
+3d8bdc3	The rig stands above the set-out point. The flap at the bottom of the hollow drill stem is closed.
+920f653	Drilling to base level
+ca79b9c	The continuous auger screws into the soil. The soil plug remaining on the auger supports the wall of the bore – no separate support is needed.
+c6c4f77	Concreting through the drill stem
+11a2d77	<b class="bad">Withdrawn too fast!</b> The concrete cannot fill the place of the auger – in the soft layer the pile narrows (necking).
+23bcc0e	The concrete is pumped under excess pressure through the inside of the stem; the concrete pushes the auger up with the soil plug while the rig pulls. The concrete pressure is measured continuously.
+35d6483	Reinforcement into the fresh concrete
+c25f3c8	The reinforcement cage is lowered into the fresh concrete (pushed, vibrated). The concrete does not need vibrating: the flowing consistency and placing under pressure compact it.
+0616d1a	An automatic record is made for every pile: depth, concrete pressure, volume of concrete placed.
+1dd5d42	Positioning, starting the casing
+c3c9f6d	Installing the casing starts with rotation (or vibration).
+c69ec77	Soil removal under the protection of the casing
+4a35d98	The soil is removed with a drilling bucket; in granular soil the casing goes ahead of the excavation.
+b0c0e4e	 <b class="bad">No water replacement:</b> the external water pressure breaks the soil in at the base!
+f014aaf	 Below the groundwater the water removed is replaced in the bore.
+0ec4444	Base cleaning
+dc3b586	No loosened, settled soil may remain at the bottom of the bore – it would greatly reduce the base resistance.
+f24a2fd	The reinforcement cage is lowered into the casing; spacers ensure the concrete cover.
+96839ba	Concreting, withdrawing the casing
+3cc7036	The concrete is placed from the bottom up through a tremie pipe, while the casing is withdrawn step by step. The end of the pipe stays in the concrete throughout.
+dad535c	Large diameter, great depth: safe even in silty soil with a high water content – in return slower, with complex machinery.
+45139c4	Positioning, pre-drilling, guide tube
+098a52d	A short steel guide tube is placed in the upper part of the bore.
+568cfd2	The bore is filled with bentonite slurry – the slurry level is well above the groundwater table.
+b8ff6a2	Soil removal with slurry support
+68b9844	<b class="bad">The slurry level has dropped close to the groundwater table:</b> the excess pressure is lost and the wall of the bore collapses.
+9d6f9d2	The soil is removed with a drilling bucket. The slurry displaces the groundwater and supports the wall of the bore with its excess pressure.
+1075984	Base cleaning, reinforcement
+f91fe65	The base is cleaned, then the reinforcement cage is lowered into the slurry.
+6010723	The concrete fills the bore from the bottom and displaces the lighter slurry upwards – the slurry is recovered.
+30b8745	Concreting to ground level, guide tube out
+0102477	The concrete is brought up to ground level, then the guide tube is lifted out.
+73d247e	Mainly for large-diameter, deep piles; in Hungary mostly for the foundations of long-span bridges.
+16c555d	In cohesive soil above the groundwater, a bore at most 8–10 m deep stands for a short time even without support.
+2f70361	Drilling with a short auger
+abc8359	<b class="bad">The bore is not stable:</b> because of the groundwater or the granular layer the wall collapses!
+4875aef	The short auger brings up the soil in cycles.
+5c66103	The reinforcement cage is lowered into the bore immediately.
+f6f359e	Concreting immediately
+cff5d1b	It must be concreted immediately after excavation – through a concreting hopper.
+57af8d0	Simple and cheap – but only for a stable bore.
+17688a8	Lifting in the pile
+d458549	The precast reinforced concrete pile is held vertical by the leader of the piling rig.
+1d55456	<b class="bad">Refusal!</b> ${M.P.blocks ? 'A tömbös feltöltésen' : 'A kemény agyagban'} the pile cannot get down to the design depth.
+542d982	In the blocky fill
+225e12d	In the hard clay
+426cf9b	The hammer blows drive the pile into the ground; the displaced soil is compacted – the base and shaft resistance increase.
+7a25f11	Pile trimming
+10dfb0d	The protruding part is cut off – but the pile has not reached the design base level.
+1fb6ed3	After driving, the pile head is broken back to the design level.
+26c04ce	Fast and of high bearing capacity – but driving comes with significant noise and vibration.
+0291169	Casing, concrete plug
+5b408e8	A dry concrete plug approx. 1 m high is placed in the bottom of the 46–52 cm casing.
+f6b4578	Driving with an internal drop hammer
+cda2cd8	The 3 t drop hammer rams the plug; through friction the plug drags the tube down to the bearing stratum.
+3763056	Driving out the plug, bulb
+7fe7218	The tube is fixed, the plug is driven out, and a widened base – the “bulb” – is rammed with further batches of concrete.
+687ad72	The reinforcement cage is lowered into the casing.
+02afeca	Concreting the shaft, withdrawing the casing
+b4fe0b7	The casing is withdrawn while concrete is added and rammed. Because of the displacement, the finished pile is approx. 60 cm in diameter.
+902ba43	At most 16–18 m long; a resistance of 2000–3000 kN can be achieved. In Hungary it has almost completely disappeared by now.
+95561c6	At the end of the hollow drill stem there is a special displacement drilling head.
+85c7693	Drilling by rotation and thrust
+2d84e70	The head pushes aside and compacts the soil around itself – hardly any spoil comes to the surface.
+0de3e59	displacement head
+6390a2d	Concreting while withdrawing the stem
+f3bf1f5	The concrete is placed under pressure through the drill stem, and the stem is withdrawn with rotation.
+fbaa065	Reinforcement by vibration
+cdd6061	The prefabricated reinforcement cage is vibrated down into the fresh concrete.
+d60fd44	No dynamic effect or noise; the displacement increases the specific bearing capacity.
+b255ec1	Positioning with a small rig
+e73619b	The small rig can also work in places with difficult access and low headroom.
+9a32cfa	Drilling and grouting at once
+599ff9a	A hollow steel bar with a sacrificial drill bit is drilled down (with extensions), with continuous cement grouting meanwhile.

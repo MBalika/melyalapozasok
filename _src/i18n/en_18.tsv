@@ -1,0 +1,120 @@
+fefd7be	Open at the top and bottom
+8081f07	The soil is removed from inside by dredging – below the groundwater by underwater dredging. The box is built and sunk in stages of 6–8 m, with a larger cutting edge all round at the bottom and stiffening cross walls inside. In easily dredged soil it gets down as far as 40–50 m.
+6bd6633	Closed at the top: caisson
+a4236b9	Compressed air expels the water from the working chamber (at most 3.2–3.5 bar). The workers get down through a personnel airlock, and the soil leaves through another airlock.
+d423ae7	water ballast
+62c0702	sits on the river bed
+550fa57	cross walls, underwater dredging
+b9264cd	airlock
+a303a82	working chamber under air pressure
+188ebff	Water depth in the river
+4042acb	Cutting edge below the river bed
+1e7bbba	Compressor: excess pressure in the chamber
+5eac53f	Set it to the required pressure
+0971d9f	The pores of the soil communicate with the river: at the level of the cutting edge the pressure of a water column h<sub>v</sub> = h<sub>1</sub> + h<sub>2</sub> acts.
+71c3427	Required excess pressure
+bf758d7	Water column above the cutting edge
+3231b29	Decompression on the way out (illustrative)
+50d9ef4	dry
+1165406	flooded
+935b26d	escaping
+c37564b	river bed
+1d884fa	personnel airlock
+046fd3f	bar excess pressure
+1d35944	PRESSURE GAUGE
+ca66231	required
+91378df	set
+8351eb3	DECOMPRESSION ON THE WAY OUT
+6ffe6e5	air escaping
+b69c604	Dry working chamber
+c034e26	The air pressure just expels the water from under the cutting edge – work can go on.
+c9a1b5c	Water is breaking in
+aad7651	The pressure is too low: the water stands ${fmt(st.hin, 1)} m high in the chamber. Raise the compressor pressure!
+57ea445	Flooded!
+62b05ef	The excess pressure is far below the water pressure: the working chamber floods.
+0073ca3	Air is escaping
+7ef38f6	The pressure is too high: the air bubbles out under the cutting edge, and the soil may be disturbed too. The required pressure is enough.
+5e13414	This is too deep
+3ec7532	${fmt(req, 2)} bar would be needed – this exceeds the 3.2–3.5 bar limit; people cannot work at such an excess pressure.
+112441a	At the limit
+cb2c9de	We are in the 3.2–3.5 bar band: short shifts, very long decompression.
+92dfddd	<b>Illustrative model.</b> The decompression time only indicates the order of magnitude (it grows steeply with pressure) – it is not a real decompression table.
+ad6a68a	middle
+1224c7a	Dredging in the ${c} cell
+3e83d2b	All three cells (even dredging)
+2ceb6d1	Monitoring (survey measurement)
+d6656c2	↺ New box
+0ed15fd	Tip: if one side is lower, dredge on the <b>other</b> side. In a hard layer the soil under the cell hardly diminishes; in a loose, flowing pocket, however, you easily over-dredge – and the surroundings loosen.
+f95b104	Depth (average)
+126bbf3	Tilt
+1a6e734	Stage
+ad0134d	Maximum tilt
+352b11e	hard lens
+fb33065	loose, flowing pocket
+f381e89	subsidence crater
+5d6e4b6	tiltmeter
+bfbb464	The tilt is exaggerated sixfold in the drawing.
+415a97a	Without monitoring: a tilt of a few tenths of a per cent cannot be seen with the naked eye…
+0b40ccd	concreting a new stage…
+dcd113f	Jammed!
+1889c50	<p>The box tilted and wedged itself into the soil – this is irreparable. Start again and watch the tiltmeter: dredge on the side <b>opposite</b> the lower side.</p>
+4fc78a2	Down – nice and straight!
+6955b28	Down, but it tilted strongly on the way
+296d214	<p>The box has reached the bearing stratum (20 m); the maximum tilt was ${fmt(s.mx * 100, 2)} %. The base slab can follow.${(s.lL + s.lR) > 0.3 ? ' A túlkotrás miatt azonban roskadási tölcsér alakult ki a környezetben.' : ''}</p>
+16f00d4	 However, because of over-dredging a subsidence crater formed in the surroundings.
+16d0e1d	<p>You dredged too much in the loose pocket: the soil flows in under the cutting edge, and a subsidence crater opens at the surface. In such a case dredge less, and more carefully, on that side.</p>
+89576d7	The box is tilting!
+9b38336	<p>${s.th > 0 ? 'A jobb' : 'A bal'} side is lower. Switch off dredging there and work on the other side.</p>
+9573474	Sinking in progress
+d1f5031	Ready to start
+5c029ce	<p>The box is built and sunk in stages of 6–8 m (here 7 m); when its top gets close to ground level, the next stage is concreted.</p>
+6001001	Quiz – well, box, caisson
+526d2a6	What takes the shell of a well or box foundation down into the depth?
+84e812f	Its own weight, while the soil is removed from inside
+07fb0d4	Hydraulic jacks pressing it down
+2c84710	Vibration, as with sheet piles
+7ee2079	The buoyancy of the groundwater
+453ef41	The reinforced concrete shell sinks under its own weight, while the “clamshell” grab removes the soil from inside – and from under the cutting edge. Buoyancy works against it.
+89ef844	What is the typical size of well foundations?
+3adc75e	Diameter 0.8–3.0 m, length 4–8 m
+92c0083	Diameter 10–30 cm, length 20–30 m
+be773b6	Diameter 20–60 m, length 40–50 m
+92ea505	Diameter 5–6 m, length 1–2 m
+7632d47	The well foundation supports columns and walls at discrete points: Ø 0.8–3.0 m, 4–8 m long; at the top they are tied together by a reinforced concrete grillage or slab.
+2a35a24	How can the shell friction of a well be reduced?
+8a5b415	With bentonite slurry or single-sized rounded gravel, or with a shoulder offset
+1224eb8	With denser reinforcement
+5e1666d	By omitting the cutting edge
+155a0ba	By raising the groundwater table
+9baedef	Because of the shoulder offset and the tapered shape, the cutting edge cuts a larger hole than the shell; thixotropic slurry or rolling gravel can be placed in the gap.
+0535d99	What was the highest excess pressure used in caissons?
+100ecc4	Approx. 10 m of water column = 1 bar, so 3.2–3.5 bar corresponds roughly to 32–35 m of water depth – people cannot work at higher pressure.
+9563c43	Why did the caisson have two airlocks?
+0194710	One for people (slow pressure change), one for materials and the excavated soil
+8de0d82	One for the entrance, one for the emergency exit
+b4476ed	One for compressed air, one for water
+4d37817	Because it had two working chambers
+99ad9a4	In the personnel airlock the pressure was changed slowly, over hours (caisson disease!); the soil and materials were moved through a separate airlock.
+410827e	What is the plan of a box foundation?
+32360f6	The same as the plan of the structure (e.g. bridge pier, building)
+403cd39	Point-like, under the columns
+5d93c3e	Always circular
+9a42e56	The same as the plan of the pile grillage
+d572a12	The wells support at discrete points, the box goes under the whole structure – which is why it is much larger.
+64ced86	How is the sinking of an open box organised?
+0e302c4	In stages: it is built and sunk in stages of 6–8 m, with cross walls inside
+c53e45b	It is built to its full height in one piece, then sunk in a single step
+0b13d96	The pit is excavated first and the box lifted into it
+b461ae6	By floating, on the water
+b12c9dc	One stage is 6–8 m; a larger cutting edge all round at the bottom, stiffening cross walls inside. In easily dredged soil it gets down as far as 40–50 m.
+3348890	What is the greatest danger when sinking a box?
+0cb358d	Tilting, which can cause irreparable jamming
+f9d6992	The concrete setting too fast
+05dd33a	The box floating up
+b11904e	Even sinking is very difficult; continuous monitoring is needed. If the soil loosens, a subsidence crater may also form in the surroundings.
+85ccdd1	What do we mean by “well foundation” today?
+d7b4214	An excavated foundation with a recoverable steel casing
+72a8d87	A masonry well built of well rings
+e48969e	A dug well for drinking water
+a62d9ca	A diaphragm wall box
+1484094	A steel casing is vibrated down while the soil is continuously removed, then the well is concreted through a tremie pipe while the casing is withdrawn.

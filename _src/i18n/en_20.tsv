@@ -1,0 +1,100 @@
+52b9a1f	the whole resistance
+388d3a0	End-bearing pile: at least 2/3 tip resistance. The pile “stands” in the layer of better bearing capacity.
+4f2f864	When do we speak of a friction pile?
+01ed8bb	If at least 2/3 of the resistance comes from the shaft, because there is no better layer near the tip.
+9e521f2	If the pile stands in groundwater.
+9627140	If the pile head is not tied into the pile cap.
+b7404ef	If the pile carries only horizontal load.
+4bffd3a	For a friction pile the friction (shaft) resistance of the longer piles dominates.
+ed86efd	What is the share of tip resistance for a mixed (combined) pile?
+a90500e	For a mixed pile the tip and the shaft contribute to the resistance in similar proportions.
+5ee39aa	How does a tension pile transfer its load?
+a103894	Only along the shaft, in the opposite direction to a pile in compression.
+c542cae	Only at its base.
+2a1c613	At its base and along its shaft, just like a pile in compression.
+4d138b3	Not at all – there is no such thing as a tension pile.
+a570939	In tension the base does not work; the shaft resistance acts downwards.
+2902a37	In which situation can a pile go into tension?
+3c746c0	When anchoring an underground car park below the groundwater against uplift.
+0060978	If the pile is an end-bearing pile.
+1b9ae25	If its diameter is greater than 80 cm.
+05b4760	If the pile is made of reinforced concrete.
+c7db8eb	When anchoring against uplift, for transmission towers, or if the pile group receives a large eccentric load.
+a72d10c	What develops in a pile under transverse (horizontal) loading?
+82e1c83	Besides the compressive stress, bending and shear stresses too.
+b256583	Only tensile stress.
+f6d0a22	Nothing – the horizontal force is taken by the pile cap.
+49b9922	Additional stress develops only at the base.
+04c0071	Earth pressure, braking force, wind, earthquake: the pile will also be in bending and shear.
+d854657	Which is a displacement technology?
+4b41cac	The Franki pile drives the casing down with the concrete plug and displaces the soil; the other three are replacement piles.
+495cda0	What happens to the surrounding soil when a displacement pile is installed?
+a7ea911	It is compacted – for a precast pile the base and shaft resistance increase, for a screw pile the shaft resistance.
+86525cd	It loosens, so the shaft resistance decreases.
+050978f	It is excavated and removed.
+8db1791	Nothing happens to it.
+d5dcaba	The displacement compacts the soil, which increases the resistance.
+503bc41	With which technology can a pile with a diameter greater than 80 cm be made?
+87c5bb2	Only by replacement.
+73a3774	Only by driving.
+061ba52	Only as a ground screw.
+f535366	Only with the Franki technology.
+b455ad4	Large-diameter piles are made only with some replacement technology.
+8fbd5a7	What is the diameter of a micropile?
+3d5b3f6	Approx. 10–30 cm (for a bored one the shaft diameter is at most 250–300 mm, for a driven one 150 mm).
+cab7251	Micropiles are used mainly for underpinning.
+753be75	Guide wall
+aeb233c	Two reinforced concrete beams, 20–30 cm wide and 1.0–1.5 m high, on both sides of the trench: they guide the grab, support the loose upper soil, prevent slurry leakage, and they are also the basis of setting out.
+58d2236	The space of the excavated soil is immediately filled with slurry (ρ = 1.03–1.12 g/cm³). It presses on the wall of the trench from inside and keeps out the groundwater – until the concrete is in place.
+c09de56	Grab
+0d8ebe9	Cyclic work: lowering – bite – lifting – emptying – lowering again. A bite is typically 2.8 m long: this is the width of the open grab.
+6297a54	The groundwater presses on the wall of the trench from outside; below the groundwater table the water pressure increases linearly with depth: σ<sub>v</sub> = (z − h)·γ<sub>v</sub>.
+eadd222	Head advantage
+e636eed	The slurry level in the trench must always be at least 1.0–1.5 m above the groundwater table. As the slurry is only slightly heavier than water, this level difference “wins” the pressure contest.
+d2b67e0	The top 30–50 cm of the wall is mixed with slurry and is broken back; the panels are tied together by a reinforced concrete capping beam, to which the superstructure connects.
+f7a2408	A continuous wall of reinforced concrete panels, 40–120 cm thick. Stiff and watertight – here it is also the permanent side wall of the underground car park, and it carries down the load of the building above.
+9e62be6	Floor slabs
+6198e87	The floor slabs of the garage levels prop the wall. In top-down construction they are built from the top down: excavation of the pit proceeds below the slabs.
+f23359f	Embedment
+7847f9c	With its toe socketed into the impermeable clay, the wall also keeps the groundwater out of the pit – so no groundwater lowering is needed in the surroundings.
+d6ecc97	The diaphragm wall is built relatively free of noise and vibration, and it is a stiff wall: so it can be built right next to a building standing on the site boundary.
+71cd6ec	slurry-filled trench
+e833f5c	DURING CONSTRUCTION
+b50056b	FINISHED STATE
+0776dad	working space – dry
+edef4f1	Reinforced concrete guide walls are built on both sides of the wall line (20–30 cm wide, 1.0–1.5 m high). They guide the grab and are also the basis of setting out.
+129121e	P1 – first bite
+ed8265a	The grab starts at one end of the primary panel: lowering – bite – lifting – emptying. The space of the excavated soil is immediately filled with bentonite slurry, and the slurry level stays near the top of the guide wall throughout.
+de2051e	P1 – second bite
+f589659	The other end of the panel comes next. A bite is typically 2.8 m long – the width of the open grab.
+81320a7	P1 – biting out the middle
+e36873b	The block of soil remaining between the two end bites is also removed: so this 7.0 m panel consists of three bites. (A 5.6 m panel can be completed with two bites.)
+137207c	Stop ends, reinforcement cages
+32bf9cc	After base cleaning, stop ends are placed at both ends of the panel, then the two reinforcement cages are lifted in by crane.
+929ab3d	Concreting P1 with two tremie pipes
+de86759	Concreting proceeds continuously from the bottom up. The heavier concrete displaces the slurry, which is pumped back to the plant. The ends of the pipes stay immersed in the fresh concrete throughout.
+ba33386	The other primary panels: P2, P3
+ecef64c	P2 and P3 are made the same way. Between the primary panels one bite of soil stays in place – the secondary panels will be here.
+f4dc564	Biting out the secondary panels
+8ff44d0	S1 and S2 are opened with a single bite each. The stop ends guide the grab and protect the concrete of the finished primary panels.
+e6daee7	Reinforcing and concreting the secondary panels
+e66f1f9	The stop ends are pulled out – the joint is sealed by the swelling waterstop embedded in the concrete – the cages are lifted in, and concreting follows. The wall is now continuous.
+0cccf76	The wall is finished: capping beam
+bbcc4fb	The top 30–50 cm of the panels is weak concrete mixed with slurry: it is broken back, and the wall is tied together by a reinforced concrete capping beam. The guide walls can be demolished.
+8629308	◀ Previous
+c3440ef	Next ▶
+4320809	↺ From the start
+3993a8d	Slurry in the trench
+d4327a6	Finished panels
+9578d0e	PLAN
+6c04e57	LONGITUDINAL SECTION ALONG THE WALL AXIS
+e5f2f70	${q.id} – go to its construction
+e6d1d6c	top 30–50 cm mixed with slurry
+990b304	Hard clay, marl
+6d03862	Rock
+889a75d	Soil at the depth of the wall
+b4c9305	Depth of the wall
+ca989cf	High accuracy needed (verticality, smooth surface)
+de48101	Tight budget
+a5ccc13	The score is illustrative: in reality the decision results from the ground investigation, the depth, the accuracy requirement and the tender price together.
+2438d4a	Diaphragm wall grab

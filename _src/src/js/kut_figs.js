@@ -1,6 +1,6 @@
 // C08 – saját, statikus SVG-ábrák (a régi szkennelt PPT-rajzok helyett)
 // Használat a HTML-ben: <div class="kf-svg" data-kfig="kotro"></div> – betöltéskor rajzolódik.
-import { svg, pathD } from './core.js';
+import { svg, pathD, EN } from './core.js';
 
 const NS = (p, tag, a = {}) => svg(tag, a, p);
 const mk = (el, w, hh, label) => { const s = svg('svg', { viewBox: `0 0 ${w} ${hh}`, class: 'kf', role: 'img', 'aria-label': label || '' }); el.appendChild(s); return s; };
@@ -317,7 +317,7 @@ const variants = {
     vVoid(s, XO + TW, VW - XO - TW);
     wallPair(s, [[XO, TOP], [XO, YB - 34], [XO - g, YB - 30], [XO - g, YB]], [[XO + TW, TOP], [XO + TW, YB - 26], [XO - g + 3, YB]]);
     lead(s, XO - 5, 112, 6, 22, 'zagy', 'start', 'kf-s');
-    lead(s, VW - XO + 5, 150, VW - 6, 22, 'kavics', 'end', 'kf-s');
+    lead(s, VW - XO + 5, 150, VW - 6, 22, EN ? 'gravel' : 'kavics', 'end', 'kf-s');
   },
 };
 function figValt(el) { panels(el, (el.dataset.v || 'gyuru,hengeres,hvall,kupos,kvall,surl').split(','), VW, VH, variants); }

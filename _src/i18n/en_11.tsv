@@ -1,0 +1,175 @@
+a56565a	The structures and their foundations are <b>to scale</b> relative to each other; the silhouettes are simplified. Only some of the piles are drawn: the real pile layout is much denser – under Taipei 101, for example, there are 380 piles.
+1f1e74f	Flow velocity
+6981e5e	Foundation of the pier
+7c04820	🌊 Flood!
+93b776e	Calm water
+8485b86	Restart
+322a11b	The pier is 3 m wide; the base of the shallow foundation is 3 m and the pile tips 16 m below the river bed.
+8ce2ce8	Scour depth next to the pier
+55a396e	Foundation level / pile tip below the bottom of the hole
+defde91	water level
+40becb8	Pier undermined!
+4fe3dcf	The scour hole has reached the foundation level: the soil is washed out from under the footing, the pier tilts – the bridge may collapse.
+fcfcefc	Dangerous scour
+cd03f35	The hole is already close to the foundation level. A larger flood could undermine the shallow foundation.
+6be9cc9	Stable for now
+882cd45	At low velocity the bed material hardly moves. But what happens in a flood?
+0fb9ba9	The piles hold, but…
+89e415f	The pier does not tilt, because the piles reach below the scour depth. However, the exposed length of pile increases the bending – this must be taken into account in design.
+ed948b3	Stable – the piles reach below the scour
+8c3a123	The load reaches the layers below the scour depth; the scour hole only exposes the upper part of the piles.
+b1db851	<b>Illustrative model:</b> the scour depth increases with velocity, up to approx. 2.4 times the pier width. The real scour depth also depends on the water depth, the shape of the pier, the bed material and the duration of the flood wave.
+a6cbd92	SHALLOW FOUNDATION
+54b1f40	DEEP FOUNDATION (PILE)
+2fb2123	the contact pressure compresses
+e6608e0	the soft layer
+b637183	soft layer
+f09ebcb	shaft
+2b8664f	resistance
+9af9da9	base (tip)
+c499f92	Pile cap
+f38bf5c	Placed under an individual column: a reinforced concrete block distributes the column load to the pile group below it. The pile reinforcement is anchored into the cap.
+edd955f	Grillage (pile grillage)
+c4058b7	Under walls and rows of columns: the pile heads are tied together by reinforced concrete beams, and the load of the wall reaches the piles through the beam.
+a818448	Slab (piled raft)
+76e5288	Under large, uniformly loaded buildings – for example towers and underground car parks: the reinforced concrete slab works together with the piles and also transfers load to the soil.
+4ddcf01	Grillage
+302f2be	column
+9eac5d8	pile cap
+4a079f2	building
+718e69c	pile head
+1a09808	shaft
+ddef8a6	base (tip)
+3b9cffc	Quiz – what is a deep foundation?
+49c5720	What fundamentally distinguishes a deep foundation from a shallow foundation?
+e917e3f	Besides its base, it can also transfer load to the soil along its shaft (side).
+b35d093	It always reaches at least 10 m deep.
+5ef8be2	It can only be made of precast elements.
+9925543	It needs no structure tying its heads together.
+491eada	A deep foundation is a load-transferring element between the structure and the deeper bearing stratum that transfers load at its base and along its shaft.
+f43bf4f	Which is NOT a typical reason for a deep foundation?
+2dfe002	The bearing stratum is directly below ground level.
+5ae0ff3	A shallow foundation would produce unacceptable settlement.
+c5364fd	There is a risk of scour around the bridge pier.
+6ae6d6f	The reliable bearing stratum lies only deeper.
+3b36e31	If the good layer is directly below the surface, a shallow foundation is usually the simplest and cheapest solution.
+4401cb8	What are the three main types of deep foundation?
+314b935	Pile foundations, diaphragm wall foundations, well and box foundations
+9230d57	Strip foundations, rafts, pile foundations
+5811ba3	CFA, Franki pile, jet grouting
+814168b	Soil replacement, preloading, piling
+75c8e7e	Today pile foundations are built most often; diaphragm walls are used mainly for excavation support, and well and box foundations are increasingly rare.
+d5d8011	What is an excavated block foundation?
+32516d6	A transitional solution: a block excavated without support and concreted immediately, in cohesive soil to approx. 5–6 m.
+a6d0c32	A precast reinforced concrete block driven into the ground.
+259d80d	A diaphragm wall panel made with bentonite slurry support.
+154bc2a	The reinforced concrete grillage tying the pile heads together.
+3e09e1f	A “transitional” solution between shallow and deep foundations, also called a well foundation in Hungarian practice.
+19ee4f4	For a wind turbine, what governs the design of the foundation?
+4e305f2	The tilt of the tower: the allowable differential settlement is approx. 3 mm/m.
+30b4a51	The chemical aggressiveness of the groundwater.
+7f10cce	The weight of the blades.
+caccc78	The depth of frost penetration.
+b411e02	For tall, slender towers even a small differential settlement causes significant tilt.
+2dd34a9	What does the pile foundation of a new structure consist of?
+e398c06	The piles and the cap, slab and/or grillage tying their heads together.
+08b20c2	Only the piles – the superstructure rests directly on them.
+2b33c42	The piles and the grout injected around them.
+de793d6	A strip footing with a layer of replaced soil below it.
+77a159c	The connecting structure distributes the load and makes the piles work together.
+036a57a	Which is NOT a reason why more and more deep foundations are built today?
+dee0a21	The standards no longer allow shallow foundations.
+79bc9bc	Buildings with ever larger loads and greater sensitivity to settlement are being built.
+5f1fda9	The sites with good subsoil have run out.
+aa6966a	Deep foundation technologies have become competitive.
+3e0e077	Shallow foundations are still fully accepted today – where suitable, they are often the cheapest.
+cb354a8	Why is a bridge pier standing in a river bed placed on piles?
+4377aa2	Because the scour hole around the pier can reach the base of a shallow foundation, whereas the piles reach below the scour depth.
+98e02a4	Because the shallow foundation would float up due to buoyancy.
+5b50cf9	Because piles do not corrode in water.
+41d4888	Scour is one of the most common causes of bridge damage – that is why river piers get deep foundations.
+33e19aa	The piles of the Burj Khalifa (828 m) are shorter than the foundation elements of the Petronas Towers (452 m). What is the main reason?
+c02ce47	The depth of the foundation is set primarily by the subsoil, the depth of the bearing stratum.
+bec934f	A taller building is always lighter.
+5d98190	There is no groundwater in Dubai.
+1277336	The Burj Khalifa was built on a diaphragm wall.
+bc72577	It is not the height of the building but the soil that decides how deep the foundation has to reach.
+5d0d10a	▽ groundwater
+75ab37c	fill
+c6f16a5	sensitive neighbour
+acda2cf	new office building
+f91361a	impermeable clay
+cf1a30d	old house
+044ac41	+ 2 new storeys
+a409610	flowing silt
+a7f1d57	dense gravel
+34c95a0	hard cohesive clay
+e34071a	no groundwater even down to 15 m
+349cc53	hard marl, rock
+60a04e7	topsoil
+579fcf4	medium-dense sand
+272b526	loose–medium sand
+ebdbe15	denser gravel
+30d39f2	Infill site in the city centre
+9375117	A six-storey office building is being built on a city-centre infill site; on both sides there are hundred-year-old apartment blocks sensitive to vibration. The sandy gravel bearing stratum is approx. 9 m deep.
+b446d28	Which piling technology is the <b>riskiest</b> here?
+fb4bb9f	Driven precast reinforced concrete pile
+487c999	Bored pile (CFA)
+109e91f	Displacement screw pile
+2447493	Pile driving causes significant noise and vibration, so near structures it can only be used under strict limits – next to vibration-sensitive neighbours it is the riskiest. CFA is chosen specifically where noise and vibration are restricted, the screw pile has no dynamic effect or noise, and the micropile is made with a small rig, without vibration.
+14175f0	Underground car park on the site boundary
+90adc0a	The excavation for a two-level underground car park has to be supported. The groundwater is 2 m below ground level, impermeable clay follows at a depth of 14 m, and old buildings stand directly on the site boundary.
+16ad1f1	Which structure would you choose?
+0af5157	A row of CFA piles
+159afbf	Gravel piles
+d88f907	The diaphragm wall is watertight and stiff, it is built relatively free of noise and vibration, no groundwater lowering is needed, and socketed into the impermeable clay it can also be the permanent side wall of the car park. A row of CFA piles does not keep out the water, the well foundation is a foundation and not excavation support, and the gravel pile is a ground improvement method.
+5a1623d	Adding storeys to an old apartment block
+99062cb	Two storeys are being added to an old apartment block, and the existing strip footings can no longer carry the extra load. Work is only possible from the cellar, where the headroom is barely more than two metres.
+cce01cb	How would you strengthen the foundations?
+b7d827a	With micropile underpinning
+3450186	With large-diameter cased piles
+6cdfa62	With Franki piles
+330313f	With driven precast reinforced concrete piles
+193b6e9	A micropile can be made even at a workplace with difficult access and limited headroom, and it transfers the loads of the existing foundations to the deeper, better layer (underpinning). Its base resistance is neglected, and in soft soil (c<sub>u</sub> < 10 kPa) buckling must also be checked. The other technologies need a large rig, and the vibration from driving and ramming would also damage the old building.
+2aec4e1	A bridge pier in the river bed
+2120798	The river pier of a long-span road bridge has to be founded. The sandy gravel of the bed may be scoured in a flood, the reliable bearing stratum is 25–30 m deep, and the loads are large.
+50af737	What is the most obvious solution today?
+14f2a9a	Large-diameter bentonite-supported bored piles
+1b517b9	A shallow foundation on the river bed
+612ccae	Timber piles
+cf1bd58	Because of the risk of scour, a shallow foundation is out of the question here: a deep foundation is needed. For large-diameter, deep piles of high bearing capacity, the slurry-supported bored pile has become widespread – in Hungary mainly for the foundations of long-span bridges, precisely. The older Danube bridges in Budapest were still built on box foundations (caissons); this has been pushed out today.
+34b6d5d	A crane hall on flowing silt
+e6b9597	A heavy hall with overhead cranes is being built. The top 25 m layer is flowing silt with a high water content, the groundwater is almost at the surface, and dense gravel lies below. Piles 120 cm in diameter and 30 m long are needed.
+4d49f39	Which technology would you choose?
+c5d0be7	A cased bored pile
+012cda8	A CFA pile
+176d765	An unsupported bored pile
+89462b8	A precast steel ground screw
+6fe3643	The casing supports the wall of the bore right up to concreting, so it can be used safely even in silty soil with a high water content – with diameters of 80–180 cm and lengths of 15–50 (100) m. CFA is typically built to 22–24 m and needs particular care in loose, flowing soil; without support the bore would collapse, and the ground screw is only a 2–3 m element for small loads.
+19152d1	A residential building on hard clay
+da07393	Piles 7 m long and 60 cm in diameter are needed under a smaller residential building. The soil is hard cohesive clay throughout; the investigation found no groundwater even down to 15 m.
+2d5d7c5	What is the simplest solution?
+ea10d6d	An unsupported bored pile, concreted immediately
+a61c7b3	A bentonite-supported bored pile
+16cb90c	A caisson foundation
+648fd5e	In cohesive soil, above the groundwater, to a depth of at most 8–10 m, the bore is stable for a short time even without support – but it must be concreted immediately after excavation. Slurry is an unnecessary cost here, and the caisson and the diaphragm wall are structures an order of magnitude larger.
+7117c7e	A diaphragm wall into rock
+1f1c234	The excavation of a metro station is enclosed by a 45 m deep diaphragm wall; the lower part of the wall goes into hard marl, rock.
+9e5cdac	What would you excavate the trench with?
+79de413	With a hydrofraise (a trench cutter with cutter wheels)
+f449da6	With a rope-suspended mechanical grab
+787d545	With a Kelly-bar hydraulic grab
+7909617	Not at all: a driven steel sheet pile wall instead of a diaphragm wall
+5f6f870	In rock or very hard clay a diaphragm wall can only be built with a hydrofraise: the cutter wheels break up the material, which is pumped out together with the slurry and then separated outside. It is very expensive, but it gives an accurate trench to great depth, in any soil and rock. In Hungary it was used for the construction of metro line 4: diaphragm walls 48.3 m deep at Fővám tér and 40 m deep at Szent Gellért tér. Sheet piles cannot be driven into rock.
+f58bcd0	A solar park on farmland
+3b7030e	A solar park is being built with several thousand lightly loaded support posts. The soil is medium-dense sand, and the posts must be easy to remove decades later.
+caa4555	What would you found the posts on?
+ad5f791	On large-diameter bored piles
+6e24e38	On a diaphragm wall
+85abbf4	On Franki piles
+983d03b	The ground screw is for founding lightly loaded structures – lightweight houses, solar parks, fences, mobile stands: it can be installed quickly and without vibration by machine (smaller ones even by hand), and it is recoverable, it can be unscrewed. It is typically at most 2–3 m long and works where it can cut a thread into the soil.
+6c0ac28	A hall for moderate loads is being built with several hundred piles. The soil is loose to medium-dense sand, removing the spoil would be expensive, and the work has to progress quickly.
+53d5ba5	Which technology fits here best?
+3d0e389	A cast-in-place displacement screw pile
+76f168a	A cased large-diameter bored pile
+d4153df	The drilling head of the screw pile pushes aside and compacts the soil while drilling: the shaft resistance increases, only a little spoil comes to the surface, and there is no dynamic effect or noise. In loose to medium-dense granular and intermediate soils it is a popular, economical and fast solution for moderately loaded industrial facilities (diameter 300–600 mm, length up to approx. 20 m).

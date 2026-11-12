@@ -1,0 +1,143 @@
+0f29498	The well foundation today
+709e52a	Today the name well foundation usually refers to <b>excavated foundations with a recoverable steel casing</b>: a steel casing is sunk (vibrated) down while the soil is continuously removed, and after the required depth is reached the casing is withdrawn while the well is concreted through a tremie pipe – by underwater concreting if necessary.
+d324471	Well foundation with a steel casing in four steps
+95e8129	The well foundation in practice
+ba4b28b	Vibrating down a steel casing
+fc636b1	Vibrating down the steel casing
+c8d612c	Excavating soil from the casing with a grab
+4995cc7	Excavating soil from inside the casing
+e1bae8e	Grab bucket above the mouth of the finished well
+bd3d540	Grab bucket above the mouth of the casing
+65661d4	Box foundations
+ffd21a2	The principle is the same as for the well foundation, but while wells support the structure <b>at discrete points</b>, the <b>plan of the box matches</b> the <b>plan</b> of the structure – for example a bridge pier or a whole building – so it is much larger. Bridges used to be founded this way almost always, the older Danube bridges in Budapest too.
+04855c5	The soil is removed from inside the box, <b>open at the top and bottom</b>, by dredging – below the groundwater by underwater dredging, with dewatering if needed. The box is <b>built and sunk in stages</b>: one stage is <b>6–8 m</b>. At the bottom there is a larger cutting edge all round, and inside <b>stiffening cross walls</b> divide it into cells. In easily dredged soil it can be sunk as deep as <b>40–50 m</b>.
+9705d79	There are also boxes <b>closed at the bottom</b>: these are floated into position on open water, then sunk onto the river bed by filling them with water. A box <b>closed at the top</b> is the caisson – see section 8.4.
+5c6398c	The open box: a larger cutting edge all round, cross walls inside; the cells are dredged underwater, and the box is built up and sunk in stages of 6–8 m.
+3898ced	Three boxes, three tricks
+078017e	The way into the depth of an underground car park in Geneva
+0d14d6b	Box foundations do not only work for bridges. An underground car park in Geneva was sunk as a box <b>57 m in diameter</b>, in three stages, down to <b>−28 m</b>, through gravel, sand and silt to the dense, stiff clay. During sinking a <b>thixotropic fluid</b> was injected beside the shell to reduce friction, and at the end the bentonite was displaced by <b>cement grout injection</b> – so no weak, fluid layer remained behind the wall.
+4958719	Soil profile
+ef86450	<span><i class="f-soilD-bg"></i>gravel</span><span><i class="f-soilA-bg"></i>fine sand, silty sand</span><span><i class="f-soilC-bg"></i>silty fine sand, silt</span><span><i class="f-soilB-bg"></i>dense clay</span><span><i class="f-soilE-bg"></i>stiff clay</span><span><i class="kf-wl-bg"></i>a) groundwater table −3.80 m</span><span><i class="f-bento-bg"></i>thixotropic fluid</span><span><i class="f-grout-bg"></i>cement grout</span>
+d30e1b8	The sinking stages of the Geneva box (not to scale horizontally; a narrow section is shown instead of the 57 m diameter).
+9b98eed	Section of the finished box: seven garage levels down to a depth of 28 m, with the ramp in the middle and two building blocks above ground.
+1b9881f	Caisson – working underwater, under air pressure
+c26c68a	The caisson (“bell”) is a <b>box closed at the top</b>: at the bottom there is a working chamber from which the water is expelled by <b>compressed air</b>. Inside, the work was done with small machines and by hand, removing the soil from under the cutting edge. People went down and up through an <b>airlock system</b> – over several hours, so that their bodies could adapt to the change in pressure – and the soil was taken out through <b>another airlock</b>.
+3fe9525	The air pressure must be at least as high as the water pressure at the level of the cutting edge: so every 10 m of water depth needs roughly <b>1 bar</b> of excess pressure. The human body sets the limit: the highest excess pressure used was <b>3.2–3.5 bar</b>, i.e. approx. 32–35 m below the water level.
+9f67b7a	It was very <b>dangerous work, harmful to health</b>: many people died during construction and afterwards.
+135e9bd	Section of a caisson: compressed air expels the water from the working chamber; people and materials pass through separate airlocks.
+0c0b400	<b>3.2–3.5<small>bar</small></b><span>maximum excess pressure in the working chamber</span>
+a947dbb	<b>≈ 10<small>m</small></b><span>approx. 1 bar of extra pressure is needed per this water depth</span>
+4ed0bb8	<b>2<small>airlocks</small></b><span>one for people, one for materials and soil</span>
+fd71bd5	<span class="f">p ≈ γ<sub>v</sub>·h<sub>v</sub></span>⏎    <span class="fl"><i>the required excess pressure</i> – h<sub>v</sub>: depth of the cutting edge below the water level, γ<sub>v</sub> ≈ 9.81 kN/m³; 100 kPa = 1 bar ≈ 10.2 m of water column</span>
+d96be5c	Caisson pressure calculator
+d6afaa1	Caisson disease
+7d8b094	At high pressure more nitrogen dissolves in the blood and tissues. If the worker returns to normal air pressure too quickly, the gas forms bubbles – the result can be joint pain, paralysis, even death. It is the same as decompression sickness in divers. That is why the pressure in the personnel airlock had to be reduced slowly, in stages.
+b86ef7d	The price of the Brooklyn Bridge
+d80d203	The towers of the Brooklyn Bridge in New York were also built on pneumatic caissons in the 1870s. The chief engineer directing the works, Washington Roebling, himself got caisson disease and lived with severe health damage for years – confined to bed, he continued to direct the construction largely through his wife, Emily Roebling.
+6151c84	If it tilts…
+9ddf801	<b>Even</b> sinking is very difficult: if the soil is removed faster on one side, or the cutting edge hits a harder layer, the box tilts. <b>Tilting</b> can cause irreparable <b>jamming</b> – the body of several thousand tonnes wedges itself into the soil and can go neither down nor back. That is why sinking needs <b>continuous monitoring</b>: the settlement of the corner points is followed by survey measurements, and the dredging locations are adjusted accordingly.
+97a3bb6	The other danger appears in the surroundings: if the soil under and around the cutting edge <b>loosens</b> – for example because too much is dredged from beneath it – a <b>subsidence crater</b> can form around the box, which can also make neighbouring structures settle.
+8fb88e1	Three rules for sinking
+7511b39	Always dredge on the side opposite the <b>lower side</b>.
+d00649f	Don’t dredge far under the cutting edge, because the soil loosens.
+b19a6e9	Measure continuously – a small deviation is easier to correct than a large one.
+7d15238	Tilt monitor
+3badca1	Open box
+8391ec2	Box closed at the bottom
+1cd7e56	Caisson
+8b201e1	<b>Plan</b>
+f0d8b7c	circular, at discrete points under columns and walls
+4959bea	the plan of the structure
+69f375f	the plan of the structure (pier)
+e521b2b	<b>Size</b>
+27c7480	Ø 0.8–3.0 m, 4–8 m long
+3934a72	large; down to 40–50 m
+7b9c94d	large, on open water
+4867fc4	at most 3.2–3.5 bar → approx. 32–35 m water depth
+1c89942	<b>How does it get down?</b>
+7f6ff85	own weight, grabbing inside
+345fdc5	own weight, dredging inside, in stages of 6–8 m
+ef8641d	floating, then filling with water
+0c8fdb0	own weight, manual and machine excavation under air pressure
+362a55e	<b>The water</b>
+c337c65	kept out by the shell, or underwater excavation
+c78cfa3	underwater dredging, dewatering if needed
+0f0a20a	kept out by the closed bottom
+ac32435	expelled by compressed air
+c36646b	<b>At the end</b>
+2308f64	bottom plug or full concrete fill, grillage on top
+85d0e1b	base slab
+943bd03	filling the inside, rising pier
+b7f12e6	concreting the working chamber
+c054882	<b>Today</b>
+fa5d159	lives on as an excavated foundation with a steel casing
+182890d	rare, for special tasks
+7dceada	for harbour and waterside structures
+40519c7	rare today
+9a2395a	<span class="id">C09</span><span>Interactive 3D</span>
+63dfbff	3D pile builder
+adffae2	Now you are the piling contractor. Choose a soil profile and a technology, set the diameter and the length – then start the rig! The pile is built step by step in the 3D section, and along the way you find out how it transfers the load, what to watch out for, and what can go wrong.
+289608e	1 · Site
+542de69	Four characteristic soil profiles: in some the bearing stratum lies deep, in others there is no outstanding layer at all. The groundwater is at a different level everywhere.
+ef3c053	2 · Technology
+a78b187	Eight methods, from CFA through the Franki pile to the micropile. The equipment is schematic; the order and logic of the work phases are real.
+064956a	3 · Result
+5e7a2ca	The ratio bar shows how much is carried by the base and how much by the shaft – layer by layer. The checklist shows the limitations of the technology.
+94a7d33	Try it
+35c0bcb	Four small tasks
+a517748	End-bearing or mixed?
+5e99376	A CFA pile in profile A: at 13 m it is drilled 3 m into the gravel. Look at the ratio bar, then drag the length to 20 m. When does the pile tip over into “mixed”?
+5421331	Set up ▶
+eede980	Driving in the city centre
+63bd156	A driven reinforced concrete pile in hard clay, next to a vibration-sensitive neighbour. How many red rows do you get? Try the screw pile and the CFA pile here too.
+6fc7819	A bore below the groundwater
+3f1cb7e	An unsupported bored pile in profile A, where the groundwater is at 2 m. What happens to the bore? Which technology solves it – and why?
+104c26a	Withdrawn too fast
+503d3bc	CFA in the peaty profile C, withdrawn too fast. Where does the pile narrow, and what does the concrete volume reveal? Then look at the micropile in the same place.
+efc0c45	Build the pile!
+134a977	<b class="t">What is the model based on?</b>
+3b1da0f	Every layer has a unit shaft resistance and a unit base resistance; these are summed over the shaft and the base of the pile. For the displacement technologies a higher value is used because of compaction (for precast piles at both the base and the shaft, for screw piles at the shaft), for the Franki pile the larger base area of the bulb counts, and for the micropile the base resistance is neglected. The classification follows the 2/3 rule. The numbers are <b>illustrative</b>: they help you see what load transfer depends on – the actual design of piles is taught in later geotechnical courses.
+bc95564	Summary
+ad450fc	Technologies at a glance
+b53157d	Support of the bore
+bb001ae	Vibration, noise
+12cacef	=
+7d193a6	replacement
+f7dd26b	=
+37beb51	low
+b543961	<b>Cased bored</b>
+9dd11d1	<b>Bentonite-supported bored</b>
+2131f8b	<b>Unsupported bored</b>
+2565faa	none – cohesive soil, above the groundwater
+c073df4	=
+0034144	<b>Driven precast RC</b>
+b2c95e0	displacement
+cb55eb2	30×30, 40×40 cm; round 25–50 cm
+01eb2b8	4–12 m; round max. 20–22 m
+dfe0c76	high
+5b9da94	=
+15b91a7	recovered casing
+a4a0ee0	approx. 60 cm (tube 46–52 cm)
+c33dbed	=
+1541fa0	significant
+87b17ac	<b>Screw</b>
+ad956d6	the displacement head
+7b77cc5	=
+d9a4916	max. approx. 20 m
+729dff1	bored, grouted
+40cbf39	continuous grouting for hollow bars
+cfd0e38	=
+0e1f464	<b class="t">Did you know?</b>
+e77c54b	The CFA rig automatically produces a record for every pile: metre by metre it logs the depth, the concrete pressure and the volume of concrete placed. If there is less concrete than expected, this points to necking; if much more, the wall of the bore has collapsed or widened somewhere. So the rig’s “log” is also an X-ray of the pile.
+e3c1eff	<span class="id">C10</span><span>Decision support · case studies · decision tree</span>
+060c419	There is no “best” deep foundation – only the one that best suits the given site, load and soil. The choice depends on the loads, the depth of the bearing stratum, the groundwater, the surroundings (neighbours, vibration, noise), the available space and finally the economy. In this chapter you decide: you can practise the choice on real situations, a filterable technology matrix and a decision tree.
+b240fe9	Decision criteria
+e28d019	<b>Load</b><span>its magnitude and direction: compression, tension, horizontal force</span>
+42107c9	<b>Bearing stratum</b><span>how deep is it, how good is it?</span>
+53d6249	<b>Soil</b><span>granular, cohesive, soft, fill, rock</span>
+cfc3324	<b>Groundwater</b><span>above or below the bore, the trench, the base?</span>
+3404a42	<b>Surroundings</b><span>neighbours, vibration and noise limits, utilities</span>
+bfd3cd7	<b>Space</b><span>a big rig or a tight cellar, low headroom?</span>
+582fd93	<b>Time and money</b><span>speed, machinery, verifiability</span>
+fe18f2d	You are the designer!
+15e69f7	Nine situations from practice, starting with the city-centre infill site. Each has one best answer: choose, and read why it is right (and why the others are not).

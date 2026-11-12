@@ -5,3 +5,8 @@ dev-*.html
 _src/src/js/_dev_*.js
 _src/APP_BRIEF.md
 _src/DRAW_BRIEF.md
+_src/.en/
+_src/i18n/node_modules/
+_src/i18n/ws.tsv
+_src/i18n/ws_hu.tsv
+_src/i18n/missing.tsv

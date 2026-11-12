@@ -1,5 +1,5 @@
 // ch_elore – C03 Előregyártott cölöpök: behajtási módok, cölöpverés-szimulátor, vibrálás-labor, rezgés a szomszédban, kvíz
-import { register, shell, slider, seg, toggle, select, stat, verdict, figure, svg, h, fmt, clear, clamp, lerp, pathD, loop } from './core.js';
+import { register, shell, slider, seg, toggle, select, stat, verdict, figure, svg, h, fmt, clear, clamp, lerp, pathD, loop, EN } from './core.js';
 import { defineQuiz } from './ui.js';
 
 const txt = (p, x, y, s, cls = 't-lab', extra = {}) => svg('text', { x, y, class: cls, text: s, ...extra }, p);
@@ -250,9 +250,9 @@ register('elo-veres', (root) => {
     const head = sg > lim ? ` <span>Figyelem: becsült ütésfeszültség ≈ ${fmt(sg, 0)} MPa – ${P.conc ? 'a betoncölöp feje megrepedhet, széteshet' : 'az acélprofil feje deformálódhat'}. Nehezebb kos, kisebb ejtési magasság kíméletesebb.</span>` : '';
     if (st.end === 'ok') ver.set('ok', 'Elérte a tervezett mélységet', `<span>${fmt(st.n, 0)} ütés, a végén ${fmt(last10, 0)} mm beverődés 10 ütésre ${lt.n} rétegben. A dinamikus ellenállás ≈ ${fmt(st.lastR, 0)} kN – ${st.lastR > 1200 ? 'a cölöp jó teherbíró rétegben áll.' : 'kevés: a cölöp nem ért jó teherbíró rétegbe, vagy a szelvény kicsi.'}</span>` + head);
     else if (st.end === 'rock') ver.set('warn', 'Megállt a kőzet felszínén', `<span>A kőzetbe verni nem lehet: a cölöp ${fmt(st.z, 2)} m-en a kőzetre ül. Ha ez a terv (álló cölöp a kőzeten), rendben – a fölösleges hosszt le kell bontani. Vigyázat: ilyenkor a visszaverődő hullám tovább növeli a feszültséget a cölöpben.</span>` + head);
-    else if (st.end === 'refusal') ver.set('bad', 'Elakadás a tervezett mélység felett', `<span>A cölöp ${fmt(st.z, 2)} m-en ${/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a'} <b>${lt.n}</b> rétegben elakadt (az utolsó 10 ütésre ${fmt(last10, 0)} mm). ${lt.hard ? 'Egy vékony kemény betelepülés is megállíthatja a vert cölöpöt – ki kell emelni, más szelvény vagy más technológia kell.' : 'Növeld az energiát, vagy válassz más cölöpöt.'}</span>` + head);
+    else if (st.end === 'refusal') ver.set('bad', 'Elakadás a tervezett mélység felett', `<span>A cölöp ${fmt(st.z, 2)} m-en ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a')} <b>${lt.n}</b> rétegben elakadt (az utolsó 10 ütésre ${fmt(last10, 0)} mm). ${lt.hard ? 'Egy vékony kemény betelepülés is megállíthatja a vert cölöpöt – ki kell emelni, más szelvény vagy más technológia kell.' : 'Növeld az energiát, vagy válassz más cölöpöt.'}</span>` + head);
     else if (st.n === 0) ver.set('', 'Kész a verésre', `<span>A cölöp (${P.t}, L = ${fmt(P.L, 0)} m) a vezetőtoronyban áll. Üss egyet, vagy indítsd a folyamatos verést!</span>` + head);
-    else ver.set(head ? 'warn' : '', 'Halad…', `<span>A talp most ${/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a'} <b>${lt.n}</b> rétegben jár, ${fmt(st.z, 2)} m mélyen.</span>` + head);
+    else ver.set(head ? 'warn' : '', 'Halad…', `<span>A talp most ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a')} <b>${lt.n}</b> rétegben jár, ${fmt(st.z, 2)} m mélyen.</span>` + head);
     draw();
   }
   function draw() {

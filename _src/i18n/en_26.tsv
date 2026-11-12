@@ -1,0 +1,130 @@
+4ec0984	grouted cement body
+567a6b7	The micropile is finished
+fa905d6	A cement body of 20–50 mm forms around the bar, and outside it a cement-permeated soil sleeve of 30–80 mm. The tip resistance is neglected in the resistance.
+7c3d307	reinforcement cage
+00e8b59	water in the bore
+38b22d3	necking
+41ede56	collapse → discontinuity
+dbc9e68	${M.cls} pile · base ${Math.round(M.share * 100)} %
+dc2df84	reinforced concrete pile cap
+4759007	spacing here 3·D = ${fmt(s, 2)} m
+c416198	${M.cls} piles · L = ${fmt(M.Lact, 1)} m
+dacd17c	The tube is 46–52 cm; because of the displacement the finished pile is approx. 60 cm in diameter.
+ebab376	Square: 30×30 or 40×40 cm, L = 4–12 m · round (spun): D = 25–50 cm, L ≤ 20–22 m.
+f9bfa05	Micropile: bored shaft diameter at most 250–300 mm.
+db90faf	Cased: D = 80–180 cm, L = 15–50 (100) m.
+3424139	Unsupported: to a depth of at most 8–10 m.
+7530984	Switch it on and see what goes wrong – and what the list reveals.
+638f509	Here the soil decides: try it below the groundwater or in sand.
+a40f64d	For this technology the soil and the length decide – watch the list.
+528251d	Real recording
+8aed4c3	0<small>m³ – displaces it</small>
+f0961f2	–<small>precast</small>
+5e9d52f	${fmt(M.concAct, 1)}<small>m³ (theoretical ${fmt(M.concV, 1)})</small>
+e5c6b16	shaft – ${p.n}: ${pct(p.R / R)} %
+1272bf3	base resistance + shaft resistance layer by layer · illustrative model
+c9481c4	friction (base ≤ 1/3)
+b0fef1c	end-bearing (base ≥ 2/3)
+cddbf23	Checklist
+e009d22	${cnt('warn')} warnings
+a9ddb80	In detail: 
+1382b04	Quiz – lessons from the pile builder
+9c66a62	What holds the wall of a CFA bore during drilling?
+3ba88ae	Nothing – the bore stands by itself
+0dcc1fa	The soil remaining on the continuous auger supports the wall, so CFA needs no separate support.
+863b51c	In profile A (soft clay over gravel) you lengthen the 13 m CFA pile to 20 m. What happens?
+96cb9b4	The share of the shaft increases, and the “end-bearing” pile becomes mixed
+a8485d7	The share of the base increases, it becomes even more end-bearing
+cf99cff	Nothing, because the base is in the same layer
+09bbc4c	It becomes a friction pile, because the base gets into a soft layer
+b3b894d	The longer shaft running in the bearing stratum takes an ever larger share – the share of the base falls below 2/3.
+e8fa78e	Why is a driven precast pile risky on a city-centre infill site?
+da7d14e	Driving causes significant noise and vibration
+0101605	Because concreting is impossible below the groundwater
+95e8ce5	Because it does not compact the soil
+8545622	Because it can be at most 4 m long
+f292085	The dynamic effect of driving also reaches the neighbouring buildings – near structures it can only be used under strict limits.
+e6d0046	In cased drilling below the groundwater, what must be done in the bore?
+71b537a	Replace the water removed, so that the soil does not break in at the base
+44f9ad1	Pump out the water so that the base is dry
+c4745a3	Grout the base with cement
+372b061	Nothing, the casing solves everything
+22f9d0a	If the water level inside falls below that outside, the water pressure difference breaks in and loosens the soil at the base.
+c99f44d	For which is the tip resistance neglected when calculating the resistance?
+0110126	Driven precast pile
+69986d3	For a slender micropile typically only the shaft resistance is taken into account.
+8a555a7	A widened base rammed out of batches of concrete
+630bd1a	The excess concrete left above the pile head
+b3e6fcb	A steel shoe welded onto the end of the casing
+4cda034	The top layer of concrete mixed with slurry
+10919ac	After the plug is driven out, further batches of concrete are rammed at the base – this “bulb” gives the high base resistance.
+9b177e1	Hard clay, the groundwater is deep, an 8 m bored pile is needed. What is the simplest support?
+114b06a	No support – but it must be concreted immediately
+06cdc2f	A casing with water replacement
+283b98c	Compressed air
+0293f7f	In cohesive soil above the groundwater, the bore stands by itself for a short time to at most 8–10 m.
+829f8f8	For a cast-in-place screw pile, which resistance does the displacement mainly increase?
+71c3d3e	The shaft resistance
+bfb28b1	Only the base resistance
+cc8c339	It reduces the shaft resistance
+a453d25	The head pushes aside and compacts the soil around the pile – this acts along the shaft.
+d0b9b5e	A deep foundation can transfer load to the soil not only at its lower bearing surface (base) but also along its side, its shaft.
+e974ad5	That is why it is a load-transferring element: its resistance is the sum of the base (tip) and the shaft resistance.
+d15ee65	For a mixed (combined) pile both the tip and the shaft resistance contribute between 33 and 66 % of the resistance.
+03ccd34	If neither reaches 2/3, the pile acts as a mixed pile.
+eac8504	If at least 2/3 of the resistance comes from the shaft, we speak of an end-bearing pile.
+5a36fb8	That is the friction pile. For an end-bearing pile at least 2/3 of the resistance is tip resistance: the pile “stands” in a layer of much better bearing capacity.
+4320a05	When anchoring against uplift – for example for underground car parks and tanks – the pile works as a tension element.
+38c5987	A pile can also go into tension if a pile group receives a large eccentric load.
+1c5d35e	A tension pile transfers its load to the soil through the base and the shaft together.
+12e7439	In a tension pile only the shaft works, in the opposite direction to the compression case.
+6c23bfc	Piles with a diameter greater than 80 cm are typically precast and installed with displacement technology.
+67f89bd	Large-diameter piles are made exclusively with replacement technology.
+13cf337	For river piers of bridges, a shallow foundation is the safest solution because of the risk of scour.
+d168abd	Exactly the opposite: the risk of scour is one of the typical reasons for a deep foundation – as is the risk of sliding or settlement that a shallow foundation would make unacceptable.
+ce085ad	A replacement pile is always cast in place.
+8d2e57b	The soil is removed (bored out) and the resulting hole is filled; meanwhile the surrounding soil may loosen slightly.
+137cd37	For a precast pile installed into the ground, the displacement increases both the base and the shaft resistance.
+01db048	For a cast-in-place screw pile mainly the shaft resistance increases.
+36b11f9	A cast-in-place screw pile brings the soil up while drilling, so a lot of spoil has to be removed.
+dce36c8	The displacement drilling head pushes aside and compacts the soil; only a little spoil comes to the surface.
+968bd20	Pile driving can be used without problems even in hard clay and fill with large blocks.
+d770d0e	It cannot be used in rock, hard clay, strongly cemented soil or blocky fill – even a thin such intercalation can prevent it.
+24d0223	Ground screws are typically 10–15 m long and are for founding heavily loaded bridges.
+f9af97e	They are typically at most 2–3 m long, for lightly loaded structures: lightweight houses, solar parks, fences, mobile stands.
+9802707	In vibration, by tuning the frequency to the natural frequency of the soil, the soil resistance can be temporarily reduced to a minimum.
+3a3b6c4	Vibration is used mainly in granular soil; the loud noise is reduced by screening.
+6f03d92	At the base of a Franki pile a widened concrete base, the “bulb”, is formed by ramming.
+c3727f7	The compacted concrete base greatly increases the bearing capacity (2000–3000 kN can be achieved).
+2c7e277	Loosened, settled or collapsed soil remaining at the bottom of the bore can greatly reduce the tip resistance of the pile.
+e26bf2a	That is why the pile base must be cleaned before concreting.
+ec719f1	The casing of a Franki pile is driven down with hammer blows on the top of the tube.
+3b634b8	The approx. 1 m dry concrete plug placed in the tube is rammed with a 3 t drop hammer, and the concrete drags the tube down with it through friction.
+c74b33c	The short auger is used mainly in granular soil, the drilling bucket mainly in cohesive soil.
+2c011c9	The other way round: the short auger is mainly for cohesive soil and the drilling bucket mainly for granular soil; the grab and the continuous auger work in any soil.
+4a5b8f5	The concrete of a CFA pile must be vibrated thoroughly after it is placed in the bore.
+b816f07	No vibration is needed: the flowing consistency and placing under pressure ensure self-compaction.
+a45bd39	For a CFA pile the wall of the bore is supported by the soil plug remaining on the auger; no separate support is needed.
+1876b2d	This is one of the biggest advantages of the continuous auger.
+090a6e6	For a CFA pile the reinforcement cage is lowered into the freshly concreted pile.
+3ce90d3	That is why the pile is usually concreted up to the working level.
+0630484	In cased drilling below the groundwater, the water removed must be replaced in the bore, otherwise groundwater may break in at the base.
+9130172	The higher water level outside would disturb the soil with water breaking in at the bottom of the bore.
+28e59b1	The typical length of a CFA pile is 30–50 m.
+3eadf56	It is typically 6–22 (24) m long and 40–120 cm in diameter.
+1cb3a2f	In granular soil the casing goes down after the excavation, lagging behind it.
+7919f83	The casing must generally – in granular soil without exception – go ahead of the excavation.
+db843a8	For a bentonite-supported pile the concrete is dropped freely from the top into the slurry-filled bore.
+d84690b	Concreting is done through a tremie pipe, from the bottom up; the concrete displaces the slurry.
+32ec632	In cohesive soil above the groundwater, a bore at most 8–10 m deep can be made without support, but it must be concreted immediately.
+bc4e1b2	Up to a depth of 5–6 m such a foundation is also called an excavated block foundation or well foundation.
+a65ede4	The shaft diameter of a bored micropile is 400–600 mm.
+10956f3	Bored micropile: at most 250–300 mm; driven micropile: at most 150 mm.
+6144ed2	For a micropile, buckling must be checked separately if the undrained shear strength of the soil layer is less than 10 kPa.
+6c1bb45	Because of the small diameter, the slender pile can buckle in soft soil.
+12a5c3c	When calculating the resistance of a micropile, the base resistance is neglected.
+e1de366	The shaft resistance is determined by the method of construction, so a load test is justified.
+01ec6e8	In jet grouting the cement suspension is injected into the soil at a pressure of 5–6 bar.
+67a382a	The pressure of the grout jet is 400–600 bar; 5–6 bar is the pressure of the air shroud in the double jet with air.
+1b2dba0	A diaphragm wall panel can be excavated in one go as long as 30 m.
+2f2277c	A panel is at most 8–10 m, typically 2.8–5.6 m long – this is set by trench stability.

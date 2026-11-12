@@ -1,0 +1,116 @@
+adc3abb	That is approx. this many trucks
+bc46e31	Shaft area
+b83aeb9	Compaction of the soil
+43fbe9c	↺ Again
+2a272bd	The drilling head is stuck
+3ca3270	<span>At ${fmt(stuck, 1)} m the torque reached the limit of the rig (${TMAX} kNm). In dense, hard soil the displacement head cannot push the soil aside – a replacement (bored, CFA) pile is the right choice here.</span>
+53ab1c6	The pile is finished
+72ce723	<span>${fmt(L, 1)} m, Ø ${fmt(sD.v, 0)} mm – we pushed ${fmt(V, 2)} m³ of soil sideways, and almost nothing came to the surface. A bored pile would produce approx. ${fmt(V * 1.25, 1)} m³ of (loosened) spoil.</span>
+7d45b34	Drilling – rotation and thrust
+e762e36	<span>The head pushes aside and compacts the soil; the monitor records the torque.</span>
+36853f7	Concreting under pressure
+a043ca6	<span>The concrete flows to the base through the drill stem under pressure, while the stem is withdrawn with rotation.</span>
+92f3dfe	<span>The reinforcement cage is vibrated down into the fresh concrete.</span>
+b8789f5	This will be hard…
+179c41d	Drilling can start
+e632f92	<span>The estimated torque at the base is ≈ ${fmt(T0, 0)} kNm – more than the rig can deliver (${TMAX} kNm).</span>
+c2eae6b	<span>Estimated torque at the base ≈ ${fmt(T0, 0)} kNm (rig limit ${TMAX} kNm).</span>
+54c66b7	little spoil
+d9ac1e4	MONITOR · SCREW PILE
+7e53d47	depth of the drilling head – concreting
+a22da57	depth of the drilling head
+5953b43	rig limit
+b67b9e3	torque (kNm)
+f73573d	concrete pressure
+a5078e3	standby
+eb7ed0a	DRILLING
+ee00674	CONCRETING
+1fc46b2	REINFORCEMENT
+add188c	DONE
+bc2d59c	Illustrative, horizontally 3×
+592e186	Quiz – Franki and screw piles
+9c35ae6	What pulls the casing of a Franki pile down into the ground?
+80ff191	The concrete plug rammed inside the tube, through friction
+1e6be8c	Hammer blows on the top of the tube
+5b88a73	The tube’s own weight
+178fcda	The soil pumped out of the inside of the tube
+7c02c09	The dry concrete placed in the bottom of the tube is rammed inside the tube by the 3 t drop hammer; through friction the plug drags the tube down with it – so neither soil nor water gets into it.
+08e13bc	What is the “bulb” of a Franki pile?
+35af448	The widened concrete body rammed out at the base
+134a5c2	The cap above the pile head
+46e9347	The lower, conical end of the casing
+7f48d20	A cracked zone forming along the shaft
+5ad2a68	When only 30–40 cm of concrete is left in the tube, further batches are rammed out: the compacted concrete base greatly increases the bearing capacity.
+74fe75b	What resistance can be achieved with a Franki pile?
+e55916c	A Franki pile is at most 16–18 m long, approx. 60 cm in diameter because of the displacement, and a resistance of 2000–3000 kN can be achieved with it.
+a96b1a3	What happens to the soil when a (displacement) screw pile is drilled?
+02c8f8c	The drilling head pushes it aside and compacts it; hardly any spoil comes up
+3d0954d	The auger brings the whole soil volume to the surface
+fa0ab10	Bentonite slurry displaces the soil
+982dfeb	The soil is removed by underwater dredging
+72cf07e	The special head pushes aside and compacts the soil around itself while drilling. Only a little spoil comes to the surface – it does not need to be removed.
+ee0f34b	Which resistance increases primarily for a cast-in-place screw pile because of the compaction?
+414ba11	The shaft resistance
+bb41e3c	Only the base resistance
+0db4c43	The tensile strength of the pile
+a7e8083	Neither – only the strength of the concrete increases
+b621d53	For a precast (driven) pile both the base and the shaft resistance increase, for a cast-in-place screw pile primarily the shaft resistance.
+7337d0e	How does the reinforcement get into a screw pile?
+2d5911f	It is vibrated down into the fresh concrete
+aa399bf	It is driven into the ground before drilling
+c8b8b5b	It goes down inside the drill stem together with the drilling head
+2e21790	It is drilled in after the concrete has hardened
+061f123	Concreting takes place through the drill stem while the stem is rotated and withdrawn; the prefabricated reinforcement cage is then vibrated down into the fresh concrete.
+2b077af	What are the usual diameter and the maximum length of screw piles?
+61c0a98	The usual diameter is 300–600 mm, and the maximum length approx. 20 m. The lower structural capacity due to the smaller diameter may limit its spread.
+d7a8a4b	Which screw pile system leaves a threaded shaft?
+ddebda5	Smooth-shaft systems are e.g. Omega, Fundex, De Waal and CHD; Screwsol has a threaded shaft. CFA is not a displacement pile but a replacement (at most partial displacement) bored pile.
+422ccb4	In which soil is the displacement screw pile least suitable?
+856457f	In very dense gravel, hard clay
+a96e75c	In medium-dense sand
+d3785da	In soft–firm clay
+ffb7220	The technology is popular in loose to medium-dense granular, intermediate and soft–firm cohesive soil. In very dense, hard soil the head cannot push the soil aside.
+f003288	Loose–medium sand
+37331da	Soft–medium clay
+a09c207	Dense sandy gravel
+4272c2a	rounded gravel
+2744824	External diameter of the well
+c0123bd	Wall thickness
+554f3eb	Depth of the bearing stratum
+9155c06	Friction reduction along the shell
+0808a00	Shoulder offset above the cutting edge
+4c5f35c	The grab also dredges from under the cutting edge
+b3e4651	Groundwater at 1.5 m depth
+3e78886	▶ Sinking
+a817307	Self-weight G
+6709292	Buoyancy at the target depth
+d003eac	Resistance at the target depth
+d080733	Ballast required
+60bb4db	bottom plug
+57222b4	FORCES AT THE CURRENT DEPTH (${fmt(z, 1)} m)
+fcd7b1d	driving: G + 
+4122c9f	resisting: S + 
+2ec0332	✓ the well stands on the bearing stratum
+c57d32d	↓ the well is sinking
+e42dd40	✕ the well has stopped – it sinks no further
+559622d	dredge from under the cutting edge too
+5c6435f	reduce the shell friction with bentonite slurry or rounded gravel
+c2a6909	use a shoulder offset
+1186b5a	add at least ${fmt(Math.ceil(m.need / 50) * 50, 0)} kN of ballast
+f7a5899	<p>The soil under the cutting edge (${fmt(m.Re, 0)} kN) carries more than the weight of the well. Tip: ${tips.slice(0, 2).join(', ')}.</p>
+307203a	<p>At this depth the shell friction and the cutting-edge resistance reach the effective weight. Tip: ${tips.slice(0, 3).join(', ')}.</p>
+6d4ffe7	It reaches the bearing stratum
+ac5107b	<p>Even at the target depth a reserve of ${fmt(m.F(o.L) - m.Rz(o.L), 0)} kN remains. There a bottom plug is made, or the well is filled with concrete.</p>
+6a0c2c0	Done – the well has reached the bearing stratum.
+46661fd	Dredging in progress…
+34e6095	The well has stopped.
+d313e95	Vibrating down, grabbing
+1ca33c6	On the bearing stratum
+35b95d9	Finished well
+ea8c909	withdrawing
+47377b4	the casing
+c666b72	tremie pipe
+a4e6ccc	RC grillage
+aded3de	concreted well
+58b1209	Closed at the bottom (floated)
+7616a1b	The box is built on the bank or in a dry dock, floated into position on open water, then sunk onto the river bed by filling it with water. Here water is not the enemy: it is used as ballast.

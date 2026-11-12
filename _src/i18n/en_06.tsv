@@ -1,0 +1,149 @@
+deb4126	<b>120–150<small>kN</small></b><span>resistance achievable even with a hollow-bar grouted micropile</span>
+02b83b7	In building rehabilitation
+5d496b5	strengthening an overloaded foundation,
+266fd08	deepening a basement level,
+0dd606b	taking an increased load (added storey, change of use),
+b36b058	deepening the foundation because of an adjacent new building,
+4684db0	transferring the load because of a cavity opened below the foundation (e.g. a utility tunnel).
+ae47cee	Other uses
+8c40aa2	founding new structures – especially in very heterogeneous soil or rock conditions,
+8e8e325	reducing settlements and displacements,
+18fe5ae	improving slope stability, retaining walls, soil reinforcement,
+97c87ec	<b>anchoring against uplift</b> (tension element: e.g. the slab of an underground car park, a pool below the groundwater).
+5233275	New loads in a tight space
+bbf0aa7	<b>New loads in a tight space</b>The small drilling rig works even in a cellar with low headroom.
+c954953	Seismic strengthening
+aed7643	<b>Seismic strengthening</b>Inclined, crossing micropiles under the column.
+2ee07d1	Stopping settlement
+81f7915	<b>Stopping settlement</b>The load of the existing foundation is carried down to a deeper, better layer.
+2e13c4c	Anchoring against uplift
+925c578	<b>Anchoring against uplift</b>Tension elements hold down the slab standing in the groundwater.
+26902a4	Underpinning
+f35e48c	<b>Underpinning</b>The old strip footing is drilled through obliquely from both sides and supported.
+584e0ba	Excavation support
+41935ad	<b>Excavation support</b>A micropile wall on a tight site, anchored with an inclined micropile.
+d777ca7	Slope stabilisation
+6ad8068	<b>Slope stabilisation</b>A lattice (crossing) micropile wall through the slip surface.
+89abd8f	New structure on mixed subsoil
+c895f68	<b>New structure on mixed subsoil</b>It can be drilled into rock and into blocky or heterogeneous layers too.
+ef8852d	How is it made? – three routes in Hungarian practice
+87cb157	Bored, grouted
+6767c6d	Replacement drilling with a continuous auger or with flushing, then filling the bore with mortar – with or without post-grouting.
+037c88d	With a steel tube core
+af8c1c8	A steel tube approx. 100–200 mm in diameter is placed in the bore as reinforcement, and the annular space and the tube are filled with mortar. In loose, collapsible soil drilling is done under the protection of a casing.
+84b856a	Hollow bar, grouted
+f254efd	An extendable <b>hollow steel bar</b> with a sacrificial drill bit is drilled down (e.g. Ischebeck Titan), with continuous grouting through the bar during drilling.
+331857e	Section of a hollow-bar grouted micropile
+31d31a1	Reinforced concrete pile cap
+6b9933b	or base slab
+a1627dc	Head plate and nuts
+fd8e292	Original soil
+e6ee505	Compacted soil zone
+975fba7	Cement-permeated soil
+dc7f4c4	=
+7f3c9fd	Cement body in the bore
+6ca0daf	=
+60f7842	Spacer (PVC)
+d771194	Cut away: grout
+ca89f07	inside the bar too
+71bf015	Coupler
+b0dd6d4	Hollow, threaded
+dd199e8	steel bar
+6b4dadd	Sacrificial drill bit
+6ab794f	Section of a hollow-bar grouted micropile (illustrative figure, thicknesses exaggerated). A cement body forms around the bar, and outside it a rough sleeve of cement-permeated soil.
+a9b3618	The hollow-bar micropile
+49e3b70	With the hollow-bar micropile, drilling and grouting are done <b>in one pass</b>: the hollow bar is at the same time the drill rod, the grouting pipe and the permanent load-bearing core. The drill bit is lost and the bar stays in the ground. Continuous grouting forms a <b>cement body of 20–50 mm</b> around the bar, and outside it a <b>sleeve of cement-permeated soil 30–80 mm thick</b> – the sleeve is “rough”, so the shaft resistance is good.
+c4e6955	Resistance and buckling
+abbeccd	When calculating the resistance of a slender micropile, the <b>base resistance is neglected</b>: only the shaft works. There are recommendations for the shaft resistance, but the method of construction is decisive, so a <b>load test</b> is justified. Because of the small diameter, the resistance to buckling must be checked separately if the undrained shear strength of the soil layer is <span class="nw">c<sub>u</sub> &lt; 10 kPa</span>.
+2698e6b	Heads of hollow steel bar micropiles protruding from the reinforcement, with nuts and head plates
+2bb8c66	Bar heads with head plates and nuts – tied into the reinforcement of the reinforced concrete slab.
+b098e6a	Underpinning with micropiles
+d48f9d2	Does the micropile buckle?
+df14a48	<b>Jet grouting</b> is the breaking up of soil or weak rock, mixing it with binder and partly replacing it. The breaking up is done by a fluid jet of high kinetic energy, which is mostly the binder itself – usually a water–cement mix. The soil structure is destroyed, and the cement suspension penetrating the resulting gaps sets with the soil to form <b>“soilcrete”</b>. The amount of soil eroded can be controlled by the velocity of the jet.
+a6762d0	The cylindrical element is the <b>jet column</b> (jet pile), the planar element formed by grouting is the <b>jet panel</b>. It is classed among deep foundations, but it is versatile: deep foundations of new structures, deepening the foundation level of an existing structure and strengthening it, underpinning, settlement compensation, low-permeability cut-off walls, excavation support, reinforcing soil masses, auxiliary structures for tunnelling, protection against liquefaction.
+c93f4af	<b>400–600<small>bar</small></b><span>pressure of the binder jet</span>
+a0addbd	<b>2–5<small>mm</small></b><span>diameter of the monitor nozzles</span>
+acd3413	<b>100–200<small>mm</small></b><span>diameter of the pre-drilled hole</span>
+9e6e0f4	<b>60–70<small>cm</small></b><span>maximum column diameter in clay</span>
+a007462	<b>150–200<small>cm</small></b><span>up to this much in gravel</span>
+e94b880	<b>5–6<small>bar</small></b><span>pressure of the air shroud in double jet</span>
+d18f3a2	Two phases: drilling and grouting
+653dabd	<b>Drilling:</b> a 100–200 mm diameter hole to the required depth, with the help of a drilling fluid. The design of the drilling head (the “monitor”) and the pressure depend on the quality of the soil.
+69f1b3b	<b>Grouting:</b> starting from the bottom of the hole, the binder is injected into the soil through the 2–5 mm nozzles of the monitor at a pressure of 400–600 bar, while the drill rod is <b>slowly rotated and withdrawn</b>.
+7108e88	The equipment: silo, mixer, high-pressure pump, drill rod and nozzle – the drilling rig is small, and the pump plant can stand aside, even in a courtyard.
+4db2fe3	Making a jet column: 1 · Drilling
+7d65eb4	<b>1 · Drilling</b>A 100–200 mm hole to the design depth, with drilling fluid.
+9d48a96	Making a jet column: 2 · Grouting from the bottom
+0e0a0e4	<b>2 · Grouting from the bottom</b>A jet at 400–600 bar from the monitor nozzles cuts and mixes the soil.
+4fa57ec	Making a jet column: 3 · Rotation, withdrawal
+eb6970c	spoil
+265b521	<b>3 · Rotation, withdrawal</b>The column grows from the bottom up; the excess material reaches the surface along the hole as spoil.
+c1f9408	Making a jet column: 4 · The next column
+d84cac5	overlap
+8be2482	finished
+954360d	next
+f1dab7b	<b>4 · The next column</b>It is cut into the previous one – so intersecting columns form a continuous wall.
+9252b0e	The four variants – how many nozzles are “switched on”?
+c1f4699	=
+78482f4	Single jet
+539ed5e	Only cement suspension is injected into the soil through a single nozzle at 400–600 bar during withdrawal and rotation.
+2c521a8	air + cement
+d3608bf	Double jet with air
+e41bb34	The cement jet of the same pressure is surrounded by an air shroud at 5–6 bar – this increases the range.
+b9cd182	water
+23f7bf9	Double jet with water
+792c30e	The soil is broken up by a high-energy water jet; cementation takes place at the same time with a grout jet injected through a separate nozzle.
+ebada0f	air + water
+c18a285	Triple jet
+3a40a89	A water jet shrouded in an air jet breaks up the soil, and grout is injected at the same time through a separate nozzle for cementation.
+6b3afd7	The variant is decided by the number of nozzles switched on and the diameter to be achieved. The column diameter depends on the permeability of the soil: <b>smallest in clay</b> (at most 60–70 cm), <b>up to 150–200 cm in gravel</b>. Intersecting columns can form a continuous wall, and if needed a horizontal slab too.
+e925c79	Jet column factory
+04cca02	Jet panel: when we don’t rotate
+216356c	Thin panels can also be formed if the rod is <b>not rotated</b> during jetting but pulled up with two opposite nozzles that just “sweep” the soil. Panels made from neighbouring holes, joined to each other in a V shape, form a <b>watertight curtain wall</b> – with less material than columns.
+00c9fb9	If the spoil cannot get out
+1d2b8af	During grouting, attention must be paid to the <b>free outflow</b> of the excess material – the spoil returning to the surface. If it becomes blocked along the hole, the pressure builds up in the soil: hydraulic fracturing can occur, and in extreme cases <b>the building or its surroundings may even be lifted</b> by the excess cement.
+c4c551c	Jet panels in a V shape: plan and elevation
+e6aad09	Plan
+093d64a	hole position: two nozzles from here
+3e3dd59	“sweeps” in two directions
+9309920	Elevation
+be7ee82	V-shaped jet panel: made from the holes without rotation, pulled up with nozzles on both sides; adjacent panels meeting each other form a watertight curtain wall.
+1562cfc	Jet grouting in the field
+09519e4	An exposed thin jet panel in the ground
+f952e09	Exposed jet panel: pulled up without rotation, with nozzles on both sides.
+a513c11	A small crawler jet grouting rig on an infill site, in front of an old fire wall
+c7cf25c	A compact drilling rig on an infill site, at the foot of the neighbouring fire wall.
+54612c6	Cement silo and mixer-pump plant next to a city-centre apartment block
+71dc46b	Silo and mixer-pump plant between the apartment blocks.
+449b391	Jet grouting monitor with a side nozzle
+131f52e	The monitor: the 2–5 mm nozzle on its side.
+5e1f94d	A high-pressure jet from the monitor at the surface, as a trial
+c20c77c	A trial jet at the surface – this is the energy with which it cuts the soil.
+0a48605	Excavated jet columns standing side by side in the side of an excavation
+7ad7d68	Excavated jet columns: the varying diameter is clearly visible.
+ee17c9f	Intersecting jet columns exposed in an excavation under an old building
+a32ade6	Underpinning: an exposed jet column wall under the neighbouring building.
+703ef62	Excavation wall under an old building, underpinned with jet columns and exposed
+ff50372	Jet columns reaching under the foundation of the old building, in the side of the pit.
+a093667	Exposed jet columns widening downwards under old masonry
+ccdcf41	Jet columns under old masonry.
+97fd55e	A jet grouting rig at the bottom of a deep excavation, between tall fire walls
+6a32dec	Continuing from the bottom of the pit: jet grouting at the next level.
+3a16c08	In <b>deep soil mixing</b> a rotating, bladed <b>mixing shaft</b> mixes the soil with the binder in place. Here the soil is broken up not by a high-pressure jet but by the mixing tool itself – so the size of the element is close to that of the tool, and much more predictable than that of a jet column.
+88a76cb	The binder (cement, in soft clay often a lime–cement mix) is released at the end of the shaft: as a suspension (<b>wet method</b>) or as a powder (<b>dry method</b>, mainly in soft soil with a high water content). Intersecting columns form a block, a grid or a wall; with a cutter-mixer rectangular wall panels can also be made, and in shallow, very soft layers the whole soil mass is stabilised.
+cc98dd0	Deep mixing: 1 · Rotating down
+bd934ae	<b>1 · Rotating down</b>The bladed mixing shaft penetrates while rotating; the binder is released at the end of the shaft.
+1d16ab0	Deep mixing: 2 · Withdrawing while mixing
+4334c11	<b>2 · Withdrawing while mixing</b>From the design depth it mixes the soil once more while being withdrawn.
+b4140a2	Deep mixing: 3 · The finished column
+6752aba	<b>3 · The finished column</b>A soil–binder element mixed in place; its size is close to that of the mixing tool.
+9044bf0	Deep mixing: 4 · Intersecting: block, wall
+47342ab	plan:
+ca7c3c9	<b>4 · Intersecting: block, wall</b>Intersecting columns form a block, a grid or a wall.
+990000f	Deep mixing in the field
+50fffe6	Deep mixing rig with multi-axis bladed mixing shafts
+ffeef90	Multi-axis bladed mixing shafts.
+f8c4c36	Excavated, intersecting deep-mixed columns
+6b4e2a0	Excavated, intersecting mixed columns.
+50d8b7c	Gravel pile, vibro stone column
+dc42002	The gravel pile is a “pile” of granular material: it consists of gravel or crushed stone. After the <b>vibrating probe</b> (depth vibrator) has been driven down, the gravel is fed into the soil in stages at the tip of the probe, <b>compacted</b> and pressed sideways by pushing the probe down again, and finally the <b>surface is levelled</b>. The finished column is ribbed, thicker in the weaker layers.

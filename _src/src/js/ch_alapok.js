@@ -1,5 +1,5 @@
 // C01 – Mi a mélyalapozás? Okok, döntés-widget, tornyok léptékben, kimosáslabor, talp és köpeny, a cölöpalap részei
-import { $, $$, h, svg, figure, clear, fmt, clamp, lerp, register, shell, slider, seg, toggle, stat, verdict, arrow, pathD, loop } from './core.js';
+import { $, $$, h, svg, figure, clear, fmt, clamp, lerp, register, shell, slider, seg, toggle, stat, verdict, arrow, pathD, loop, EN } from './core.js';
 import { defineQuiz } from './ui.js';
 import './alap_tt.js';
 
@@ -147,7 +147,7 @@ register('alap-dontes', (root) => {
     for (let i = 1; i < m.n; i++) svg('line', { x1: bx, y1: G - i * fh, x2: bx + bw, y2: G - i * fh, class: 's-line', 'stroke-width': fh > 5 ? 1 : 0.5 }, s);
     svg('rect', { x: bx, y: top, width: bw, height: G - top, fill: 'none', class: 's-ink', 'stroke-width': 1, opacity: 0.5 }, s);
     if (m.df > 1.6) { svg('rect', { x: bx, y: G, width: bw, height: yF - G, class: 'f-bld2' }, s); T(s, bx + bw / 2, (G + yF) / 2 + 4, 'pince', 't-sm', { 'text-anchor': 'middle' }); }
-    T(s, bx + bw + 8, top + 12, `${m.n} szint`, 't-num halo');
+    T(s, bx + bw + 8, top + 12, `${m.n} ${EN ? (m.n === 1 ? 'storey' : 'storeys') : 'szint'}`, 't-num halo');
     // talajvíz
     water(s, 0, 560, Y(m.w));
     // alap

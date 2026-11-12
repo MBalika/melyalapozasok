@@ -1,0 +1,116 @@
+13219f0	The stone column is stiffer than the surrounding soil, so part of the load concentrates on it; meanwhile it acts as a vertical drain that speeds up consolidation, and in granular soil it also compacts its surroundings. It is not an independent load-bearing element: the stone column and the soil between <b>work together</b> – which makes it a <b>transition towards ground improvement</b>.
+1a04407	Vibro stone column: 1 · Penetration
+d48b5d2	<b>1 · Penetration</b>The vibrating depth vibrator pushes the soil sideways and (assisted by compressed air) penetrates to the design depth.
+a25c480	Vibro stone column: 2 · Compaction
+7572d64	<b>2 · Compaction</b>It is lifted slightly; the gravel fills the void through the tip, and pushing the probe down again compacts it and presses it sideways.
+c872df0	Vibro stone column: 3 · Levelling
+5c15251	<b>3 · Levelling</b>It is built up in stages to the surface, and finally the surface is compacted and levelled.
+a323eaf	Vibro stone column: 4 · Finished columns
+baa2bdb	<b>4 · Finished columns</b>Ribbed stone columns in a grid – thicker in the weaker (softer) layer.
+a95b5df	A related solution is <b>ground improvement with rigid inclusions</b>: rigid, typically unreinforced concrete or mortar columns that are not tied into the foundation; instead there is a granular load transfer platform (gravel mattress) above them. Arching in the mattress directs a large part of the load onto the inclusions (the rest is carried by the soil between them), and the inclusions pass it on through shaft and base resistance; along their upper part – where the soil between them settles more – negative skin friction develops. This is ground improvement, a form of combined foundation – not a pile foundation – and a transition between shallow and pile foundations.
+6c332a0	<a class="btn btn-line btn-sm" href="https://vedekezesakarossullyedesekellen.vercel.app" target="_blank" rel="noopener">Ground improvement in detail: Protection against harmful settlement ↗</a>
+1ef15b8	What does it do with the soil?
+1bb9bed	Comparison
+01835e0	Technology
+2342400	What happens to the soil?
+33bda1d	What remains in the ground
+099a762	Typical use
+9b71f8b	<b>Micropile</b>
+2a32484	bored (or displaced), the bore is grouted – the surrounding soil is permeated
+d99215c	steel core (bar, tube) + cement body, Ø ≤ 300 mm
+4d5c261	underpinning, strengthening foundations in tight spaces, anchoring against uplift
+1d93c9c	<b>Jet grouting</b>
+348d05a	a high-energy jet breaks it up, mixes it with binder and partly replaces it
+a6eac14	“soilcrete” column or panel; at most 60–70 cm in diameter in clay, up to 150–200 cm in gravel
+06af48f	underpinning, excavations, cut-off walls, tunnelling auxiliary structures
+69f7b9e	<b>Deep mixing</b>
+2148d2e	a mixing shaft mixes it mechanically with the binder in place
+ec28bbd	mixed column, block or wall panel
+af857b0	improving soft soil, under embankments, cut-off walls, excavation support
+affdef6	<b>Gravel pile</b>
+041981e	a vibrating probe displaces it and compacts gravel into the soil
+79c5a02	compacted gravel column (a granular “pile”)
+99a1189	reducing settlement, speeding up consolidation, ground improvement in a grid
+3b3ccb9	Jet grouting really spread around the turn of the millennium – worldwide and in Hungary too. Since then it has been one of the most important methods for city-centre infill sites: “reaching” under the foundation of the neighbouring house, it underpins, supports and seals against water at the same time – and the small drilling rig gets onto even the tightest site.
+ce8f99d	<span class="id">C07</span><span>Deep foundations</span><span>A wall in the ground</span>
+a0635f0	Diaphragm walls
+12049ff	Imagine a trench 60 cm wide and 30 metres deep, full of a greenish-grey, mud-like fluid – and yet it does not collapse, although groundwater and sand press on it from the side. A diaphragm wall is a wall formed below ground level by <b>reinforcing and concreting such a vertical-sided trench</b>. The trick lies in the fluid: the bentonite slurry holds the trench open until the concrete is in place.
+c4a0ab7	<a href="#rf-fal"><span>7.1</span><b>A wall in the ground</b></a>⏎    <a href="#rf-lepesek"><span>7.2</span><b>Construction step by step</b></a>⏎    <a href="#rf-zagy"><span>7.3</span><b>Bentonite slurry</b></a>⏎    <a href="#rf-allek"><span>7.4</span><b>Trench stability</b></a>⏎    <a href="#rf-beton"><span>7.5</span><b>Concreting, inspection</b></a>⏎    <a href="#rf-mikor"><span>7.6</span><b>When yes, when no?</b></a>
+1f07690	A wall in the ground
+a9e14ec	It has been used in Hungary <b>since the 1960s</b>. A diaphragm wall consists of a series of panels: each panel is excavated under the protection of bentonite slurry, then a reinforcement cage is lowered into it and it is filled by underwater concreting. It can be built to great depth, in practically any length and plan layout – in return it needs expensive, special equipment, so it is an <b>expensive technology</b>.
+bad8e1e	It is most often encountered as <b>earth retention</b>: as the boundary of an excavation next to an existing building where watertightness is also needed, or where the diaphragm wall also becomes the <b>side wall</b> of the permanent structure (underground car park, underpass, tunnel). Less often, shorter <b>barrettes</b> are made, like piles, purely as foundation elements – but per unit the pile is usually cheaper.
+b36be88	<b>40–120<small>cm</small></b><span>width of the trench (40–50–60–80–100–120 cm)</span>
+9046a14	<b>2.8–5.6<small>m</small></b><span>typical length of a panel; at most 8–10 m</span>
+3727208	<b>15–30<small>m</small></b><span>usual depth (6–30 m)</span>
+dcf8da6	<b>120–150<small>m</small></b><span>the deepest barrettes (USA, Mexico)</span>
+fb7ec7c	What is it used for?
+3c11c82	lateral support of excavations (retaining structure),
+2f53b68	permanent side walls of underground car parks and underpasses,
+171ebc9	deep foundations (barrettes, load-bearing diaphragm walls),
+291873a	cut-off walls: preventing seepage under dams, enclosing contaminated sites afterwards,
+e82f330	riverbank walls, slope stabilisation.
+202ba6d	Anatomy of a diaphragm wall
+e3af120	Construction step by step
+5743d9c	Excavation can be <b>staged</b> – first every second (primary) panel is made, and only then the ones in between (secondary) – or <b>continuous</b>, building the panels one after another. Concreting, however, is always done in sections: the panels are bounded by <b>stop ends</b> (a plank or a tube). The six steps of staged excavation:
+8f45999	The six steps of staged excavation
+ecaa53f	Panel builder
+1c56b01	The guide wall – the “template” of the diaphragm wall
+8cb1c75	The two reinforced concrete beams built on both sides of the trench near ground level are the basis of the whole job. Their width is <b>20–30 cm</b>, their height <b>1.0–1.5 m</b>; they can be straight walls or L-shaped with an outward-projecting toe. The two beams are usually propped against each other with struts, so they have to be designed as continuous beams. Their tasks:
+eb44a7c	protecting the edge of the trench, e.g. against the action of the excavating rig,
+8a388e9	supporting the loose upper soil,
+2e2f332	preventing slurry leakage in loose, filled soil,
+f7e2631	guiding the excavating tool,
+52269ea	reference base for setting out,
+abfe04f	guiding the slurry when it is pumped out and in.
+d967d99	<b>a) L-shaped beam:</b> the outward-projecting toe keeps it stable even on loose upper soil.
+0c90626	<b>b) Straight beam:</b> two reinforced concrete walls propped against each other.
+3a2f3ab	Completed guide walls, with the location of the trench between them
+9e5f7df	A completed pair of guide walls – the gap between them is the future trench.
+152f894	Excavating the soil: grab or cutter
+f22b91f	Diaphragm wall grab (clamshell)
+e9ebad9	A rig with a rigid rod (<b>Kelly</b>) or suspended on ropes, with hydraulic or mechanical (rope) power transmission. The work is <b>cyclic</b>: lowering – bite – lifting – emptying – lowering again. A bite is typically <b>2.8 m</b> long: this is the open width of the grab, and also the shortest panel that can be excavated.
+2359162	Hydrofraise (trench cutter)
+28cb9df	A reverse-circulation cutting machine: counter-rotating <b>cutter wheels</b> break up the soil, which is pumped out together with the bentonite slurry; outside they are separated, the slurry is cleaned and returned to the trench. It can be used to great depth, in any soil and even in <b>rock</b>, and gives a more accurate, neater surface – but it is very expensive.
+43db0b6	Grab or hydrofraise?
+db0f20c	The diaphragm walls of metro line 4
+9b322bd	In Hungary the hydrofraise has so far been deployed in the construction of metro line 4 in Budapest: a diaphragm wall was built <b>40 m deep at Szent Gellért tér</b> and <b>48.3 m deep at Fővám tér</b>, right next to the Danube.
+1e8aeb8	Diaphragm wall construction in pictures
+442a203	Rope-suspended diaphragm wall grab
+5bea3c0	Different grabs
+f9b76e2	Grabs: the width of the open grab gives the length of the bite
+3bc520e	Excavation with a grab from a slurry-filled trench
+6c274a7	The grab rises out of the slurry-filled trench
+0cf45c2	Hydrofraise cutter on site
+b55ac0a	Hydrofraise on site
+114381b	The cutter wheels of the hydrofraise close up
+9f83282	Cutter wheels with teeth – they work in rock too
+4732003	Two counter-rotating cutter wheels
+bba28e4	The two counter-rotating wheels direct the cuttings to the centre
+2ee36f8	Slurry treatment plant on site
+8206b8a	Slurry treatment plant: mixing, storage, cleaning
+9b652ad	Stop end and reinforcement
+008410b	Placing a stop end in the trench
+3430ad0	Stop end
+c5af9e1	Before concreting, <b>stop ends</b> (planks or tubes) are lowered at both ends of the primary panel. They mark the boundary between panels, make room for installing the <b>swelling waterstop</b> (which will seal the joint between the panels), protect the finished panel during the next excavation, and guide the excavating tool.
+43f00ff	Lifting a reinforcement cage with a crane
+313d91e	Reinforcement cage
+751a5c8	The <b>steel cage</b>, assembled as a grid and sufficiently stiffened with diagonal bars, is usually lifted into the trench in one piece by crane. The conditions for lifting are the structural design of the cage, the built-in auxiliary members, the lifting and fixing elements and handling according to the <b>lifting plan</b> – lifting a 20–30 m cage is a serious crane operation.
+a5417f0	Bentonite slurry
+307e8af	The special “raw material” of the diaphragm wall is a mixture of water and bentonite dispersed in it, the <b>bentonite slurry</b>. Bentonite is a very fine-grained colloidal clay consisting predominantly of <b>montmorillonite</b>. Only <b>activated “Na” bentonite</b> can be used for trenching; the viscosity of the slurry can be increased with CMC (a cellulose derivative).
+b0eb069	The slurry does two things at once: it <b>prevents groundwater from flowing in</b>, and it <b>counterbalances</b> the water and earth pressure acting on the side walls of the trench. Mixing it requires a separate mixing and settling “plant” on site: this is where it is made, where it rests, and where the slurry displaced or pumped out of the trench returns for cleaning.
+7294631	<b>1.03–1.12<small>g/cm³</small></b><span>density of the slurry during trenching</span>
+fe20fca	<b>≥ 1.0–1.5<small>m</small></b><span>how far the slurry level must be above the groundwater table</span>
+58a55ab	A jelly that flows
+e004583	Bentonite slurry is <b>thixotropic</b>: at rest it sets like a jelly, and when stirred or pumped it flows again. At the wall of the trench part of the water seeps into the soil, and the bentonite platelets deposit a thin, almost impermeable <b>filter cake</b> on the surface – through this the slurry transfers its pressure to the soil grains.
+af25c55	← swipe sideways for the figure →
+65cbe8f	<i>1</i><span><b>Cutter wheels</b> – they break up the soil at the bottom</span>
+547c53d	<i>2</i><span><b>Suction pump</b> – draws up the soil-laden slurry</span>
+b899a7b	<i>3</i><span><b>Desander</b> – separates the soil grains</span>
+6414ae7	<i>4</i><span><b>Tank</b> – storage for the cleaned slurry</span>
+a5d0091	<i>5</i><span><b>Centrifugal pump</b> – returns the slurry to the trench</span>
+6b7d811	<i>6</i><span><b>Separated soil</b> – for removal</span>
+5fb3c3e	<i>7</i><span><b>Centrifugal pump</b> – pushes the fresh slurry into the tank</span>
+12a0bdd	<i>8</i><span><b>Bentonite mixer</b> – the fresh slurry is made here</span>
+36a4ab8	<i>9</i><span><b>Bentonite silo</b> – storage for the bentonite powder</span>
+a1ec4a7	<i>10</i><span><b>Adding water</b> to the mixer</span>
+205ba3f	The slurry cycle in hydrofraise trenching: the soil-laden slurry (brown) taken from the trench is cleaned by the desander, and the cleaned and fresh slurry (greenish-yellow) returns to the trench from the tank – so the slurry level in the trench can be kept above the groundwater table throughout.

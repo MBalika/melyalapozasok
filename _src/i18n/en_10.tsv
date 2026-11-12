@@ -1,0 +1,150 @@
+2cc6883	Case study game
+6e26dd4	In Hungary the CFA pile has been the dominant piling technology for the past two or three decades: it is fast, low in noise and vibration, and an automatic record of the concrete pressure and the volume of concrete placed is produced for every single pile. Well and box foundations, on the other hand, have been almost completely pushed out today – their place has been taken by piles and modern excavation support.
+a9fe600	Technologies side by side
+51c652b	Switch on the site conditions: the matrix shows which technology is an option, which needs particular care, and which drops out – with reasons. Click the name of a row to jump to the relevant chapter.
+a0c9669	Technology matrix
+5ab50f4	Decision tree
+1a32224	Answer the questions in order: the tree guides you through the most important branches, from shallow foundations to diaphragm walls. The tree is deliberately simple – in real design several variants are compared, and the final word is always given by calculation, load testing and economy.
+0768bf4	Which deep foundation fits here?
+4d774b7	Remember
+2139c83	Choosing a technology is not a matter of “taste”: a wrong choice (for example a driven pile next to a sensitive neighbour, or unsupported drilling below the groundwater) can damage the surrounding buildings or result in a defective pile with discontinuities. That is why the soil and groundwater conditions must be known at the very start of design.
+6b56740	<span class="id">C11</span><span>5 animations · 13 real recordings</span>
+2ea4c4d	Video library
+00ab14e	All the videos in one place. The five explainer animations show the concepts, the load transfer and the mechanics, and the recordings of the BME Faculty of Civil Engineering show how the machines work on a real site. In the player <span class="kbd">Space</span> = pause, <span class="kbd">F</span> = full screen, <span class="kbd">Esc</span> = close; you can also page through at the bottom of the animation window.
+7f71812	Explainer animations
+bb32d7f	What to watch when?
+ca8e3b3	A suggested viewing route in the order of the chapters: at each stop the animation gives the principle and the real recording the technology. The buttons start the video directly.
+25b5ffc	What it looks like in reality
+5961a22	Deep foundation recordings from the YouTube channel of the BME Faculty of Civil Engineering (in Hungarian). Click to open the video here on the page; you can also open it on YouTube at the bottom of the window.
+7e6274b	<a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoJk3IiDC5YBCNSs0_YQFXXA" target="_blank" rel="noopener"><i class="grp1"></i><span><small>Playlist</small><b>Pile foundations</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLJnR9HUPPN85cACUQXJhYj" target="_blank" rel="noopener"><i class="grp3"></i><span><small>Playlist</small><b>Ground improvement</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLoUK4uIoeIHjowjrmQH1Tc" target="_blank" rel="noopener"><i class="grp4"></i><span><small>Playlist</small><b>Embedded retaining structures</b></span><em>↗</em></a>
+dbaf814	Deep foundations are not an island: the design of shallow foundations, ground improvement, unfavourable subsoils and excavation support are all part of the same decision.
+19d4836	Design of shallow foundations
+2fd6250	If a shallow foundation is enough after all: dimensions, bearing resistance, settlement.
+5138815	=
+65c85d1	Stability of shallow foundations
+b245627	Sliding, overturning, bearing failure – the limit states of a shallow foundation.
+e18bdbe	=
+77ccacb	Protection against harmful settlement
+5d9e4af	Soil replacement, compaction, stone columns, grouting, deep mixing.
+0569631	=
+77211c8	Foundations on unfavourable ground
+bf132f9	Expansive, collapsible, filled and organic soils.
+721ead8	=
+e754175	Excavation support (in Hungarian)
+c2b8534	Diaphragm walls, sheet piles, pile walls, strutting, anchoring – the sides of the excavation.
+e9a1c61	=
+b199986	Ground investigation
+744bb47	Boreholes, penetration tests, soil profile – the starting point of every foundation decision.
+3f6f8ac	=
+6970f84	<span class="id">C12</span><span>40 true/false statements · glossary</span>
+f0e99fc	Test and glossary
+308c915	The last pile has reached the bearing stratum too! Now check how much you remember: first a summary video with a quiz, then 40 statements covering the whole page – from the classification of piles to the caisson. After each answer you get a short explanation, and at the end a searchable glossary helps you revise.
+0a8248c	Warm-up: summary video
+ca070a4	The complete map of deep foundations in a few minutes, with quiz questions at the end. If you can answer the video’s questions, the statements below will be no problem either.
+ba20c08	True or false?
+5552a1d	Decide for each of the forty statements whether it is true. The bar at the bottom shows the result continuously; with the <b>Start again</b> button you can start over at any time.
+18c8a58	Glossary
+e25ea26	The most important terms in brief. Search for a word or filter by topic – one click takes you from any term to the relevant chapter.
+9cb00bb	<a class="btn btn-line" href="#bevezeto">↑ Back to the surface</a>
+dd18fd3	slender elements into the bearing stratum
+a94f295	Slender, individual elements carry the load down to the bearing stratum – at their bases and along their shafts.
+a579f3c	a wall in the ground: foundation and retaining wall
+fb3abb9	A continuous reinforced concrete wall in the ground: foundation and excavation support in one – it also forms the wall of the underground car park.
+00141bc	sunk large-diameter bodies
+f0c3a23	Large-diameter bodies, sunk and then filled with concrete, under individual columns; a grillage ties them together at the top.
+86b73c0	Box · caisson
+6794925	sunk on the plan of the structure
+c948eb6	A single large body matching the plan of the structure – the classic foundation of bridge piers standing in a river bed.
+1f8eb13	excavated block · rigid inclusions
+0354a06	On the boundary between shallow and deep foundations: the excavated block foundation, and ground improvement with rigid inclusions and a load transfer platform.
+45f377f	piles
+30bd8d6	underground car park
+eeebd45	diaphragm wall
+81135b9	grillage
+2d22939	well: Ø 0.8–3.0
+ee70d2c	river
+cfa479d	box
+4cf9dff	block foundation
+b895506	load transfer
+e213eec	granular layer
+23d2b9e	rigid inclusions
+29e1bc8	The types of deep foundation in one ground section: pile foundation, diaphragm wall, well foundation, box and caisson, transitional solutions
+5321057	<span><i class="sw f-l1"></i>fill</span><span><i class="sw f-l2"></i>soft clay</span><span><i class="sw f-l3"></i>sandy gravel (bearing stratum)</span><span><i class="sw f-l4"></i>hard clay</span><span><i class="ln gw"></i>groundwater table</span><span><i class="ar ld"></i>load</span><span><i class="ar sk"></i>shaft resistance</span><span><i class="ar bs"></i>base resistance</span><span><i class="ar ea"></i>earth and water pressure</span>
+e9c2c19	Five solutions in one section. 
+e7609f4	Choose a type in the section or with the buttons – its data sheet below is highlighted too.
+614b6d2	Deep-lying bearing stratum
+327a9d2	A reliable bearing stratum lies only deeper – with soft clay, peat or fill above it.
+f610b57	Large loads
+5a88e7d	Towers, bridge piers, heavy industrial equipment: the upper layers could not carry the contact pressure.
+1724cc7	Unacceptable settlement
+b415deb	With a shallow foundation the settlement would be too large or too uneven – for example for towers sensitive to tilting.
+7c533a3	High groundwater table
+446e965	A shallow foundation would need a watertight excavation and dewatering; overall a deep foundation is often more economical.
+81cb8ea	Scour, undermining
+47b90df	Around the river piers of bridges the water deepens the bed: the foundation must reach below the scour depth.
+f82c714	Risk of sliding
+a03d916	Under a strongly inclined load a shallow foundation could slide on its base; piles also take the horizontal force.
+3a42752	Top of the bearing stratum
+94de1f2	dense sandy gravel below ground level; soft clay above it
+d465ee1	Number of storeys
+9caa9ea	on average approx. 12 kPa of load per storey
+9f612d1	Groundwater table
+7710f11	Sensitivity to settlement
+44ebf16	Normal
+81729d3	Sensitive
+99b0382	Strict
+5a81d42	River bed – scour hazard
+7040e49	Large inclined load (e.g. earth pressure)
+bc2e6ed	Soft layer below the foundation level
+3808c35	Expected settlement with a shallow foundation
+1d8e23a	Average load of the building
+51da41c	Scour hazard: the shallow foundation may be undermined; the foundation must reach below the expected scour depth.
+ddd442b	The soft layer cannot carry the load (risk of bearing failure): ${fmt(q, 0)}${NB}kPa > approx. ${fmt(R, 0)}${NB}kPa.
+163aefb	The settlement of the shallow foundation (approx. ${fmt(sMm, 0)}${NB}mm) exceeds the allowable value (approx. ${allow}${NB}mm).
+6ea2922	The settlement (approx. ${fmt(sMm, 0)}${NB}mm) is still within the limit of approx. ${allow}${NB}mm.
+3f6e7dd	The groundwater is above the foundation level: a shallow foundation would need a watertight excavation and dewatering – often more expensive than a deep foundation.
+2f240a8	Large inclined load: the shallow foundation must also be checked for sliding; piles can also take the horizontal force.
+eb03b7d	The soil excavated for the basement “unloads”: the extra load is only approx. ${fmt(qnet, 0)}${NB}kPa.
+b38cd9d	bearing stratum
+38ae054	river bed, flood
+7ac72cd	scour
+93c0a67	excavated blocks
+1fbd1c7	piles (~${fmt(Math.max(4, m.D + 3 - m.df), 0)}${NB}m)
+69788b2	Shallow foundation
+eade0ad	The shallow foundation can be placed directly on the bearing stratum.
+e534ebc	This building can be founded on a shallow foundation (e.g. a reinforced concrete raft).
+4d90231	Shallow foundation – but it needs weighing up
+0917695	Structurally a shallow foundation may be adequate, but because of the side conditions a deep foundation may be more economical overall.
+8316716	Transitional solution: excavated block foundation
+b7faf42	The bearing stratum is not deep and the groundwater is below it: in cohesive soil the blocks can be excavated without support and concreted immediately (to approx. 5–6 m).
+8c9a42a	Deep foundation: pile foundation
+dc3225b	The load must be carried down to the bearing stratum at a depth of ${fmt(m.D, 1)}${NB}m – the piles are socketed approx. 3 m into the good layer.
+5078f9c	 For a tower this size, large-diameter bored piles, barrettes and a thick raft come into question.
+81f6789	 With a bearing stratum this deep, long friction piles or a piled raft are also realistic.
+19b2ac1	<b>Illustrative model:</b> the settlement comes from a simple compression estimate (soft clay, E<sub>s</sub> ≈ 3.5 MPa), the bearing failure from an approximation of the undrained bearing resistance. In real design, soil testing and detailed calculation decide.
+c0e9c0d	Prefabricated panel block
+c97c1cf	the 1970s–80s
+593a95b	shallow foundation or piles
+78cbf59	A ten-storey prefabricated panel block is approx. 30 m tall. On good subsoil it stands on reinforced concrete strip or raft foundations approx. 2–3 m deep; on unfavourable subsoil it was founded on piles.
+30cab3c	A point of reference: next to the other structures, the foundation of the panel block is almost invisible.
+7a75c8e	Wind turbine
+9cb3c58	onshore wind farm
+207f1d3	reinforced concrete footing (on piles on weak soil)
+a9c55eb	The tower of a modern onshore wind turbine is approx. 100–150 m tall, and the blade tip reaches close to 200 m. Its foundation is typically a reinforced concrete footing approx. 15–25 m in diameter and 2–3 m thick, on piles on weak soil.
+bf64b18	The tilt of the tower governs: the allowable differential settlement is approx. 3 mm/m.
+13d888e	reinforced concrete foundation taken down 15 m
+42ebf5d	For more than 30 years it was the tallest free-standing structure in the world. The load of the 553 m tall tower is transferred to the rock (shale) by a reinforced concrete foundation taken down 15 m.
+bdb3148	If the bearing stratum is within reach, a massive foundation taken to depth is enough.
+66bddc5	380 bored piles, approx. 80 m
+e3a2745	The tower stands on 380 bored piles 1.5 m in diameter: they reach down approx. 80 m, socketed up to 30 m into the rock. The area is exposed to earthquakes and typhoons.
+bd38737	Large-diameter bored piles carry the load down to the deeper bearing stratum.
+dfd4e91	104 barrettes, 60–115 m
+8f6ed7a	The bearing stratum lies very deep, so 104 reinforced concrete barrettes, 60–115 m long, were built for each tower, with a raft approx. 4.5 m thick on top. Measured from ground level, the foundation reaches approx. 120 m deep.
+c77e622	Unfavourable subsoil: most of the load is carried by shaft resistance.
+1938b25	Dubai, United Arab Emirates
+ad4daf5	192 bored piles, approx. 43 m + raft
+e063417	The world’s tallest building stands on a reinforced concrete raft 3.7 m thick, supported by 192 bored piles 1.5 m in diameter and approx. 43 m long – a piled raft.
+0a3a4ac	Almost twice as tall as the Petronas, yet it stands on much shorter piles: the depth of the foundation is set by the soil.
+a182a80	True scale
+d1866fa	Foundations enlarged
+3f0a0a1	<div class="alap-sh-h"><b>${tw.n}</b><span>${tw.loc} · ${tw.yr}</span></div>⏎      <div class="chips"><span class="chip grp">height: ${fmt(tw.hgt, 0)}${NB}m</span><span class="chip">foundation: ${tw.f.replace(/(\d) (?=\S)/g, '$1' + NB).replace(/(kb\.|\+) /g, '$1' + NB)}</span></div>⏎      <p>${tw.p}</p><p class="alap-sh-l"><b>Lesson:</b> ${tw.l}</p>

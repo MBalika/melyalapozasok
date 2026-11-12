@@ -1,0 +1,201 @@
+6821703	the base resistance
+273a68f	the shaft resistance
+6e1fee7	the effect of grouting
+5419cfd	the strength of the steel core
+e99b93f	In a micropile only the shaft works; since the method of construction is decisive, a load test is also worthwhile.
+b864b52	When must the buckling of a micropile be checked separately?
+7e10754	if the undrained shear strength of the soil is c<sub>u</sub> &lt; 10 kPa
+09ae41f	if the pile is longer than 10 m
+f1cb1b3	if the groundwater is above the pile head
+8d8623e	Because of the small diameter, in very soft soil (c<sub>u</sub> &lt; 10 kPa) the lateral support of the soil is small – then buckling can become governing.
+29f9ed1	What happens when a hollow-bar grouted micropile (e.g. Ischebeck Titan) is installed?
+01b3bf2	a hollow bar with a sacrificial drill bit is drilled down with continuous grouting
+b625ed9	a precast steel tube is driven down, then pulled out
+00909f8	the bore is supported with bentonite slurry, then concreted through a tremie pipe
+57b1cd0	the bar is pulled out and its place filled with gravel
+1dfd399	The bar is at the same time the drill rod, the grouting pipe and the permanent core. A cement body of 20–50 mm forms around it, and outside that a permeated soil sleeve of 30–80 mm.
+3b427d1	At what pressure is the binder injected into the soil in jet grouting?
+4d2e8a4	The binder is jetted through the 2–5 mm nozzles at a pressure of 400–600 bar. 5–6 bar is the pressure of the air shroud in the double jet with air.
+cb9cf57	With the same technology, in which soil is the largest jet column obtained?
+0ae3999	The diameter depends on the permeability of the soil: at most 60–70 cm in clay, up to 150–200 cm in gravel.
+f0c7def	What is the essence of the double jet with air?
+4c88c2c	the cement jet is surrounded by an air shroud at 5–6 bar, so the range increases
+ec69296	two cement jets fire against each other
+a40f351	first they drill with air, then grout with cement
+36d01ac	the air sucks out the returning spoil
+4cad104	The air shroud reduces the “braking” of the jet in the soil, so a larger column diameter can be achieved.
+a6a86c8	What is the danger if the returning spoil cannot escape to the surface during grouting?
+d2ae91e	hydraulic fracturing, heave of the surface and the building
+49929ee	the jet column becomes too thin
+96332b9	the drill rod freezes in
+56f114d	The free outflow of the excess material must be watched all the time – otherwise the pressure builds up in the soil.
+ee7fdd2	How is a jet panel made?
+2397d4d	pulled up without rotation, with two opposite nozzles
+5f6f669	with slower rotation but higher pressure
+a7b8bf2	by grouting two adjacent columns at once
+e6d9ce9	by horizontal drilling from the side of the pit
+785bbb9	If the rod is not rotated, the two nozzles only “sweep” the soil in one plane: the result is a thin, planar element – joined in a V shape, a watertight curtain wall.
+a82e98f	How does deep mixing differ from jet grouting?
+17d8860	the soil is mixed with the binder in place by a rotating, bladed mixing shaft, not by a high-pressure jet
+d68b4b8	in deep mixing the soil is excavated and mixed at the surface
+23cf960	deep mixing uses no binder
+6ef9ec4	deep mixing only works in rock
+5518135	The mixing tool does the work, so the size of the element is close to that of the tool.
+98f9489	Which statement is true of the vibro stone column (gravel pile)?
+5b682b8	the stone column and the soil between carry the load together – a transition towards ground improvement
+5c07ad5	it is an independent load-bearing pile standing on its tip
+8e6a304	it is a steel tube filled with concrete
+ff88ce8	it can only be made above the groundwater, in cohesive soil
+186167c	The gravel column compacted with a vibrating probe stiffens and drains; part of the load goes to the soil, which is why it is also classed as ground improvement.
+c9f8891	Driving
+6f9e106	loose–medium soils; not rock or a hard intercalation
+30eeb62	high-capacity RC and steel piles
+47acae4	Drop, diesel or hydraulic hammer: every blow is an impulse into the soil – the surroundings hear and feel it.
+7ffefb6	Vibrating
+d4818f2	mainly granular soils
+3f08390	steel tubular piles, H-sections, sheet piles, RC piles
+8096f06	Vibration tuned to the soil temporarily “fluidises” the soil around the pile – the pile almost slides in.
+f5a29fd	Jacking
+0526b4f	softer soils
+3ffc057	piles of lower capacity, mainly micropiles
+bf9e471	The jack reacts against a counterweight (or an existing structure) and pushes the pile down stroke by stroke.
+26852a8	Screwing
+4904320	where the screw can cut a thread (not stony)
+2cb4ff6	ground screws: lightweight houses, solar parks, stands
+8d6900f	The rotary head drives the threaded shaft down “like a corkscrew” – no blows, no spoil.
+e2ed8a0	Method
+0dd7860	Vibration
+d600ccc	Bearing capacity
+e717004	vibrator
+1990ece	counterweight
+1d19291	pressure
+380c649	rotary head
+eeeb02c	rotation
+f5ac848	penetration ≈ ${fmt(pen, 1)} m
+0942d49	dense sand
+38fddb9	cemented band
+d55f49f	block of concrete rubble
+a20688d	rock
+5da1ae7	Soft clay, dense sand from 7 m
+e28c175	Loose sand, thin cemented band at 3.5 m
+06a37b7	Fill with blocky inclusions, gravel below
+960dda2	Soft clay, rock at 6.5 m
+7fc3fae	steel H-section
+94672e0	drop hammer
+f2d5164	Hammer mass
+4b7023d	Drop height
+526a78e	“Heavy hammer, small drop” – a large drop height breaks the pile head.
+c41a373	One blow
+874172a	▶ Continuous driving
+f036fc1	↺ New pile
+b07be45	Penetration
+e8ecf55	Blow count
+6b723ca	Set
+c2db05d	mm/blow
+35d488e	For the last 10 blows
+6350902	Blow energy η·m·g·h
+fccfa5a	Driving stress (estimate)
+2cd8ff6	Dynamic resistance
+8bdbfca	 <span>Warning: estimated driving stress ≈ ${fmt(sg, 0)} MPa – ${P.conc ? 'a betoncölöp feje megrepedhet, széteshet' : 'az acélprofil feje deformálódhat'}. A heavier hammer and a smaller drop height are gentler.</span>
+8ee29e8	the head of the concrete pile may crack and break up
+18a1c24	the head of the steel section may deform
+d5294ac	Design depth reached
+82c6014	<span>${fmt(st.n, 0)} blows, at the end a set of ${fmt(last10, 0)} mm per 10 blows in the ${lt.n} layer. The dynamic resistance is ≈ ${fmt(st.lastR, 0)} kN – ${st.lastR > 1200 ? 'a cölöp jó teherbíró rétegben áll.' : 'kevés: a cölöp nem ért jó teherbíró rétegbe, vagy a szelvény kicsi.'}</span>
+1cc761e	the pile stands in a good bearing stratum.
+e6d519a	too low: the pile has not reached a good bearing stratum, or the section is too small.
+553da6c	Stopped at the rock surface
+1a03102	<span>The pile cannot be driven into rock: it sits on the rock at ${fmt(st.z, 2)} m. If this is the plan (an end-bearing pile on rock), fine – the excess length must be cut off. Caution: in this case the reflected wave further increases the stress in the pile.</span>
+9f2b2d0	Refusal above the design depth
+809e8b2	Even a thin hard intercalation can stop a driven pile – it must be extracted, and a different section or a different technology is needed.
+4de6a26	Increase the energy, or choose a different pile.
+d34e011	Ready for driving
+04f89b5	<span>The pile (${P.t}, L = ${fmt(P.L, 0)} m) stands in the leader. Strike one blow, or start continuous driving!</span>
+c0f341d	DRIVING RECORD
+673ca50	blows / 0.5 m
+b2b346f	no blows yet
+bf8ebfc	Illustrative model: R = shaft + base, s = η·E/R − c/2
+0af0055	Dense sand
+1a3165d	Cohesive clay
+927ee38	Frequency
+78fddc4	Tip: look for the lowest point of the curve – that is where the soil resistance is smallest.
+678289a	Soil resistance (R / R₀)
+8a5a81e	Penetration (illustrative)
+ea23454	Vibration is weak in cohesive soil
+6082438	Because of cohesion, vibration hardly reduces the resistance (at best only by approx. ${fmt(S.k * 100, 0)} %). Driving, jacking or a bored technology is needed here instead.
+18b4f9b	You’ve tuned in!
+2f7730c	Around ≈ ${fmt(fopt, 0)} Hz the soil resistance drops temporarily to a minimum – the pile almost slides in.
+e4bacc2	Frequency too low
+a8c40cd	At such a slow vibration the soil does not yet “fluidise”, but the structures of nearby buildings can resonate in this range – at start-up and shut-down it must be passed through quickly.
+b80fc25	Not quite there yet
+2b4d81b	The optimum is around ≈ ${fmt(fopt, 0)} Hz – ${f < fopt ? 'növeld' : 'csökkentsd'} the frequency.
+e7fb9c7	increase
+dac50f3	decrease
+31d055c	 Jetting also reduces the resistance below the base – but it must be stopped 1–2 m before the final base depth, otherwise the soil below the base loosens.
+588dbe1	building resonance
+7cbaba5	soil resistance R/R₀
+7bf7ec0	vibration amplitude
+e947dab	Illustrative model
+872f7ab	Driven RC pile (hammer)
+cb505ab	Vibrated pile
+f860283	Jacked pile
+f54adf0	Screw pile (cast in place)
+f7ecfa6	Bored CFA pile
+78a90e3	Industrial RC frame
+d19b3bb	Residential building
+1c5d81b	Listed building, sensitive
+9a1d793	Blow energy
+056a4af	Neighbouring building
+c59d15d	Distance from the pile
+bab01f6	Vibration velocity at the neighbour
+b1c9bc7	Limit (order of magnitude)
+413021d	Utilisation
+84c92c2	Distance needed for this
+18ad914	 (with the resonance peak at start-up and shut-down)
+2524de0	Vibration too high
+2b2abb6	<span>${T.t}, at ${fmt(sR.v, 1)} m: ≈ ${fmt(v, 1)} mm/s${pk}. This is ${fmt(u * 100, 0)} % of the limit (${B.t.toLowerCase()}: approx. ${B.lim} mm/s). A distance of at least ≈ ${fmt(rmin, 0)} m, or a low-noise, low-vibration technology, is needed.</span>
+f0d802a	Borderline – measure it
+618c0d2	<span>≈ ${fmt(v, 1)} mm/s${pk}: close to the limit. The neighbour must be monitored with a vibration meter during the work.</span>
+a2f18df	Tolerable vibration
+7225989	<span>≈ ${fmt(v, 1)} mm/s${pk} – ${fmt(u * 100, 0)} % of the limit. ${sT.v === 'vert' ? 'Közelebb érve vagy nagyobb energiával ez gyorsan megváltozik.' : 'Ez a technológia érzékeny környezetben is jó választás lehet.'}</span>
+5810a52	Closer up or with more energy this changes quickly.
+cbc0dd3	This technology can be a good choice even in sensitive surroundings.
+8abe0e1	distance (m)
+632a3d1	limit: ${B.t.toLowerCase()} ≈ ${B.lim} mm/s
+8a05a34	Illustrative model: v = v₁₀·(10 m / r)ⁿ
+c788ca0	Quiz – precast piles
+c4b4edc	Why do both the base <i>and</i> the shaft resistance of a driven precast pile increase?
+bf96d9c	Because the displacement compacts the soil around and below the pile
+cb3a03a	Because the strength of the concrete increases during driving
+3d8e1ed	Because driving removes the groundwater permanently
+eb18d3a	Because the surface of the pile is rougher than that of a bored pile
+6a5b753	A displacement pile brings up no soil: it pushes it aside and compacts it. For a precast pile this increases both the base and the shaft resistance.
+ac698dd	Which layer can a precast reinforced concrete pile <b>not</b> be driven through?
+602e4af	A thin, strongly cemented band
+9ad514b	Fine sand below the groundwater
+de4a203	Driving cannot be used in rock, rocky ground, hard (stony) clay, strongly cemented soil and blocky fill – even a thin intercalation can stop the pile.
+d5b1b39	During driving the set drops almost to zero <b>above</b> the design base depth. What does this mean?
+514b5dc	The pile has refused: it has probably hit a hard intercalation
+f3ae4d5	It has reached the bearing stratum, we are done
+33478bf	The hammer energy is too high
+927721f	The groundwater is floating the pile up
+f30dddb	If the pile stops above the design depth, something is in its way. It must not be driven on “by force”: the pile head may be damaged, and the base is not in the planned layer either.
+1c0523c	Where is a steel tubular pile advantageous?
+c9f64cb	Soft, loose soil at the top, a dense granular layer below
+89f0be3	If there is rock near the surface
+7426817	In very hard, stony clay
+1f7ca77	If the pile has to be made of timber
+496f8a1	The tubular pile passes through the soft layer and “stands” in the dense granular layer. For harder layers the H-section is better, because it is easier to drive.
+0387481	A city-centre infill site with a vibration-sensitive neighbouring building. Which is the riskiest piling technology?
+ac3c59e	Driving comes with loud noise and strong vibration; near structures it can only be used under strict limits. Bored, screw and micropiles are low in noise and vibration.
+a3b5819	In which soil is vibration effective primarily?
+dfa8e5b	In granular soil
+aad90a2	In cohesive, hard clay
+3d403b4	In rock
+49450f6	In organic, peaty soil
+00d24c8	Vibration tuned to the natural frequency of the soil temporarily reduces the resistance to a minimum in granular soil. In cohesive soil this effect is small because of cohesion.
+622af09	When vibrating with jetting, when must jetting be stopped?
+532b123	1–2 m before reaching the pile tip (final base depth)
+a57449c	Already after the top 1–2 m
+46cc830	Only when the final base depth is reached
+926b45a	Never, jetting can continue throughout
+8afb9f1	Jetting must be stopped 1–2 m before the final base depth so that the soil below the base does not loosen. The base can be grouted through the pipes afterwards.

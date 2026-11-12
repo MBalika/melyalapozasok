@@ -1,0 +1,113 @@
+8bcd5c9	In jet grouting a smaller column forms in clay and a much larger one in gravel.
+c5cfed5	In clay at most approx. 60–70 cm, in gravel up to 150–200 cm.
+37fc413	During trenching, the slurry level must always be at least 1.0–1.5 m above the groundwater table.
+a3ec192	The slurry pressure must balance the water pressure and the earth pressure.
+590d47a	Among other things, the guide wall guides the excavating tool and is also the reference base for setting out.
+3f6b266	It protects the edge of the trench, supports the loose upper soil and prevents slurry leakage.
+3296e3e	The density of the bentonite slurry used for trenching is approx. 1.8–2.0 g/cm³.
+8d7fbfc	The slurry density is ρ = 1.03–1.12 g/cm³; only activated “Na” bentonite can be used.
+a0ea39b	For a trench of finite length the earth pressure increases linearly with depth, so the full Rankine pressure always governs.
+c4684aa	Arching develops towards the two ends of the trench (silo effect), and the earth pressure tends to a limit – the Schneebeli formula, for example, is used for this.
+16ca2b7	There is no hurry: concreting of the panel can start a day or two after trenching.
+400fa35	Concreting must start as soon as possible, within 4–5 hours at the latest, with base cleaning beforehand.
+e1e18e0	The top approx. 30–50 cm of the diaphragm wall concrete, mixed with slurry, must be removed.
+b2003e2	This part is broken back and re-concreted.
+5682f07	In rock or very hard clay a diaphragm wall can only be built with a hydrofraise; in Hungary it was used for the construction of metro line 4.
+73b71ac	Diaphragm walls 48.3 m deep at Fővám tér and 40 m deep at Szent Gellért tér were built this way.
+47fb97a	In the caisson the water was expelled by excess air pressure, with an excess pressure of at most approx. 3.2–3.5 bar.
+5811df9	People and materials went down and up through separate airlocks – it was very dangerous work, harmful to health.
+11193a6	A well foundation is pressed into the ground with hydraulic jacks.
+0c32e19	The shell wall sinks under its own weight while a “clamshell” grab removes the soil inside.
+dcc5c85	Displacement
+84534b8	Bored, replacement
+49491fe	Other piles
+bd496cb	Deep foundation
+2847adc	A load-transferring element between the structure and the deeper bearing stratum that transfers load at its base and along its shaft. Types: pile, diaphragm wall, well and box foundations.
+8dc9696	Tip resistance (base resistance)
+2699a00	The load transferred at the base of the pile by compression, like a shallow foundation.
+404c86e	Shaft (skin) resistance
+d89f8d1	The load transferred along the side surface of the pile by shear. In a tension pile only this works.
+4078eb4	At least 2/3 of the resistance comes from the tip resistance: the pile “stands” in a much better layer.
+b2adee3	At least 2/3 of the resistance comes from the shaft resistance; there is no layer of better bearing capacity near the tip.
+728b88c	The tip and the shaft resistance each contribute between 33 and 66 % of the resistance.
+339df71	It transfers load only along its shaft, in the opposite direction – for example when anchoring against uplift or with a large eccentricity.
+74f7f0f	Pile grillage, pile cap
+1f1f18b	The reinforced concrete block, slab and/or grillage tying the pile heads together, which distributes the load of the superstructure onto the piles.
+49bd7d9	The soil is removed (bored out) and the hole is filled with concrete. Always cast in place; the surrounding soil may loosen slightly.
+c67c2a5	A precast element is driven, vibrated, jacked or screwed into the ground, or the soil is pushed aside in place – the surroundings are compacted.
+0f38871	Large-diameter pile
+4423d5b	A pile with a diameter greater than 80 cm; made exclusively with replacement technology.
+c1bf7bf	Pile driving
+c5b0138	Installing a precast pile into the ground with a hammer (mechanical, pneumatic, steam or diesel hammer). Noisy, causes vibration; cannot be used in rock or hard clay.
+e0b0e2b	By tuning the frequency to the natural frequency of the soil, the soil resistance temporarily drops to a minimum – mainly in granular soil.
+be5443d	A hollow steel shaft with a thread every 40–60 cm, typically at most 2–3 m long; for lightly loaded structures, recoverable.
+b1bcb78	A cased, cast-in-place driven concrete pile: the dry concrete plug placed in the tube is rammed with a drop hammer, and a “bulb” forms at the base.
+84a6992	A displacement drilling head at the end of a hollow drill stem (Omega, FDP, Fundex, Screwsol) that pushes aside and compacts the soil while drilling; 300–600 mm, up to approx. 20 m.
+1fa4840	A pile drilled with a continuous auger: the concrete is placed in the bore through the drill stem under excess pressure; 40–120 cm, 6–22 (24) m.
+d02d9a1	Soil plug
+df6d76b	The soil remaining on the CFA auger, which supports the wall of the bore during drilling.
+696936d	Necking
+eb5b269	A local narrowing of the pile shaft, for example if the CFA drill stem is withdrawn faster than the concreting rate.
+16a3135	Casing (temporary casing)
+7515754	A steel tube installed in parallel with soil removal, which prevents soil and water from breaking in until concreting.
+9701035	Bentonite slurry (drilling mud)
+4689b21	Water with bentonite (montmorillonite) dispersed in it; it displaces the groundwater and supports the wall of the bore or trench. ρ = 1.03–1.12 g/cm³.
+d52b1d9	A concreting pipe whose end stays in the fresh concrete throughout: it concretes from the bottom up and displaces the slurry or water.
+58a53aa	A cylindrical drilling tool for removing soil, mainly in granular soil.
+9de3935	A foundation excavated without support in cohesive soil above the groundwater, at most 5–6 m deep; also called a well foundation in Hungarian practice.
+920863e	A pile with a diameter of at most 300 mm when bored, at most 150 mm when driven; for underpinning, in places with difficult access. No base resistance is assumed.
+aa22ca7	Hollow-bar micropile
+7be1668	A continuously extendable hollow steel bar with a sacrificial drill bit, through which grouting is done while drilling (e.g. Ischebeck Titan).
+cedd06c	The soil is broken up by a fluid jet at 400–600 bar and mixed with binder: a “soilcrete” column or panel is formed.
+fb42abb	The mixing shaft mixes the soil with the binder in place.
+06cf67b	A wall in the ground built by reinforcing and concreting a vertical-sided trench supported by bentonite slurry; 40–120 cm thick.
+2ef57ef	Panel (primary, secondary)
+24fc502	The wall section excavated and concreted at once (typically 2.8–5.6 m). First the primary panels are made, then the secondary panels between them.
+eb4d353	Bite
+89ac3a9	One excavation cycle of the grab; its length is typically 2.8 m, the open width of the grab.
+d77e9ec	A reinforced concrete beam built on both sides of the trench: it protects the edge, guides the tool and the slurry, and is the reference base for setting out.
+10a0717	The element marking the boundary between panels; it makes room for the swelling waterstop and protects the finished panel during the next excavation.
+b00a22f	Silo effect
+3ec18e3	In a trench of finite length arching develops towards the two ends, so the earth pressure tends to a limit with depth (Schneebeli formula).
+6f436ef	A reverse-circulation trenching machine with cutter wheels: it gives an accurate trench to great depth even in rock and very hard clay.
+2e1ae0d	A large-diameter (0.8–3.0 m), 4–8 m long shell wall, open at the top and bottom, sunk by its own weight while the soil inside is removed.
+4467f03	Cutting edge
+44cdf35	The reinforced lower edge of the sunk shell wall that cuts into the soil.
+41ec573	Box foundation
+d418324	A sunk box matching the full plan of the structure (e.g. a bridge pier); it is built and sunk in stages.
+4050846	A box closed at the top (“bell”), from which the water was expelled by an excess air pressure of at most 3.2–3.5 bar.
+938bd02	Airlock
+ca98ab7	A pressure-equalising chamber of the caisson: there is a separate airlock for people (with slow pressure change) and for materials.
+d8b0ffe	Subsidence crater
+8fca476	A surface depression forming around the sunk box if the surrounding soil loosens.
+b25c26a	Search the terms… (e.g. slurry, shaft, caisson)
+221e52f	Search the glossary
+0e6a868	Topic
+14219de	No results – try a shorter part of the word.
+d638893	Light theme
+b2e0db5	Dark theme
+60cab37	<svg viewBox="0 0 120 120" aria-hidden="true">⏎    <circle class="o2" cx="60" cy="60" r="57"/><circle class="in" cx="60" cy="60" r="44"/><circle class="o" cx="60" cy="60" r="44"/>⏎    <path class="x" d="M60 0v20M60 100v20M0 60h20M100 60h20"/>⏎    <text x="60" y="66" text-anchor="middle">${label}</text>⏎    <text class="s" x="60" y="84" text-anchor="middle">PILE</text></svg>
+db0d360	Setting out
+4adb18a	Explainer animation · ${order.indexOf(v.n) + 1} / ${order.length}
+1feeb2f	Play video: ${v.t}
+a0078fc	Video: 
+7f2fd36	BME Faculty of Civil Engineering · ${y.dur} · in Hungarian
+713966f	 · ${y.playlist} playlist
+9cd3050	No such YouTube video:
+79398b4	Play video: 
+48c0556	Watch it live too!
+7816f2c	QR code: 
+ab71156	BME Faculty of Civil Engineering · YouTube
+52c14ae	▶ click the image, or open it on YouTube ↗
+ab52c3f	YouTube video: 
+82a44f4	No quiz:
+53de35b	Flawless! This pile reaches the bearing stratum.
+6c00709	A fine result – it is worth looking at the wrong ones once more.
+2683510	It is worth going through the chapter (and the videos) once more.
+726a1c8	<b>Not quite.</b> 
+4f5d20d	Question ${i + 1} / ${qs.length}
+9ab089b	<span>Answered: <b>${done}/${TF.length}</b></span><span>Correct: <b>${ok}</b></span>
+47ab8d7	Excellent!
+fa50020	Good result!
+4a41774	Worth revising.
+1dfdd48	Formatting guard error

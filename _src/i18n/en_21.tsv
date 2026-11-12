@@ -1,0 +1,81 @@
+48f67a4	in rock and very hard clay a diaphragm wall can be built <b>only with a hydrofraise</b>
+c52f278	at great depth the verticality of a grab is increasingly difficult to maintain; the cutter is guided all the way
+ee8bf92	the cutter gives a more accurate, neater surface
+81263af	the hydrofraise is very expensive (cutter + slurry cleaning plant)
+1c93272	in loose or medium soil at usual depths the cyclically working grab is fast and economical
+b3c7df2	GRAB
+5a7b1e1	Szent Gellért tér · 40 m
+d42e21a	Fővám tér · 48.3 m
+0a0b720	Both are possible
+c8b68a6	 is the better choice
+3498169	Panel length
+2999a33	Sand below the groundwater table: φ = 32°, c = 0, γ′ = 10 kN/m³. The figure shows the effective earth pressure (without the water pressure), from 0 to 30 m depth.
+a919d6b	σ<sub>x</sub> at 30 m (with the silo effect)
+bb7a5c8	Reduction
+9526b0e	Limit L·γ′·K<sub>a</sub>/sin 2φ
+3427816	arching
+eaf939b	panel (with slurry)
+2b355ea	 (silo)
+9a76e08	Medium sand
+c7af802	Silty, flowing sand
+0fe9577	Angle of internal friction
+ccee3ff	Cohesion
+686b820	Unit weight (above GWT)
+c5bb91c	Depth of the slurry level
+80f0ae3	Slurry density
+85dccf7	1.03–1.12 g/cm³ during trenching.
+d596601	Depth of the trench
+ba8cd2b	Surface load next to the trench
+915fb18	<span><i style="background:var(--slurry)"></i>slurry pressure σ<sub>p</sub></span><span><i style="background:var(--water-fill);border-color:var(--water)"></i>water pressure σ<sub>v</sub></span><span><i style="background:var(--bad);height:3px"></i>water + soil (with silo effect)</span><span><i style="background:repeating-linear-gradient(90deg,var(--muted) 0 5px,transparent 5px 8px);height:3px;border:0"></i>water + soil (Rankine)</span>
+50084d8	η<sub>min</sub> with the silo effect
+a1832f6	Earth pressure at the bottom: silo / Rankine
+53ad7cc	SECTION OF THE TRENCH
+1021bee	PRESSURES ON THE TRENCH WALL
+616d2d4	bottom of the guide wall
+aa2f4de	Below GWT: γ<sub>sat</sub> = ${fmt(o.gsat, 1)} kN/m³, γ′ = ${fmt(o.gsat - 10, 1)} kN/m³; unit weight of the slurry γ<sub>b</sub> = ${fmt(pr.gb, 1)} kN/m³; K<sub>a</sub> = ${fmt(pr.Ka, 3)}.
+e9f0f3f	raise the slurry level (the head advantage is now 
+98e8b24	increase the slurry density
+fc5e0c9	open a shorter panel
+78db53a	move the surface load further away
+c9f769d	The trench collapses
+7ea1c5e	<p>The slurry pressure in excess of the water pressure does not beat the earth pressure: between <b>${rng(bad)}</b>. Suggestion: ${tips.slice(0, 3).join(', ') || 'változtass a paramétereken'}.</p>
+daf29d0	change the parameters
+02c4378	Borderline
+796dec0	<p>The trench just stands, but the reserve is small (η &lt; 1.3) here: <b>${rng(zones)}</b>. ${dh < 1.0 ? 'A zagyszint ráadásul nincs legalább 1,0 m-rel a talajvíz felett.' : ''}</p>
+ded1cb7	Moreover, the slurry level is not at least 1.0 m above the groundwater.
+d46e8ce	Stable – but not by the rules
+30af315	Stable
+9b7c7c4	According to the model the trench stands, but the slurry level is not at least 1.0–1.5 m above the groundwater table: even a small loss of slurry could cause a collapse.
+f38dfc3	At every depth the slurry holds the wall of the trench with an adequate reserve.
+a4105ca	Notice: with Rankine earth pressure the same trench would collapse – the silo effect “saves” it.
+ffe7624	<b>Illustrative model.</b> η = (σ<sub>p</sub> − σ<sub>v</sub>) / σ<sub>x</sub>: how many times the slurry pressure in excess of the water pressure exceeds the earth pressure (η &lt; 1: collapse, 1–1.3: small reserve). The earth pressure is calculated from the Schneebeli formula, layer by layer (γ above the GWT, γ′ below); the check is made below the guide wall (1.2 m). The real verification works with three-dimensional slip surfaces and safety factors, and in peat and very soft clay undrained behaviour and slurry loss are even more unfavourable.
+0b293cf	Quiz – diaphragm walls
+2efda35	At least how far above the groundwater table should the slurry level in the trench be?
+264627c	At least 5 m
+ba80107	It doesn’t matter if the slurry is dense enough
+824d640	The slurry is only slightly heavier than water (1.03–1.12 g/cm³), so a head advantage is needed: at least 1.0–1.5 m. This excess also balances the earth pressure.
+c4710bd	What is the typical length of a grab “bite”?
+f2b0acc	The open width of the grab is approx. 2.8 m – this is also the shortest panel that can be excavated. Usual panels are 2.8–5.6 m long.
+cc2ba39	Why is the earth pressure on the wall of the trench smaller than the Rankine value?
+831b35f	Arching develops towards the two ends of the panel (silo effect)
+2ab3ecf	The slurry chemically stabilises the soil
+99e2d75	The buoyancy of the groundwater fully balances it
+baeb67d	Because the diaphragm wall is flexible
+1dcfdd7	Next to a trench of finite length, the soil wedge leans on the soil at rest at the ends of the panel; the earth pressure tends to a limit with depth (Schneebeli formula).
+79a4f32	What happens if a longer panel is opened in the same soil?
+731ce1c	Arching weakens, the earth pressure increases, and stability decreases
+5d16af9	Stability increases
+7f5f8ad	No effect, only concreting takes longer
+acaed90	The slurry density increases
+380bb46	Shorter panel → stronger arching → smaller earth pressure → more stable trench. That is why the panel length is at most 8–10 m, typically 2.8–5.6 m.
+b8b335e	What kind of bentonite can be used for trenching?
+aa3c997	Only activated “Na” bentonite
+ab2097d	Any local clay
+6b22647	A mixture of quartz sand and water
+bbadfde	Bentonite is a colloidal clay consisting predominantly of montmorillonite; only activated Na bentonite is suitable for trenching, and the viscosity can be increased with CMC.
+f62600e	At the latest, how long after the end of trenching must concreting start?
+59cf376	4–5 hours
+a76d5dd	24 hours
+fdfc899	Only after the slurry has fully settled
+312ca7e	As soon as possible, but no later than 4–5 hours afterwards – before that, base cleaning; then continuous, uninterrupted underwater concreting.
+65261d0	Why is the top 30–50 cm of a diaphragm wall broken back?

@@ -1,0 +1,150 @@
+5b8f41d	Because it is mixed with slurry and of poor quality
+e3eb7b7	Because that is where the bending moment is greatest
+06b75da	So that the guide wall fits
+ed59e60	Only for aesthetic reasons
+1b4c42e	The upper part of the concrete mixes with the displaced slurry. After breaking back, the reinforced concrete capping beam is placed on it.
+57b5784	In which situation is trench stability most difficult to ensure?
+5fbb72f	In soft clay, peat, flowing sand, with a very high groundwater table
+60b4ff3	In dense gravel above the groundwater
+3627284	In hard clay
+9c84b59	If the trench is short and shallow
+f9b9516	Here the shear strength of the soil is low, and the water pressure or the risk of slurry loss is high. Hard clay and rock make excavation difficult (a hydrofraise is needed there), not stability.
+9d94bad	When is a hydrofraise (trench cutter) justified rather than a grab?
+b2a2589	In rock, very hard clay, at great depth and with accuracy requirements
+ce1e90b	For a short, shallow wall in loose sand
+6c092a1	If no slurry is needed
+98f5d9d	If the cheapest solution is needed
+ed4dddc	The cutter works accurately in any soil and rock, to great depth – but it is very expensive. In Hungary it was used for metro line 4 (Fővám tér: 48.3 m).
+8c5071e	Interactive
+3aeb8e7	displacement pile
+302f9b0	replacement pile
+b095760	shaft resistance
+980c642	skin resistance
+2ad0b3e	base resistance
+fa161de	tip resistance
+0d78be2	end-bearing pile
+db0e2a3	friction pile
+941018c	mixed pile
+295aef0	combined pile
+217d657	tension pile
+bfa218c	continuous auger
+cb82272	short auger
+51b7911	bentonite slurry
+256d178	guide wall
+ff8772c	stop end
+06ecd8c	hollow-bar micropile
+b612ed8	reinforcement cage
+5781a4f	groundwater table
+baaff0e	undrained shear strength
+0422a19	angle of internal friction
+e125b8b	activated Na bentonite
+7b0d201	large-diameter pile
+30e0a7a	large-diameter pile
+5cd2bda	screw pile
+32cf6f9	vibro stone column
+c1d2e28	well and box foundations
+6ef5ddf	excavated block foundation
+4bdb87c	combined foundation
+0c6a6f3	differential settlement
+d324e8c	hydraulic fracturing
+50f5cc4	underwater concreting
+e240ea7	trench stability
+b44199a	silo effect
+3c4bfd8	caisson disease
+ef38f08	ultimate limit state
+b04b19c	piled raft
+d10f958	=
+56bdf73	Precast
+6712240	Franki and screw
+70b5fa4	Bored
+6a495f0	Well, caisson
+5b2f81c	Decision
+1b1da6e	Self-check
+f915afc	Basics of deep foundations
+1ef40f1	When is a deep foundation needed? Tip and shaft resistance, end-bearing, friction and mixed piles
+149e33c	Displacement and bore stability
+211733c	What happens to the soil? Casing, slurry, soil plug – and what can go wrong
+025df0a	Trench stability
+a07147c	Bentonite slurry, slurry level above the groundwater, silo effect, panel length
+7301770	Sinking under self-weight, cutting edge, cross walls, excess pressure and airlocks
+b7cdbb9	Summary and quiz
+2b75dc1	A map of deep foundations and six quiz questions – test yourself!
+9d95ae2	Overview of piling technologies
+71c391e	Pile foundations
+f96ca1c	The CFA pile in reality
+57d0fd3	The large-diameter bored pile in reality
+f81e39e	Large-diameter bored pile
+6f8bb70	The screw pile in reality
+6203308	The driven and vibrated pile in reality
+65de389	Driven, vibrated pile
+8cefc90	The ground screw in reality
+1424cbe	Steel screw pile
+b057c82	The Franki pile in reality
+dce3eaa	The micropile in reality
+b0f63ac	Overview of ground improvement
+5dad6a5	Ground improvement
+807c1c8	Grouting in reality
+361dca1	Jet grouting in reality
+be68a5c	Deep mixing in reality
+f56f16d	Vibroflotation in reality
+8fc004f	Vibroflotation
+19e4aae	The vibro stone column in reality
+0d64736	Vibro stone column
+d58be00	Dynamic compaction in reality
+a8cf5e4	Dynamic compaction
+f238219	Overview of embedded retaining structures
+6a05153	Embedded retaining structures
+2697bac	Walls with gaps in reality
+839aefc	Walls with reinforced gaps
+8880832	Sheet piling in reality
+1fdeefc	Sheet pile wall
+06daf2c	The pile wall in reality
+cbf1153	Pile wall
+1564fc0	The diaphragm wall in reality
+dbf8836	Scour around a bridge pier
+97f4275	Scour around the pier
+7018969	Other piles (from the Ground improvement playlist)
+0121646	Diaphragm wall (from the Embedded retaining structures playlist)
+1e8cd90	silty, soft layer
+2949639	hard clay
+99dcd85	cohesive soil (clay)
+f4cb68e	dry concrete in the bottom of the tube, rammed
+0e5dfcd	the plug drags the tube down
+00c62c9	the plug is driven out of the fixed tube
+1afa0df	fixed
+abebf6d	further batches: widening base
+fa8c329	the cage into the tube, down to the bulb
+41d687b	cage
+a0ab452	ramming while the tube is withdrawn
+a2983bd	shaft
+0b8cef8	Positioning
+e5a6de3	The rig stands above the pile position; the displacement drilling head is at the end of the hollow drill stem.
+f016539	drilling head
+eb5e862	It is driven down by rotation and thrust: the head pushes the soil sideways and compacts it, it does not bring it up.
+be9f640	Stop
+ce19178	At the specified depth drilling stops; the rig continuously records the drilling data.
+1b28e63	specified depth
+213019d	Concreting under pressure through the drill stem, while the stem is withdrawn and rotated.
+1ba0562	The reinforcement cage is placed into the fresh concrete, with vibration if needed.
+292ad20	Setting out, positioning
+db86973	The pile position is set out and the rig is positioned. The bottom of the hollow drill stem is closed by a sacrificial cap or a “flap”.
+a74aa87	flap
+91e4d7d	Drilling the bore
+5a1e56d	The auger is screwed down without removing soil: the spoil is only partly pressed out, and the soil plug remaining on the auger continuously supports the wall of the bore.
+14a8727	soil plug
+a8e504a	Concrete is pumped through the drill stem under excess pressure, pushing the auger up – this is assisted by pulling. No vibration is needed: the flowing concrete self-compacts under pressure.
+88b89ce	The pile is usually concreted up to the working level, and the reinforcement cage is lowered into the fresh concrete.
+0470841	Installing the casing
+b88a7d9	The casing is installed by rotation or vibration.
+ca08d34	Soil removal
+d6bc075	The soil is removed with a drilling bucket under the protection of the casing; the casing goes ahead, and below water the water is replaced.
+d49b455	water in the casing
+08938e2	The reinforcement cage is lowered into the bore, inside the casing.
+38d882d	Concreting through a concreting pipe while the casing is continuously withdrawn.
+71877e1	Finished pile
+f091139	A finished reinforced concrete pile remains in place of the recovered casing.
+80d6466	RC pile
+c2c49de	Preparation
+ab9b49c	positioning, pre-drilling, guide tube
+ed32749	Filling with slurry
+e619697	bentonite drilling fluid into the bore

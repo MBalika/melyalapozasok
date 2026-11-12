@@ -1,0 +1,111 @@
+4d9e1ba	Skip to content
+7d2f980	Deep foundations – top of the page
+2c1cc23	<b>Deep foundations</b><small>BME · Foundation Engineering</small>
+6bec538	Chapters
+2d4b68d	Which pile (chapter) you are at
+9f554ef	<i></i><span>drilling</span><b id="rigPile">C00</b>
+a23fb86	Magyar változat
+f7e4d5c	<span>HU</span><b>EN</b>
+13602ca	Toggle theme
+1752cfe	Pile layout plan – choose a pile (chapter)
+2dbcfca	Pile row – chapters
+36c6b24	Interactive learning module · BME Foundation Engineering
+7e9600d	Deep foundations <span>where a shallow foundation is no longer enough</span>
+aaea79b	If the bearing stratum lies deep, if settlement has to be limited, if water could scour the shallow foundation, or a large horizontal force could push it aside, we insert a load-transferring element and carry the loads down to greater depth. This page guides you from piles through diaphragm walls to well foundations. Along the way you can build a pile in 3D, experiment in the labs, and watch the machines and technologies in real footage.
+5f5d3fb	<b>12</b><span>piles = chapters</span>
+e9d4521	<b>13</b><span>BME videos</span>
+f9723e9	<b>5</b><span>explainer animations</span>
+eb46d10	<b>3D</b><span>pile builder</span>
+1ee039d	<a class="btn btn-acc" href="#alapok">Let’s start with setting out ↓</a>⏎        <a class="btn btn-ghost" href="#szimulator">3D pile builder</a>⏎        <a class="btn btn-ghost" href="#videotar">Video library</a>
+3c42b04	<span class="h3-tag">3D section · rotate it</span>
+b6de5f9	Type of foundation
+03a075b	Bearing stratum
+1a9c6ef	<b>Deep foundations</b> – an interactive learning aid for the Foundation Engineering course at the BME Faculty of Civil Engineering.
+358f7cd	The labs, calculators and the 3D pile builder are simplified, <b>illustrative</b> models: they help understanding but are not for design. The actual design of piles is taught in later geotechnical courses.
+b610e3f	The real footage comes from the YouTube channel of the BME Faculty of Civil Engineering; the explainer animations were made with three.js.
+cb1185d	Related pages
+04cfaa1	<a href="https://sikalapoktervezese.vercel.app" target="_blank" rel="noopener">Design of shallow foundations <small>↗</small></a>⏎        <a href="https://vedekezesakarossullyedesekellen.vercel.app" target="_blank" rel="noopener">Protection against harmful settlement <small>↗</small></a>⏎        <a href="https://kedvezotlen-altalaj.vercel.app" target="_blank" rel="noopener">Foundations on unfavourable ground <small>↗</small></a>⏎        <a href="https://munkaterhatarolasok.vercel.app" target="_blank" rel="noopener">Excavation support (in Hungarian) <small>↗</small></a>
+090df7b	Close
+343ce9a	Explainer animation
+f13b3d1	← Previous
+3951bcb	Next →
+87ca126	YouTube video
+b35b02a	<span id="ytInfo"></span><a id="ytOpen" href="#" target="_blank" rel="noopener">Open on YouTube ↗</a>
+cbf28f4	separator
+fe03091	<span class="id">C01</span><span>Basic concepts</span>
+3aeb37b	What is a deep foundation?
+98dfb82	If a shallow foundation is not suitable, a <b>load-transferring element</b> is built in between the structure and the deeper subsoil of adequate bearing capacity. This is the deep foundation – and its most important property is that it can transfer load to the soil not only at its base but also along its <b>side, its shaft</b>.
+d9a5f62	<b>3</b><span>main types: piles, diaphragm walls, well and box foundations</span>
+7f8600a	<b>2</b><span>routes of load transfer: base and shaft</span>
+11ee240	<b>6</b><span>typical reasons why a shallow foundation is not enough</span>
+c4b2a21	What is a deep foundation? – base and shaft
+8725fdf	A shallow foundation transfers the load <b>at its base</b>: the contact pressure loads the upper, often weak layers, and these are compressed. A deep foundation carries the load down to a deeper layer of better bearing capacity, and along the way it also transfers load to the soil <b>along its shaft</b> by friction and adhesion.
+898c4c9	For a pile the two parts have their own names: <b>base (end-bearing) resistance</b> (at the base, by compression) and <b>shaft resistance</b> (along the shaft, by shear). Which of them dominates also decides how the pile is classified – this is covered in the next chapter.
+a858936	<b>Shallow foundation:</b> the load enters the soil only at the base and spreads out in the upper layers.
+322f17a	<b>Deep foundation:</b> the load passes through the base and the shaft into the deeper layer of better bearing capacity.
+cf13eca	Load transfer of a shallow foundation and a pile: the shallow foundation transfers load only at its base, the pile at its base and along its shaft
+33c5b6d	Types of deep foundation
+e6aa64f	Deep foundations have three main families: <b>pile foundations</b> (slender elements taken to depth), <b>diaphragm wall foundations</b> (a continuous wall in the ground) and <b>well and box foundations</b> (large-section sunk bodies, also called “deepened shallow foundations” because of their size). On the boundary between shallow and deep foundations lie the <b>transitional solutions</b>. Today the pile foundation is by far the most common, so it is covered in the most detail (C02–C06); diaphragm walls (C07) and well, box and caisson foundations (C08) each get a chapter of their own. In the 3D section at the top of the page you can also try how a shallow foundation, a pile foundation, a diaphragm wall and a well foundation carry the load down.
+451cdac	Classification of deep foundations
+3c43f53	<b>Deep foundation</b><small>a load-transferring element between the structure and the deeper bearing stratum</small>
+65ea8c1	<span class="alap-ti" data-ti="colop"></span><span class="at-t"><b>Pile foundation</b><small>slender elements taken to depth</small></span>
+d358650	<a href="#elore">displacement</a><a href="#furt">replacement</a><a href="#egyeb">other: micropiles, jet grouting, mixing</a>
+a78c625	<span class="alap-ti" data-ti="resfal"></span><span class="at-t"><b>Diaphragm wall</b><small>a continuous wall in the ground</small></span>
+994f18c	<a href="#resfal">diaphragm wall of panels</a><a href="#resfal">barrette</a>
+23e153b	<span class="alap-ti" data-ti="kut"></span><span class="at-t"><b>“Deepened shallow foundations”</b><small>large sunk bodies</small></span>
+fade340	<a href="#kut">well foundation</a><a href="#kut">box foundation · caisson</a>
+4fcca94	<b>Transitional solutions</b><span>excavated block foundation · combined foundation (ground improvement with rigid inclusions)</span>
+02f1901	Five solutions in one section
+99e5757	Pile foundation
+e1e7f3d	Slender, individual load-transferring elements; their heads are tied together by a reinforced concrete pile cap, slab or grillage. Today this is by far the most common deep foundation.
+2bfdd6f	Shape, size
+e0c8005	Micropiles approx. 10–30 cm, “normal” piles 25 (30)–80 cm, large-diameter piles above 80 cm; length from a few metres to several tens of metres.
+ecc997c	Load transfer
+cde20ed	At discrete points, at the base (tip) and along the shaft; according to the ratio it is an end-bearing, friction or mixed pile. It can also carry tension and horizontal load.
+f697c06	Construction
+745f4c8	Precast and driven, vibrated, jacked or screwed in (displacement), or bored in place and filled with concrete (replacement).
+1abd3de	When do we choose it?
+8c951e7	If the bearing stratum lies deep below weak layers, the load is large, the settlement limit is strict, or scour or uplift is a threat.
+428827e	Example
+d5acbed	Tower blocks, bridges, wind turbines, halls – Taipei 101 stands on large-diameter bored piles.
+a4d10d5	In detail: C02–C06 →
+5f9286e	Diaphragm wall
+29a890f	A continuous, planar reinforced concrete structure – a wall in the ground. The trench is excavated under bentonite slurry, reinforced, then concreted from the bottom up.
+6d864cf	Thickness 40–120 cm; a panel is typically 2.8–5.6 m long (at most 8–10 m); depth generally 15–30 m.
+a60dea2	A strip foundation: the load coming down the wall is transferred at its base and along both faces; meanwhile it also retains the soil and the groundwater.
+8ce4c3d	Guide walls, then excavation under slurry with a grab or a hydromill (cutter), reinforcement cage, and finally concreting through a tremie pipe.
+5b59246	Underground car parks, underpasses, metro stations: where excavation support, a permanent side wall and a foundation are needed at once, below the groundwater, next to neighbouring buildings.
+1212063	The stations of metro line 4 in Budapest (a 48.3 m deep diaphragm wall at Fővám tér), city-centre underground car parks.
+c520f1e	In detail: C07 →
+22e1bb4	Well foundation
+f3a4367	A large-diameter shaft wall, open at the top and bottom, sunk under its own weight to the bearing stratum while being excavated from inside, then filled with concrete.
+ad95e25	Diameter 0.8–3.0 m, length 4–8 m; a cutting edge at the bottom, and a reinforced concrete grillage or slab connecting the wells at the top.
+7197988	At discrete points, under individual columns and walls – through its large base area and, to a lesser extent, its shaft.
+9be9125	Sinking a reinforced concrete shell or well rings with a “clamshell” grab; today a steel casing is more often vibrated down and concreted while it is withdrawn.
+60084da	If the bearing stratum is not too deep, mainly with high groundwater, when the foundation level has to be taken below the water table.
+06deec6	Hall and bridge piers, foundations of older industrial buildings.
+fb0cfea	In detail: C08 →
+6e05d8c	Box foundation · caisson
+a4f743e	The “big brother” of the well foundation: the plan of the box matches that of the structure (e.g. a bridge pier or a whole building). A caisson is a box closed at the top, from which the water is expelled by compressed air.
+60b1585	A large body matching the plan of the structure; 6–8 m is built on top of it in each stage, and in easily excavated soil it can go down as deep as 40–50 m.
+abae9de	As a single large body, mainly at its base (and along its shaft) into the bearing stratum.
+2ddea29	Open box with internal excavation; floated in closed at the bottom and sunk with water; caisson with a pressurised working chamber (at most 3.2–3.5 bar) and airlocks.
+f6666f2	Under bridge piers in a river bed, where the foundation must reach below the scour depth; rare today, piles have replaced it.
+a420c0a	The piers of the older Danube bridges in Budapest; the box of an underground car park in Geneva.
+358c118	Transitional solutions
+89b4fc8	The boundary between shallow and deep foundations is not sharp. It includes the excavated block foundation and the combined foundation, for example ground improvement with rigid inclusions – this is ground improvement, not a pile foundation.
+77ee286	Block foundation: a block excavated in cohesive soil, above the groundwater, to a depth of approx. 5–6 m. Rigid inclusions: typically unreinforced concrete or mortar columns under the slab.
+73bf84e	The block foundation works mainly at its base. With rigid inclusions, arching develops in the granular load transfer platform: part of the load goes to the inclusions, the rest to the soil between them; negative skin friction develops along the upper part of the inclusions.
+528e6c7	The block is excavated without support and concreted immediately; the inclusions are not rigidly connected to the structure (e.g. the base slab).
+bf42e83	Block foundations for moderate loads and a good layer not too deep; rigid inclusions to reduce the settlement of large, uniformly loaded slabs (hall floors, tanks, embankments).
+767fd7b	Block foundations of smaller buildings; logistics halls and tanks on ground improved with rigid inclusions.
+5605a25	Rigid inclusions, stone columns: C06 →
+b729eff	Which is the most common?
+5099d66	Today, by far the pile foundation. Diaphragm walls are used primarily for excavation support and less often purely as foundations – in underground car parks they often do both at once. Well and box foundations were the “classic” methods of the last century; because of piles and modern excavation support they are built less and less today.
+96cf525	When is a deep foundation needed?
+4e26fd9	Foundation systems have two large families: <b>shallow foundations</b> and <b>deep foundations</b>. Until the end of the last century shallow foundations dominated, but in the past two or three decades deep foundation systems have been playing an ever larger role. We choose a deep foundation when a shallow foundation is for some reason not enough – or would simply be more expensive.
+becd9ef	Why are there more and more deep foundations?
+e3ff7c2	Buildings with ever larger loads and greater sensitivity to settlement have to be founded – for these even a reinforced concrete raft is often not enough, primarily because settlements must be limited. The sites with good subsoil have run out, so we increasingly have to build on filled, marshy sites. And deep foundation technologies have developed so much that – including the construction time – they are often cheaper overall than a shallow foundation.
+e40c705	Shallow or deep foundation?
+51db9ef	Giants and their foundations
+23ab85c	Skyscrapers and towers are the most spectacular cases of deep foundations. Besides the <b>large load</b>, <b>unfavourable subsoil</b> and a <b>strict settlement criterion</b> also often force the foundation into the depth. In the figure below every structure and its foundation is shown <b>at the same scale</b>. Look how deep the foundation has to reach – and notice that this is decided not by the height of the building but by the <b>subsoil</b>.

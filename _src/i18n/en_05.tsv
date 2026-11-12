@@ -1,0 +1,138 @@
+d5bd8cf	With bentonite slurry
+3f73b9f	The drilling mud (bentonite slurry) is denser than water: it displaces the groundwater and supports the wall of the bore with its excess pressure. For this, the slurry level must always be kept above the groundwater table.
+3386ecf	With soil
+fd383a4	For a continuous auger (CFA) the plug of soil remaining on the auger supports the surrounding soil – no separate technology is needed, which is a significant advantage.
+e3c69de	Not at all – because it is not needed
+893e3c3	In cohesive soil, above the groundwater, to a depth of at most 8–10 m, the bore stands for a short time even without support, but it must be concreted immediately after excavation.
+df52932	If the bore is not held
+0e4af63	The bore may collapse: a <b>discontinuity</b> forms in the pile shaft, the required concrete volume increases, and the loosened wall can greatly reduce the <b>shaft resistance</b>. Soil falling to the bottom impairs the <b>base resistance</b>.
+fd50871	Bore stability lab
+203f62d	Why does the casing need water?
+d4a4bd4	Below the groundwater, removing soil from the casing also removes water. If the water level inside the tube falls below that outside, the difference starts a flow towards the bottom of the tube: the water bursts in upwards at the base, carries grains with it, and loosens the soil exactly where the pile base will sit. That is why the water level inside the tube is kept at least at the outside level.
+4412407	Slurry and groundwater
+5bdb1c6	Bentonite slurry is denser than water and forms a thin layer of low permeability on the wall of the bore (filter cake), through which its excess pressure is transferred to the soil. For this, the slurry level must be kept above the groundwater table – the details are discussed under diaphragm walls (C07).
+b2544e0	Concreting and reinforcement
+9ee0444	The pile can be made in two sequences: <b>concreting – compaction – reinforcement</b>, or <b>reinforcement – concreting – compaction</b>. Concreting can be gravitational or pneumatic (under pressure): through a concreting hopper, through the casing, or for CFA through the drill stem.
+3944c77	<b>Compaction.</b> With a dropped rammer (tamping – not in flowing concrete), or by “re-driving” the casing. In concreting under pressure the placing itself compacts.
+96fc5d0	<b>The concrete must not segregate</b> or bleed water: segregated concrete leaves a honeycombed, weak section in the pile.
+c6c3681	<b>Reinforcement.</b> The reinforcement is either pushed or vibrated into the fresh concrete afterwards (CFA), or, for larger-diameter, longer piles, placed in the bore in advance with concreting afterwards. <b>Spacers</b> ensure the central position and the concrete cover.
+d8e8dc1	<b>Below water or slurry</b> concreting is done through a tremie pipe: the pipe fills from the bottom, the concrete displaces the slurry upwards, and the end of the pipe stays immersed in the fresh concrete throughout.
+b433175	Concreting into the bore through a hopper
+7975cea	Concreting hopper above the bore
+75b4a33	CFA rig with a concrete pump, concreting through the drill stem
+8b8d7eb	Concreting through the drill stem (CFA)
+1407bb8	An excavator pushes the reinforcement cage into the fresh concrete
+3806b91	Pushing the reinforcement cage into the finished pile concrete
+5015d30	Lifting a long reinforcement cage into the bore
+83b8b8d	Lifting in the reinforcement cage before concreting
+8e218c4	Concreting through a tremie pipe
+ff79ec7	CFA pile – with a continuous auger
+ee42f2b	In the past two or three decades this piling technology has dominated in Hungary. Its name abbreviates <i>Continuous Flight Auger</i>; in German-speaking countries it is known as the SOB pile, in France as the STARSOL pile. The CFA pile is made with a continuous auger on a hollow drill stem, and concrete is pumped into the bore through the drill stem as the auger is withdrawn.
+3df043e	The four phases of making a CFA pile
+1e35440	← swipe sideways for the phases →
+6b75da2	<b>40–120<small>cm</small></b><span>diameter (40, 60, 80, 100, rarely 120 cm)</span>
+a1af03d	<b>6–22<small>(24) m</small></b><span>length – the length of the auger is limited by the mast of the rig</span>
+b093abf	When is it a good choice?
+e4141d0	in any soil except loose, flowing soils – in fine sand with particular care
+0673cce	on projects needing many pile diameters and lengths
+7bd315e	with variable bearing capacity requirements
+ceffdf4	on jobs with a short deadline
+47cdcbe	where noise and vibration are restricted
+fe9574d	Main features, limitations
+03fd842	simple machinery, fast drilling
+946df3d	automatic monitoring: a record for every pile
+ed59bbd	at most approx. 22–24 m long – the length of the auger is limited by the mast of the rig
+a3b1446	the reinforcement cage can only be lowered into fresh concrete – difficult for a long cage
+63aba3a	if withdrawn too fast, the pile can narrow (necking)
+89e0f3f	A record for every pile
+e060007	Modern rigs continuously measure and record the drilling resistance, the concrete pressure at the top of the drill stem, the volume of concrete placed and the withdrawal rate during pile construction, and produce an automatic record for every single pile. This shows afterwards if less concrete reached the bore anywhere than the theoretical volume.
+7bce691	The most typical defect is <b>necking</b>: if the auger is withdrawn faster than the concrete fills the space released, the wall of the bore is pushed into the place of the concrete, and the pile narrows over that section. That is why the concrete must always arrive with a slight excess pressure, in step with the withdrawal – the concrete consumption is typically somewhat more than the theoretical volume.
+a8bc943	Monitor in the cab of a CFA rig showing depth, pressure and concrete volume
+99d85e3	The depth, concrete pressure and concrete volume can be seen in real time on the rig operator’s monitor
+7cd4116	CFA monitor
+5cc41af	Cased pile
+643f690	A technology that can be used even in extreme ground conditions. The casing is sunk in parallel with the removal of the spoil – with a drilling bucket or auger, possibly a grab – in such a way that the casing generally, and in granular soil without exception, goes ahead of the excavation. Below water, the water removed from the bore is replaced.
+a0bfc8c	The wall of the bore is supported by the casing until concreting, so the method can be used safely even in silty soils with high water content. The pile is concreted through a concreting pipe while the casing is withdrawn at the appropriate rate. The casing can be <b>recovered</b> (withdrawn during concreting) or <b>permanent</b> (it stays in the ground, e.g. to protect the pile shaft). Its main field of application is depths and diameters that cannot be reached with other technologies, and high bearing capacity. In Hungarian practice a depth of 30–40 m has proved sufficient so far.
+78f21b3	The five phases of making a cased pile
+617604f	<b>80–180<small>cm</small></b><span>diameter (80, 100, 120, 150, 180 cm)</span>
+220dec8	<b>15–50<small>(100) m</small></b><span>length; in Hungarian practice 30–40 m has been sufficient so far</span>
+4e179be	Field of application
+65c10c8	in particularly unfavourable soils (too)
+37aca67	for large diameters of at least 80 cm
+c313300	for high bearing capacity requirements
+341401a	Main features
+ac49161	complex machinery
+7f54753	slower drilling than methods using a drill stem
+23f8cf3	moving and extending the casing is cumbersome
+1aec639	Bentonite-supported (slurry-supported) pile
+03c01e8	The result is very similar to the cased pile, only here the stability of the bore is ensured by the drilling mud, the bentonite slurry. It has spread mainly for large-diameter, deep piles: because of excavation with a drilling bucket and slurry support, the capacity of the rig does not limit the achievable depth. In Hungary it is used mainly for the foundations of long-span bridges.
+491c5ae	positioning, pre-drilling, placing the guide tube;
+25fc146	filling with the drilling fluid (slurry);
+90a5777	removing the soil with a short auger or drilling bucket to the required depth, with slurry support;
+c01b27d	cleaning the pile base, placing the reinforcement, starting concreting through a tremie pipe;
+c95bc22	concreting up to ground level – the concrete displaces the slurry from below;
+00ae074	removing the guide tube.
+842721e	The six construction phases of a bentonite-supported pile
+2bf66ad	<b>80–180<small>cm</small></b><span>diameter</span>
+50f53b0	<b>15–50<small>m</small></b><span>length – not limited by the capacity of the rig</span>
+4026e82	in any soil
+38c1982	complex machinery, a slurry mixing and cleaning plant is needed
+67ff704	slower drilling
+f9ee358	the slurry must be treated after concreting
+19b4478	Unsupported bore
+d0c77ff	Unsupported bored pile: drilling and concreting
+fae5ffd	In cohesive soil, above the groundwater, to a depth of at most 8–10 m, the bore stands even without support – but only for a short time, so it must be concreted immediately after excavation. The bore is made with a short auger or a grab; the concrete is placed gravitationally through a hopper.
+39680f3	A body excavated to a depth of 5–6 m and filled with concrete is also called an <b>excavated block foundation</b> or, in Hungarian practice, a <b>“well foundation”</b> – this is already a transition between shallow and deep foundations (“real” well and box foundations are covered in C08).
+c0458ac	Water changes everything
+aafb502	The same clay that stands for a while when dry can quickly start to move below the groundwater or at a granular intercalation. If the drilling hits water, the unsupported technology can no longer be used.
+7cf031c	Which one to choose?
+c21bfb5	=
+76484cf	Cased
+d159f15	Bentonite-supported
+677aed6	Unsupported
+0875608	Diameter
+62ed994	=
+3a9a190	=
+16554b5	according to the size of the short auger or grab
+7493dbb	Length
+55125f8	Soil
+711d439	any soil except loose, flowing soils; with care in fine sand
+4fb9fef	even in particularly unfavourable soil
+3b15fe6	any soil
+edef334	cohesive soil, above the groundwater
+37a60a1	soil plug on the auger
+2e0dd08	steel casing
+4784deb	bentonite slurry
+cb1c92e	the soil’s own strength
+bc40472	Concreting
+3db1457	through the drill stem, under pressure
+cc81614	through a concreting pipe, while the casing is withdrawn
+7ab44e4	through a tremie pipe, below slurry
+14774d6	through a hopper
+39eff75	Reinforcement
+655f18e	afterwards, into the fresh concrete
+9e4322c	in advance, into the bore
+82b6680	in advance or afterwards
+74f6757	Machinery, speed
+8b43cc7	simple, fast
+1521f73	complex, slower
+83022a7	simple
+f42c05c	Technology selector
+1788dbf	<span class="id">C06</span><span>Other piles</span><span>micropiles · jet grouting · deep mixing · gravel piles</span>
+f1c42e6	Micropiles, jet grouting, deep mixing
+12d5bbd	Some technologies are neither purely displacement nor purely replacement – yet their result works (also) as a pile. These include the micropile, made with machines that fit through a cellar door, jet grouting, which cuts the soil apart with a jet at a pressure of 400–600 bar, deep mixing, which mixes the soil in place, and the stone column compacted from gravel. With these you can reach under a hundred-year-old apartment block, close off an excavation on an infill site, or make soft soil capable of carrying load.
+c8d52df	Micropile
+1d86f6f	Ø ≤ 300 mm, with a grouted shaft. Small rig, tight space, underpinning an existing building.
+89afb40	Jet grouting
+cb76a9a	A high-energy jet breaks up the soil and mixes it with binder: a “soilcrete” column.
+b13a5e3	Deep mixing
+2a78f24	A rotating mixing shaft mixes the soil with the binder in place – a column, block or wall.
+da0e159	Gravel pile
+5a13275	A gravel column compacted with a vibrating probe: it stiffens and drains – a transition towards ground improvement.
+14fd345	Micropiles
+b8575b3	<b>Micropiles</b> are bored piles with a shaft diameter of at most 250–300 mm, and driven piles whose shaft diameter or largest cross-sectional dimension does not exceed 150 mm. They are slender elements: they transfer the load to the soil and reduce deformations. Their shaft and base resistance can usually be increased by <b>grout injection</b>, and their shaft can have a constant cross-section, a telescopically varying one, or an enlarged shaft or base.
+ef3c0c9	Their material is steel (steel tube, rigid steel element) or another reinforcing material, cement or concrete mortar, or concrete – most often a combination of these: a steel core surrounded by a grouted body.
+620a09d	Their real strength is the <b>equipment</b>: the drilling rig is so small that it fits into a cellar, a place with low headroom or difficult access, and it works without vibration next to the walls of an existing building.
+3a1debb	<b>≤ 300<small>mm</small></b><span>shaft diameter of a bored micropile (the limit is 250–300 mm)</span>
+5148645	<b>≤ 150<small>mm</small></b><span>largest cross-sectional dimension of a driven micropile</span>
+79b9648	<b>100–200<small>mm</small></b><span>diameter of the steel tube core placed in the bore</span>

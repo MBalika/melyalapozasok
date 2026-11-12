@@ -1,0 +1,99 @@
+207a1d2	A short pile with a big rig
+a076574	The ${k === 'casing' ? 'béléscsöves' : 'zagyos'} bored pile is typically 15–50 m long; for ${fmt(L, 1)} m the slower, complex technology is rarely economical.
+8ab546c	cased
+85f4f0a	Casing ahead of the excavation
+850f35e	The casing prevents the soil and groundwater from breaking in; in granular soil the casing must go ahead of the excavation. It is safe even in silty soil with a high water content.
+6569ae0	Nothing to replace here
+6851a5b	In this profile there is no groundwater along the bore, so the lack of water replacement causes no problem in the model. Try it in profile A, B or C!
+b750cc5	Base failure!
+4881899	The water removed from inside the casing is not replaced: because of the higher groundwater table outside (−${fmt(gw, 1)} m), water breaks in at the base and disturbs the soil – the base resistance drops significantly.
+bd3a1a5	Water replacement in the bore
+f61cbbd	Below the groundwater table the water removed is replaced in the bore, so the soil does not break in at the base.
+d220497	Bentonite slurry support
+a7858dc	The slurry displaces the groundwater and supports the wall of the bore; the concrete is placed from the bottom up through a tremie pipe and displaces the slurry.
+6140f22	No groundwater along the bore
+2494ee8	In this profile the drop in slurry level causes no collapse in the model – try it in profile A, B or C!
+db47605	The slurry level has dropped close to the groundwater table (−${fmt(gw, 1)} m): the excess pressure is lost and the wall collapses. A discontinuity forms in the pile shaft, more concrete is needed, and the shaft resistance decreases.
+686460c	Slurry level above the groundwater
+90539f9	The slurry level is kept well above the groundwater table throughout – this way the excess pressure on the wall of the bore is maintained.
+bd5d8b7	A very long pile
+c61b464	In Hungarian practice a depth of 30–40 m is typically sufficient.
+96c89a4	the groundwater (−${fmt(gw, 1)} m) is above the bottom of the bore
+ad76fc6	the bore passes through a granular layer (${gr.n})
+603f634	Without support the bore stands only in cohesive soil above the groundwater – here ${why.join(', és ')}. The result would be a discontinuity, more concrete and lower shaft resistance. Choose a casing, slurry or CFA!
+b818e34	, and 
+0409013	Cohesive soil, above the groundwater
+d7e0f86	In hard cohesive soil above the groundwater the bore stands by itself for a short time – it must be concreted immediately after excavation.
+0a724e5	Unsupported bore too deep
+f1c41f1	Without support work is done to a depth of at most 8–10 m – here ${fmt(L, 1)} m.
+0e242f8	${fmt(L, 1)} m: an unsupported bore can be at most 8–10 m deep.
+b80af9e	Excavated block foundation
+5a99914	Up to a depth of 5–6 m such a foundation is also called an excavated block foundation or well foundation.
+37d033b	Square pile too long
+57b3876	Square piles (30×30, 40×40 cm) are typically 4–12 m long. A longer one needs a round spun pile (max. 20–22 m).
+4de8588	Precast pile too long
+edd062b	Round spun piles are at most 20–22 m long.
+4899a03	In Hungarian practice the square pile is 30×30 or 40×40 cm.
+25024f5	The pile refuses!
+fc2a79b	In hard (stony) clay the precast pile cannot be driven to the design depth – here it stops at approx. −${fmt(M.stuck, 1)} m.
+7456292	The pile refuses in the fill!
+687fd79	Pile driving cannot be used in fill with large blocks – a single thinner such layer can prevent the pile from getting down.
+6059412	Displacement compacts
+706bb69	The driven pile pushes aside and compacts the soil around it: for a precast pile both the base and the shaft resistance increase.
+5e426c5	Vibration-sensitive neighbour: the riskiest choice
+d092ae3	Noise and vibration
+e755bec	Driving causes significant noise and vibration; near structures it can only be used under strict limits.
+0115ec2	 A bored (CFA) or screw pile is the better choice here.
+a4ce44c	Franki pile too long
+f876b99	The length of a Franki pile is at most approx. 16–18 m.
+56dc83b	At the limit of the Franki pile length
+7778308	It does not reach the bearing stratum
+14ae796	The casing is driven into the bearing stratum – that is where the bulb gives a high base resistance.
+0d43985	Widened base: the “bulb”
+c7f47a3	The rammed concrete bulb gives a high base resistance; a resistance of 2000–3000 kN can be achieved. In Hungary it has almost completely disappeared by now.
+7230801	Driving, ramming
+a5763ba	The casing is driven down with a drop hammer and the concrete is rammed – with dynamic effects and noise.
+bbc0353	 To be avoided next to a vibration-sensitive neighbour.
+1d7d643	Screw pile too long
+e17c8f3	The length of a screw pile is at most approx. 20 m.
+819f081	Not ideal in hard clay
+e99d789	The screw pile is popular and economical mainly in loose or medium-dense granular and intermediate, weakly cohesive soil.
+f404364	Deep in the dense gravel
+c8cb72a	The displacement head progresses only with difficulty in a dense layer – the technology is for loose, medium-dense soil.
+0958d76	No vibration, hardly any spoil
+df5c5b4	While drilling, the head pushes aside and compacts the soil: the shaft resistance increases, little spoil comes to the surface, and there is no dynamic effect or noise.
+69d1ad1	Buckling!
+00f3ba0	In the ${weak.n} layer the undrained shear strength is below 10 kPa: the buckling of the slender micropile must be checked separately.
+f38f162	Only the shaft counts
+1aa857a	For the resistance of a slender micropile the tip resistance is typically neglected. A resistance of 120–150 kN can be achieved with a hollow-bar grouted micropile.
+51b09f8	Small rig, tight space
+32b6ae3	It can be used in places with difficult access and low headroom, and for underpinning an existing building.
+4f0fc9e	Even next to a vibration-sensitive neighbour
+3a02e06	Drilling is not dynamic; installing the casing by rotation is gentler than by vibration.
+21571e6	Making a bored pile involves no vibration from driving.
+9a75fa8	The neighbour doesn’t feel it either
+01f3597	There is no driving or vibrating while screwing.
+d29f6d8	The base stands in the soft layer
+6559fea	The base is in the bearing stratum
+fe59ade	The pile penetrates ${fmt(Lact - P.bear, 1)} m into the bearing stratum (−${fmt(P.bear, 1)} m).
+4f0b0dc	No outstanding bearing stratum
+b274a22	There is no better layer near the base – the shaft of the longer pile does more of the work.
+f0429af	end-bearing
+6942c60	friction
+c6974a5	Close (follow)
+4db7a45	Pile group
+da5d8ee	Previous step
+78ac2a8	▶ Build
+cd5ebee	Next step
+c7375bb	Timeline
+d6e2282	Site
+b0776e4	Soil profile
+8070656	Vibration-sensitive neighbour (city centre)
+d54fcaa	Square
+4afc679	Round (spun)
+b4c1a08	Construction error
+9c581a6	Base resistance
+05a72da	Shaft resistance
+295e094	Classification
+f75ae2e	Compared with a CFA of the same size
+ec27e11	Cast-in-place concrete
