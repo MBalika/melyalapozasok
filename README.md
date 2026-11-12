@@ -29,3 +29,7 @@ python3 build.py          # → ../index.html
 ## Videók zenéje
 
 A videók zenéje (2026-11) valódi hangszerek felvett mintáiból készült – zongora, vonósok, akusztikus és elektromos gitár, basszusgitár, fúvósok, akusztikus dob –, ütemre igazítva a képhez; a gép- és effekthangok a korábbi hangkönyvtárból vannak. Hangminták: Salamander Grand Piano (Alexander Holm, CC BY 3.0); tonejs-instruments (nbrosowsky; VSCO2, Karoryfer, Iowa, Freesound – CC BY 3.0); Tone.js dobminták.
+
+## Angol változat (/en)
+
+Élő: https://melyalapozasok.vercel.app/en („Deep foundations”). Ugyanabból a magyar forrásból épül: a `python3 build.py` az `index.html` mellett az `en.html`-t is elkészíti (előtte egyszer: `cd i18n && npm install`). A fordítás: `_src/i18n/en_*.tsv` (magyar szöveg azonosítója ⇥ angol), a BME-videók adatai: `_src/i18n/en_yt.tsv`. Ha a magyar szöveg változik, az angol build leáll, a hiányzók: `_src/i18n/missing.tsv`; munkalap: `python3 build.py catalog`. Az angol magyarázó videók: `video/en/v1–v5.html`, indexképeik: `img/thumb/en/`. A magyar forrás angolhoz szükséges kapcsait (EN jelző, nyelvváltó, angol tördelési szabályok) a `_src/i18n/prep_hu.py` teszi bele (idempotens).
