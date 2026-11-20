@@ -30,6 +30,7 @@
 
 /* fúrófej-kártyák */
 .hsz-heads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hsz-heads + p { margin-top: 10px; }
 .hsz-heads .card svg { width: 100%; height: 150px; display: block; margin-bottom: 8px; }
 @media (max-width: 760px) { .hsz-heads { grid-template-columns: minmax(0, 1fr); } .hsz-heads .card svg { height: 120px; } }
 
@@ -90,3 +91,17 @@ canvas.hsz-cv { max-width: 900px; margin: 0 auto; }
 @media (max-width: 900px) { .gal.elo-gg { grid-template-columns: repeat(min(var(--n, 3), 3), minmax(0, 1fr)); } }
 @media (max-width: 620px) { .gal.elo-gg { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
 @media (max-width: 600px) { .elo-dw .dn, .elo-dw .dl { font-size: 15px; } .elo-dw .dl.mut { font-size: 13px; } }
+
+/* csavart cölöp: jelenet + monitor */
+.hsz-duo { display: grid; grid-template-columns: minmax(0, 400fr) minmax(0, 248fr); gap: 0; align-items: start; }
+.hsz-duo > svg { width: 100%; height: auto; display: block; }
+@media (max-width: 600px) {
+  .hsz-duo { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .hsz-duo > svg.hsz-mon { max-width: 300px; margin: 0 auto; }
+  [data-w="hsz-csavart"] .hsz-duo svg.fig .t-sm, [data-w="hsz-csavart"] .hsz-duo svg.fig .t-num { font-size: 14px; }
+  [data-w="hsz-csavart"] .hsz-duo svg.fig .t-big { font-size: 19px; }
+  /* a 720 egység széles verésszimulátor felére zsugorodik: nagyobb betű */
+  [data-w="elo-veres"] svg.fig .t-sm, [data-w="elo-veres"] svg.fig .t-num { font-size: 21px; }
+  [data-w="elo-veres"] svg.fig .t-big { font-size: 26px; }
+  [data-w="elo-vibro"] svg.fig .t-sm, [data-w="elo-rezges"] svg.fig .t-sm, [data-w="elo-rezges"] svg.fig .t-num { font-size: 20px; }
+}

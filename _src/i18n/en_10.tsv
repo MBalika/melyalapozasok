@@ -46,9 +46,7 @@ ba20c08	True or false?
 18c8a58	Glossary
 e25ea26	The most important terms in brief. Search for a word or filter by topic – one click takes you from any term to the relevant chapter.
 9cb00bb	<a class="btn btn-line" href="#bevezeto">↑ Back to the surface</a>
-dd18fd3	slender elements into the bearing stratum
 a94f295	Slender, individual elements carry the load down to the bearing stratum – at their bases and along their shafts.
-a579f3c	a wall in the ground: foundation and retaining wall
 fb3abb9	A continuous reinforced concrete wall in the ground: foundation and excavation support in one – it also forms the wall of the underground car park.
 00141bc	sunk large-diameter bodies
 f0c3a23	Large-diameter bodies, sunk and then filled with concrete, under individual columns; a grillage ties them together at the top.
@@ -100,8 +98,6 @@ bc2e6ed	Soft layer below the foundation level
 1d8e23a	Average load of the building
 51da41c	Scour hazard: the shallow foundation may be undermined; the foundation must reach below the expected scour depth.
 ddd442b	The soft layer cannot carry the load (risk of bearing failure): ${fmt(q, 0)}${NB}kPa > approx. ${fmt(R, 0)}${NB}kPa.
-163aefb	The settlement of the shallow foundation (approx. ${fmt(sMm, 0)}${NB}mm) exceeds the allowable value (approx. ${allow}${NB}mm).
-6ea2922	The settlement (approx. ${fmt(sMm, 0)}${NB}mm) is still within the limit of approx. ${allow}${NB}mm.
 3f6e7dd	The groundwater is above the foundation level: a shallow foundation would need a watertight excavation and dewatering – often more expensive than a deep foundation.
 2f240a8	Large inclined load: the shallow foundation must also be checked for sliding; piles can also take the horizontal force.
 eb03b7d	The soil excavated for the basement “unloads”: the extra load is only approx. ${fmt(qnet, 0)}${NB}kPa.
@@ -133,7 +129,6 @@ c97c1cf	the 1970s–80s
 a9c55eb	The tower of a modern onshore wind turbine is approx. 100–150 m tall, and the blade tip reaches close to 200 m. Its foundation is typically a reinforced concrete footing approx. 15–25 m in diameter and 2–3 m thick, on piles on weak soil.
 bf64b18	The tilt of the tower governs: the allowable differential settlement is approx. 3 mm/m.
 13d888e	reinforced concrete foundation taken down 15 m
-42ebf5d	For more than 30 years it was the tallest free-standing structure in the world. The load of the 553 m tall tower is transferred to the rock (shale) by a reinforced concrete foundation taken down 15 m.
 bdb3148	If the bearing stratum is within reach, a massive foundation taken to depth is enough.
 66bddc5	380 bored piles, approx. 80 m
 e3a2745	The tower stands on 380 bored piles 1.5 m in diameter: they reach down approx. 80 m, socketed up to 30 m into the rock. The area is exposed to earthquakes and typhoons.

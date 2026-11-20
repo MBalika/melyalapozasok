@@ -5,7 +5,8 @@
 .g3-ph { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 8px 8px 12px; box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0; }
 .g3-ph .g3-svg { width: 100%; height: auto; display: block; border-radius: 9px; overflow: hidden; }
 .g3-ph figcaption { margin-top: 9px; padding: 0 3px; font-size: 13.5px; line-height: 1.45; color: var(--ink2); }
-.g3-ph figcaption span { display: block; text-align: justify; hyphens: manual; }
+/* keskeny panel: a sorkizárás lyukas sorokat adna, ezért balra zárt */
+.g3-ph figcaption span { display: block; text-align: left; hyphens: manual; }
 .g3-ph figcaption b { display: flex; align-items: center; gap: 7px; font-family: var(--f-display); font-size: 17px; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; line-height: 1.1; text-align: left; }
 .g3-ph figcaption b i { font-style: normal; flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--grp); color: #fff; display: grid; place-items: center; font: 800 12.5px/1 var(--f-mono); }
 @media (max-width: 980px) {
@@ -56,3 +57,6 @@
 .g3-svg .g3-lab { font: 600 11px var(--f-body); fill: var(--ink2); }
 .g3-svg .t-sm { font-size: 10px; }
 @media (max-width: 560px) { #furt .furt-nav { gap: 6px; } #furt .furt-nav a { padding: 8px 8px; } #furt .furt-nav a b { font-size: 14.5px; letter-spacing: 0; } }
+/* a hétpaneles Franki-sor keskeny paneljein a rajzfeliratok 1440 px-en 8–9 px-esre zsugorodnának */
+.g3-phases[data-g3ph="franki"] .g3-svg .g3-lab { font-size: 12px; }
+.g3-phases[data-g3ph="franki"] .g3-svg .t-sm { font-size: 11.5px; }
