@@ -59,7 +59,7 @@ export function initHero() {
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0x1d2a37, 70, 140);
   const cam = new THREE.PerspectiveCamera(40, 1.6, 0.5, 400);
-  cam.position.set(34, 8.5, 49);
+  cam.position.set(36, 9, 52);
   const ctl = new OrbitControls(cam, renderer.domElement);
   renderer.domElement.style.touchAction = 'pan-y'; // telefonon a függőleges húzás a lapot görgeti
   ctl.target.set(0, -5.5, -6); ctl.enableDamping = true; ctl.dampingFactor = 0.08;
