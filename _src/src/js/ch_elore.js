@@ -3,6 +3,18 @@ import { register, shell, slider, seg, toggle, select, stat, verdict, figure, sv
 import { defineQuiz } from './ui.js';
 
 const txt = (p, x, y, s, cls = 't-lab', extra = {}) => svg('text', { x, y, class: cls, text: s, ...extra }, p);
+// SVG-felirat alsó (_) vagy felső (^) indexszel: txtI(p, x, y, ['R/R', '_0'], …) – dy-os tspan, nem baseline-shift
+function txtI(p, x, y, parts, cls = 't-sm', extra = {}) {
+  const t = svg('text', { x, y, class: cls, ...extra }, p); let back = 0;
+  for (const s of parts) {
+    const up = s[0] === '^', dn = s[0] === '_';
+    const o = { text: up || dn ? s.slice(1) : s }, dy = (up ? -0.42 : dn ? 0.28 : 0);
+    if (dy - back) o.dy = (dy - back).toFixed(2) + 'em';
+    if (up || dn) o['font-size'] = '76%';
+    back = dy; svg('tspan', o, t);
+  }
+  return t;
+}
 const rect = (p, x, y, w, hh, style, extra = {}) => svg('rect', { x, y, width: Math.max(0, w), height: Math.max(0, hh), style, ...extra }, p);
 const line = (p, x1, y1, x2, y2, style) => svg('line', { x1, y1, x2, y2, style }, p);
 function arr(p, x1, y1, x2, y2, color = 'var(--ink)', w = 2, hd = 7) {
@@ -56,7 +68,7 @@ register('elo-modok', (root) => {
     rect(fig, 0, 0, 640, GY, 'fill:var(--sky)');
     soilRect(fig, 0, GY, 640, 70, 'soilB'); soilRect(fig, 0, GY + 70, 640, 50, 'soilA');
     line(fig, 0, GY, 640, GY, 'stroke:var(--soil-line);stroke-width:1.5');
-    txt(fig, 12, GY + 20, 'puha réteg', 't-sm'); txt(fig, 12, GY + 92, 'teherbíró réteg', 't-sm');
+    txt(fig, 12, GY + 20, 'puha réteg', 't-sm halo'); txt(fig, 12, GY + 92, 'teherbíró réteg', 't-sm halo');
     let pen = 0, jig = 0;
     const o = MODES[mode];
     if (mode === 'veres') {
@@ -176,7 +188,7 @@ const PILES = {
   vb40: { t: 'vb. 40×40 cm', L: 10, per: 1.6, A: 0.16, conc: true, w: 24 },
   H: { t: 'acél H-profil', L: 12, per: 1.2, A: 0.02, conc: false, w: 18 },
 };
-const HAM = { ejto: { t: 'ejtőkos', eta: 0.75 }, diesel: { t: 'diesel', eta: 0.5 }, hidr: { t: 'hidraulikus', eta: 0.85 } };
+const HAM = { ejto: { t: 'ejtőkos', eta: 0.75 }, diesel: { t: 'dízel', eta: 0.5 }, hidr: { t: 'hidraulikus', eta: 0.85 } };
 register('elo-veres', (root) => {
   const { ctrls, viz, out } = shell(root);
   const sHam = seg(ctrls, { label: 'Kos', options: Object.entries(HAM).map(([v, o]) => ({ v, t: o.t })), value: 'hidr' });
@@ -213,14 +225,23 @@ register('elo-veres', (root) => {
   const sigma = () => { const P = PILES[sPile.v]; const v0 = Math.sqrt(2 * 9.81 * sH.v * HAM[sHam.v].eta); return (P.conc ? 5 : 20) * v0; };
   function blow() {
     if (st.end) return;
-    const P = PILES[sPile.v], E = energy(), c2 = 0.003;
-    const { R, lt } = resist(st.z + 1e-6);
-    let s = lt.rock ? 0 : E / R - c2;
-    if (s < 0) s = 0;
-    const zmax = P.L - 0.5;
+    const P = PILES[sPile.v], E = energy(), c2 = 0.003, zmax = P.L - 0.5;
+    const SMAX = 0.4, dz = 0.002; // egy ütésre legfeljebb ennyit „fut meg” a cölöp; az integrálás lépése (m)
+    // az ütés energiája rétegről rétegre fogy el: E = ∫R·dz + R·c/2 (állandó R-nél s = E/R − c/2)
+    const r0 = resist(st.z + 1e-6);
+    let s = 0, Er = r0.lt.rock ? 0 : E - r0.R * c2;
+    while (Er > 0 && s < SMAX && st.z + s < zmax - 1e-9) {
+      const q = resist(st.z + s + dz / 2);
+      if (q.lt.rock) { s = Math.max(s, q.lt.top - st.z); break; }
+      const need = q.R * dz;
+      if (need >= Er) { s += dz * Er / need; Er = 0; break; }
+      Er -= need; s += dz;
+    }
     if (st.z + s >= zmax) s = zmax - st.z;
     const zb = Math.floor(st.z / 0.5); st.log[zb] = (st.log[zb] || 0) + 1;
-    st.z += s; st.n++; st.sets.push(s); st.lastS = s; st.lastR = E / (Math.max(s, 0.0005) + c2);
+    st.z += s; st.n++; st.sets.push(s); st.lastS = s;
+    const r1 = resist(st.z + 1e-6), lt = r1.lt;
+    st.lastR = lt.rock ? null : r1.R;
     const last10 = st.sets.slice(-10).reduce((a, b) => a + b, 0);
     if (st.z >= zmax - 1e-6) st.end = 'ok';
     else if (st.sets.length >= 10 && last10 < 0.01) st.end = lt.rock ? 'rock' : 'refusal';
@@ -302,11 +323,12 @@ register('elo-veres', (root) => {
     for (const b of bins) {
       const n = st.log[b], w = (n / mx) * (cx1 - cx0 - 30);
       rect(fig, cx0, Y(b * 0.5) + 1, w, 0.5 * SC - 2, n > 40 ? 'fill:var(--bad)' : 'fill:var(--grp)', { opacity: 0.85 });
-      if (n >= 3) txt(fig, cx0 + w + 4, Y(b * 0.5) + 0.5 * SC - 2, String(n), 't-sm');
+      // csak a helyi csúcsokat számozzuk, hogy a sűrű sávok feliratai ne érjenek egymásba
+      if (n >= 3 && n >= (st.log[b - 1] || 0) && n > (st.log[b + 1] || 0)) txt(fig, cx0 + w + 4, Y(b * 0.5) + 0.5 * SC - 1, String(n), 't-sm');
     }
     txt(fig, cx0, GY - 12, `max. ${mx}`, 't-sm');
     if (!bins.length) txt(fig, cx0 + 6, GY + 30, 'még nincs ütés', 't-sm');
-    txt(fig, 8, 494, 'Szemléltető modell: R = köpeny + talp, s = η·E/R − c/2', 't-sm');
+    txt(fig, 8, 494, 'Szemléltető modell: R = köpeny + talp; s = E/R − c/2', 't-sm');
   }
   upd();
 });
@@ -326,7 +348,7 @@ register('elo-vibro', (root) => {
   const fig = figure(viz, 660, 330);
   const ver = verdict(viz);
   const oF = stat(out, { label: 'Rezgésszám', unit: 'Hz', d: 1 });
-  const oR = stat(out, { label: 'Talajellenállás (R / R₀)', unit: '%', d: 0 });
+  const oR = stat(out, { label: 'Talajellenállás (R / R<sub>0</sub>)', unit: '%', d: 0 });
   const oV = stat(out, { label: 'Behatolás (szemléltető)', unit: 'm/perc', d: 1 });
   // excentrikus (forgó tömegű) gerjesztés: az amplitúdó 0-ról indul, a talaj önrezgésszáma körül csúcsosodik
   const ampl = (f, S) => { const r = f / S.f0; return (r * r) / Math.sqrt((1 - r * r) ** 2 + (2 * S.z * r) ** 2); };
@@ -390,7 +412,7 @@ register('elo-vibro', (root) => {
     for (let ff = F0; ff <= F1; ff += 0.5) { pa.push([X(ff), Yv(ampl(ff, S) / amax(S))]); pr.push([X(ff), Yv(ratio(ff, S, tFl.v))]); }
     svg('path', { d: pathD(pa), style: 'fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4' }, fig);
     svg('path', { d: pathD(pr), style: 'fill:none;stroke:var(--grp);stroke-width:2.6' }, fig);
-    txt(fig, x1 - 4, y0 + 2, 'talajellenállás R/R₀', 't-sm t-grp', { 'text-anchor': 'end' });
+    txtI(fig, x1 - 4, y0 + 2, ['talajellenállás R/R', '_0'], 't-sm t-grp', { 'text-anchor': 'end' });
     txt(fig, x1 - 4, y0 + 22, 'rezgési amplitúdó', 't-sm', { 'text-anchor': 'end' });
     line(fig, X(f), y0, X(f), y1, 'stroke:var(--accent);stroke-width:1.4');
     svg('circle', { cx: X(f), cy: Yv(rr), r: 6, style: 'fill:var(--accent);stroke:var(--surface);stroke-width:2' }, fig);
@@ -432,16 +454,17 @@ register('elo-rezges', (root) => {
     oV.set(v, u > 1 ? 'bad' : u > 0.7 ? 'warn' : 'ok', v < 0.1 ? '< 0,1' : null); oL.set(B.lim); oU.set(u * 100, u > 1 ? 'bad' : u > 0.7 ? 'warn' : 'ok');
     oM.set(Math.max(rmin, 0), null, rmin < 2 ? '< 2' : null);
     const pk = T.peak ? ' (az indítás–leállás rezonanciacsúcsával)' : '';
-    if (u > 1) ver.set('bad', 'Túl nagy rezgés', `<span>${T.t}, ${fmt(sR.v, 1)} m-re: ≈ ${fmt(v, 1)} mm/s${pk}. Ez a határérték (${B.t.toLowerCase()}: kb. ${B.lim} mm/s) ${fmt(u * 100, 0)} %-a. Legalább ≈ ${fmt(rmin, 0)} m távolság, vagy zaj- és rezgésszegény technológia kell.</span>`);
-    else if (u > 0.7) ver.set('warn', 'Határeset – mérni kell', `<span>≈ ${fmt(v, 1)} mm/s${pk}: közel a határhoz. A munka alatt rezgésmérővel kell figyelni a szomszédot.</span>`);
-    else ver.set('ok', 'Elviselhető rezgés', `<span>≈ ${fmt(v, 1)} mm/s${pk} – a határérték ${fmt(u * 100, 0)} %-a. ${sT.v === 'vert' ? 'Közelebb érve vagy nagyobb energiával ez gyorsan megváltozik.' : 'Ez a technológia érzékeny környezetben is jó választás lehet.'}</span>`);
+    const vT = v < 0.1 ? '< 0,1' : '≈ ' + fmt(v, 1);
+    if (u > 1) ver.set('bad', 'Túl nagy rezgés', `<span>${T.t}, ${fmt(sR.v, 1)} m-re: ${vT} mm/s${pk}. Ez a határérték (${B.t.toLowerCase()}: kb. ${B.lim} mm/s) ${fmt(u * 100, 0)} %-a. Legalább ≈ ${fmt(rmin, 0)} m távolság, vagy zaj- és rezgésszegény technológia kell.</span>`);
+    else if (u > 0.7) ver.set('warn', 'Határeset – mérni kell', `<span>${vT} mm/s${pk}: közel a határhoz. A munka alatt rezgésmérővel kell figyelni a szomszédot.</span>`);
+    else ver.set('ok', 'Elviselhető rezgés', `<span>${vT} mm/s${pk} – a határérték ${fmt(u * 100, 0)} %-a. ${sT.v === 'vert' ? 'Közelebb érve vagy nagyobb energiával ez gyorsan megváltozik.' : 'Ez a technológia érzékeny környezetben is jó választás lehet.'}</span>`);
   }
   loop(root, (t) => draw(t));
   function draw(t) {
     clear(fig);
     const T = TECH[sT.v], B = BLD[sB.v], r = sR.v;
     const v = vAt(sT.v, r) * (T.peak || 1), u = v / B.lim;
-    const GY = 120, X = (m) => 70 + (m / 60) * 560;
+    const GY = 120, X = (m) => 70 + (m / 60) * 510; // a 60 m-re álló épület is beférjen a képbe
     rect(fig, 0, 0, 660, GY, 'fill:var(--sky)'); soilRect(fig, 0, GY, 660, 42, 'soilA');
     line(fig, 0, GY, 660, GY, 'stroke:var(--soil-line);stroke-width:1.5');
     // gép
@@ -462,7 +485,7 @@ register('elo-rezges', (root) => {
     line(fig, gx, GY + 26, bx, GY + 26, 'stroke:var(--ink);stroke-width:1');
     txt(fig, (gx + bx) / 2, GY + 22, `r = ${fmt(r, 1)} m`, 't-num halo', { 'text-anchor': 'middle' });
     // grafikon – log y
-    const cx0 = 70, cx1 = 630, cy0 = 190, cy1 = 350, LMIN = -1, LMAX = 2;
+    const cx0 = 70, cx1 = X(60), cy0 = 190, cy1 = 350, LMIN = -1, LMAX = 2;
     const Yl = (vv) => clamp(cy1 - ((Math.log10(Math.max(vv, 0.1)) - LMIN) / (LMAX - LMIN)) * (cy1 - cy0), cy0 - 6, cy1);
     line(fig, cx0, cy1, cx1, cy1, 'stroke:var(--line2)'); line(fig, cx0, cy0, cx0, cy1, 'stroke:var(--line2)');
     for (const vv of [0.1, 1, 10, 100]) { line(fig, cx0, Yl(vv), cx1, Yl(vv), 'stroke:var(--line);stroke-width:1'); txt(fig, cx0 - 6, Yl(vv) + 4, fmt(vv, vv < 1 ? 1 : 0), 't-sm', { 'text-anchor': 'end' }); }
@@ -477,8 +500,8 @@ register('elo-rezges', (root) => {
     line(fig, cx0, Yl(B.lim), cx1, Yl(B.lim), `stroke:var(--bad);stroke-width:1.4;stroke-dasharray:6 4`);
     txt(fig, cx0 + 6, Yl(B.lim) - 5, `határ: ${B.t.toLowerCase()} ≈ ${B.lim} mm/s`, 't-sm t-bad halo');
     svg('circle', { cx: X(r), cy: Yl(v), r: 6, style: `fill:${col};stroke:var(--surface);stroke-width:2` }, fig);
-    txt(fig, X(2) + 4, Yl(vAt(sT.v, 2) * (T.peak || 1)) + (Yl(vAt(sT.v, 2) * (T.peak || 1)) < cy0 + 12 ? 14 : -6), T.t, 't-sm t-grp halo');
-    txt(fig, cx1, cy0 - 8, 'Szemléltető modell: v = v₁₀·(10 m / r)ⁿ', 't-sm', { 'text-anchor': 'end' });
+    txt(fig, X(44), Yl(vAt(sT.v, 44) * (T.peak || 1)) - 9, T.t, 't-sm t-grp halo', { 'text-anchor': 'middle' });
+    txtI(fig, cx1, cy0 - 8, ['Szemléltető modell: v = v', '_10', '·(10 m / r)', '^n'], 't-sm', { 'text-anchor': 'end' });
   }
   upd();
 });

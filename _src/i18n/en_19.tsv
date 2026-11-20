@@ -37,7 +37,6 @@ cc48ade	<b>Illustrative model:</b> R<sub>s</sub> = Σ π·D·q<sub>s</sub>·Δz 
 137fadb	All piles are in tension
 63c8c2d	The resultant points upwards (uplift): the piles anchor. The load is taken by the shaft only, in the opposite direction to the usual – the base does not work.
 4e60860	The outer pile has gone into tension
-f71f0b5	Because of the large eccentricity (M = ${fmt(M, 0)}${NB}kNm), tension develops on the windward side: there only the shaft works, in the opposite direction. The pile on the other side is in compression with ${kN(mx)}.
 a15a59e	All piles are in compression
 c03a7a9	The piles transfer the load to the soil by compression at the tip and by shear along the shaft.
 a4864ff	 Because of the horizontal force, <b>bending and shear</b> develop in the piles besides the compressive force.

@@ -25,11 +25,6 @@ c4d27b5	Scour lab around a bridge pier
 0921324	Scheme of a pile foundation: 1 – columns and floor of the superstructure, 2 – grillage, 3 – pile caps, 4 – piles, 5 – bearing stratum; arrows show the load path
 bb2578a	Scheme and load transfer of a pile foundation: the load of the superstructure is distributed to the piles by the pile caps and the grillage, and the piles transfer it to the soil along their shafts and at their bases.
 bd7f6c5	The pile foundation of a new structure has two main parts: the <b>piles</b>, and the <b>cap, slab and/or pile grillage</b> (beam grillage) tying their heads together. The connecting structure distributes the load of the superstructure to the piles and makes them work together.
-e9199a3	<span class="n">1</span><span><b>Superstructure</b> – columns and floors; their load (<b>vertical arrows</b>) is carried down to the foundation by the columns.</span>
-c1066a9	<span class="n">2</span><span><b>Grillage (pile grillage)</b> – reinforced concrete beams between the heads: it ties and stiffens the system and can also take the load of walls.</span>
-7c8c0d1	<span class="n">3</span><span><b>Pile cap</b> – the reinforced concrete block under the column that distributes the load to the pile group; its top is horizontal, and the pile reinforcement is anchored into it.</span>
-f05f4af	<span class="n">4</span><span><b>Piles</b> – they transfer the load to the soil along their shafts (<b class="alap-k-ok">green arrows</b>) and at their bases (<b class="alap-k-acc">orange arrows</b>).</span>
-40f3acc	<span class="n">5</span><span><b>Bearing stratum</b> – the piles are socketed into it; above it lie the weaker, compressible layers.</span>
 6e1390b	Pile cap, grillage, slab
 70351fc	What else are piles good for?
 8dc0567	Foundation of a new structure
@@ -84,7 +79,6 @@ da7a9bd	Tension
 149c2c9	Anchor
 f111cb9	bending
 0f58573	<span>End-bearing pile</span>
-8831f35	<span>In compression</span>
 13a416e	<span>In tension</span>
 40c8463	<span>In bending</span>
 4b0ad55	<span><i style="background:var(--soilB)"></i>weaker layer</span>⏎      <span><i style="background:var(--soilD)"></i>bearing stratum</span>⏎      <span><i style="background:var(--water-fill)"></i>water</span>⏎      <span><i class="l" style="border-color:var(--ok)"></i>shaft resistance</span>⏎      <span><i class="l" style="border-color:var(--accent)"></i>base resistance</span>⏎      <span><i class="l" style="border-color:var(--muted)"></i>lateral displacement</span>⏎      <span><i class="l" style="border-color:var(--grp)"></i>lateral soil resistance</span>

@@ -100,8 +100,6 @@ bc2e6ed	Soft layer below the foundation level
 1d8e23a	Average load of the building
 51da41c	Scour hazard: the shallow foundation may be undermined; the foundation must reach below the expected scour depth.
 ddd442b	The soft layer cannot carry the load (risk of bearing failure): ${fmt(q, 0)}${NB}kPa > approx. ${fmt(R, 0)}${NB}kPa.
-163aefb	The settlement of the shallow foundation (approx. ${fmt(sMm, 0)}${NB}mm) exceeds the allowable value (approx. ${allow}${NB}mm).
-6ea2922	The settlement (approx. ${fmt(sMm, 0)}${NB}mm) is still within the limit of approx. ${allow}${NB}mm.
 3f6e7dd	The groundwater is above the foundation level: a shallow foundation would need a watertight excavation and dewatering – often more expensive than a deep foundation.
 2f240a8	Large inclined load: the shallow foundation must also be checked for sliding; piles can also take the horizontal force.
 eb03b7d	The soil excavated for the basement “unloads”: the extra load is only approx. ${fmt(qnet, 0)}${NB}kPa.

@@ -39,7 +39,7 @@ register('rsz-teher', (root) => {
   const oR = stat(out, { label: 'Összesen R' });
   const oP = stat(out, { label: 'A talp részaránya', unit: '%', d: 0 });
   const vd = verdict(null); out.append(vd.el); vd.el.style.gridColumn = '1 / -1';
-  const G = 44, K = 11.2, Y = (z) => G + z * K;
+  const G = 44, K = 10.6, Y = (z) => G + z * K;
   function calc() {
     const P = PROF[sP.v], zg = sG.v, L = sL.v, D = sD.v;
     const layerAt = (z) => (P.L.length === 1 || z < zg ? P.L[0] : P.L[1]);
@@ -59,8 +59,8 @@ register('rsz-teher', (root) => {
     if (c.P.L.length === 1) hatch(s, 0, G, 380, 420 - G, c.P.L[0].cls, c.P.L[0].pat);
     else { hatch(s, 0, G, 380, Y(c.zg) - G, c.P.L[0].cls, c.P.L[0].pat); hatch(s, 0, Y(c.zg), 380, 420 - Y(c.zg), c.P.L[1].cls, c.P.L[1].pat); svg('line', { x1: 0, y1: Y(c.zg), x2: 380, y2: Y(c.zg), class: 's-soil', 'stroke-width': 1.3 }, s); }
     svg('line', { x1: 0, y1: G, x2: 380, y2: G, class: 's-ink', 'stroke-width': 1.5 }, s);
-    T(s, 8, G + 16, c.P.L[0].n, 't-sm halo');
-    if (c.P.L.length > 1) T(s, 8, 410, c.P.L[1].n, 't-sm halo');
+    if (c.P.L.length > 1) { T(s, 8, G + 16, c.P.L[0].n, 't-sm halo'); T(s, 8, 410, c.P.L[1].n, 't-sm halo'); }
+    else T(s, 8, 410, c.P.L[0].n, 't-sm halo');
     // mélységskála
     for (let z = 5; z < zmax; z += 5) { svg('line', { x1: 372, y1: Y(z), x2: 380, y2: Y(z), class: 's-muted', 'stroke-width': 1 }, s); T(s, 368, Y(z) + 4, `${z}${NB}m`, 't-sm halo', { 'text-anchor': 'end' }); }
     // cölöp (átmérő torzítva)
@@ -151,7 +151,7 @@ register('rsz-csoport', (root) => {
     oM.set(M); oHp.set(H / 4);
     let st, ttl, txt;
     if (mx <= 0) { st = 'warn'; ttl = 'Minden cölöp húzott'; txt = 'Az eredő felfelé mutat (felúszás): a cölöpök lehorgonyoznak. A terhet csak a köpeny veszi fel, a megszokottal ellentétes irányban – a talp nem dolgozik.'; }
-    else if (mn < 0) { st = 'warn'; ttl = 'A szélső cölöp húzottá vált'; txt = `A nagy külpontosság (M = ${fmt(M, 0)}${NB}kNm) miatt a széllel szemközti oldalon húzás lép fel: ott csak a köpeny dolgozik, ellentétes irányban. A túloldali cölöp ${kN(mx)}-nal nyomott.`; }
+    else if (mn < 0) { st = 'warn'; ttl = 'A szélső cölöp húzottá vált'; txt = `A nagy külpontosság (M = ${fmt(M, 0)}${NB}kNm) miatt azon az oldalon, ahonnan a vízszintes erő érkezik, húzás lép fel: ott csak a köpeny dolgozik, ellentétes irányban. A túloldali szélső cölöpre ${kN(mx)} nyomóerő jut.`; }
     else { st = 'ok'; ttl = 'Minden cölöp nyomott'; txt = 'A terhet a cölöpök a csúcson nyomással, a köpenyen nyírással adják át a talajnak.'; }
     if (H > 0) txt += ' A vízszintes erő miatt a cölöpökben a nyomóerő mellett <b>hajlítás és nyírás</b> is ébred.';
     vd.set(st, ttl, `<p>${txt}</p>`);
@@ -217,10 +217,11 @@ register('rsz-csoport', (root) => {
   loop(s, (t, dt) => {
     if (!goal) return;
     const k = 1 - Math.exp(-dt * 9);
-    let moved = false;
+    let moved = false; const was = cur._moving;
     const ap = (a, b) => { const v = a + (b - a) * k; if (Math.abs(b - v) > 0.5) moved = true; return Math.abs(b - v) <= 0.5 ? b : v; };
     cur.P = cur.P.map((p, i) => ap(p, goal.P[i])); cur.H = ap(cur.H, goal.H); cur.N = ap(cur.N, goal.N); cur.hh = ap(cur.hh, goal.hh);
-    if (moved || cur._last !== JSON.stringify(goal)) { draw(); cur._last = JSON.stringify(goal); }
+    cur._moving = moved;
+    if (moved || was || cur._last !== JSON.stringify(goal)) { draw(); cur._last = JSON.stringify(goal); } // a megérkezés utáni képkockát is kirajzolja
   });
   root.append(h('div', { class: 'w-foot', html: '<b>Szemléltető modell:</b> merev fejtömb, egyforma cölöpök, P<sub>i</sub> = N/n + M·x<sub>i</sub>/Σx<sub>i</sub>² (a cölöptávolság 2,5 m). A vízszintes erőt egyenlően osztottuk el a cölöpök között.' }));
 });
@@ -383,7 +384,7 @@ register('rsz-atmero', (root) => {
   const sD = slider(cbox, { label: 'Átmérő', sym: 'D', min: 10, max: 200, step: 5, value: 60, unit: 'cm', d: 0, hint: 'A bal oldali rajzon a cölöp és az ember (1,75 m) méretaránya valós.' });
   const dg = h('div', { class: 'rsz-dgrid' }); viz.append(dg);
   const s = figure(dg, 230, 350, 'fig rsz-dman'), s2 = figure(dg, 430, 350, 'fig rsz-dchart');
-  const oK = stat(out, { label: 'Kategória' });
+  const oK = stat(out, { label: 'Kategória' }); oK.el.classList.add('elo-tstat');
   const oA = stat(out, { label: 'Keresztmetszet A = π·D²/4', unit: 'm²', d: 3 });
   const oU = stat(out, { label: 'Köpenyfelület 1 m hosszon', unit: 'm²', d: 2 });
   const vd = verdict(null); out.append(vd.el); vd.el.style.gridColumn = '1 / -1';
@@ -399,7 +400,7 @@ register('rsz-atmero', (root) => {
   function draw() {
     const D = sD.v; clear(s); clear(s2);
     // bal: méretarányos rajz
-    const k = 120, yb = 300, x0 = 30;
+    const k = D > 110 ? 120 * 110 / D : 120, yb = 300, x0 = 30; // 110 cm felett a rajz arányosan kisebb, hogy a cölöp beférjen
     svg('rect', { x: 0, y: 0, width: 230, height: 340, rx: 12, class: 'f-bg2' }, s);
     T(s, 14, 24, 'MÉRETARÁNYOSAN', 't-sm');
     svg('line', { x1: 10, y1: yb, x2: 220, y2: yb, class: 's-ink', 'stroke-width': 1.2 }, s);

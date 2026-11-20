@@ -1,0 +1,22 @@
+0310eb8	<span>In compression</span>
+21b2b43	Over the past two decades the bored, cast-in-place <b>displacement screw pile</b> has been gaining more and more ground. At the end of the hollow drill stem there is a special drilling head: the rig drives it down by rotating and pushing, and the head <b>pushes aside and compacts</b> the soil around itself – and does not bring it up. At the required depth <b>concreting under pressure</b> starts through the drill stem, while the stem is continuously rotated and withdrawn; finally the reinforcement cage is vibrated into the fresh pile.
+006a4ae	Illustrative model: v = v
+293beba	soil resistance R/R
+eb67dbc	Soil resistance (R / R<sub>0</sub>)
+9c780fc	Illustrative model: R = shaft + base; s = E/R − c/2
+0695343	diesel
+cf01447	For this diameter and length in this soil the rig does not have enough torque: a smaller diameter, a shorter pile or a more powerful rig is needed.
+1cb8ef3	In dense, hard soil the displacement head cannot push the soil aside – a replacement (bored, CFA) pile is the right choice here.
+4462fa4	<span>At ${fmt(stuck, 1)} m the torque reached the limit of the rig (${TMAX} kNm). ${S.ok === 'bad' ? 'Tömör, kemény talajban a kiszorító fej nem tudja széttolni a talajt – ide inkább talajhelyettesítéses (fúrt, CFA) cölöp való.' : 'Ekkora átmérőhöz és hosszhoz ebben a talajban ennek a gépnek kevés a nyomatéka: kisebb átmérő, rövidebb cölöp vagy erősebb gép kell.'}</span>
+cc47966	For 100 such piles: this many trucks
+7ecf521	Because of the large eccentricity (M = ${fmt(M, 0)}${NB}kNm), tension develops on the side the horizontal force comes from: there only the shaft works, in the opposite direction. The outer pile on the other side carries a compressive force of ${kN(mx)}.
+7f8fb89	<span><b>Superstructure</b> – columns and floors; their load (<b>vertical arrows</b>) is carried down to the foundation by the columns.</span>
+f381315	<span><b>Grillage (pile grillage)</b> – reinforced concrete beams between the heads: it ties and stiffens the system and can also take the load of walls.</span>
+389f8fa	<span><b>Pile cap</b> – the reinforced concrete block under the column that distributes the load to the pile group; its top is horizontal, and the pile reinforcement is anchored into it.</span>
+828cc1a	<span><b>Piles</b> – they transfer the load to the soil along their shafts (<b class="alap-k-ok">green arrows</b>) and at their bases (<b class="alap-k-acc">orange arrows</b>).</span>
+bc45450	<span><b>Bearing stratum</b> – the piles are socketed into it; above it lie the weaker, compressible layers.</span>
+29a7396	The settlement of the shallow foundation (${sTxt}) exceeds the allowable value (approx. ${allow}${NB}mm).
+3fc070f	The settlement (${sTxt}) is still within the limit of approx. ${allow}${NB}mm.
+d16aa83	<span>${T.t}, at ${fmt(sR.v, 1)} m: ${vT} mm/s${pk}. This is ${fmt(u * 100, 0)} % of the limit (${B.t.toLowerCase()}: approx. ${B.lim} mm/s). A distance of at least ≈ ${fmt(rmin, 0)} m, or a low-noise, low-vibration technology, is needed.</span>
+e06fcae	<span>${vT} mm/s${pk}: close to the limit. The neighbour must be monitored with a vibration meter during the work.</span>
+3139c19	<span>${vT} mm/s${pk} – ${fmt(u * 100, 0)} % of the limit. ${sT.v === 'vert' ? 'Közelebb érve vagy nagyobb energiával ez gyorsan megváltozik.' : 'Ez a technológia érzékeny környezetben is jó választás lehet.'}</span>

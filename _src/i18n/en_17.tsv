@@ -1,9 +1,7 @@
-adc3abb	That is approx. this many trucks
 bc46e31	Shaft area
 b83aeb9	Compaction of the soil
 43fbe9c	↺ Again
 2a272bd	The drilling head is stuck
-3ca3270	<span>At ${fmt(stuck, 1)} m the torque reached the limit of the rig (${TMAX} kNm). In dense, hard soil the displacement head cannot push the soil aside – a replacement (bored, CFA) pile is the right choice here.</span>
 53ab1c6	The pile is finished
 72ce723	<span>${fmt(L, 1)} m, Ø ${fmt(sD.v, 0)} mm – we pushed ${fmt(V, 2)} m³ of soil sideways, and almost nothing came to the surface. A bored pile would produce approx. ${fmt(V * 1.25, 1)} m³ of (loosened) spoil.</span>
 7d45b34	Drilling – rotation and thrust

@@ -214,14 +214,14 @@ function panorama(root) {
   P(soil, rd, 'tt-river'); P(soil, rd, '', { fill: 'url(#pat-water)', opacity: 0.8 });
   P(soil, `M${RX0 + 6} ${Y(WL)} H${RX1 - 6}`, 'tt-wl');
   // talajvíz
-  P(soil, `M34 ${Y(2.5)} H346 M644 ${Y(2.5)} H${RX0 + 20}`, 'tt-gw');
+  P(soil, `M48 ${Y(2.5)} H346 M644 ${Y(2.5)} H${RX0 + 20}`, 'tt-gw');
   P(soil, `M${RX1 - 20} ${Y(WL + 0.5)} C${RX1 + 30} ${Y(1.5)} 1270 ${Y(7)} 1310 ${Y(7)} H${W}`, 'tt-gw');
   T(soil, 324, Y(2.5) - 6, 'TV', 'tt-xs t-water', { 'text-anchor': 'end' });
   // mélységléc
   const rl = svg('g', { class: 'tt-ruler' }, s);
-  P(rl, `M28 ${G} V${H - 6}`, 'tt-rl');
-  for (let d = 0; d <= 20; d += 5) { P(rl, `M22 ${Y(d)} H34`, 'tt-rl'); T(rl, 18, Y(d) + 5, d === 0 ? '0' : '−' + d, 'tt-xs', { 'text-anchor': 'end' }); }
-  T(rl, 18, Y(21.4) + 5, 'm', 'tt-xs', { 'text-anchor': 'end' });
+  P(rl, `M40 ${G} V${H - 6}`, 'tt-rl');
+  for (let d = 0; d <= 25; d += 5) { P(rl, `M35 ${Y(d)} H45`, 'tt-rl'); T(rl, 32, Y(d) + 5, d === 0 ? '±0' : '−' + d, 'tt-xs', { 'text-anchor': 'end' }); }
+  T(rl, 32, Y(22.5) + 5, 'm', 'tt-xs', { 'text-anchor': 'end' });
   // jelenetek
   const groups = {};
   for (const sc of TT_SCENES) {
@@ -253,7 +253,7 @@ register('alap-tipusterkep', (root) => {
     for (const sc of TT_SCENES) groups[sc.k].classList.toggle('dim', k !== 'all' && sc.k !== k);
     cards.forEach((c) => { c.classList.toggle('on', c.dataset.tt === k); c.classList.toggle('dim', k !== 'all' && c.dataset.tt !== k); });
     const sc = TT_SCENES.find((q) => q.k === k);
-    if (narrow() && sc) { const pad = 10; s.setAttribute('viewBox', `${sc.x0 - pad} 0 ${sc.x1 - sc.x0 + 2 * pad} ${sc.zh}`); view.classList.add('zoom'); }
+    if (narrow() && sc) { const pad = 10, xa = sc.x0 < 60 ? 0 : sc.x0 - pad; s.setAttribute('viewBox', `${xa} 0 ${sc.x1 + pad - xa} ${sc.zh}`); view.classList.add('zoom'); }
     else { s.setAttribute('viewBox', `0 0 ${W} ${H}`); view.classList.remove('zoom'); }
     s.style.aspectRatio = s.getAttribute('viewBox').split(' ').slice(2).join(' / ');
     if (sc) {

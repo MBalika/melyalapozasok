@@ -21,9 +21,10 @@ function soilRect(p, x, y, w, hh, key) {
 
 /* =================================================================== 1. szemcseszimuláció */
 const RP = 0.26; // a cölöp sugara a panel egységében
-function mapRepl(r0, Rt) { // helyettesítés: a fal menti talaj kissé a furat felé mozdul (fellazul)
-  const d = 0.04 * (Rt / RP), lam = 0.12;
-  return r0 - d * Math.exp(-Math.max(0, r0 - Rt) / lam);
+const dRepl = (Rt) => 0.04 * (Rt / RP); // ennyit mozdul a furat fala befelé (a panel egységében)
+function mapRepl(r0, Rt) { // helyettesítés: a fal menti talaj kissé a furat felé mozdul (fellazul); a furat sugara Rt marad
+  const d = dRepl(Rt), lam = 0.12;
+  return r0 - d * Math.exp(-Math.max(0, r0 - Rt - d) / lam);
 }
 function mapDisp(r0, Rt) { // kiszorítás: a szemcsék kifelé tolódnak, a köpeny mentén összetömörödnek
   return Math.sqrt(r0 * r0 + Rt * Rt * Math.exp(-r0 / 0.25));
@@ -71,7 +72,7 @@ register('hsz-reszecske', (root) => {
   }
   function upd() {
     const R = Rt();
-    const dA = dens(mapRepl, R, (r0, RR) => r0 >= RR), dB = dens(mapDisp, R, () => true);
+    const dA = dens(mapRepl, R, (r0, RR) => r0 >= RR + dRepl(RR)), dB = dens(mapDisp, R, () => true);
     const avg = (d) => { const s = d.filter((x) => x.q < 1.5); return s.reduce((a, x) => a + x.v, 0) / s.length; };
     const a = (avg(dA) - 1) * 100, b = (avg(dB) - 1) * 100;
     oA.set(p < 0.05 ? 0 : a, a < -2 ? 'warn' : null); oB.set(p < 0.05 ? 0 : b, b > 2 ? 'ok' : null);
@@ -111,9 +112,10 @@ register('hsz-reszecske', (root) => {
       for (const q of P) {
         let r, alpha = 1, rad = base, rho = 1;
         if (m === 0) {
-          if (q.r < R) { alpha = 1 - clamp((R - q.r) / 0.05, 0, 1); if (alpha <= 0) continue; }
-          r = mapRepl(q.r, R);
-          if (q.r >= R) { const dr = (mapRepl(q.r + 0.002, R) - r) / 0.002; rho = q.r / (r * dr); rad = base / Math.sqrt(Math.max(0.5, rho)); }
+          const Rc = R + dRepl(R); // eddig a sugárig fúrjuk ki a szemcséket
+          if (q.r < Rc) { alpha = 1 - clamp((Rc - q.r) / 0.05, 0, 1); if (alpha <= 0) continue; }
+          r = Math.max(mapRepl(q.r, R), q.r < Rc ? q.r : 0);
+          if (q.r >= Rc) { const dr = (mapRepl(q.r + 0.002, R) - r) / 0.002; rho = q.r / (r * dr); rad = base / Math.sqrt(Math.max(0.5, rho)); }
         } else {
           r = mapDisp(q.r, R);
           const dr = Math.abs((mapDisp(q.r + 0.002, R) - r) / 0.002); rho = q.r < 0.01 ? 3 : q.r / (r * Math.max(dr, 0.15));
@@ -128,7 +130,7 @@ register('hsz-reszecske', (root) => {
       }
       ctx.globalAlpha = 1;
       // furat / cölöp
-      const hr = (m === 0 ? R - 0.04 * (R / RP) : R) * sc;
+      const hr = R * sc;
       if (R > 0.005) {
         ctx.fillStyle = fill > 0 ? col.conc : col.bg; ctx.globalAlpha = fill > 0 ? 0.35 + 0.65 * fill : 0.9;
         ctx.beginPath(); ctx.arc(ox, oy, Math.max(0, hr), 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
@@ -177,15 +179,16 @@ register('hsz-franki', (root) => {
   const oV = stat(out, { label: 'A talpba döngölt beton', unit: 'm³', d: 2 });
   const GY = 64, SC = 32, HX = 2 * SC, PX = 250, ZT = 7.2; // terep, px/m, vízszintes px/m, tengely, csőtalp
   const TUBE = 0.52, SHAFT = 0.6, AIN = Math.PI / 4 * 0.46 * 0.46;
-  let cur = 6, u = 1, playing = false;
+  let cur = 6, u = 1, playing = false, shownStep = -1, shownKey = '';
   const bulbV = (n) => 0.075 + n * 0.12;
   const bulbD = (V) => Math.cbrt((6 * V) / Math.PI);
   function go(i, uu = 0) { cur = i; u = uu; paint(); }
   bPlay.addEventListener('click', () => { playing = !playing; if (playing && cur === 6 && u >= 1) { cur = 0; u = 0; } bPlay.textContent = playing ? '❚❚ Megállítás' : '▶ Lejátszás'; });
   sN.on(() => paint());
+  const MOVING = new Set([1, 2, 3, 5]); // ezekben a lépésekben a kos magától is mozog
   loop(root, (t, dt) => {
     if (playing) { u += dt / 3.2; if (u >= 1) { if (cur < 6) { cur++; u = 0; } else { u = 1; playing = false; bPlay.textContent = '▶ Lejátszás'; } } }
-    paint(t);
+    if (playing || MOVING.has(cur)) paint(t);
   });
   function stats() {
     const n = sN.v;
@@ -194,10 +197,10 @@ register('hsz-franki', (root) => {
     return { Vb, D, A, x: A / As };
   }
   function paint(t = performance.now() / 1000) {
-    sb.forEach((b, i) => b.classList.toggle('on', i === cur));
-    const S = FSTEPS[cur]; stx.innerHTML = `<b>${S.t}</b>${S.d}`;
     const s = stats();
-    oD.set(s.D || '–', null, s.D ? null : '–'); oA.set(s.A || '–', null, s.A ? null : '–'); oX.set(s.x || '–', s.x > 2.5 ? 'ok' : null, s.x ? null : '–'); oV.set(s.Vb || '–', null, s.Vb ? null : '–');
+    if (shownStep !== cur) { shownStep = cur; sb.forEach((b, i) => b.classList.toggle('on', i === cur)); const S = FSTEPS[cur]; stx.innerHTML = `<b>${S.t}</b>${S.d}`; }
+    const key = s.Vb.toFixed(3);
+    if (key !== shownKey) { shownKey = key; oD.set(s.D || '–', null, s.D ? null : '–'); oA.set(s.A || '–', null, s.A ? null : '–'); oX.set(s.x || '–', s.x > 2.5 ? 'ok' : null, s.x ? null : '–'); oV.set(s.Vb || '–', null, s.Vb ? null : '–'); }
     draw(t, s);
   }
   function draw(t, s) {
@@ -279,12 +282,12 @@ register('hsz-franki', (root) => {
 });
 
 /* =================================================================== 3. csavart cölöp – monitor */
-const HEADS = { sima: { t: 'Sima köpenyű', k: 1, vol: 1 }, menetes: { t: 'Csavarmenetes', k: 1.15, vol: 0.85 }, fdp: { t: 'FDP', k: 1.25, vol: 1 } };
+const HEADS = { sima: { t: 'Sima köpenyű', k: 1, vol: 1 }, menetes: { t: 'Csavarmenetes', k: 1.1, vol: 0.85 }, fdp: { t: 'FDP', k: 1.2, vol: 1 } };
 const CSOIL = {
   laza: { t: 'Laza homok', key: 'soilA', q: 1.0, comp: 'jelentős', ok: 'ok' },
-  kozep: { t: 'Közepesen tömör homok', key: 'soilD', q: 1.6, comp: 'mérsékelt', ok: 'ok' },
+  kozep: { t: 'Közepesen tömör homok', key: 'soilD', q: 1.5, comp: 'mérsékelt', ok: 'ok' },
   agyag: { t: 'Puha–gyúrható agyag', key: 'soilB', q: 1.2, comp: 'kicsi', ok: 'ok' },
-  tomor: { t: 'Tömör kavics, kemény agyag', key: 'soilE', q: 3.2, comp: '—', ok: 'bad' },
+  tomor: { t: 'Tömör kavics, kemény agyag', key: 'soilE', q: 9, comp: '—', ok: 'bad' },
 };
 register('hsz-csavart', (root) => {
   const { ctrls, viz, out } = shell(root);
@@ -298,14 +301,14 @@ register('hsz-csavart', (root) => {
   const ver = verdict(viz);
   const oV = stat(out, { label: 'Oldalra tolt talaj (nem jön fel)', unit: 'm³', d: 2 });
   const oF = stat(out, { label: 'Fúrt cölöpnél ennyi furadék lenne', unit: 'm³', d: 1 });
-  const oT = stat(out, { label: 'Ez kb. ennyi teherautó', d: 0 });
+  const oT = stat(out, { label: '100 ilyen cölöpnél ez ennyi teherautó', d: 0 });
   const oA = stat(out, { label: 'Köpenyfelület', unit: 'm²', d: 1 });
   const oC = stat(out, { label: 'A talaj tömörödése' });
   oC.el.classList.add('elo-tstat');
   const TMAX = 400; // kNm, a gép határa (szemléltető)
   let ph = 'drill', z = 0, zc = 0, cage = 0, stuck = null, trace = [];
   bGo.textContent = '↺ Újra';
-  const torque = (zz) => { const S = CSOIL[sS.v], H = HEADS[sHd.v]; return 120 * (sD.v / 450) ** 2 * S.q * H.k * (1 + 0.03 * zz); };
+  const torque = (zz) => { const S = CSOIL[sS.v], H = HEADS[sHd.v]; return 22 * (sD.v / 450) ** 2 * S.q * H.k * (1 + 0.45 * zz); }; // a nyomaték az átmérővel négyzetesen, a mélységgel (a köpenyfelülettel) lineárisan nő
   const reset = () => { ph = 'idle'; z = 0; zc = 0; cage = 0; stuck = null; trace = []; bGo.textContent = '▶ Fúrás indítása'; };
   bGo.addEventListener('click', () => { if (ph === 'idle' || ph === 'done' || ph === 'stuck') { reset(); ph = 'drill'; bGo.textContent = '↺ Újra'; } else { reset(); } upd(); });
   [sHd, sD, sL, sS].forEach((c) => c.on(() => { reset(); upd(); }));
@@ -317,20 +320,21 @@ register('hsz-csavart', (root) => {
       else if (z >= L) { z = L; ph = 'conc'; zc = L; upd(); }
     } else if (ph === 'conc') { zc -= dt * 2.6; if (zc <= 0) { zc = 0; ph = 'cage'; cage = 0; upd(); } }
     else if (ph === 'cage') { cage += dt * 3.2; if (cage >= L * 0.85) { cage = L * 0.85; ph = 'done'; upd(); } }
-    draw(t);
+    if (ph === 'drill' || ph === 'conc' || ph === 'cage') draw(t);
   });
   function upd() {
     const D = sD.v / 1000, L = sL.v, H = HEADS[sHd.v], S = CSOIL[sS.v];
     const V = Math.PI / 4 * D * D * L * H.vol;
-    oV.set(V); oF.set(V * 1.25); oT.set(Math.max(1, Math.ceil((V * 1.25) / 10))); oA.set(Math.PI * D * L);
+    oV.set(V); oF.set(V * 1.25); oT.set(Math.ceil((V * 1.25 * 100) / 10)); /* 10 m³-es billencsekkel */ oA.set(Math.PI * D * L);
     oC.set(0, S.ok === 'bad' ? 'bad' : S.comp === 'jelentős' ? 'ok' : null, S.comp);
     const T0 = torque(L);
-    if (ph === 'stuck') ver.set('bad', 'Elakadt a fúrófej', `<span>${fmt(stuck, 1)} m-en a forgatónyomaték elérte a gép határát (${TMAX} kNm). Tömör, kemény talajban a kiszorító fej nem tudja széttolni a talajt – ide inkább talajhelyettesítéses (fúrt, CFA) cölöp való.</span>`);
+    if (ph === 'stuck') ver.set('bad', 'Elakadt a fúrófej', `<span>${fmt(stuck, 1)} m-en a forgatónyomaték elérte a gép határát (${TMAX} kNm). ${S.ok === 'bad' ? 'Tömör, kemény talajban a kiszorító fej nem tudja széttolni a talajt – ide inkább talajhelyettesítéses (fúrt, CFA) cölöp való.' : 'Ekkora átmérőhöz és hosszhoz ebben a talajban ennek a gépnek kevés a nyomatéka: kisebb átmérő, rövidebb cölöp vagy erősebb gép kell.'}</span>`);
     else if (ph === 'done') ver.set('ok', 'Kész a cölöp', `<span>${fmt(L, 1)} m, Ø ${fmt(sD.v, 0)} mm – ${fmt(V, 2)} m³ talajt toltunk oldalra, a felszínre szinte semmi sem jött. Fúrt cölöpnél ugyanez kb. ${fmt(V * 1.25, 1)} m³ (fellazult) furadék lenne.</span>`);
     else if (ph === 'drill') ver.set('', 'Fúrás – forgatás és tolás', '<span>A fej széttolja és tömöríti a talajt; a monitor a nyomatékot rögzíti.</span>');
     else if (ph === 'conc') ver.set('', 'Betonozás nyomás alatt', '<span>A beton a fúrószáron át, nyomás alatt áramlik a talpra, miközben a szárat forgatva kiemelik.</span>');
     else if (ph === 'cage') ver.set('', 'Vasalás', '<span>A vasalókosarat a friss betonba vibrálással juttatják le.</span>');
     else ver.set(T0 > TMAX ? 'warn' : '', T0 > TMAX ? 'Ez nehéz lesz…' : 'Indulhat a fúrás', T0 > TMAX ? `<span>A becsült nyomaték a talpnál ≈ ${fmt(T0, 0)} kNm – több, mint amennyit a gép tud (${TMAX} kNm).</span>` : `<span>Becsült nyomaték a talpnál ≈ ${fmt(T0, 0)} kNm (a gép határa ${TMAX} kNm).</span>`);
+    draw(performance.now() / 1000);
   }
   function draw(t) {
     clear(fig);
