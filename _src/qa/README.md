@@ -10,6 +10,8 @@ Az oktatóappok átnézéséhez (lásd az „oktatoapp-atnezes” skillt). Mind 
 | `sheet.py "minta" ki.jpg oszlop [arány]` | a képek összefűzése egy áttekintő lapra |
 | `tabs_full.py url mappa szélesség "<fülgombok>"` | fejezetfüles appnál fejezetenként teljes oldalas kép (az `audit.py --tabs "<fülgombok>"` párja) |
 | `els.py url mappa szélesség téma szelektor…` | egy-egy elem (labor, kártyasor) fényképe; `szelektor@@n` az n-edik találat |
+| `sections.py url mappa szélesség téma azonosító…` | egy-egy fejezet (`#id`, illetve `hero`, `foot`) végigfényképezése képernyőnként |
+| `sim_hero_states.py url mappa részek [téma]` | a 3D cölöpépítő (technológia × szelvény × hiba × nézet, az idővonal több pontján) és a hős-jelenet (4 alapozási mód × rétegmélység) állapotai 1440 és 390 px-en; részek: `sim,hero,misc,simm,herom,miscm`; `SIMSET="cfa:A:0:k:4,…"` környezeti változóval szűkíthető; kiírja a menüsor túlcsordulását és a vásznak touch-action értékét |
 | `labs.py`, `toro_states.py`, `alapsik_states.py` | interaktív laborok állapotainak végigkattintása (minta a többi apphoz) |
 
 A lyuk határa 1,25 em-nyi szóköz; a tiltott sorvégek a formázás skill listáját követik (magyar: a, az, s, e, és, egy, számnév, rövidítés; angol: a, an, the, rövidítés).

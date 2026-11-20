@@ -13,13 +13,15 @@
 .w.sim .w-ctrls { gap: 12px; }
 .sim-views .seg { width: 100%; }
 .sim-views .seg button { padding: 6px 8px; font-size: 13px; }
-.sim-stage { position: relative; border-radius: 12px; overflow: hidden; background: var(--sky); border: 1px solid var(--line); touch-action: none; min-height: 240px; }
-.sim-stage canvas { display: block; width: 100%; height: 100%; outline: none; }
+.sim-stage { position: relative; border-radius: 12px; overflow: hidden; background: var(--sky); border: 1px solid var(--line); touch-action: pan-y; min-height: 240px; }
+.sim-stage canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: pan-y !important; cursor: grab; }
+.sim-stage canvas:active { cursor: grabbing; }
 .sim-badge { position: absolute; left: 10px; top: 10px; z-index: 3; font: 700 10.5px/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 8px; border-radius: 6px; background: rgba(20, 22, 26, 0.72); color: #f0e9dc; pointer-events: none; }
-.sim-step { position: absolute; left: 10px; bottom: 10px; z-index: 3; max-width: min(560px, calc(100% - 20px)); font-size: 13.5px; line-height: 1.4; padding: 8px 11px; border-radius: 10px; background: rgba(16, 20, 26, 0.8); color: #f3eee4; pointer-events: none; text-align: left; hyphens: manual; }
+/* lépésleírás: a jelenet ALATT áll (nem fedi a 3D-címkéket); fix legkisebb magasság, hogy lépésváltáskor ne ugráljon az oldal */
+.sim-step { box-sizing: border-box; min-height: 86px; font-size: 14px; line-height: 1.45; padding: 10px 14px; border-radius: 12px; background: #16212c; color: #f3eee4; text-align: left; hyphens: manual; border-left: 4px solid #f06ba0; }
 .sim-step > b { display: inline-block; font: 700 12px/1 var(--f-mono); color: #16212c; background: #f06ba0; padding: 3px 6px; border-radius: 5px; margin-right: 6px; vertical-align: 1px; }
 .sim-step .sim-st { font-family: var(--f-display); font-size: 18px; font-weight: 750; letter-spacing: 0.02em; color: #fff; }
-.sim-step .sim-sd { display: block; margin-top: 3px; color: #dfe4e8; }
+.sim-step .sim-sd { display: block; margin-top: 4px; color: #dfe4e8; text-align: justify; hyphens: auto; }
 .sim-step .bad { color: #ff8a7a; }
 .sim-alert { position: absolute; right: 10px; top: 10px; z-index: 3; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; pointer-events: none; }
 .sim-alert span { font: 700 12.5px/1.2 var(--f-body); padding: 5px 9px; border-radius: 8px; color: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); }
@@ -30,13 +32,13 @@
 /* 3D-címkék */
 .sim-lab { position: absolute; z-index: 2; transform: translate(-50%, -50%); font: 600 11.5px/1.15 var(--f-mono); color: #fff; background: rgba(14, 18, 24, 0.66); padding: 3px 6px; border-radius: 5px; white-space: nowrap; pointer-events: none; }
 .sim-lab.lay { transform: translate(0, -50%); background: rgba(255, 255, 255, 0.78); color: #22262b; font-family: var(--f-body); font-weight: 700; }
-.sim-lab.ruler { transform: translate(-100%, -50%); background: none; color: #22262b; font-size: 10.5px; padding: 0; text-shadow: 0 0 3px rgba(255, 255, 255, 0.9); }
+.sim-lab.ruler { transform: translate(-100%, -50%); background: rgba(255, 255, 255, 0.72); color: #22262b; font-size: 10.5px; padding: 1px 4px; border-radius: 4px; }
 .sim-lab.water { background: #1f7fbf; }
 .sim-lab.acc { background: #c4502c; }
 .sim-lab.tool { background: rgba(14, 18, 24, 0.8); border: 1px solid rgba(255, 255, 255, 0.25); }
 .sim-lab.tool.acc { background: rgba(196, 80, 44, 0.9); }
 .sim-lab.hid { visibility: hidden; }
-@media (max-width: 560px) { .sim-lab { font-size: 10px; padding: 2px 4px; } .sim-lab.ruler { font-size: 9.5px; } .sim-badge { display: none; } .sim-step { font-size: 12px; padding: 6px 8px; } .sim-step .sim-st { font-size: 15.5px; } .sim-alert span { font-size: 11px; } }
+@media (max-width: 560px) { .sim-lab { font-size: 10px; padding: 2px 4px; } .sim-lab.ruler { font-size: 9.5px; } .sim-badge { display: none; } .sim-step { font-size: 13px; padding: 8px 11px; min-height: 124px; } .sim-step .sim-st { font-size: 16.5px; } .sim-step .sim-sd { text-align: left; } .sim-alert span { font-size: 11px; } }
 
 /* idővonal */
 .sim-play { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -73,6 +75,7 @@
 .sim-rbar span { display: block; text-align: center; padding: 0 3px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 11.5px/28px var(--f-body); color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55); border-right: 1px solid rgba(255, 255, 255, 0.35); }
 .sim-rbar span.b { background: #c4502c; }
 .sim-rbar span.s { color: #1d1a16; text-shadow: 0 0 3px rgba(255, 255, 255, 0.6); }
+.sim-rbar span.s.dk { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); }
 .sim-rbar i { position: absolute; top: 0; bottom: 0; width: 0; border-left: 2px dashed rgba(20, 24, 30, 0.75); }
 .sim-rbar i.m1 { left: 33.333%; } .sim-rbar i.m2 { left: 66.667%; }
 .sim-rbar em { position: absolute; top: -2px; bottom: -2px; width: 4px; margin-left: -2px; background: var(--ink); border-radius: 2px; box-shadow: 0 0 0 2px var(--surface); }

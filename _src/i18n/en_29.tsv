@@ -37,7 +37,6 @@ e6d318d	Set the soil, the depth and the requirements – which machine is the be
 f210501	<b>Stage 1</b>The lower part, 13 m high, is built and sunk to −10.0 m: an excavator in the box (b), thixotropic fluid injected beside the shell (c).|<b>Stage 2</b>The upper part is concreted: the weight of the complete 24.5 m high box takes it further down, to −14.5 m.|<b>Stage 3</b>Sinking is completed at −28.0 m, in the stiff clay; the bentonite is displaced by cement grout injection (d).
 487e9b0	Deepen the caisson and set the compressor: does the working chamber stay dry, does water break in, or does the air escape? (Illustrative model.)
 eb8c129	Sink the 20 m wide box with cross walls 20 m deep! You decide in which cell the grab dredges. The soil is not uniform – watch the tiltmeter. (Illustrative game.)
-43c3c8a	Rotate: drag · zoom: scroll or pinch · the rig is schematic, and the load transfer is a simplified, illustrative model.
 7857c17	9 situations · choose a technology and read the reasoning
 32e03f1	Filter
 f621b3a	15 deep foundation technologies · diameter, length, soil, groundwater, vibration, speed, inspection
@@ -57,4 +56,4 @@ e6c37ff	PLAN
 177e7c4	REFUSAL
 796a9d8	MIXED
 7cf36e0	RECOMMENDED
-bd46165	img/thumb/en/${n}.jpg
+914cbdf	img/thumb/en/${n}.jpg?v=2

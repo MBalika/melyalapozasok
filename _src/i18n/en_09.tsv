@@ -80,7 +80,6 @@ adffae2	Now you are the piling contractor. Choose a soil profile and a technolog
 289608e	1 · Site
 542de69	Four characteristic soil profiles: in some the bearing stratum lies deep, in others there is no outstanding layer at all. The groundwater is at a different level everywhere.
 ef3c053	2 · Technology
-a78b187	Eight methods, from CFA through the Franki pile to the micropile. The equipment is schematic; the order and logic of the work phases are real.
 064956a	3 · Result
 5e7a2ca	The ratio bar shows how much is carried by the base and how much by the shaft – layer by layer. The checklist shows the limitations of the technology.
 94a7d33	Try it
@@ -103,7 +102,6 @@ b53157d	Support of the bore
 bb001ae	Vibration, noise
 12cacef	=
 7d193a6	replacement
-f7dd26b	=
 37beb51	low
 b543961	<b>Cased bored</b>
 9dd11d1	<b>Bentonite-supported bored</b>
@@ -112,8 +110,6 @@ b543961	<b>Cased bored</b>
 c073df4	=
 0034144	<b>Driven precast RC</b>
 b2c95e0	displacement
-cb55eb2	30×30, 40×40 cm; round 25–50 cm
-01eb2b8	4–12 m; round max. 20–22 m
 dfe0c76	high
 5b9da94	=
 15b91a7	recovered casing
@@ -122,11 +118,9 @@ c33dbed	=
 1541fa0	significant
 87b17ac	<b>Screw</b>
 ad956d6	the displacement head
-7b77cc5	=
 d9a4916	max. approx. 20 m
 729dff1	bored, grouted
 40cbf39	continuous grouting for hollow bars
-cfd0e38	=
 0e1f464	<b class="t">Did you know?</b>
 e77c54b	The CFA rig automatically produces a record for every pile: metre by metre it logs the depth, the concrete pressure and the volume of concrete placed. If there is less concrete than expected, this points to necking; if much more, the wall of the bore has collapsed or widened somewhere. So the rig’s “log” is also an X-ray of the pile.
 e3c1eff	<span class="id">C10</span><span>Decision support · case studies · decision tree</span>

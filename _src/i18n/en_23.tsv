@@ -8,8 +8,6 @@ f6cb593	removing the guide tube, the pile is finished
 3768e26	the wall stands
 96d11ed	Concreting immediately after excavation, through a hopper, by gravity.
 b2b8b20	The 3D view needs WebGL.
-6ff57ed	stress bulb: Δσz/q isobars
-741a5c6	influence depth ≈ ${fmt(HM, 1)} m (Δσz = 0.2·σ′v0)
 f5c3f77	<b>A shallow foundation is enough</b>The bearing stratum starts at ${fmt(D, 1)} m: the shallow foundation (or a slightly deepened one) can stand directly on it.
 dcd7650	<b>A shallow foundation is not enough here</b>The stress bulb below the raft (elastic half-space, Boussinesq–Steinbrenner) acts to approx. 
 ae1dd87	 m below ground level, down to the influence depth
@@ -19,7 +17,6 @@ dd9ca0c	. Large settlement is expected (exaggerated in the figure). The load mus
 8d91902	<b>Pile foundation: 9 piles, L ≈ ${fmt(L, 1)} m</b>The piles pass through the soft layer and are socketed ${fmt(2.2, 1)} m into the bearing stratum. They transfer the load along their shafts and at their bases – the slab tying their heads together distributes the load of the building onto them.
 749a61d	two basement levels
 af7875f	<b>Diaphragm wall: retaining wall and foundation in one</b>The ${fmt(Lw, 1)} m deep diaphragm wall first supports the excavation below the groundwater, then becomes the permanent wall of the basement levels and the foundation of the building. It pays off where a deep basement is needed right next to the neighbour.
-7f425f2	well foundation Ø2.5 m
 4246c4d	<b>Well foundation: still competitive here</b>The bearing stratum is at ${fmt(D, 1)} m – the wells (diameter 0.8–3.0 m, length 4–8 m) are sunk by their own weight while the soil is removed from inside.
 83756e6	<b>Not worth it this deep</b>At ${fmt(D, 1)} m depth a well foundation is no longer economical: wells are typically 4–8 m long. For a deeper bearing stratum we choose piles or a diaphragm wall.
 dedcefa	bearing stratum −${fmt(D, 1)} m

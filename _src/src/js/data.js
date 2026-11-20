@@ -10,7 +10,7 @@ export const CHAPTERS = [
   { id: 'furt', pile: 'C05', t: 'Fúrt cölöpök', nav: 'Fúrt', grp: 2 },
   { id: 'egyeb', pile: 'C06', t: 'Mikrocölöp, jet, keverés', nav: 'Egyéb', grp: 3 },
   { id: 'resfal', pile: 'C07', t: 'Résfalak', nav: 'Résfal', grp: 4 },
-  { id: 'kut', pile: 'C08', t: 'Kút, szekrény, keszon', nav: 'Kút, keszon', grp: 5 },
+  { id: 'kut', pile: 'C08', t: 'Kút, szekrény, keszon', nav: 'Kút', grp: 5 },
   { id: 'szimulator', pile: 'C09', t: '3D cölöpépítő', nav: '3D', grp: 6 },
   { id: 'dontes', pile: 'C10', t: 'Melyiket válasszam?', nav: 'Döntés', grp: 6 },
   { id: 'videotar', pile: 'C11', t: 'Videótár', nav: 'Videótár', grp: 6 },
