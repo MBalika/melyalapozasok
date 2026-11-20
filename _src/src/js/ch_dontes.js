@@ -537,7 +537,7 @@ register('vt-route', (root) => {
   ROUTE.forEach((r, i) => {
     const btns = h('div', { class: 'vt-btns' },
       ...r.v.map((n) => { const v = VIDEOS[VIDX[n]]; return h('button', { class: 'vt-b own grp' + v.grp, type: 'button', onclick: () => playOwn(n), 'aria-label': 'Animáció: ' + v.t }, h('i', { class: 'vt-play' }), h('span', {}, h('small', {}, `Animáció · ${VIDX[n] + 1} / ${VIDEOS.length}`), h('b', {}, v.t))); }),
-      ...r.yt.map((id) => { const y = YT[id]; return h('button', { class: 'vt-b yt', type: 'button', onclick: () => playYT(id), 'aria-label': 'BME-felvétel: ' + y.title }, h('i', { class: 'vt-ytb' }), h('span', {}, h('small', {}, `BME · ${y.dur}`), h('b', {}, y.tech))); }));
+      ...r.yt.map((id) => { const y = YT[id]; return h('button', { class: 'vt-b yt', type: 'button', onclick: () => playYT(id), 'aria-label': 'BME-felvétel: ' + y.title }, h('i', { class: 'vt-ytb' }), h('span', {}, h('small', {}, `${y.ch.split(' ')[0]} · ${y.dur}`), h('b', {}, y.tech))); }));
     ol.append(h('li', { class: 'vt-step' },
       h('div', { class: 'vt-num' }, String(i + 1)),
       h('div', { class: 'vt-body' },
