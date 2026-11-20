@@ -15,7 +15,7 @@ const conc = (parent, x, y, w, hh, cls = 'f-conc') => {
   svg('rect', { x, y, width: w, height: hh, fill: 'url(#pat-conc)', opacity: 0.7 }, parent);
   svg('rect', { x, y, width: w, height: hh, fill: 'none', class: 's-ink', 'stroke-width': 0.8, opacity: 0.45 }, parent);
 };
-const water = (parent, x1, x2, y, lab = 'TV') => {
+const water = (parent, x1, x2, y, lab = EN ? 'GWL' : 'TV') => { // talajvízszint (angolul: groundwater level)
   svg('line', { x1, y1: y, x2, y2: y, class: 's-water', 'stroke-width': 1.6, 'stroke-dasharray': '7 4' }, parent);
   svg('path', { d: `M${x2 - 26} ${y - 9} h12 l-6 8 z`, style: 'fill: var(--water)' }, parent);
   T(parent, x2 - 30, y - 3, lab, 't-sm t-water', { 'text-anchor': 'end' });
@@ -148,7 +148,7 @@ register('alap-dontes', (root) => {
     svg('rect', { x: bx, y: top, width: bw, height: G - top, class: 'f-bld' }, s);
     for (let i = 1; i < m.n; i++) svg('line', { x1: bx, y1: G - i * fh, x2: bx + bw, y2: G - i * fh, class: 's-line', 'stroke-width': fh > 5 ? 1 : 0.5 }, s);
     svg('rect', { x: bx, y: top, width: bw, height: G - top, fill: 'none', class: 's-ink', 'stroke-width': 1, opacity: 0.5 }, s);
-    if (m.df > 1.6) { svg('rect', { x: bx, y: G, width: bw, height: yF - G, class: 'f-bld2' }, s); T(s, bx + bw / 2, (G + yF) / 2 + 4, 'pince', 't-sm', { 'text-anchor': 'middle' }); }
+    if (m.df > 1.6) { svg('rect', { x: bx, y: G, width: bw, height: yF - G, class: 'f-bld2' }, s); T(s, bx + bw / 2, (G + yF) / 2 + 4, EN ? 'basement' : 'pince', 't-sm', { 'text-anchor': 'middle' }); }
     T(s, bx + bw + 8, m.n < 3 ? G - 8 - (m.n - 1) * 6 : top + 12, `${m.n} ${EN ? (m.n === 1 ? 'storey' : 'storeys') : 'szint'}`, 't-num halo');
     // talajvíz
     water(s, 0, 560, Y(m.w));
@@ -165,7 +165,7 @@ register('alap-dontes', (root) => {
       T(s, fx + fw + 10, Math.min(350, yD + 20), 'markolt tömbök', 't-sm halo');
     } else {
       conc(s, fx, yF, fw, 1.0 * K);
-      const tip = Math.min(356, yD + 3 * K);
+      const tip = Math.min(356, Math.max(yD + 3 * K, yF + 5 * K)); // ha a pince már a teherbíró rétegben áll, a cölöp akkor is az alaplemez alá nyúlik
       const nP = 6;
       for (let i = 0; i < nP; i++) { const x = fx + 10 + i * ((fw - 28) / (nP - 1)); conc(s, x, yF + K, 8, tip - yF - K, 'f-conc2'); }
       T(s, fx + fw + 10, Math.min(350, yD + 20), `cölöpök (~${fmt(Math.max(4, m.D + 3 - m.df), 0)}${NB}m)`, 't-sm halo');
@@ -205,7 +205,7 @@ const TW = [
   { k: 'tp', n: 'Taipei 101', hgt: 508, loc: 'Tajpej, Tajvan', yr: '2004', f: '380 db fúrt cölöp, kb. 80 m', fd: 80,
     p: 'A toronyház 380 db, 1,5 m átmérőjű fúrt cölöpön áll: ezek kb. 80 m mélyre, a kőzetbe akár 30 m‑rel befogva érnek le. A terület földrengés- és tájfunveszélyes.',
     l: 'Nagy átmérőjű fúrt cölöpök viszik le a terhet a mélyebb teherbíró rétegbe.' },
-  { k: 'pet', n: 'Petronas-tornyok', hgt: 452, loc: 'Kuala Lumpur, Malajzia', yr: '1998', f: '104 réselt elem (barett), 60–115 m', fd: 115,
+  { k: 'pet', n: EN ? 'Petronas Towers' : 'Petronas-tornyok', hgt: 452, loc: 'Kuala Lumpur, Malajzia', yr: '1998', f: '104 réselt elem (barett), 60–115 m', fd: 115,
     p: 'A teherbíró réteg nagyon mélyen fekszik, ezért tornyonként 104 réselt vasbeton elem (barett) készült, 60–115 m hosszan, rajtuk kb. 4,5 m vastag lemezzel. Az alapozás a terepszinttől mérve kb. 120 m mélyre nyúlik.',
     l: 'Kedvezőtlen altalaj: a teher nagy részét a köpenymenti ellenállás viszi.' },
   { k: 'burj', n: 'Burdzs Kalifa', hgt: 828, loc: 'Dubaj, Egyesült Arab Emírségek', yr: '2010', f: '192 db fúrt cölöp, kb. 43 m + lemez', fd: 50,

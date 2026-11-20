@@ -1,5 +1,5 @@
 // C02 – Cölöpök rendszere: teherátadás-labor, cölöpcsoport-igénybevétel, rendező játék, átmérő-skála, családfa
-import { $, $$, h, svg, figure, clear, fmt, clamp, lerp, register, shell, slider, seg, toggle, stat, verdict, arrow, pathD, loop } from './core.js';
+import { $, $$, h, svg, figure, clear, fmt, clamp, lerp, register, shell, slider, seg, toggle, stat, verdict, arrow, pathD, loop, EN } from './core.js';
 import { defineQuiz } from './ui.js';
 
 const NB = ' ';
@@ -417,8 +417,8 @@ register('rsz-atmero', (root) => {
     T(s, px + pw / 2, yb + 32, `D = ${fmt(D, 0)}${NB}cm`, 't-num', { 'text-anchor': 'middle' });
     T(s, x0 + 18, yb + 32, '1,75 m', 't-sm', { 'text-anchor': 'middle' });
     // jobb: tartomány-diagram
-    const ax0 = 170, ax1 = 418, X = (cm) => ax0 + (cm / 200) * (ax1 - ax0);
-    const bands = [[10, 30, 'mikro'], [30, 80, 'normál'], [80, 200, 'nagyátmérőjű']];
+    const ax0 = 205, ax1 = 418, /* széles címkeoszlop: a hosszabb angol nevek is elférnek */ X = (cm) => ax0 + (cm / 200) * (ax1 - ax0);
+    const bands = [[10, 30, EN ? 'micro' : 'mikro'], [30, 80, 'normál'], [80, 200, 'nagyátmérőjű']];
     bands.forEach(([a, b, t], i) => {
       svg('rect', { x: X(a), y: 36, width: X(b) - X(a), height: 290, class: i === 1 ? 'f-bg2' : 'f-surface', opacity: 0.9 }, s2);
       T(s2, (X(a) + X(b)) / 2, i === 0 ? 18 : 30, t, 't-sm', { 'text-anchor': 'middle' });

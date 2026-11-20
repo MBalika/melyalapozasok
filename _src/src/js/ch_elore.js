@@ -188,7 +188,7 @@ const PILES = {
   vb40: { t: 'vb. 40×40 cm', L: 10, per: 1.6, A: 0.16, conc: true, w: 24 },
   H: { t: 'acél H-profil', L: 12, per: 1.2, A: 0.02, conc: false, w: 18 },
 };
-const HAM = { ejto: { t: 'ejtőkos', eta: 0.75 }, diesel: { t: 'dízel', eta: 0.7 }, hidr: { t: 'hidraulikus', eta: 0.85 } };
+const HAM = { ejto: { t: 'ejtőkos', eta: 0.75 }, diesel: { t: 'dízel', eta: 0.7 }, hidr: { t: EN ? 'hydraulic' : 'hidraulikus', eta: 0.85 } };
 register('elo-veres', (root) => {
   const { ctrls, viz, out } = shell(root);
   const sHam = seg(ctrls, { label: 'Kos', options: Object.entries(HAM).map(([v, o]) => ({ v, t: o.t })), value: 'hidr' });

@@ -228,7 +228,7 @@ ol.alap-legend .alap-k-ok { color: var(--ok); } ol.alap-legend .alap-k-acc { col
 }
 .tt-svg .tt-lab { font: 650 19px var(--f-body); fill: var(--ink); }
 .tt-svg .tt-sm { font: 550 16px var(--f-body); fill: var(--ink2); }
-.tt-svg .tt-xs { font: 600 13.5px var(--f-body); fill: var(--ink2); }
+.tt-svg .tt-xs { font: 600 15px var(--f-body); fill: var(--ink2); }
 .tt-svg .tt-good { font-weight: 800; fill: var(--ink); }
 .tt-svg .tt-tit { font: 800 27px var(--f-display); letter-spacing: 0.05em; fill: var(--c); }
 .tt-svg .tt-sub { font: 500 15.5px var(--f-body); fill: var(--muted); }

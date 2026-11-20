@@ -58,5 +58,5 @@
 .g3-svg .t-sm { font-size: 10px; }
 @media (max-width: 560px) { #furt .furt-nav { gap: 6px; } #furt .furt-nav a { padding: 8px 8px; } #furt .furt-nav a b { font-size: 14.5px; letter-spacing: 0; } }
 /* a hétpaneles Franki-sor keskeny paneljein a rajzfeliratok 1440 px-en 8–9 px-esre zsugorodnának */
-.g3-phases[data-g3ph="franki"] .g3-svg .g3-lab { font-size: 13px; }
-.g3-phases[data-g3ph="franki"] .g3-svg .t-sm { font-size: 12px; }
+.g3-phases[data-g3ph="franki"] .g3-svg .g3-lab { font-size: 12px; }
+.g3-phases[data-g3ph="franki"] .g3-svg .t-sm { font-size: 11.5px; }

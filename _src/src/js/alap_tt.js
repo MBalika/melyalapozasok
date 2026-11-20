@@ -1,5 +1,5 @@
 // C01 – 1.2 A mélyalapozás típusai: interaktív terepmetszet-panoráma (cölöpalap, résfal, kútalap, szekrény/keszon, átmeneti)
-import { $, $$, h, svg, register, shell, seg } from './core.js';
+import { $, $$, h, svg, register, shell, seg, EN } from './core.js';
 
 const NB = ' ';
 const W = 1520, H = 700, G = 250, S = 17; // 1 m = 17 egység (függőlegesen)
@@ -174,7 +174,7 @@ function sceneAtmeneti(g) {
     for (const dx of [5, 12, 19]) F(g, bx + dx, yb + 22, bx + dx, yb + 3, 'base', 1.0);
   }
   flow(g, `M1278 ${G - 60} V${Y(bt(1278) + 0.4)} M1336 ${G - 60} V${Y(bt(1336) + 0.4)}`);
-  T(g, 1307, Y(6.7), 'markolt', 'tt-sm', { 'text-anchor': 'middle' }); T(g, 1307, Y(6.7) + 16, 'tömbalap', 'tt-sm', { 'text-anchor': 'middle' });
+  T(g, 1307, Y(6.7), EN ? 'excavated' : 'markolt', 'tt-sm', { 'text-anchor': 'middle' }); T(g, 1307, Y(6.7) + 16, 'tömbalap', 'tt-sm', { 'text-anchor': 'middle' });
   // b) csarnoklemez merev betéteken, teherelosztó szemcsés réteggel
   const sx0 = 1370, sx1 = 1514, slabT = G - 6, ltpB = G + 10;
   R(g, 1374, G - 96, 4, 90, 'f-steelc'); R(g, 1506, G - 96, 4, 90, 'f-steelc'); P(g, `M1368 ${G - 96} L1442 ${G - 120} L1516 ${G - 96}`, 'tt-roof');
@@ -216,7 +216,7 @@ function panorama(root) {
   // talajvíz
   P(soil, `M48 ${Y(2.5)} H346 M644 ${Y(2.5)} H${RX0 + 20}`, 'tt-gw');
   P(soil, `M${RX1 - 20} ${Y(WL + 0.5)} C${RX1 + 30} ${Y(1.5)} 1270 ${Y(7)} 1310 ${Y(7)} H${W}`, 'tt-gw');
-  T(soil, 324, Y(2.5) - 6, 'TV', 'tt-xs t-water', { 'text-anchor': 'end' });
+  T(soil, 324, Y(2.5) - 6, EN ? 'GWL' : 'TV', 'tt-xs t-water', { 'text-anchor': 'end' });
   // mélységléc
   const rl = svg('g', { class: 'tt-ruler' }, s);
   P(rl, `M40 ${G} V${H - 6}`, 'tt-rl');
