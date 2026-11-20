@@ -265,7 +265,7 @@ register('hsz-franki', (root) => {
       if (cur <= 1) txt(fig, PX + hw + 8, ypl + plug * SC / 2 + 4, cur === 0 ? 'dugó' : 'dugó húzza a csövet', 't-sm halo');
       if (cur === 1) for (const sgn of [-1, 1]) arr(fig, PX + sgn * (hw + 4), yt - 10, PX + sgn * (hw + 22), yt - 4, 'var(--accent)', 1.6, 6);
       // kötelek (3. lépéstől rögzítve)
-      if (cur >= 2 && cur <= 5) { for (const sgn of [-1, 1]) line(fig, PX + sgn * hw, Math.max(ytop, 12) + 4, PX + 70, 8, 'stroke:var(--ink2);stroke-width:1.4'); txt(fig, PX - hw - 10, 40, 'a cső a verőállványhoz rögzítve', 't-sm halo', { 'text-anchor': 'end' }); }
+      if (cur >= 2 && cur <= 5) { for (const sgn of [-1, 1]) line(fig, PX + sgn * hw, Math.max(ytop, 12) + 4, PX + 70, 8, 'stroke:var(--ink2);stroke-width:1.4'); txt(fig, PX - hw - 10, 40, 'a cső rögzítve', 't-sm halo', { 'text-anchor': 'end' }); }
       // ejtőkos a csőben
       if (ram !== null) {
         const yr = ypl - 6 - ram * SC - 1.2 * SC;
@@ -297,7 +297,10 @@ register('hsz-csavart', (root) => {
   const sS = select(ctrls, { label: 'Talaj', options: Object.entries(CSOIL).map(([v, o]) => ({ v, t: o.t })), value: 'laza' });
   const bGo = h('button', { type: 'button', class: 'btn btn-acc btn-sm' }, '▶ Fúrás indítása');
   ctrls.append(h('div', { class: 'hsz-btns' }, bGo));
-  const fig = figure(viz, 660, 400);
+  // jelenet és monitor külön SVG-ben: széles nézetben egymás mellett, keskenyen egymás alatt (a monitor így olvasható marad)
+  const duo = h('div', { class: 'hsz-duo' }); viz.append(duo);
+  const fig = figure(duo, 400, 400), mon = figure(duo, 248, 400, 'fig hsz-mon');
+  mon.setAttribute('viewBox', '408 0 248 400');
   const ver = verdict(viz);
   const oV = stat(out, { label: 'Oldalra tolt talaj (nem jön fel)', unit: 'm³', d: 2 });
   const oF = stat(out, { label: 'Fúrt cölöpnél ennyi furadék lenne', unit: 'm³', d: 1 });
@@ -337,7 +340,7 @@ register('hsz-csavart', (root) => {
     draw(performance.now() / 1000);
   }
   function draw(t) {
-    clear(fig);
+    clear(fig); clear(mon);
     const L = sL.v, D = sD.v / 1000, S = CSOIL[sS.v], Hd = sHd.v;
     const GY = 56, SC = 16, HX = 3 * SC, PX = 170, Y = (zz) => GY + zz * SC, hw = (D * HX) / 2;
     rect(fig, 0, 0, 400, GY, 'fill:var(--sky)'); soilRect(fig, 0, GY, 400, 400 - GY, S.key);
@@ -388,29 +391,29 @@ register('hsz-csavart', (root) => {
     if (ph !== 'idle') { svg('path', { d: `M${PX - 50} ${GY} q10 -6 20 0z`, style: 'fill:var(--soilC)' }, fig); txt(fig, 6, GY - 4, 'csekély furadék', 't-sm halo'); }
     // ---------- monitor
     const mx = 412, my = 8, mw = 240, mh = 384;
-    rect(fig, mx, my, mw, mh, 'fill:var(--plan)', { rx: 12 });
+    rect(mon, mx, my, mw, mh, 'fill:var(--plan)', { rx: 12 });
     const ink = 'fill:var(--plan-ink)';
-    txt(fig, mx + 14, my + 22, 'MONITOR · CSAVART CÖLÖP', 't-sm', { style: ink + ';font-weight:700;letter-spacing:.06em;font-size:11px' });
+    txt(mon, mx + 14, my + 22, 'MONITOR · CSAVART CÖLÖP', 't-sm', { style: ink + ';font-weight:700;letter-spacing:.06em;font-size:11px' });
     const zShow = ph === 'drill' || ph === 'stuck' ? z : ph === 'conc' ? zc : ph === 'idle' ? 0 : 0;
-    txt(fig, mx + 14, my + 56, `${fmt(zShow, 1)} m`, 't-num', { style: 'fill:#f0864a;font-size:26px' });
-    txt(fig, mx + 14, my + 72, ph === 'conc' ? 'a fúrófej mélysége – betonozás' : 'a fúrófej mélysége', 't-sm', { style: 'fill:var(--plan-ink);opacity:.7;font-size:11px' });
+    txt(mon, mx + 14, my + 56, `${fmt(zShow, 1)} m`, 't-num', { style: 'fill:#f0864a;font-size:26px' });
+    txt(mon, mx + 14, my + 72, ph === 'conc' ? 'a fúrófej mélysége – betonozás' : 'a fúrófej mélysége', 't-sm', { style: 'fill:var(--plan-ink);opacity:.7;font-size:11px' });
     // nyomaték–mélység
     const gx0 = mx + 40, gx1 = mx + mw - 14, gy0 = my + 96, gy1 = my + mh - 70;
-    rect(fig, gx0, gy0, gx1 - gx0, gy1 - gy0, 'fill:none;stroke:var(--plan-line)');
+    rect(mon, gx0, gy0, gx1 - gx0, gy1 - gy0, 'fill:none;stroke:var(--plan-line)');
     const TX = (T) => gx0 + (Math.min(T, 520) / 520) * (gx1 - gx0), ZY = (zz2) => gy0 + (zz2 / 20) * (gy1 - gy0);
-    line(fig, TX(TMAX), gy0, TX(TMAX), gy1, 'stroke:#e05a4a;stroke-width:1.4;stroke-dasharray:4 3');
-    txt(fig, TX(TMAX) - 4, gy1 - 6, 'gép határa', 't-sm', { style: 'fill:#e88;font-size:10px', 'text-anchor': 'end' });
-    for (let k = 0; k <= 20; k += 5) txt(fig, gx0 - 6, ZY(k) + 4, String(k), 't-sm', { style: 'fill:var(--plan-ink);opacity:.7;font-size:11px', 'text-anchor': 'end' });
-    for (const T of [0, 200, 400]) txt(fig, TX(T), gy0 - 6, String(T), 't-sm', { style: 'fill:var(--plan-ink);opacity:.7;font-size:11px', 'text-anchor': 'middle' });
-    txt(fig, gx1, gy0 - 18, 'nyomaték (kNm)', 't-sm', { style: 'fill:var(--plan-ink);opacity:.8;font-size:11px', 'text-anchor': 'end' });
-    if (trace.length > 1) svg('path', { d: pathD(trace.map(([a, b]) => [TX(b), ZY(a)])), style: 'fill:none;stroke:#f0864a;stroke-width:2.2' }, fig);
+    line(mon, TX(TMAX), gy0, TX(TMAX), gy1, 'stroke:#e05a4a;stroke-width:1.4;stroke-dasharray:4 3');
+    txt(mon, TX(TMAX) - 4, gy1 - 6, 'gép határa', 't-sm', { style: 'fill:#e88;font-size:10px', 'text-anchor': 'end' });
+    for (let k = 0; k <= 20; k += 5) txt(mon, gx0 - 6, ZY(k) + 4, String(k), 't-sm', { style: 'fill:var(--plan-ink);opacity:.7;font-size:11px', 'text-anchor': 'end' });
+    for (const T of [0, 200, 400]) txt(mon, TX(T), gy0 - 6, String(T), 't-sm', { style: 'fill:var(--plan-ink);opacity:.7;font-size:11px', 'text-anchor': 'middle' });
+    txt(mon, gx1, gy0 - 18, 'nyomaték (kNm)', 't-sm', { style: 'fill:var(--plan-ink);opacity:.8;font-size:11px', 'text-anchor': 'end' });
+    if (trace.length > 1) svg('path', { d: pathD(trace.map(([a, b]) => [TX(b), ZY(a)])), style: 'fill:none;stroke:#f0864a;stroke-width:2.2' }, mon);
     // betonnyomás
     const pr = ph === 'conc' ? 2 + 0.8 * Math.sin(t * 3) + (zc / L) * 1.2 : 0;
-    txt(fig, mx + 14, my + mh - 44, 'betonnyomás', 't-sm', { style: 'fill:var(--plan-ink);opacity:.8;font-size:11px' });
-    rect(fig, mx + 14, my + mh - 36, mw - 28, 10, 'fill:var(--plan-line)', { rx: 5 });
-    rect(fig, mx + 14, my + mh - 36, ((mw - 28) * pr) / 5, 10, 'fill:#4ab3e0', { rx: 5 });
-    txt(fig, mx + mw - 14, my + mh - 12, ph === 'conc' ? `${fmt(pr, 1)} bar` : '—', 't-num', { style: 'fill:var(--plan-ink);font-size:13px', 'text-anchor': 'end' });
-    txt(fig, mx + 14, my + mh - 12, { idle: 'készenlét', drill: 'FÚRÁS', stuck: 'ELAKADT', conc: 'BETONOZÁS', cage: 'VASALÁS', done: 'KÉSZ' }[ph], 't-num', { style: (ph === 'stuck' ? 'fill:#e88' : 'fill:#9fe0b0') + ';font-size:13px' });
+    txt(mon, mx + 14, my + mh - 44, 'betonnyomás', 't-sm', { style: 'fill:var(--plan-ink);opacity:.8;font-size:11px' });
+    rect(mon, mx + 14, my + mh - 36, mw - 28, 10, 'fill:var(--plan-line)', { rx: 5 });
+    rect(mon, mx + 14, my + mh - 36, ((mw - 28) * pr) / 5, 10, 'fill:#4ab3e0', { rx: 5 });
+    txt(mon, mx + mw - 14, my + mh - 12, ph === 'conc' ? `${fmt(pr, 1)} bar` : '—', 't-num', { style: 'fill:var(--plan-ink);font-size:13px', 'text-anchor': 'end' });
+    txt(mon, mx + 14, my + mh - 12, { idle: 'készenlét', drill: 'FÚRÁS', stuck: 'ELAKADT', conc: 'BETONOZÁS', cage: 'VASALÁS', done: 'KÉSZ' }[ph], 't-num', { style: (ph === 'stuck' ? 'fill:#e88' : 'fill:#9fe0b0') + ';font-size:13px' });
     txt(fig, 10, 394, 'Szemléltető, vízszintesen 3×', 't-sm halo');
   }
   upd();

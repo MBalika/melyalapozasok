@@ -20,3 +20,8 @@ bc45450	<span><b>Bearing stratum</b> – the piles are socketed into it; above i
 d16aa83	<span>${T.t}, at ${fmt(sR.v, 1)} m: ${vT} mm/s${pk}. This is ${fmt(u * 100, 0)} % of the limit (${B.t.toLowerCase()}: approx. ${B.lim} mm/s). A distance of at least ≈ ${fmt(rmin, 0)} m, or a low-noise, low-vibration technology, is needed.</span>
 e06fcae	<span>${vT} mm/s${pk}: close to the limit. The neighbour must be monitored with a vibration meter during the work.</span>
 3139c19	<span>${vT} mm/s${pk} – ${fmt(u * 100, 0)} % of the limit. ${sT.v === 'vert' ? 'Közelebb érve vagy nagyobb energiával ez gyorsan megváltozik.' : 'Ez a technológia érzékeny környezetben is jó választás lehet.'}</span>
+5d7395c	By material, a precast pile can be of three kinds. Each has its own “territory”: timber belongs to the past (and to waterside structures), steel is for temporary and extendable piles, reinforced concrete for durable foundations of high bearing capacity.
+aacf336	Steel pile
+0d63837	clay, stiffening with depth
+852b95d	For more than 30 years it was the tallest free-standing structure in the world. The load of the 553 m tall tower is transferred to the rock (shale) by a reinforced concrete foundation taken down 15 m.
+8b69aa0	tube fixed

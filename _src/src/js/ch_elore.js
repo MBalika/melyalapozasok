@@ -188,7 +188,7 @@ const PILES = {
   vb40: { t: 'vb. 40×40 cm', L: 10, per: 1.6, A: 0.16, conc: true, w: 24 },
   H: { t: 'acél H-profil', L: 12, per: 1.2, A: 0.02, conc: false, w: 18 },
 };
-const HAM = { ejto: { t: 'ejtőkos', eta: 0.75 }, diesel: { t: 'dízel', eta: 0.5 }, hidr: { t: 'hidraulikus', eta: 0.85 } };
+const HAM = { ejto: { t: 'ejtőkos', eta: 0.75 }, diesel: { t: 'dízel', eta: 0.7 }, hidr: { t: 'hidraulikus', eta: 0.85 } };
 register('elo-veres', (root) => {
   const { ctrls, viz, out } = shell(root);
   const sHam = seg(ctrls, { label: 'Kos', options: Object.entries(HAM).map(([v, o]) => ({ v, t: o.t })), value: 'hidr' });
@@ -406,17 +406,17 @@ register('elo-vibro', (root) => {
     txt(fig, 0, 0, 'épület-rezonancia', 't-sm', { 'text-anchor': 'middle', transform: `translate(${(X(4) + X(10)) / 2 + 4},${(y0 + y1) / 2}) rotate(-90)` });
     line(fig, x0, y1, x1, y1, 'stroke:var(--line2)'); line(fig, x0, y0, x0, y1, 'stroke:var(--line2)');
     for (let ff = 5; ff <= 45; ff += 5) { line(fig, X(ff), y1, X(ff), y1 + 4, 'stroke:var(--muted)'); txt(fig, X(ff), y1 + 16, String(ff), 't-sm', { 'text-anchor': 'middle' }); }
-    txt(fig, x1, y1 + 30, 'f (Hz)', 't-sm', { 'text-anchor': 'end' });
+    txt(fig, x1, y1 + 36, 'f (Hz)', 't-sm', { 'text-anchor': 'end' });
     for (const v of [0, 0.5, 1]) txt(fig, x0 - 6, Yv(v) + 4, fmt(v * 100, 0) + '%', 't-sm', { 'text-anchor': 'end' });
     const pa = [], pr = [];
     for (let ff = F0; ff <= F1; ff += 0.5) { pa.push([X(ff), Yv(ampl(ff, S) / amax(S))]); pr.push([X(ff), Yv(ratio(ff, S, tFl.v))]); }
     svg('path', { d: pathD(pa), style: 'fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4' }, fig);
     svg('path', { d: pathD(pr), style: 'fill:none;stroke:var(--grp);stroke-width:2.6' }, fig);
-    txtI(fig, x1 - 4, y0 + 2, ['talajellenállás R/R', '_0'], 't-sm t-grp', { 'text-anchor': 'end' });
-    txt(fig, x1 - 4, y0 + 22, 'rezgési amplitúdó', 't-sm', { 'text-anchor': 'end' });
+    txtI(fig, x1 - 4, y0 + 2, ['talajellenállás R/R', '_0'], 't-sm t-grp halo', { 'text-anchor': 'end' });
+    txt(fig, x1 - 4, y0 + 22, 'rezgési amplitúdó', 't-sm halo', { 'text-anchor': 'end' });
     line(fig, X(f), y0, X(f), y1, 'stroke:var(--accent);stroke-width:1.4');
     svg('circle', { cx: X(f), cy: Yv(rr), r: 6, style: 'fill:var(--accent);stroke:var(--surface);stroke-width:2' }, fig);
-    txt(fig, 645, 322, 'Szemléltető modell', 't-sm', { 'text-anchor': 'end' });
+    txt(fig, x0, y1 + 52, 'Szemléltető modell', 't-sm');
   }
   upd();
 });
@@ -485,13 +485,13 @@ register('elo-rezges', (root) => {
     line(fig, gx, GY + 26, bx, GY + 26, 'stroke:var(--ink);stroke-width:1');
     txt(fig, (gx + bx) / 2, GY + 22, `r = ${fmt(r, 1)} m`, 't-num halo', { 'text-anchor': 'middle' });
     // grafikon – log y
-    const cx0 = 70, cx1 = X(60), cy0 = 190, cy1 = 350, LMIN = -1, LMAX = 2;
+    const cx0 = 70, cx1 = X(60), cy0 = 190, cy1 = 336, LMIN = -1, LMAX = 2;
     const Yl = (vv) => clamp(cy1 - ((Math.log10(Math.max(vv, 0.1)) - LMIN) / (LMAX - LMIN)) * (cy1 - cy0), cy0 - 6, cy1);
     line(fig, cx0, cy1, cx1, cy1, 'stroke:var(--line2)'); line(fig, cx0, cy0, cx0, cy1, 'stroke:var(--line2)');
     for (const vv of [0.1, 1, 10, 100]) { line(fig, cx0, Yl(vv), cx1, Yl(vv), 'stroke:var(--line);stroke-width:1'); txt(fig, cx0 - 6, Yl(vv) + 4, fmt(vv, vv < 1 ? 1 : 0), 't-sm', { 'text-anchor': 'end' }); }
     txt(fig, cx0 - 6, cy0 - 8, 'mm/s', 't-sm', { 'text-anchor': 'end' });
     for (let m = 0; m <= 60; m += 10) txt(fig, X(m), cy1 + 15, String(m), 't-sm', { 'text-anchor': 'middle' });
-    txt(fig, cx1, cy1 + 28, 'távolság (m)', 't-sm', { 'text-anchor': 'end' });
+    txt(fig, cx1, cy1 + 36, 'távolság (m)', 't-sm', { 'text-anchor': 'end' });
     for (const [k, Tk] of Object.entries(TECH)) {
       const pts = []; for (let m = 2; m <= 60; m += 1) pts.push([X(m), Yl(vAt(k, m) * (Tk.peak || 1))]);
       const on = k === sT.v;

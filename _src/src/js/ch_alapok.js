@@ -162,13 +162,13 @@ register('alap-dontes', (root) => {
     } else if (m.rec === 'tomb') {
       conc(s, fx, yF, fw, 0.7 * K);
       for (const x of [fx + 6, fx + fw / 2 - 16, fx + fw - 38]) conc(s, x, yF + 0.7 * K, 32, Math.max(4, yD + 0.6 * K - yF - 0.7 * K), 'f-conc2');
-      T(s, fx + fw + 10, (yF + yD) / 2 + 4, 'markolt tömbök', 't-sm halo');
+      T(s, fx + fw + 10, Math.min(350, yD + 20), 'markolt tömbök', 't-sm halo');
     } else {
       conc(s, fx, yF, fw, 1.0 * K);
       const tip = Math.min(356, yD + 3 * K);
       const nP = 6;
       for (let i = 0; i < nP; i++) { const x = fx + 10 + i * ((fw - 28) / (nP - 1)); conc(s, x, yF + K, 8, tip - yF - K, 'f-conc2'); }
-      T(s, fx + fw + 10, Math.min(346, (yF + tip) / 2 + 4), `cölöpök (~${fmt(Math.max(4, m.D + 3 - m.df), 0)}${NB}m)`, 't-sm halo');
+      T(s, fx + fw + 10, Math.min(350, yD + 20), `cölöpök (~${fmt(Math.max(4, m.D + 3 - m.df), 0)}${NB}m)`, 't-sm halo');
     }
     // mélység-méret
     svg('line', { x1: 534, y1: G, x2: 534, y2: yD, class: 's-muted', 'stroke-width': 1 }, s);
@@ -200,7 +200,7 @@ const TW = [
     p: 'A modern szárazföldi szélerőmű tornya kb. 100–150 m magas, a lapátvég 200 m közelébe is felér. Alapja jellemzően egy kb. 15–25 m átmérőjű, 2–3 m vastag vasbeton talp, gyenge talajon cölöpökkel.',
     l: 'A mértékadó a torony dőlése: a megengedett egyenlőtlen süllyedés kb. 3 mm/m.' },
   { k: 'cn', n: 'CN Tower', hgt: 553, loc: 'Toronto, Kanada', yr: '1976', f: '15 m mélyre vitt vasbeton alap', fd: 15,
-    p: 'Több mint 30 évig a világ legmagasabb szabadon álló építménye volt. A 553 m magas torony terhét 15 m mélyre vitt vasbeton alap adja át a kőzetre (agyagpalára).',
+    p: 'Több mint 30 évig a világ legmagasabb szabadon álló építménye volt. Az 553 m magas torony terhét 15 m mélyre vitt vasbeton alap adja át a kőzetre (agyagpalára).',
     l: 'Ha a teherbíró réteg elérhető mélységben van, egy masszív, mélyre vitt alap is elég.' },
   { k: 'tp', n: 'Taipei 101', hgt: 508, loc: 'Tajpej, Tajvan', yr: '2004', f: '380 db fúrt cölöp, kb. 80 m', fd: 80,
     p: 'A toronyház 380 db, 1,5 m átmérőjű fúrt cölöpön áll: ezek kb. 80 m mélyre, a kőzetbe akár 30 m‑rel befogva érnek le. A terület földrengés- és tájfunveszélyes.',
@@ -290,7 +290,7 @@ register('alap-tornyok', (root) => {
       T(s, 896, Yz(m) - 3, `${m}${NB}m`, 't-sm halo alap-sc', { 'text-anchor': 'end' });
     }
     const clipId = 'alapTwClip' + Math.random().toString(36).slice(2, 7);
-    const cp = svg('clipPath', { id: clipId }, s); svg('rect', { x: 0, y: zoom ? 18 : 0, width: 900, height: 560 }, cp);
+    const cp = svg('clipPath', { id: clipId }, s); svg('rect', { x: 0, y: zoom ? 34 : 0, width: 900, height: 560 }, cp);
     blades = null;
     TW.forEach((tw, i) => {
       const x = XS[i], on = sSel.v === tw.k;
@@ -306,10 +306,11 @@ register('alap-tornyok', (root) => {
       towerFound(g, tw.k, x, Zd, kx);
       if (zoom && tw.hgt > 40) {
         // törésjel a levágott tetőn
-        svg('path', { d: `M${x - 46} 24 l8 -6 l8 6 l8 -6 l8 6 l8 -6 l8 6 l8 -6 l8 6 l8 -6 l8 6 l8 -6`, fill: 'none', class: 's-muted', 'stroke-width': 1.4 }, g);
+        svg('path', { d: `M${x - 46} 40 l8 -6 l8 6 l8 -6 l8 6 l8 -6 l8 6 l8 -6 l8 6 l8 -6 l8 6 l8 -6`, fill: 'none', class: 's-muted', 'stroke-width': 1.4 }, g);
       }
-      const topY = zoom ? (tw.hgt > 40 ? 14 : Yz(tw.hgt) - 8) : Yz(tw.hgt) - 8;
-      T(g, x, Math.max(14, topY), zoom ? `${fmt(tw.hgt, 0)}${NB}m ↑` : `${fmt(tw.hgt, 0)}${NB}m`, 't-num halo', { 'text-anchor': 'middle' });
+      // nagyított nézetben a levágott tornyok magassága a törésjel fölött áll (keskeny nézetben is elfér egymás mellett)
+      const topY = zoom ? (tw.hgt > 40 ? 24 : Yz(tw.hgt) - 8) : Yz(tw.hgt) - 8;
+      T(g, x, Math.max(14, topY), `${fmt(tw.hgt, 0)}${NB}m`, 't-num halo', { 'text-anchor': 'middle' });
       T(g, x, Math.min(552, Zd(tw.fd) + 14), `−${fmt(tw.fd, 0)}${NB}m`, 't-num halo' + (on ? ' t-grp' : ''), { 'text-anchor': 'middle' });
       // ütközési terület
       svg('rect', { x: x - 62, y: 0, width: 124, height: 560, fill: 'transparent' }, g);

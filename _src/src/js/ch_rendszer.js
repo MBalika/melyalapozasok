@@ -25,7 +25,7 @@ const PROF = {
     { n: 'laza homok', cls: 'f-soilA', pat: 'pat-sand', qs: () => 22, qb: () => 1500 },
     { n: 'tömör homok', cls: 'f-soilD', pat: 'pat-sand', qs: () => 65, qb: () => 4500 }] },
   B: { t: 'Vastag agyag, nincs jobb réteg', good: false, L: [
-    { n: 'közepes–kemény agyag (lefelé szilárdul)', cls: 'f-soilB', pat: 'pat-clay', qs: (z) => 30 + 1.5 * z, qb: (z) => 9 * (40 + 3 * z) }] },
+    { n: 'agyag, lefelé szilárdul', cls: 'f-soilB', pat: 'pat-clay', qs: (z) => 30 + 1.5 * z, qb: (z) => 9 * (40 + 3 * z) }] },
 };
 register('rsz-teher', (root) => {
   const { ctrls, viz, out } = shell(root);
@@ -64,7 +64,7 @@ register('rsz-teher', (root) => {
     // mélységskála
     for (let z = 5; z < zmax; z += 5) { svg('line', { x1: 372, y1: Y(z), x2: 380, y2: Y(z), class: 's-muted', 'stroke-width': 1 }, s); T(s, 368, Y(z) + 4, `${z}${NB}m`, 't-sm halo', { 'text-anchor': 'end' }); }
     // cölöp (átmérő torzítva)
-    const cx = 190, pw = Math.max(12, c.D * K * 2.6);
+    const cx = 160, pw = Math.max(12, c.D * K * 2.6);
     conc(s, cx - 34, G - 14, 68, 14);
     conc(s, cx - pw / 2, G, pw, Y(c.L) - G, 'f-conc2');
     arrow(s, cx, 4, cx, G - 16, { cls: 's-ink', w: 3, head: 9 });
@@ -161,6 +161,7 @@ register('rsz-csoport', (root) => {
   const PX = XI.map((x) => 280 + x * 38);
   function draw() {
     clear(s);
+    const mob = s.clientWidth > 0 && s.clientWidth < 440;
     svg('rect', { x: 0, y: 0, width: 560, height: G, class: 'f-sky' }, s);
     hatch(s, 0, G, 560, 420 - G, 'f-soilB', 'pat-clay');
     svg('line', { x1: 0, y1: G, x2: 560, y2: G, class: 's-ink', 'stroke-width': 1.4 }, s);
@@ -193,15 +194,16 @@ register('rsz-csoport', (root) => {
         if (!tens) for (const dx of [-4, 4]) arrow(s, x + dx, Ptip + 14, x + dx, Ptip + 2, { cls: 's-acc', w: 1.8, head: 5 });
       }
       const lab = (P >= 0 ? '+' : '−') + fmt(Math.abs(P), 0);
-      const ty = i % 2 ? 300 : 280;
-      svg('rect', { x: x - 34, y: ty - 14, width: 68, height: 30, rx: 7, class: 'f-surface', opacity: 0.92 }, s);
+      // keskeny nézetben (ahol a CSS nagyobb betűt ad) nagyobb doboz, távolabb eső két sor
+      const ty = mob ? (i % 2 ? 332 : 282) : (i % 2 ? 300 : 280), bw = mob ? 90 : 68, bh = mob ? 46 : 30;
+      svg('rect', { x: x - bw / 2, y: ty - (mob ? 20 : 14), width: bw, height: bh, rx: 7, class: 'f-surface', opacity: 0.92 }, s);
       T(s, x, ty, lab, 't-num' + (tens ? ' t-water' : ' t-bad'), { 'text-anchor': 'middle' });
-      T(s, x, ty + 12, tens ? 'húzott' : 'nyomott', 't-sm', { 'text-anchor': 'middle' });
+      T(s, x, ty + (mob ? 19 : 12), tens ? 'húzott' : 'nyomott', 't-sm', { 'text-anchor': 'middle' });
     });
     // terhek
     const nl = clamp(Math.abs(cur.N) / 120, 0, 44);
     if (cur.N > 20) arrow(s, 280, topY - 26 - 0, 280, topY + Math.min(nl, 44) - 4, { cls: 's-ink', w: 4, head: 11 });
-    if (cur.N < -20) { arrow(s, 280, capB + 4, 280, capT - Math.min(nl, 44) - 10, { cls: 's-water', w: 4, head: 11 }); T(s, 300, capT - 30, 'felhajtóerő', 't-lab t-water halo'); }
+    if (cur.N < -20) { arrow(s, 280, capB + 4, 280, capT - Math.min(nl, 44) - 10, { cls: 's-water', w: 4, head: 11 }); T(s, 300, capT - (mob ? 40 : 30), 'felhajtóerő', 't-lab t-water halo'); }
     if (cur.N > 20) T(s, 298, topY - 8, `N = ${kN(cur.N)}`, 't-num halo');
     if (cur.N < -20) T(s, 300, capT - 16, `N = −${fmt(-cur.N, 0)}${NB}kN`, 't-num t-water halo');
     if (cur.H > 5) {
