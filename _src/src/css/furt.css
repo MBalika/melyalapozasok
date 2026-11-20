@@ -103,3 +103,10 @@ a.ft-n:hover { background: color-mix(in srgb, var(--grp) 14%, var(--surface)); b
   #furt .furt-rep dd { text-align: left; padding-bottom: 6px; }
   #furt .furt-rep dt { border-bottom: 0; padding-bottom: 0; }
 }
+
+/* fázisábrák (g3_phases.js – a C04 Franki- és csavartcölöp-ábráit is ez rajzolja): tinta színű felirat a kártya színével rajzolt glóriával */
+svg .g3x-t, svg .g3x-lab { font: 600 10.5px var(--f-body); fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 3.2px; stroke-linejoin: round; }
+svg .g3x-lab { font-weight: 700; font-size: 11px; }
+/* „Főbb jellemzők” lista: nem hátrányok, ezért semleges jelölő */
+.proscons .con.furt-neu h5 { color: var(--grp); }
+.proscons .con.furt-neu li::marker { content: "•  "; color: var(--grp); }

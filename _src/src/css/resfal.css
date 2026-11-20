@@ -57,3 +57,12 @@ figure.fig-ppt.rf-figw { max-width: 600px; margin: 22px auto; }
   #resfal .w-viz > svg.rf-anatfig { min-width: 640px; }
   .rf-info { min-height: 0; }
 }
+
+/* átnézés: a kiírások töltsék ki a sort akkor is, ha alattuk teljes szélességű értékelés áll
+   (az auto-fit rács a teljes sort átfogó elem miatt nem ejti el az üres oszlopokat) */
+.w-out:has(> .rf-span) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.w-out:has(> .rf-span):has(> .stat:nth-child(3):nth-last-child(2)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.w-out:has(> .rf-span):has(> .stat:nth-child(2):nth-last-child(2)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .w-out:has(> .rf-span) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+/* a jelmagyarázat indexes felirata egy egységként törjön (az inline-flex nem szedi szét a σ-t és az indexét) */
+.legend .rf-lg { display: inline; }

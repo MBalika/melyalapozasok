@@ -20,9 +20,9 @@ function ar(p, x1, y1, x2, y2, col = 'var(--ink)', w = 2, hd = 7) {
 /** determinisztikus álvéletlen (a „szemcsék” ne ugráljanak képkockáról képkockára) */
 const rnd = (i) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 const SOIL = {
-  homok: { t: 'Homok', cls: 'f-soilA', pat: 'pat-sand', szem: true },
-  kavics: { t: 'Kavics', cls: 'f-soilC', pat: 'pat-gravel', szem: true },
-  agyag: { t: 'Agyag (kötött)', cls: 'f-soilB', pat: 'pat-clay', szem: false },
+  k_homok: { t: 'Homok', cls: 'f-soilA', pat: 'pat-sand', szem: true },
+  k_kavics: { t: 'Kavics', cls: 'f-soilC', pat: 'pat-gravel', szem: true },
+  k_agyag: { t: 'Agyag (kötött)', cls: 'f-soilB', pat: 'pat-clay', szem: false },
 };
 function soilRect(p, x, y, w, hh, key) {
   const s = SOIL[key];
@@ -37,6 +37,27 @@ function gwMark(p, x, y, lab = 'TV') {
   if (lab) T(p, x + 12, y - 2, lab, 't-sm t-water halo');
 }
 const ST = { ok: 'Stabil', warn: 'Kockázatos', bad: 'Beomlik' };
+/**
+ * Sematikus cölöpözőgép a furat bal oldalán: lánctalpas alváz, felsőváz fülkével és ellensúllyal,
+ * a terepre támaszkodó árboc hátsó kitámasztással, fent konzol a furat tengelyéig (X).
+ * o.off: az árboc távolsága a furat tengelyétől; o.top: az árboc teteje (lehet a kép felett is: a kép levágja).
+ */
+function rigL(p, X, G0, o = {}) {
+  const g = G(p), mx = X - (o.off ?? 46), top = o.top ?? 6;
+  R(g, mx - 122, G0 - 16, 104, 16, 'f-steel2', { rx: 8 });
+  for (let i = 0; i < 6; i++) { C(g, mx - 112 + i * 16.8, G0 - 8, 4.6, 'f-surface', { opacity: 0.85 }); C(g, mx - 112 + i * 16.8, G0 - 8, 1.6, 'f-steel2'); }
+  R(g, mx - 114, G0 - 40, 86, 22, 'f-steel', { rx: 4, style: 'stroke:var(--steelm2);stroke-width:1.2' });
+  R(g, mx - 120, G0 - 47, 24, 29, 'f-steel2', { rx: 3 });
+  R(g, mx - 56, G0 - 62, 28, 44, 'f-steel', { rx: 4, style: 'stroke:var(--steelm2);stroke-width:1.2' });
+  R(g, mx - 52, G0 - 58, 20, 16, 'f-surface', { rx: 2, opacity: 0.88 });
+  L(g, mx - 4, Math.max(top, 0) + (G0 - Math.max(top, 0)) * 0.3, mx - 100, G0 - 44, 'stroke:var(--steelm2);stroke-width:3;stroke-linecap:round');
+  L(g, mx - 28, G0 - 28, mx - 5, G0 - 28, 'stroke:var(--steelm2);stroke-width:6');
+  R(g, mx - 5, top, 10, G0 - top, 'f-acc');
+  for (let y = Math.max(top, 0) + 10; y < G0 - 12; y += 14) L(g, mx - 3.5, y, mx + 3.5, y + 8, 'stroke:var(--surface);stroke-width:1;opacity:.45');
+  R(g, mx - 10, G0 - 4, 20, 4, 'f-steel2');
+  if (o.jib !== false) { R(g, mx - 5, top, X - mx + 12, 7, 'f-acc', { rx: 2 }); C(g, X, top + 8, 5, 'f-steel2'); C(g, X, top + 8, 1.6, 'f-surface'); }
+  return g;
+}
 
 /* ================================================================== 1. Fúrófejek munkaciklusa */
 const TOOLS = {
@@ -50,19 +71,15 @@ register('furtTool', (root) => {
   const { ctrls, viz, out } = shell(root);
   const s = seg(ctrls, { label: 'Eszköz', options: Object.entries(TOOLS).map(([v, o]) => ({ v, t: o.t })), value: 'rovid', vert: true });
   const chips = h('div', { class: 'chips' }); ctrls.append(h('div', { class: 'ctl' }, h('span', { class: 'ctl-lab' }, 'Melyik talajhoz?'), chips));
-  const W = 560, H = 360, G0 = 92, X = 250, BW = 74, MAXD = 230;
+  const W = 560, H = 380, G0 = 150, X = 262, BW = 74, MAXD = 180, LC = 142;
   const fig = figure(viz, W, H);
   const cap = h('p', { class: 'furt-cap' }); viz.append(cap);
   const bg = G(fig), dyn = G(fig);
   // háttér: talaj, terep, gép árboca
   R(bg, 0, 0, W, G0, 'f-sky');
-  soilRect(bg, 0, G0, W, H - G0, 'agyag');
+  soilRect(bg, 0, G0, W, H - G0, 'k_agyag');
   L(bg, 0, G0, W, G0, 'stroke:var(--soil-line);stroke-width:2');
-  R(bg, X - 150, G0 - 18, 96, 18, 'f-steel2', { rx: 3 });
-  for (let i = 0; i < 6; i++) C(bg, X - 140 + i * 16, G0 - 4, 5, 'f-ink', { opacity: 0.6 });
-  R(bg, X - 116, G0 - 58, 52, 40, 'f-steel', { rx: 4 });
-  R(bg, X - 70, 8, 8, G0 - 26, 'f-acc');
-  L(bg, X - 62, 12, X, 12, 'stroke:var(--accent);stroke-width:5');
+  rigL(bg, X, G0);
   T(bg, 12, 22, 'fúrógép (vázlat)', 't-sm halo');
   out.remove();
   let typ = s.v, depth = 40, pile = 0, last = -1;
@@ -75,12 +92,15 @@ register('furtTool', (root) => {
   s.on((v) => { typ = v; reset(); paintInfo(); });
   paintInfo();
   // eszközrajzolók (y: az eszköz alja)
-  const kelly = (g, yTop) => R(g, X - 5, 12, 10, Math.max(0, yTop - 12), 'f-steel2');
-  const flights = (g, y0, y1, ph, soil) => {
+  const kelly = (g, yTop) => R(g, X - 5, 16, 10, Math.max(0, yTop - 16), 'f-steel2');
+  // forgatófej az árbocon (a fúrószár tetején)
+  const drive = (g, y) => { L(g, X - 46, y + 7, X - 12, y + 7, 'stroke:var(--steelm2);stroke-width:6'); R(g, X - 13, y, 26, 14, 'f-steel', { rx: 3, style: 'stroke:var(--steelm2);stroke-width:1.2' }); };
+  const flights = (g, y0, y1, ph, soil, soilFrom = -1e9) => {
     R(g, X - 4, y0, 8, y1 - y0, 'f-steel2');
     const pitch = 22;
+    if (soil && y1 > Math.max(y0, soilFrom)) R(g, X - BW / 2, Math.max(y0, soilFrom), BW, y1 - Math.max(y0, soilFrom), '', { style: 'fill:color-mix(in srgb, var(--soilB) 80%, var(--soilE))' });
     for (let y = y0 + ((ph * pitch) % pitch); y < y1; y += pitch) {
-      if (soil) P(g, [[X - BW / 2 + 4, y + 4], [X + BW / 2 - 4, y + 13], [X + BW / 2 - 4, y + 20], [X - BW / 2 + 4, y + 11]], 'fill:var(--soilB);opacity:.9', true);
+      if (soil && y + 4 >= soilFrom) P(g, [[X - BW / 2 + 4, y + 4], [X + BW / 2 - 4, y + 13], [X + BW / 2 - 4, y + 20], [X - BW / 2 + 4, y + 11]], 'fill:var(--soilB);opacity:.9', true);
       L(g, X - BW / 2 + 3, y, X + BW / 2 - 3, y + 9, 'stroke:var(--steelm2);stroke-width:3.4;stroke-linecap:round');
     }
   };
@@ -102,7 +122,8 @@ register('furtTool', (root) => {
     }
     // a furat (üreg) aktuális mélysége
     let dNow;
-    if (typ === 'cfa' || typ === 'obl') dNow = 20 + MAXD * clamp(u / 0.8, 0, 1) * (typ === 'obl' ? 0.9 : 1);
+    if (typ === 'cfa') dNow = 10 + 130 * clamp(u / 0.8, 0, 1);
+    else if (typ === 'obl') dNow = 20 + 150 * clamp(u / 0.8, 0, 1);
     else dNow = u < 0.3 ? depth : u < 0.5 ? depth + 26 * (u - 0.3) / 0.2 : depth + 26;
     const yB = G0 + Math.max(10, dNow);
     if (typ === 'obl') R(g, X - 22, G0, 44, yB - G0, 'f-water', { style: 'opacity:.9' });
@@ -117,12 +138,13 @@ register('furtTool', (root) => {
     let label = '';
     if (typ === 'cfa') {
       const ph = tt * 2.2;
-      const yb = yB;
-      kelly(g, yTopTool);
-      flights(g, Math.min(yTopTool, yb - 40), yb, ph, true);
+      const yb = yB, yt = yb - LC; // a spirál hossza állandó: a forgatófej az árbocon lefelé csúszik
+      drive(g, yt - 14);
+      flights(g, yt, yb, ph, true, G0);
       label = u < 0.8 ? 'lehajtás – a furadék a meneteken marad' : 'végső mélység – jöhet a betonozás';
     } else if (typ === 'obl') {
       kelly(g, yTopTool);
+      drive(g, G0 - 44);
       R(g, X - 5, yTopTool, 10, yB - yTopTool - 10, 'f-steel2');
       P(g, [[X - 14, yB - 12], [X + 14, yB - 12], [X + 8, yB], [X - 8, yB]], 'fill:var(--steelm2)', true);
       // folyadékáram: le a rúdban, fel a résben
@@ -148,24 +170,24 @@ register('furtTool', (root) => {
       const empt = u >= 0.8;
       if (typ === 'rovid') {
         const ph = u > 0.3 && u < 0.5 ? tt * 3 : u > 0.8 ? tt * 8 : 0;
-        kelly(g, yb - 66);
+        kelly(g, yb - 66); drive(g, 26);
         flights(g, yb - 66, yb, ph, full && !(u > 0.82));
         if (u > 0.8) for (let i = 0; i < 7; i++) { const k = ((u - 0.8) / 0.2 + i / 7) % 1; C(g, X + 40 + k * 50, yb - 30 + k * 26 - Math.sin(k * 3) * 18, 4, 'f-soilB'); }
       } else if (typ === 'dob') {
-        kelly(g, yb - 70);
+        kelly(g, yb - 70); drive(g, 26);
         R(g, X - BW / 2 + 4, yb - 70, BW - 8, 66, 'f-steel', { rx: 3 });
         if (full) R(g, X - BW / 2 + 8, yb - 60 + (empt ? 50 * (u - 0.8) / 0.2 : 0), BW - 16, 54 - (empt ? 50 * (u - 0.8) / 0.2 : 0), 'f-soilA');
         for (let i = 0; i < 6; i++) P(g, [[X - BW / 2 + 6 + i * 11, yb - 4], [X - BW / 2 + 11 + i * 11, yb + 4], [X - BW / 2 + 16 + i * 11, yb - 4]], 'fill:var(--steelm2)', true);
         if (empt) { L(g, X - BW / 2 + 4, yb - 4, X - BW / 2 + 4 + 40 * Math.cos(0.9), yb - 4 + 40 * Math.sin(0.9), 'stroke:var(--steelm2);stroke-width:4');
-          for (let i = 0; i < 8; i++) C(g, X - 6 + rnd(i) * 30, yb + 6 + ((u - 0.8) / 0.2 * 30 + i * 6) % 30, 3, 'f-soilA'); }
+          for (let i = 0; i < 8; i++) { const k = ((u - 0.8) / 0.2 + i / 8) % 1; C(g, X + 30 + k * 62 + rnd(i) * 8, yb + 2 - Math.sin(k * 3) * 16 + k * (G0 - yb - 8), 3, 'f-soilA'); } }
       } else if (typ === 'marko') {
         const open = u < 0.34 || u > 0.82 ? 1 : u < 0.44 ? 1 - (u - 0.34) / 0.1 : 0;
-        L(g, X, 12, X, yb - 60, 'stroke:var(--ink2);stroke-width:2');
+        L(g, X, 15, X, yb - 60, 'stroke:var(--ink2);stroke-width:2');
         R(g, X - 16, yb - 66, 32, 26, 'f-steel2', { rx: 3 });
         const jaw = (sg) => P(g, [[X, yb - 42], [X + sg * (BW / 2 - 6 + open * 10), yb - 30], [X + sg * (BW / 2 - 10 + open * 16), yb - 4 - open * 6], [X + sg * 3, yb + 2 - open * 10]], 'fill:var(--steelm);stroke:var(--steelm2);stroke-width:1.5', true);
         jaw(-1); jaw(1);
         if (full && open < 0.6) R(g, X - 16, yb - 26, 32, 20, 'f-soilB', { opacity: 0.85 });
-        if (u > 0.82) for (let i = 0; i < 7; i++) C(g, X - 12 + rnd(i + 9) * 24, yb + 4 + ((u - 0.82) / 0.18 * 40 + i * 7) % 40, 3.5, 'f-soilB');
+        if (u > 0.82) for (let i = 0; i < 7; i++) { const k = ((u - 0.82) / 0.18 + i / 7) % 1; C(g, X + 26 + k * 66 + rnd(i + 9) * 8, yb - 6 - Math.sin(k * 3) * 16 + k * (G0 - yb), 3.5, 'f-soilB'); }
       }
       label = u < 0.3 ? '1 · le a furatba' : u < 0.5 ? '2 · fúrás, telítődés' : u < 0.8 ? '3 · kiemelés' : '4 · ürítés a furat mellett';
     }
@@ -177,16 +199,16 @@ register('furtTool', (root) => {
 
 /* ================================================================== 2. Furatállékonyság-labor */
 const METH = {
-  nincs: { t: 'Nincs megtámasztás' },
+  k_nincs: { t: 'Nincs megtámasztás' },
   bel: { t: 'Béléscső' },
-  zagy: { t: 'Bentonitzagy' },
+  k_zagy: { t: 'Bentonitzagy' },
   cfa: { t: 'Talaj a spirálon (CFA)' },
 };
 function labEval(o) {
   const { soil, gw, hw, z, m, dh, lead, sz } = o;
   const szem = SOIL[soil].szem, wet = gw && hw < z;
   const r = { st: 'ok', mode: null, title: '', txt: '' };
-  if (m === 'nincs') {
+  if (m === 'k_nincs') {
     if (szem) {
       Object.assign(r, { st: 'bad', mode: 'wall', zf: 1.2, title: 'A furat beomlik.', txt: `Szemcsés talajban (${SOIL[soil].t.toLowerCase()}) nincs kohézió, ami a függőleges falat megtartaná: a fal kipereg, beomlik${wet ? ', a talajvíz alatt pedig a beáramló víz is sodorja a szemcséket' : ''}. Megtámasztásra van szükség (béléscső, zagy vagy folyamatos spirál).` });
     } else if (wet) {
@@ -209,26 +231,26 @@ function labEval(o) {
     } else {
       Object.assign(r, { st: 'ok', title: 'A cső tartja a falat.', txt: `Az acél béléscső megakadályozza a talaj és a talajvíz betörését${wet ? `, a csőben tartott víz${dh > 0 ? ` (+${fmt(dh, 1)} m)` : ''} pedig egyensúlyt tart a külső víznyomással` : ''}. Hátránya: a cső mozgatása, toldása nehézkes és lassú.` });
     }
-  } else if (m === 'zagy') {
+  } else if (m === 'k_zagy') {
     if (wet && sz < 0.5) Object.assign(r, { st: 'bad', mode: 'wall', zf: Math.max(1, hw), title: 'Kevés a zagy túlnyomása.', txt: `A zagyszint csak ${fmt(sz, 2)} m-rel van a talajvízszint felett. A zagy nyomása így alig nagyobb a víznyomásnál, a földnyomást már nem tudja ellensúlyozni: a fal a talajvíz alatt megindul.` });
     else if (wet && sz < 1.0) Object.assign(r, { st: 'warn', title: 'Szűkös a túlnyomás.', txt: `A zagyszint ${fmt(sz, 2)} m-rel van a talajvíz felett – kevés. A zagyszintet legalább 1,0–1,5 m-rel a talajvízszint felett kell tartani.` });
-    else if (soil === 'kavics') Object.assign(r, { st: 'warn', mode: 'loss', title: 'Megáll – de fogy a zagy.', txt: 'Nagy áteresztőképességű kavicsban a zagy elszivároghat a pórusokba (zagyveszteség), és a zagyszint süllyed. Folyamatosan figyelni és pótolni kell; szükség esetén sűrűbb zagy kell.' });
+    else if (soil === 'k_kavics') Object.assign(r, { st: 'warn', mode: 'loss', title: 'Megáll – de fogy a zagy.', txt: 'Nagy áteresztőképességű kavicsban a zagy elszivároghat a pórusokba (zagyveszteség), és a zagyszint süllyed. Folyamatosan figyelni és pótolni kell; szükség esetén sűrűbb zagy kell.' });
     else Object.assign(r, { st: 'ok', title: 'A zagy megtámasztja a falat.', txt: `A bentonitzagy sűrűbb a víznél, kiszorítja a talajvizet, és túlnyomásával megtámasztja a furat falát${wet ? ` – a zagyszint ${fmt(sz, 1)} m-rel a talajvíz felett van` : ''}.` });
   } else if (m === 'cfa') {
     if (z > 24) Object.assign(r, { st: 'bad', mode: 'short', title: 'Ilyen hosszú CFA nincs.', txt: 'A folyamatos spirál hossza a gép árbocához kötött: a CFA-cölöp legfeljebb kb. 22–24 m-es. Ehhez a mélységhez köpenycsöves vagy zagyos technológia kell.' });
     else if (z > 22) Object.assign(r, { st: 'warn', title: 'A felső határon.', txt: '22–24 m a CFA felső tartománya: csak nagy géppel, gondos tervezéssel.' });
-    else if (soil === 'homok' && wet) Object.assign(r, { st: 'warn', mode: 'over', title: 'Megáll – különös gondossággal.', txt: 'Finom homokban, talajvíz alatt a CFA különös gondosságot igényel (laza, folyós talajba nem is javasolt): ha a spirál a behatoláshoz képest túl sokat forog, több talajt szállít fel, mint a furat térfogata, és a környezet fellazul. A fúrást és a betonozást ütemesen, megszakítás nélkül kell végezni.' });
+    else if (soil === 'k_homok' && wet) Object.assign(r, { st: 'warn', mode: 'over', title: 'Megáll – különös gondossággal.', txt: 'Finom homokban, talajvíz alatt a CFA különös gondosságot igényel (laza, folyós talajba nem is javasolt): ha a spirál a behatoláshoz képest túl sokat forog, több talajt szállít fel, mint a furat térfogata, és a környezet fellazul. A fúrást és a betonozást ütemesen, megszakítás nélkül kell végezni.' });
     else Object.assign(r, { st: 'ok', title: 'A talajdugó megtámaszt.', txt: 'A spirálon maradó talajdugó folyamatosan támasztja a furat falát, külön megtámasztó technológia nem kell. A betont a fúrószáron át, a felhúzás közben nyomják be.' });
   }
   return r;
 }
 register('furtLab', (root) => {
   const { ctrls, viz, out } = shell(root);
-  const sSoil = seg(ctrls, { label: 'Talaj', options: Object.entries(SOIL).map(([v, o]) => ({ v, t: o.t })), value: 'homok' });
+  const sSoil = seg(ctrls, { label: 'Talaj', options: Object.entries(SOIL).map(([v, o]) => ({ v, t: o.t })), value: 'k_homok' });
   const sGw = toggle(ctrls, { label: 'Talajvíz van', value: true });
   const sHw = slider(ctrls, { label: 'Talajvízszint mélysége', min: 1, max: 10, step: 0.5, value: 3, unit: 'm', d: 1 });
   const sZ = slider(ctrls, { label: 'A furat mélysége', min: 4, max: 40, step: 1, value: 14, unit: 'm', d: 0 });
-  const sM = seg(ctrls, { label: 'Megtámasztás', options: Object.entries(METH).map(([v, o]) => ({ v, t: o.t })), value: 'nincs', vert: true });
+  const sM = seg(ctrls, { label: 'Megtámasztás', options: Object.entries(METH).map(([v, o]) => ({ v, t: o.t })), value: 'k_nincs', vert: true });
   const boxBel = h('div', { class: 'furt-sub' });
   const sDh = slider(boxBel, { label: 'Vízszint a csőben a külsőhöz képest', min: -4, max: 2, step: 0.5, value: 0, unit: 'm', d: 1, fmt: (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + fmt(Math.abs(v), 1) });
   const sLead = toggle(boxBel, { label: 'A cső a kiemelés előtt jár', value: true });
@@ -245,16 +267,18 @@ register('furtLab', (root) => {
   const rebuild = () => {
     const soil = sSoil.v, gw = sGw.v, hw = sHw.v, z = sZ.v, m = sM.v;
     sHw.el.hidden = !gw;
-    boxBel.hidden = m !== 'bel'; boxZ.hidden = m !== 'zagy' || !gw;
+    boxBel.hidden = m !== 'bel'; boxZ.hidden = m !== 'k_zagy' || !gw;
     sDh.el.style.opacity = gw ? 1 : 0.45; sDh.input.disabled = !gw;
-    const r = labEval({ soil, gw, hw, z, m, dh: sDh.v, lead: sLead.v, sz: sSz.v });
+    // a zagyszint legfeljebb a vezetőcső tetejéig (0,3 m-rel a terep alá) emelhető: a tényleges szintelőny ennél nem lehet nagyobb
+    const szE = Math.min(sSz.v, Math.max(0, hw - 0.3));
+    const r = labEval({ soil, gw, hw, z, m, dh: sDh.v, lead: sLead.v, sz: szE });
     const zmax = Math.max(12, z + 3);
     sc = (H - G0 - 16) / zmax;
-    st = { soil, gw, hw, z, m, r, zmax, dh: sDh.v, sz: sSz.v, lead: sLead.v };
+    st = { soil, gw, hw, z, m, r, zmax, dh: sDh.v, sz: szE, lead: sLead.v };
     // háttér
     clear(bg);
     R(bg, 0, 0, W, G0, 'f-sky');
-    soilRect(bg, 0, G0, W, yz(1) - G0, 'kavics');
+    soilRect(bg, 0, G0, W, yz(1) - G0, 'k_kavics');
     R(bg, 0, G0, W, yz(1) - G0, 'f-soilD', { opacity: 0.75 });
     soilRect(bg, 0, yz(1), W, H - yz(1), soil);
     L(bg, 0, G0, W, G0, 'stroke:var(--soil-line);stroke-width:2');
@@ -275,11 +299,11 @@ register('furtLab', (root) => {
     // kimenetek
     oSt.set(ST[r.st], r.st, r.st === 'bad' && (r.mode === 'short') ? 'Nem kivitelezhető' : null);
     if (m === 'bel') { oX.el.querySelector('.stat-l').innerHTML = 'Belső − külső vízszint'; oX.set(gw ? (sDh.v > 0 ? '+' : sDh.v < 0 ? '−' : '') + fmt(Math.abs(sDh.v), 1) : '–', gw ? (sDh.v < 0 ? (SOIL[soil].szem ? 'bad' : 'warn') : 'ok') : null, gw ? null : 'nincs talajvíz'); if (gw) oX.el.querySelector('.stat-v').innerHTML += '<small>m</small>'; }
-    else if (m === 'zagy') {
+    else if (m === 'k_zagy') {
       oX.el.querySelector('.stat-l').innerHTML = 'Zagy túlnyomása a talpon';
-      if (gw && hw < z) { const t = Math.max(0.3, hw - sSz.v); const dp = 11.0 * (z - t) - 10 * (z - hw); oX.set(dp, dp < 15 ? 'bad' : dp < 25 ? 'warn' : 'ok'); oX.el.querySelector('.stat-v').innerHTML += '<small>kPa</small>'; }
+      if (gw && hw < z) { const t = hw - szE; const dp = 11.0 * (z - t) - 10 * (z - hw); oX.set(dp, r.st); oX.el.querySelector('.stat-v').innerHTML += '<small>kPa</small>'; }
       else oX.set('–', null, 'talajvíz felett');
-    } else if (m === 'nincs') { oX.el.querySelector('.stat-l').innerHTML = 'Megtámasztás nélkül (kötött talaj, TV felett)'; oX.set('≤ 8–10 m', SOIL[soil].szem || (gw && hw < z) || z > 10 ? 'bad' : z > 8 ? 'warn' : 'ok', '≤ 8–10 m'); }
+    } else if (m === 'k_nincs') { oX.el.querySelector('.stat-l').innerHTML = 'Megtámasztás nélkül (kötött talaj, TV felett)'; oX.set('≤ 8–10 m', SOIL[soil].szem || (gw && hw < z) || z > 10 ? 'bad' : z > 8 ? 'warn' : 'ok', '≤ 8–10 m'); }
     else { oX.el.querySelector('.stat-l').innerHTML = 'CFA-hossz'; oX.set('6–22 (24) m', z > 24 ? 'bad' : z > 22 ? 'warn' : 'ok', '6–22 (24) m'); }
     vd.set(r.st, r.title, ' ' + r.txt);
     t0 = performance.now() / 1000;
@@ -296,7 +320,7 @@ register('furtLab', (root) => {
     const xl = X - BW / 2, xr = X + BW / 2;
     const kc = clamp((u - 1.6) / 2.2, 0, 1); // beomlás üteme
     // furat belseje
-    if (m === 'zagy') {
+    if (m === 'k_zagy') {
       const t = gw ? Math.max(0.3, hw - st.sz) : 0.5;
       const tl = r.mode === 'loss' ? t + 0.08 * zNow * clamp((u - 1.6) / 4, 0, 1) : t;
       R(g, xl, G0, BW, yb - G0, 'f-surface', { opacity: 0.85 });
@@ -324,7 +348,7 @@ register('furtLab', (root) => {
       const pitch = 22, ph = (u < 1.6 ? u * 30 : 0) % pitch;
       R(g, X - 4, 8, 8, yb - 8, 'f-steel2');
       for (let y = G0 + ph; y < yb - 4; y += pitch) {
-        P(g, [[xl + 2, y + 4], [xr - 2, y + 13], [xr - 2, y + 21], [xl + 2, y + 12]], `fill:var(--${st.soil === 'agyag' ? 'soilB' : st.soil === 'kavics' ? 'soilC' : 'soilA'});opacity:.95`, true);
+        P(g, [[xl + 2, y + 4], [xr - 2, y + 13], [xr - 2, y + 21], [xl + 2, y + 12]], `fill:var(--${st.soil === 'k_agyag' ? 'soilB' : st.soil === 'k_kavics' ? 'soilC' : 'soilA'});opacity:.95`, true);
         L(g, xl + 1, y, xr - 1, y + 9, 'stroke:var(--steelm2);stroke-width:3.2;stroke-linecap:round');
       }
       if (r.mode === 'short') { T(g, X, yb + 18, 'a spirál nem ér le', 't-lab t-bad halo', { 'text-anchor': 'middle' }); L(g, xl, yz(z), xr, yz(z), 'stroke:var(--bad);stroke-width:2;stroke-dasharray:5 4'); T(g, xr + 8, yz(z) + 4, `tervezett: ${fmt(z, 0)} m`, 't-sm t-bad halo'); }
@@ -359,7 +383,7 @@ register('furtLab', (root) => {
       }
       // felhalmozódó törmelék a talpon
       const hh = 34 * kc;
-      if (hh > 0) { P(g, [[xl, y1], [xl, y1 - hh * 0.7], [X, y1 - hh], [xr, y1 - hh * 0.7], [xr, y1]], `fill:var(--${st.soil === 'agyag' ? 'soilB' : st.soil === 'kavics' ? 'soilC' : 'soilA'});stroke:var(--soil-line);stroke-width:1`, true); }
+      if (hh > 0) { P(g, [[xl, y1], [xl, y1 - hh * 0.7], [X, y1 - hh], [xr, y1 - hh * 0.7], [xr, y1]], `fill:var(--${st.soil === 'k_agyag' ? 'soilB' : st.soil === 'k_kavics' ? 'soilC' : 'soilA'});stroke:var(--soil-line);stroke-width:1`, true); }
       if (kc > 0.5) T(g, xr + 12, y1 - 10, 'beomlott talaj a talpon', 't-sm t-bad halo');
     }
     if (r.mode === 'under' && kDrill >= 1) {
@@ -379,7 +403,7 @@ register('furtLab', (root) => {
       R(g, xl - 30, y1, BW + 60, 40, '', { fill: 'url(#pat-soil)', opacity: 0.9 * kc });
       T(g, xr + 12, y1 + 22, big ? 'felbuzgás – fellazult talp' : 'felpuhuló talp', 't-sm t-bad halo');
     }
-    if (r.st === 'ok' && kDrill >= 1 && m !== 'zagy') { const k = clamp((u - 1.6) / 0.4, 0, 1); C(g, X, yb + 26, 14 * k, 'f-ok'); T(g, X, yb + 31, '✓', 't-big', { 'text-anchor': 'middle', style: 'fill:#fff;font-size:16px', opacity: k }); }
+    if (r.st === 'ok' && kDrill >= 1 && m !== 'k_zagy') { const k = clamp((u - 1.6) / 0.4, 0, 1); C(g, X, yb + 26, 14 * k, 'f-ok'); T(g, X, yb + 31, '✓', 't-big', { 'text-anchor': 'middle', style: 'fill:#fff;font-size:16px', opacity: k }); }
   };
   rebuild();
   loop(root, (tt) => draw(performance.now() / 1000));
@@ -404,7 +428,7 @@ register('furtTremie', (root) => {
   const oC = stat(out, { label: 'Betonszint a talptól', unit: 'm' }), oE = stat(out, { label: 'A cső bemerülése' }), oP = stat(out, { label: 'Cölöptest' });
   const bg = G(fig), dyn = G(fig);
   R(bg, 0, 0, W, TOP, 'f-sky');
-  soilRect(bg, 0, TOP, W, H - TOP, 'homok');
+  soilRect(bg, 0, TOP, W, H - TOP, 'k_homok');
   L(bg, 0, TOP, W, TOP, 'stroke:var(--soil-line);stroke-width:2');
   R(bg, 0, yz(HP - 2.5), W, H - yz(HP - 2.5), '', { fill: 'url(#pat-water)', opacity: 0.5 });
   gwMark(bg, W - 100, yz(HP - 2.5), 'talajvíz');
@@ -513,13 +537,13 @@ register('furtCfa', (root) => {
   const bGo = h('button', { class: 'btn btn-acc btn-sm', type: 'button' }, '▶ Fúrás és betonozás');
   const bFast = h('button', { class: 'btn btn-line btn-sm', type: 'button', 'aria-pressed': 'false' }, '×4 gyorsítás');
   row.append(bGo, bFast); ctrls.append(row);
-  const W = 600, H = 430, G0 = 56, BOT = 410;
+  const W = 600, H = 452, G0 = 78, BOT = 432;
   const fig = figure(viz, W, H);
   const vd = verdict(viz);
   const rep = h('div', { class: 'furt-rep', hidden: true }); viz.append(rep);
   const oZ = stat(out, { label: 'A spirál talpa', unit: 'm' }), oQ = stat(out, { label: 'Betonáram', unit: 'm³/óra', d: 0 }), oR = stat(out, { label: 'Betonfogyás / elméleti', unit: '%' }), oV = stat(out, { label: 'Bedolgozott beton', unit: 'm³' });
   const bg = G(fig), dyn = G(fig);
-  const XS = 140, BWmax = 92; // metszet
+  const XS = 190, BWmax = 92; // metszet
   const CX0 = 330, CX1 = 580; // diagram
   const rMin = 0, rMax = 1.6;
   const cx = (r) => CX0 + (clamp(r, rMin, rMax) - rMin) / (rMax - rMin) * (CX1 - CX0);
@@ -531,14 +555,13 @@ register('furtCfa', (root) => {
     clear(bg);
     const L0 = sL.v, k = sc();
     R(bg, 0, 0, W, G0, 'f-sky');
-    soilRect(bg, 0, G0, 290, H - G0, 'homok');
+    soilRect(bg, 0, G0, 290, H - G0, 'k_homok');
     R(bg, 0, G0 + 0.45 * (BOT - G0), 290, 0.25 * (BOT - G0), 'f-soilE', { opacity: 0.55 });
     T(bg, 8, G0 + 0.45 * (BOT - G0) + 16, 'puha, iszapos réteg', 't-sm halo');
     L(bg, 0, G0, 290, G0, 'stroke:var(--soil-line);stroke-width:2');
     T(bg, 8, G0 + 16, 'közepes homok', 't-sm halo');
     // gép
-    R(bg, XS - 120, G0 - 18, 90, 18, 'f-steel2', { rx: 3 }); R(bg, XS - 100, G0 - 50, 50, 32, 'f-steel', { rx: 4 });
-    R(bg, XS - 30, 6, 7, G0 - 24, 'f-acc'); L(bg, XS - 23, 10, XS, 10, 'stroke:var(--accent);stroke-width:4');
+    rigL(bg, XS, G0, { off: 58, top: -12, jib: false }); // a magas árboc a kép fölé nyúlik
     // diagram háttér
     R(bg, CX0, G0, CX1 - CX0, BOT - G0, 'f-surface', { style: 'stroke:var(--line2);stroke-width:1' });
     R(bg, cx(1.0), G0, cx(1.25) - cx(1.0), BOT - G0, 'f-ok', { opacity: 0.12 });
@@ -615,10 +638,14 @@ register('furtCfa', (root) => {
     // furat a spirál felett/alatt
     if (st.phase === 'drill' || st.phase === 'pull') {
       const yb = G0 + st.z * k;
-      R(g, XS - 4, 8, 8, yb - 8, 'f-steel2');
+      const yt = yb - L0 * k; // a spirál teteje (a fúrás elején a kép felett van)
+      R(g, XS - 4, Math.max(0, yt), 8, yb - Math.max(0, yt), 'f-steel2');
+      if (yt - 14 > -14) { L(g, XS - 58, yt - 7, XS - 12, yt - 7, 'stroke:var(--steelm2);stroke-width:6'); R(g, XS - 13, yt - 14, 26, 14, 'f-steel', { rx: 3, style: 'stroke:var(--steelm2);stroke-width:1.2' }); }
       const pitch = 20, ph = (tt * (st.phase === 'drill' ? 60 : 10)) % pitch;
-      for (let y = Math.max(G0, yb - L0 * k) + ph; y < yb - 4; y += pitch) {
-        P(g, [[xl + 2, y + 4], [xl + bw - 2, y + 12], [xl + bw - 2, y + 18], [xl + 2, y + 10]], 'fill:var(--soilA);opacity:.95', true);
+      // a menetek között végig talaj van: fúráskor a terep alatt, húzáskor a kiemelt szakaszon is
+      const ys0 = st.phase === 'drill' ? G0 : Math.max(0, yt);
+      for (let y = Math.max(0, yt) - pitch + ph; y < yb - 4; y += pitch) {
+        if (y + 4 >= ys0) P(g, [[xl + 2, y + 4], [xl + bw - 2, y + 12], [xl + bw - 2, y + 18], [xl + 2, y + 10]], 'fill:color-mix(in srgb, var(--soilA) 62%, var(--soilE))', true);
         L(g, xl + 1, y, xl + bw - 1, y + 8, 'stroke:var(--steelm2);stroke-width:3;stroke-linecap:round');
       }
       if (st.phase === 'pull' && sP.v > 0) { const kk = (tt * 3) % 1; ar(g, XS, yb - 30 + kk * 20, XS, yb - 6 + kk * 14, 'var(--surface)', 2, 6); }
@@ -685,7 +712,7 @@ function pickEval(o) {
   }
   // zagyos
   {
-    const r = { id: 'zagy', t: 'Bentonitzagyos', s: 2.5, why: [], out: null, href: '#furt-zagy' };
+    const r = { id: 'k_zagy', t: 'Bentonitzagyos', s: 2.5, why: [], out: null, href: '#furt-zagy' };
     if (D < 80) r.out = 'legalább 80 cm átmérő'; else r.why.push(['ok', `Ø ${D} cm: a 80–180 cm-es tartományban`]);
     if (L0 < 15) { r.s -= 1; r.why.push(['warn', 'rövid cölöphöz összetett technológia']); } else r.why.push(['ok', `${L0} m: belefér a 15–50 m-be`]);
     if (L0 > 30) { r.s += 1; r.why.push(['ok', 'nagy mélységben a gép kapacitása nem korlát']); }

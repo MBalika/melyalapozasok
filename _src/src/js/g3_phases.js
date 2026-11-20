@@ -8,14 +8,14 @@ const R = (g, x, y, w, hh, cls, extra = {}) => svg('rect', { x, y, width: Math.m
 const PAT = (g, x, y, w, hh, pat, op = 1) => svg('rect', { x, y, width: Math.max(0, w), height: Math.max(0, hh), fill: `url(#${pat})`, opacity: op }, g);
 const L = (g, x1, y1, x2, y2, cls, w = 1.5, extra = {}) => svg('line', { x1, y1, x2, y2, class: cls, 'stroke-width': w, ...extra }, g);
 const P = (g, d, cls, extra = {}) => svg('path', { d, class: cls, ...extra }, g);
-const T = (g, x, y, s, anchor = 'start', cls = 't-sm halo') => svg('text', { x, y, class: cls, 'text-anchor': anchor, text: s }, g);
+const T = (g, x, y, s, anchor = 'start', cls = 'g3x-t') => svg('text', { x, y, class: cls, 'text-anchor': anchor, text: s }, g);
 
-function lab(g, x, y, s, side = 1, lx = null, cls = 'g3-lab halo') {
+function lab(g, x, y, s, side = 1, lx = null, cls = 'g3x-lab') {
   // felirat vezetővonallal: (x,y) a pont, a szöveg oldalra
   const tx = lx ?? x + side * 16;
-  L(g, x, y, tx - side * 2, y, 's-muted', 1);
-  svg('circle', { cx: x, cy: y, r: 1.8, class: 'f-ink' }, g);
-  T(g, tx, y + 3.5, s, side > 0 ? 'start' : 'end', cls);
+  L(g, x, y, tx - side * 2, y, 's-ink', 1, { opacity: 0.7 });
+  svg('circle', { cx: x, cy: y, r: 1.9, class: 'f-ink' }, g);
+  T(g, tx, y + 3.6, s, side > 0 ? 'start' : 'end', cls);
 }
 
 function ground(g, S, prof) {
@@ -28,7 +28,7 @@ function ground(g, S, prof) {
   L(g, 0, S.GY, S.W, S.GY, 's-soil', 2);
 }
 function layerLabels(g, S, prof) {
-  for (const l of prof.layers) if (l.lab) T(g, 5, l.y + 13, l.lab, 'start', 't-sm halo');
+  for (const l of prof.layers) if (l.lab) T(g, 5, l.y + 13, l.lab, 'start', 'g3x-t');
 }
 function gwl(g, S, y) {
   L(g, 0, y, S.W, y, 's-water', 1.4, { 'stroke-dasharray': '6 4' });
@@ -70,11 +70,26 @@ function cage(g, cx, top, bot, w) {
   P(g, d, 's-rebar', { fill: 'none', 'stroke-width': 1.1 });
 }
 function stem(g, cx, top, bot, w = 6) { R(g, cx - w / 2, top, w, bot - top, 'f-steel2'); }
+/**
+ * Fúróspirál. soilCls: a menetek közét kitöltő talaj osztálya (null = tiszta spirál);
+ * from: innen lefelé van talaj a meneteken (alapértelmezés: a spirál teljes hosszán).
+ * A talaj a spirál teljes szélességében, minden menet között ott van – a furadék így támasztja a furat falát.
+ */
 function auger(g, cx, top, bot, w, soilCls = null, from = null) {
-  if (soilCls) R(g, cx - w / 2, Math.max(top, from ?? top), w, bot - Math.max(top, from ?? top), soilCls, { opacity: 0.92 });
+  const pitch = 11, rise = 6;
+  const y0 = Math.max(top, from ?? top);
+  if (soilCls && bot > y0) {
+    R(g, cx - w / 2, y0, w, bot - y0, soilCls);
+    PAT(g, cx - w / 2, y0, w, bot - y0, 'pat-soil', 0.9);
+    L(g, cx - w / 2, y0, cx - w / 2, bot, 's-soil', 0.8, { opacity: 0.8 }); L(g, cx + w / 2, y0, cx + w / 2, bot, 's-soil', 0.8, { opacity: 0.8 });
+  }
   stem(g, cx, top, bot, 6);
-  for (let y = top + 4; y < bot - 4; y += 12) P(g, `M${cx - w / 2} ${y} L${cx + w / 2} ${y + 7}`, 's-steel', { 'stroke-width': 2.4, 'stroke-linecap': 'round', fill: 'none' });
-  P(g, `M${cx - w / 2} ${bot - 4} L${cx} ${bot + 4} L${cx + w / 2} ${bot - 4}`, 's-steel', { fill: 'none', 'stroke-width': 2.4 });
+  for (let y = top + 4; y < bot - rise - 1; y += pitch) {
+    // a menet hátsó (halvány) és elülső (erős) fele: csavarvonalnak látszik
+    P(g, `M${cx + w / 2} ${y + rise} L${cx - w / 2} ${y + pitch}`, '', { fill: 'none', style: 'stroke:var(--steelm)', 'stroke-width': 1.2, opacity: soilCls && y + pitch > y0 ? 0.35 : 0.75 });
+    P(g, `M${cx - w / 2} ${y} L${cx + w / 2} ${y + rise}`, 's-steel', { 'stroke-width': 2.6, 'stroke-linecap': 'round', fill: 'none' });
+  }
+  P(g, `M${cx - w / 2} ${bot - 5} L${cx} ${bot + 4} L${cx + w / 2} ${bot - 5}`, 's-steel', { fill: 'none', 'stroke-width': 2.6, 'stroke-linejoin': 'round' });
 }
 function shortAuger(g, cx, top, bot, w) {
   stem(g, cx, top, bot - 26, 5);
@@ -90,23 +105,43 @@ function dispHead(g, cx, tip, w) {
   P(g, `M${cx - 5} ${tip - 52} L${cx - w / 2} ${tip - 30} L${cx - w / 2} ${tip - 16} L${cx} ${tip} L${cx + w / 2} ${tip - 16} L${cx + w / 2} ${tip - 30} L${cx + 5} ${tip - 52}z`, 'f-steel', { style: 'stroke:var(--steelm2);stroke-width:1.2' });
   P(g, `M${cx - w / 2 - 3} ${tip - 26} L${cx + w / 2 + 3} ${tip - 20} M${cx - w / 2 - 2} ${tip - 40} L${cx + w / 2 - 6} ${tip - 34}`, 's-steel', { 'stroke-width': 2.6, fill: 'none', 'stroke-linecap': 'round' });
 }
+/**
+ * Sematikus cölöpözőgép: lánctalpas alváz, felsőváz fülkével és ellensúllyal, a terepre támaszkodó árboc
+ * hátsó kitámasztással; az árbocon csúszó forgatófej (headY) vagy az árboc tetején kötélkorong (pulley).
+ */
 function rig(g, S, headY, o = {}) {
-  // sematikus cölöpözőgép: árboc, forgatófej, lánctalp, fülke
-  const mx = S.cx + 24, base = S.GY - 3;
-  R(g, mx, 4, 6, base - 14, 'f-steel2');
-  R(g, S.cx + 16, base - 13, Math.min(64, S.W - S.cx - 18), 11, 'f-steel2', { rx: 5 });
-  for (let i = 0; i < 4; i++) svg('circle', { cx: S.cx + 22 + i * Math.min(15, (S.W - S.cx - 32) / 3.4), cy: base - 7.5, r: 3, class: 'f-surface' }, g);
-  R(g, mx + 8, base - 34, Math.min(26, S.W - mx - 12), 20, 'f-steel', { rx: 3 });
-  R(g, mx + 12, base - 30, 9, 8, 'f-surface', { opacity: 0.8 });
-  if (o.head !== false) { R(g, S.cx - 11, headY, 22, 14, 'f-steel', { rx: 2, style: 'stroke:var(--steelm2);stroke-width:1.2' }); L(g, S.cx + 11, headY + 7, mx, headY + 7, 's-steel', 3); }
-  if (o.pulley) { svg('circle', { cx: S.cx, cy: 9, r: 4, class: 'f-steel2' }, g); L(g, S.cx, 9, mx, 9, 's-steel', 3); }
+  const base = S.GY, mx = S.cx + 22, top = o.top ?? 3;
+  const tw = Math.max(40, Math.min(72, S.W - mx - 16)), tx = mx + 11;
+  // árboc + talp
+  R(g, mx, top, 7, base - top, 'f-steel2');
+  for (let y = top + 8; y < base - 16; y += 12) L(g, mx + 1.2, y, mx + 5.8, y + 6, 's-steel', 0.8, { style: 'stroke:var(--steelm)' });
+  R(g, mx - 3, base - 3, 13, 3, 'f-steel2');
+  // hátsó kitámasztás (a felsőváz hátuljától az árboc felső harmadáig)
+  L(g, mx + 6, top + (base - top) * 0.3, tx + tw * 0.62, base - 27, 's-steel', 2.2, { 'stroke-linecap': 'round' });
+  // lánctalp
+  R(g, tx, base - 11, tw, 11, 'f-steel2', { rx: 5.5 });
+  const nw = Math.max(3, Math.round(tw / 14));
+  for (let i = 0; i < nw; i++) svg('circle', { cx: tx + 6 + i * (tw - 12) / (nw - 1), cy: base - 5.5, r: 2.7, class: 'f-surface', opacity: 0.85 }, g);
+  // felsőváz: gépház + ellensúly + fülke
+  R(g, tx + 3, base - 27, tw - 8, 15, 'f-steel', { rx: 2.5, style: 'stroke:var(--steelm2);stroke-width:1' });
+  R(g, tx + tw - 15, base - 30, 12, 18, 'f-steel2', { rx: 2 });
+  R(g, tx + 3, base - 39, 15, 27, 'f-steel', { rx: 2.5, style: 'stroke:var(--steelm2);stroke-width:1' });
+  R(g, tx + 5.5, base - 36.5, 10, 9, 'f-surface', { rx: 1.5, opacity: 0.85 });
+  L(g, mx + 7, base - 19, tx + 3, base - 19, 's-steel', 3);
+  if (o.head !== false) {
+    R(g, S.cx - 11, headY, 22, 14, 'f-steel', { rx: 2, style: 'stroke:var(--steelm2);stroke-width:1.2' });
+    R(g, S.cx + 11, headY + 3, mx - S.cx - 11, 8, 'f-steel2');
+  }
+  if (o.pulley) { R(g, S.cx - 3, top, mx - S.cx + 6, 4, 'f-steel2'); svg('circle', { cx: S.cx, cy: top + 5, r: 4.2, class: 'f-steel2' }, g); svg('circle', { cx: S.cx, cy: top + 5, r: 1.4, class: 'f-surface' }, g); }
 }
 function truck(g, x, y) {
   // mixer / betonpumpa
   R(g, x, y - 16, 30, 12, 'f-steel2', { rx: 2 });
   svg('ellipse', { cx: x + 14, cy: y - 22, rx: 13, ry: 8, class: 'f-conc', style: 'stroke:var(--concrete2);stroke-width:1' }, g);
-  R(g, x + 30, y - 18, 10, 14, 'f-steel', { rx: 2 });
-  for (const dx of [6, 22, 35]) svg('circle', { cx: x + dx, cy: y - 3, r: 3, class: 'f-ink' }, g);
+  P(g, `M${x + 6} ${y - 27} l14 9 M${x + 12} ${y - 29} l12 8`, '', { fill: 'none', style: 'stroke:var(--concrete2)', 'stroke-width': 1 });
+  R(g, x + 30, y - 19, 10, 15, 'f-steel', { rx: 2 });
+  R(g, x + 33, y - 17, 6, 5, 'f-surface', { rx: 1, opacity: 0.85 });
+  for (const dx of [6, 22, 35]) { svg('circle', { cx: x + dx, cy: y - 3, r: 3.2, class: 'f-ink' }, g); svg('circle', { cx: x + dx, cy: y - 3, r: 1.1, class: 'f-surface', opacity: 0.8 }, g); }
 }
 function hose(g, x1, y1, x2, y2) { P(g, `M${x1} ${y1} C${x1 + 10} ${y2 - 40} ${x2 - 30} ${y2 - 10} ${x2} ${y2}`, 's-ink', { fill: 'none', 'stroke-width': 2.6, 'stroke-linecap': 'round', opacity: 0.75 }); }
 function funnel(g, cx, top, bot) {
@@ -121,89 +156,94 @@ function rot(g, cx, y, r) {
   P(gg, `M${cx + r + 4} ${y - 5} L${cx + r} ${y + 3} L${cx + r - 6} ${y - 4}z`, '', { fill: 'currentColor' });
 }
 function push(g, cx, y, w) { arrow(g, cx - w / 2 - 2, y, cx - w / 2 - 16, y, { cls: 's-acc', w: 2, head: 6 }); arrow(g, cx + w / 2 + 2, y, cx + w / 2 + 16, y, { cls: 's-acc', w: 2, head: 6 }); }
-function heap(g, x, w) { return (S) => P(g, `M${x} ${S.GY} q${w / 2} -10 ${w} 0z`, 'f-soilC'); }
+/** kiemelt furadék kupaca a terepen */
+function heap(g, S, x, w, cls = 'f-soilC') { P(g, `M${x} ${S.GY} q${w / 2} ${-w * 0.55} ${w} 0z`, cls, { style: 'stroke:var(--soil-line);stroke-width:.8' }); }
+/** Franki-kos (ejtősúly) a csőben, kötéllel a kötélkorongról */
+function ram(g, S, y) { L(g, S.cx, 8, S.cx, y, 's-ink', 1.1, { opacity: 0.75 }); R(g, S.cx - 7.5, y, 15, 22, 'f-steel2', { rx: 2, style: 'stroke:var(--ink);stroke-width:.6' }); }
 
 /* ------------------------------------------------------------------ talajszelvények */
 const PROF = {
-  franki: (S) => ({ layers: [{ y: S.GY, to: 206, cls: 'f-soilB', pat: 'pat-clay', lab: 'puha, kötött réteg' }, { y: 206, cls: 'f-soilD', pat: 'pat-gravel', lab: 'teherbíró réteg' }] }),
-  csavart: (S) => ({ layers: [{ y: S.GY, to: 200, cls: 'f-soilA', pat: 'pat-sand', lab: 'laza homok' }, { y: 200, cls: 'f-soilD', pat: 'pat-sand', lab: 'közepesen tömör homok' }] }),
-  cfa: (S) => ({ layers: [{ y: S.GY, to: 182, cls: 'f-soilC', pat: 'pat-clay', lab: 'iszapos agyag' }, { y: 182, cls: 'f-soilA', pat: 'pat-sand', lab: 'homok' }], gw: 132 }),
+  franki: (S) => ({ layers: [{ y: S.GY, to: 226, cls: 'f-soilB', pat: 'pat-clay', lab: 'puha, kötött réteg' }, { y: 226, cls: 'f-soilD', pat: 'pat-gravel', lab: 'teherbíró réteg' }] }),
+  csavart: (S) => ({ layers: [{ y: S.GY, to: 228, cls: 'f-soilA', pat: 'pat-sand', lab: 'laza homok' }, { y: 228, cls: 'f-soilD', pat: 'pat-sand', lab: 'közepesen tömör homok' }] }),
+  cfa: (S) => ({ layers: [{ y: S.GY, to: 214, cls: 'f-soilC', pat: 'pat-clay', lab: 'iszapos agyag' }, { y: 214, cls: 'f-soilA', pat: 'pat-sand', lab: 'homok' }], gw: 190 }),
   kopeny: (S) => ({ layers: [{ y: S.GY, to: 206, cls: 'f-soilC', pat: 'pat-clay', lab: 'iszapos, puha réteg' }, { y: 206, cls: 'f-soilD', pat: 'pat-gravel', lab: 'homokos kavics' }], gw: 122 }),
-  zagy: (S) => ({ layers: [{ y: S.GY, to: 120, cls: 'f-soilC', lab: 'feltöltés' }, { y: 120, to: 252, cls: 'f-soilA', pat: 'pat-sand', lab: 'homok' }, { y: 252, cls: 'f-soilE', pat: 'pat-clay', lab: 'kemény agyag' }], gw: 112 }),
+  p_zagy: (S) => ({ layers: [{ y: S.GY, to: 120, cls: 'f-soilC', lab: 'feltöltés' }, { y: 120, to: 252, cls: 'f-soilA', pat: 'pat-sand', lab: 'homok' }, { y: 252, cls: 'f-soilE', pat: 'pat-clay', lab: 'kemény agyag' }], gw: 112 }),
   nelkul: (S) => ({ layers: [{ y: S.GY, cls: 'f-soilB', pat: 'pat-clay', lab: 'kötött talaj (agyag)' }] }),
 };
 
 /* ------------------------------------------------------------------ a fázisok */
 // minden fázis: [cím, rövid leírás, rajzoló(g, S)]
+// A Franki-, a csavart és a CFA-cölöpnél a terep lejjebb van (GY: 150), hogy a gép árboca legalább olyan magas legyen,
+// mint a cső, illetve a fúrószerszám: a szerszám hossza fázisról fázisra ugyanakkora, csak lejjebb kerül.
 const PH = {
-  franki: { W: 160, prof: 'franki', items: [
+  franki: { W: 160, GY: 150, prof: 'franki', items: [
     ['Dugó', 'száraz beton a cső aljában, döngölve', (g, S) => {
-      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 26, S.GY + 8, 22); conc(g, S.cx - 11, S.GY - 18, 22, 26);
-      R(g, S.cx - 8, 34, 16, 20, 'f-steel2'); L(g, S.cx, 9, S.cx, 34, 's-muted', 1.2); down(g, S.cx + 19, 28, 56); lab(g, S.cx - 11, S.GY - 6, 'dugó', -1, S.cx - 28); lab(g, S.cx - 8, 44, 'kos', -1, S.cx - 28);
+      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 14, 160, 22); hole(g, S.cx, 14, 136, 22, 'f-surface'); conc(g, S.cx - 11, 136, 22, 24);
+      ram(g, S, 70); down(g, S.cx - 22, 66, 100); lab(g, S.cx - 12, 141, 'dugó', -1, S.cx - 26); lab(g, S.cx - 8, 86, 'kos', -1, S.cx - 34);
     }],
     ['Leverés', 'a dugó magával húzza le a csövet', (g, S) => {
-      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 26, 196, 22); conc(g, S.cx - 11, 172, 22, 24); R(g, S.cx - 8, 150, 16, 20, 'f-steel2'); L(g, S.cx, 9, S.cx, 150, 's-muted', 1.2);
-      push(g, S.cx, 192, 29); down(g, S.cx + 28, 104, 150);
+      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 60, 206, 22); hole(g, S.cx, 60, 182, 22, 'f-surface'); conc(g, S.cx - 11, 182, 22, 24); ram(g, S, 160);
+      push(g, S.cx, 200, 29); down(g, S.cx - 26, 92, 138);
     }],
     ['Kiverés', 'a rögzített csőből kiverik a dugót', (g, S) => {
-      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 26, 238, 22); bulb(g, S.cx, 246, 15, 10); R(g, S.cx - 8, 214, 16, 20, 'f-steel2'); L(g, S.cx, 9, S.cx, 214, 's-muted', 1.2);
-      L(g, S.cx - 18, 30, S.cx + 18, 30, 's-ink', 3); T(g, S.cx - 22, 24, 'rögzítve', 'end', 't-sm halo');
+      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 92, 238, 22); hole(g, S.cx, 92, 238, 22, 'f-surface'); bulb(g, S.cx, 247, 15, 10); ram(g, S, 218);
+      L(g, S.cx - 19, 96, S.cx + 19, 96, 's-ink', 3); T(g, S.cx - 23, 99.5, 'rögzítve', 'end');
     }],
     ['Hagyma', 'újabb adagok: kiszélesedő talp', (g, S) => {
-      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 26, 238, 22); bulb(g, S.cx, 262, 30, 22); conc(g, S.cx - 11, 226, 22, 12); R(g, S.cx - 8, 120, 16, 20, 'f-steel2'); L(g, S.cx, 9, S.cx, 120, 's-muted', 1.2);
-      P(g, `M${S.cx - 44} 18 q14 -10 26 6`, 's-acc', { fill: 'none', 'stroke-width': 2.2 }); arrow(g, S.cx - 20, 20, S.cx - 16, 30, { cls: 's-acc', w: 2.2, head: 7 }); T(g, S.cx - 46, 40, 'beton', 'start', 't-sm halo');
+      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 92, 238, 22); hole(g, S.cx, 92, 226, 22, 'f-surface'); bulb(g, S.cx, 262, 30, 22); conc(g, S.cx - 11, 226, 22, 12); ram(g, S, 168);
+      P(g, `M${S.cx - 46} 70 q16 -12 30 6`, 's-acc', { fill: 'none', 'stroke-width': 2.2 }); arrow(g, S.cx - 17, 74, S.cx - 9, 90, { cls: 's-acc', w: 2.2, head: 7 }); T(g, S.cx - 50, 62, 'beton', 'start');
       lab(g, S.cx + 26, 262, 'hagyma', 1, S.cx + 33);
     }],
     ['Vasalás', 'a kosár a csőbe, a hagymáig', (g, S) => {
-      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 26, 238, 22); bulb(g, S.cx, 262, 30, 22); cage(g, S.cx, 22, 258, 20); L(g, S.cx, 9, S.cx, 22, 's-muted', 1.2);
-      lab(g, S.cx + 9, 120, 'kosár', 1, S.cx + 30);
+      rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 92, 238, 22); hole(g, S.cx, 92, 238, 22, 'f-surface'); bulb(g, S.cx, 262, 30, 22); cage(g, S.cx, 70, 258, 20); L(g, S.cx, 8, S.cx, 70, 's-ink', 1.1, { opacity: 0.75 });
+      lab(g, S.cx - 7, 78, 'kosár', -1, S.cx - 28);
     }],
     ['Törzs', 'döngölés, közben a cső visszahúzása', (g, S) => {
-      rig(g, S, 0, { head: false, pulley: true }); bulb(g, S.cx, 262, 30, 22); wavyShaft(g, S.cx, 150, 248, 30); casing(g, S.cx, 6, 154, 22); cage(g, S.cx, 22, 258, 20); R(g, S.cx - 8, 120, 16, 20, 'f-steel2');
-      up(g, S.cx - 28, 140, 100); up(g, S.cx + 28, 140, 100);
+      rig(g, S, 0, { head: false, pulley: true }); bulb(g, S.cx, 262, 30, 22); wavyShaft(g, S.cx, 186, 248, 30); casing(g, S.cx, 44, 190, 22); hole(g, S.cx, 44, 186, 22, 'f-surface'); ram(g, S, 163); cage(g, S.cx, 58, 258, 20);
+      up(g, S.cx - 24, 132, 92);
     }],
     ['Kész', 'Ø ≈ 60 cm, legfeljebb 16–18 m', (g, S) => {
       bulb(g, S.cx, 262, 30, 22); wavyShaft(g, S.cx, S.GY - 2, 248, 30); cage(g, S.cx, S.GY - 16, 258, 20);
-      lab(g, S.cx + 16, 150, 'törzs', 1, S.cx + 32); lab(g, S.cx + 26, 266, 'talp', 1, S.cx + 40);
+      lab(g, S.cx + 16, 196, 'törzs', 1, S.cx + 32); lab(g, S.cx + 26, 266, 'talp', 1, S.cx + 40);
     }],
   ] },
-  csavart: { W: 200, prof: 'csavart', items: [
+  csavart: { W: 200, GY: 150, prof: 'csavart', items: [
     ['Pontraállás', 'A gép a cölöp helye fölé áll; az üreges fúrószár végén a kiszorító fúrófej.', (g, S) => {
-      rig(g, S, 24); stem(g, S.cx, 38, S.GY - 50, 10); dispHead(g, S.cx, S.GY, 26); lab(g, S.cx - 13, S.GY - 26, 'fúrófej', -1, S.cx - 30);
+      rig(g, S, 2); stem(g, S.cx, 16, S.GY - 50, 10); dispHead(g, S.cx, S.GY, 26); lab(g, S.cx - 13, S.GY - 26, 'fúrófej', -1, S.cx - 30);
     }],
     ['Fúrás', 'Forgatással és tolással hajtják le: a fej oldalra tolja és tömöríti a talajt, nem hozza fel.', (g, S) => {
-      rig(g, S, 24); stem(g, S.cx, 38, 140, 10); dispHead(g, S.cx, 192, 26); rot(g, S.cx, 64, 16); down(g, S.cx - 30, 100, 140);
-      push(g, S.cx, 168, 26); push(g, S.cx, 150, 16);
+      rig(g, S, 67); stem(g, S.cx, 81, 165, 10); dispHead(g, S.cx, 215, 26); rot(g, S.cx, 104, 16); down(g, S.cx - 30, 92, 134);
+      push(g, S.cx, 191, 26); push(g, S.cx, 173, 16);
     }],
     ['Megállás', 'Az előírt mélységben a fúrás leáll; a gép a fúrás adatait folyamatosan rögzíti.', (g, S) => {
-      rig(g, S, 24); stem(g, S.cx, 38, 236, 10); dispHead(g, S.cx, 288, 26);
-      L(g, S.cx + 20, 288, S.W - 4, 288, 's-ink', 1.2, { 'stroke-dasharray': '4 3' }); T(g, S.W - 6, 302, 'előírt mélység', 'end', 't-sm halo');
+      rig(g, S, 136); stem(g, S.cx, 150, 234, 10); dispHead(g, S.cx, 284, 26);
+      L(g, S.cx + 20, 284, S.W - 4, 284, 's-ink', 1.2, { 'stroke-dasharray': '4 3' }); T(g, S.W - 6, 299, 'előírt mélység', 'end');
     }],
     ['Betonozás', 'Nyomás alatt betonoznak a fúrószáron át, a szár kiemelése és forgatása közben.', (g, S) => {
-      rig(g, S, 24); conc(g, S.cx - 13, 200, 26, 88, true); stem(g, S.cx, 38, 152, 10); dispHead(g, S.cx, 204, 26); rot(g, S.cx, 64, 16); up(g, S.cx - 30, 150, 110);
-      truck(g, 6, S.GY - 3); hose(g, 34, S.GY - 26, S.cx - 11, 34); lab(g, S.cx + 13, 250, 'friss beton', 1, S.cx + 28);
+      rig(g, S, 78); conc(g, S.cx - 13, 222, 26, 62, true); stem(g, S.cx, 92, 176, 10); dispHead(g, S.cx, 226, 26); rot(g, S.cx, 114, 16); up(g, S.cx - 30, 140, 98);
+      truck(g, 6, S.GY - 1); hose(g, 34, S.GY - 26, S.cx - 11, 84); lab(g, S.cx + 13, 256, 'friss beton', 1, S.cx + 28);
     }],
     ['Vasalás', 'A vasalókosarat a friss betonba juttatják, szükség esetén vibrációval.', (g, S) => {
-      conc(g, S.cx - 13, S.GY, 26, 204, true); cage(g, S.cx, S.GY - 24, 250, 22); R(g, S.cx - 12, S.GY - 40, 24, 16, 'f-steel', { rx: 2 });
-      P(g, `M${S.cx - 8} ${S.GY - 44} l4 -5 l4 5 l4 -5 l4 5`, 's-acc', { fill: 'none', 'stroke-width': 1.8 }); down(g, S.cx + 26, S.GY - 30, S.GY + 14);
-      lab(g, S.cx - 9, 160, 'kosár', -1, S.cx - 28);
+      conc(g, S.cx - 13, S.GY, 26, 134, true); cage(g, S.cx, S.GY - 34, 258, 22); R(g, S.cx - 12, S.GY - 50, 24, 16, 'f-steel', { rx: 2, style: 'stroke:var(--steelm2);stroke-width:1' });
+      P(g, `M${S.cx - 8} ${S.GY - 54} l4 -5 l4 5 l4 -5 l4 5`, 's-acc', { fill: 'none', 'stroke-width': 1.8 }); down(g, S.cx + 26, S.GY - 40, S.GY + 6);
+      lab(g, S.cx - 9, 212, 'kosár', -1, S.cx - 28); lab(g, S.cx + 12, S.GY - 42, 'vibrátor', 1, S.cx + 36);
     }],
   ] },
-  cfa: { W: 230, prof: 'cfa', items: [
+  cfa: { W: 230, GY: 150, prof: 'cfa', items: [
     ['Kitűzés, pontraállás', 'Kitűzik a cölöp helyét, és a gép pontraáll. Az üreges fúrószár alját elvesző sapka vagy „csapóajtó” zárja.', (g, S) => {
-      rig(g, S, 22); auger(g, S.cx, 36, S.GY - 2, 30); lab(g, S.cx + 2, S.GY + 1, 'csapóajtó', 1, S.cx + 30);
+      rig(g, S, 4); auger(g, S.cx, 18, S.GY - 3, 30); lab(g, S.cx + 3, S.GY + 5, 'csapóajtó', 1, S.cx + 26);
     }],
     ['Furatkészítés', 'A spirált földkitermelés nélkül hajtják le: a furadék csak részben nyomódik ki, a spirálon maradó talajdugó folyamatosan támasztja a furat falát.', (g, S) => {
-      rig(g, S, 22); auger(g, S.cx, 36, 292, 30, 'f-soilC', S.GY); heap(g, S.cx - 44, 22)(S); heap(g, S.cx + 20, 18)(S); rot(g, S.cx, 58, 20);
-      lab(g, S.cx - 15, 160, 'talajdugó', -1, S.cx - 34);
+      heap(g, S, S.cx - 46, 26); rig(g, S, 132); auger(g, S.cx, 146, 282, 30, 'f-soilC', S.GY); rot(g, S.cx, 122, 20);
+      lab(g, S.cx - 15, 236, 'talajdugó', -1, S.cx - 34);
     }],
     ['Betonozás', 'A fúrószáron át túlnyomással betont pumpálnak, amely feltolja a spirált – ezt húzással segítik. Vibrálni nem kell: a folyós beton nyomás alatt öntömörödik.', (g, S) => {
-      rig(g, S, 22); conc(g, S.cx - 15, 204, 30, 88, true); auger(g, S.cx, 36, 204, 30, 'f-soilC', S.GY); up(g, S.cx - 34, 200, 160);
-      truck(g, 6, S.GY - 3); hose(g, 34, S.GY - 26, S.cx - 11, 32); lab(g, S.cx + 15, 250, 'beton', 1, S.cx + 30);
+      heap(g, S, S.cx - 50, 32); rig(g, S, 66); conc(g, S.cx - 15, 214, 30, 68, true); auger(g, S.cx, 80, 214, 30, 'f-soilC'); up(g, S.cx - 34, 208, 168);
+      truck(g, 4, S.GY - 1); hose(g, 32, S.GY - 26, S.cx - 11, 72); lab(g, S.cx + 15, 252, 'beton', 1, S.cx + 30);
     }],
     ['Vasalás', 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalókosarat a friss betonba süllyesztik.', (g, S) => {
-      conc(g, S.cx - 15, S.GY, 30, 208, true); cage(g, S.cx, S.GY - 36, 240, 26); down(g, S.cx + 32, S.GY - 30, S.GY + 20);
-      lab(g, S.cx - 13, 170, 'kosár', -1, S.cx - 32);
+      conc(g, S.cx - 15, S.GY, 30, 132, true); cage(g, S.cx, S.GY - 56, 250, 26); down(g, S.cx + 32, S.GY - 44, S.GY + 8);
+      lab(g, S.cx - 13, 206, 'kosár', -1, S.cx - 32);
     }],
   ] },
   kopeny: { W: 200, prof: 'kopeny', items: [
@@ -227,13 +267,13 @@ const PH = {
       conc(g, S.cx - 15, S.GY, 30, 190); cage(g, S.cx, S.GY - 14, 266, 26); lab(g, S.cx + 15, 160, 'vb. cölöp', 1, S.cx + 30);
     }],
   ] },
-  zagy: { W: 184, prof: 'zagy', items: [
+  zagy: { W: 184, prof: 'p_zagy', items: [
     ['Előkészítés', 'pontraállás, előfúrás, vezetőcső', (g, S) => {
       rig(g, S, 22); casing(g, S.cx, S.GY - 10, S.GY + 32, 34); shortAuger(g, S.cx, 36, S.GY + 26, 28); lab(g, S.cx + 20, S.GY + 24, 'vezetőcső', 1, S.cx + 30);
     }],
     ['Zagy betöltése', 'bentonitos fúrófolyadék a furatba', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY - 4, S.GY + 40, 30); P(g, `M8 ${S.GY - 30} H${S.cx - 8} v22`, 's-ink', { fill: 'none', 'stroke-width': 4, opacity: 0.7 });
-      down(g, S.cx - 8, S.GY - 6, S.GY + 8, 's-ink'); T(g, 8, S.GY - 36, 'zagy', 'start', 't-lab halo');
+      down(g, S.cx - 8, S.GY - 6, S.GY + 8, 's-ink'); T(g, 8, S.GY - 36, 'zagy', 'start');
     }],
     ['Talajkiemelés', 'spirállal vagy dobfúróval, zagy alatt', (g, S) => {
       rig(g, S, 22); casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY + 2, 298, 30); stem(g, S.cx, 36, 272, 5); bucket(g, S.cx, 298, 26); rot(g, S.cx, 58, 16);
@@ -241,11 +281,11 @@ const PH = {
     }],
     ['Kontraktorcső', 'talptisztítás, kosár, a betonozás indul', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY + 2, 280, 30); conc(g, S.cx - 15, 280, 30, 18, true); cage(g, S.cx, S.GY - 18, 296, 26); funnel(g, S.cx, 30, 290);
-      lab(g, S.cx + 4, 220, 'kontraktorcső', 1, S.cx + 16, 't-sm halo');
+      lab(g, S.cx + 4, 220, 'kontraktorcső', 1, S.cx + 16);
     }],
     ['Betonozás', 'alulról a terepszintig, a zagy kiszorul', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); conc(g, S.cx - 15, S.GY + 10, 30, 288 - S.GY, true); slurry(g, S.cx, S.GY + 2, S.GY + 10, 30); cage(g, S.cx, S.GY - 18, 296, 26); funnel(g, S.cx, 30, 200);
-      P(g, `M${S.cx + 18} ${S.GY - 2} q20 -6 30 -22`, 's-ink', { fill: 'none', 'stroke-width': 2.2, opacity: 0.7 }); T(g, S.cx + 20, S.GY - 30, 'zagy ki', 'start', 't-sm halo');
+      P(g, `M${S.cx + 18} ${S.GY - 2} q20 -6 30 -22`, 's-ink', { fill: 'none', 'stroke-width': 2.2, opacity: 0.7 }); T(g, S.cx + 20, S.GY - 30, 'zagy ki', 'start');
     }],
     ['Vezetőcső ki', 'a vezetőcső eltávolítása, kész a cölöp', (g, S) => {
       conc(g, S.cx - 15, S.GY, 30, 298 - S.GY); cage(g, S.cx, S.GY - 14, 296, 26); casing(g, S.cx, S.GY - 46, S.GY - 6, 34); up(g, S.cx - 30, S.GY - 6, S.GY - 40); up(g, S.cx + 30, S.GY - 6, S.GY - 40);
@@ -270,7 +310,7 @@ const MINI = {
 };
 
 function draw(def, i, n) {
-  const W = def.W, H = 330, S = { W, H, GY: 84, cx: W / 2 };
+  const W = def.W, H = 330, S = { W, H, GY: def.GY ?? 84, cx: W / 2 };
   const s = svg('svg', { viewBox: `0 0 ${W} ${H}`, class: 'g3-svg', role: 'img', 'aria-label': `${i + 1}. ${def.items[i][0]}` });
   const g = svg('g', {}, s);
   const prof = PROF[def.prof](S);

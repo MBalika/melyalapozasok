@@ -26,7 +26,6 @@ c5bb91c	Depth of the slurry level
 85dccf7	1.03–1.12 g/cm³ during trenching.
 d596601	Depth of the trench
 ba8cd2b	Surface load next to the trench
-915fb18	<span><i style="background:var(--slurry)"></i>slurry pressure σ<sub>p</sub></span><span><i style="background:var(--water-fill);border-color:var(--water)"></i>water pressure σ<sub>v</sub></span><span><i style="background:var(--bad);height:3px"></i>water + soil (with silo effect)</span><span><i style="background:repeating-linear-gradient(90deg,var(--muted) 0 5px,transparent 5px 8px);height:3px;border:0"></i>water + soil (Rankine)</span>
 50084d8	η<sub>min</sub> with the silo effect
 a1832f6	Earth pressure at the bottom: silo / Rankine
 53ad7cc	SECTION OF THE TRENCH

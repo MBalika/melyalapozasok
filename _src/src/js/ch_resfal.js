@@ -11,7 +11,7 @@ const C = (p, cx, cy, r, cls, o = {}) => svg('circle', { cx, cy, r: Math.max(0, 
 const L = (p, x1, y1, x2, y2, style, o = {}) => svg('line', { x1, y1, x2, y2, style, ...o }, p);
 const P = (p, d, cls, o = {}) => svg('path', { d, class: cls, ...o }, p);
 const G = (p, o = {}) => svg('g', o, p);
-const sub = (a, b) => `${a}<tspan baseline-shift="sub" font-size="72%">${b}</tspan>`;
+const sub = (a, b) => `${a}<tspan dy="0.3em" font-size="72%">${b}</tspan><tspan dy="-0.3em" font-size="72%">\u200b</tspan>`;
 function ar(p, x1, y1, x2, y2, col = 'var(--ink)', w = 2, hd = 7) {
   const g = G(p);
   const a = Math.atan2(y2 - y1, x2 - x1);
@@ -328,14 +328,14 @@ register('rf-epito', (root) => {
 
 /* ================================================================== 3. Markoló vagy hydrofraiser? */
 const GSOIL = {
-  homok: { t: 'Homok, kavics', m: 0, f: 0, cls: 'f-soilA', pat: 'pat-sand' },
-  agyag: { t: 'Puha–közepes agyag', m: 0, f: 0, cls: 'f-soilB', pat: 'pat-clay' },
+  k_homok: { t: 'Homok, kavics', m: 0, f: 0, cls: 'f-soilA', pat: 'pat-sand' },
+  k_agyag: { t: 'Puha–közepes agyag', m: 0, f: 0, cls: 'f-soilB', pat: 'pat-clay' },
   kemeny: { t: 'Kemény agyag, márga', m: -70, f: 15, cls: 'f-soilE', pat: 'pat-clay' },
   kozet: { t: 'Kőzet', m: -100, f: 25, cls: 'f-rock', pat: 'pat-rock' },
 };
 register('rf-gep', (root) => {
   const { ctrls, viz, out } = shell(root);
-  const sS = seg(ctrls, { label: 'Talaj a fal mélységében', options: Object.entries(GSOIL).map(([v, o]) => ({ v, t: o.t })), value: 'homok', vert: true });
+  const sS = seg(ctrls, { label: 'Talaj a fal mélységében', options: Object.entries(GSOIL).map(([v, o]) => ({ v, t: o.t })), value: 'k_homok', vert: true });
   const sD = slider(ctrls, { label: 'A fal mélysége', min: 10, max: 60, step: 1, value: 25, unit: 'm' });
   const tP = toggle(ctrls, { label: 'Nagy pontosság kell (függőlegesség, sima felület)', value: false });
   const tC = toggle(ctrls, { label: 'Szűk a költségkeret', value: false });
@@ -493,7 +493,7 @@ register('rf-silo', (root) => {
     const last = pr.pts[pr.pts.length - 1];
     T(fig, xs(last.sR) - 4, ys(26), 'Rankine', 't-sm halo', { 'text-anchor': 'end' });
     TH(fig, xs(last.sx) + 6, ys(29), sub('σ', 'x') + ' (siló)', 't-lab halo t-grp', { style: 'font-weight:700' });
-    T(fig, xs(ghost[0][ghost[0].length - 1].sx) + 4, ys(14), '2,8 m', 't-sm halo');
+    T(fig, xs(ghost[0][ghost[0].length - 1].sx) - 5, ys(23), '2,8 m', 't-sm halo', { 'text-anchor': 'end' });
     T(fig, xs(ghost[1][ghost[1].length - 1].sx) + 4, ys(19), '10 m', 't-sm halo');
     const lim = Lr * 10 * pr.Ka / Math.sin(2 * 32 * Math.PI / 180);
     L(fig, xs(lim), gy0, xs(lim), gy1, 'stroke:var(--grp);stroke-width:1;stroke-dasharray:2 3;opacity:.7');
@@ -504,14 +504,14 @@ register('rf-silo', (root) => {
 
 /* ================================================================== 5. Résállékonyság-labor */
 const LSOIL = {
-  kavics: { t: 'Kavicsos homok', phi: 36, c: 0, gam: 19, ds: 2.0 },
-  homok: { t: 'Közepes homok', phi: 32, c: 0, gam: 18, ds: 2.0 },
-  iszap: { t: 'Iszapos, folyós homok', phi: 27, c: 0, gam: 18, ds: 1.5 },
-  agyag: { t: 'Puha agyag', phi: 20, c: 4, gam: 17.5, ds: 0.5 },
+  k_kavics: { t: 'Kavicsos homok', phi: 36, c: 0, gam: 19, ds: 2.0 },
+  k_homok: { t: 'Közepes homok', phi: 32, c: 0, gam: 18, ds: 2.0 },
+  k_iszap: { t: 'Iszapos, folyós homok', phi: 27, c: 0, gam: 18, ds: 1.5 },
+  k_agyag: { t: 'Puha agyag', phi: 20, c: 4, gam: 17.5, ds: 0.5 },
 };
 register('rf-lab', (root) => {
   const { ctrls, viz, out } = shell(root);
-  const sS = seg(ctrls, { label: 'Talaj', options: Object.entries(LSOIL).map(([v, o]) => ({ v, t: o.t })), value: 'homok' });
+  const sS = seg(ctrls, { label: 'Talaj', options: Object.entries(LSOIL).map(([v, o]) => ({ v, t: o.t })), value: 'k_homok' });
   const sPhi = slider(ctrls, { label: 'Belső súrlódási szög', sym: 'φ', min: 15, max: 42, step: 1, value: 32, unit: '°' });
   const sC = slider(ctrls, { label: 'Kohézió', sym: 'c', min: 0, max: 20, step: 1, value: 0, unit: 'kPa' });
   const sG = slider(ctrls, { label: 'Térfogatsúly (TV felett)', sym: 'γ', min: 15, max: 21, step: 0.5, value: 18, unit: 'kN/m³', d: 1 });
@@ -525,7 +525,7 @@ register('rf-lab', (root) => {
   const W = 640, H = 470;
   const fig = figure(viz, W, H, 'fig rf-labfig');
   const leg = h('div', { class: 'legend' }); viz.append(leg);
-  leg.innerHTML = '<span><i style="background:var(--slurry)"></i>zagynyomás σ<sub>p</sub></span><span><i style="background:var(--water-fill);border-color:var(--water)"></i>víznyomás σ<sub>v</sub></span><span><i style="background:var(--bad);height:3px"></i>víz + föld (silóhatással)</span><span><i style="background:repeating-linear-gradient(90deg,var(--muted) 0 5px,transparent 5px 8px);height:3px;border:0"></i>víz + föld (Rankine)</span>';
+  leg.innerHTML = '<span><i style="background:var(--slurry)"></i><span class="rf-lg">zagynyomás σ<sub>p</sub></span></span><span><i style="background:var(--water-fill);border-color:var(--water)"></i><span class="rf-lg">víznyomás σ<sub>v</sub></span></span><span><i style="background:var(--bad);height:3px"></i>víz + föld (silóhatással)</span><span><i style="background:repeating-linear-gradient(90deg,var(--muted) 0 5px,transparent 5px 8px);height:3px;border:0"></i>víz + föld (Rankine)</span>';
   const oDh = stat(out, { label: 'Zagyszint a TV felett', unit: 'm', d: 1 }), oE = stat(out, { label: 'η<sub>min</sub> silóhatással' }), oER = stat(out, { label: 'η<sub>min</sub> Rankine-nel' }), oSx = stat(out, { label: 'Földnyomás a talpon: siló / Rankine', unit: 'kPa' });
   const vd = verdict(out); vd.el.classList.add('rf-span');
   const ZG = 1.2; // a résvezető gerenda mélysége: eddig a gerenda támaszt
@@ -600,7 +600,6 @@ register('rf-lab', (root) => {
     P(fig, pathD(sel.map((p) => [xs(p.sw + p.sx), ys(p.z)])), '', { style: 'fill:none;stroke:var(--bad);stroke-width:2.6' });
     L(fig, gx0, ys(ZG), gx1, ys(ZG), 'stroke:var(--concrete2);stroke-width:1;stroke-dasharray:2 3');
     T(fig, gx1 - 4, ys(ZG) - 4, 'résvezető gerenda alja', 't-sm halo', { 'text-anchor': 'end' });
-    TH(fig, xs(last.sp) - 6, ys(D) - 8, sub('σ', 'p'), 't-lab halo', { 'text-anchor': 'end', style: 'fill:var(--bento);font-weight:800' });
     L(fig, gx0, gy0, gx0, gy1, 'stroke:var(--ink);stroke-width:1');
     fig.append(hover);
     // ---- kiírások

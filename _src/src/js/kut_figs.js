@@ -16,7 +16,9 @@ function T(p, x, y, s, cls = 'kf-t', a = {}) {
   const re = /_\{([^}]*)\}|_(\S)/g; let i = 0, m;
   while ((m = re.exec(s))) {
     if (m.index > i) t.appendChild(document.createTextNode(s.slice(i, m.index)));
-    NS(t, 'tspan', { 'baseline-shift': 'sub', 'font-size': '72%', text: m[1] ?? m[2] });
+    // alsó index dy-nal (a baseline-shift nem minden böngészőben működik); a nulla szélességű tspan visszaemeli az alapvonalat
+    NS(t, 'tspan', { dy: '0.3em', 'font-size': '72%', text: m[1] ?? m[2] });
+    NS(t, 'tspan', { dy: '-0.3em', 'font-size': '72%', text: '\u200b' });
     i = m.index + m[0].length;
   }
   if (i < s.length) t.appendChild(document.createTextNode(s.slice(i)));

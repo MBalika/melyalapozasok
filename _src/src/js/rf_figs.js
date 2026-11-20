@@ -10,7 +10,7 @@ const C = (p, cx, cy, r, cls, o = {}) => svg('circle', { cx, cy, r: Math.max(0, 
 const L = (p, x1, y1, x2, y2, style, o = {}) => svg('line', { x1, y1, x2, y2, style, ...o }, p);
 const P = (p, d, cls, o = {}) => svg('path', { d, class: cls, ...o }, p);
 const G = (p, o = {}) => svg('g', o, p);
-const sub = (a, b) => `${a}<tspan baseline-shift="sub" font-size="70%">${b}</tspan>`;
+const sub = (a, b) => `${a}<tspan dy="0.3em" font-size="72%">${b}</tspan><tspan dy="-0.3em" font-size="72%">\u200b</tspan>`;
 function mk(parent, w, hh, label, cls = '') {
   const s = svg('svg', { viewBox: `0 0 ${w} ${hh}`, class: 'rf-svg ' + cls, role: 'img', 'aria-label': label });
   parent.appendChild(s);
@@ -348,7 +348,7 @@ function renderZagykor(el) {
 function renderPress(el) {
   const W = 640, H = 580;
   const s = mk(el, W, H, 'A zagynyomás és a víz- és földnyomás a rés falán a mélység mentén', 'rf-press');
-  // számpélda (szemléltető): homok φ = 32°, γ = 18 / γ′ = 10 kN/m³, h = 2,0 m, t = 0,5 m, ρ = 1,10 g/cm³, L = 5,6 m, D = 20 m
+  // számpélda (szemléltető): homok φ = 32°, γ = 18 / γ′ = 10 kN/m³, h = 2,0 m, t = 0,5 m, ρ = 1,08 g/cm³, L = 5,6 m, D = 20 m
   const D = 20, t = 0.5, hw = 2, gb = 10.8, gw = 10, phi = 32 * Math.PI / 180, Lr = 5.6;
   const Ka = Math.tan(Math.PI / 4 - phi / 2) ** 2, s2 = Math.sin(2 * phi);
   const y0 = 64, ky = (500 - y0) / D, X0 = 330, kx = 0.9;
