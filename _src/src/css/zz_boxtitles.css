@@ -1,0 +1,68 @@
+/* ===== Dobozcímek középre (formázás skill, 5. pont) – az app h2–h6 nélküli dobozcímeire is =====
+   A h2–h6 címeket a boxtitle.inc.html (bxt-js) kezeli; itt a <b>/<dt>/<span> címek és díszítőik kerülnek középre.
+   A doboz szövege sorkizárt marad, a felsorolások balra zártak. Kivétel (szándékosan): ikon/kép a cím mellett
+   vízszintes kártyában (alap-ok, a 5.3 módszerkártyák), a YouTube-kártya polaroidjai és alsó sávja. */
+
+/* widget fejléce: a cím (és alatta az alcím) a doboz közepén; az „INTERAKTÍV” címke a bal szélen marad */
+.w-head { position: relative; flex-wrap: wrap; justify-content: center; }
+.w-head > .w-tag { position: absolute; left: 18px; top: 14px; }
+.w-head > .w-title { flex: 1 1 100%; min-width: 0; text-align: center; padding: 0 128px; }
+.w-head > .w-sub { flex: 1 1 100%; text-align: center; }
+.w-head > .w-sub:empty { display: none; }
+@media (max-width: 720px) {
+  .w-head > .w-tag { position: static; margin: 0 auto; }
+  .w-head > .w-title { padding: 0; }
+}
+
+/* kvíz fejléce: a cím középen, a pontszám a jobb szélen */
+.quiz-head { position: relative; justify-content: center; }
+.quiz-head > b { flex: 1 1 100%; text-align: center; padding: 0 92px; }
+.quiz-head > span { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); margin: 0; }
+@media (max-width: 560px) { .quiz-head > b { padding: 0; } .quiz-head > span { position: static; transform: none; margin: 0 auto; } }
+
+/* kiemelő dobozok (Tudtad?, Ne feledd, veszély, hazai): az ikon a cím fölött, a cím középen, a szöveg sorkizárt */
+.callout { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+.callout::before { grid-row: auto; justify-self: center; }
+.callout > b.t, .callout > div > b.t { display: block; text-align: center; }
+
+/* tény-kártyák: nagy szám + felirat középen */
+.fact, .fact b, .fact span { text-align: center !important; }
+
+/* eredmény-/ítéletdobozok */
+.verdict > b:first-child { text-align: center; }
+
+/* kimeneti panelek, adatlapok, rendező kosarak, információs dobozok */
+.w-out > b { grid-column: 1 / -1; text-align: center; display: block; }
+.alap-sh-h { flex-direction: column; align-items: center; text-align: center; }
+.rsz-bin-h { align-items: center; text-align: center; }
+.rf-info > b { text-align: center; }
+.vt-head { flex-direction: column; align-items: center; justify-content: center; }
+.vt-head > b { text-align: center; }
+.dnt-factors > div > b { display: block; text-align: center; }
+.dnt-factors > div > span { display: block; text-align: center; }
+
+/* fogalomtár: a fogalom középen (a jobb felső címke miatt szimmetrikus belső margó) */
+.tz-gi dt { text-align: center; padding-left: 90px; }
+@media (max-width: 560px) { .tz-gi dt { padding-left: 0; padding-right: 0; padding-top: 22px; } }
+
+/* képes kártyák (fotó + cím + rövid leírás): a cím és a rövid leírás középen */
+.furt-tool figcaption, .furt-tool figcaption b { text-align: center !important; }
+
+/* lépéskártyák: a cím alatti rövid eszközlista is középen */
+.g3-step .tools { text-align: center !important; }
+
+/* számkijelző csempék (widgetek kimenete): felirat és érték középen */
+.stat, .stat-l, .stat-v { text-align: center; }
+
+/* képletdoboz: a képlet középen, a jelmagyarázat alatta sorkizárt */
+.formula { justify-content: center; }
+.formula .f { flex: 1 1 100%; text-align: center; }
+.formula .fl { flex: 1 1 100%; text-align: justify; }
+
+/* videókártyák: a kicker, a cím és a rövid leírás középen */
+.vtile, .vtile > .vk, .vtile > b, .vtile > span { text-align: center; }
+.vtile > .vk, .vtile > b { justify-content: center; }
+
+/* a nézési útvonal gombsora: a hiányos sor is középen */
+.vt-btns { display: flex; flex-wrap: wrap; justify-content: center; }
+.vt-btns > .vt-b { flex: 0 1 calc(25% - 6px); min-width: min(100%, 215px); }

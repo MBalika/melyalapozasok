@@ -2063,7 +2063,183 @@ svg.rf-svg .t-bad { fill: var(--bad); }
 .sim-lab.tool.bad { background: #c2412f; border-color: transparent; }
 .sim-tab { min-width: 860px; }
 
+/* zz_boxtitles.css */
+/* ===== Dobozcímek középre (formázás skill, 5. pont) – az app h2–h6 nélküli dobozcímeire is =====
+   A h2–h6 címeket a boxtitle.inc.html (bxt-js) kezeli; itt a <b>/<dt>/<span> címek és díszítőik kerülnek középre.
+   A doboz szövege sorkizárt marad, a felsorolások balra zártak. Kivétel (szándékosan): ikon/kép a cím mellett
+   vízszintes kártyában (alap-ok, a 5.3 módszerkártyák), a YouTube-kártya polaroidjai és alsó sávja. */
+
+/* widget fejléce: a cím (és alatta az alcím) a doboz közepén; az „INTERAKTÍV” címke a bal szélen marad */
+.w-head { position: relative; flex-wrap: wrap; justify-content: center; }
+.w-head > .w-tag { position: absolute; left: 18px; top: 14px; }
+.w-head > .w-title { flex: 1 1 100%; min-width: 0; text-align: center; padding: 0 128px; }
+.w-head > .w-sub { flex: 1 1 100%; text-align: center; }
+.w-head > .w-sub:empty { display: none; }
+@media (max-width: 720px) {
+  .w-head > .w-tag { position: static; margin: 0 auto; }
+  .w-head > .w-title { padding: 0; }
+}
+
+/* kvíz fejléce: a cím középen, a pontszám a jobb szélen */
+.quiz-head { position: relative; justify-content: center; }
+.quiz-head > b { flex: 1 1 100%; text-align: center; padding: 0 92px; }
+.quiz-head > span { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); margin: 0; }
+@media (max-width: 560px) { .quiz-head > b { padding: 0; } .quiz-head > span { position: static; transform: none; margin: 0 auto; } }
+
+/* kiemelő dobozok (Tudtad?, Ne feledd, veszély, hazai): az ikon a cím fölött, a cím középen, a szöveg sorkizárt */
+.callout { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+.callout::before { grid-row: auto; justify-self: center; }
+.callout > b.t, .callout > div > b.t { display: block; text-align: center; }
+
+/* tény-kártyák: nagy szám + felirat középen */
+.fact, .fact b, .fact span { text-align: center !important; }
+
+/* eredmény-/ítéletdobozok */
+.verdict > b:first-child { text-align: center; }
+
+/* kimeneti panelek, adatlapok, rendező kosarak, információs dobozok */
+.w-out > b { grid-column: 1 / -1; text-align: center; display: block; }
+.alap-sh-h { flex-direction: column; align-items: center; text-align: center; }
+.rsz-bin-h { align-items: center; text-align: center; }
+.rf-info > b { text-align: center; }
+.vt-head { flex-direction: column; align-items: center; justify-content: center; }
+.vt-head > b { text-align: center; }
+.dnt-factors > div > b { display: block; text-align: center; }
+.dnt-factors > div > span { display: block; text-align: center; }
+
+/* fogalomtár: a fogalom középen (a jobb felső címke miatt szimmetrikus belső margó) */
+.tz-gi dt { text-align: center; padding-left: 90px; }
+@media (max-width: 560px) { .tz-gi dt { padding-left: 0; padding-right: 0; padding-top: 22px; } }
+
+/* képes kártyák (fotó + cím + rövid leírás): a cím és a rövid leírás középen */
+.furt-tool figcaption, .furt-tool figcaption b { text-align: center !important; }
+
+/* lépéskártyák: a cím alatti rövid eszközlista is középen */
+.g3-step .tools { text-align: center !important; }
+
+/* számkijelző csempék (widgetek kimenete): felirat és érték középen */
+.stat, .stat-l, .stat-v { text-align: center; }
+
+/* képletdoboz: a képlet középen, a jelmagyarázat alatta sorkizárt */
+.formula { justify-content: center; }
+.formula .f { flex: 1 1 100%; text-align: center; }
+.formula .fl { flex: 1 1 100%; text-align: justify; }
+
+/* videókártyák: a kicker, a cím és a rövid leírás középen */
+.vtile, .vtile > .vk, .vtile > b, .vtile > span { text-align: center; }
+.vtile > .vk, .vtile > b { justify-content: center; }
+
+/* a nézési útvonal gombsora: a hiányos sor is középen */
+.vt-btns { display: flex; flex-wrap: wrap; justify-content: center; }
+.vt-btns > .vt-b { flex: 0 1 calc(25% - 6px); min-width: min(100%, 215px); }
+
 </style>
+<style id="bxt-css">
+/* Dobozcímek középre – formázás skill */
+.bxt{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+.bxt-f,.bxt-row,.bxd-f{justify-content:center!important}
+.bxt-st{align-self:stretch!important}
+.bxd{margin-left:auto!important;margin-right:auto!important;text-align:center!important}
+.bxd-as{align-self:center!important}
+.bxt-grow{flex:1 1 auto!important;min-width:0!important}
+.bxd-rl{position:relative!important;left:50%!important;transform:translateX(-50%)!important}
+.bxt-tc{text-align:center!important}
+.bxk-s{text-align:start}.bxk-l{text-align:left}.bxk-j{text-align:justify}.bxk-r{text-align:right}.bxk-e{text-align:end}
+</style>
+<script id="bxt-js">
+/* Dobozcímek középre (formázás skill, 5. pont): minden keretes/hátteres szövegdoboz saját címe
+   — és a cím előtti kis díszítők (ikon, sorszám, kicker) — vízszintesen középen. */
+(function(){
+  'use strict';
+  var HS='h2,h3,h4,h5,h6', SKIP='header,nav,footer,table,button,summary,label,svg,dialog form,[data-bxt-skip]';
+  var MEDIA=/^(IMG|CANVAS|VIDEO|PICTURE|FIGURE|IFRAME|OBJECT)$/;
+  function cs(e){return getComputedStyle(e);}
+  function isBox(e){
+    if(!e||/^(BODY|HTML|MAIN|SECTION)$/.test(e.tagName))return false;
+    var s=cs(e),bg=s.backgroundColor,hb=(bg&&bg!=='transparent'&&!/rgba\(\d+, \d+, \d+, 0\)/.test(bg))||s.backgroundImage!=='none';
+    var bw=0;['Top','Right','Bottom','Left'].forEach(function(k){if(parseFloat(s['border'+k+'Width'])>0&&s['border'+k+'Style']!=='none')bw++;});
+    var r=parseFloat(s.borderTopLeftRadius)||0,sh=s.boxShadow&&s.boxShadow!=='none';
+    return sh||bw>=3||(hb&&(r>0||bw>=1));
+  }
+  function isRow(p){
+    var s=cs(p),d=s.display;
+    if(/flex/.test(d))return !/column/.test(s.flexDirection);
+    if(/grid/.test(d)){var g=s.gridTemplateColumns;if(!g||g==='none')return false;var m=g.match(/repeat\(\s*(\d+)/);return m?+m[1]>1:g.trim().split(/\s+/).length>1;}
+    return false;
+  }
+  function isMedia(e){
+    if(MEDIA.test(e.tagName))return true;
+    if(e.tagName.toLowerCase()==='svg'){var w=e.getBoundingClientRect().width||parseFloat(e.getAttribute('width'))||0;return w>80;}
+    var c=typeof e.className==='string'?e.className:'';return !!e.querySelector('img,canvas,video,iframe,figure')||/(^|\s)(fh-cv|xw-box|thumb)/.test(c);
+  }
+  function interactive(e){return /^(BUTTON|INPUT|SELECT|TEXTAREA|A)$/.test(e.tagName)&&(e.tagName!=='A'||e.hasAttribute('href'))||!!e.querySelector('button,input,select,textarea,a[href]');}
+  function txt(e){return (e.textContent||'').replace(/\s+/g,' ').trim().length;}
+  function free(e){var s=cs(e);return s.position==='absolute'||s.position==='fixed'||s.float!=='none'||s.display==='none';}
+  function alone(d){
+    function blk(n){if(!n||n.nodeType!==1)return true;var x=cs(n);return x.display==='none'||!/^inline/.test(x.display)||x.position==='absolute'||x.position==='fixed';}
+    function ws(n,k){while(n&&n.nodeType!==1){if(n.nodeType===3&&n.textContent.trim())return null;n=n[k];}return n;}
+    var p=d.previousSibling,n=d.nextSibling,a=ws(p,'previousSibling'),b=ws(n,'nextSibling');
+    if(a===null||b===null)return false;
+    return blk(a)&&blk(b);
+  }
+  var TA={start:'s',left:'l',justify:'j',right:'r',end:'e',center:'c'};
+  function grp(P,decos,h){
+    if(!P||P.classList.contains('bxt-tc'))return;
+    for(var n=P.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return;}
+    var pa=cs(P).textAlign;
+    [].forEach.call(P.children,function(c){
+      if(decos.indexOf(c)>=0||c===h||c.contains(h))return;
+      var ta=cs(c).textAlign;if(ta===pa&&TA[ta])c.classList.add('bxk-'+TA[ta]);
+    });
+    P.classList.add('bxt-tc');
+  }
+  function startJ(j){return /^(normal|flex-start|start|left)$/.test(j);}
+  function dbg(h,r){if(window.__bxtDebug)window.__bxtDebug.push([h,r]);}
+  function one(h){
+    if(h.__bxt)return; h.__bxt=1;
+    if(h.closest(SKIP))return;
+    var n=h,path=[],box=null;
+    for(var k=0;k<5;k++){var p=n.parentElement;if(!p||/^(BODY|MAIN)$/.test(p.tagName))break;path.push(n);if(isBox(p)){box=p;break;}n=p;}
+    if(!box)return;if(box.querySelector(HS)!==h)return dbg(h,'not-first');
+    var decos=[],rows=[],grow=[];
+    for(var i=0;i<path.length;i++){
+      var m=path[i],par=m.parentElement,sib=[].slice.call(par.children).filter(function(c){return c!==m&&!free(c);});
+      if(isRow(par)&&sib.length){
+        for(var q=0;q<sib.length;q++){if(isMedia(sib[q])||interactive(sib[q])||txt(sib[q])>40)return dbg(h,'row-sib');}
+        if(startJ(cs(par).justifyContent)&&/flex/.test(cs(par).display))rows.push(par);else grow.push(m);
+        continue;
+      }
+      for(var e=m.previousElementSibling;e;e=e.previousElementSibling){
+        if(free(e))continue;
+        if(isMedia(e))continue;
+        if(interactive(e)||txt(e)>60||e.querySelector(HS))return dbg(h,'pre-content');
+        decos.push(e);
+      }
+    }
+    var nx=h.nextElementSibling;
+    if(nx&&!free(nx)&&!interactive(nx)&&!isMedia(nx)&&!/^(UL|OL|TABLE|DL)$/.test(nx.tagName)&&!nx.querySelector(HS)){
+      var c=typeof nx.className==='string'?nx.className:'',L=txt(nx);
+      if(L>0&&L<=90&&(/(^|[-_\s])(sub|subtitle|subhead|caption|hint|meta|tagline|lede)([-_\s]|$)/i.test(c)||(nx.tagName==='P'&&L<=40)))decos.push(nx);
+    }
+    var hs=cs(h);h.classList.add('bxt');if(/flex/.test(hs.display))h.classList.add('bxt-f');
+    var hp=cs(h.parentElement);if(/flex/.test(hp.display)&&/column/.test(hp.flexDirection)&&!/stretch|normal/.test(hp.alignItems))h.classList.add('bxt-st');
+    decos.forEach(function(d){
+      var s=cs(d),dp=s.display;
+      if((/flex|grid/.test(dp))&&!startJ(s.justifyContent))return;
+      if(/^inline/.test(dp)){if(alone(d)&&s.transform==='none'&&s.position==='static')d.classList.add('bxd-rl');else grp(d.parentElement,decos,h);}
+      else{d.classList.add('bxd');if(/flex/.test(dp))d.classList.add('bxd-f');}
+      var pp=cs(d.parentElement);if(/flex/.test(pp.display)&&/column/.test(pp.flexDirection))d.classList.add('bxd-as');
+    });
+    rows.forEach(function(r){r.classList.add('bxt-row');});
+    grow.forEach(function(g){g.classList.add(/flex/.test(cs(g.parentElement).display)?'bxt-grow':'bxt-cell');});
+  }
+  function run(root){var l=(root||document).querySelectorAll(HS);for(var i=0;i<l.length;i++){try{one(l[i]);}catch(e){}}}
+  var t=0;function later(){if(t)return;t=setTimeout(function(){t=0;run();},60);}
+  function init(){run();try{new MutationObserver(function(r){for(var i=0;i<r.length;i++){if(r[i].addedNodes.length){later();return;}}}).observe(document.body,{childList:true,subtree:true});}catch(e){}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+  window.__boxTitles=run;
+})();
+</script>
 </head>
 <body>
 <a class="sr" href="#alapok">Ugrás a tartalomhoz</a>
