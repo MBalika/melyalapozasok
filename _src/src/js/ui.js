@@ -132,14 +132,14 @@ function initJump() {
 
 /* ---------------------------------------------------------------- saját videók */
 const VMAP = Object.fromEntries(VIDEOS.map((v) => [v.n, v]));
-const thumb = (n) => h('div', { class: 'vthumb' }, h('img', { src: `img/thumb/${n}.jpg`, alt: '', loading: 'lazy', decoding: 'async', onerror: (e) => { e.target.style.visibility = 'hidden'; } }), h('span', { class: 'vplay' }), h('span', { class: 'vdur' }, VMAP[n]?.d || ''));
+const thumb = (n) => h('div', { class: 'vthumb' }, h('img', { src: `img/thumb/${n}.jpg?v=2`, alt: '', loading: 'lazy', decoding: 'async', onerror: (e) => { e.target.style.visibility = 'hidden'; } }), h('span', { class: 'vplay' }), h('span', { class: 'vdur' }, VMAP[n]?.d || ''));
 const order = VIDEOS.map((v) => v.n); let curIdx = 0;
 function openVideo(n) {
   const v = VMAP[n]; if (!v) return;
   curIdx = order.indexOf(n);
   const m = $('#vmodal');
   $('#vmTitle', m).textContent = `${v.t}`;
-  $('#vmFrame', m).src = `video/${EN ? 'en/' : ''}${n}.html#autoplay`;
+  $('#vmFrame', m).src = `video/${EN ? 'en/' : ''}${n}.html?v=2#autoplay`;
   $('#vmInfo', m).textContent = `${curIdx + 1} / ${order.length} · ${v.d} · zene: ${v.g}`;
   m.hidden = false; document.body.style.overflow = 'hidden';
   setTimeout(() => $('#vmFrame', m).focus(), 300);
