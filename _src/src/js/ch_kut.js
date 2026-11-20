@@ -354,7 +354,7 @@ register('kut-keszon', (root) => {
     const hinPx = Math.min(chH, hin / 2.5 * chH);
     if (hinPx > 0) R(fig, x0 + 10, EY - hinPx, x1 - x0 - 20, hinPx, '', { style: 'fill:var(--water);opacity:.5' });
     if (ch !== 'elöntve') { person(fig, x0 + 50, EY - 2 - Math.min(hinPx, 6) * 0, 0.95); person(fig, x0 + 120, EY - 2, 0.95); grab(fig, x1 - 40, EY - 2, 16, 0.3); }
-    TH(fig, (x0 + x1) / 2 - 24, EY - chH - 8, `p = ${fmt(p, 2)} bar`, 't-num halo', { 'text-anchor': 'middle', style: 'font-size:11px' });
+    TH(fig, x0 - 8, EY - chH / 2 + 4, `p = ${fmt(p, 2)} bar`, 't-num halo', { 'text-anchor': 'end', style: 'font-size:11px' });
     // aknák, zsilipek, gépház
     R(fig, 220, 14, 12, EY - chH - 14, 'f-steel2');
     R(fig, 202, 2, 48, 16, 'f-acc', { rx: 3 });
