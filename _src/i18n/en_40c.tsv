@@ -33,3 +33,9 @@ a264ce6	influence depth ≈ ${fmt(HM, 1)} m (Δσ<sub>z</sub> = 0.2·σ′<sub>v
 94ab62b	stress bulb: Δσ<sub>z</sub>/q isobars
 
 6d952a6	Well
+2eb388f	mixed
+e009d22	warnings: ${cnt('warn')}
+cb7bfa6	errors: ${cnt('bad')}
+2ea4c4d@js/data.js:16#2	Videos
+66d2f2a	fast
+b8f0b8a!	Situation ${i + 1} / ${CASES.length}

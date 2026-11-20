@@ -300,7 +300,7 @@ export function initHero() {
     }
     raf = requestAnimationFrame(tick);
   };
-  new IntersectionObserver((es) => { vis = es[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(tick); }).observe(box);
+  new IntersectionObserver((es) => { vis = es[es.length - 1].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(tick); }).observe(box);
   renderer.domElement.addEventListener('webglcontextrestored', () => { dirty = true; });
   resize(); rebuild();
 }

@@ -155,7 +155,7 @@ function evaluate(S) {
   const Lact = M.stuck || L;
   const toeA = layerAt(P, Lact - 0.01);
   if (P.bear) {
-    if (Lact < P.bear) add('bad', 'A talp a puha rétegben áll', `A teherbíró ${layerAt(P, P.bear + 0.1).n} csak −${fmt(P.bear, 1)} m-en kezdődik, a cölöp talpa (−${fmt(Lact, 1)} m) ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(toeA.n) ? 'az' : 'a')} ${toeA.n} rétegben van: kicsi teherbírás, nagy süllyedés.`);
+    if (Lact < P.bear + 0.05) add('bad', 'A talp a puha rétegben áll', `A teherbíró ${layerAt(P, P.bear + 0.1).n} csak −${fmt(P.bear, 1)} m-en kezdődik, a cölöp talpa (−${fmt(Lact, 1)} m) ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(toeA.n) ? 'az' : 'a')} ${toeA.n} rétegben van: kicsi teherbírás, nagy süllyedés.`);
     else add('ok', `A talp a teherbíró rétegben`, `A cölöp ${fmt(Lact - P.bear, 1)} m-re hatol a teherbíró rétegbe (−${fmt(P.bear, 1)} m).`);
   } else add('info', 'Nincs kiemelkedő teherbíró réteg', 'A talp környékén nincs jobb réteg – a hosszabb cölöp köpenye dolgozik többet.');
 
@@ -968,7 +968,7 @@ register('sim3d', (root) => {
     if (again && visible) req(); else lastT = 0;
   }
   if (renderer) {
-    new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) { warm = 24; req(); } }, { threshold: [0, 0.05, 0.5] }).observe(stage);
+    new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; if (visible) { warm = 24; req(); } }, { threshold: [0, 0.05, 0.5] }).observe(stage);
     const resize = () => {
       const w = stage.clientWidth || 600;
       const hh = Math.round(w * (w < 560 ? 1.12 : w < 820 ? 0.82 : 0.64));
@@ -1101,7 +1101,7 @@ register('sim3d', (root) => {
   rebuild(); paintPlay();
   // első megjelenéskor egyszer lejátsszuk
   if (renderer && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); if (!playing && T >= total - 0.001) { T = 0; playing = true; lastT = 0; paintPlay(); req(); } } }, { threshold: 0.4 });
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); if (!playing && T >= total - 0.001) { T = 0; playing = true; lastT = 0; paintPlay(); req(); } } }, { threshold: 0.4 });
     io.observe(stage);
   }
 });
