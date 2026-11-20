@@ -187,7 +187,7 @@ const CASES = [
     d: 'Nehéz, daruzott csarnok épül. A felső 25 m-es réteg magas víztartalmú, folyós iszap, a talajvíz szinte a felszínen áll, alatta tömör kavics. 120 cm átmérőjű, 30 m hosszú cölöpök kellenek.',
     q: 'Melyik technológiát választanád?',
     o: ['Béléscsöves (köpenycsöves) fúrt cölöpöt', 'CFA-cölöpöt', 'Megtámasztás nélküli fúrt cölöpöt', 'Előregyártott acél talajcsavart'], c: 0,
-    e: 'A béléscső a furat falát egészen a felbetonozásig megtámasztja, ezért magas víztartalmú, iszapos talajban is biztonsággal alkalmazható – 80–180 cm átmérővel, 15–50 (100) m hosszal. A CFA jellemzően 22–24 m-ig készül, és laza, folyós talajban különös gondosságot kíván; megtámasztás nélkül a furat beomlana, a talajcsavar pedig csak 2–3 m-es, kis terhű elem.' },
+    e: 'A béléscső a furat falát egészen a felbetonozásig megtámasztja, ezért magas víztartalmú, iszapos talajban is biztonsággal alkalmazható – 80–180 cm átmérővel, 15–50 (100) m hosszal. A CFA legfeljebb 22–24 m-ig készül, és laza, folyós talajba nem való; megtámasztás nélkül a furat beomlana, a talajcsavar pedig csak 2–3 m-es, kis terhű elem.' },
   { t: 'Lakóépület kemény agyagon', sk: 'agyag',
     d: 'Kisebb lakóépület alá 7 m hosszú, 60 cm átmérőjű cölöpök kellenek. A talaj végig kemény, kötött agyag; talajvizet a feltárás 15 m-ig sem talált.',
     q: 'Mi a legegyszerűbb megoldás?',
@@ -600,3 +600,8 @@ function vtLayout() {
   lib.append(r1, r2);
 }
 if (typeof window !== 'undefined') setTimeout(vtLayout, 0);
+// az angol oldalon a build a társoldalak gyökércímét írja át /en-re; az aloldalas és a később elkészült angol változatokat itt irányítjuk át
+if (EN && typeof document !== 'undefined') for (const el of document.querySelectorAll('a[href^="https://cfa-colop-3d.vercel.app"], a[href^="https://bme-alapozas.vercel.app/ar-labor"]')) {
+  const u = el.getAttribute('href').replace(/\/$/, ''); if (!/\/en$/.test(u)) el.setAttribute('href', u + '/en');
+}
+

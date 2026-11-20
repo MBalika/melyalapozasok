@@ -36,6 +36,8 @@ const TECH = {
   screw: { t: 'Csavart, talajkiszorításos', g: 'talajkiszorításos', D: [30, 60, 5, 45], L: 12, ks: 1.3, kb: 1, yt: 'hwP8iZzAq6I', fault: null, link: '#helyszini' },
   micro: { t: 'Mikrocölöp (merevbetétes)', g: 'egyéb (mikrocölöp)', D: [10, 30, 2, 20], L: 12, ks: 1.2, kb: 0, yt: '7M7YPxBn8Xk', fault: null, link: '#egyeb' },
 };
+// a technológia jellemző hossztartománya: váltáskor az ezen kívüli hossz a technológia alapértékére áll
+const LRANGE = { cfa: [6, 24], casing: [15, 50], slurry: [15, 50], dry: [4, 10], driven: [4, 22], franki: [6, 18], screw: [6, 20], micro: [4, 30] };
 const KISZ = (k) => TECH[k].g === 'talajkiszorításos';
 
 function layersOf(P) { return P.layers.map(([k, t, b, nm]) => ({ k, t, b, K: KIND[k], n: nm || KIND[k].n })); }
@@ -243,10 +245,21 @@ function ringProfile(z0, z1, rIn, rOut) {
   pts.push(pts[0]);
   return lathe(pts, 28);
 }
-function helixGeom(len, rad, pitch, tube) {
-  const turns = len / pitch, N = Math.ceil(turns * 18);
-  const pts = []; for (let i = 0; i <= N; i++) { const a = (i / N) * turns * TAU; pts.push(new THREE.Vector3(Math.sin(a) * rad, -(i / N) * len, Math.cos(a) * rad)); }
-  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), N, tube, 5, false);
+// spirállevél (helikoid szalag vastagsággal): a szár (rIn) és a furatfal (rOut) között, a teteje y = 0, lefelé len hosszan
+function flightGeom(len, rIn, rOut, pitch, thick) {
+  const turns = len / pitch, N = Math.max(8, Math.ceil(turns * 28)), pos = [], idx = [];
+  for (let i = 0; i <= N; i++) {
+    const a = (i / N) * turns * TAU, y = -(i / N) * (len - thick), sn = Math.sin(a), cs = Math.cos(a);
+    pos.push(sn * rIn, y, cs * rIn, sn * rOut, y, cs * rOut, sn * rOut, y - thick, cs * rOut, sn * rIn, y - thick, cs * rIn);
+  }
+  for (let i = 0; i < N; i++) {
+    const a = i * 4, b = a + 4;
+    idx.push(a, a + 1, b + 1, a, b + 1, b);             // felső lap
+    idx.push(a + 1, a + 2, b + 2, a + 1, b + 2, b + 1); // külső él
+    idx.push(a + 3, b + 2, a + 2, a + 3, b + 3, b + 2); // alsó lap
+  }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals();
+  return g;
 }
 const unitCyl = (r, seg = 32, open = false) => new THREE.CylinderGeometry(r, r, 1, seg, 1, open).translate(0, -0.5, 0); // teteje y = 0, alja y = −1
 const unitBox = () => new THREE.BoxGeometry(1, 1, 1).translate(0, -0.5, 0);
@@ -264,14 +277,14 @@ register('sim3d', (root) => {
   const badge = h('div', { class: 'sim-badge' }, 'Szemléltető modell');
   const stepEl = h('div', { class: 'sim-step' });
   const alertEl = h('div', { class: 'sim-alert' });
-  stage.append(badge, alertEl, stepEl);
+  stage.append(badge, alertEl);
   const bPrev = h('button', { class: 'btn btn-line btn-sm sim-ic', type: 'button', 'aria-label': 'Előző lépés', title: 'Előző lépés' }, '⏮');
   const bPlay = h('button', { class: 'btn btn-acc btn-sm sim-playbtn', type: 'button' }, '▶ Építés');
   const bNext = h('button', { class: 'btn btn-line btn-sm sim-ic', type: 'button', 'aria-label': 'Következő lépés', title: 'Következő lépés' }, '⏭');
   const tl = h('input', { type: 'range', min: 0, max: 1000, step: 1, value: 1000, 'aria-label': 'Idővonal', class: 'sim-tl' });
   const playRow = h('div', { class: 'sim-play' }, bPrev, bPlay, bNext, tl);
   const chips = h('div', { class: 'sim-chips' });
-  ui.viz.append(h('div', { class: 'sim-views' }, viewSeg.el), stage, playRow, chips);
+  ui.viz.append(h('div', { class: 'sim-views' }, viewSeg.el), stage, stepEl, playRow, chips);
 
   /* ---- vezérlők */
   const C = ui.ctrls;
@@ -317,17 +330,22 @@ register('sim3d', (root) => {
   if (renderer) {
     renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
     renderer.localClippingEnabled = true;
+    renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.05;
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     stage.prepend(renderer.domElement);
     renderer.domElement.setAttribute('aria-label', '3D cölöpépítő – metszet');
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = false; controls.minDistance = 2.5; controls.maxDistance = 220; controls.maxPolarAngle = Math.PI * 0.72;
+    renderer.domElement.style.touchAction = 'pan-y'; // telefonon a függőleges húzás a lapot görgeti
     controls.addEventListener('change', () => req());
     controls.addEventListener('start', () => { userAct = true; });
     controls.addEventListener('end', () => { userAct = false; if (S.view === 'kozeli' && camDist > 0) userK = clamp(camera.position.distanceTo(controls.target) / camDist, 0.35, 3); });
   }
-  scene.add(new THREE.HemisphereLight(0xfff6e8, 0x6a5a4a, 1.7));
-  const sun = new THREE.DirectionalLight(0xffffff, 2.0); sun.position.set(18, 40, 30); scene.add(sun);
-  const fillL = new THREE.DirectionalLight(0xc7dcff, 0.55); fillL.position.set(-30, 10, 25); scene.add(fillL);
+  scene.add(new THREE.HemisphereLight(0xfff6e8, 0x7a6a58, 1.75));
+  const sun = new THREE.DirectionalLight(0xfff3e0, 2.3); sun.position.set(22, 46, 30); scene.add(sun); scene.add(sun.target);
+  sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.04; sun.shadow.radius = 5;
+  const fillL = new THREE.DirectionalLight(0xc7dcff, 0.6); fillL.position.set(-30, 10, 25); scene.add(fillL);
+  const fitShadow = () => { const c = sun.shadow.camera, e = Math.max(W * 0.75, Hm * 0.8 + 6); c.left = -e; c.right = e; c.top = e; c.bottom = -e; c.near = 1; c.far = 160; c.updateProjectionMatrix(); sun.target.position.set(0, Hm * 0.3, -ZB / 2); };
 
   // anyagok
   const MAT = {
@@ -336,14 +354,16 @@ register('sim3d', (root) => {
     slurry: secMat(0x7d7a48, 0x75723f, { transparent: true, opacity: 0.55, depthWrite: false }),
     water: secMat(0x3d8fd1, 0x3d8fd1, { transparent: true, opacity: 0.42, depthWrite: false }),
     spoilS: secMat(0x8b7a62, 0x7d6c55), spoilC: lam(0x8b7a62), parts: lam(0x8d7c62),
-    rigBody: lam(0xe3a12b), rigDark: lam(0x2a2e33), mast: lam(0x45505b), head: lam(0xc4502c), cab: lam(0x9fb6c8), yellow: lam(0xe7b43a),
+    rigBody: lam(0xe6a422), rigDark: lam(0x2a2e33), mast: lam(0x4a5560), head: lam(0xc4502c), cab: lam(0x9fb6c8), yellow: lam(0xe7b43a),
+    track: lam(0x1d2024), roller: lam(0x6b7680), cw: lam(0x3a4047), glass: lam(0xa9cfe6, { transparent: true, opacity: 0.42, depthWrite: false }),
+    vest: lam(0xf07a1a), skin: lam(0xd9a47c), helmet: lam(0xf4d03a), trouser: lam(0x2d3d55),
     rebar: new THREE.LineBasicMaterial({ color: 0xc0632e, clippingPlanes: SEC, clipIntersection: true }),
     cable: new THREE.LineBasicMaterial({ color: 0x222222 }),
     halo: new THREE.MeshBasicMaterial({ color: 0xf0864a, transparent: true, opacity: 0.22, depthWrite: false }),
     gwLine: new THREE.LineDashedMaterial({ color: 0x2f86c9, dashSize: 0.5, gapSize: 0.3 }),
     gwFace: new THREE.MeshBasicMaterial({ color: 0x4fa6e0, transparent: true, opacity: 0.2, depthWrite: false, side: THREE.DoubleSide }),
     bear: new THREE.MeshBasicMaterial({ color: 0xf0864a }),
-    grass: lam(0x7b8656), line: new THREE.LineBasicMaterial({ color: 0x2b241c, transparent: true, opacity: 0.5 }),
+    grass: lam(0xffffff, { map: canvasTex((g, s) => { rs = 77; g.fillStyle = '#7f8a58'; g.fillRect(0, 0, s, s); for (let k = 0; k < 900; k++) { g.fillStyle = ['rgba(50,70,30,0.22)', 'rgba(190,200,120,0.2)', 'rgba(110,95,60,0.2)'][k % 3]; g.fillRect(rnd() * s, rnd() * s, 1 + rnd() * 2, 1 + rnd() * 3); } }, 256) }), line: new THREE.LineBasicMaterial({ color: 0x2b241c, transparent: true, opacity: 0.5 }),
   };
   // talajanyagok rétegfajtánként: homlok (textúra), „rés” (a furat helyén, alulról fogyó), furatfal, oldal
   const clipStrip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0); // y ≤ −d marad
@@ -373,13 +393,24 @@ register('sim3d', (root) => {
   function setLab(L, on, txt, x = 0, y = 0, z = 0) { L.on = !!on; if (!on) return; L.p.set(x, y, z); if (txt !== L.txt) { L.el.innerHTML = txt; L.txt = txt; } }
   const v3 = new THREE.Vector3();
   function placeLabs() {
-    const w = stage.clientWidth, hh = stage.clientHeight;
+    const w = stage.clientWidth, hh = stage.clientHeight, placed = [];
+    const show = (L, on) => { if (L.shown !== on) { L.shown = on; L.el.style.display = on ? '' : 'none'; } };
     for (const L of labs) {
-      if (!L.on) { L.el.style.display = 'none'; continue; }
+      if (!L.on || L.el.classList.contains('hid')) { show(L, false); continue; }
       v3.copy(L.p).project(camera);
-      const ok = v3.z < 1 && v3.x > -1.1 && v3.x < 1.1 && v3.y > -1.05 && v3.y < 1.05;
-      L.el.style.display = ok ? '' : 'none';
-      if (ok) { L.el.style.left = ((v3.x + 1) / 2) * w + 'px'; L.el.style.top = ((1 - v3.y) / 2) * hh + 'px'; }
+      const ok = v3.z < 1 && v3.x > -1.05 && v3.x < 1.05 && v3.y > -1.02 && v3.y < 1.02;
+      show(L, ok); if (!ok) continue;
+      if (L.sz !== L.txt) { L.sz = L.txt; L.w = L.el.offsetWidth; L.h = L.el.offsetHeight; L.an = L.el.classList.contains('lay') ? 0 : L.el.classList.contains('ruler') ? 1 : 0.5; }
+      let x = ((v3.x + 1) / 2) * w, y = ((1 - v3.y) / 2) * hh;
+      // a címke maradjon a jeleneten belül, és ne fedjen másik címkét (lefelé, majd felfelé tér ki)
+      x = clamp(x, 4 + L.w * L.an, w - 4 - L.w * (1 - L.an)); y = clamp(y, 6 + L.h / 2, hh - 6 - L.h / 2);
+      const hit = (yy) => placed.find((q) => x - L.w * L.an < q.x1 + 3 && x + L.w * (1 - L.an) > q.x0 - 3 && yy - L.h / 2 < q.y1 + 2 && yy + L.h / 2 > q.y0 - 2);
+      let q = hit(y), free = !q;
+      for (let n = 0; q && n < 4; n++) { const yd = q.y1 + 3 + L.h / 2; if (yd < hh - 4 && !hit(yd)) { y = yd; free = true; break; } const yu = q.y0 - 3 - L.h / 2; if (yu > 4 && !hit(yu)) { y = yu; free = true; break; } q = hit(yd) || q; y = yd; }
+      if (!free && hit(y)) { show(L, false); continue; }
+      placed.push({ x0: x - L.w * L.an, x1: x + L.w * (1 - L.an), y0: y - L.h / 2, y1: y + L.h / 2 });
+      const px = Math.round(x * 2) / 2, py = Math.round(y * 2) / 2;
+      if (px !== L.px || py !== L.py) { L.px = px; L.py = py; L.el.style.left = px + 'px'; L.el.style.top = py + 'px'; }
     }
   }
   const staticLabs = [];
@@ -392,6 +423,7 @@ register('sim3d', (root) => {
   const ZF = 3;
   let rcProfile = () => 0; // furat/kiszorítás sugara a mélység függvényében
   const O = {}; // dinamikus testek
+  const domKey = { step: '', alert: '', chips: '' }; // az animáció csak változáskor ír a DOM-ba
 
   /* ---- talajtömb (minden paraméterváltozáskor újraépül) */
   function buildSoil() {
@@ -415,7 +447,7 @@ register('sim3d', (root) => {
         g.add(new THREE.Mesh(new THREE.ShapeGeometry(sh), m.strip));
         // furatfal: félhenger a metszősík mögött (a furat aljáig látszik)
         const pts = zs.map((z) => new THREE.Vector2(Math.max(0.001, rcf(z)), -z));
-        g.add(new THREE.Mesh(new THREE.LatheGeometry(pts, 24, Math.PI / 2, Math.PI), m.wall));
+        const wl = new THREE.Mesh(new THREE.LatheGeometry(pts, 24, Math.PI / 2, Math.PI), m.wall); wl.userData.bore = true; g.add(wl);
       }
       // oldallapok
       for (const sgn of [-1, 1]) {
@@ -433,9 +465,9 @@ register('sim3d', (root) => {
     // terepfelszín: egyedi cölöpnél a furat félkörével kivágva
     const r0 = Math.max(0.02, rcf(0.01));
     const top = new THREE.Shape(); top.moveTo(-W / 2, 0); top.lineTo(-r0, 0); top.absarc(0, 0, r0, Math.PI, 0, true); top.lineTo(W / 2, 0); top.lineTo(W / 2, ZB); top.lineTo(-W / 2, ZB); top.closePath();
-    O.groundCut = new THREE.Mesh(new THREE.ShapeGeometry(top).rotateX(-Math.PI / 2).translate(0, 0.001, 0), MAT.grass); g.add(O.groundCut);
+    O.groundCut = new THREE.Mesh(new THREE.ShapeGeometry(top).rotateX(-Math.PI / 2).translate(0, 0.001, 0), MAT.grass); O.groundCut.receiveShadow = true; g.add(O.groundCut);
     const full = new THREE.Shape(); full.moveTo(-W / 2, 0); full.lineTo(W / 2, 0); full.lineTo(W / 2, ZB); full.lineTo(-W / 2, ZB); full.closePath();
-    O.groundFull = new THREE.Mesh(new THREE.ShapeGeometry(full).rotateX(-Math.PI / 2).translate(0, 0.001, 0), MAT.grass); g.add(O.groundFull);
+    O.groundFull = new THREE.Mesh(new THREE.ShapeGeometry(full).rotateX(-Math.PI / 2).translate(0, 0.001, 0), MAT.grass); O.groundFull.receiveShadow = true; g.add(O.groundFull);
     // „levágott” talaj a metszősík előtt – halvány doboz
     const dk = isDark();
     const ghost = new THREE.Mesh(new THREE.BoxGeometry(W, YB, ZF), tmp(new THREE.MeshBasicMaterial({ color: dk ? 0xb7a27e : 0x8a7a62, transparent: true, opacity: dk ? 0.05 : 0.06, depthWrite: false })));
@@ -460,30 +492,79 @@ register('sim3d', (root) => {
     if (M.P.bear && M.P.bear < YB) sLab(`teherbíró réteg −${fmt(M.P.bear, 0)} m`, 'acc', W / 2 - 2.2, -M.P.bear + 0.45, 0.02);
   }
 
-  /* ---- gép (sematikus) */
+  /* ---- gép (egyszerűsített, de valós felépítésű: lánctalp, forgó felsőváz, fülke kezelővel, árboc, támasztóhengerek) */
+  const UP = new THREE.Vector3(0, 1, 0);
+  function man(g, x, y, z, ry = 0, sc = 1) {
+    const m = new THREE.Group();
+    const cyl = (r, hh, yy, mat, dx = 0) => { const c = new THREE.Mesh(new THREE.CylinderGeometry(r, r, hh, 10), mat); c.position.set(dx, yy, 0); c.castShadow = true; m.add(c); return c; };
+    cyl(0.075, 0.86, 0.43, MAT.trouser, -0.1); cyl(0.075, 0.86, 0.43, MAT.trouser, 0.1);
+    cyl(0.19, 0.62, 1.17, MAT.vest);
+    cyl(0.055, 0.58, 1.16, MAT.vest, -0.25); cyl(0.055, 0.58, 1.16, MAT.vest, 0.25);
+    const hd = new THREE.Mesh(new THREE.SphereGeometry(0.115, 12, 10), MAT.skin); hd.position.y = 1.6; hd.castShadow = true; m.add(hd);
+    const hm = new THREE.Mesh(new THREE.SphereGeometry(0.135, 12, 8, 0, TAU, 0, Math.PI / 2), MAT.helmet); hm.position.y = 1.63; m.add(hm);
+    m.position.set(x, y, z); m.rotation.y = ry; m.scale.setScalar(sc); g.add(m); return m;
+  }
   function buildRig() {
     disposeGroup(G.rig);
     const k = S.tech, g = G.rig, rr = Math.max(0.2, M.rp + 0.05);
     const small = k === 'micro', s = small ? 0.55 : 1;
-    const cx = -(3.1 * s + rr), cz = -1.5 * s;
-    const box = (w, hh, d, x, y, z, m) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, hh, d), m); b.position.set(x, y, z); g.add(b); return b; };
-    box(4.4 * s, 0.75 * s, 0.7 * s, cx, 0.38 * s, cz - 1.05 * s, MAT.rigDark); box(4.4 * s, 0.75 * s, 0.7 * s, cx, 0.38 * s, cz + 1.05 * s, MAT.rigDark);
-    box(3.3 * s, 1.3 * s, 2.3 * s, cx - 0.35 * s, 1.4 * s, cz, MAT.rigBody);
-    box(1.15 * s, 1.35 * s, 1.0 * s, cx + 0.9 * s, 2.7 * s, cz + 0.6 * s, MAT.cab);
-    box(1.15 * s, 0.12 * s, 1.0 * s, cx + 0.9 * s, 3.43 * s, cz + 0.6 * s, MAT.rigBody);
+    const cx = -(3.3 * s + rr), cz = -1.5 * s;
+    const add = (geo, m, x, y, z, par = g) => { const b = new THREE.Mesh(geo, m); b.position.set(x, y, z); b.castShadow = true; b.receiveShadow = true; par.add(b); return b; };
+    const box = (w, hh, d, x, y, z, m, par) => add(new THREE.BoxGeometry(w, hh, d), m, x, y, z, par);
+    const cylZ = (r, len, x, y, z, m) => add(new THREE.CylinderGeometry(r, r, len, 18).rotateX(Math.PI / 2), m, x, y, z);
+    const strut = (a, b, r, m) => { const d = b.clone().sub(a), c = add(new THREE.CylinderGeometry(r, r, d.length(), 10), m, 0, 0, 0); c.position.copy(a).add(b).multiplyScalar(0.5); c.quaternion.setFromUnitVectors(UP, d.normalize()); return c; };
+    // lánctalpas alváz
+    const th = 0.72 * s, tl = 3.5 * s;
+    for (const sz of [-1, 1]) {
+      const tz = cz + sz * 1.05 * s;
+      box(tl, th, 0.62 * s, cx, th / 2, tz, MAT.track);
+      cylZ(th / 2, 0.62 * s, cx - tl / 2, th / 2, tz, MAT.track); cylZ(th / 2, 0.62 * s, cx + tl / 2, th / 2, tz, MAT.track);
+      for (let i = 0; i < 6; i++) cylZ(0.17 * s, 0.68 * s, cx - tl / 2 + (i + 0.5) * (tl / 6), 0.27 * s, tz, MAT.roller);
+      cylZ(0.24 * s, 0.68 * s, cx - tl / 2, th / 2, tz, MAT.roller); cylZ(0.24 * s, 0.68 * s, cx + tl / 2, th / 2, tz, MAT.roller);
+    }
+    box(2.2 * s, 0.3 * s, 1.6 * s, cx, 0.6 * s, cz, MAT.rigDark);
+    add(new THREE.CylinderGeometry(0.8 * s, 0.8 * s, 0.22 * s, 28), MAT.cw, cx, 0.86 * s, cz);
+    // forgó felsőváz: gépház, ellensúly, fülke a kezelővel
+    box(3.5 * s, 0.22 * s, 2.3 * s, cx - 0.3 * s, 1.08 * s, cz, MAT.rigDark);
+    box(2.0 * s, 1.2 * s, 2.3 * s, cx - 0.95 * s, 1.79 * s, cz, MAT.rigBody);
+    box(0.55 * s, 1.05 * s, 2.34 * s, cx - 2.2 * s, 1.72 * s, cz, MAT.cw);
+    for (let i = 0; i < 5; i++) box(0.9 * s, 0.05 * s, 0.02 * s, cx - 1.1 * s, (1.45 + i * 0.16) * s, cz + 1.16 * s, MAT.rigDark); // hűtőrács
+    box(1.25 * s, 1.5 * s, 1.1 * s, cx + 0.72 * s, 1.94 * s, cz - 0.6 * s, MAT.rigBody);
+    const cxb = cx + 0.72 * s, czb = cz + 0.6 * s;
+    box(1.25 * s, 0.3 * s, 1.05 * s, cxb, 1.34 * s, czb, MAT.rigBody);
+    box(1.25 * s, 0.08 * s, 1.05 * s, cxb, 2.86 * s, czb, MAT.rigBody);
+    for (const [dx, dz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) box(0.07 * s, 1.36 * s, 0.07 * s, cxb + dx * 0.59 * s, 2.15 * s, czb + dz * 0.49 * s, MAT.rigDark);
+    const gl = box(1.16 * s, 1.3 * s, 0.96 * s, cxb, 2.16 * s, czb, MAT.glass); gl.castShadow = false; gl.renderOrder = 4;
+    man(g, cxb - 0.1 * s, 1.3 * s, czb, Math.PI / 2, 0.62 * s);               // a gépkezelő a fülkében
+    if (!small) man(g, 1.7 + rr, 0, -1.3 - rr, -Math.PI * 0.7, 1);           // irányító a munkaterületen, a gép látóterében
+    else man(g, 1.6 + rr, 0, -1.4, -Math.PI * 0.75, 1);
+    // árboc (vezetőoszlop) a talpával, fejjel és a két támasztóhengerrel
     const mz = -(rr + 0.55 * s);
     Hm = { cfa: clamp(S.L + 3, 9, 30), screw: clamp(S.L + 3, 9, 26), casing: 15, slurry: 15, dry: 11, driven: Math.min(S.L, S.shape === 'sq' ? 12 : 22) + 5.5, franki: 16, micro: 4.6 }[k];
-    box(0.5 * s, Hm, 0.5 * s, 0, Hm / 2 + 0.5 * s, mz, MAT.mast);
-    // támasztókar a géptől az árbocig
-    const arm = new THREE.Mesh(new THREE.BoxGeometry(1, 0.3 * s, 0.3 * s), MAT.mast);
-    const a = new THREE.Vector3(cx + 1.2 * s, 2.0 * s, cz), b = new THREE.Vector3(0, Math.min(Hm * 0.45, 7 * s), mz);
-    arm.scale.x = a.distanceTo(b); arm.position.copy(a).add(b).multiplyScalar(0.5); arm.rotation.z = Math.atan2(b.y - a.y, b.x - a.x); arm.rotation.y = -Math.atan2(b.z - a.z, b.x - a.x); g.add(arm);
-    box(1.2 * s, 0.25 * s, 1.1 * s, 0, 0.62 * s, mz + 0.2, MAT.rigDark);
-    // mozgó fej / kalapács
-    O.head = new THREE.Mesh(new THREE.BoxGeometry(Math.max(0.9, rr * 2.2) * s, 1.1 * s, rr + 0.9 * s), k === 'driven' ? MAT.yellow : MAT.head);
-    O.head.geometry.translate(0, 0, -(rr + 0.9 * s) / 2 + 0.3 * s); g.add(O.head);
+    box(0.5 * s, Hm, 0.5 * s, 0, Hm / 2 + 0.3 * s, mz, MAT.mast);
+    for (const dx of [-1, 1]) box(0.07 * s, Hm, 0.1 * s, dx * 0.2 * s, Hm / 2 + 0.3 * s, mz + 0.3 * s, MAT.rigDark);      // vezetősínek
+    for (let y = 1.2 * s; y < Hm; y += 1.5 * s) box(0.54 * s, 0.07 * s, 0.54 * s, 0, y, mz, MAT.rigDark);                   // merevítő bordák
+    box(1.3 * s, 0.22 * s, 1.2 * s, 0, 0.11 * s, mz - 0.1 * s, MAT.rigDark);
+    box(0.8 * s, 0.4 * s, 0.9 * s, 0, Hm + 0.5 * s, mz + 0.12 * s, MAT.rigBody);
+    cylZ(0.24 * s, 0.14 * s, 0, Hm + 0.5 * s, mz + 0.62 * s, MAT.rigDark).rotation.y = Math.PI / 2;
+    const top = Math.min(Hm * 0.55, 8 * s);
+    for (const dz of [-0.55, 0.55]) strut(new THREE.Vector3(cx + 0.9 * s, 1.3 * s, cz + dz * s * 1.6), new THREE.Vector3(-0.2 * s, top, mz + dz * 0.3 * s), 0.09 * s, MAT.roller);
+    strut(new THREE.Vector3(cx + 1.45 * s, 0.75 * s, cz), new THREE.Vector3(0, 0.75 * s, mz), 0.16 * s, MAT.rigDark);          // gém az árboc talpához
+    // mozgó forgatófej / verőkalapács
+    O.head = new THREE.Group(); g.add(O.head);
+    const hw = Math.max(0.9, rr * 2.2) * s, hd = rr + 0.9 * s, hz = -hd / 2 + 0.3 * s;
+    if (k === 'driven') {
+      add(new THREE.CylinderGeometry(Math.max(0.3, rr * 1.25), Math.max(0.3, rr * 1.25), 1.7, 20), MAT.yellow, 0, 0.6, 0, O.head);
+      box(Math.max(0.75, rr * 2.9), 0.3, Math.max(0.75, rr * 2.9), 0, -0.4, 0, MAT.rigDark, O.head);                           // verősisak
+      box(0.5, 0.5, Math.abs(mz) + 0.1, 0, 0.6, mz / 2, MAT.rigDark, O.head);                                                    // megvezetés az árbocon
+    } else {
+      box(hw, 1.1 * s, hd, 0, 0, hz, MAT.head, O.head);
+      for (const dx of [-1, 1]) add(new THREE.CylinderGeometry(0.17 * s, 0.17 * s, 0.6 * s, 14), MAT.rigDark, dx * hw * 0.27, 0.8 * s, hz * 0.6, O.head); // hidromotorok
+      box(hw * 0.5, 0.25 * s, hw * 0.5, 0, -0.65 * s, 0, MAT.rigDark, O.head);
+    }
     O.cable = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(0, -1, 0)]), MAT.cable); g.add(O.cable); O.cable.visible = false;
     O.mastTop = Hm + 0.5 * s;
+    fitShadow();
   }
 
   /* ---- a cölöp és a szerszámok testei */
@@ -491,7 +572,7 @@ register('sim3d', (root) => {
     disposeGroup(G.pile);
     for (const key of ['auger', 'plugSoil', 'augLen', 'bucket', 'bucketLoad', 'kelly', 'bucketH', 'rod', 'rodLen', 'grout', 'pile', 'Lp', 'plug', 'ram']) delete O[key];
     const g = G.pile, r = M.rp, k = S.tech;
-    const add = (m) => { g.add(m); m.visible = false; return m; };
+    const add = (m) => { g.add(m); m.visible = false; m.castShadow = true; return m; };
     O.conc = add(new THREE.Mesh(new THREE.BufferGeometry(), MAT.fresh)); O.concKey = '';
     O.incl = add(new THREE.Mesh(new THREE.BufferGeometry(), SM.softclay.incl)); O.inclKey = '';
     // vasalókosár
@@ -521,8 +602,8 @@ register('sim3d', (root) => {
     if (k === 'cfa') {
       O.auger = add(new THREE.Group());
       O.auger.add(new THREE.Mesh(unitCyl(Math.max(0.06, r * 0.22), 16).scale(1, augLen, 1), MAT.steelD));
-      O.auger.add(new THREE.Mesh(helixGeom(augLen, r * 0.72, Math.max(0.45, r * 1.3), Math.max(0.03, r * 0.22)), MAT.steel));
-      O.plugSoil = new THREE.Mesh(unitCyl(r * 0.9, 24), MAT.spoilS); O.auger.add(O.plugSoil);
+      O.auger.add(new THREE.Mesh(flightGeom(augLen, Math.max(0.05, r * 0.2), r * 0.985, Math.max(0.4, r * 1.5), Math.max(0.035, r * 0.12)), MAT.steel));
+      O.plugSoil = new THREE.Mesh(unitCyl(r * 0.93, 28), MAT.spoilS); O.auger.add(O.plugSoil);   // a menetek között talaj: csak a levelek éle látszik ki belőle
       O.augLen = augLen;
     }
     if (k === 'screw') {
@@ -531,14 +612,14 @@ register('sim3d', (root) => {
       // kiszorító fej: rövid spirál + vastag test + kúp
       const hd = lathe([[0, -augLen - 0.05], [r * 0.5, -augLen + 0.35], [r * 0.98, -augLen + 1.1], [r * 0.98, -augLen + 1.7], [r * 0.55, -augLen + 2.3], [r * 0.45, -augLen + 2.6]], 28);
       O.auger.add(new THREE.Mesh(hd, MAT.steel));
-      const fl = helixGeom(0.9, r * 0.85, 0.45, Math.max(0.03, r * 0.16)); fl.translate(0, -augLen + 1.05, 0); O.auger.add(new THREE.Mesh(fl, MAT.steelD));
+      const fl = flightGeom(0.9, r * 0.4, r * 0.99, 0.45, Math.max(0.03, r * 0.12)); fl.translate(0, -augLen + 1.05, 0); O.auger.add(new THREE.Mesh(fl, MAT.steelD));
       O.augLen = augLen;
     }
     if (k === 'dry') {
       O.bucket = add(new THREE.Group());
-      const sp = helixGeom(1.6, r * 0.75, Math.max(0.4, r), Math.max(0.03, r * 0.2)); O.bucket.add(new THREE.Mesh(sp, MAT.steel));
+      const sp = flightGeom(1.6, Math.max(0.05, r * 0.2), r * 0.97, Math.max(0.4, r * 1.2), Math.max(0.035, r * 0.12)); O.bucket.add(new THREE.Mesh(sp, MAT.steel));
       O.bucket.add(new THREE.Mesh(unitCyl(Math.max(0.05, r * 0.2), 12).scale(1, 1.7, 1), MAT.steelD));
-      O.bucketLoad = new THREE.Mesh(unitCyl(r * 0.88, 20).scale(1, 1.5, 1), MAT.spoilS); O.bucket.add(O.bucketLoad);
+      O.bucketLoad = new THREE.Mesh(unitCyl(r * 0.91, 24).scale(1, 1.6, 1), MAT.spoilS); O.bucket.add(O.bucketLoad);
       O.kelly = add(new THREE.Mesh(unitBox().scale(0.22, 1, 0.22), MAT.steelD)); O.bucketH = 1.7;
     }
     if (k === 'casing' || k === 'slurry') {
@@ -568,7 +649,7 @@ register('sim3d', (root) => {
     if (KISZ(k)) for (const sgn of [-1, 1]) { const p = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).translate(0.5, -0.5, 0), MAT.halo); p.scale.x = Math.max(0.35, 1.1 * M.D); p.position.set(sgn > 0 ? rcProfile(0.5) : -rcProfile(0.5) - p.scale.x, 0, 0.008); p.renderOrder = 7; add(p); O.halo.push(p); }
     // depónia
     O.spoil = add(new THREE.Mesh(new THREE.ConeGeometry(1, 1, 24).translate(0, 0.5, 0), MAT.spoilC));
-    O.spoil.position.set(3.2 + M.rp, 0, -2.4);
+    O.spoil.position.set(4.6 + M.rp, 0, -2.7); O.spoil.receiveShadow = true;
     // törmelék-részecskék (beomlás, talajtörés)
     const pg = new THREE.DodecahedronGeometry(Math.max(0.05, r * 0.16), 0);
     O.parts = add(new THREE.InstancedMesh(pg, MAT.parts, 70));
@@ -606,8 +687,8 @@ register('sim3d', (root) => {
     if (k === 'cfa') return [
       { t: 'Kitűzés, pontraállás', dur: 2, d: 'A gép a kitűzött pont fölé áll. Az üreges fúrószár alján a csapóajtó zárva van.', a(st, u) { st.auger = { tip: lerp(-1.4, 0, sm(u)), rot: 0 }; st.focus = -Hm * 0.4; st.span = Hm + 5; } },
       { t: 'Fúrás a talpszintig', dur: 5, d: 'A folyamatos spirál becsavarodik a talajba. A spirálon maradó talajdugó támasztja meg a furat falát – külön megtámasztás nem kell.', a(st, u) { const d = u * L; st.d = d; st.auger = { tip: d, rot: (d / 0.6) * TAU }; st.spoil = 0.75 * u; st.focus = d; st.span = 5.5; st.lab = 'talajdugó a spirálon'; } },
-      { t: 'Betonozás a fúrószáron át', dur: 5, d: M.fault ? '<b class="bad">Túl gyors kihúzás!</b> A beton nem tudja kitölteni a spirál helyét – a puha rétegben a cölöp elvékonyodik (nyakasodás).' : 'A betont túlnyomással pumpálják a szár belsején át; a beton feltolja a spirált a talajdugóval, a gép közben húzza. A betonnyomást folyamatosan mérik.', a(st, u) { const tip = L * (1 - sm(u)); st.d = L; st.auger = { tip, rot: (L / 0.6) * TAU }; st.conc = { top: tip, bot: L }; st.neck = true; st.spoil = 0.75 + 0.25 * u; st.focus = tip; st.span = 5.5; if (M.neck && tip < M.neck[0]) st.alert = 'Nyakasodás!'; } },
-      { t: 'Vasalás a friss betonba', dur: 3.5, d: 'A vasalókosarat a friss betonba süllyesztik (nyomják, vibrálják). A betont vibrálni nem kell: a folyós konzisztencia és a nyomás alatti bedolgozás tömörít.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u }; cageIn(st, u); } },
+      { t: 'Betonozás a fúrószáron át', dur: 5, d: M.fault ? '<b class="bad">Túl gyors kihúzás!</b> A beton nem tudja kitölteni a spirál helyét – a puha rétegben a cölöp elvékonyodik (nyakasodás).' : 'A betont túlnyomással pumpálják a szár belsején át; a beton feltolja a spirált a talajdugóval, a gép közben húzza. A betonnyomást folyamatosan mérik.', a(st, u) { const tip = L * (1 - sm(u)); st.d = L; st.auger = { tip, rot: (L / 0.6) * TAU, fill: L }; st.conc = { top: tip, bot: L }; st.neck = true; st.spoil = 0.75 + 0.25 * u; st.focus = tip; st.span = 5.5; if (M.neck && tip < M.neck[0]) st.alert = 'Nyakasodás!'; } },
+      { t: 'Vasalás a friss betonba', dur: 3.5, d: 'A vasalókosarat a friss betonba süllyesztik (nyomják, vibrálják). A betont vibrálni nem kell: a folyós konzisztencia és a nyomás alatti bedolgozás tömörít.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u, fill: L }; cageIn(st, u); } },
       { t: 'Kész a cölöp', dur: 2.5, d: 'Minden cölöpről automatikus jegyzőkönyv készül: mélység, betonnyomás, bedolgozott betonmennyiség.', a(st, u) { st.auger = null; done(st, u); } },
     ];
     if (k === 'casing') return [
@@ -727,7 +808,7 @@ register('sim3d', (root) => {
     if (O.auger) {
       if (st.auger) {
         O.auger.visible = true; const tip = st.auger.tip; O.auger.position.set(0, -tip + O.augLen, 0); O.auger.rotation.y = st.auger.rot || 0;
-        if (O.plugSoil) { const len = Math.min(O.augLen, tip + 0.4); if (tip > 0.05 && !st.auger.away) span(O.plugSoil, O.augLen - len, O.augLen); else O.plugSoil.visible = false; }
+        if (O.plugSoil) { const len = Math.min(O.augLen, Math.max(tip, st.auger.fill || 0) + 0.3); if (len > 0.4) span(O.plugSoil, O.augLen - len, O.augLen - 0.04); else O.plugSoil.visible = false; }
         headAt(-tip + O.augLen + 0.55);
       } else { O.auger.visible = false; headAt(Hm - 0.6); }
     }
@@ -791,11 +872,16 @@ register('sim3d', (root) => {
     setLab(DL.halo, st.halo > 1.5 && S.view !== 'csoport', 'tömörödött talaj', rcProfile(1) + 1.1 * M.D + 0.9, -Math.min(st.halo * 0.5, 4), 0.05);
     // riasztás + lépésszöveg
     const s = steps[st.k];
-    stepEl.innerHTML = `<b>${st.k + 1}/${steps.length}</b> <span class="sim-st">${s.t}</span><span class="sim-sd">${s.d}</span>`;
-    alertEl.innerHTML = '';
-    if (st.alert) alertEl.append(h('span', { class: 'a-bad' }, st.alert));
-    if (st.done) alertEl.append(h('span', { class: M.items.some((i) => i.s === 'bad') ? 'a-bad' : M.items.some((i) => i.s === 'warn') ? 'a-warn' : 'a-ok' }, `${M.cls} cölöp · talp ${Math.round(M.share * 100)} %`));
-    [...chips.children].forEach((c, i) => { c.classList.toggle('on', i === st.k); c.classList.toggle('done', i < st.k || (i === st.k && st.u >= 1)); });
+    const sHtml = `<b>${st.k + 1}/${steps.length}</b> <span class="sim-st">${s.t}</span><span class="sim-sd">${s.d}</span>`;
+    if (sHtml !== domKey.step) { domKey.step = sHtml; stepEl.innerHTML = sHtml; }
+    const doneTxt = st.done ? `${M.cls} cölöp · talp ${Math.round(M.share * 100)} %` : '', aKey = (st.alert || '') + '|' + doneTxt;
+    if (aKey !== domKey.alert) {
+      domKey.alert = aKey; alertEl.innerHTML = '';
+      if (st.alert) alertEl.append(h('span', { class: 'a-bad' }, st.alert));
+      if (st.done) alertEl.append(h('span', { class: M.items.some((i) => i.s === 'bad') ? 'a-bad' : M.items.some((i) => i.s === 'warn') ? 'a-warn' : 'a-ok' }, doneTxt));
+    }
+    const cKey = st.k + (st.u >= 1 ? 'd' : '');
+    if (cKey !== domKey.chips) { domKey.chips = cKey; [...chips.children].forEach((c, i) => { c.classList.toggle('on', i === st.k); c.classList.toggle('done', i < st.k || (i === st.k && st.u >= 1)); }); }
     curSt = st;
   }
 
@@ -824,7 +910,8 @@ register('sim3d', (root) => {
     S.view = v;
     const grp = v === 'csoport';
     G.group.visible = grp; G.pile.visible = !grp; G.rig.visible = !grp; O.groundCut.visible = !grp; O.groundFull.visible = grp;
-    setXray(grp);
+    setXray(grp); sun.castShadow = !grp;
+    G.soil.traverse((o) => { if (o.userData.bore) o.visible = !grp; }); // csoportnézetben nincs egyedi furat
     for (const [key, L] of Object.entries(DL)) L.el.classList.toggle('hid', grp || (v === 'teljes' && key !== 'zone'));
     grpLabs.forEach((L) => (L.on = grp));
     clipStrip.constant = grp ? 0 : -(curSt?.d || 0); clipWall.constant = grp ? 0 : curSt?.d || 0;
@@ -836,7 +923,7 @@ register('sim3d', (root) => {
     let pos, tgt;
     if (v === 'teljes') { const top = Hm + 1, bot = -YB, sp = top - bot; tgt = new THREE.Vector3(0, (top + bot) / 2, -1.5); pos = tgt.clone().add(new THREE.Vector3(0.38, 0.1, 1).normalize().multiplyScalar(fitDist(sp) * 0.98)); }
     else if (grp) { const sp = M.Lact + 4, Lx = M.grp.B + 4; tgt = new THREE.Vector3(0, -M.Lact / 2 + 1, M.grp.zc); pos = tgt.clone().add(new THREE.Vector3(0.75, 0.42, 1).normalize().multiplyScalar(Math.max(fitDist(sp), fitDist(Lx * 0.8)) * 1.05)); }
-    else { fFocus = curSt ? curSt.focus : 0; fSpan = curSt ? curSt.span : 10; userK = 1; camDist = fitDist(fSpan); tgt = new THREE.Vector3(0, -fFocus - fSpan * 0.1, -0.3); pos = tgt.clone().add(dirK.clone().multiplyScalar(camDist)); }
+    else { fFocus = curSt ? curSt.focus : 0; fSpan = curSt ? curSt.span : 10; userK = 1; camDist = fitDist(fSpan * 1.18); tgt = new THREE.Vector3(0, -fFocus - fSpan * 0.04, -0.3); pos = tgt.clone().add(dirK.clone().multiplyScalar(camDist)); }
     if (instant) { camera.position.copy(pos); controls.target.copy(tgt); controls.update(); }
     else tween = { t0: performance.now(), from: { pos: camera.position.clone(), tgt: controls.target.clone() }, to: { pos, tgt } };
     req();
@@ -871,9 +958,9 @@ register('sim3d', (root) => {
     } else if (S.view === 'kozeli' && curSt && controls && !userAct) {
       const kf = 1 - Math.exp(-Math.min(0.1, dt || 0.03) * 5);
       fFocus = lerp(fFocus, curSt.focus, kf); fSpan = lerp(fSpan, curSt.span, kf);
-      camDist = fitDist(fSpan);
+      camDist = fitDist(fSpan * 1.18);
       const dir = camera.position.clone().sub(controls.target).normalize();
-      const tgt = new THREE.Vector3(0, -fFocus - fSpan * 0.1, -0.3), want = tgt.clone().add(dir.multiplyScalar(camDist * userK));
+      const tgt = new THREE.Vector3(0, -fFocus - fSpan * 0.04, -0.3), want = tgt.clone().add(dir.multiplyScalar(camDist * userK));
       const moved = want.distanceTo(camera.position) > 0.005 || tgt.distanceTo(controls.target) > 0.005;
       if (moved) { controls.target.copy(tgt); camera.position.copy(want); controls.update(); again = true; }
     }
@@ -889,6 +976,7 @@ register('sim3d', (root) => {
       camera.aspect = w / hh; camera.updateProjectionMatrix(); warm = Math.max(warm, 6); req();
     };
     new ResizeObserver(resize).observe(stage); resize();
+    renderer.domElement.addEventListener('webglcontextrestored', () => { warm = 6; req(); }); // elveszett GL-környezet után újrarajzolás
   }
 
   /* ---- teljes újraépítés */
@@ -925,7 +1013,7 @@ register('sim3d', (root) => {
     YB = Math.max(16, Math.ceil((Math.max(S.L, M.P.bear || 0) + 5) / 2) * 2);
     buildSoil(); buildRig(); buildPile(); buildGroup(); setGrpLabs();
     steps = buildSteps(); total = steps.reduce((a, s) => a + s.dur, 0);
-    chips.innerHTML = '';
+    chips.innerHTML = ''; domKey.step = domKey.alert = domKey.chips = '';
     steps.forEach((s, i) => { const b = h('button', { type: 'button' }, h('i', {}, String(i + 1)), s.t); b.addEventListener('click', () => { playing = false; paintPlay(); T = steps.slice(0, i).reduce((a, x) => a + x.dur, 0) + 0.001; setTl(); apply(stateAt(T)); req(); }); chips.append(b); });
     if (!keepT) T = total;
     T = Math.min(T, total);
@@ -950,7 +1038,7 @@ register('sim3d', (root) => {
     ratio.innerHTML = '';
     const R = cap.R || 1;
     const bar = h('div', { class: 'sim-rbar' }, h('span', { class: 'b', style: { width: (cap.Rb / R) * 100 + '%' }, title: `talp: ${pct(cap.Rb / R)} %` }, cap.Rb / R > 0.12 ? 'talp' : ''),
-      ...cap.parts.filter((p) => p.R > 0).map((p) => h('span', { class: 's', style: { width: (p.R / R) * 100 + '%', background: hex(p.c) }, title: `köpeny – ${p.n}: ${pct(p.R / R)} %` }, p.R / R > 0.14 ? p.n : '')),
+      ...cap.parts.filter((p) => p.R > 0).map((p) => h('span', { class: 's' + (((p.c >> 16) * 0.3 + ((p.c >> 8) & 255) * 0.59 + (p.c & 255) * 0.11) < 120 ? ' dk' : ''), style: { width: (p.R / R) * 100 + '%', background: hex(p.c) }, title: `köpeny – ${p.n}: ${pct(p.R / R)} %` }, p.R / R > 0.14 ? p.n : '')),
       h('i', { class: 'm1' }), h('i', { class: 'm2' }), h('em', { class: 'ptr', style: { left: M.share * 100 + '%' } }));
     ratio.append(h('div', { class: 'sim-rh' }, h('b', {}, 'Teherátadás'), h('span', {}, 'talpellenállás + köpenymenti ellenállás rétegenként · szemléltető modell')), bar,
       h('div', { class: 'sim-rz' }, h('span', { class: M.cls === 'lebegő' ? 'on' : '' }, 'lebegő (talp\u00A0≤\u00A01/3)'), h('span', { class: M.cls === 'vegyes' ? 'on' : '' }, 'vegyes'), h('span', { class: M.cls === 'álló' ? 'on' : '' }, 'álló (talp\u00A0≥\u00A02/3)')));
@@ -972,7 +1060,7 @@ register('sim3d', (root) => {
   const schedule = (keep = false) => { if (rbPending) return; rbPending = true; requestAnimationFrame(() => { rbPending = false; playing = false; rebuild(keep); paintPlay(); }); };
   cProf.on((v) => { S.prof = v; schedule(); });
   cNb.on((v) => { S.nb = v; schedule(true); });
-  cTech.on((v) => { S.tech = v; const T = TECH[v]; techRanges(); cD.set(T.D[3], false); if (S.L > 24 && v === 'cfa') cL.set(T.L, false); if (v === 'dry' && S.L > 10) cL.set(T.L, false); S.fault = false; cFault.set(false, false); schedule(); });
+  cTech.on((v) => { S.tech = v; const T = TECH[v]; techRanges(); cD.set(T.D[3], false); const [l0, l1] = LRANGE[v]; if (S.L < l0 || S.L > l1) cL.set(T.L, false); S.fault = false; cFault.set(false, false); schedule(); });
   cShape.on((v) => { S.shape = v; schedule(); });
   cD.on(() => schedule());
   cL.on(() => schedule());

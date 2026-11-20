@@ -1,0 +1,35 @@
+# C csoport (C09–C12, hős, lábléc) – átnézés 2026-11
+fdda8de	<a href="https://bme-alapozas.vercel.app" target="_blank" rel="noopener">Foundation Engineering – course home <small>↗</small></a>⏎        <a href="https://talajfelderites.vercel.app" target="_blank" rel="noopener">Ground investigation <small>↗</small></a>⏎        <a href="https://sikalapoktervezese.vercel.app" target="_blank" rel="noopener">Design of shallow foundations <small>↗</small></a>⏎        <a href="https://sikalapokaterohatasok.vercel.app" target="_blank" rel="noopener">Actions on shallow foundations <small>↗</small></a>⏎        <a href="https://sikalapok-teherbirasszamitasa.vercel.app" target="_blank" rel="noopener">Bearing resistance of shallow foundations <small>↗</small></a>⏎        <a href="https://sikalapokallekonysagvizsgalata.vercel.app" target="_blank" rel="noopener">Stability of shallow foundations <small>↗</small></a>⏎        <a href="https://sikalapok-sullyedesszamitasa.vercel.app" target="_blank" rel="noopener">Settlement of shallow foundations <small>↗</small></a>⏎        <a href="https://vedekezesakarossullyedesekellen.vercel.app" target="_blank" rel="noopener">Protection against harmful settlement <small>↗</small></a>⏎        <a href="https://kedvezotlen-altalaj.vercel.app" target="_blank" rel="noopener">Foundations on unfavourable ground <small>↗</small></a>⏎        <a href="https://munkaterhatarolasok.vercel.app" target="_blank" rel="noopener">Excavation support <small>↗</small></a>⏎        <a href="https://cfa-colop-3d.vercel.app" target="_blank" rel="noopener">CFA pile in 3D <small>↗</small></a>⏎        <a href="https://bme-alapozas.vercel.app/ar-labor/" target="_blank" rel="noopener">Foundation Engineering AR lab <small>↗</small></a>
+9094c41	bored: ≤ 250–300 mm
+8858aaf	=
+dabd729	4–12 m; spun: max. 20–22 m
+9303a44	no bore
+f88e190	depends on the tool size
+49e1266	Rotate: drag (horizontally on a phone) · zoom: scroll or pinch · the rig is simplified, and the load transfer is an illustrative model.
+624e24e	Eight methods, from CFA through the Franki pile to the micropile. The rigs are simplified; the order and logic of the work phases are real.
+0e2f00b	=
+48d71f9	Six 3D models from the course topics – you can also view them in augmented reality on your phone.
+deac28d	Foundation Engineering AR lab
+bac3116	=
+decb1a2	How a CFA pile is built, step by step, in a 3D animation you can rotate.
+a1fcff0	CFA pile in 3D
+e6aafa5	=
+ef9cdf4	Stresses beneath the foundation, depth of influence, settlement – a practical guide.
+a50c115	Settlement of shallow foundations
+14a7925	=
+5626b84	Calculating the bearing resistance step by step, with worked examples.
+f35a04c	Bearing resistance of shallow foundations
+c775585	=
+002deff	The loads and actions on a foundation – the input data for design.
+e944a36	Actions on shallow foundations
+82a1200	If a shallow foundation is enough after all: foundation types, founding level, dimensions.
+25678d0	=
+09e402d	How the course is built up, from ground investigation to the finished building – every module is one click away.
+c73fcce	Foundation Engineering – course home
+990b3c2	Deep foundations are not an island: ground investigation, the design of shallow foundations, ground improvement, unfavourable subsoils and excavation support are all part of the same decision. The other interactive modules of the Foundation Engineering course:
+2a323cf	The casing supports the wall of the bore right up to concreting, so it can be used safely even in silty soil with a high water content – with diameters of 80–180 cm and lengths of 15–50 (100) m. CFA is built to 22–24 m at most and is not suitable for loose, flowing soil; without support the bore would collapse, and the ground screw is only a 2–3 m element for small loads.
+c9b87b7	well foundation, Ø 2.5 m
+a264ce6	influence depth ≈ ${fmt(HM, 1)} m (Δσ<sub>z</sub> = 0.2·σ′<sub>v0</sub>)
+94ab62b	stress bulb: Δσ<sub>z</sub>/q isobars
+
+6d952a6	Well
