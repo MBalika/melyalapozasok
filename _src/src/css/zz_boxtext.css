@@ -1,0 +1,29 @@
+/* ===== Szövegdobozok szövege középen (2026-11-20, a felhasználó kérése: „a címek és a szövegek mindig középen legyenek
+   az összes ilyen szövegablakban”) =====
+   A cím (díszítőivel) és a szöveg középen; a több soros, sorkizárt bekezdés sorkizárt marad, de az utolsó sora is
+   középre áll. Kép vagy ikon melletti kártyában a szöveg a megmaradó hasáb közepén. Balra zárt marad: felsorolás,
+   táblázat, a kezelőpanelek (csúszka, választó), a lejátszólisták sorai. */
+
+.card, .callout, .formula .fl, .alap-ok > :not(.alap-oki), .sim-task > :not(.sim-task-n), .at-node > :not(.alap-ti), .hero-verdict,
+.sim-step, .vmeta, .vt-list span, .vt-link, .verdict, .q-n, .q-t, .q-exp, .tf-item .s, .tf-item .e, .alap-ttc, .tz-gi dd, .rf-info span,
+.rf-figcard figcaption, .rf-figcap, .rf-stepd, .rf-figcard > p { text-align: center; }
+
+main .card p, main .callout p, main .q-exp, main .verdict, main .verdict p, main .tf-item .s, main .tf-item .e, main .tz-gi dd,
+main .alap-ok p, main .sim-task p, main .alap-ttc p, main .w-foot, .hero-verdict, .sim-step .sim-sd, .formula .fl, .rf-info span,
+.rf-figcard figcaption, .rf-figcap, .rf-stepd, .rf-figcard > p { text-align-last: center; }
+
+main .card .rag, main .callout .rag, main .q-exp.rag, main .verdict.rag, main .verdict .rag, main .tf-item .rag, main .tz-gi .rag,
+main .alap-ok .rag, main .sim-task .rag, main .alap-ttc .rag, .hero-verdict.rag, .sim-step .rag { text-align: center !important; }
+
+.card ul, .card ol, .card li, .callout ul, .callout li, .alap-ttc ul, .alap-ttc li { text-align: left; text-align-last: auto; }
+
+.verdict > b:first-child { text-align: center; }
+.sim-task .btn { justify-self: center; }
+.vt-link { align-items: center; }
+.alap-ttc .ttc-go { justify-self: center; }
+.q-opts button { text-align: center; justify-content: center; }
+.tf-btns { justify-content: center; }
+.formula .fl { text-align: center; }
+.alap-ok b { text-align: center; }
+.tz-gi dd a { margin-inline: auto; }
+.dnt-flags button { align-items: center; text-align: center; padding-left: 34px; padding-right: 34px; }   /* a jelölőnégyzet bal felül, a felirat a gomb közepén */
