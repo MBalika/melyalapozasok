@@ -10,16 +10,14 @@ a0c9669	Technology matrix
 2139c83	Choosing a technology is not a matter of “taste”: a wrong choice (for example a driven pile next to a sensitive neighbour, or unsupported drilling below the groundwater) can damage the surrounding buildings or result in a defective pile with discontinuities. That is why the soil and groundwater conditions must be known at the very start of design.
 6b56740	<span class="id">C11</span><span>5 animations · 13 real recordings</span>
 2ea4c4d	Video library
-00ab14e	All the videos in one place. The five explainer animations show the concepts, the load transfer and the mechanics, and the recordings of the BME Faculty of Civil Engineering show how the machines work on a real site. In the player <span class="kbd">Space</span> = pause, <span class="kbd">F</span> = full screen, <span class="kbd">Esc</span> = close; you can also page through at the bottom of the animation window.
+00ab14e	All the videos in one place. The five explainer animations show the concepts, the load transfer and the mechanics, and the real-site recordings show how the machines work on a real site. In the player <span class="kbd">Space</span> = pause, <span class="kbd">F</span> = full screen, <span class="kbd">Esc</span> = close; you can also page through at the bottom of the animation window.
 7f71812	Explainer animations
 bb32d7f	What to watch when?
 ca8e3b3	A suggested viewing route in the order of the chapters: at each stop the animation gives the principle and the real recording the technology. The buttons start the video directly.
 25b5ffc	What it looks like in reality
-5961a22	Deep foundation recordings from the YouTube channel of the BME Faculty of Civil Engineering (in Hungarian). Click to open the video here on the page; you can also open it on YouTube at the bottom of the window.
-7e6274b	<a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoJk3IiDC5YBCNSs0_YQFXXA" target="_blank" rel="noopener"><i class="grp1"></i><span><small>Playlist</small><b>Pile foundations</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLJnR9HUPPN85cACUQXJhYj" target="_blank" rel="noopener"><i class="grp3"></i><span><small>Playlist</small><b>Ground improvement</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLoUK4uIoeIHjowjrmQH1Tc" target="_blank" rel="noopener"><i class="grp4"></i><span><small>Playlist</small><b>Embedded retaining structures</b></span><em>↗</em></a>
-dbaf814	Deep foundations are not an island: the design of shallow foundations, ground improvement, unfavourable subsoils and excavation support are all part of the same decision.
+5961a22	Real deep foundation footage in English from the Geotech Project YouTube channel (the two short overview clips exist only in Hungarian). Click to open the video here on the page; you can also open it on YouTube at the bottom of the window.
+7e6274b	<a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoJk3IiDC5YBCNSs0_YQFXXA" target="_blank" rel="noopener"><i class="grp1"></i><span><small>Playlist</small><b>Pile foundations</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLJnR9HUPPN85cACUQXJhYj" target="_blank" rel="noopener"><i class="grp3"></i><span><small>Playlist</small><b>Ground improvement</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLoUK4uIoeIHjowjrmQH1Tc" target="_blank" rel="noopener"><i class="grp4"></i><span><small>Playlist</small><b>Embedded retaining walls</b></span><em>↗</em></a>
 19d4836	Design of shallow foundations
-2fd6250	If a shallow foundation is enough after all: dimensions, bearing resistance, settlement.
 5138815	=
 65c85d1	Stability of shallow foundations
 b245627	Sliding, overturning, bearing failure – the limit states of a shallow foundation.
@@ -46,9 +44,7 @@ ba20c08	True or false?
 18c8a58	Glossary
 e25ea26	The most important terms in brief. Search for a word or filter by topic – one click takes you from any term to the relevant chapter.
 9cb00bb	<a class="btn btn-line" href="#bevezeto">↑ Back to the surface</a>
-dd18fd3	slender elements into the bearing stratum
 a94f295	Slender, individual elements carry the load down to the bearing stratum – at their bases and along their shafts.
-a579f3c	a wall in the ground: foundation and retaining wall
 fb3abb9	A continuous reinforced concrete wall in the ground: foundation and excavation support in one – it also forms the wall of the underground car park.
 00141bc	sunk large-diameter bodies
 f0c3a23	Large-diameter bodies, sunk and then filled with concrete, under individual columns; a grillage ties them together at the top.
@@ -100,8 +96,6 @@ bc2e6ed	Soft layer below the foundation level
 1d8e23a	Average load of the building
 51da41c	Scour hazard: the shallow foundation may be undermined; the foundation must reach below the expected scour depth.
 ddd442b	The soft layer cannot carry the load (risk of bearing failure): ${fmt(q, 0)}${NB}kPa > approx. ${fmt(R, 0)}${NB}kPa.
-163aefb	The settlement of the shallow foundation (approx. ${fmt(sMm, 0)}${NB}mm) exceeds the allowable value (approx. ${allow}${NB}mm).
-6ea2922	The settlement (approx. ${fmt(sMm, 0)}${NB}mm) is still within the limit of approx. ${allow}${NB}mm.
 3f6e7dd	The groundwater is above the foundation level: a shallow foundation would need a watertight excavation and dewatering – often more expensive than a deep foundation.
 2f240a8	Large inclined load: the shallow foundation must also be checked for sliding; piles can also take the horizontal force.
 eb03b7d	The soil excavated for the basement “unloads”: the extra load is only approx. ${fmt(qnet, 0)}${NB}kPa.
@@ -133,7 +127,6 @@ c97c1cf	the 1970s–80s
 a9c55eb	The tower of a modern onshore wind turbine is approx. 100–150 m tall, and the blade tip reaches close to 200 m. Its foundation is typically a reinforced concrete footing approx. 15–25 m in diameter and 2–3 m thick, on piles on weak soil.
 bf64b18	The tilt of the tower governs: the allowable differential settlement is approx. 3 mm/m.
 13d888e	reinforced concrete foundation taken down 15 m
-42ebf5d	For more than 30 years it was the tallest free-standing structure in the world. The load of the 553 m tall tower is transferred to the rock (shale) by a reinforced concrete foundation taken down 15 m.
 bdb3148	If the bearing stratum is within reach, a massive foundation taken to depth is enough.
 66bddc5	380 bored piles, approx. 80 m
 e3a2745	The tower stands on 380 bored piles 1.5 m in diameter: they reach down approx. 80 m, socketed up to 30 m into the rock. The area is exposed to earthquakes and typhoons.

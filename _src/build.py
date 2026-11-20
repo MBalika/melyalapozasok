@@ -160,4 +160,19 @@ if r.returncode: print(r.stderr); sys.exit(1)
 for f in FILES:
     if f.endswith('.js'):
         p = EN / f; t = p.read_text(encoding='utf-8'); t = re.sub(r'\btg(?=[  ][αδφ$\d(]|²)', 'tan', t); t = re.sub(r'\bctg(?=[  ][αδφ$\d(]|²)', 'cot', t); p.write_text(t, encoding='utf-8')
+# az angol oldalon a BME-videók helyett azok eredeti angol változatai (Geotech Project csatorna) – i18n/yt_en.json;
+# amelyiknek nincs angol változata, az marad, „in Hungarian” jelzéssel
+YE = json.loads((I18N / 'yt_en.json').read_text(encoding='utf-8'))
+meta = json.loads((EN / 'js' / 'yt_meta.json').read_text(encoding='utf-8')); ytm = {}
+for hu, v in meta.items():
+    e = YE['videos'].get(hu)
+    if e: ytm[e['id']] = {**{k: e[k] for k in ('title', 'dur', 'playlist', 'list', 'caps', 'times', 'thumbSize')}, 'ch': YE['channel']}
+    else: ytm[hu] = {**v, 'note': 'in Hungarian'}
+(EN / 'js' / 'yt_meta.json').write_text(json.dumps(ytm, ensure_ascii=False, indent=1), encoding='utf-8')
+SWAP = {**{hu: e['id'] for hu, e in YE['videos'].items()}, **YE['lists']}
+rx = re.compile('|'.join(map(re.escape, SWAP))); nsw = 0
+for p in [*(EN / 'js').glob('*.js'), *(EN / 'chapters').glob('*.html'), *EN.glob('*.html')]:
+    t = p.read_text(encoding='utf-8'); t2, k = rx.subn(lambda m: SWAP[m.group(0)], t)
+    if k: p.write_text(t2, encoding='utf-8'); nsw += k
+print('angol YouTube-videók:', sum(1 for v in ytm.values() if v.get('ch')), '· csak magyarul:', sum(1 for v in ytm.values() if v.get('note')), '· cserélt hivatkozás:', nsw)
 build(EN, 'en-GB', 'en.html')

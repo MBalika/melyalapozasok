@@ -1,5 +1,5 @@
 // C01 – 1.2 A mélyalapozás típusai: interaktív terepmetszet-panoráma (cölöpalap, résfal, kútalap, szekrény/keszon, átmeneti)
-import { $, $$, h, svg, register, shell, seg } from './core.js';
+import { $, $$, h, svg, register, shell, seg, EN } from './core.js';
 
 const NB = ' ';
 const W = 1520, H = 700, G = 250, S = 17; // 1 m = 17 egység (függőlegesen)
@@ -174,7 +174,7 @@ function sceneAtmeneti(g) {
     for (const dx of [5, 12, 19]) F(g, bx + dx, yb + 22, bx + dx, yb + 3, 'base', 1.0);
   }
   flow(g, `M1278 ${G - 60} V${Y(bt(1278) + 0.4)} M1336 ${G - 60} V${Y(bt(1336) + 0.4)}`);
-  T(g, 1307, Y(6.7), 'markolt', 'tt-sm', { 'text-anchor': 'middle' }); T(g, 1307, Y(6.7) + 16, 'tömbalap', 'tt-sm', { 'text-anchor': 'middle' });
+  T(g, 1307, Y(6.7), EN ? 'excavated' : 'markolt', 'tt-sm', { 'text-anchor': 'middle' }); T(g, 1307, Y(6.7) + 16, 'tömbalap', 'tt-sm', { 'text-anchor': 'middle' });
   // b) csarnoklemez merev betéteken, teherelosztó szemcsés réteggel
   const sx0 = 1370, sx1 = 1514, slabT = G - 6, ltpB = G + 10;
   R(g, 1374, G - 96, 4, 90, 'f-steelc'); R(g, 1506, G - 96, 4, 90, 'f-steelc'); P(g, `M1368 ${G - 96} L1442 ${G - 120} L1516 ${G - 96}`, 'tt-roof');
@@ -214,14 +214,14 @@ function panorama(root) {
   P(soil, rd, 'tt-river'); P(soil, rd, '', { fill: 'url(#pat-water)', opacity: 0.8 });
   P(soil, `M${RX0 + 6} ${Y(WL)} H${RX1 - 6}`, 'tt-wl');
   // talajvíz
-  P(soil, `M34 ${Y(2.5)} H346 M644 ${Y(2.5)} H${RX0 + 20}`, 'tt-gw');
+  P(soil, `M48 ${Y(2.5)} H346 M644 ${Y(2.5)} H${RX0 + 20}`, 'tt-gw');
   P(soil, `M${RX1 - 20} ${Y(WL + 0.5)} C${RX1 + 30} ${Y(1.5)} 1270 ${Y(7)} 1310 ${Y(7)} H${W}`, 'tt-gw');
-  T(soil, 324, Y(2.5) - 6, 'TV', 'tt-xs t-water', { 'text-anchor': 'end' });
+  T(soil, 324, Y(2.5) - 6, EN ? 'GWL' : 'TV', 'tt-xs t-water', { 'text-anchor': 'end' });
   // mélységléc
   const rl = svg('g', { class: 'tt-ruler' }, s);
-  P(rl, `M28 ${G} V${H - 6}`, 'tt-rl');
-  for (let d = 0; d <= 20; d += 5) { P(rl, `M22 ${Y(d)} H34`, 'tt-rl'); T(rl, 18, Y(d) + 5, d === 0 ? '0' : '−' + d, 'tt-xs', { 'text-anchor': 'end' }); }
-  T(rl, 18, Y(21.4) + 5, 'm', 'tt-xs', { 'text-anchor': 'end' });
+  P(rl, `M40 ${G} V${H - 6}`, 'tt-rl');
+  for (let d = 0; d <= 25; d += 5) { P(rl, `M35 ${Y(d)} H45`, 'tt-rl'); T(rl, 32, Y(d) + 5, d === 0 ? '±0' : '−' + d, 'tt-xs', { 'text-anchor': 'end' }); }
+  T(rl, 32, Y(22.5) + 5, 'm', 'tt-xs', { 'text-anchor': 'end' });
   // jelenetek
   const groups = {};
   for (const sc of TT_SCENES) {
@@ -253,7 +253,7 @@ register('alap-tipusterkep', (root) => {
     for (const sc of TT_SCENES) groups[sc.k].classList.toggle('dim', k !== 'all' && sc.k !== k);
     cards.forEach((c) => { c.classList.toggle('on', c.dataset.tt === k); c.classList.toggle('dim', k !== 'all' && c.dataset.tt !== k); });
     const sc = TT_SCENES.find((q) => q.k === k);
-    if (narrow() && sc) { const pad = 10; s.setAttribute('viewBox', `${sc.x0 - pad} 0 ${sc.x1 - sc.x0 + 2 * pad} ${sc.zh}`); view.classList.add('zoom'); }
+    if (narrow() && sc) { const pad = 10, xa = sc.x0 < 60 ? 0 : sc.x0 - pad; s.setAttribute('viewBox', `${xa} 0 ${sc.x1 + pad - xa} ${sc.zh}`); view.classList.add('zoom'); }
     else { s.setAttribute('viewBox', `0 0 ${W} ${H}`); view.classList.remove('zoom'); }
     s.style.aspectRatio = s.getAttribute('viewBox').split(' ').slice(2).join(' / ');
     if (sc) {

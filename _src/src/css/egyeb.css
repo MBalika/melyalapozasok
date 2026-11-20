@@ -106,3 +106,9 @@ svg .egy-mixf2 { fill: color-mix(in srgb, var(--grout) 40%, var(--soilC)); }
 svg .egy-mixc { fill: color-mix(in srgb, var(--grout) 55%, var(--soilC)); stroke: var(--ink2); stroke-width: 1.2; opacity: 0.95; }
 svg .egy-vib { fill: var(--steelm); stroke: var(--steelm2); stroke-width: 1.2; }
 svg .egy-ovl { fill: color-mix(in srgb, var(--grout) 60%, var(--ink) 25%); }
+
+/* átnézés: ábrafeliratok glóriával, csonka galériasor középre */
+svg .egy-Ls { paint-order: stroke; stroke: var(--surface2); stroke-width: 3px; stroke-linejoin: round; }
+#egyeb .gal:has(> figure:nth-child(2):last-child) { justify-content: center; }
+/* keskeny kijelzőn a páratlan számú kiírás utolsó eleme töltse ki a sort (ne maradjon csonka sor) */
+@media (max-width: 600px) { #egyeb .w-out > .stat:last-child:nth-child(odd), #furt .w-out > .stat:last-child:nth-child(odd) { grid-column: 1 / -1; } }

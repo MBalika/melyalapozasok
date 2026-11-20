@@ -187,7 +187,7 @@ const CASES = [
     d: 'Nehéz, daruzott csarnok épül. A felső 25 m-es réteg magas víztartalmú, folyós iszap, a talajvíz szinte a felszínen áll, alatta tömör kavics. 120 cm átmérőjű, 30 m hosszú cölöpök kellenek.',
     q: 'Melyik technológiát választanád?',
     o: ['Béléscsöves (köpenycsöves) fúrt cölöpöt', 'CFA-cölöpöt', 'Megtámasztás nélküli fúrt cölöpöt', 'Előregyártott acél talajcsavart'], c: 0,
-    e: 'A béléscső a furat falát egészen a felbetonozásig megtámasztja, ezért magas víztartalmú, iszapos talajban is biztonsággal alkalmazható – 80–180 cm átmérővel, 15–50 (100) m hosszal. A CFA jellemzően 22–24 m-ig készül, és laza, folyós talajban különös gondosságot kíván; megtámasztás nélkül a furat beomlana, a talajcsavar pedig csak 2–3 m-es, kis terhű elem.' },
+    e: 'A béléscső a furat falát egészen a felbetonozásig megtámasztja, ezért magas víztartalmú, iszapos talajban is biztonsággal alkalmazható – 80–180 cm átmérővel, 15–50 (100) m hosszal. A CFA legfeljebb 22–24 m-ig készül, és laza, folyós talajba nem való; megtámasztás nélkül a furat beomlana, a talajcsavar pedig csak 2–3 m-es, kis terhű elem.' },
   { t: 'Lakóépület kemény agyagon', sk: 'agyag',
     d: 'Kisebb lakóépület alá 7 m hosszú, 60 cm átmérőjű cölöpök kellenek. A talaj végig kemény, kötött agyag; talajvizet a feltárás 15 m-ig sem talált.',
     q: 'Mi a legegyszerűbb megoldás?',
@@ -537,7 +537,7 @@ register('vt-route', (root) => {
   ROUTE.forEach((r, i) => {
     const btns = h('div', { class: 'vt-btns' },
       ...r.v.map((n) => { const v = VIDEOS[VIDX[n]]; return h('button', { class: 'vt-b own grp' + v.grp, type: 'button', onclick: () => playOwn(n), 'aria-label': 'Animáció: ' + v.t }, h('i', { class: 'vt-play' }), h('span', {}, h('small', {}, `Animáció · ${VIDX[n] + 1} / ${VIDEOS.length}`), h('b', {}, v.t))); }),
-      ...r.yt.map((id) => { const y = YT[id]; return h('button', { class: 'vt-b yt', type: 'button', onclick: () => playYT(id), 'aria-label': 'BME-felvétel: ' + y.title }, h('i', { class: 'vt-ytb' }), h('span', {}, h('small', {}, `BME · ${y.dur}`), h('b', {}, y.tech))); }));
+      ...r.yt.map((id) => { const y = YT[id]; return h('button', { class: 'vt-b yt', type: 'button', onclick: () => playYT(id), 'aria-label': 'BME-felvétel: ' + y.title }, h('i', { class: 'vt-ytb' }), h('span', {}, h('small', {}, `${y.ch.split(' ')[0]} · ${y.dur}`), h('b', {}, y.tech))); }));
     ol.append(h('li', { class: 'vt-step' },
       h('div', { class: 'vt-num' }, String(i + 1)),
       h('div', { class: 'vt-body' },
@@ -585,6 +585,7 @@ function vtLayout() {
   if (n(groups[1]) + n(groups[2]) !== 4 || n(groups[3]) !== 1) return;
   lib.dataset.vtl = '1';
   // a keskeny (egykártyás) oszlopok fejléce egy sorba férjen, hogy a kártyák teteje egy vonalba essen
+  groups[1][0].textContent = 'Egyéb cölöpök'; groups[1][0].title = 'A Talajjavítások lejátszási listából';
   groups[2][0].textContent = 'Résfal'; groups[2][0].title = 'A Befogott támszerkezetek lejátszási listából';
   groups[3][0].textContent = 'Kimosás'; groups[3][0].title = 'Miért kell mélyre menni? – kimosás a hídpillér körül';
   const mk = (cls, span) => { const d = document.createElement('div'); d.className = cls; if (span) d.style.setProperty('--n', span); return d; };
@@ -600,3 +601,8 @@ function vtLayout() {
   lib.append(r1, r2);
 }
 if (typeof window !== 'undefined') setTimeout(vtLayout, 0);
+// az angol oldalon a build a társoldalak gyökércímét írja át /en-re; az aloldalas és a később elkészült angol változatokat itt irányítjuk át
+if (EN && typeof document !== 'undefined') for (const el of document.querySelectorAll('a[href^="https://cfa-colop-3d.vercel.app"], a[href^="https://bme-alapozas.vercel.app/ar-labor"]')) {
+  const u = el.getAttribute('href').replace(/\/$/, ''); if (!/\/en$/.test(u)) el.setAttribute('href', u + '/en');
+}
+

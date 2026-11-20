@@ -8,7 +8,7 @@ b15d812	Sinking under self-weight, cutting edge, excess pressure and airlocks �
 9001662	A summary with a quiz, then decision situations and 40 true/false statements.
 b9fcdcd	Animation: 
 f4cba35	Animation · ${VIDX[n] + 1} / ${VIDEOS.length}
-841c2c0	BME recording: 
+841c2c0	YouTube video: 
 760f981	Quiz – which one to choose?
 16ebe89	Which is <b>not</b> a limitation of pile driving?
 bce9b26	Loose, medium-dense sand
@@ -56,7 +56,7 @@ e7b4ed6	Which statement is true of large-diameter piles (above 80 cm)?
 8f42037	They can only be ground screws
 0065489	They are always made of timber
 27c99cb	Piles with a diameter above 80 cm are made exclusively with replacement technology – by cased or bentonite-supported drilling, or with a larger CFA rig.
-b311494	From the Embedded retaining structures playlist
+b311494	From the Embedded retaining walls playlist
 1b36f3d	Scour
 d0ff6f1	Why go deep? – scour around a bridge pier
 0d03120	The complete playlists
@@ -150,7 +150,6 @@ d3df46a	Thin overlap – risky
 12b08fa	A closed, overlapping jet wall
 ce0fa6a	Columns of approx. ${fmt(D, 2)} m every ${fmt(s, 2)} m: a continuous wall approx. ${fmt(t, 2)} m thick at the overlap.
 ca00001	1 · drilling
-5126f9b	2 · grouting upwards
 9142c88	3 · finished column
 2213f89	plan · row of columns
 21555f5	hollow, extendable steel bar with a sacrificial drill bit

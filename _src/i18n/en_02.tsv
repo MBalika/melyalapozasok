@@ -25,11 +25,6 @@ c4d27b5	Scour lab around a bridge pier
 0921324	Scheme of a pile foundation: 1 – columns and floor of the superstructure, 2 – grillage, 3 – pile caps, 4 – piles, 5 – bearing stratum; arrows show the load path
 bb2578a	Scheme and load transfer of a pile foundation: the load of the superstructure is distributed to the piles by the pile caps and the grillage, and the piles transfer it to the soil along their shafts and at their bases.
 bd7f6c5	The pile foundation of a new structure has two main parts: the <b>piles</b>, and the <b>cap, slab and/or pile grillage</b> (beam grillage) tying their heads together. The connecting structure distributes the load of the superstructure to the piles and makes them work together.
-e9199a3	<span class="n">1</span><span><b>Superstructure</b> – columns and floors; their load (<b>vertical arrows</b>) is carried down to the foundation by the columns.</span>
-c1066a9	<span class="n">2</span><span><b>Grillage (pile grillage)</b> – reinforced concrete beams between the heads: it ties and stiffens the system and can also take the load of walls.</span>
-7c8c0d1	<span class="n">3</span><span><b>Pile cap</b> – the reinforced concrete block under the column that distributes the load to the pile group; its top is horizontal, and the pile reinforcement is anchored into it.</span>
-f05f4af	<span class="n">4</span><span><b>Piles</b> – they transfer the load to the soil along their shafts (<b class="alap-k-ok">green arrows</b>) and at their bases (<b class="alap-k-acc">orange arrows</b>).</span>
-40f3acc	<span class="n">5</span><span><b>Bearing stratum</b> – the piles are socketed into it; above it lie the weaker, compressible layers.</span>
 6e1390b	Pile cap, grillage, slab
 70351fc	What else are piles good for?
 8dc0567	Foundation of a new structure
@@ -84,7 +79,6 @@ da7a9bd	Tension
 149c2c9	Anchor
 f111cb9	bending
 0f58573	<span>End-bearing pile</span>
-8831f35	<span>In compression</span>
 13a416e	<span>In tension</span>
 40c8463	<span>In bending</span>
 4b0ad55	<span><i style="background:var(--soilB)"></i>weaker layer</span>⏎      <span><i style="background:var(--soilD)"></i>bearing stratum</span>⏎      <span><i style="background:var(--water-fill)"></i>water</span>⏎      <span><i class="l" style="border-color:var(--ok)"></i>shaft resistance</span>⏎      <span><i class="l" style="border-color:var(--accent)"></i>base resistance</span>⏎      <span><i class="l" style="border-color:var(--muted)"></i>lateral displacement</span>⏎      <span><i class="l" style="border-color:var(--grp)"></i>lateral soil resistance</span>
@@ -111,7 +105,7 @@ e17764d	<b>Short pile</b> – approx. 3–5 m long; useful where the bearing str
 c70112f	<b>Large-diameter pile</b> – above 80 cm; these are made <b>exclusively with replacement</b> technology.
 3a77e97	Diameter scale
 77a7037	The pile family tree
-b2325f6	Pile technologies are best grouped by method of construction: <b>displacement</b> and <b>replacement</b> piles, supplemented by an <b>“other”</b> group. (The complete system of deep foundations – together with diaphragm walls, well and box foundations – is presented in <a href="#alap-fajtak">section 1.2</a>.) Tap a branch to jump to the relevant chapter. The <span class="rsz-ytdot" aria-hidden="true"></span> mark shows that there is also real BME footage of the technology.
+b2325f6	Pile technologies are best grouped by method of construction: <b>displacement</b> and <b>replacement</b> piles, supplemented by an <b>“other”</b> group. (The complete system of deep foundations – together with diaphragm walls, well and box foundations – is presented in <a href="#alap-fajtak">section 1.2</a>.) Tap a branch to jump to the relevant chapter. The <span class="rsz-ytdot" aria-hidden="true"></span> mark shows that there is also real site footage of the technology.
 946f875	<span class="id">C03</span><span>Displacement · precast</span>
 eb9e6b5	Precast piles
 3395cbc	A precast pile is a finished <b>displacement element</b>: it is made in a factory or yard, and on site it is driven, vibrated, jacked or screwed into the ground. No soil is brought up – the pile “makes” its place by pushing the soil aside, so the surrounding soil is compacted. As a result, <b>both the base and the shaft resistance of the pile increase</b>. The price: noise, vibration, and the fact that it cannot pass through whatever is in its way (rock, a hard intercalated layer).

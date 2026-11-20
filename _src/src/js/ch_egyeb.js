@@ -8,7 +8,9 @@ const txt = (p, x, y, t, cls = 't-lab', o = {}) => svg('text', { x, y, class: cl
 function stxt(p, x, y, base, sub, rest = '', cls = 't-lab', o = {}) {
   const t = svg('text', { x, y, class: cls, ...o }, p);
   svg('tspan', { text: base }, t);
-  svg('tspan', { text: sub, 'baseline-shift': 'sub', 'font-size': '72%' }, t);
+  // alsó index dy-nal (a baseline-shift nem minden böngészőben működik); a záró, nulla szélességű tspan visszaemeli az alapvonalat
+  svg('tspan', { text: sub, dy: '0.3em', 'font-size': '72%' }, t);
+  svg('tspan', { text: '\u200b', dy: '-0.3em', 'font-size': '72%' }, t);
   if (rest) svg('tspan', { text: rest }, t);
   return t;
 }
@@ -292,8 +294,10 @@ register('egy-kihajlas', (root) => {
     svg('line', { x1: 186, y1: hy0, x2: 186, y2: hy1, class: 's-ink', 'stroke-width': 1 }, g);
     svg('line', { x1: 181, y1: hy0, x2: 191, y2: hy0, class: 's-ink', 'stroke-width': 1 }, g);
     svg('line', { x1: 181, y1: hy1, x2: 191, y2: hy1, class: 's-ink', 'stroke-width': 1 }, g);
-    txt(g, 180, (hy0 + hy1) / 2 - 4, 'félhullám', 't-sm halo', { 'text-anchor': 'end' });
-    txt(g, 180, (hy0 + hy1) / 2 + 10, nb(fmt(R.half, 1) + ' m'), 't-num halo', { 'text-anchor': 'end' });
+    // a felirat sötét talajon áll: kis hátlapot kap, hogy világos és sötét témában is olvasható legyen
+    svg('rect', { x: 122, y: (hy0 + hy1) / 2 - 17, width: 61, height: 33, rx: 6, class: 'f-surface', opacity: 0.92 }, g);
+    txt(g, 178, (hy0 + hy1) / 2 - 4, 'félhullám', 't-sm', { 'text-anchor': 'end' });
+    txt(g, 178, (hy0 + hy1) / 2 + 10, nb(fmt(R.half, 1) + ' m'), 't-num', { 'text-anchor': 'end' });
     // ---------------- jobb panel: N_cr(c_u)
     const c = svg('g', {}, fig);
     const x0 = nar ? 52 : 290, x1 = nar ? 386 : 700, y0 = nar ? 735 : 350, y1 = nar ? 440 : 30;
@@ -327,7 +331,8 @@ register('egy-kihajlas', (root) => {
     const ncrLab = svg('g', {}, c);
     svg('circle', { cx: sx(cu.v), cy: sy(R.Ncr), r: 7, class: R.Ncr < R.Npl ? 'f-bad' : 'f-ok', style: 'stroke:var(--surface);stroke-width:2.5' }, ncrLab);
     const right = sx(cu.v) < x0 + (x1 - x0) * 0.62;
-    stxt(ncrLab, sx(cu.v) + (right ? 12 : -12), Math.max(y1 + 12, sy(R.Ncr) - 10), 'N', 'cr', nb(` = ${fmt(R.Ncr, 0)} kN`), 't-num halo', { 'text-anchor': right ? 'start' : 'end' });
+    // a görbe balról jobbra emelkedik: jobbra-lent és balra-fent szabad a hely, oda kerül a felirat
+    stxt(ncrLab, sx(cu.v) + (right ? 12 : -12), right ? Math.min(y0 - 26, sy(R.Ncr) + 20) : Math.max(y1 + 12, sy(R.Ncr) - 10), 'N', 'cr', nb(` = ${fmt(R.Ncr, 0)} kN`), 't-num halo', { 'text-anchor': right ? 'start' : 'end' });
     // kimenetek
     sEI.set(R.EI);
     sNcr.set(R.Ncr, R.Ncr < R.Npl ? 'bad' : 'ok');
@@ -344,10 +349,10 @@ register('egy-kihajlas', (root) => {
 
 /* ================================================================== 3. JET-OSZLOPGYÁR */
 const JET_SOIL = {
-  kavics: { t: 'Kavics', D: [0.8, 2.0], col: '--soilD', grain: 2.6 },
-  homok: { t: 'Homok', D: [0.6, 1.6], col: '--soilA', grain: 1.5 },
-  iszap: { t: 'Iszap', D: [0.45, 1.0], col: '--soilC', grain: 1.0 },
-  agyag: { t: 'Agyag', D: [0.35, 0.7], col: '--soilB', grain: 0.7 },
+  k_kavics: { t: 'Kavics', D: [0.8, 2.0], col: '--soilD', grain: 2.6 },
+  k_homok: { t: 'Homok', D: [0.6, 1.6], col: '--soilA', grain: 1.5 },
+  k_iszap: { t: 'Iszap', D: [0.45, 1.0], col: '--soilC', grain: 1.0 },
+  k_agyag: { t: 'Agyag', D: [0.35, 0.7], col: '--soilB', grain: 0.7 },
 };
 const JET_VAR = {
   szimpla: { t: 'Szimpla', f: 0.25, water: false, air: false },
@@ -366,7 +371,7 @@ function jetCalc(soil, vr, p, v, n) {
 }
 register('egy-jet', (root) => {
   const { ctrls, viz, out } = shell(root, { foot: '<b>Szemléltető modell.</b> Az átmérőt a talaj, a változat, a nyomás és az emelési sebesség alapján a jellemző tartományokba (agyagban legfeljebb 60–70 cm, kavicsban 150–200 cm) skáláztuk. A valós átmérőt a helyszínen próbaoszlopokkal, kibontással ellenőrzik.' });
-  const soil = seg(ctrls, { label: 'Talaj', options: Object.entries(JET_SOIL).map(([v, s]) => ({ v, t: s.t })), value: 'homok' });
+  const soil = seg(ctrls, { label: 'Talaj', options: Object.entries(JET_SOIL).map(([v, s]) => ({ v, t: s.t })), value: 'k_homok' });
   const vr = seg(ctrls, { label: 'Változat', options: Object.entries(JET_VAR).map(([v, s]) => ({ v, t: s.t })), value: 'szimpla' });
   const pr = slider(ctrls, { label: 'Nyomás', sym: 'p', min: 300, max: 600, step: 10, value: 450, unit: 'bar', d: 0, hint: 'a szokásos tartomány 400–600 bar' });
   const sp = slider(ctrls, { label: 'Emelési sebesség', sym: 'v', min: 10, max: 60, step: 1, value: 30, unit: 'cm/perc', d: 0 });
@@ -409,6 +414,14 @@ register('egy-jet', (root) => {
   let S = upd();
   [soil, vr, pr, sp, rpm, ss, blk].forEach((c) => c.on(() => { S = upd(); if (!blk.v) heave = 0; draw(); }));
 
+  // vászonfelirat a kártya színével rajzolt hátlapon (a talajmintán is olvasható, sötét témában megfordul)
+  const chip = (s, x, y, align) => {
+    const ctx = st.ctx;
+    ctx.font = `700 12px ${MONO()}`; ctx.textAlign = align; ctx.textBaseline = 'alphabetic';
+    const tw = ctx.measureText(s).width, x0 = align === 'center' ? x - tw / 2 : x;
+    ctx.globalAlpha = 0.9; ctx.fillStyle = C['--surface']; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x0 - 5, y - 13, tw + 10, 18, 5); else ctx.rect(x0 - 5, y - 13, tw + 10, 18); ctx.fill(); ctx.globalAlpha = 1;
+    ctx.fillStyle = C['--ink']; ctx.fillText(s, x, y);
+  };
   const draw = () => {
     if (!st || !st.w || st.w < 200) return;
     const { ctx, w, h: HH, narrow } = st;
@@ -446,8 +459,8 @@ register('egy-jet', (root) => {
       ctx.fillStyle = C['--grout'];
       ctx.beginPath();
       const steps = 30;
-      for (let i = 0; i <= steps; i++) { const y = lerp(colTop, bot, i / steps); const wob = 1 + 0.06 * Math.sin(y * 0.09 + so.grain) * (soil.v === 'kavics' ? 1.6 : 1); ctx.lineTo(cx - half * wob, y); }
-      for (let i = steps; i >= 0; i--) { const y = lerp(colTop, bot, i / steps); const wob = 1 + 0.06 * Math.sin(y * 0.11 + 1.3) * (soil.v === 'kavics' ? 1.6 : 1); ctx.lineTo(cx + half * wob, y); }
+      for (let i = 0; i <= steps; i++) { const y = lerp(colTop, bot, i / steps); const wob = 1 + 0.06 * Math.sin(y * 0.09 + so.grain) * (soil.v === 'k_kavics' ? 1.6 : 1); ctx.lineTo(cx - half * wob, y); }
+      for (let i = steps; i >= 0; i--) { const y = lerp(colTop, bot, i / steps); const wob = 1 + 0.06 * Math.sin(y * 0.11 + 1.3) * (soil.v === 'k_kavics' ? 1.6 : 1); ctx.lineTo(cx + half * wob, y); }
       ctx.closePath(); ctx.fill();
       // csavarvonalas hibák
       if (R.gaps) {
@@ -487,10 +500,8 @@ register('egy-jet', (root) => {
       ctx.strokeStyle = C['--bad']; ctx.lineWidth = 2;
       for (const [x0, a] of [[0.25, 1], [0.7, -1], [0.45, 1]]) { ctx.beginPath(); let x = split * x0, y = H * 0.15; ctx.moveTo(x, y); for (let k = 0; k < 4; k++) { x += a * 6; y += 9; ctx.lineTo(x + (k % 2 ? 4 : -4), y); } ctx.stroke(); }
     }
-    ctx.font = `700 12px ${MONO()}`; ctx.fillStyle = C['--ink']; ctx.textAlign = 'left';
-    ctx.fillText(u < drill ? '1 · fúrás' : u < rise ? '2 · injektálás felfelé' : '3 · kész oszlop', 10, 18);
-    ctx.textAlign = 'center';
-    ctx.fillText('D ≈ ' + fmt(D, 2).replace(' ', '') + ' m', cx, bot + 14 > H - 4 ? H - 6 : bot + 14);
+    chip(u < drill ? '1 · fúrás' : u < rise ? '2 · injektálás' : '3 · kész oszlop', 8, 20, 'left');
+    chip('D ≈ ' + fmt(D, 2).replace(' ', '') + '\u00A0m', cx, bot + 15 > H - 5 ? H - 7 : bot + 15, 'center');
     ctx.restore();
     // ---------------- felülnézet (jobb oldalt, keskeny kijelzőn alul)
     ctx.save();
@@ -522,16 +533,14 @@ register('egy-jet', (root) => {
       ctx.strokeStyle = C['--ink']; ctx.lineWidth = 1.4;
       ctx.beginPath(); ctx.moveTo(x, pcy - tt); ctx.lineTo(x, pcy + tt); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(x - 5, pcy - tt); ctx.lineTo(x + 5, pcy - tt); ctx.moveTo(x - 5, pcy + tt); ctx.lineTo(x + 5, pcy + tt); ctx.stroke();
-      ctx.font = `700 12px ${MONO()}`; ctx.textAlign = 'left'; ctx.fillStyle = C['--ink'];
-      ctx.fillText('t ≈ ' + fmt(S.t, 2) + '\u00A0m', Math.min(x + 8, PW - 90), Math.min(PH - 6, pcy + Math.max(tt, r * 0.6) + 16));
+      chip('t ≈ ' + fmt(S.t, 2) + '\u00A0m', clamp(x, 50, PW - 50), Math.min(PH - 8, pcy + r + 20), 'center');
     }
     // osztásméret
     const yd = pcy - r - 12;
     ctx.strokeStyle = C['--ink']; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(xs, yd); ctx.lineTo(xs + s * k, yd); ctx.moveTo(xs, yd - 5); ctx.lineTo(xs, yd + 5); ctx.moveTo(xs + s * k, yd - 5); ctx.lineTo(xs + s * k, yd + 5); ctx.stroke();
-    ctx.font = `700 12px ${MONO()}`; ctx.textAlign = 'center'; ctx.fillStyle = C['--ink'];
-    ctx.fillText('s = ' + fmt(s, 2) + '\u00A0m', Math.max(xs + (s * k) / 2, 46), yd - 7);
-    ctx.textAlign = 'left'; ctx.fillText('felülnézet · oszlopsor', px0, 18);
+    chip('s = ' + fmt(s, 2) + '\u00A0m', clamp(xs + (s * k) / 2, 46, PW - 46), Math.max(46, yd - 9), 'center');
+    chip('felülnézet · oszlopsor', 8, 20, 'left');
     ctx.restore();
   };
   // saját illesztés: keskeny kijelzőn az oldalnézet és a felülnézet egymás alá kerül

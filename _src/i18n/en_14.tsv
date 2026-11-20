@@ -113,12 +113,10 @@ d34e011	Ready for driving
 c0f341d	DRIVING RECORD
 673ca50	blows / 0.5 m
 b2b346f	no blows yet
-bf8ebfc	Illustrative model: R = shaft + base, s = η·E/R − c/2
 0af0055	Dense sand
 1a3165d	Cohesive clay
 927ee38	Frequency
 78fddc4	Tip: look for the lowest point of the curve – that is where the soil resistance is smallest.
-678289a	Soil resistance (R / R₀)
 8a5a81e	Penetration (illustrative)
 ea23454	Vibration is weak in cohesive soil
 6082438	Because of cohesion, vibration hardly reduces the resistance (at best only by approx. ${fmt(S.k * 100, 0)} %). Driving, jacking or a bored technology is needed here instead.
@@ -132,7 +130,6 @@ e7fb9c7	increase
 dac50f3	decrease
 31d055c	 Jetting also reduces the resistance below the base – but it must be stopped 1–2 m before the final base depth, otherwise the soil below the base loosens.
 588dbe1	building resonance
-7cbaba5	soil resistance R/R₀
 7bf7ec0	vibration amplitude
 e947dab	Illustrative model
 872f7ab	Driven RC pile (hammer)
@@ -152,16 +149,12 @@ b1c9bc7	Limit (order of magnitude)
 84c92c2	Distance needed for this
 18ad914	 (with the resonance peak at start-up and shut-down)
 2524de0	Vibration too high
-2b2abb6	<span>${T.t}, at ${fmt(sR.v, 1)} m: ≈ ${fmt(v, 1)} mm/s${pk}. This is ${fmt(u * 100, 0)} % of the limit (${B.t.toLowerCase()}: approx. ${B.lim} mm/s). A distance of at least ≈ ${fmt(rmin, 0)} m, or a low-noise, low-vibration technology, is needed.</span>
 f0d802a	Borderline – measure it
-618c0d2	<span>≈ ${fmt(v, 1)} mm/s${pk}: close to the limit. The neighbour must be monitored with a vibration meter during the work.</span>
 a2f18df	Tolerable vibration
-7225989	<span>≈ ${fmt(v, 1)} mm/s${pk} – ${fmt(u * 100, 0)} % of the limit. ${sT.v === 'vert' ? 'Közelebb érve vagy nagyobb energiával ez gyorsan megváltozik.' : 'Ez a technológia érzékeny környezetben is jó választás lehet.'}</span>
 5810a52	Closer up or with more energy this changes quickly.
 cbc0dd3	This technology can be a good choice even in sensitive surroundings.
 8abe0e1	distance (m)
 632a3d1	limit: ${B.t.toLowerCase()} ≈ ${B.lim} mm/s
-8a05a34	Illustrative model: v = v₁₀·(10 m / r)ⁿ
 c788ca0	Quiz – precast piles
 c4b4edc	Why do both the base <i>and</i> the shaft resistance of a driven precast pile increase?
 bf96d9c	Because the displacement compacts the soil around and below the pile
