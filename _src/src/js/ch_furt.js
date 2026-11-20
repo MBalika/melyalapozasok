@@ -306,14 +306,19 @@ register('furtLab', (root) => {
     } else if (m === 'k_nincs') { oX.el.querySelector('.stat-l').innerHTML = 'Megtámasztás nélkül (kötött talaj, TV felett)'; oX.set('≤ 8–10 m', SOIL[soil].szem || (gw && hw < z) || z > 10 ? 'bad' : z > 8 ? 'warn' : 'ok', '≤ 8–10 m'); }
     else { oX.el.querySelector('.stat-l').innerHTML = 'CFA-hossz'; oX.set('6–22 (24) m', z > 24 ? 'bad' : z > 22 ? 'warn' : 'ok', '6–22 (24) m'); }
     vd.set(r.st, r.title, ' ' + r.txt);
-    t0 = performance.now() / 1000;
+    t0 = performance.now() / 1000; settled = false;
   };
   [sSoil, sGw, sHw, sZ, sM, sDh, sLead, sSz].forEach((c) => c.on(rebuild));
+  let settled = false;
   const draw = (now) => {
     if (!st) return;
+    const u = now - t0;
+    // a beállt állapotot nem rajzoljuk újra képkockánként (a tétlen oldal ne írjon a DOM-ba); a folyamatosan mozgó módok kivételek
+    const live = u < 6.5 || ['loss', 'under', 'boil', 'boilS'].includes(st.r.mode);
+    if (!live && settled) return;
+    settled = !live;
     clear(dyn);
     const g = dyn, { z, m, r, gw, hw } = st;
-    const u = now - t0;
     const kDrill = clamp(u / 1.6, 0, 1);
     const zNow = r.mode === 'short' ? Math.min(z, 24) * kDrill : z * kDrill;
     const yb = yz(zNow);

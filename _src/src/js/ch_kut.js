@@ -354,14 +354,14 @@ register('kut-keszon', (root) => {
     const hinPx = Math.min(chH, hin / 2.5 * chH);
     if (hinPx > 0) R(fig, x0 + 10, EY - hinPx, x1 - x0 - 20, hinPx, '', { style: 'fill:var(--water);opacity:.5' });
     if (ch !== 'elöntve') { person(fig, x0 + 50, EY - 2 - Math.min(hinPx, 6) * 0, 0.95); person(fig, x0 + 120, EY - 2, 0.95); grab(fig, x1 - 40, EY - 2, 16, 0.3); }
-    TH(fig, (x0 + x1) / 2, EY - chH + 13, `p = ${fmt(p, 2)} bar`, 't-num halo', { 'text-anchor': 'middle', style: 'font-size:11px' });
+    TH(fig, (x0 + x1) / 2 - 24, EY - chH - 8, `p = ${fmt(p, 2)} bar`, 't-num halo', { 'text-anchor': 'middle', style: 'font-size:11px' });
     // aknák, zsilipek, gépház
     R(fig, 220, 14, 12, EY - chH - 14, 'f-steel2');
     R(fig, 202, 2, 48, 16, 'f-acc', { rx: 3 });
-    T(fig, 256, 13, 'személyzsilip', 't-sm halo');
+    T(fig, 197, 14, 'személyzsilip', 't-sm halo', { 'text-anchor': 'end' });
     R(fig, 290, 20, 8, EY - chH - 20, 'f-steel2');
     R(fig, 282, 12, 24, 12, 'f-warn', { rx: 2 });
-    T(fig, 312, 30, 'anyagzsilip', 't-sm halo');
+    T(fig, 312, 22, 'anyagzsilip', 't-sm halo');
     R(fig, 20, 20, 70, 26, 'f-steel', { rx: 3 });
     T(fig, 55, 37, 'kompresszor', 't-sm', { 'text-anchor': 'middle', style: 'fill:#fff;font-weight:700' });
     P(fig, `M90 30 H150 V${EY - chH - 2}`, '', { style: 'fill:none;stroke:var(--steel);stroke-width:2.5' });
