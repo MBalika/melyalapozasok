@@ -427,7 +427,7 @@ register('rsz-atmero', (root) => {
     TECH_D.forEach((tc, i) => {
       const y = 50 + i * 31;
       const on = D >= tc.a && D <= tc.b;
-      T(s2, ax0 - 10, y + 9, tc.t, on ? 't-lab t-grp' : 't-sm', { 'text-anchor': 'end', 'font-weight': on ? 700 : 500 });
+      T(s2, ax0 - 10, y + 9, EN ? tc.t.replace('-supported', '') : tc.t, on ? 't-lab t-grp' : 't-sm', { 'text-anchor': 'end', 'font-weight': on ? 700 : 500 });
       svg('rect', { x: X(tc.a), y: y, width: Math.max(4, X(tc.b) - X(tc.a)), height: 12, rx: 6, class: on ? 'f-grp' : 'rsz-off' }, s2);
     });
     svg('line', { x1: X(D), y1: 36, x2: X(D), y2: 326, class: 's-acc', 'stroke-width': 2.2 }, s2);

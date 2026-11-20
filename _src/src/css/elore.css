@@ -103,4 +103,5 @@ canvas.hsz-cv { max-width: 900px; margin: 0 auto; }
   /* a 720 egység széles verésszimulátor felére zsugorodik: nagyobb betű */
   [data-w="elo-veres"] svg.fig .t-sm, [data-w="elo-veres"] svg.fig .t-num { font-size: 21px; }
   [data-w="elo-veres"] svg.fig .t-big { font-size: 26px; }
+  [data-w="elo-vibro"] svg.fig .t-sm, [data-w="elo-rezges"] svg.fig .t-sm, [data-w="elo-rezges"] svg.fig .t-num { font-size: 20px; }
 }
