@@ -3,6 +3,7 @@ import { bootWidgets, bootAll } from './core.js';
 import { LAYOUT } from './layout.js';
 import { initUI, startGuard } from './ui.js';
 import { initHero } from './hero.js';
+import './proc.js';
 import './ch_alapok.js';
 import './ch_rendszer.js';
 import './ch_elore.js';

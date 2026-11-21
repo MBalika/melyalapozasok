@@ -71,18 +71,7 @@ d18f3a2	Two phases: drilling and grouting
 653dabd	<b>Drilling:</b> a 100–200 mm diameter hole to the required depth, with the help of a drilling fluid. The design of the drilling head (the “monitor”) and the pressure depend on the quality of the soil.
 69f1b3b	<b>Grouting:</b> starting from the bottom of the hole, the binder is injected into the soil through the 2–5 mm nozzles of the monitor at a pressure of 400–600 bar, while the drill rod is <b>slowly rotated and withdrawn</b>.
 7108e88	The equipment: silo, mixer, high-pressure pump, drill rod and nozzle – the drilling rig is small, and the pump plant can stand aside, even in a courtyard.
-4db2fe3	Making a jet column: 1 · Drilling
-7d65eb4	<b>1 · Drilling</b>A 100–200 mm hole to the design depth, with drilling fluid.
-9d48a96	Making a jet column: 2 · Grouting from the bottom
-0e0a0e4	<b>2 · Grouting from the bottom</b>A jet at 400–600 bar from the monitor nozzles cuts and mixes the soil.
-4fa57ec	Making a jet column: 3 · Rotation, withdrawal
 eb6970c	spoil
-265b521	<b>3 · Rotation, withdrawal</b>The column grows from the bottom up; the excess material reaches the surface along the hole as spoil.
-c1f9408	Making a jet column: 4 · The next column
-d84cac5	overlap
-8be2482	finished
-954360d	next
-f1dab7b	<b>4 · The next column</b>It is cut into the previous one – so intersecting columns form a continuous wall.
 9252b0e	The four variants – how many nozzles are “switched on”?
 c1f4699	=
 78482f4	Single jet
@@ -131,15 +120,6 @@ ccdcf41	Jet columns under old masonry.
 6a32dec	Continuing from the bottom of the pit: jet grouting at the next level.
 3a16c08	In <b>deep soil mixing</b> a rotating, bladed <b>mixing shaft</b> mixes the soil with the binder in place. Here the soil is broken up not by a high-pressure jet but by the mixing tool itself – so the size of the element is close to that of the tool, and much more predictable than that of a jet column.
 88a76cb	The binder (cement, in soft clay often a lime–cement mix) is released at the end of the shaft: as a suspension (<b>wet method</b>) or as a powder (<b>dry method</b>, mainly in soft soil with a high water content). Intersecting columns form a block, a grid or a wall; with a cutter-mixer rectangular wall panels can also be made, and in shallow, very soft layers the whole soil mass is stabilised.
-cc98dd0	Deep mixing: 1 · Rotating down
-bd934ae	<b>1 · Rotating down</b>The bladed mixing shaft penetrates while rotating; the binder is released at the end of the shaft.
-1d16ab0	Deep mixing: 2 · Withdrawing while mixing
-4334c11	<b>2 · Withdrawing while mixing</b>From the design depth it mixes the soil once more while being withdrawn.
-b4140a2	Deep mixing: 3 · The finished column
-6752aba	<b>3 · The finished column</b>A soil–binder element mixed in place; its size is close to that of the mixing tool.
-9044bf0	Deep mixing: 4 · Intersecting: block, wall
-47342ab	plan:
-ca7c3c9	<b>4 · Intersecting: block, wall</b>Intersecting columns form a block, a grid or a wall.
 990000f	Deep mixing in the field
 50fffe6	Deep mixing rig with multi-axis bladed mixing shafts
 ffeef90	Multi-axis bladed mixing shafts.

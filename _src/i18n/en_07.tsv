@@ -1,12 +1,4 @@
 13219f0	The stone column is stiffer than the surrounding soil, so part of the load concentrates on it; meanwhile it acts as a vertical drain that speeds up consolidation, and in granular soil it also compacts its surroundings. It is not an independent load-bearing element: the stone column and the soil between <b>work together</b> – which makes it a <b>transition towards ground improvement</b>.
-1a04407	Vibro stone column: 1 · Penetration
-d48b5d2	<b>1 · Penetration</b>The vibrating depth vibrator pushes the soil sideways and (assisted by compressed air) penetrates to the design depth.
-a25c480	Vibro stone column: 2 · Compaction
-7572d64	<b>2 · Compaction</b>It is lifted slightly; the gravel fills the void through the tip, and pushing the probe down again compacts it and presses it sideways.
-c872df0	Vibro stone column: 3 · Levelling
-5c15251	<b>3 · Levelling</b>It is built up in stages to the surface, and finally the surface is compacted and levelled.
-a323eaf	Vibro stone column: 4 · Finished columns
-baa2bdb	<b>4 · Finished columns</b>Ribbed stone columns in a grid – thicker in the weaker (softer) layer.
 a95b5df	A related solution is <b>ground improvement with rigid inclusions</b>: rigid, typically unreinforced concrete or mortar columns that are not tied into the foundation; instead there is a granular load transfer platform (gravel mattress) above them. Arching in the mattress directs a large part of the load onto the inclusions (the rest is carried by the soil between them), and the inclusions pass it on through shaft and base resistance; along their upper part – where the soil between them settles more – negative skin friction develops. This is ground improvement, a form of combined foundation – not a pile foundation – and a transition between shallow and pile foundations.
 6c332a0	<a class="btn btn-line btn-sm" href="https://vedekezesakarossullyedesekellen.vercel.app" target="_blank" rel="noopener">Ground improvement in detail: Protection against harmful settlement ↗</a>
 1ef15b8	What does it do with the soil?
