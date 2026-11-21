@@ -216,11 +216,13 @@ register('egy-alafogas', (root) => {
 /* ================================================================== 2. KIHAJLÁS */
 // Szemléltető modell: rugalmasan ágyazott rúd. k = 67·c_u (kN/m²), λ = (EI/k)^¼,
 // N_cr = π²·EI / (L_f + π·λ/√2)²  →  L_f = 0-nál N_cr = 2·√(k·EI)
+// A kritikus erőt a merevbetétes injektálásos mikrocölöp jellemző teherbírásával (KH_R) vetjük össze.
 const KH_SEC = {
-  t30: { t: 'Önfúró rúd Ø30/11', EIs: 8.2, Npl: 260, D: 0.10, d: 0.030, core: 0.011 },
-  t40: { t: 'Önfúró rúd Ø40/16', EIs: 25.7, Npl: 525, D: 0.12, d: 0.040, core: 0.016 },
-  cso: { t: 'Acélcső 114,3×9', EIs: 873, Npl: 1057, D: 0.18, d: 0.1143, core: 0.0963 },
+  t30: { t: 'Önfúró rúd Ø30/11', EIs: 8.2, D: 0.10, d: 0.030, core: 0.011 },
+  t40: { t: 'Önfúró rúd Ø40/16', EIs: 25.7, D: 0.12, d: 0.040, core: 0.016 },
+  cso: { t: 'Acélcső 114,3×9', EIs: 873, D: 0.18, d: 0.1143, core: 0.0963 },
 };
+const KH_R = [130, 180]; // kN
 const EG = 1.0e7; // a cementtest rugalmassági modulusa, kN/m² (≈ 10 GPa)
 function khCalc(sec, cu, Lf, withGrout) {
   const S = KH_SEC[sec];
@@ -230,10 +232,10 @@ function khCalc(sec, cu, Lf, withGrout) {
   const lam = Math.pow(EI / k, 0.25);
   const Le = Lf + (Math.PI * lam) / Math.SQRT2;
   const Ncr = (Math.PI ** 2 * EI) / (Le * Le);
-  return { EI, k, lam, half: Math.PI * lam, Ncr, Npl: S.Npl };
+  return { EI, k, lam, half: Math.PI * lam, Ncr };
 }
 register('egy-kihajlas', (root) => {
-  const { ctrls, viz, out } = shell(root, { foot: '<b>Szemléltető modell:</b> rugalmasan ágyazott rúd.<br>A talaj oldalirányú ágyazása: <i>k</i> ≈ 67·<i>c</i><sub>u</sub>; λ = (<i>EI</i>/<i>k</i>)<sup>¼</sup>.<br>Szabad hossz nélkül: <i>N</i><sub>cr</sub> = 2·√(<i>k</i>·<i>EI</i>),<br>szabad hosszal: <i>N</i><sub>cr</sub> ≈ π²·<i>EI</i> / (<i>L</i><sub>f</sub> + π·λ/√2)².<br>A cementtest merevségét <i>E</i> ≈ 10 GPa-lal, repedésmentesen vettük; az értékek parciális tényezők nélküliek. Tervezéshez a szabványos vizsgálat kell.' });
+  const { ctrls, viz, out } = shell(root, { foot: '<b>Szemléltető modell:</b> rugalmasan ágyazott rúd.<br>A talaj oldalirányú ágyazása: <i>k</i> ≈ 67·<i>c</i><sub>u</sub>; λ = (<i>EI</i>/<i>k</i>)<sup>¼</sup>.<br>Szabad hossz nélkül: <i>N</i><sub>cr</sub> = 2·√(<i>k</i>·<i>EI</i>),<br>szabad hosszal: <i>N</i><sub>cr</sub> ≈ π²·<i>EI</i> / (<i>L</i><sub>f</sub> + π·λ/√2)².<br>A kritikus erőt a merevbetétes injektálásos mikrocölöp jellemző, 130–180 kN-os teherbírásával vetjük össze.<br>A cementtest merevségét <i>E</i> ≈ 10 GPa-lal, repedésmentesen vettük; az értékek parciális tényezők nélküliek. Tervezéshez a szabványos vizsgálat kell.' });
   const sec = seg(ctrls, { label: 'Keresztmetszet', options: Object.entries(KH_SEC).map(([v, s]) => ({ v, t: s.t })), value: 't30', vert: true });
   const gr = toggle(ctrls, { label: 'a cementtest merevségét is számítjuk', value: true });
   const cu = slider(ctrls, { label: 'Drénezetlen nyírószilárdság', sym: 'c<sub>u</sub>', min: 2, max: 60, step: 1, value: 8, unit: 'kPa', hint: 'puha agyag, iszap: 10–25 kPa; nagyon puha, szerves talaj: 10 kPa alatt' });
@@ -243,7 +245,7 @@ register('egy-kihajlas', (root) => {
   fig.setAttribute('aria-label', 'Bal oldalt a mikrocölöp a talajban kihajlási alakkal, jobb oldalt a kritikus erő a drénezetlen nyírószilárdság függvényében');
   const sEI = stat(out, { label: 'Hajlítási merevség <i>EI</i>', unit: 'kNm²', d: 1 });
   const sNcr = stat(out, { label: 'Kritikus (kihajlási) erő <i>N</i><sub>cr</sub>', unit: 'kN', d: 0 });
-  const sNpl = stat(out, { label: 'Az acél folyási ereje <i>N</i><sub>pl</sub>', unit: 'kN', d: 0 });
+  const sR = stat(out, { label: 'A mikrocölöp teherbírása <i>R</i>', unit: 'kN' });
   const sGov = stat(out, { label: 'Mértékadó' });
   const vd = verdict(viz);
 
@@ -301,7 +303,7 @@ register('egy-kihajlas', (root) => {
     // ---------------- jobb panel: N_cr(c_u)
     const c = svg('g', {}, fig);
     const x0 = nar ? 52 : 290, x1 = nar ? 386 : 700, y0 = nar ? 735 : 350, y1 = nar ? 440 : 30;
-    const ymax = { t30: 700, t40: 1200, cso: 2500 }[sec.v];
+    const ymax = { t30: 600, t40: 1000, cso: 2500 }[sec.v];
     const sx = (v) => x0 + ((v - 0) / 60) * (x1 - x0), sy = (v) => y0 - (Math.min(v, ymax) / ymax) * (y0 - y1);
     // c_u < 10 kPa sáv
     svg('rect', { x: sx(0), y: y1, width: sx(10) - sx(0), height: y0 - y1, class: 'f-warn', opacity: 0.13 }, c);
@@ -317,31 +319,51 @@ register('egy-kihajlas', (root) => {
     const cp = [];
     for (let v = 1; v <= 60; v += 0.25) { const n = khCalc(sec.v, v, lf.v, gr.v).Ncr; if (n > ymax) { cp.push([sx(v), sy(ymax)]); break; } cp.push([sx(v), sy(n)]); }
     svg('path', { d: pathD(cp), fill: 'none', class: 's-grp', 'stroke-width': 3 }, c);
-    // N_pl
-    svg('line', { x1: x0, y1: sy(R.Npl), x2: x1, y2: sy(R.Npl), class: 's-steel', 'stroke-width': 2, 'stroke-dasharray': '7 5' }, c);
-    stxt(c, x1 - 4, sy(R.Npl) - 7, 'N', 'pl', ' – az acél folyása', 't-lab', { 'text-anchor': 'end', 'font-size': 12 });
-    // metszéspont
+    // R: a mikrocölöp teherbírása (sáv)
+    const [rLo, rHi] = KH_R;
+    svg('rect', { x: x0, y: sy(rHi), width: x1 - x0, height: sy(rLo) - sy(rHi), class: 'f-ok', opacity: 0.14 }, c);
+    svg('line', { x1: x0, y1: sy(rHi), x2: x1, y2: sy(rHi), class: 's-steel', 'stroke-width': 2, 'stroke-dasharray': '7 5' }, c);
+    svg('line', { x1: x0, y1: sy(rLo), x2: x1, y2: sy(rLo), class: 's-steel', 'stroke-width': 1.4, 'stroke-dasharray': '4 4' }, c);
+    // ahol a kritikus erő eléri a sáv felső szélét
     let cross = null;
-    for (let v = 1; v <= 60; v += 0.25) { if (khCalc(sec.v, v, lf.v, gr.v).Ncr >= R.Npl) { cross = v; break; } }
+    for (let v = 1; v <= 60; v += 0.25) { if (khCalc(sec.v, v, lf.v, gr.v).Ncr >= rHi) { cross = v; break; } }
     if (cross !== null && cross > 1) {
-      svg('line', { x1: sx(cross), y1: sy(R.Npl), x2: sx(cross), y2: y0, class: 's-muted', 'stroke-width': 1, 'stroke-dasharray': '3 3' }, c);
-      txt(c, sx(cross) + 5, y0 - 8, nb(`≈ ${fmt(cross, 0)} kPa`), 't-num halo');
+      svg('line', { x1: sx(cross), y1: sy(rHi), x2: sx(cross), y2: y0, class: 's-muted', 'stroke-width': 1, 'stroke-dasharray': '3 3' }, c);
+      const flip = sx(cross) > x1 - 70;
+      txt(c, sx(cross) + (flip ? -5 : 5), y0 - 8, nb(`≈ ${fmt(cross, 0)} kPa`), 't-num halo', { 'text-anchor': flip ? 'end' : 'start' });
     }
     // aktuális pont
+    const nR = Math.round(R.Ncr), st = nR < rLo ? 'bad' : nR <= rHi ? 'warn' : 'ok';
     const ncrLab = svg('g', {}, c);
-    svg('circle', { cx: sx(cu.v), cy: sy(R.Ncr), r: 7, class: R.Ncr < R.Npl ? 'f-bad' : 'f-ok', style: 'stroke:var(--surface);stroke-width:2.5' }, ncrLab);
+    svg('circle', { cx: sx(cu.v), cy: sy(R.Ncr), r: 7, class: 'f-' + st, style: 'stroke:var(--surface);stroke-width:2.5' }, ncrLab);
     const right = sx(cu.v) < x0 + (x1 - x0) * 0.62;
     // a görbe balról jobbra emelkedik: jobbra-lent és balra-fent szabad a hely, oda kerül a felirat
     stxt(ncrLab, sx(cu.v) + (right ? 12 : -12), right ? Math.min(y0 - 26, sy(R.Ncr) + 20) : Math.max(y1 + 12, sy(R.Ncr) - 10), 'N', 'cr', nb(` = ${fmt(R.Ncr, 0)} kN`), 't-num halo', { 'text-anchor': right ? 'start' : 'end' });
+    // az R-sáv felirata oda kerül, ahol nem fedi a görbét és az N_cr feliratát
+    const rLab = txt(c, 0, 0, nb('R = 130–180 kN – teherbírás'), 't-lab halo', { 'font-size': 12 });
+    const nb0 = ncrLab.getBBox ? ncrLab.getBBox() : null;
+    const xl = sx(10) + 6;
+    const cand = [[x1 - 4, sy(rHi) - 7, 'end'], [x1 - 4, sy(rLo) + 16, 'end'], [xl, sy(rLo) + 16, 'start'], [xl, sy(rHi) - 7, 'start'], [(x0 + x1) / 2, sy(rHi) - 7, 'middle']];
+    let pick = cand[0];
+    for (const cd of cand) {
+      rLab.setAttribute('x', cd[0]); rLab.setAttribute('y', cd[1]); rLab.setAttribute('text-anchor', cd[2]);
+      const bb = rLab.getBBox ? rLab.getBBox() : null;
+      if (!bb || !bb.width) { pick = cd; break; }
+      const hit = (x, y) => x > bb.x - 4 && x < bb.x + bb.width + 4 && y > bb.y - 3 && y < bb.y + bb.height + 3;
+      const onCurve = cp.some(([x, y]) => hit(x, y));
+      const onLab = nb0 && !(nb0.x > bb.x + bb.width + 4 || nb0.x + nb0.width < bb.x - 4 || nb0.y > bb.y + bb.height + 3 || nb0.y + nb0.height < bb.y - 3);
+      if (!onCurve && !onLab) { pick = cd; break; }
+    }
+    rLab.setAttribute('x', pick[0]); rLab.setAttribute('y', pick[1]); rLab.setAttribute('text-anchor', pick[2]);
     // kimenetek
     sEI.set(R.EI);
-    sNcr.set(R.Ncr, R.Ncr < R.Npl ? 'bad' : 'ok');
-    sNpl.set(R.Npl);
-    const gov = R.Ncr < R.Npl;
-    sGov.set(gov ? 'kihajlás' : 'az acél folyása', gov ? 'bad' : 'ok');
-    if (gov) vd.set('bad', 'A kihajlás a mértékadó', nb(`A talaj ennyire puha (vagy a szabad szakasz ennyire hosszú), hogy a cölöp előbb kihajlik (${fmt(R.Ncr, 0)} kN), mint hogy az acél megfolyna (${fmt(R.Npl, 0)} kN). Ilyenkor a kihajlást külön kell vizsgálni – merevebb betét, nagyobb cementtest, vagy a szabad szakasz megszüntetése segít.`));
-    else if (cu.v < 10) vd.set('warn', 'Most még elég – de vizsgálni kell', nb(`c<sub>u</sub> < 10 kPa: a kihajlást külön ellenőrizni kell. Ebben a modellben a kritikus erő (${fmt(R.Ncr, 0)} kN) még meghaladja a folyási erőt, de a cementtest repedése vagy egy kis üreg ezt gyorsan megfordítja.`));
-    else vd.set('ok', 'A talaj megtámasztja a cölöpöt', nb(`A kritikus erő (${fmt(R.Ncr, 0)} kN) nagyobb a folyási erőnél (${fmt(R.Npl, 0)} kN): az oldalirányú ágyazás elég ahhoz, hogy ne a kihajlás legyen a mértékadó. Kapcsold ki a cementtest merevségét, vagy adj szabad hosszt – és figyeld a görbét!`));
+    sNcr.set(R.Ncr, st);
+    sR.set('130–180');
+    sGov.set(st === 'bad' ? 'kihajlás' : st === 'warn' ? 'a kihajlás korlátoz' : 'a köpenyellenállás', st);
+    if (st === 'bad') vd.set('bad', 'A kihajlás a mértékadó', nb(`A talaj ennyire puha (vagy a szabad szakasz ennyire hosszú), hogy a cölöp már ${fmt(R.Ncr, 0)} kN-nál kihajlik – mielőtt elérné a 130–180 kN-os teherbírását. Ilyenkor a kihajlást külön kell vizsgálni: merevebb betét, nagyobb cementtest vagy a szabad szakasz megszüntetése segít.`));
+    else if (st === 'warn') vd.set('warn', 'Határeset: a kihajlás korlátoz', nb(`A kritikus erő (${fmt(R.Ncr, 0)} kN) a 130–180 kN-os teherbírás sávjába esik: a cölöpöt nem lehet a teljes teherbírásáig kihasználni. Merevebb betét, a cementtest megtámasztása vagy rövidebb szabad szakasz segít.`));
+    else if (cu.v < 10) vd.set('warn', 'Most még elég – de vizsgálni kell', nb(`c<sub>u</sub> < 10 kPa: a kihajlást külön ellenőrizni kell. Ebben a modellben a kritikus erő (${fmt(R.Ncr, 0)} kN) még nagyobb a 180 kN-nál, de a cementtest repedése vagy egy kis üreg ezt gyorsan megfordítja.`));
+    else vd.set('ok', 'A talaj megtámasztja a cölöpöt', nb(`A kritikus erő (${fmt(R.Ncr, 0)} kN) nagyobb a 130–180 kN-os teherbírásnál: az oldalirányú ágyazás elég, így nem a kihajlás, hanem a köpenyellenállás a mértékadó. Kapcsold ki a cementtest merevségét, vagy adj szabad hosszt – és figyeld a görbét!`));
   };
   [sec, gr, cu, lf].forEach((c) => c.on(draw));
   draw();

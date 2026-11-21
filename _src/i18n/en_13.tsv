@@ -100,7 +100,16 @@ dae0cb3	shaft – developing
 a85e105	Self-drilling bar Ø30/11
 25c1446	Self-drilling bar Ø40/16
 46814f1	Steel tube 114.3×9
-56e6bf7	<b>Illustrative model:</b> a bar on an elastic foundation.<br>Lateral subgrade reaction of the soil: <i>k</i> ≈ 67·<i>c</i><sub>u</sub>; λ = (<i>EI</i>/<i>k</i>)<sup>¼</sup>.<br>Without a free length: <i>N</i><sub>cr</sub> = 2·√(<i>k</i>·<i>EI</i>),<br>with a free length: <i>N</i><sub>cr</sub> ≈ π²·<i>EI</i> / (<i>L</i><sub>f</sub> + π·λ/√2)².<br>The stiffness of the cement body is taken as <i>E</i> ≈ 10 GPa, uncracked; the values are without partial factors. Design requires the standard verification.
+3b291e2	<b>Illustrative model:</b> a bar on an elastic foundation.<br>Lateral subgrade reaction of the soil: <i>k</i> ≈ 67·<i>c</i><sub>u</sub>; λ = (<i>EI</i>/<i>k</i>)<sup>¼</sup>.<br>Without a free length: <i>N</i><sub>cr</sub> = 2·√(<i>k</i>·<i>EI</i>),<br>with a free length: <i>N</i><sub>cr</sub> ≈ π²·<i>EI</i> / (<i>L</i><sub>f</sub> + π·λ/√2)².<br>The critical force is compared with the typical resistance of a hollow-bar grouted micropile, 130–180 kN.<br>The stiffness of the cement body is taken as <i>E</i> ≈ 10 GPa, uncracked; the values are without partial factors. Design requires the standard verification.
+ebb9a9f	Resistance of the micropile <i>R</i>
+c5c561e	R = 130–180 kN – resistance
+ea96977	buckling limits it
+1129448	the shaft resistance
+f96998b	The soil is so soft (or the free length so long) that the pile already buckles at ${fmt(R.Ncr, 0)} kN – before it reaches its resistance of 130–180 kN. Then buckling must be checked separately: a stiffer core, a larger cement body, or eliminating the free length helps.
+39f8481	Borderline: buckling limits it
+158c9d4	The critical force (${fmt(R.Ncr, 0)} kN) falls within the 130–180 kN resistance band: the pile cannot be used up to its full resistance. A stiffer core, the support of the cement body, or a shorter free length helps.
+60abf68	c<sub>u</sub> < 10 kPa: buckling must be checked separately. In this model the critical force (${fmt(R.Ncr, 0)} kN) is still above 180 kN, but cracking of the cement body or a small cavity quickly reverses this.
+9e7444d	The critical force (${fmt(R.Ncr, 0)} kN) is greater than the resistance of 130–180 kN: the lateral support is enough, so the shaft resistance governs, not buckling. Switch off the stiffness of the cement body, or add a free length – and watch the curve!
 144663d	the stiffness of the cement body is also included
 c273078	Undrained shear strength
 34236b2	Free (unsupported) length
@@ -108,20 +117,14 @@ c273078	Undrained shear strength
 ba557b9	On the left the micropile in the soil with its buckled shape, on the right the critical force as a function of the undrained shear strength
 74845ae	Bending stiffness <i>EI</i>
 910551c	Critical (buckling) force <i>N</i><sub>cr</sub>
-0de710e	Yield force of the steel <i>N</i><sub>pl</sub>
 572ed70	Governing
 0933b43	pile cap, footing
 f7fa131	half-wave
 c37247c	check separately
-a0d214e	 – yielding of the steel
 4757108	buckling
-a9be369	yielding of the steel
 9540203	Buckling governs
-7885582	The soil is so soft (or the free length so long) that the pile buckles (${fmt(R.Ncr, 0)} kN) before the steel yields (${fmt(R.Npl, 0)} kN). Then buckling must be checked separately – a stiffer core, a larger cement body, or eliminating the free length helps.
 6e1e38f	Enough for now – but it must be checked
-6d0b38d	c<sub>u</sub> < 10 kPa: buckling must be checked separately. In this model the critical force (${fmt(R.Ncr, 0)} kN) still exceeds the yield force, but cracking of the cement body or a small cavity quickly reverses this.
 69c5904	The soil supports the pile
-a3decef	The critical force (${fmt(R.Ncr, 0)} kN) is greater than the yield force (${fmt(R.Npl, 0)} kN): the lateral support is enough for buckling not to govern. Switch off the stiffness of the cement body, or add a free length – and watch the curve!
 8315238	Double with air
 4ab8d01	<b>Illustrative model.</b> The diameter has been scaled from the soil, the variant, the pressure and the lifting speed into the typical ranges (at most 60–70 cm in clay, 150–200 cm in gravel). The real diameter is verified on site with trial columns and excavation.
 28ff065	Variant
@@ -185,3 +188,5 @@ b8c03ff	compaction
 0fb8137	What is the maximum shaft diameter of a <b>bored</b> micropile?
 fadda6b	The shaft diameter of a bored micropile is at most 250–300 mm; the 150 mm limit applies to the largest cross-sectional dimension of a <b>driven</b> micropile.
 a23cca8	What is neglected when calculating the resistance of a slender micropile?
+
+ca936e7!	soft clay, silt: 10–25 kPa; very soft, organic soil: below 10 kPa

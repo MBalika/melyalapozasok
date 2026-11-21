@@ -29,9 +29,10 @@ print('furat zagy: Δp=%.1f kPa'%(11*(14-1.5)-10*(14-3)))
 A=pi*0.6**2/4; print('CFA: A=%.4f r=%.0f%% Q=%.0f m3/h Vth(14m)=%.2f'%(A,100*0.5/(1.5*A),30,A*14))
 # 6) kihajlás: Ø30/11 + cementtest D=100, cu=8
 EIs=210e6*pi/64*(0.030**4-0.011**4); Ig=pi/64*(0.10**4-0.03**4)+pi/64*0.011**4; EI=EIs+1e7*Ig; k=67*8
-print('kihajlás: EIs=%.1f EI=%.1f Ncr=%.0f kN ; Npl(Titan30/11)=260'%(EIs,EI,2*sqrt(k*EI)))
+print('kihajlás: EIs=%.1f EI=%.1f Ncr=%.0f kN ; összevetés: R = 130–180 kN (merevbetétes injektálásos mikrocölöp)'%(EIs,EI,2*sqrt(k*EI)))
+for R_ in (130,180): print('  Ncr = %d kN: cu = %.1f kPa cementtesttel, %.1f kPa nélküle (Lf = 0)'%(R_, R_**2/(4*67*EI), R_**2/(4*67*EIs)))
 EI40=210e6*pi/64*(0.040**4-0.016**4); EIc=210e6*pi/64*(0.1143**4-0.0963**4); Ac=pi/4*(0.1143**2-0.0963**2)
-print('  EIs 40/16=%.1f ; cső 114,3x9: EI=%.0f, Npl=%.0f kN (S355)'%(EI40,EIc,Ac*355e3))
+print('  EIs 40/16=%.1f ; cső 114,3x9: EI=%.0f kNm²'%(EI40,EIc))
 lam=(EI/(67*30))**0.25; print('  cu=30, Lf=1,5: Ncr=%.0f'%(pi**2*EI/(1.5+pi*lam/sqrt(2))**2))
 # 7) kútsüllyesztő alap: D=2, v=0,3, L=6, homok f=12, qe=400, alákotrás
 Aw=pi/4*(4-1.4**2); G=25*Aw*6.5; U=10*Aw*4.5; S=12*pi*2*6; Re=400*0.25*pi*2*0.15

@@ -145,7 +145,7 @@ function evaluate(S) {
   if (k === 'micro') {
     const weak = inL.find((l) => l.K.cu && l.K.cu(l.t) < 10);
     if (weak) add('warn', 'Kihajlás!', `A ${weak.n} rétegben a drénezetlen nyírószilárdság 10 kPa alatti: a karcsú mikrocölöp kihajlását külön vizsgálni kell.`);
-    add('info', 'Csak a köpeny számít', 'A karcsú mikrocölöp teherbírásánál a csúcsellenállást jellemzően figyelmen kívül hagyjuk. Merevbetétes injektált mikrocölöppel 120–150 kN-os teherbírás érhető el.');
+    add('info', 'Csak a köpeny számít', 'A karcsú mikrocölöp teherbírásánál a csúcsellenállást jellemzően figyelmen kívül hagyjuk. Merevbetétes injektált mikrocölöppel 130–180 kN-os teherbírás érhető el.');
     add('ok', 'Kis gép, szűk hely', 'Nehezen megközelíthető, alacsony belmagasságú helyen, meglévő épület aláfogásánál is használható.');
   }
   if (!KISZ(k) && k !== 'micro' && S.nb) add('ok', 'Rezgésérzékeny szomszéd mellett is', k === 'casing' ? 'A fúrás nem dinamikus; a béléscső lehajtása rotációval kíméletesebb, mint vibrálással.' : 'A fúrt cölöp készítése nem jár verés okozta rezgéssel.');
