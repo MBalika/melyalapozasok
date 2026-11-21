@@ -674,3 +674,6 @@ html[lang^=en] .brand small { white-space: nowrap; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .series a.next b { color: #9a5d00; } }
 :root[data-theme="dark"] .series a.next b { color: #9a5d00; }
 #sorozat .ch-head { grid-template-columns: minmax(0, 1fr); }
+/* fejléc: az app teljes neve keskeny kijelzőn is (két sorba törhet, nem vágjuk le) */
+@media (max-width: 600px) { .brand { flex: 1 1 auto; min-width: 0; } .brand b { display: block; white-space: normal; line-height: 1.02; } }
+@media (max-width: 400px) { .brand b { font-size: 16px; } }

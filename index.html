@@ -858,6 +858,9 @@ html[lang^=en] .brand small { white-space: nowrap; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .series a.next b { color: #9a5d00; } }
 :root[data-theme="dark"] .series a.next b { color: #9a5d00; }
 #sorozat .ch-head { grid-template-columns: minmax(0, 1fr); }
+/* fejléc: az app teljes neve keskeny kijelzőn is (két sorba törhet, nem vágjuk le) */
+@media (max-width: 600px) { .brand { flex: 1 1 auto; min-width: 0; } .brand b { display: block; white-space: normal; line-height: 1.02; } }
+@media (max-width: 400px) { .brand b { font-size: 16px; } }
 
 /* alapok.css */
 /* C01–C02 (F1): Mi a mélyalapozás? · Cölöpök rendszere – prefixek: alap-, rsz- */
@@ -2457,7 +2460,7 @@ main .alap-ok .rag, main .sim-task .rag, main .alap-ttc .rag, .hero-verdict.rag,
   <div class="topbar-in">
     <a class="brand" href="#bevezeto" aria-label="Mélyalapozások – az oldal teteje">
       <svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#16212c"/><circle cx="18" cy="18" r="10.5" fill="none" stroke="#f0864a" stroke-width="2.6"/><circle cx="18" cy="18" r="5" fill="#f0864a"/><path d="M18 3v5M18 28v5M3 18h5M28 18h5" stroke="#c9d3dc" stroke-width="2"/></svg>
-      <span><b>Mélyalapozások</b><small>BME · Alapozás</small></span>
+      <span><b>Mély&shy;alapozások</b><small>BME · Alapozás</small></span>
     </a>
     <nav class="topnav" id="topnav" aria-label="Fejezetek"></nav>
     <div class="rigro" title="Melyik cölöpnél (fejezetnél) tartasz"><i></i><span>fúrás alatt</span><b id="rigPile">C00</b></div>
