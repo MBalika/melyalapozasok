@@ -39,7 +39,7 @@ d9a5f62	<b>3</b><span>main types: piles, diaphragm walls, well and box foundatio
 c4b2a21	What is a deep foundation? – base and shaft
 8725fdf	A shallow foundation transfers the load <b>at its base</b>: the contact pressure loads the upper, often weak layers, and these are compressed. A deep foundation carries the load down to a deeper layer of better bearing capacity, and along the way it also transfers load to the soil <b>along its shaft</b> by friction and adhesion.
 898c4c9	For a pile the two parts have their own names: <b>base (end-bearing) resistance</b> (at the base, by compression) and <b>shaft resistance</b> (along the shaft, by shear). Which of them dominates also decides how the pile is classified – this is covered in the next chapter.
-a858936	<b>Shallow foundation:</b> the load enters the soil only at the base and spreads out in the upper layers.
+603bd8b	<b>Shallow foundation:</b> the load enters the soil only at the foundation level (the bearing surface of the footing) and spreads out in the soil zone a few metres deep below it (except for raft foundations).
 372c13a	<b>Deep foundation:</b> through the base and the shaft the load also reaches deeper layer(s).
 cf13eca	Load transfer of a shallow foundation and a pile: the shallow foundation transfers load only at its base, the pile at its base and along its shaft
 33c5b6d	Types of deep foundation
