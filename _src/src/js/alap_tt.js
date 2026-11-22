@@ -2,10 +2,10 @@
 import { $, $$, h, svg, register, shell, seg, EN } from './core.js';
 
 const NB = ' ';
-const W = 1520, H = 700, G = 250, S = 17; // 1 m = 17 egység (függőlegesen)
+const W = 1700, H = 700, G = 250, S = 17; // 1 m = 17 egység (függőlegesen)
 const Y = (d) => G + d * S;
 // a teherbíró réteg teteje (m) a panoráma mentén – koszinuszos simítás a pontok között
-const BT = [[0, 11.5], [330, 11.0], [560, 10.2], [700, 7.0], [900, 6.5], [1085, 8.6], [1240, 6.2], [1300, 4.8], [1520, 5.8]];
+const BT = [[0, 11.5], [330, 11.0], [560, 10.2], [700, 7.0], [900, 6.5], [1085, 8.6], [1240, 6.2], [1300, 4.8], [1520, 5.8], [1610, 6.0], [1700, 6.4]];
 function bt(x) {
   for (let i = 0; i < BT.length - 1; i++) {
     const [x0, d0] = BT[i], [x1, d1] = BT[i + 1];
@@ -26,15 +26,15 @@ const FILL = 1.2; // feltöltés vastagsága
 
 export const TT_SCENES = [
   { k: 'colop', t: 'Cölöpalap', s: 'karcsú elemek a teherbíró rétegbe', x0: 34, x1: 330, zh: 520, c: 'var(--accent)',
-    o: 'Karcsú, egyedi elemek viszik le a terhet a teherbíró rétegbe – a talpukon és a köpenyükön.' },
+    o: 'Karcsú, egyedi elemek viszik le a terhet a teherbíró rétegbe – a talpukon és a köpenyükön. A metszeten egy csarnok pillérei alatt vasbeton fejtömbös, 4-es cölöpcsoportok állnak.' },
   { k: 'resfal', t: 'Résfal', s: 'fal a talajban: alap és határolás', x0: 330, x1: 660, zh: 615, c: 'var(--g4)',
-    o: 'Folytonos vasbeton fal a talajban: alap és munkatérhatárolás egyben – a mélygarázs falát is adja.' },
+    o: 'Folytonos vasbeton fal a talajban: alap és munkatérhatárolás egyben – a mélygarázs falát is adja. A belső pilléreket résbaretták (réspillérek) viszik le a teherbíró rétegbe.' },
   { k: 'kut', t: 'Kútalap', s: 'süllyesztett, nagy átmérőjű testek', x0: 660, x1: 930, zh: 470, c: 'var(--g5)',
     o: 'Nagy átmérőjű, süllyesztett, majd kibetonozott testek egyedi pillérek alatt; felül gerendarács köti össze őket.' },
   { k: 'szekreny', t: 'Szekrény · keszon', s: 'az építmény alaprajzán süllyesztve', x0: 930, x1: 1240, zh: 480, c: 'var(--g5)',
     o: 'Egyetlen nagy, az építmény alaprajzával azonos test – a folyómederben álló hídpillérek klasszikus alapja.' },
-  { k: 'atmeneti', t: 'Átmeneti megoldások', s: 'markolt tömbalap · merev betétek', x0: 1240, x1: 1520, zh: 440, c: 'var(--g3)',
-    o: 'A sík- és a mélyalap határán: markolt tömbalap, illetve merev betétes talajjavítás teherelosztó réteggel.' },
+  { k: 'atmeneti', t: 'Átmeneti megoldások', s: 'tömbalap · merev betétek · gyámolított lemez', x0: 1240, x1: 1700, zh: 440, c: 'var(--g3)',
+    o: 'A sík- és a mélyalap határán: markolt tömbalap; merev betétes talajjavítás (rigid inclusion) teherelosztó réteggel, a betétek nincsenek bekötve a lemezbe; cölöppel gyámolított lemezalap, ahol a lemez és a bekötött cölöpök együtt viselik a terhet.' },
 ];
 
 /* ---------------------------------------------------------------- rajzsegédek */
@@ -76,22 +76,31 @@ const flow = (p, d) => P(p, d, 'tt-flowline');
 
 /* ---------------------------------------------------------------- jelenetek */
 function sceneColop(g) {
-  const x0 = 56, x1 = 278, raftTop = G - 4, raftBot = G + 18;
-  building(g, 64, raftTop, 206, 10);
-  conc(g, x0, raftTop, x1 - x0, raftBot - raftTop);
-  const xs = Array.from({ length: 7 }, (_, i) => 74 + i * 31);
-  xs.forEach((cx, i) => {
-    const yb = Y(bt(cx) + 2.0);
-    conc(g, cx - 6.5, raftBot, 13, yb - raftBot, 'f-conc2');
-    if (i % 2 === 0) {
-      for (let d = 3; d < bt(cx) + 1.6; d += 2.2) { F(g, cx - 11, Y(d) + 16, cx - 11, Y(d), 'skin', d * 0.08); F(g, cx + 11, Y(d) + 16, cx + 11, Y(d), 'skin', d * 0.08); }
-      F(g, cx, yb + 22, cx, yb + 3, 'base', 1.2);
+  // csarnok egymástól távoli pillérekkel; minden pillér alatt vasbeton fejtömb és 4-es (2×2) cölöpcsoport
+  const cols = [92, 182, 272], capT = G - 4, capB = G + 20, roofY = G - 150;
+  P(g, `M66 ${roofY - 22} H298 M66 ${roofY} H298`, 'tt-roof');
+  let zz = `M66 ${roofY}`; for (let x = 66; x < 298; x += 29) zz += ` L${x + 14.5} ${roofY - 22} L${x + 29} ${roofY}`;
+  P(g, zz, 'tt-roof', { 'stroke-width': 1.6 });
+  for (const cx of cols) R(g, cx - 5, roofY, 10, capT - roofY, 'f-steelc');
+  cols.forEach((cx, i) => {
+    conc(g, cx - 25, capT, 50, capB - capT);
+    for (const px of [cx - 14, cx + 14]) {
+      const yb = Y(bt(px) + 2.0);
+      conc(g, px - 5, capB, 10, yb - capB, 'f-conc2');
+      const sx = px < cx ? -1 : 1;
+      for (let d = 2.6 + i * 0.3; d < bt(px) + 1.6; d += 2.3) F(g, px + sx * 10, Y(d) + 15, px + sx * 10, Y(d), 'skin', d * 0.08);
+      F(g, px, yb + 22, px, yb + 3, 'base', 1.2);
     }
+    F(g, cx, roofY + 18, cx, capT - 6, 'load');
   });
-  for (const cx of [105, 167, 229]) F(g, cx, raftTop - 70, cx, raftTop - 6, 'load');
-  flow(g, `M167 ${raftTop - 90} V${raftBot} M105 ${raftBot} V${Y(bt(105) + 2)} M229 ${raftBot} V${Y(bt(229) + 2)}`);
-  lead(g, 272, raftTop + 8, 296, G - 34); T(g, 322, G - 40, 'vb. lemez', 'tt-lab', { 'text-anchor': 'end' });
-  lead(g, 260, Y(6), 296, Y(5.2)); T(g, 322, Y(5.2) - 6, 'cölöpök', 'tt-lab', { 'text-anchor': 'end' });
+  flow(g, cols.map((cx) => `M${cx} ${roofY + 6} V${capB} M${cx - 14} ${capB} V${Y(bt(cx - 14) + 2)} M${cx + 14} ${capB} V${Y(bt(cx + 14) + 2)}`).join(' '));
+  // jelölések a csarnokon belül: fejtömb, a csoport alaprajza
+  lead(g, 112, capT + 4, 137, G - 38); T(g, 137, G - 44, 'fejtömb', 'tt-sm', { 'text-anchor': 'middle' });
+  const px0 = 212, py0 = G - 104;
+  R(g, px0, py0, 30, 30, 'f-conc', { rx: 2 }); R(g, px0, py0, 30, 30, 's-ink', { fill: 'none', 'stroke-width': 1, opacity: 0.6, rx: 2 });
+  for (const [dx, dy] of [[8, 8], [22, 8], [8, 22], [22, 22]]) svg('circle', { cx: px0 + dx, cy: py0 + dy, r: 4, class: 'f-conc2 s-ink', 'stroke-width': 0.8 }, g);
+  T(g, 227, G - 60, EN ? 'in plan' : 'alaprajzban', 'tt-xs', { 'text-anchor': 'middle' });
+  T(g, 227, G - 42, '4 cölöp', 'tt-sm', { 'text-anchor': 'middle' });
 }
 function sceneResfal(g) {
   const L0 = 346, L1 = 360, R0 = 630, R1 = 644, yb = Y(hc(346) + 1.5);
@@ -116,7 +125,16 @@ function sceneResfal(g) {
     for (let d = 10.6; d < hc(346) + 1.2; d += 2.1) F(g, cx + sgn * 9, Y(d) + 16, cx + sgn * 9, Y(d), 'skin', d * 0.06);
   }
   F(g, 353, yb + 22, 353, yb + 3, 'base', 1.3); F(g, 637, yb + 22, 637, yb + 3, 'base', 1.3);
-  flow(g, `M353 ${G - 100} V${yb} M637 ${G - 100} V${yb}`);
+  // a belső pillérek alatt résbaretták (réspillérek) – nem lemezalap
+  const bb = Y(hc(495) - 0.6);
+  for (const cx of [450, 540]) {
+    conc(g, cx - 8, slabB, 16, bb - slabB, 'f-conc2');
+    for (let d = 10.9; d < hc(495) - 1.2; d += 1.9) { F(g, cx - 14, Y(d) + 15, cx - 14, Y(d), 'skin', d * 0.06); F(g, cx + 14, Y(d) + 15, cx + 14, Y(d), 'skin', d * 0.06); }
+    F(g, cx, bb + 22, cx, bb + 3, 'base', 1.3);
+    lead(g, cx, bb + 26, 495, Y(hc(495) + 1.4));
+  }
+  T(g, 495, Y(hc(495) + 1.4) + 20, 'résbaretták', 'tt-lab', { 'text-anchor': 'middle' });
+  flow(g, `M353 ${G - 100} V${yb} M637 ${G - 100} V${yb} M450 ${G} V${bb} M540 ${G} V${bb}`);
   T(g, 495, Y(1.75), 'mélygarázs', 'tt-sm', { 'text-anchor': 'middle' });
   lead(g, 344, Y(13.5), 372, Y(12.6)); T(g, 374, Y(12.6) + 5, 'résfal', 'tt-lab');
 }
@@ -192,6 +210,24 @@ function sceneAtmeneti(g) {
   flow(g, xs.map((cx) => `M${cx} ${slabT - 30} V${Y(bt(cx) + 0.8)}`).join(' '));
   lead(g, 1500, G + 5, 1494, G + 40); T(g, 1468, G + 54, 'teherelosztó', 'tt-xs', { 'text-anchor': 'middle' }); T(g, 1468, G + 68, 'szemcsés réteg', 'tt-xs', { 'text-anchor': 'middle' });
   T(g, 1440, Y(6.9), 'merev betétek', 'tt-sm', { 'text-anchor': 'middle' });
+  if (!EN) T(g, 1440, Y(6.9) + 16, '(rigid inclusion)', 'tt-xs', { 'text-anchor': 'middle' });
+  // c) cölöppel gyámolított lemezalap: vastag lemez, ritkább, a lemezbe bekötött cölöpök
+  const rx0 = 1540, rx1 = 1694, rT = G - 4, rB = G + 20;
+  building(g, 1548, rT, 138, 8);
+  conc(g, rx0, rT, rx1 - rx0, rB - rT);
+  const ps = [1558, 1598, 1638, 1678];
+  for (const cx of ps) {
+    const yb = Y(bt(cx) + 1.2);
+    conc(g, cx - 5, rB - 6, 10, yb - rB + 6, 'f-conc2');
+    for (let d = 2.4; d < bt(cx) + 0.8; d += 1.9) F(g, cx + 10, Y(d) + 13, cx + 10, Y(d), 'skin', d * 0.08);
+    F(g, cx, yb + 18, cx, yb + 3, 'base', 1.1);
+  }
+  for (const x of [1578, 1618, 1658]) F(g, x, rB + 26, x, rB + 3, 'base', 0.8);
+  for (const x of [1578, 1618, 1658]) F(g, x, rT - 70, x, rT - 6, 'load');
+  flow(g, `M1618 ${rT - 84} V${rB}` + ps.map((cx) => ` M${cx} ${rB} V${Y(bt(cx) + 1.2)}`).join(''));
+  T(g, 1617, Y(8.3), 'cölöppel gyámolított', 'tt-sm', { 'text-anchor': 'middle' });
+  if (!EN) T(g, 1617, Y(8.3) + 17, 'lemezalap', 'tt-sm', { 'text-anchor': 'middle' });
+  T(g, 1617, Y(8.3) + (EN ? 17 : 34), 'lemez + cölöpök együtt', 'tt-xs', { 'text-anchor': 'middle' });
 }
 const DRAW = { colop: sceneColop, resfal: sceneResfal, kut: sceneKut, szekreny: sceneSzekreny, atmeneti: sceneAtmeneti };
 

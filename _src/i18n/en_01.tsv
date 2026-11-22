@@ -37,22 +37,17 @@ d9a5f62	<b>3</b><span>main types: piles, diaphragm walls, well and box foundatio
 7f8600a	<b>2</b><span>routes of load transfer: base and shaft</span>
 11ee240	<b>6</b><span>typical reasons why a shallow foundation is not enough</span>
 c4b2a21	What is a deep foundation? – base and shaft
-aa860e8	A shallow foundation transfers the load <b>at its base</b>: the contact pressure loads the upper, often weak layers, and these are compressed. A deep foundation carries the load down to deeper layers of (better) bearing capacity, and along the way, besides its base, it also transfers load to the soil <b>along its shaft</b> by friction and adhesion.
 d4c973d	For piles the two load-transfer surfaces have their own names: <b>base (end-bearing) resistance</b> (at the base, by compression) and <b>shaft resistance</b> (along the shaft, by shear). Which of them dominates depends on many factors – this is covered in the next chapter.
 603bd8b	<b>Shallow foundation:</b> the load enters the soil only at the foundation level (the bearing surface of the footing) and spreads out in the soil zone a few metres deep below it (except for raft foundations).
 372c13a	<b>Deep foundation:</b> through the base and the shaft the load also reaches deeper layer(s).
-cf13eca	Load transfer of a shallow foundation and a pile: the shallow foundation transfers load only at its base, the pile at its base and along its shaft
 33c5b6d	Types of deep foundation
-9fe4402	Deep foundations have three main families: <b>pile foundations</b> (slender, long column-like elements), <b>diaphragm wall foundations</b> (a continuous wall in the ground) and <b>well and box foundations</b> (large-section sunk bodies, also called “deepened shallow foundations” because of their size). On the boundary between shallow and deep foundations lie the <b>transitional solutions</b>. Today the pile foundation is by far the most common, so it is covered in the most detail (C02–C06); diaphragm walls (C07) and well, box and caisson foundations (C08) each get a chapter of their own. In the 3D section at the top of the page you can also try how a shallow foundation, a pile foundation, a diaphragm wall and a well foundation carry the load down.
 451cdac	Classification of deep foundations
 3c43f53	<b>Deep foundation</b><small>a load-transferring element between the structure and the deeper bearing stratum</small>
 8513a8e	<span class="alap-ti" data-ti="colop"></span><span class="at-t"><b>Pile foundation</b><small>slender, long column-like elements</small></span>
 d358650	<a href="#elore">displacement</a><a href="#furt">replacement</a><a href="#egyeb">other: micropiles, jet grouting, mixing</a>
 a78c625	<span class="alap-ti" data-ti="resfal"></span><span class="at-t"><b>Diaphragm wall</b><small>a continuous wall in the ground</small></span>
 994f18c	<a href="#resfal">diaphragm wall of panels</a><a href="#resfal">barrette</a>
-23e153b	<span class="alap-ti" data-ti="kut"></span><span class="at-t"><b>“Deepened shallow foundations”</b><small>large sunk bodies</small></span>
 fade340	<a href="#kut">well foundation</a><a href="#kut">box foundation · caisson</a>
-4fcca94	<b>Transitional solutions</b><span>excavated block foundation · combined foundation (ground improvement with rigid inclusions)</span>
 02f1901	Five solutions in one section
 99e5757	Pile foundation
 e1e7f3d	Slender, individual load-transferring elements; their heads are tied together by a reinforced concrete pile cap, slab or grillage. Today this is by far the most common deep foundation.
@@ -91,12 +86,6 @@ abae9de	As a single large body, mainly at its base (and along its shaft) into th
 f6666f2	Under bridge piers in a river bed, where the foundation must reach below the scour depth; rare today, piles have replaced it.
 a420c0a	The piers of the older Danube bridges in Budapest; the box of an underground car park in Geneva.
 358c118	Transitional solutions
-89b4fc8	The boundary between shallow and deep foundations is not sharp. It includes the excavated block foundation and the combined foundation, for example ground improvement with rigid inclusions – this is ground improvement, not a pile foundation.
-77ee286	Block foundation: a block excavated in cohesive soil, above the groundwater, to a depth of approx. 5–6 m. Rigid inclusions: typically unreinforced concrete or mortar columns under the slab.
-73bf84e	The block foundation works mainly at its base. With rigid inclusions, arching develops in the granular load transfer platform: part of the load goes to the inclusions, the rest to the soil between them; negative skin friction develops along the upper part of the inclusions.
-528e6c7	The block is excavated without support and concreted immediately; the inclusions are not rigidly connected to the structure (e.g. the base slab).
-bf42e83	Block foundations for moderate loads and a good layer not too deep; rigid inclusions to reduce the settlement of large, uniformly loaded slabs (hall floors, tanks, embankments).
-767fd7b	Block foundations of smaller buildings; logistics halls and tanks on ground improved with rigid inclusions.
 5605a25	Rigid inclusions, stone columns: C06 →
 b729eff	Which is the most common?
 5099d66	Today, by far the pile foundation. Diaphragm walls are used primarily for excavation support and less often purely as foundations – in underground car parks they often do both at once. Well and box foundations were the “classic” methods of the last century; because of piles and modern excavation support they are built less and less today.
@@ -107,3 +96,35 @@ e3ff7c2	Buildings with ever larger loads and greater sensitivity to settlement h
 e40c705	Shallow or deep foundation?
 51db9ef	Giants and their foundations
 23ab85c	Skyscrapers and towers are the most spectacular cases of deep foundations. Besides the <b>large load</b>, <b>unfavourable subsoil</b> and a <b>strict settlement criterion</b> also often force the foundation into the depth. In the figure below every structure and its foundation is shown <b>at the same scale</b>. Look how deep the foundation has to reach – and notice that this is decided not by the height of the building but by the <b>subsoil</b>.
+2f493ce	Block foundations of smaller buildings; logistics halls and tanks on ground improved with rigid inclusions; tall buildings on piled raft foundations (e.g. the Messeturm in Frankfurt).
+5eeb57a	Block foundations for moderate loads and a good layer not too deep; rigid inclusions to reduce the settlement of large, uniformly loaded slabs (hall floors, tanks, embankments); a piled raft for heavily loaded tall buildings, when the raft alone would settle too much but a full pile foundation is not needed.
+f0cc03a	The block is excavated without support and concreted immediately; the rigid inclusions are not connected to the structure (e.g. the base slab), whereas the piles of a piled raft are.
+73fed85	The block foundation works mainly at its base. With rigid inclusions, arching develops in the granular load transfer platform: part of the load goes to the inclusions, the rest to the soil between them; negative skin friction develops along the upper part of the inclusions. In a piled raft the pile heads are connected to the raft: the load is carried jointly by the raft at its base and by the piles, which mainly reduce the settlement.
+a2e0be1	Block foundation: a block excavated in cohesive soil, above the groundwater, to a depth of approx. 5–6 m. Rigid inclusions: typically unreinforced concrete or mortar columns under the slab, with a load transfer platform. Piled raft: a thick reinforced concrete raft on piles spaced more widely than in a pile foundation.
+0ad7b66	The boundary between shallow and deep foundations is not sharp. It includes the excavated block foundation and two quite different forms of combined foundation: ground improvement with rigid inclusions – this is ground improvement, not a pile foundation – and the piled raft.
+81b80df	<b>Transitional solutions</b><span>excavated block foundation · combined foundation: ground improvement with rigid inclusions, piled raft</span>
+88e5c23	<span class="alap-ti" data-ti="kut"></span><span class="at-t"><b>“Deepened shallow foundations”</b><small>they transfer the load mainly at their base, at depth</small></span>
+b9f8a28	Deep foundations have three main families: <b>pile foundations</b> (slender, long column-like elements), <b>diaphragm wall foundations</b> (a continuous wall in the ground) and <b>well and box foundations</b> (rigid, massive bodies that – like a shallow foundation – transfer the load mainly at their base, only deeper, in the bearing layer; hence they are also called “deepened shallow foundations”). On the boundary between shallow and deep foundations lie the <b>transitional solutions</b>. Today the pile foundation is by far the most common, so it is covered in the most detail (C02–C06); diaphragm walls (C07) and well, box and caisson foundations (C08) each get a chapter of their own. On the 3D section at the top of the page you can also try how a shallow foundation, a pile foundation, a diaphragm wall and a well foundation carry the load down.
+4313f60	Load transfer of a shallow foundation and a pile: under the shallow foundation the stress from the load dissipates mostly in the soft layer, so the settlement is large; the pile carries the load through its shaft and base into the bearing layer, so the settlement is small
+f46dc05	A shallow foundation transfers the load <b>at its base</b>: the stress from the load dissipates in the often weak layers below the foundation, and these are compressed. A deep foundation carries the load down to deeper layers of (better) bearing capacity, and along the way, besides its base, it also transfers load to the soil <b>along its shaft</b> by friction and adhesion.
+4b048c6	raft + piles together
+d76448d	piled raft
+d31d888	barrettes
+4eeabb1	4 piles
+4c35824	On the boundary between shallow and deep foundations: the excavated block foundation; ground improvement with rigid inclusions and a load transfer platform, the inclusions not connected to the slab; and the piled raft, where the raft and the connected piles carry the load together.
+9e7d42f	block · rigid inclusions · piled raft
+4d08645	A continuous reinforced concrete wall in the ground: foundation and excavation support in one – it also forms the wall of the underground car park. The internal columns are carried down to the bearing layer by barrettes.
+a183cdc	Slender, individual elements carry the load down to the bearing stratum – at their bases and along their shafts. In the section, the columns of a hall stand on groups of 4 piles with reinforced concrete pile caps.
+cc1c14d	the bearing layer takes the load
+66ff248	small settlement
+9d8fb0a	the soft layer is compressed
+0061192	large settlement
+6853f96	small shaft
+fc2cb3b	in the soft layer
+f092f4b	bearing layer
+629dddb	reaches into the
+a238ffa	a smaller part
+4912569	in the soft layer
+b07e20e	mostly dissipates
+372f673	 from the load:
+dd8bcf1	contact pressure

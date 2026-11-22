@@ -41,6 +41,9 @@ ul.alap-why li.ok::before { content: "✓"; color: var(--ok); }
 /* ---- talp és köpeny ábra, fajták ikonjai */
 .alap-elvfig { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
 .alap-elvfig svg { width: 100%; height: auto; display: block; }
+.ae-pair { display: grid; grid-template-columns: 1fr 1fr; }
+.ae-cell + .ae-cell { border-left: 3px solid var(--surface); }
+@media (max-width: 560px) { .ae-pair { grid-template-columns: 1fr; } .ae-cell + .ae-cell { border-left: 0; border-top: 3px solid var(--surface); } }
 .alap-ti { margin: -4px -4px 10px; }
 .alap-tii { width: 100%; height: auto; display: block; border-radius: 9px; border: 1px solid var(--line); }
 
@@ -104,7 +107,7 @@ svg .rsz-off { fill: var(--line2); }
   :is([data-w^="alap-"], [data-w^="rsz-"]):not([data-w="rsz-fa"]) svg .t-lab { font-size: 19px; }
   :is([data-w^="alap-"], [data-w^="rsz-"]):not([data-w="rsz-fa"]) svg .t-num { font-size: 19px; }
   :is([data-w^="alap-"], [data-w^="rsz-"]):not([data-w="rsz-fa"]) svg .t-big { font-size: 22px; }
-  .alap-elvfig[data-w="alap-elv"] svg text.t-lab, .alap-elvfig[data-w="alap-elv"] svg text.t-sm { font-size: 15px; }
+  .alap-elvfig[data-w="alap-elv"] svg text.t-lab { font-size: 12px; } .alap-elvfig[data-w="alap-elv"] svg text.t-sm { font-size: 10.5px; } .alap-elvfig[data-w="alap-elv"] svg text.t-big { font-size: 15px; }
   .w[data-w="alap-tornyok"] svg text.t-num { font-size: 30px; }
   .w[data-w="alap-tornyok"] svg text.t-sm { font-size: 26px; }
   .rsz-dchart .t-sm, .rsz-dchart .t-lab { font-size: 13px !important; }

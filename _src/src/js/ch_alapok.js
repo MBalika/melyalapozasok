@@ -454,41 +454,123 @@ register('alap-kimosas', (root) => {
   root.append(h('div', { class: 'w-foot', html: '<b>Szemléltető modell:</b> a kimélyülés a sebességgel nő, legfeljebb a pillérszélesség kb. 2,4-szereséig. A valódi kimosási mélység a vízmélységtől, a pillér alakjától, a mederanyagtól és az árhullám hosszától is függ.' }));
 });
 
-/* ================================================================ 1.4 talp és köpeny (ábra) */
-register('alap-elv', (root) => {
-  const s = figure(root, 460, 330, 'fig');
-  const G = 70, yB = 230;
-  svg('rect', { x: 0, y: 0, width: 460, height: G, class: 'f-sky' }, s);
-  hatch(s, 0, G, 460, yB - G, 'f-soilB', 'pat-clay');
-  hatch(s, 0, yB, 460, 330 - yB, 'f-soilD', 'pat-gravel');
-  svg('line', { x1: 0, y1: G, x2: 460, y2: G, class: 's-ink', 'stroke-width': 1.5 }, s);
-  svg('line', { x1: 230, y1: 6, x2: 230, y2: 324, class: 's-surface', 'stroke-width': 3 }, s);
-  T(s, 115, 22, 'SÍKALAP', 't-big', { 'text-anchor': 'middle' });
-  T(s, 345, 22, 'MÉLYALAP (CÖLÖP)', 't-big', { 'text-anchor': 'middle' });
-  // síkalap
-  conc(s, 70, G - 4, 90, 18);
-  svg('rect', { x: 102, y: 30, width: 26, height: G - 34, class: 'f-conc2' }, s);
-  arrow(s, 115, 26, 115, 48, { cls: 's-ink', w: 3, head: 9 });
-  for (let i = 0; i < 4; i++) svg('ellipse', { cx: 115, cy: G + 14 + i * 14, rx: 50 + i * 18, ry: 16 + i * 14, fill: 'none', class: 's-bad', 'stroke-width': 1.1, 'stroke-dasharray': '4 3', opacity: 0.8 - i * 0.15 }, s);
-  for (const x of [80, 97, 115, 133, 150]) arrow(s, x, G + 16, x, G + 34, { cls: 's-bad', w: 1.6, head: 6 });
-  T(s, 115, G + 120, 'a talpfeszültség a puha', 't-sm halo', { 'text-anchor': 'middle' });
-  T(s, 115, G + 133, 'réteget nyomja össze', 't-sm halo', { 'text-anchor': 'middle' });
-  T(s, 10, yB + 18, 'teherbíró réteg', 't-sm halo');
-  T(s, 10, G + 16, 'puha réteg', 't-sm halo');
-  // cölöp
-  conc(s, 310, G - 6, 70, 16);
-  svg('rect', { x: 333, y: 30, width: 24, height: G - 36, class: 'f-conc2' }, s);
-  arrow(s, 345, 26, 345, 48, { cls: 's-ink', w: 3, head: 9 });
-  conc(s, 336, G + 10, 18, yB + 50 - G - 10, 'f-conc2');
-  for (let y = G + 24; y < yB + 44; y += 22) {
-    arrow(s, 330, y + 10, 330, y - 4, { cls: 's-ok', w: 1.8, head: 6 });
-    arrow(s, 360, y + 10, 360, y - 4, { cls: 's-ok', w: 1.8, head: 6 });
+/* ================================================================ 1.1 síkalap és cölöp teherátadása (ábra) */
+// Feszültséghagyma: B×B négyzetes, egyenletesen terhelt alap középmetszete, rugalmas féltér
+// (Boussinesq–Steinbrenner sarokpont-képlet, szuperpozícióval). Értékek: Δσz / q.
+function steinC(a, b, z) {
+  const sg = Math.sign(a); a = Math.abs(a);
+  if (a === 0) return 0;
+  const R = Math.sqrt(a * a + b * b + z * z);
+  return sg * (1 / (2 * Math.PI)) * ((a * b * z * (a * a + b * b + 2 * z * z)) / ((a * a + z * z) * (b * b + z * z) * R) + Math.atan((a * b) / (z * R)));
+}
+const sigSq = (x, z) => 2 * (steinC(1 + x, 1, z) + steinC(1 - x, 1, z)); // c = 1 (fél alapszélesség), x és z c-egységben
+function bisect(f, lo, hi, n = 40) { for (let i = 0; i < n; i++) { const m = (lo + hi) / 2; if (f(m) > 0) lo = m; else hi = m; } return (lo + hi) / 2; }
+/** Izobár (Δσz/q = L) zárt görbéje SVG-koordinátákban: (cx, y0) az alapsík közepe, c a fél alapszélesség px-ben */
+function isobar(L, cx, y0, c) {
+  const zmax = bisect((z) => sigSq(0, z) - L, 1e-3, 12);
+  const right = [];
+  const N = 46;
+  for (let i = 0; i <= N; i++) {
+    const t = i / N, z = Math.max(1e-3, zmax * (1 - Math.pow(1 - t, 2.2)));
+    const x = i === N ? 0 : bisect((xx) => sigSq(xx, z) - L, 0, 6);
+    right.push([x, z]);
   }
-  for (const x of [338, 345, 352]) arrow(s, x, yB + 76, x, yB + 60, { cls: 's-acc', w: 2.2, head: 7 });
-  T(s, 322, G + 70, 'köpenymenti', 't-lab t-ok halo', { 'text-anchor': 'end' });
-  T(s, 322, G + 85, 'ellenállás', 't-lab t-ok halo', { 'text-anchor': 'end' });
-  T(s, 330, yB + 70, 'talp- (csúcs-)', 't-lab t-acc halo', { 'text-anchor': 'end' });
-  T(s, 330, yB + 85, 'ellenállás', 't-lab t-acc halo', { 'text-anchor': 'end' });
+  const pts = right.map(([x, z]) => [cx + x * c, y0 + z * c]);
+  const left = right.slice().reverse().map(([x, z]) => [cx - x * c, y0 + z * c]);
+  return { d: pathD(pts.concat(left), true), zmax: y0 + zmax * c, xTop: right[0][0] * c };
+}
+// alsó indexes jelölés SVG-ben (dy-vel, nem baseline-shifttel)
+function Tsub(parent, x, y, parts, cls, o = {}) {
+  const t = svg('text', { x, y, class: cls, ...o }, parent);
+  let back = 0;
+  for (const [txt, sub] of parts) {
+    if (sub) { svg('tspan', { dy: 3.5 - back, 'font-size': '0.72em', text: txt }, t); back = 3.5; }
+    else { svg('tspan', back ? { dy: -back, text: txt } : { text: txt }, t); back = 0; }
+  }
+  return t;
+}
+register('alap-elv', (root) => {
+  // két külön panel: széles nézetben egymás mellett, telefonon egymás alatt (így a feliratok olvashatók maradnak)
+  const W = 240, H = 420, G = 80, yB = 236, X = 120;
+  const pair = h('div', { class: 'ae-pair' }); root.append(pair);
+  function base(title, trough) {
+    const cell = h('div', { class: 'ae-cell' }); pair.append(cell);
+    const s = figure(cell, W, H, 'fig');
+    const gy = (x) => G + trough(x);
+    svg('rect', { x: 0, y: 0, width: W, height: G + 10, class: 'f-sky' }, s);
+    const top = []; for (let x = 0; x <= W; x += 6) top.push([x, gy(x)]);
+    const soft = pathD(top.concat([[W, yB], [0, yB]]), true);
+    svg('path', { d: soft, class: 'f-soilB' }, s); svg('path', { d: soft, fill: 'url(#pat-clay)', opacity: 0.55 }, s);
+    hatch(s, 0, yB, W, H - yB, 'f-soilD', 'pat-gravel');
+    svg('line', { x1: 0, y1: yB, x2: W, y2: yB, class: 's-ink', 'stroke-width': 1, opacity: 0.45 }, s);
+    svg('path', { d: pathD(top), fill: 'none', class: 's-ink', 'stroke-width': 1.5 }, s);
+    T(s, 8, G + 18, 'puha réteg', 't-sm halo');
+    T(s, 8, yB + 16, 'teherbíró réteg', 't-sm halo');
+    T(s, X, 24, title, 't-big', { 'text-anchor': 'middle' });
+    return s;
+  }
+  const badge = (s, ok, l1, l2) => {
+    svg('rect', { x: 10, y: H - 50, width: W - 20, height: 42, rx: 9, style: `fill: var(--surface); stroke: var(--${ok ? 'ok' : 'bad'}); stroke-width: 1.5` }, s);
+    T(s, X, H - 33, (ok ? '✓ ' : '✗ ') + l1, `t-lab ${ok ? 't-ok' : 't-bad'}`, { 'text-anchor': 'middle' });
+    T(s, X, H - 17, l2, 't-sm', { 'text-anchor': 'middle' });
+  };
+
+  // ---------------- síkalap: talpfeszültség és a teherből eredő feszültség a talajban
+  const trough = (x) => 7 * Math.exp(-Math.pow((x - X) / 58, 2)); // süllyedési teknő
+  let s = base('SÍKALAP', trough);
+  const c = 36, yF = G + 14 + trough(X); // fél alapszélesség (px), alapsík
+  const bands = [[0.1, 0.13], [0.2, 0.2], [0.4, 0.28], [0.6, 0.36], [0.8, 0.46]];
+  const iso = {};
+  for (const [L, op] of bands) {
+    const b = isobar(L, X, yF, c); iso[L] = b;
+    svg('path', { d: b.d, style: `fill: var(--bad); opacity: ${op}` }, s);
+    svg('path', { d: b.d, fill: 'none', class: 's-bad', 'stroke-width': 1, opacity: 0.85 }, s);
+  }
+  for (const [L] of bands) if (L !== 0.8) T(s, X, iso[L].zmax - 3.5, (L < 0.15 ? '0.1' : String(L)).replace('.', EN ? '.' : ','), 't-sm halo', { 'text-anchor': 'middle' });
+  T(s, X + c - 4, yF + 15, EN ? '0.8q' : '0,8q', 't-sm halo', { 'text-anchor': 'end' });
+  // az alap eredeti helyzete (szaggatva), a lesüllyedt alap és a pillér
+  svg('rect', { x: X - c, y: G - 6, width: 2 * c, height: 20, fill: 'none', class: 's-ink', 'stroke-width': 1, 'stroke-dasharray': '3 3', opacity: 0.6 }, s);
+  conc(s, X - c, yF - 20, 2 * c, 20);
+  svg('rect', { x: X - 12, y: 34, width: 24, height: yF - 20 - 34, class: 'f-conc2' }, s);
+  arrow(s, X, 30, X, 52, { cls: 's-ink', w: 3, head: 9 });
+  for (let i = -2; i <= 2; i++) arrow(s, X + i * 15, yF - 10, X + i * 15, yF + 1, { cls: 's-bad', w: 1.6, head: 5 });
+  svg('line', { x1: X - c + 8, y1: yF - 3, x2: 44, y2: G - 22, class: 's-muted', 'stroke-width': 1 }, s);
+  T(s, 8, G - 26, 'talpfeszültség', 't-sm halo');
+  svg('line', { x1: X + c + 8, y1: G - 6, x2: X + c + 8, y2: yF - 20, class: 's-bad', 'stroke-width': 1.4 }, s);
+  T(s, X + c + 13, G + 3, 's', 't-lab t-bad halo');
+  Tsub(s, 8, 188, [['Δσ'], ['z', true], [' a teherből:']], 't-sm halo');
+  T(s, 8, 201, 'döntően a puha', 't-sm halo');
+  T(s, 8, 214, 'rétegben épül le', 't-sm halo');
+  svg('line', { x1: X + 22, y1: iso[0.1].zmax - 1, x2: X + 30, y2: yB + 38, class: 's-muted', 'stroke-width': 1 }, s);
+  T(s, X + 26, yB + 50, 'kisebb része a', 't-sm halo');
+  T(s, X + 26, yB + 63, 'teherbíró rétegbe', 't-sm halo');
+  T(s, X + 26, yB + 76, 'is lenyúlik', 't-sm halo');
+  badge(s, false, 'nagy süllyedés', 'a puha réteg nyomódik össze');
+
+  // ---------------- cölöp
+  s = base('MÉLYALAP (CÖLÖP)', () => 0);
+  const yT = yB + 62, D = 9;
+  for (const [L, op] of [[0.1, 0.1], [0.2, 0.16], [0.4, 0.24]]) {
+    const b = isobar(L, X, yT, D * 1.6);
+    svg('path', { d: b.d, style: `fill: var(--bad); opacity: ${op}` }, s);
+    svg('path', { d: b.d, fill: 'none', class: 's-bad', 'stroke-width': 0.9, opacity: 0.6 }, s);
+  }
+  conc(s, X - 30, G - 6, 60, 18);
+  svg('rect', { x: X - 12, y: 34, width: 24, height: G - 6 - 34, class: 'f-conc2' }, s);
+  arrow(s, X, 30, X, 52, { cls: 's-ink', w: 3, head: 9 });
+  conc(s, X - D, G + 12, 2 * D, yT - G - 12, 'f-conc2');
+  // köpenymenti ellenállás: a puha rétegben kicsi, a teherbíró rétegben nagy
+  for (let y = G + 30; y < yB - 6; y += 26) for (const sx of [-1, 1]) arrow(s, X + sx * (D + 6), y + 7, X + sx * (D + 6), y - 2, { cls: 's-ok', w: 1.2, head: 4.5 }).setAttribute('opacity', 0.55);
+  for (let y = yB + 12; y < yT - 4; y += 15) for (const sx of [-1, 1]) arrow(s, X + sx * (D + 7), y + 13, X + sx * (D + 7), y - 2, { cls: 's-ok', w: 2, head: 6.5 });
+  for (const dx of [-5, 0, 5]) arrow(s, X + dx, yT + 18, X + dx, yT + 2, { cls: 's-acc', w: 2.2, head: 7 });
+  T(s, X + D + 14, G + 64, 'a puha rétegben', 't-sm halo');
+  T(s, X + D + 14, G + 77, 'kicsi köpeny-', 't-sm halo');
+  T(s, X + D + 14, G + 90, 'ellenállás', 't-sm halo');
+  T(s, X - D - 14, yB + 40, 'köpenymenti', 't-lab t-ok halo', { 'text-anchor': 'end' });
+  T(s, X - D - 14, yB + 55, 'ellenállás', 't-lab t-ok halo', { 'text-anchor': 'end' });
+  T(s, X - 22, yT + 32, 'talp- (csúcs-)', 't-lab t-acc halo', { 'text-anchor': 'end' });
+  T(s, X - 22, yT + 47, 'ellenállás', 't-lab t-acc halo', { 'text-anchor': 'end' });
+  badge(s, true, 'kis süllyedés', 'a terhet a teherbíró réteg veszi fel');
 });
 
 /* ================================================================ 1.4 fajták ikonjai */
