@@ -17,9 +17,9 @@ ca8e3b3	A suggested viewing route in the order of the chapters: at each stop the
 25b5ffc	What it looks like in reality
 5961a22	Real deep foundation footage in English from the Geotech Project YouTube channel (the two short overview clips exist only in Hungarian). Click to open the video here on the page; you can also open it on YouTube at the bottom of the window.
 7e6274b	<a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoJk3IiDC5YBCNSs0_YQFXXA" target="_blank" rel="noopener"><i class="grp1"></i><span><small>Playlist</small><b>Pile foundations</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLJnR9HUPPN85cACUQXJhYj" target="_blank" rel="noopener"><i class="grp3"></i><span><small>Playlist</small><b>Ground improvement</b></span><em>↗</em></a>⏎    <a class="vt-list" href="https://www.youtube.com/playlist?list=PLiAsGexXzYoLoUK4uIoeIHjowjrmQH1Tc" target="_blank" rel="noopener"><i class="grp4"></i><span><small>Playlist</small><b>Embedded retaining walls</b></span><em>↗</em></a>
-6970f84	<span class="id">C12</span><span>40 true/false statements · glossary</span>
+2ab5c4b	<span class="id">C12</span><span>sorting game · 40 true/false statements · glossary</span>
 f0e99fc	Test and glossary
-308c915	The last pile has reached the bearing stratum too! Now check how much you remember: first a summary video with a quiz, then 40 statements covering the whole page – from the classification of piles to the caisson. After each answer you get a short explanation, and at the end a searchable glossary helps you revise.
+ea12ed5	The last pile has reached the bearing stratum too! Now check how much you remember: first a summary video with a quiz, then a sorting game with the pile technologies, and finally 40 statements covering the whole page – from the classification of piles to the caisson. After each answer you get a short explanation, and at the end a searchable glossary helps you revise.
 0a8248c	Warm-up: summary video
 ca070a4	The complete map of deep foundations in a few minutes, with quiz questions at the end. If you can answer the video’s questions, the statements below will be no problem either.
 ba20c08	True or false?
@@ -120,3 +120,5 @@ d1866fa	Foundations enlarged
 3f0a0a1	<div class="alap-sh-h"><b>${tw.n}</b><span>${tw.loc} · ${tw.yr}</span></div>⏎      <div class="chips"><span class="chip grp">height: ${fmt(tw.hgt, 0)}${NB}m</span><span class="chip">foundation: ${tw.f.replace(/(\d) (?=\S)/g, '$1' + NB).replace(/(kb\.|\+) /g, '$1' + NB)}</span></div>⏎      <p>${tw.p}</p><p class="alap-sh-l"><b>Lesson:</b> ${tw.l}</p>
 2a74574	Larger-diameter bodies, sunk and then filled with concrete, under individual columns; a grillage ties them together at the top.
 c022c1a	sunk larger-diameter bodies
+77de3b0	Replacement or displacement?
+b82786f	Now that you have met every technology, sort them by whether the soil is removed during construction or the pile pushes it aside and compacts it.

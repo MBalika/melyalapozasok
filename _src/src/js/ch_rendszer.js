@@ -1,6 +1,7 @@
 // C02 – Cölöpök rendszere: teherátadás-labor, cölöpcsoport-igénybevétel, rendező játék, átmérő-skála, családfa
 import { $, $$, h, svg, figure, clear, fmt, clamp, lerp, register, shell, slider, seg, toggle, stat, verdict, arrow, pathD, loop, EN } from './core.js';
 import { defineQuiz } from './ui.js';
+import { kindScene } from './proc.js';
 
 const NB = ' ';
 const T = (parent, x, y, text, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text, ...o }, parent);
@@ -138,7 +139,8 @@ register('rsz-csoport', (root) => {
   const oHp = stat(out, { label: 'Vízszintes erő cölöpönként', unit: 'kN', d: 0 });
   const vd = verdict(null); out.append(vd.el); vd.el.style.gridColumn = '1 / -1';
   let lockPre = false;
-  sPre.on((k) => { const p = PRESET[k]; lockPre = true; sN.set(p.N); sH.set(p.H); sh.set(p.h); lockPre = false; tgt(); });
+  let scene = 'szel';   // a rajzolt jelenet: az utoljára választott helyzet
+  sPre.on((k) => { scene = k; const p = PRESET[k]; lockPre = true; sN.set(p.N); sH.set(p.H); sh.set(p.h); lockPre = false; tgt(); });
   [sN, sH, sh].forEach((c) => c.on(() => { tgt(); }));
   const cur = { P: [0, 0, 0, 0], H: 0, N: 0, hh: 0 };
   let goal = null;
@@ -157,60 +159,170 @@ register('rsz-csoport', (root) => {
     vd.set(st, ttl, `<p>${txt}</p>`);
     if (!lockPre) { const m = Object.entries(PRESET).find(([, p]) => p.N === N && p.H === H && p.h === hh); sPre.set(m ? m[0] : null, false); }
   }
-  const G = 214, CAP = [130, 430], capT = 196, capB = 232, colW = 36, Ptip = 404;
+  const G = 214, CAP = [112, 448], capT = 196, capB = 232, colW = 36, Ptip = 404;
   const PX = XI.map((x) => 280 + x * 38);
+  // jelenetek: torony széllel · épület · híd fékező járművel · mélygarázs talajvízben (felúszás)
+  const box = { roofT: 202, roofB: 214, slabT: 286, slabB: 304, wall: 14 }, GW = G + 14;
+  function car(g, x, yb, w, dir = 1, cls = 'f-steel2') {
+    // egyszerű személyautó / tehergépkocsi oldalnézetben; dir: a menetirány (+1: jobbra)
+    const gg = svg('g', { transform: `translate(${x} ${yb}) scale(${dir} 1)` }, g);
+    if (w > 80) {
+      svg('rect', { x: -w / 2, y: -38, width: w * 0.72, height: 30, rx: 2, class: 'f-surface' }, gg);
+      svg('rect', { x: -w / 2, y: -38, width: w * 0.72, height: 30, rx: 2, fill: 'none', class: 's-ink', 'stroke-width': 1, opacity: 0.6 }, gg);
+      svg('path', { d: `M${w * 0.24} -8 V-30 Q${w * 0.25} -36 ${w * 0.32} -36 H${w * 0.4} L${w / 2} -22 V-8 Z`, class: cls }, gg);
+      svg('path', { d: `M${w * 0.33} -32 H${w * 0.39} L${w * 0.46} -22 H${w * 0.33} Z`, class: 'f-sky' }, gg);
+      svg('rect', { x: -w / 2 + 2, y: -9, width: w - 4, height: 4, class: 'f-ink', opacity: 0.75 }, gg);
+      for (const wx of [-w * 0.36, -w * 0.2, w * 0.36]) { svg('circle', { cx: wx, cy: -4, r: 6.5, class: 'f-ink' }, gg); svg('circle', { cx: wx, cy: -4, r: 2.6, class: 'f-muted' }, gg); }
+    } else {
+      svg('path', { d: `M${-w / 2} -6 V-13 Q${-w / 2} -16 ${-w / 2 + 4} -16 L${-w * 0.22} -17 L${-w * 0.08} -26 H${w * 0.18} L${w * 0.34} -17 L${w / 2 - 3} -15 Q${w / 2} -14 ${w / 2} -10 V-6 Z`, class: cls }, gg);
+      svg('path', { d: `M${-w * 0.05} -24 H${w * 0.08} V-17.5 H${-w * 0.16} Z M${w * 0.11} -24 H${w * 0.17} L${w * 0.29} -17.5 H${w * 0.11} Z`, class: 'f-sky' }, gg);
+      for (const wx of [-w * 0.3, w * 0.3]) { svg('circle', { cx: wx, cy: -5, r: 5, class: 'f-ink' }, gg); svg('circle', { cx: wx, cy: -5, r: 2, class: 'f-muted' }, gg); }
+    }
+    return gg;
+  }
   function draw() {
     clear(s);
     const mob = s.clientWidth > 0 && s.clientWidth < 440;
+    const sc = goal && goal.N < 0 ? 'felusz' : (scene === 'felusz' ? 'epulet' : scene);
+    const wet = sc === 'felusz', hd = wet ? box.slabB : capB;   // hd: a cölöpfejek szintje
     svg('rect', { x: 0, y: 0, width: 560, height: G, class: 'f-sky' }, s);
     hatch(s, 0, G, 560, 420 - G, 'f-soilB', 'pat-clay');
+    if (wet) {
+      // talajvíz: a terep alatt nem sokkal, a szerkezet körül és alatta
+      svg('rect', { x: 0, y: GW, width: 560, height: 420 - GW, class: 'f-water' }, s);
+      for (const [x1, x2] of [[0, CAP[0]], [CAP[1], 560]]) svg('line', { x1, y1: GW, x2, y2: GW, class: 's-water', 'stroke-width': 1.6, 'stroke-dasharray': '7 4' }, s);
+      svg('path', { d: `M12 ${GW - 11} h14 l-7 9 z`, class: 's-water', fill: 'none', 'stroke-width': 1.6 }, s);
+      svg('path', { d: `M15 ${GW + 4} h8 M17 ${GW + 8} h4`, class: 's-water', 'stroke-width': 1.4 }, s);
+      T(s, 30, GW - 4, 'talajvíz', 't-sm t-water halo');
+    }
     svg('line', { x1: 0, y1: G, x2: 560, y2: G, class: 's-ink', 'stroke-width': 1.4 }, s);
-    // oszlop / torony
-    const topY = 30, hY = (hh) => capT - hh * ((capT - topY) / 30);
-    svg('rect', { x: 280 - colW / 2, y: topY, width: colW, height: capT - topY, class: 'f-conc2' }, s);
-    conc(s, CAP[0], capT, CAP[1] - CAP[0], capB - capT);
-    T(s, CAP[0] - 6, capT + 22, 'fejtömb', 't-sm halo', { 'text-anchor': 'end' });
-    // cölöpök (hajlítás: a fej elmozdul)
-    const defl = clamp(cur.H / 1000, 0, 1) * 10;
+    // a vízszintes erő (balról jobbra) a fejtömböt és vele a cölöpfejeket jobbra tolja (torzított lépték);
+    // a fejtömbbe befogott cölöpfej függőleges marad, a kitérés a mélységgel lecseng
+    const defl = clamp(cur.H / 1000, 0, 1) * 12, LB = 150;
+    const off = (y) => { const t = (y - hd) / LB; return t <= 0 ? defl : t >= 1 ? 0 : defl * (1 + Math.cos(Math.PI * t)) / 2; };
+    const C0 = 280 + defl;
+    const topY = 50, kH = sc === 'vizsz' ? 16 : (capT - topY) / 30;
+    const hY = (hh) => Math.max(sc === 'vizsz' ? 84 : topY, capT - hh * kH);
+    let Ny = topY, Hx = C0 - colW / 2;   // a függőleges teher nyílhegye és a vízszintes erő támadáspontja
+    // ---- felszerkezet
+    if (wet) {
+      const L = CAP[0] + defl, R = CAP[1] + defl, w = box.wall;
+      // mélygarázs: födém, falak, alaplemez – a belseje üres (levegő)
+      svg('rect', { x: L + w, y: box.roofB, width: R - L - 2 * w, height: box.slabT - box.roofB, class: 'f-sky' }, s);
+      conc(s, L, box.roofT, R - L, box.roofB - box.roofT);
+      conc(s, L, box.roofB, w, box.slabT - box.roofB); conc(s, R - w, box.roofB, w, box.slabT - box.roofB);
+      conc(s, L, box.slabT, R - L, box.slabB - box.slabT);
+      svg('rect', { x: C0 - 5, y: box.roofB, width: 10, height: box.slabT - box.roofB, class: 'f-conc2' }, s);
+      car(s, L + 62, box.slabT, 64, 1); car(s, R - 62, box.slabT, 64, -1);
+      T(s, C0, box.roofB + 15, 'mélygarázs', 't-sm halo', { 'text-anchor': 'middle' });
+      // víznyomás: a falakon a mélységgel nő, az alaplemezt alulról emeli
+      for (let y = GW + 14; y < box.slabB; y += 18) {
+        const l = 4 + (y - GW) * 0.3;
+        arrow(s, L - 3 - l, y, L - 2, y, { cls: 's-water', w: 1.6, head: 5 });
+        arrow(s, R + 3 + l, y, R + 2, y, { cls: 's-water', w: 1.6, head: 5 });
+      }
+      for (const x of [PX[0] + 47.5, 280, PX[2] + 47.5]) arrow(s, x + off(box.slabB + 24), box.slabB + 26, x + defl, box.slabB + 3, { cls: 's-water', w: 2.4, head: 7 });
+      T(s, L - 8, box.slabB + 22, 'víznyomás', 't-sm t-water halo', { 'text-anchor': 'end' });
+      Hx = L; Ny = box.roofT;
+    } else {
+      if (defl > 1) svg('rect', { x: CAP[0], y: capT, width: CAP[1] - CAP[0], height: capB - capT, fill: 'none', class: 's-muted', 'stroke-width': 1, 'stroke-dasharray': '4 3' }, s);
+      if (sc === 'epulet') {
+        // többszintes épület a fejtömbön
+        const bw = 200, bt = 64, bx = C0 - bw / 2;
+        svg('rect', { x: bx, y: bt, width: bw, height: capT - bt, class: 'f-bld' }, s);
+        svg('rect', { x: bx, y: bt, width: bw, height: capT - bt, fill: 'none', class: 's-ink', 'stroke-width': 1, opacity: 0.55 }, s);
+        for (let y = bt + 22; y < capT - 4; y += 22) svg('line', { x1: bx, y1: y, x2: bx + bw, y2: y, class: 's-line', 'stroke-width': 0.8 }, s);
+        for (let y = bt + 6; y < capT - 18; y += 22) for (let x = bx + 12; x < bx + bw - 16; x += 26) svg('rect', { x, y, width: 14, height: 11, rx: 1, class: 'f-sky' }, s);
+        svg('rect', { x: C0 - 10, y: capT - 20, width: 20, height: 20, class: 'f-ink', opacity: 0.7 }, s);
+        svg('rect', { x: bx - 4, y: bt - 5, width: bw + 8, height: 5, class: 'f-conc2' }, s);
+        Ny = bt - 5; Hx = bx;
+      } else if (sc === 'vizsz') {
+        // híd: pillér, saru, szerkezet; rajta egy jobbra haladó, fékező tehergépkocsi
+        const dT = hY(cur.hh), dB = dT + 14, pw = 42;
+        svg('rect', { x: C0 - pw / 2, y: dB + 5, width: pw, height: capT - dB - 5, class: 'f-conc2' }, s);
+        svg('rect', { x: C0 - pw / 2, y: dB + 5, width: pw, height: capT - dB - 5, fill: 'none', class: 's-ink', 'stroke-width': 0.8, opacity: 0.45 }, s);
+        svg('rect', { x: C0 - pw / 2 - 4, y: dB, width: pw + 8, height: 5, class: 'f-ink', opacity: 0.75 }, s);
+        conc(s, -2 + defl, dT, 564, dB - dT, 'f-conc2');
+        svg('line', { x1: 0, y1: dT - 12, x2: 560, y2: dT - 12, class: 's-ink', 'stroke-width': 1.2, opacity: 0.55 }, s);
+        for (let x = 8 + (defl % 1); x < 560; x += 28) svg('line', { x1: x + defl, y1: dT - 12, x2: x + defl, y2: dT, class: 's-ink', 'stroke-width': 1, opacity: 0.45 }, s);
+        const tx = C0 - 120;
+        // féknyomok és menetirány-vonalak a jármű mögött
+        for (const wx of [tx - 36, tx - 20, tx + 36]) svg('line', { x1: wx - 30, y1: dT - 1, x2: wx - 4, y2: dT - 1, class: 's-ink', 'stroke-width': 2.4, opacity: 0.6 }, s);
+        for (const [y, l] of [[dT - 30, 34], [dT - 22, 24], [dT - 14, 30]]) svg('line', { x1: tx - 64 - l, y1: y, x2: tx - 60, y2: y, class: 's-muted', 'stroke-width': 1.6, 'stroke-linecap': 'round' }, s);
+        car(s, tx, dT, 104, 1);
+        T(s, tx - 58, dT - 40, 'fékező jármű', 't-sm halo', { 'text-anchor': 'end' });
+        Ny = dT - 2; Hx = tx + 56;
+      } else {
+        // torony
+        svg('rect', { x: C0 - colW / 2, y: topY, width: colW, height: capT - topY, class: 'f-conc2' }, s);
+      }
+      conc(s, CAP[0] + defl, capT, CAP[1] - CAP[0], capB - capT);
+      T(s, CAP[0] - 6, capT + 22, 'fejtömb', 't-sm halo', { 'text-anchor': 'end' });
+    }
+    // ---- cölöpök (hajlítás: a fej a fejtömbbel együtt elmozdul)
     cur.P.forEach((P, i) => {
-      const x = PX[i];
-      const d = `M${x - 8} ${capB} C${x - 8 + defl} ${capB + 50} ${x - 8} ${capB + 90} ${x - 8} ${Ptip} L${x + 8} ${Ptip} C${x + 8} ${capB + 90} ${x + 8 + defl} ${capB + 50} ${x + 8} ${capB} Z`;
+      const x0 = PX[i], x = x0 + defl;
+      const ys = []; for (let y = hd; y < hd + LB; y += 10) ys.push(y); ys.push(Math.min(hd + LB, Ptip));
+      const d = 'M' + ys.map((y) => `${(x0 - 8 + off(y)).toFixed(1)} ${y}`).join(' L') + ` L${x0 - 8} ${Ptip} L${x0 + 8} ${Ptip} L` + ys.slice().reverse().map((y) => `${(x0 + 8 + off(y)).toFixed(1)} ${y}`).join(' L') + ' Z';
       const tens = P < 0;
       svg('path', { d, class: tens ? 'f-steel' : 'f-conc2', opacity: 0.95 }, s);
       svg('path', { d, fill: 'none', class: 's-ink', 'stroke-width': 0.8, opacity: 0.5 }, s);
       const mag = Math.abs(P), len = clamp(8 + mag / 80, 8, 40);
       // a cölöperő (a fejtömb alatt)
       if (mag > 1) {
-        if (!tens) arrow(s, x, capB + 4, x, capB + 4 + len, { cls: 's-bad', w: 2.6, head: 7 });
-        else arrow(s, x, capB + 4 + len, x, capB + 4, { cls: 's-water', w: 2.6, head: 7 });
+        if (!tens) arrow(s, x, hd + 4, x, hd + 4 + len, { cls: 's-bad', w: 2.6, head: 7 });
+        else arrow(s, x, hd + 4 + len, x, hd + 4, { cls: 's-water', w: 2.6, head: 7 });
         // mobilizált ellenállás a köpeny mentén
-        for (let y = capB + 70; y < Ptip - 14; y += 36) {
-          const l = clamp(mag / 220, 3, 10);
+        for (let y = hd + 70; y < Ptip - 14; y += 36) {
+          const l = clamp(mag / 220, 3, 10), xs = x0 + off(y);
           for (const sx of [-1, 1]) {
-            if (!tens) arrow(s, x + sx * 14, y + l, x + sx * 14, y - l, { cls: 's-ok', w: 1.5, head: 4.5 });
-            else arrow(s, x + sx * 14, y - l, x + sx * 14, y + l, { cls: 's-water', w: 1.5, head: 4.5 });
+            if (!tens) arrow(s, xs + sx * 14, y + l, xs + sx * 14, y - l, { cls: 's-ok', w: 1.5, head: 4.5 });
+            else arrow(s, xs + sx * 14, y - l, xs + sx * 14, y + l, { cls: 's-water', w: 1.5, head: 4.5 });
           }
         }
-        if (!tens) for (const dx of [-4, 4]) arrow(s, x + dx, Ptip + 14, x + dx, Ptip + 2, { cls: 's-acc', w: 1.8, head: 5 });
+        if (!tens) for (const dx of [-4, 4]) arrow(s, x0 + dx, Ptip + 14, x0 + dx, Ptip + 2, { cls: 's-acc', w: 1.8, head: 5 });
       }
       const lab = (P >= 0 ? '+' : '−') + fmt(Math.abs(P), 0);
       // keskeny nézetben (ahol a CSS nagyobb betűt ad) nagyobb doboz, távolabb eső két sor
-      const ty = mob ? (i % 2 ? 332 : 282) : (i % 2 ? 300 : 280), bw = mob ? 90 : 68, bh = mob ? 46 : 30;
-      svg('rect', { x: x - bw / 2, y: ty - (mob ? 20 : 14), width: bw, height: bh, rx: 7, class: 'f-surface', opacity: 0.92 }, s);
-      T(s, x, ty, lab, 't-num' + (tens ? ' t-water' : ' t-bad'), { 'text-anchor': 'middle' });
-      T(s, x, ty + (mob ? 19 : 12), tens ? 'húzott' : 'nyomott', 't-sm', { 'text-anchor': 'middle' });
+      const ty = wet ? (mob ? (i % 2 ? 384 : 346) : (i % 2 ? 374 : 352)) : (mob ? (i % 2 ? 332 : 282) : (i % 2 ? 300 : 280));
+      const bw = mob ? 90 : 68, bh = mob ? 46 : 30;
+      const xl = x0 + off(ty);
+      svg('rect', { x: xl - bw / 2, y: ty - (mob ? 20 : 14), width: bw, height: bh, rx: 7, class: 'f-surface', opacity: 0.92 }, s);
+      T(s, xl, ty, lab, 't-num' + (tens ? ' t-water' : ' t-bad'), { 'text-anchor': 'middle' });
+      T(s, xl, ty + (mob ? 19 : 12), tens ? 'húzott' : 'nyomott', 't-sm', { 'text-anchor': 'middle' });
     });
-    // terhek
+    // ---- terhek
     const nl = clamp(Math.abs(cur.N) / 120, 0, 44);
-    if (cur.N > 20) arrow(s, 280, topY - 26 - 0, 280, topY + Math.min(nl, 44) - 4, { cls: 's-ink', w: 4, head: 11 });
-    if (cur.N < -20) { arrow(s, 280, capB + 4, 280, capT - Math.min(nl, 44) - 10, { cls: 's-water', w: 4, head: 11 }); T(s, 300, capT - (mob ? 40 : 30), 'felhajtóerő', 't-lab t-water halo'); }
-    if (cur.N > 20) T(s, 298, topY - 8, `N = ${kN(cur.N)}`, 't-num halo');
-    if (cur.N < -20) T(s, 300, capT - 16, `N = −${fmt(-cur.N, 0)}${NB}kN`, 't-num t-water halo');
+    if (cur.N > 20) {
+      arrow(s, C0, Ny - 30 - Math.min(nl, 44) * 0.4, C0, Ny - 2, { cls: 's-ink', w: 4, head: 11 });
+      T(s, C0 + 14, Ny - 22, `N = ${kN(cur.N)}`, 't-num halo');
+    }
+    if (cur.N < -20) {
+      // az eredő (felhajtóerő mínusz önsúly) felfelé mutat
+      arrow(s, C0, Ny - 2, C0, Ny - 16 - Math.min(nl, 44), { cls: 's-water', w: 4, head: 11 });
+      T(s, C0 + 16, Ny - (mob ? 44 : 34), 'eredő: felhajtóerő − önsúly', 't-lab t-water halo');
+      T(s, C0 + 16, Ny - 14, `N = −${fmt(-cur.N, 0)}${NB}kN`, 't-num t-water halo');
+    }
     if (cur.H > 5) {
-      const y = hY(cur.hh), l = clamp(cur.H / 12, 14, 90);
-      arrow(s, 280 - colW / 2 - l - 6, y, 280 - colW / 2 - 2, y, { cls: 's-warn', w: 4, head: 11 });
-      T(s, 280 - colW / 2 - 8, y - 10, `H = ${kN(cur.H)}`, 't-num halo', { 'text-anchor': 'end' });
-      if (cur.hh > 1) { svg('line', { x1: 280 + colW / 2 + 16, y1: y, x2: 280 + colW / 2 + 16, y2: capT, class: 's-muted', 'stroke-width': 1 }, s); T(s, 280 + colW / 2 + 22, (y + capT) / 2 + 4, `h = ${fmt(cur.hh, 0)}${NB}m`, 't-sm halo'); }
+      const y = wet ? box.roofT + 6 : sc === 'vizsz' ? hY(cur.hh) - 6 : hY(cur.hh), l = clamp(cur.H / 12, 14, 90);
+      if (sc === 'vizsz') {
+        arrow(s, Hx, y, Hx + l + 6, y, { cls: 's-warn', w: 4, head: 11 });
+        T(s, C0 - 10, y - 52, `H = ${kN(cur.H)}`, 't-num halo', { 'text-anchor': 'end' });
+        T(s, C0 - 10, y - 38, 'fékezőerő', 't-sm halo', { 'text-anchor': 'end' });
+      } else {
+        arrow(s, Hx - l - 6, y, Hx - 2, y, { cls: 's-warn', w: 4, head: 11 });
+        T(s, Hx - 8, y - 10, `H = ${kN(cur.H)}`, 't-num halo', { 'text-anchor': 'end' });
+        if (sc === 'szel' || sc === 'epulet') {
+          // szél: hullámos áramvonalak a nyíl mögött
+          for (const dy of [12, 22]) svg('path', { d: `M${Hx - l - 60} ${y + dy} q10 -5 20 0 t20 0 t20 0`, fill: 'none', class: 's-muted', 'stroke-width': 1.6, 'stroke-linecap': 'round' }, s);
+          T(s, Hx - l - 64, y + 20, 'szél', 't-sm halo', { 'text-anchor': 'end' });
+        }
+      }
+      if (!wet && cur.hh > 1) {
+        const xd = sc === 'vizsz' ? C0 + 34 : sc === 'epulet' ? C0 + 116 : C0 + colW / 2 + 16, yd = sc === 'vizsz' ? hY(cur.hh) : y;
+        svg('line', { x1: xd, y1: yd, x2: xd, y2: capT, class: 's-muted', 'stroke-width': 1 }, s);
+        T(s, xd + 6, (yd + capT) / 2 + 4, `h = ${fmt(cur.hh, 0)}${NB}m`, 't-sm halo');
+      }
     }
   }
   tgt();
@@ -225,36 +337,12 @@ register('rsz-csoport', (root) => {
     cur._moving = moved;
     if (moved || was || cur._last !== JSON.stringify(goal)) { draw(); cur._last = JSON.stringify(goal); } // a megérkezés utáni képkockát is kirajzolja
   });
-  root.append(h('div', { class: 'w-foot', html: '<b>Szemléltető modell:</b> merev fejtömb, egyforma cölöpök, P<sub>i</sub> = N/n + M·x<sub>i</sub>/Σx<sub>i</sub>² (a cölöptávolság 2,5 m). A vízszintes erőt egyenlően osztottuk el a cölöpök között.' }));
+  root.append(h('div', { class: 'w-foot', html: '<b>Szemléltető modell:</b> merev fejtömb, egyforma cölöpök, P<sub>i</sub> = N/n + M·x<sub>i</sub>/Σx<sub>i</sub>² (a cölöptávolság 2,5 m). A vízszintes erőt egyenlően osztottuk el a cölöpök között; a fejtömb elmozdulását és a cölöpök kitérését torzított léptékben rajzoltuk.' }));
 });
 
 /* ================================================================ 2.4 készítés – ikonok */
 register('rsz-kinds', (root) => {
-  $$('.rsz-kic', root).forEach((el) => {
-    const k = el.dataset.ki;
-    const s = svg('svg', { viewBox: '-20 0 260 90', class: 'rsz-kis', 'aria-hidden': 'true' }, el);
-    const G = 24;
-    svg('rect', { x: -20, y: 0, width: 260, height: G, class: 'f-sky' }, s);
-    hatch(s, -20, G, 260, 66, 'f-soilA', 'pat-sand');
-    svg('line', { x1: -20, y1: G, x2: 240, y2: G, class: 's-ink', 'stroke-width': 1.2 }, s);
-    if (k === 'h') {
-      // furat + kiemelt talaj (depónia)
-      svg('rect', { x: 92, y: G, width: 26, height: 60, class: 'f-sky' }, s);
-      for (let y = G + 6; y < G + 60; y += 9) svg('path', { d: `M95 ${y} L115 ${y + 5}`, class: 's-steel', 'stroke-width': 2.4 }, s);
-      svg('rect', { x: 103, y: 0, width: 4, height: G + 60, class: 'f-steel2' }, s);
-      svg('path', { d: `M128 ${G} q14 -18 30 0 z`, class: 'f-soilA' }, s);
-      svg('path', { d: `M128 ${G} q14 -18 30 0 z`, fill: 'url(#pat-sand)' }, s);
-      arrow(s, 122, G + 24, 140, G - 10, { cls: 's-acc', w: 2, head: 6 });
-      for (const sx of [-1, 1]) svg('path', { d: `M${105 + sx * 20} ${G + 14} l${sx * 6} 3 M${105 + sx * 20} ${G + 34} l${sx * 6} 3`, class: 's-muted', 'stroke-width': 1.2 }, s);
-      T(s, 236, G + 50, 'kissé fellazul', 't-sm halo', { 'text-anchor': 'end' });
-    } else {
-      conc(s, 96, G - 18, 18, 76, 'f-conc2');
-      svg('path', { d: `M96 ${G + 58} L105 ${G + 70} L114 ${G + 58} Z`, class: 'f-conc2' }, s);
-      arrow(s, 105, 0, 105, G - 20, { cls: 's-ink', w: 3, head: 8 });
-      for (let y = G + 12; y < G + 64; y += 16) { arrow(s, 120, y, 140, y, { cls: 's-grp', w: 1.8, head: 5 }); arrow(s, 90, y, 70, y, { cls: 's-grp', w: 1.8, head: 5 }); }
-      T(s, 146, G + 50, 'tömörödik', 't-sm halo');
-    }
-  });
+  $$('.rsz-kic', root).forEach((el) => { el.replaceChildren(kindScene(el.dataset.ki)); });
 });
 
 /* ================================================================ 2.4 rendező játék */
@@ -290,7 +378,7 @@ register('rsz-valogato', (root) => {
     state = { first: 0, done: 0, tried: new Set() };
     pool.innerHTML = ''; $$('.rsz-bin-l', root).forEach((l) => (l.innerHTML = ''));
     shuffle(ITEMS.map((it, i) => i)).forEach((i) => pool.append(chip(i)));
-    fb.dataset.s = ''; fb.innerHTML = '<b>Kezdd el!</b>Melyik technológia emeli ki a talajt, és melyik tolja szét?';
+    fb.dataset.s = ''; fb.innerHTML = '<b>Kezdd el!</b>Húzd be a megfelelő helyre a technológiákat!';
     sel = null; upd();
   }
   function upd() { score.innerHTML = `Besorolva: <b>${state.done}/${ITEMS.length}</b> · elsőre jó: <b>${state.first}</b>`; }
@@ -383,7 +471,7 @@ const TECH_D = [
 register('rsz-atmero', (root) => {
   const { viz, out } = shell(root, { layout: 'wide' });
   const cbox = h('div', { class: 'rsz-ictl' }); viz.append(cbox);
-  const sD = slider(cbox, { label: 'Átmérő', sym: 'D', min: 10, max: 200, step: 5, value: 60, unit: 'cm', d: 0, hint: 'A bal oldali rajzon a cölöp és az ember (1,75 m) méretaránya valós.' });
+  const sD = slider(cbox, { label: 'Átmérő', sym: 'D', min: 10, max: 200, step: 5, value: 60, unit: 'cm', d: 0, hint: 'A bal oldali rajz méretarányos: a terepből kiálló cölöpfej mellett egy 1,75 m magas ember áll.' });
   const dg = h('div', { class: 'rsz-dgrid' }); viz.append(dg);
   const s = figure(dg, 230, 350, 'fig rsz-dman'), s2 = figure(dg, 430, 350, 'fig rsz-dchart');
   const oK = stat(out, { label: 'Kategória' }); oK.el.classList.add('elo-tstat');
@@ -401,21 +489,42 @@ register('rsz-atmero', (root) => {
   }
   function draw() {
     const D = sD.v; clear(s); clear(s2);
-    // bal: méretarányos rajz
-    const k = D > 110 ? 120 * 110 / D : 120, yb = 300, x0 = 30; // 110 cm felett a rajz arányosan kisebb, hogy a cölöp beférjen
+    // bal: méretarányos rajz – állandó lépték (1 m = 62 px); a cölöpfej a terepből áll ki, a törzs a talajban folytatódik
+    const k = 62, yb = 178, x0 = 34, pc = 146;
     svg('rect', { x: 0, y: 0, width: 230, height: 340, rx: 12, class: 'f-bg2' }, s);
     T(s, 14, 24, 'MÉRETARÁNYOSAN', 't-sm');
-    svg('line', { x1: 10, y1: yb, x2: 220, y2: yb, class: 's-ink', 'stroke-width': 1.2 }, s);
-    man(s, x0 + 18, yb, 1.75 * k);
-    const pw = D / 100 * k, px = 150 - pw / 2;
-    const top = yb - 2.1 * k;
-    conc(s, px, top, pw, yb - top, 'f-conc2');
-    // törésvonalak
-    svg('path', { d: `M${px - 6} ${top + 8} l${pw / 2 + 6} -10 l${pw / 2 + 6} 10`, fill: 'none', class: 's-muted', 'stroke-width': 1.4 }, s);
-    svg('line', { x1: px, y1: yb + 14, x2: px + pw, y2: yb + 14, class: 's-ink', 'stroke-width': 1 }, s);
-    for (const x of [px, px + pw]) svg('line', { x1: x, y1: yb + 9, x2: x, y2: yb + 19, class: 's-ink', 'stroke-width': 1 }, s);
-    T(s, px + pw / 2, yb + 32, `D = ${fmt(D, 0)}${NB}cm`, 't-num', { 'text-anchor': 'middle' });
-    T(s, x0 + 18, yb + 32, '1,75 m', 't-sm', { 'text-anchor': 'middle' });
+    hatch(s, 0, yb, 230, 340 - yb - 12, 'f-soilB', 'pat-clay');
+    svg('rect', { x: 0, y: 328 - 12, width: 230, height: 24, rx: 12, class: 'f-soilB' }, s);
+    svg('line', { x1: 0, y1: yb, x2: 230, y2: yb, class: 's-ink', 'stroke-width': 1.2 }, s);
+    man(s, x0, yb, 1.75 * k);
+    T(s, x0, yb - 1.75 * k - 8, '1,75 m', 't-sm', { 'text-anchor': 'middle' });
+    const pw = Math.max(3, D / 100 * k), px = pc - pw / 2, ry = Math.max(1.5, pw * 0.16);
+    const head = yb - 0.3 * k, bot = 300;
+    // törzs a talajban, alul törésvonallal (a cölöp 10–30 m hosszú)
+    conc(s, px, yb, pw, bot - yb, 'f-conc2');
+    const zz = `M${px - 3} ${bot} l${pw / 4 + 1.5} -5 l${pw / 4 + 1.5} 7 l${pw / 4 + 1.5} -7 l${pw / 4 + 1.5} 5`;
+    svg('path', { d: zz + ` V${bot + 12} H${px - 3} Z`, class: 'f-soilB' }, s);
+    svg('path', { d: zz, fill: 'none', class: 's-ink', 'stroke-width': 1.2 }, s);
+    // a terep feletti cölöpfej: palást + felső kör (ellipszis), kiálló vasakkal
+    conc(s, px, head, pw, yb - head, 'f-conc2');
+    const nb = D < 25 ? 1 : clamp(Math.round(D / 12), 4, 16);
+    for (let i = 0; i < nb; i++) {
+      const a = nb === 1 ? Math.PI / 2 : Math.PI * (0.05 + 0.9 * i / (nb - 1)), bx = pc + Math.cos(a) * (nb === 1 ? 0 : pw * 0.38), by = head - Math.sin(a) * ry * 0.76;
+      svg('line', { x1: bx, y1: by, x2: bx, y2: by - 0.32 * k, class: 's-steel', 'stroke-width': 1.6 }, s);
+    }
+    svg('ellipse', { cx: pc, cy: head, rx: pw / 2, ry, class: 'f-conc' }, s);
+    svg('ellipse', { cx: pc, cy: head, rx: pw / 2, ry, fill: 'none', class: 's-ink', 'stroke-width': 0.8, opacity: 0.5 }, s);
+    for (let i = 0; i < nb; i++) {
+      const a = nb === 1 ? -Math.PI / 2 : -Math.PI * (0.05 + 0.9 * i / (nb - 1)), bx = pc + Math.cos(a) * (nb === 1 ? 0 : pw * 0.38), by = head - Math.sin(a) * ry * 0.76;
+      if (nb > 1) svg('line', { x1: bx, y1: by, x2: bx, y2: by - 0.32 * k, class: 's-steel', 'stroke-width': 1.6 }, s);
+    }
+    // D a cölöpfej fölött
+    const dy = head - 0.32 * k - 12;
+    svg('line', { x1: px, y1: dy, x2: px + pw, y2: dy, class: 's-ink', 'stroke-width': 1 }, s);
+    for (const x of [px, px + pw]) svg('line', { x1: x, y1: dy - 5, x2: x, y2: dy + 5, class: 's-ink', 'stroke-width': 1 }, s);
+    T(s, clamp(pc, 60, 190), dy - 10, `D = ${fmt(D, 0)}${NB}cm`, 't-num', { 'text-anchor': 'middle' });
+    T(s, 115, 316, 'a cölöp lefelé folytatódik', 't-sm halo', { 'text-anchor': 'middle' });
+    T(s, 115, 331, '(jellemzően 10–30 m)', 't-sm halo', { 'text-anchor': 'middle' });
     // jobb: tartomány-diagram
     const ax0 = 205, ax1 = 418, /* széles címkeoszlop: a hosszabb angol nevek is elférnek */ X = (cm) => ax0 + (cm / 200) * (ax1 - ax0);
     const bands = [[10, 30, EN ? 'micro' : 'mikro'], [30, 80, 'normál'], [80, 200, 'nagyátmérőjű']];

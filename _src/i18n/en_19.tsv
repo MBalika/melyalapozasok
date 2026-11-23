@@ -39,8 +39,8 @@ cc48ade	<b>Illustrative model:</b> R<sub>s</sub> = Σ π·D·q<sub>s</sub>·Δz 
 a15a59e	All piles are in compression
 c03a7a9	The piles transfer the load to the soil by compression at the tip and by shear along the shaft.
 a4864ff	 Because of the horizontal force, <b>bending and shear</b> develop in the piles besides the compressive force.
-816aa1b	buoyancy
-5a73256	<b>Illustrative model:</b> rigid pile cap, identical piles, P<sub>i</sub> = N/n + M·x<sub>i</sub>/Σx<sub>i</sub>² (pile spacing 2.5 m). The horizontal force is shared equally between the piles.
+9ba9e59	resultant: buoyancy − self-weight
+0780608	<b>Illustrative model:</b> rigid pile cap, identical piles, P<sub>i</sub> = N/n + M·x<sub>i</sub>/Σx<sub>i</sub>² (pile spacing 2.5 m). The horizontal force is shared equally between the piles; the displacement of the pile cap and the deflection of the piles are drawn to an exaggerated scale.
 c515cf2	loosens slightly
 df3656c	cast in place
 65900a8	The soil is drilled out with a continuous auger; the soil on the auger supports the bore, and the concrete is placed through the drill stem.
@@ -65,7 +65,7 @@ d4c65d9	In softer soil it is “pressed” down without driving or vibration –
 9297672	the soil is removed
 e7936c6	pushed aside, compacted
 267d7d4	Solution
-4713cb1	<b>Get started!</b>Which technology removes the soil, and which pushes it aside?
+c930a33	<b>Get started!</b>Drag the technologies to the right place!
 d2ae5cd	Sorted: <b>${state.done}/${ITEMS.length}</b> · right first time: <b>${state.first}</b>
 c6c9179	<b>✗ Not quite – ${it.t}</b>${it.e}
 19da863	<b>Done! ${state.first}/${ITEMS.length} right first time</b>Remember: large-diameter piles (above 80 cm) are all made by replacement, and displacement piles can be either precast or cast in place.
@@ -74,7 +74,7 @@ c6c9179	<b>✗ Not quite – ${it.t}</b>${it.e}
 57d5b72	Square RC pile (side)
 b13420f	Screw pile
 909eb72	Franki pile (tube → finished)
-5efe8d6	In the drawing on the left, the pile and the person (1.75 m) are to scale.
+0cd1721	The drawing on the left is to scale: a 1.75 m tall person stands next to the pile head protruding from the ground.
 cec73d5	Category
 39e1c20	Shaft area per 1 m length
 302553f	TO SCALE
@@ -95,3 +95,8 @@ ec12019	For an end-bearing pile, at least what share of the resistance comes fro
 7c21c07	2/3
 fd340f9	1/3
 e8c3a59	half
+0f9e839	wind
+1494451	braking force
+db9b74b	braking vehicle
+2212721	the pile continues downwards
+b0e33f0	(typically 10–30 m)

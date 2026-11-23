@@ -95,8 +95,6 @@ f108a5e	Tube or rolled section. Rare in Hungary because it is expensive; more co
 1756126	Gravel, crushed stone, slag, crushed concrete, stabilised soil – primarily for ground improvement over larger areas, not for founding individual columns.
 2f78d43	By method of construction
 56ef2ed	Replacement pile
-aca3bea	The soil is <b>removed</b> in some way (bored out), and the resulting hole is filled with the pile material. During construction the surrounding soil may <b>loosen</b> slightly. These piles are always <b>cast in place</b>.
-8a8b129	A precast pile is <b>driven, jacked, vibrated or screwed</b> into the ground – or a cast-in-place technology is used that <b>pushes aside and compacts</b> the soil while drilling and does not bring it up (screw pile). Because of the compaction, both the base and the shaft resistance increase for a precast pile, and mainly the shaft resistance for a cast-in-place screw pile.
 31565e0	Sort the piles!
 34b2455	By size
 e17764d	<b>Short pile</b> – approx. 3–5 m long; useful where the bearing stratum is not deep, but a shallow foundation would not yet reach it.
@@ -105,8 +103,12 @@ e17764d	<b>Short pile</b> – approx. 3–5 m long; useful where the bearing str
 c70112f	<b>Large-diameter pile</b> – above 80 cm; these are made <b>exclusively with replacement</b> technology.
 3a77e97	Diameter scale
 77a7037	The pile family tree
-b2325f6	Pile technologies are best grouped by method of construction: <b>displacement</b> and <b>replacement</b> piles, supplemented by an <b>“other”</b> group. (The complete system of deep foundations – together with diaphragm walls, well and box foundations – is presented in <a href="#alap-fajtak">section 1.2</a>.) Tap a branch to jump to the relevant chapter. The <span class="rsz-ytdot" aria-hidden="true"></span> mark means that real site footage of the technology is also available.
+9ad07a9	Pile technologies are best grouped by method of construction: <b>displacement</b> and <b>replacement</b> piles, supplemented by an <b>“other”</b> group. (The complete system of deep foundations – together with diaphragm walls, well and box foundations – is presented in <a href="#alap-fajtak">section 1.2</a>.) Tap a branch to jump to the relevant chapter. The <span class="rsz-ytdot" aria-hidden="true"></span> mark means that a YouTube video with real footage of the technology is also available.
 946f875	<span class="id">C03</span><span>Displacement · precast</span>
 eb9e6b5	Precast piles
 3395cbc	A precast pile is a finished <b>displacement element</b>: it is made in a factory or yard, and on site it is driven, vibrated, jacked or screwed into the ground. No soil is brought up – the pile “makes” its place by pushing the soil aside, so the surrounding soil is compacted. As a result, <b>both the base and the shaft resistance of the pile increase</b>. The price: noise, vibration, and the fact that it cannot pass through whatever is in its way (rock, a hard intercalated layer).
 165fd83	<b>30–40<small>cm</small></b><span>side length of the square RC piles used in Hungary (30×30 or 40×40 cm), 4–12 m long</span>
+65ef6a7	The soil is <b>removed</b> in some way (bored out – for a CFA pile, for example, the continuous flight auger brings it up), and the resulting hole is filled with the pile material. During construction the surrounding soil may <b>loosen</b> slightly. These piles are always <b>cast in place</b>.
+0c2f208	The soil is not removed: the pile or the drilling tool <b>pushes it aside and compacts it</b>, so no soil comes to the surface. There are two kinds:
+af5948d	<b>precast</b> piles – a finished reinforced concrete or steel element is <b>driven, jacked, vibrated</b> or <b>screwed</b> into the ground; because of the compaction, both the base and the shaft resistance increase;
+d9d3778	<b>cast-in-place</b> piles – we drill with a displacement head (<b>screw pile</b>, shown in the figure) or drive down a tube closed with a gravel plug (<b>Franki pile</b>), and the hole is concreted in place; for the screw pile, mainly the shaft resistance increases.

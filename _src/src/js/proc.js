@@ -1509,5 +1509,69 @@ function render(el0) {
   });
 }
 
+/* ================================================================== 2.4 – a két csoport egy-egy jelenetben */
+/**
+ * kind 'h': talajhelyettesítéses – CFA-gép fúr, a folyamatos spirál felhozza a talajt, mellette kész cölöp;
+ * kind 'k': talajkiszorításos – helyszínen készülő csavart cölöp: a kiszorító fej oldalra tolja és tömöríti a talajt.
+ */
+export function kindScene(kind) {
+  defs();
+  const W = 400, H = 300;
+  CUR.W = W;
+  const M = kind === 'h'
+    ? { H, GY: 150, layers: [{ k: 'clay', y: 150 }, { k: 'sand', y: 226 }] }
+    : { H, GY: 150, layers: [{ k: 'sand', y: 150 }, { k: 'sand2', y: 232 }] };
+  const s = el('svg', { viewBox: `0 0 ${W} ${H}`, class: 'pr-svg rsz-kis', role: 'img',
+    'aria-label': kind === 'h' ? 'CFA-cölöp fúrása: a spirál kihozza a talajt' : 'Csavart cölöp fúrása: a kiszorító fej oldalra tolja a talajt' });
+  const g = g_(s);
+  backdrop(g, M, 0, W);
+  const GY = M.GY, x = 132;
+  const tg = (gg, tx, ty, text, o = {}) => tag(gg, tx, ty, text, { fs: 12, ...o });   // a kártyán nagyobb felirat
+  if (kind === 'h') {
+    // kész cölöp a szomszédban: beton + vasalási armatúra
+    const xp = 336;
+    concrete(g, xp - 14, GY, 28, 270 - GY, false);
+    holeWall(g, xp, GY, 270, 14);
+    cage(g, xp, GY + 4, 262, 11);
+    tg(g, xp, GY - 22, 'kész cölöp', { anchor: 'middle', to: [xp, GY + 2] });
+    // fúrás: a spirál menetei közt a talaj felfelé halad, a felszínen kupacba hullik
+    const toe = 236, top = toe - 94;
+    spoil(g, M, x - 58, 40, 12); spoil(g, M, x + 16, 22, 7);
+    const r = rig(g, M, x, { top: 14, headY: top - 24 });
+    auger(g, x, r.headBot, toe, 15, { soilFrom: GY - 22, soilTo: toe - 4 });
+    holeWall(g, x, GY, toe - 4, 15);
+    spin(g, x, r.headY + 34, 24);
+    // a fellazult zóna a furat körül
+    for (const sx of [-1, 1]) for (let y = GY + 14; y < toe - 10; y += 15) P(g, `M${x + sx * 19} ${y} q${sx * 4} 3 ${sx * 8} 1`, SK('wall', 1.1, 'opacity:.75'));
+    arrowP(g, `M${x - 26} ${GY + 46} L${x - 26} ${GY - 8} Q${x - 27} ${GY - 22} ${x - 40} ${GY - 18}`, { w: 2.6 });
+    head(g, x - 42, GY - 17.5, 165, { s: 8 });
+    worker(g, x - 74, { GY, pose: 'stand' });
+    tg(g, x - 40, 34, 'CFA-fúrógép', { anchor: 'end', to: [x + 9, 40] });
+    tg(g, x - 34, GY + 64, 'a spirál felhozza a talajt', { anchor: 'end', to: [x - 27, GY + 46] });
+    tg(g, x - 70, GY - 36, EN ? 'excavated soil' : 'kitermelt talaj', { anchor: 'middle', to: [x - 46, GY - 8] });
+    tg(g, x + 24, toe + 26, 'kissé fellazul', { to: [x + 22, toe - 16] });
+  } else {
+    // kész csavart cölöp a szomszédban, körülötte tömörödött zóna
+    const xp = 336;
+    E(g, xp, 214, 26, 70, F('push', 0.1) + `;stroke:${v('push')};stroke-width:1;stroke-dasharray:4 3;stroke-opacity:.6`);
+    wavyShaft(g, xp, GY, 276, 13);
+    tg(g, xp, GY - 22, 'kész csavart cölöp', { anchor: 'middle', to: [xp, GY + 2] });
+    // fúrás: a kiszorító fej oldalra tolja és tömöríti a talajt – nincs kitermelt talaj
+    const tip = 246, r = rig(g, M, x, { top: 14, headY: tip - 156 });
+    for (const [rx, ry, op] of [[44, 36, 0.13], [30, 25, 0.16]]) E(g, x, tip - 22, rx, ry, F('push', op) + `;stroke:${v('push')};stroke-width:1;stroke-dasharray:4 3;stroke-opacity:.55`);
+    dispTool(g, x, r.headBot, tip, 15);
+    holeWall(g, x, GY, tip - 44, 7);
+    pushOut(g, x, tip - 33, 17, 3);
+    spin(g, x, r.headY + 34, 22);
+    arrowV(g, x - 34, GY - 46, GY - 12);
+    worker(g, x - 100, { GY, pose: 'signal' });
+    tg(g, x - 40, 34, 'csavart cölöp fúrógépe', { anchor: 'end', to: [x + 9, 40] });
+    tg(g, x - 52, tip - 18, 'kiszorító fúrófej', { anchor: 'end', to: [x - 16, tip - 22] });
+    tg(g, x + 52, tip + 34, 'a talaj oldalra tömörödik', { anchor: 'middle', to: [x + 36, tip - 14] });
+    tg(g, x - 24, GY + 20, EN ? 'no soil removed' : 'nincs kitermelt talaj', { anchor: 'end', to: [x - 8, GY + 2] });
+  }
+  return s;
+}
+
 function init() { document.querySelectorAll('[data-proc]').forEach(render); }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
