@@ -630,7 +630,7 @@ register('alap-reszek', (root) => {
       capTop = G - 6; capH = 30;
       conc(s, 130, capTop, 160, capH);
       svg('rect', { x: 192, y: 20, width: 36, height: capTop - 20, class: 'f-conc2' }, s);
-      piles = [150, 250];
+      piles = [160, 260];   // a fejtömb (130–290) és a pillér (210) tengelyére szimmetrikusan
       lab(210, 50, 290, 46, 'pillér');
       lab(280, capTop + 16, 330, capTop + 6, 'fejtömb');
       // alaprajz
@@ -642,7 +642,7 @@ register('alap-reszek', (root) => {
       conc(s, 30, capTop, 360, capH);
       svg('rect', { x: 30, y: 30, width: 360, height: capTop - 30, class: 'f-bld' }, s);
       for (let x = 30; x < 390; x += 45) svg('line', { x1: x, y1: 30, x2: x, y2: capTop, class: 's-line', 'stroke-width': 0.8 }, s);
-      piles = [55, 135, 215, 295, 365];
+      piles = [55, 132.5, 210, 287.5, 365];   // egyenletes kiosztás, a gerendarács tengelyére szimmetrikusan
       lab(120, 60, 120, 14, 'fal');
       lab(330, capTop + 13, 330, capTop - 28, 'gerendarács');
       // alaprajz: rács
@@ -658,7 +658,7 @@ register('alap-reszek', (root) => {
       lab(300, 52, 330, 22, 'épület');
       lab(330, capTop + 11, 330, capTop - 26, 'vasbeton lemez');
       conc(s, 462, 70, 146, 220);
-      for (let y = 88; y < 290; y += 34) for (let x = 478; x < 600; x += 32) svg('circle', { cx: x, cy: y, r: 7, class: 'f-conc2 s-ink', 'stroke-width': 0.8, 'stroke-dasharray': '3 2' }, s);
+      for (let y = 95; y < 270; y += 34) for (let x = 487; x < 590; x += 32) svg('circle', { cx: x, cy: y, r: 7, class: 'f-conc2 s-ink', 'stroke-width': 0.8, 'stroke-dasharray': '3 2' }, s);
       // a lemez a talajra is ad át terhet
       for (const x of [72, 127, 182, 237, 292, 347]) arrow(s, x, capTop + capH + 2, x, capTop + capH + 16, { cls: 's-warn', w: 1.4, head: 5 });
     }

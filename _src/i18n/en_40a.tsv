@@ -13,7 +13,7 @@ cc47966	For 100 such piles: this many trucks
 f381315	<span><b>Grillage (pile grillage)</b> – reinforced concrete beams between the heads: it ties and stiffens the system and can also take the load of walls.</span>
 389f8fa	<span><b>Pile cap</b> – the reinforced concrete block under the column that distributes the load to the pile group; its top is horizontal, and the pile reinforcement is anchored into it.</span>
 828cc1a	<span><b>Piles</b> – they transfer the load to the soil along their shafts (<b class="alap-k-ok">green arrows</b>) and at their bases (<b class="alap-k-acc">orange arrows</b>).</span>
-bc45450	<span><b>Bearing stratum</b> – the piles are socketed into it; above it lie the weaker, compressible layers.</span>
+5ad7e19	<span><b>Bearing stratum</b> – if there is a layer of better bearing capacity, the piles are typically embedded in it.</span>
 29a7396	The settlement of the shallow foundation (${sTxt}) exceeds the allowable value (approx. ${allow}${NB}mm).
 3fc070f	The settlement (${sTxt}) is still within the limit of approx. ${allow}${NB}mm.
 d16aa83	<span>${T.t}, at ${fmt(sR.v, 1)} m: ${vT} mm/s${pk}. This is ${fmt(u * 100, 0)} % of the limit (${B.t.toLowerCase()}: approx. ${B.lim} mm/s). A distance of at least ≈ ${fmt(rmin, 0)} m, or a low-noise, low-vibration technology, is needed.</span>

@@ -258,7 +258,7 @@ register('egy-kihajlas', (root) => {
     const R = khCalc(sec.v, cu.v, lf.v, gr.v);
     // ---------------- bal panel: cölöp a talajban (keskeny nézetben felül, középen)
     const g = svg('g', { transform: nar ? 'translate(90 0)' : null }, fig);
-    const PX = 40, X = 112, CAP0 = 30, CAP1 = 54;
+    const PX = 40, X = 114, CAP0 = 30, CAP1 = 54;   // X: a fejtömb (34–194) tengelye
     const ys = CAP1 + lf.v * PX;
     const soilShade = clamp((cu.v - 2) / 40, 0, 1);
     svg('rect', { x: 20, y: ys, width: 190, height: 390 - ys, class: soilShade < 0.35 ? 'f-soilF' : soilShade < 0.7 ? 'f-soilB' : 'f-soilE' }, g);
