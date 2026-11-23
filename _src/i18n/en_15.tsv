@@ -125,7 +125,6 @@ c3df109	 The concrete filled the bore from the bottom up, in one body, and displ
 8ad9904	OK: the end of the pipe is in the concrete.
 f24d7d0	Start concreting!
 d472faa	 The concrete fills the bore from the bottom through the end of the pipe and lifts the concrete already placed; the slurry does not mix with it.
-dd0de6a	 The bore contains slurry and the reinforcement cage. The concrete is placed through the hopper and the tremie pipe, starting from the bottom of the bore.
 ac85719	Pile length
 5010a48	Withdrawal rate
 b76a6af	Concrete pressure
@@ -183,3 +182,4 @@ e95f679	automatic monitoring, record
 de99f08	Ø ${D} cm: within the 80–180 cm range
 fbb5731	a complex, slow technology for a short pile
 599a085	${L0} m: within 15–50 (100) m
+055d9a6	 The bore contains slurry and the reinforcement cage. The concrete is placed through the hopper and the tremie pipe, starting from the bottom of the bore.

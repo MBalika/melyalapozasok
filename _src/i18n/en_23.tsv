@@ -1,6 +1,6 @@
 cd6a297	with an auger or drilling bucket, under slurry
 048b32d	Tremie pipe
-6da5a62	base cleaning, cage, concreting starts
+3526574	base cleaning, cage, concreting starts
 04f2268	from the bottom to ground level, the slurry is displaced
 228e935	Guide tube out
 f6cb593	removing the guide tube, the pile is finished
@@ -65,7 +65,6 @@ eddf58f	A pair of reinforced concrete beams is built on both sides of the trench
 42b41be	The middle of the panel
 2a0a2c2	After the middle bite the primary panel stands open over its full length – under slurry.
 cf63438	Reinforcement, concreting
-30b2cdf	The reinforcement cage is lifted in (1–3 pieces depending on the length), then concreting from the bottom through two tremie pipes.
 14aed6d	Secondary panel
 b3959ca	Between two finished primary panels the secondary panel is bitten out.
 d66b2c3	After the secondary panel is reinforced and concreted, the panels form a continuous wall.
@@ -137,3 +136,4 @@ bc610b7	At the limit of CFA length
 e8668b6	Sand below the groundwater
 2c23d75	In fine sand below the groundwater a CFA pile needs particular care (it is not even recommended in loose, flowing soil): control of drilling and concrete pressure is critical.
 7822e4c	If the auger is withdrawn faster than the concrete fills its place, the pile narrows (here between approx. −${fmt(M.neck[0], 1)} and −${fmt(M.neck[1], 1)} m). In the rig’s record the volume and pressure of the concrete reveal this immediately.
+d4e8a2e	The reinforcement cage is lifted in (1–3 pieces depending on the length), then concreting from the bottom through two tremie pipes.

@@ -66,12 +66,9 @@ a4d10d5	In detail: C02–C06 →
 29a890f	A continuous, planar reinforced concrete structure – a wall in the ground. The trench is excavated under bentonite slurry, reinforced, then concreted from the bottom up.
 6d864cf	Thickness 40–120 cm; a panel is typically 2.8–5.6 m long (at most 8–10 m); depth generally 15–30 m.
 a60dea2	A strip foundation: the load coming down the wall is transferred at its base and along both faces; meanwhile it also retains the soil and the groundwater.
-8ce4c3d	Guide walls, then excavation under slurry with a grab or a hydromill (cutter), reinforcement cage, and finally concreting through a tremie pipe.
-5b59246	Underground car parks, underpasses, metro stations: where excavation support, a permanent side wall and a foundation are needed at once, below the groundwater, next to neighbouring buildings.
 1212063	The stations of metro line 4 in Budapest (a 48.3 m deep diaphragm wall at Fővám tér), city-centre underground car parks.
 c520f1e	In detail: C07 →
 22e1bb4	Well foundation
-f3a4367	A large-diameter shaft wall, open at the top and bottom, sunk under its own weight to the bearing stratum while being excavated from inside, then filled with concrete.
 ad95e25	Diameter 0.8–3.0 m, length 4–8 m; a cutting edge at the bottom, and a reinforced concrete grillage or slab connecting the wells at the top.
 7197988	At discrete points, under individual columns and walls – through its large base area and, to a lesser extent, its shaft.
 9be9125	Sinking a reinforced concrete shell or well rings with a “clamshell” grab; today a steel casing is more often vibrated down and concreted while it is withdrawn.
@@ -92,10 +89,10 @@ b729eff	Which is the most common?
 96cf525	When is a deep foundation needed?
 4e26fd9	Foundation systems have two large families: <b>shallow foundations</b> and <b>deep foundations</b>. Until the end of the last century shallow foundations dominated, but in the past two or three decades deep foundation systems have been playing an ever larger role. We choose a deep foundation when a shallow foundation is for some reason not enough – or would simply be more expensive.
 becd9ef	Why are there more and more deep foundations?
-e3ff7c2	Buildings with ever larger loads and greater sensitivity to settlement have to be founded – for these even a reinforced concrete raft is often not enough, primarily because settlements must be limited. The sites with good subsoil have run out, so we increasingly have to build on filled, marshy sites. And deep foundation technologies have developed so much that – including the construction time – they are often cheaper overall than a shallow foundation.
+af27653	Buildings with ever larger loads and greater sensitivity to settlement have to be founded – for these even a reinforced concrete raft is often not enough, primarily because settlements must be limited. We increasingly have to build on filled, marshy sites. And deep foundation technologies have developed so much that – including the construction time – they are often cheaper overall than a shallow foundation.
 e40c705	Shallow or deep foundation?
 51db9ef	Giants and their foundations
-23ab85c	Skyscrapers and towers are the most spectacular cases of deep foundations. Besides the <b>large load</b>, <b>unfavourable subsoil</b> and a <b>strict settlement criterion</b> also often force the foundation into the depth. In the figure below every structure and its foundation is shown <b>at the same scale</b>. Look how deep the foundation has to reach – and notice that this is decided not by the height of the building but by the <b>subsoil</b>.
+a582bbb	Skyscrapers and towers are the most spectacular cases of deep foundations. Besides the <b>large load</b>, <b>unfavourable subsoil</b> and a <b>strict settlement criterion</b> also often force the foundation into the depth. In the figure below every structure and its foundation is shown <b>at the same scale</b>. Look how deep the foundation has to reach – and notice that this is often decided not by the height (load) of the building but by the <b>subsoil</b>.
 2f493ce	Block foundations of smaller buildings; logistics halls and tanks on ground improved with rigid inclusions; tall buildings on piled raft foundations (e.g. the Messeturm in Frankfurt).
 5eeb57a	Block foundations for moderate loads and a good layer not too deep; rigid inclusions to reduce the settlement of large, uniformly loaded slabs (hall floors, tanks, embankments); a piled raft for heavily loaded tall buildings, when the raft alone would settle too much but a full pile foundation is not needed.
 f0cc03a	The block is excavated without support and concreted immediately; the rigid inclusions are not connected to the structure (e.g. the base slab), whereas the piles of a piled raft are.
@@ -128,3 +125,6 @@ a238ffa	a smaller part
 b07e20e	mostly dissipates
 372f673	 from the load:
 dd8bcf1	contact pressure
+f70379b	A larger-diameter shaft wall, open at the top and bottom, sunk under its own weight to the bearing stratum while being excavated from inside, then filled with concrete.
+6c2937c	Underground car parks, underpasses, metro stations: where excavation support, a permanent side wall and a foundation are needed at once, also below the groundwater, next to neighbouring buildings.
+bec33b9	Guide walls, then excavation under slurry with a grab or a hydromill (cutter), reinforcement cage, and finally concreting through a tremie pipe.

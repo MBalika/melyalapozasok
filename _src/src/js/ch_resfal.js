@@ -155,11 +155,11 @@ const EP_STEPS = [
   { t: 'P1 – első harapás', d: 'A réskanál a primer tábla egyik végén kezd: leengedés – harapás – kiemelés – ürítés. A kiemelt föld helyét azonnal bentonitzagy tölti ki, a zagyszint végig a résvezető gerenda teteje közelében marad.', dur: 2.2 },
   { t: 'P1 – második harapás', d: 'A tábla másik vége következik. Egy harapás jellemzően 2,8 m hosszú – ennyi a nyitott réskanál szélessége.', dur: 2.2 },
   { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt talajtömböt is kiemelik: ez a 7,0 m-es tábla így három harapásból áll. (Egy 5,6 m-es tábla két harapással is elkészül.)', dur: 1.8 },
-  { t: 'Szakaszoló pallók, vasalókosarak', d: 'Aljtisztítás után a tábla két végére szakaszoló palló kerül, majd daruval beemelik a két vasalókosarat.', dur: 2.0 },
+  { t: 'Szakaszoló pallók, vasalási armatúrák', d: 'Aljtisztítás után a tábla két végére szakaszoló palló kerül, majd daruval beemelik a két vasalási armatúrát.', dur: 2.0 },
   { t: 'P1 betonozása két kontraktorcsővel', d: 'Alulról felfelé, folyamatosan betonoznak. A nehezebb beton kiszorítja a zagyot, amelyet visszaszivattyúznak a telepre. A csövek vége végig a friss betonba merül.', dur: 2.6 },
   { t: 'A többi primer tábla: P2, P3', d: 'Ugyanígy készül el P2 és P3. A primer táblák között egy-egy harapásnyi talaj marad a helyén – itt lesznek a közbenső táblák.', dur: 3.6 },
   { t: 'Közbenső táblák kiharapása', d: 'S1 és S2 egyetlen harapással nyílik ki. A szakaszoló pallók vezetik a kanalat, és védik a már kész primer táblák betonját.', dur: 2.4 },
-  { t: 'Közbenső táblák vasalása, betonozása', d: 'A szakaszoló pallókat kihúzzák – a hézagot a betonba ágyazott duzzadószalag tömíti –, beemelik a kosarakat, és betonoznak. A fal most már folytonos.', dur: 3.0 },
+  { t: 'Közbenső táblák vasalása, betonozása', d: 'A szakaszoló pallókat kihúzzák – a hézagot a betonba ágyazott duzzadószalag tömíti –, beemelik a vasalási armatúrákat, és betonoznak. A fal most már folytonos.', dur: 3.0 },
   { t: 'Kész a fal: fejgerenda', d: 'A táblák felső 30–50 cm-e zaggyal keveredett, gyenge beton: ezt visszavésik, és a falat vasbeton fejgerenda fogja össze. A résvezető gerendák elbonthatók.', dur: 2.4 },
 ];
 const JUMP = { P1: 1, S1: 7, P2: 6, S2: 7, P3: 6 };
@@ -251,7 +251,7 @@ register('rf-epito', (root) => {
           }
         }
       }
-      // vasalókosár
+      // vasalási armatúra
       if (s.cage > 0) {
         const off = -(1 - s.cage) * 230;
         const cg = q.k === 'P' ? [[q.x0 + 0.2, (q.x0 + q.x1) / 2 - 0.15], [(q.x0 + q.x1) / 2 + 0.15, q.x1 - 0.2]] : [[q.x0 + 0.25, q.x1 - 0.25]];

@@ -194,9 +194,9 @@ const PH = {
       P(g, `M${S.cx - 46} 70 q16 -12 30 6`, 's-acc', { fill: 'none', 'stroke-width': 2.2 }); arrow(g, S.cx - 17, 74, S.cx - 9, 90, { cls: 's-acc', w: 2.2, head: 7 }); T(g, S.cx - 50, 62, 'beton', 'start');
       lab(g, S.cx + 26, 262, 'hagyma', 1, S.cx + 33);
     }],
-    ['Vasalás', 'a kosár a csőbe, a hagymáig', (g, S) => {
+    ['Vasalás', 'az armatúra a csőbe, a hagymáig', (g, S) => {
       rig(g, S, 0, { head: false, pulley: true }); casing(g, S.cx, 92, 238, 22); hole(g, S.cx, 92, 238, 22, 'f-surface'); bulb(g, S.cx, 262, 30, 22); cage(g, S.cx, 70, 258, 20); L(g, S.cx, 8, S.cx, 70, 's-ink', 1.1, { opacity: 0.75 });
-      lab(g, S.cx - 7, 78, 'kosár', -1, S.cx - 28);
+      lab(g, S.cx - 7, 78, 'armatúra', -1, S.cx - 28);
     }],
     ['Törzs', 'döngölés, közben a cső visszahúzása', (g, S) => {
       rig(g, S, 0, { head: false, pulley: true }); bulb(g, S.cx, 262, 30, 22); wavyShaft(g, S.cx, 186, 248, 30); casing(g, S.cx, 44, 190, 22); hole(g, S.cx, 44, 186, 22, 'f-surface'); ram(g, S, 163); cage(g, S.cx, 58, 258, 20);
@@ -223,10 +223,10 @@ const PH = {
       rig(g, S, 78); conc(g, S.cx - 13, 222, 26, 62, true); stem(g, S.cx, 92, 176, 10); dispHead(g, S.cx, 226, 26); rot(g, S.cx, 114, 16); up(g, S.cx - 30, 140, 98);
       truck(g, 6, S.GY - 1); hose(g, 34, S.GY - 26, S.cx - 11, 84); lab(g, S.cx + 13, 256, 'friss beton', 1, S.cx + 28);
     }],
-    ['Vasalás', 'A vasalókosarat a friss betonba juttatják, szükség esetén vibrációval.', (g, S) => {
+    ['Vasalás', 'A vasalási armatúrát a friss betonba juttatják, szükség esetén vibrációval.', (g, S) => {
       conc(g, S.cx - 13, S.GY, 26, 134, true); cage(g, S.cx, S.GY - 34, 258, 22); R(g, S.cx - 12, S.GY - 50, 24, 16, 'f-steel', { rx: 2, style: 'stroke:var(--steelm2);stroke-width:1' });
       P(g, `M${S.cx - 8} ${S.GY - 54} l4 -5 l4 5 l4 -5 l4 5`, 's-acc', { fill: 'none', 'stroke-width': 1.8 }); down(g, S.cx + 26, S.GY - 40, S.GY + 6);
-      lab(g, S.cx - 9, 212, 'kosár', -1, S.cx - 28); lab(g, S.cx + 12, S.GY - 42, 'vibrátor', 1, S.cx + 36);
+      lab(g, S.cx - 9, 212, 'armatúra', -1, S.cx - 28); lab(g, S.cx + 12, S.GY - 42, 'vibrátor', 1, S.cx + 36);
     }],
   ] },
   cfa: { W: 230, GY: 150, prof: 'cfa', items: [
@@ -241,9 +241,9 @@ const PH = {
       heap(g, S, S.cx - 50, 32); rig(g, S, 66); conc(g, S.cx - 15, 214, 30, 68, true); auger(g, S.cx, 80, 214, 30, 'f-soilC'); up(g, S.cx - 34, 208, 168);
       truck(g, 4, S.GY - 1); hose(g, 32, S.GY - 26, S.cx - 11, 72); lab(g, S.cx + 15, 252, 'beton', 1, S.cx + 30);
     }],
-    ['Vasalás', 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalókosarat a friss betonba süllyesztik.', (g, S) => {
+    ['Vasalás', 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalási armatúrát a friss betonba süllyesztik.', (g, S) => {
       conc(g, S.cx - 15, S.GY, 30, 132, true); cage(g, S.cx, S.GY - 56, 250, 26); down(g, S.cx + 32, S.GY - 44, S.GY + 8);
-      lab(g, S.cx - 13, 206, 'kosár', -1, S.cx - 32);
+      lab(g, S.cx - 13, 206, 'armatúra', -1, S.cx - 32);
     }],
   ] },
   kopeny: { W: 200, prof: 'kopeny', items: [
@@ -255,9 +255,9 @@ const PH = {
       rig(g, S, 22); casing(g, S.cx, S.GY - 30, 272, 30); hole(g, S.cx, S.GY - 30, 262, 30); water(g, S.cx, 116, 262, 30); stem(g, S.cx, 36, 230, 5); bucket(g, S.cx, 258, 26);
       lab(g, S.cx - 15, 116, 'víz a csőben', -1, S.cx - 30);
     }],
-    ['Vasalás', 'A vasalókosarat a furatba, a cső belsejébe engedik.', (g, S) => {
+    ['Vasalás', 'A vasalási armatúrát a furatba, a cső belsejébe engedik.', (g, S) => {
       casing(g, S.cx, S.GY - 30, 272, 30); hole(g, S.cx, S.GY - 30, 270, 30); water(g, S.cx, 116, 270, 30); cage(g, S.cx, 26, 266, 26); L(g, S.cx, 4, S.cx, 26, 's-muted', 1.2);
-      lab(g, S.cx + 13, 200, 'kosár', 1, S.cx + 32);
+      lab(g, S.cx + 13, 200, 'armatúra', 1, S.cx + 32);
     }],
     ['Betonozás', 'Betonozó csővel betonoznak, közben a béléscsövet folyamatosan visszahúzzák.', (g, S) => {
       conc(g, S.cx - 15, 176, 30, 94, true); casing(g, S.cx, S.GY - 50, 212, 30); hole(g, S.cx, S.GY - 50, 176, 30); water(g, S.cx, 116, 176, 30); cage(g, S.cx, 30, 266, 26); funnel(g, S.cx, 28, 236);
@@ -279,7 +279,7 @@ const PH = {
       rig(g, S, 22); casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY + 2, 298, 30); stem(g, S.cx, 36, 272, 5); bucket(g, S.cx, 298, 26); rot(g, S.cx, 58, 16);
       lab(g, S.cx - 15, S.GY + 2, 'zagyszint', -1, S.cx - 30);
     }],
-    ['Kontraktorcső', 'talptisztítás, kosár, a betonozás indul', (g, S) => {
+    ['Kontraktorcső', 'talptisztítás, armatúra, a betonozás indul', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY + 2, 280, 30); conc(g, S.cx - 15, 280, 30, 18, true); cage(g, S.cx, S.GY - 18, 296, 26); funnel(g, S.cx, 30, 290);
       lab(g, S.cx + 4, 220, 'kontraktorcső', 1, S.cx + 16);
     }],

@@ -575,7 +575,7 @@ register('sim3d', (root) => {
     const add = (m) => { g.add(m); m.visible = false; m.castShadow = true; return m; };
     O.conc = add(new THREE.Mesh(new THREE.BufferGeometry(), MAT.fresh)); O.concKey = '';
     O.incl = add(new THREE.Mesh(new THREE.BufferGeometry(), SM.softclay.incl)); O.inclKey = '';
-    // vasalókosár
+    // vasalási armatúra
     const rc = Math.max(0.05, r - (k === 'micro' ? 0.02 : 0.075)), Lc = k === 'cfa' || k === 'screw' ? Math.max(3, S.L - 0.8) : S.L - 0.3;
     M.cageL = Lc;
     const nb = clamp(Math.round((TAU * rc) / 0.2), 6, 16), segs = [];
@@ -688,7 +688,7 @@ register('sim3d', (root) => {
       { t: 'Kitűzés, pontraállás', dur: 2, d: 'A gép a kitűzött pont fölé áll. Az üreges fúrószár alján a csapóajtó zárva van.', a(st, u) { st.auger = { tip: lerp(-1.4, 0, sm(u)), rot: 0 }; st.focus = -Hm * 0.4; st.span = Hm + 5; } },
       { t: 'Fúrás a talpszintig', dur: 5, d: 'A folyamatos spirál becsavarodik a talajba. A spirálon maradó talajdugó támasztja meg a furat falát – külön megtámasztás nem kell.', a(st, u) { const d = u * L; st.d = d; st.auger = { tip: d, rot: (d / 0.6) * TAU }; st.spoil = 0.75 * u; st.focus = d; st.span = 5.5; st.lab = 'talajdugó a spirálon'; } },
       { t: 'Betonozás a fúrószáron át', dur: 5, d: M.fault ? '<b class="bad">Túl gyors kihúzás!</b> A beton nem tudja kitölteni a spirál helyét – a puha rétegben a cölöp elvékonyodik (nyakasodás).' : 'A betont túlnyomással pumpálják a szár belsején át; a beton feltolja a spirált a talajdugóval, a gép közben húzza. A betonnyomást folyamatosan mérik.', a(st, u) { const tip = L * (1 - sm(u)); st.d = L; st.auger = { tip, rot: (L / 0.6) * TAU, fill: L }; st.conc = { top: tip, bot: L }; st.neck = true; st.spoil = 0.75 + 0.25 * u; st.focus = tip; st.span = 5.5; if (M.neck && tip < M.neck[0]) st.alert = 'Nyakasodás!'; } },
-      { t: 'Vasalás a friss betonba', dur: 3.5, d: 'A vasalókosarat a friss betonba süllyesztik (nyomják, vibrálják). A betont vibrálni nem kell: a folyós konzisztencia és a nyomás alatti bedolgozás tömörít.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u, fill: L }; cageIn(st, u); } },
+      { t: 'Vasalás a friss betonba', dur: 3.5, d: 'A vasalási armatúrát a friss betonba süllyesztik (nyomják, vibrálják). A betont vibrálni nem kell: a folyós konzisztencia és a nyomás alatti bedolgozás tömörít.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u, fill: L }; cageIn(st, u); } },
       { t: 'Kész a cölöp', dur: 2.5, d: 'Minden cölöpről automatikus jegyzőkönyv készül: mélység, betonnyomás, bedolgozott betonmennyiség.', a(st, u) { st.auger = null; done(st, u); } },
     ];
     if (k === 'casing') return [
@@ -698,7 +698,7 @@ register('sim3d', (root) => {
         if (M.gwIn && d > gw) { if (M.fault) { st.boil = clamp((d - gw - 1) / 3, 0, 1); if (st.boil > 0.1) st.alert = 'Talajtörés a talpon!'; } else st.water = { top: gw - 0.6, bot: d }; }
       } },
       { t: 'Talptisztítás', dur: 2, d: 'A furat talpán nem maradhat fellazult, leülepedett talaj – az jelentősen csökkentené a talpellenállást.', a(st, u) { const tip = trip(u, L); st.bucket = { tip, full: u > 0.5 }; st.focus = clamp(tip, 0, L); st.span = 8; } },
-      { t: 'Vasalás', dur: 3, d: 'A vasalókosarat a béléscsőbe engedik; távtartók biztosítják a betontakarást.', a(st, u) { st.bucket = null; cageIn(st, u); } },
+      { t: 'Vasalás', dur: 3, d: 'A vasalási armatúrát a béléscsőbe engedik; távtartók biztosítják a betontakarást.', a(st, u) { st.bucket = null; cageIn(st, u); } },
       { t: 'Betonozás, a cső visszahúzása', dur: 6, d: 'A betont kontraktorcsővel alulról felfelé juttatják be, a béléscsövet közben ütemesen visszahúzzák. A cső vége végig a betonban marad.', a(st, u) { const top = L * (1 - sm(u)); st.conc = { top, bot: L }; st.tremie = { bot: Math.min(L - 0.3, top + 1.6) }; st.casing = { top: -1.2 - (L - Math.min(L, top + 2.2)), bot: Math.min(L, top + 2.2) }; if (st.water) st.water.bot = top; st.focus = top; st.span = 10; } },
       { t: 'Kész a cölöp', dur: 2.5, d: 'Nagy átmérő, nagy mélység: magas víztartalmú, iszapos talajban is biztonságos – cserébe lassabb, összetett gépészet.', a(st, u) { const cb = lerp(2.2, -1.5, sm(u * 2)); st.casing = u < 0.5 ? { top: cb - L - 1.2, bot: cb } : null; st.tremie = null; st.water = null; done(st, u); } },
     ];
@@ -709,7 +709,7 @@ register('sim3d', (root) => {
         const [d, tip, full] = cycles(u, Math.max(5, Math.round(L / 3)), L); st.d = Math.max(2.6, d); st.bucket = { tip, full }; st.slurry = { top: -0.3, bot: st.d }; st.spoil = 0.85 * u; st.focus = Math.max(d, 0); st.span = 10;
         if (M.fault && M.gwIn) { const lv = lerp(-0.3, gw - 0.2, sm((u - 0.15) / 0.35)); st.slurry.top = lv; if (M.collapse && st.d > M.collapse[0] && u > 0.45) { st.collapse = clamp((u - 0.45) / 0.4, 0, 1); st.alert = 'Beomlik a furat fala!'; } }
       } },
-      { t: 'Talptisztítás, vasalás', dur: 3.5, d: 'A talpat kitisztítják, majd a vasalókosarat a zagyba engedik.', a(st, u) { st.bucket = null; st.slurry.top = -0.3; cageIn(st, u); } },
+      { t: 'Talptisztítás, vasalás', dur: 3.5, d: 'A talpat kitisztítják, majd a vasalási armatúrát a zagyba engedik.', a(st, u) { st.bucket = null; st.slurry.top = -0.3; cageIn(st, u); } },
       { t: 'Betonozás kontraktorcsővel', dur: 5.5, d: 'A beton alulról tölti ki a furatot, és a könnyebb zagyot felfelé kiszorítja – a zagyot visszanyerik.', a(st, u) { const top = lerp(L, 0.4, sm(u)); st.conc = { top, bot: L }; st.incl = true; st.tremie = { bot: Math.min(L - 0.3, top + 1.6) }; st.slurry = { top: -0.3, bot: top }; st.focus = top; st.span = 10; } },
       { t: 'Betonozás a terepszintig, vezetőcső ki', dur: 2.5, d: 'A betont a terepszintig hozzák fel, majd kiemelik a vezetőcsövet.', a(st, u) { st.conc.top = lerp(0.4, 0, u); st.slurry = u < 0.4 ? { top: -0.3, bot: lerp(0.4, -0.3, u / 0.4) } : null; st.tremie = u < 0.3 ? st.tremie : null; st.vez = { top: -0.6 - 3 * sm(u), bot: 2.6 - 3 * sm(u) }; st.focus = 0; st.span = 8; } },
       { t: 'Kész a cölöp', dur: 2.5, d: 'Elsősorban nagy átmérőjű, nagy mélységű cölöpökhöz; hazánkban főleg nagy fesztávú hidak alapozásához.', a(st, u) { st.vez = null; done(st, u); } },
@@ -721,7 +721,7 @@ register('sim3d', (root) => {
         if (M.collapse && d > M.collapse[0] + 0.4) { st.collapse = clamp((d - M.collapse[0] - 0.4) / Math.max(1, L - M.collapse[0]), 0, 1); st.alert = 'Beomlik a furat!'; }
         if (M.collapse && M.gwIn && d > gw) st.water = { top: gw + 0.4, bot: d };
       } },
-      { t: 'Vasalás', dur: 3, d: 'A vasalókosarat azonnal a furatba engedik.', a(st, u) { st.bucket = null; cageIn(st, u); } },
+      { t: 'Vasalás', dur: 3, d: 'A vasalási armatúrát azonnal a furatba engedik.', a(st, u) { st.bucket = null; cageIn(st, u); } },
       { t: 'Betonozás azonnal', dur: 4, d: 'A kiemelés után rögtön be kell betonozni – betonozó tölcsérrel.', a(st, u) { const top = L * (1 - sm(u)); st.conc = { top, bot: L }; st.incl = true; st.tremie = { bot: Math.min(L - 0.3, top + 1.2) }; if (st.water) st.water.bot = top; st.focus = top; st.span = 9; } },
       { t: 'Kész a cölöp', dur: 2.5, d: L <= 6 ? '5–6 m mélységig az ilyen alapot markolt tömbalapnak, más néven kútalapnak is nevezik.' : 'Egyszerű és olcsó – de csak állékony furatnál.', a(st, u) { st.tremie = null; st.water = null; done(st, u); } },
     ];
@@ -744,7 +744,7 @@ register('sim3d', (root) => {
         { t: 'Béléscső, betondugó', dur: 2.5, d: 'A 46–52 cm-es béléscső aljába kb. 1 m magas száraz betondugót töltenek.', a(st, u) { st.casing = { top: -1.6 - L, bot: 0 }; st.plug = { top: lerp(-3, -1, sm(u)), bot: lerp(-2, 0, sm(u)) }; st.ram = { bot: -2 - 1.8 }; st.focus = -4; st.span = 14; } },
         { t: 'Verés belső ejtőkossal', dur: 6, d: 'A 3 t-ás ejtőkos a dugót döngöli; a dugó a súrlódás révén magával húzza a csövet a teherbíró rétegig.', a(st, u) { const b = blows(u, 30), z = b.adv * L; st.casing = { top: z - 1.6 - L, bot: z }; st.plug = { top: z - 1, bot: z }; st.ram = { bot: z - 1 - b.lift * 2.2 }; st.d = z; st.halo = z; st.focus = z; st.span = 10; st.vibe = b.lift; st.lab = 'ejtőkos'; } },
         { t: 'Dugó kiverése, hagyma', dur: 3.5, d: 'A csövet rögzítik, a dugót kiverik, és újabb betonadagokkal kiszélesedő talpat – „hagymát” – döngölnek.', a(st, u) { const b = blows(u, 10); st.casing = { top: -1.6 - Lr, bot: L - Lr }; st.plug = u < 0.25 ? { top: L - 1 + u * 2, bot: L } : null; st.bulb = sm(u); st.conc = { top: L - Lr - 0.8 * M.D * st.bulb, bot: L + 0.2 }; st.ram = { bot: st.conc.top - b.lift * 1.6 }; st.focus = L; st.span = 8; st.vibe = b.lift; st.lab = 'hagyma'; } },
-        { t: 'Vasalás', dur: 3, d: 'A vasalókosarat a béléscsőbe engedik.', a(st, u) { st.ram = { bot: lerp(L - 2, -3, sm(u)) }; cageIn(st, u); } },
+        { t: 'Vasalás', dur: 3, d: 'A vasalási armatúrát a béléscsőbe engedik.', a(st, u) { st.ram = { bot: lerp(L - 2, -3, sm(u)) }; cageIn(st, u); } },
         { t: 'Köpeny betonozása, cső visszahúzása', dur: 5.5, d: 'Betonadagolás és döngölés közben a béléscsövet visszahúzzák. A kiszorítás miatt a kész cölöp kb. 60 cm átmérőjű.', a(st, u) { const top = lerp(st.conc.top, 0, sm(u)), cb = Math.min(L - Lr, top + 0.4); st.conc = { top, bot: L + 0.2 }; st.casing = { top: cb - L - 1.6, bot: cb }; st.ram = { bot: Math.max(-2, top - 0.3) - blows(u, 24).lift * 1.4 }; st.focus = top; st.span = 10; } },
         { t: 'Kész a cölöp', dur: 2.5, d: 'Legfeljebb 16–18 m hosszú; 2000–3000 kN-os teherbírás is elérhető. Hazánkban mára szinte teljesen eltűnt.', a(st, u) { st.casing = null; st.ram = null; done(st, u); } },
       ];
@@ -753,7 +753,7 @@ register('sim3d', (root) => {
       { t: 'Pontraállás', dur: 2, d: 'Az üreges fúrószár végén speciális kiszorító fúrófej van.', a(st, u) { st.auger = { tip: lerp(-1.4, 0, sm(u)), rot: 0 }; st.focus = -Hm * 0.4; st.span = Hm + 5; } },
       { t: 'Fúrás forgatással és tolással', dur: 5, d: 'A fej széttolja és tömöríti maga körül a talajt – a felszínre alig kerül furatanyag.', a(st, u) { const d = u * L; st.d = d; st.auger = { tip: d, rot: (d / 0.5) * TAU }; st.halo = d; st.focus = d; st.span = 9; st.lab = 'kiszorító fej'; } },
       { t: 'Betonozás a szár kiemelése közben', dur: 4.5, d: 'A betont nyomás alatt a fúrószáron át juttatják be, a szárat forgatva emelik ki.', a(st, u) { const tip = L * (1 - sm(u)); st.d = L; st.auger = { tip, rot: (L / 0.5 + (L - tip) / 0.5) * TAU }; st.conc = { top: tip, bot: L }; st.focus = tip; st.span = 9; } },
-      { t: 'Vasalás vibrálással', dur: 3.5, d: 'Az előregyártott vasalókosarat vibrálással juttatják le a friss betonba.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u }; cageIn(st, u); st.vibe = 0.3; } },
+      { t: 'Vasalás vibrálással', dur: 3.5, d: 'Az előregyártott vasalási armatúrát vibrálással juttatják le a friss betonba.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u }; cageIn(st, u); st.vibe = 0.3; } },
       { t: 'Kész a cölöp', dur: 2.5, d: 'Nincs dinamikus és zajhatás; a kiszorítás miatt nő a fajlagos teherbírás.', a(st, u) { st.auger = null; done(st, u); } },
     ];
     // mikrocölöp
@@ -862,7 +862,7 @@ register('sim3d', (root) => {
     const lx = r + 0.45;
     setLab(DL.tool, st.lab && st.k !== undefined, st.lab || '', -lx - 0.2, -Math.max(0.6, st.focus - 0.6), 0.05);
     setLab(DL.conc, st.conc && st.conc.bot - st.conc.top > 1.2 && !st.done, st.cured > 0.5 ? 'beton' : 'friss beton', lx + 0.3, -Math.min(st.conc?.bot - 0.8 || 0, (st.conc?.top || 0) + 1.2), 0.05);
-    setLab(DL.cage, st.cage && !st.done, 'vasalókosár', lx + 0.4, -clamp(st.cage ? st.cage.top + 1.6 : 0, -1, L), 0.05);
+    setLab(DL.cage, st.cage && !st.done, 'vasalási armatúra', lx + 0.4, -clamp(st.cage ? st.cage.top + 1.6 : 0, -1, L), 0.05);
     setLab(DL.casing, st.casing && (k === 'casing' || k === 'franki'), 'béléscső', -lx - 0.35, 0.9, 0.05);
     const fluidOn = st.slurry && st.slurry.bot - st.slurry.top > 1.5;
     setLab(DL.fluid, fluidOn || (st.water && st.water.bot - st.water.top > 1.5), fluidOn ? 'bentonitzagy' : 'víz a furatban', lx + 0.3, -((fluidOn ? st.slurry.top : st.water?.top || 0) + 1.0), 0.05);

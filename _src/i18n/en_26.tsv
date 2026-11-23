@@ -1,7 +1,6 @@
 4ec0984	grouted cement body
 567a6b7	The micropile is finished
 fa905d6	A cement body of 20–50 mm forms around the bar, and outside it a cement-permeated soil sleeve of 30–80 mm. The tip resistance is neglected in the resistance.
-7c3d307	reinforcement cage
 00e8b59	water in the bore
 38b22d3	necking
 41ede56	collapse → discontinuity
@@ -106,7 +105,6 @@ c74b33c	The short auger is used mainly in granular soil, the drilling bucket mai
 b816f07	No vibration is needed: the flowing consistency and placing under pressure ensure self-compaction.
 a45bd39	For a CFA pile the wall of the bore is supported by the soil plug remaining on the auger; no separate support is needed.
 1876b2d	This is one of the biggest advantages of the continuous auger.
-090a6e6	For a CFA pile the reinforcement cage is lowered into the freshly concreted pile.
 3ce90d3	That is why the pile is usually concreted up to the working level.
 0630484	In cased drilling below the groundwater, the water removed must be replaced in the bore, otherwise groundwater may break in at the base.
 9130172	The higher water level outside would disturb the soil with water breaking in at the bottom of the bore.
@@ -128,3 +126,4 @@ e1de366	The shaft resistance is determined by the method of construction, so a l
 67a382a	The pressure of the grout jet is 400–600 bar; 5–6 bar is the pressure of the air shroud in the double jet with air.
 1b2dba0	A diaphragm wall panel can be excavated in one go as long as 30 m.
 2f2277c	A panel is at most 8–10 m, typically 2.8–5.6 m long – this is set by trench stability.
+79b8c9d	For a CFA pile the reinforcement cage is lowered into the freshly concreted pile.

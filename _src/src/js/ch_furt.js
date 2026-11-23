@@ -490,7 +490,7 @@ register('furtTremie', (root) => {
         if (!lab1) { T(g, xr + 34, (ya + yb2) / 2 - 4, 'zagyzárvány', 't-lab t-bad halo'); lab1 = true; }
       }
     }
-    // vasalókosár
+    // vasalási armatúra
     for (const xx of [xl + 14, xr - 14]) L(g, xx, yz(HP - 0.2), xx, yz(0.3), 'stroke:var(--rebar);stroke-width:3');
     for (let zb = 0.6; zb < HP; zb += 0.8) L(g, xl + 14, yz(zb), xr - 14, yz(zb), 'stroke:var(--rebar);stroke-width:1.4;opacity:.8');
     // kontraktorcső + tölcsér
@@ -524,7 +524,7 @@ register('furtTremie', (root) => {
       if (bad) vd.set('bad', 'Zagyzárvány – folytonossági hiány.', ' A cső vége kiemelkedett a betonból: az új beton a zagyon át hullott, keveredett vele, és a cölöptestben gyenge, zagyos réteg maradt. A csövet mindig úgy kell emelni, hogy a vége a friss betonban maradjon.');
       else if (done) vd.set('ok', 'Kész a cölöp.', ' A beton alulról felfelé, egy tömbben töltötte ki a furatot, és kiszorította a zagyot. A legfelső, zaggyal keveredett réteget a cölöpfej kialakításakor levésik – ezért a cölöpöt a tervezett fejszint fölé betonozzák.');
       else if (primed && emb < 1.5 && emb >= 0) vd.set('warn', 'Kevés a bemerülés.', ' A cső vége alig van a betonban: egy hirtelen emelésnél kiemelkedhet. Biztonságosabb nagyobb bemerüléssel dolgozni.');
-      else vd.set(c > 0 ? 'ok' : '', c > 0 ? 'Rendben: a cső vége a betonban.' : 'Indítsd a betonozást!', c > 0 ? ' A beton a cső végén át alulról tölti a furatot, a már bent lévő betont emeli fel, a zagy nem keveredik bele.' : ' A furatban zagy és a vasalókosár. A betont a tölcséren és a kontraktorcsövön át, a furat aljától kezdve juttatjuk be.');
+      else vd.set(c > 0 ? 'ok' : '', c > 0 ? 'Rendben: a cső vége a betonban.' : 'Indítsd a betonozást!', c > 0 ? ' A beton a cső végén át alulról tölti a furatot, a már bent lévő betont emeli fel, a zagy nem keveredik bele.' : ' A furatban zagy és a vasalási armatúra. A betont a tölcséren és a kontraktorcsövön át, a furat aljától kezdve juttatjuk be.');
     }
   };
   loop(root, (tt, dt) => draw(tt, dt));
@@ -775,7 +775,7 @@ defineQuiz('furt', 'Kvíz – fúrt cölöpök', [
   { q: 'Mi történik, ha talajvíz alatt a béléscsőben alacsonyabban áll a víz, mint kint?', a: ['A talpon betör a talajvíz, és fellazítja a talajt', 'A cső felúszik', 'A beton gyorsabban köt meg', 'Semmi, a cső vízzáró'], c: 0, e: 'A vízszintkülönbség felfelé irányuló áramlást indít a talpon (felbuzgás): a víz magával ragadja a szemcséket. Ezért a furatban pótolni kell a kiemelt vizet.' },
   { q: 'Mikor alkalmazható megtámasztás nélküli furat?', a: ['Kötött talajban, talajvíz felett, legfeljebb 8–10 m-ig', 'Szemcsés talajban, ha a talajvíz mélyen van, legfeljebb 20 m-ig', 'Bármely talajban, ha gyorsan betonozunk', 'Talajvíz alatt, ha a furat rövid'], c: 0, e: 'Kötött talajban, talajvíz felett, nem túl hosszú furatnál – és a kiemelés után rögtön ki kell betonozni.' },
   { q: 'Miért nem kell a CFA-cölöp betonját vibrálni?', a: ['A folyós konzisztencia és a nyomás alatti bedolgozás öntömörödést biztosít', 'Mert a CFA-cölöp vasalatlan', 'Mert a spirál forgása tömöríti', 'Mert a talajdugó összenyomja'], c: 0, e: 'A betont a fúrószáron át, túlnyomással pumpálják: a folyós beton és a nyomás együtt tömörít.' },
-  { q: 'Mi a nyakasodás egy CFA-cölöpnél?', a: ['Elvékonyodás, ha a spirált gyorsabban húzzák, mint ahogy a beton a teret kitölti', 'A cölöpfej megvastagodása a túlbetonozástól', 'A vasalókosár felúszása a friss betonban', 'A fúrószár elhajlása kemény rétegben'], c: 0, e: 'Ha a betonáram nem tart lépést a húzással, a talaj a beton helyére nyomódik. A gépek ezért folyamatosan mérik a betonnyomást és a betonmennyiséget.' },
+  { q: 'Mi a nyakasodás egy CFA-cölöpnél?', a: ['Elvékonyodás, ha a spirált gyorsabban húzzák, mint ahogy a beton a teret kitölti', 'A cölöpfej megvastagodása a túlbetonozástól', 'A vasalási armatúra felúszása a friss betonban', 'A fúrószár elhajlása kemény rétegben'], c: 0, e: 'Ha a betonáram nem tart lépést a húzással, a talaj a beton helyére nyomódik. A gépek ezért folyamatosan mérik a betonnyomást és a betonmennyiséget.' },
   { q: 'Melyik technológia NEM alkalmas egy 150 cm átmérőjű cölöphöz?', a: ['CFA', 'Köpenycsöves fúrt cölöp', 'Bentonitzagyos fúrt cölöp'], c: 0, e: 'A CFA-cölöp átmérője 40–120 cm; a köpenycsöves és a zagyos cölöp 80–180 cm-ig készül.' },
   { q: 'Kontraktorcsöves betonozásnál mi a legfontosabb szabály?', a: ['A cső vége végig a friss betonba merüljön', 'A cső végét a betonozás elején ki kell emelni a zagyból', 'A betont a cső tetejéről a zagyra kell önteni', 'A zagyot betonozás előtt le kell szivattyúzni a furatból'], c: 0, e: 'Ha a cső vége kiemelkedik, az új beton a zagyon át hullik, keveredik vele, és zagyzárvány – folytonossági hiány – keletkezik.' },
   { q: 'Miért veszélyes a furat talpán maradt fellazult, leülepedett talaj?', a: ['Jelentősen csökkentheti a talpellenállást', 'Növeli a köpenysúrlódást', 'Megakadályozza a vasalás behelyezését', 'Nincs jelentősége, a beton kiszorítja'], c: 0, e: 'A cölöp talpa a fellazult rétegen ül – a talpellenállás jelentősen kisebb lehet a tervezettnél.' },

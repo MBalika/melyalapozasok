@@ -157,7 +157,7 @@ const FSTEPS = [
   { k: 'Leverés', t: '2. Leverés a dugóval', d: 'A 3 t-ás ejtőkos a csőben a dugót döngöli; a dugó a súrlódás révén magával húzza a csövet. A cső kiszorítja a talajt – sem talaj, sem víz nem jut bele.' },
   { k: 'Kiverés', t: '3. A dugó kiverése', d: 'A teherbíró rétegben a csövet a verőállványhoz rögzítik, és erőteljes döngöléssel kiverik belőle a betont – kb. 30–40 cm marad a csőben.' },
   { k: 'Hagyma', t: '4. A „hagyma” kidöngölése', d: 'Újabb és újabb betonadagokat juttatnak a csőbe, és kidöngölik: a talp kiszélesedik, körülötte a talaj tömörödik.' },
-  { k: 'Vasalás', t: '5. Vasalás', d: 'A vasalókosarat a csőbe engedik, egészen a hagymáig.' },
+  { k: 'Vasalás', t: '5. Vasalás', d: 'A vasalási armatúrát a csőbe engedik, egészen a hagymáig.' },
   { k: 'Törzs', t: '6. A törzs betonozása', d: 'Újabb betonadagolás és döngölés mellett a béléscsövet fokozatosan visszahúzzák. A döngölt beton a talajba is benyomódik – a törzs érdes, bordázott.' },
   { k: 'Kész', t: '7. Kész cölöp', d: 'A kész cölöp átmérője a kiszorítás miatt kb. 60 cm, hossza legfeljebb 16–18 m; 2000–3000 kN teherbírás is elérhető.' },
 ];
@@ -247,7 +247,7 @@ register('hsz-franki', (root) => {
         txt(fig, PX + hw + 32, Y(3.6), 'tömörödött talaj', 't-sm t-acc halo');
       }
     }
-    // vasalókosár
+    // vasalási armatúra
     if (cage !== null) {
       const top = Y(cage) - 14, bot = Y(cage + ZT) + 6, cw = Xh(0.4) / 2;
       for (const sx of [-cw, -cw / 3, cw / 3, cw]) line(fig, PX + sx, top, PX + sx, bot, 'stroke:var(--rebar);stroke-width:1.6');
@@ -335,7 +335,7 @@ register('hsz-csavart', (root) => {
     else if (ph === 'done') ver.set('ok', 'Kész a cölöp', `<span>${fmt(L, 1)} m, Ø ${fmt(sD.v, 0)} mm – ${fmt(V, 2)} m³ talajt toltunk oldalra, a felszínre szinte semmi sem jött. Fúrt cölöpnél ugyanez kb. ${fmt(V * 1.25, 1)} m³ (fellazult) furadék lenne.</span>`);
     else if (ph === 'drill') ver.set('', 'Fúrás – forgatás és tolás', '<span>A fej széttolja és tömöríti a talajt; a monitor a nyomatékot rögzíti.</span>');
     else if (ph === 'conc') ver.set('', 'Betonozás nyomás alatt', '<span>A beton a fúrószáron át, nyomás alatt áramlik a talpra, miközben a szárat forgatva kiemelik.</span>');
-    else if (ph === 'cage') ver.set('', 'Vasalás', '<span>A vasalókosarat a friss betonba vibrálással juttatják le.</span>');
+    else if (ph === 'cage') ver.set('', 'Vasalás', '<span>A vasalási armatúrát a friss betonba vibrálással juttatják le.</span>');
     else ver.set(T0 > TMAX ? 'warn' : '', T0 > TMAX ? 'Ez nehéz lesz…' : 'Indulhat a fúrás', T0 > TMAX ? `<span>A becsült nyomaték a talpnál ≈ ${fmt(T0, 0)} kNm – több, mint amennyit a gép tud (${TMAX} kNm).</span>` : `<span>Becsült nyomaték a talpnál ≈ ${fmt(T0, 0)} kNm (a gép határa ${TMAX} kNm).</span>`);
     draw(performance.now() / 1000);
   }

@@ -112,8 +112,7 @@ f4cb68e	dry concrete in the bottom of the tube, rammed
 00c62c9	the plug is driven out of the fixed tube
 1afa0df	fixed
 abebf6d	further batches: widening base
-fa8c329	the cage into the tube, down to the bulb
-41d687b	cage
+59f1b7a	the cage into the tube, down to the bulb
 a0ab452	ramming while the tube is withdrawn
 a2983bd	shaft
 0b8cef8	Positioning
@@ -124,7 +123,6 @@ be9f640	Stop
 ce19178	At the specified depth drilling stops; the rig continuously records the drilling data.
 1b28e63	specified depth
 213019d	Concreting under pressure through the drill stem, while the stem is withdrawn and rotated.
-1ba0562	The reinforcement cage is placed into the fresh concrete, with vibration if needed.
 292ad20	Setting out, positioning
 db86973	The pile position is set out and the rig is positioned. The bottom of the hollow drill stem is closed by a sacrificial cap or a “flap”.
 a74aa87	flap
@@ -132,13 +130,11 @@ a74aa87	flap
 5a1e56d	The auger is screwed down without removing soil: the spoil is only partly pressed out, and the soil plug remaining on the auger continuously supports the wall of the bore.
 14a8727	soil plug
 a8e504a	Concrete is pumped through the drill stem under excess pressure, pushing the auger up – this is assisted by pulling. No vibration is needed: the flowing concrete self-compacts under pressure.
-88b89ce	The pile is usually concreted up to the working level, and the reinforcement cage is lowered into the fresh concrete.
 0470841	Installing the casing
 b88a7d9	The casing is installed by rotation or vibration.
 ca08d34	Soil removal
 d6bc075	The soil is removed with a drilling bucket under the protection of the casing; the casing goes ahead, and below water the water is replaced.
 d49b455	water in the casing
-08938e2	The reinforcement cage is lowered into the bore, inside the casing.
 38d882d	Concreting through a concreting pipe while the casing is continuously withdrawn.
 71877e1	Finished pile
 f091139	A finished reinforced concrete pile remains in place of the recovered casing.
@@ -147,3 +143,6 @@ c2c49de	Preparation
 ab9b49c	positioning, pre-drilling, guide tube
 ed32749	Filling with slurry
 e619697	bentonite drilling fluid into the bore
+67837a6	The reinforcement cage is lowered into the bore, inside the casing.
+af23772	The pile is usually concreted up to the working level, and the reinforcement cage is lowered into the fresh concrete.
+aaf5ff5	The reinforcement cage is placed into the fresh concrete, with vibration if needed.

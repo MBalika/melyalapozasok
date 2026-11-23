@@ -22,7 +22,7 @@ defineTF([
   { s: 'A rövid spirált elsősorban szemcsés, a dobfúrót elsősorban kötött talajban használják.', v: false, e: 'Fordítva: a rövid spirál elsősorban kötött, a dobfúró elsősorban szemcsés talajhoz való; a markoló és a folyamatos spirál bármely talajban dolgozik.' },
   { s: 'A CFA-cölöp betonját a furatba juttatás után alaposan vibrálni kell.', v: false, e: 'Nem kell vibrálni: a folyós konzisztencia és a nyomás alatti bedolgozás biztosítja az öntömörödést.' },
   { s: 'CFA-cölöpnél a furat falát a spirálon maradó talajdugó támasztja meg, külön megtámasztás nem kell.', v: true, e: 'Ez a folyamatos spirál egyik legnagyobb előnye.' },
-  { s: 'CFA-cölöpnél a vasalókosarat a már bebetonozott, friss cölöpbe süllyesztik.', v: true, e: 'Ezért a cölöpöt általában a munkaszintig felbetonozzák.' },
+  { s: 'CFA-cölöpnél a vasalási armatúrát a már bebetonozott, friss cölöpbe süllyesztik.', v: true, e: 'Ezért a cölöpöt általában a munkaszintig felbetonozzák.' },
   { s: 'Béléscsöves fúrásnál talajvíz alatt a furatban pótolni kell a kiemelt vizet, különben a talpon betörhet a talajvíz.', v: true, e: 'A magasabb külső vízszint a furat talpán betörő vízzel megbontaná a talajt.' },
   { s: 'A CFA-cölöp jellemző hossza 30–50 m.', v: false, e: 'Jellemzően 6–22 (24) m hosszú, 40–120 cm átmérőjű.' },
   { s: 'Szemcsés talajban a béléscső a földkiemelés után, attól lemaradva halad lefelé.', v: false, e: 'A béléscsőnek általában – szemcsés talajban feltétlenül – a földkiemelés előtt kell járnia.' },

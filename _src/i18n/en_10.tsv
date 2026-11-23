@@ -27,8 +27,6 @@ ba20c08	True or false?
 18c8a58	Glossary
 e25ea26	The most important terms in brief. Search for a word or filter by topic – one click takes you from any term to the relevant chapter.
 9cb00bb	<a class="btn btn-line" href="#bevezeto">↑ Back to the surface</a>
-00141bc	sunk large-diameter bodies
-f0c3a23	Large-diameter bodies, sunk and then filled with concrete, under individual columns; a grillage ties them together at the top.
 86b73c0	Box · caisson
 6794925	sunk on the plan of the structure
 c948eb6	A single large body matching the plan of the structure – the classic foundation of bridge piers standing in a river bed.
@@ -120,3 +118,5 @@ e063417	The world’s tallest building stands on a reinforced concrete raft 3.7 
 a182a80	True scale
 d1866fa	Foundations enlarged
 3f0a0a1	<div class="alap-sh-h"><b>${tw.n}</b><span>${tw.loc} · ${tw.yr}</span></div>⏎      <div class="chips"><span class="chip grp">height: ${fmt(tw.hgt, 0)}${NB}m</span><span class="chip">foundation: ${tw.f.replace(/(\d) (?=\S)/g, '$1' + NB).replace(/(kb\.|\+) /g, '$1' + NB)}</span></div>⏎      <p>${tw.p}</p><p class="alap-sh-l"><b>Lesson:</b> ${tw.l}</p>
+2a74574	Larger-diameter bodies, sunk and then filled with concrete, under individual columns; a grillage ties them together at the top.
+c022c1a	sunk larger-diameter bodies

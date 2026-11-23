@@ -29,7 +29,6 @@ a0635f0	Diaphragm walls
 12049ff	Imagine a trench 60 cm wide and 30 metres deep, full of a greenish-grey, mud-like fluid – and yet it does not collapse, although groundwater and sand press on it from the side. A diaphragm wall is a wall formed below ground level by <b>reinforcing and concreting such a vertical-sided trench</b>. The trick lies in the fluid: the bentonite slurry holds the trench open until the concrete is in place.
 c4a0ab7	<a href="#rf-fal"><span>7.1</span><b>A wall in the ground</b></a>⏎    <a href="#rf-lepesek"><span>7.2</span><b>Construction step by step</b></a>⏎    <a href="#rf-zagy"><span>7.3</span><b>Bentonite slurry</b></a>⏎    <a href="#rf-allek"><span>7.4</span><b>Trench stability</b></a>⏎    <a href="#rf-beton"><span>7.5</span><b>Concreting, inspection</b></a>⏎    <a href="#rf-mikor"><span>7.6</span><b>When yes, when no?</b></a>
 1f07690	A wall in the ground
-a9e14ec	It has been used in Hungary <b>since the 1960s</b>. A diaphragm wall consists of a series of panels: each panel is excavated under the protection of bentonite slurry, then a reinforcement cage is lowered into it and it is filled by underwater concreting. It can be built to great depth, in practically any length and plan layout – in return it needs expensive, special equipment, so it is an <b>expensive technology</b>.
 bad8e1e	It is most often encountered as <b>earth retention</b>: as the boundary of an excavation next to an existing building where watertightness is also needed, or where the diaphragm wall also becomes the <b>side wall</b> of the permanent structure (underground car park, underpass, tunnel). Less often, shorter <b>barrettes</b> are made, like piles, purely as foundation elements – but per unit the pile is usually cheaper.
 b36be88	<b>40–120<small>cm</small></b><span>width of the trench (40–50–60–80–100–120 cm)</span>
 9046a14	<b>2.8–5.6<small>m</small></b><span>typical length of a panel; at most 8–10 m</span>
@@ -84,9 +83,7 @@ bba28e4	The two counter-rotating wheels direct the cuttings to the centre
 008410b	Placing a stop end in the trench
 3430ad0	Stop end
 c5af9e1	Before concreting, <b>stop ends</b> (planks or tubes) are lowered at both ends of the primary panel. They mark the boundary between panels, make room for installing the <b>swelling waterstop</b> (which will seal the joint between the panels), protect the finished panel during the next excavation, and guide the excavating tool.
-43f00ff	Lifting a reinforcement cage with a crane
-313d91e	Reinforcement cage
-751a5c8	The <b>steel cage</b>, assembled as a grid and sufficiently stiffened with diagonal bars, is usually lifted into the trench in one piece by crane. The conditions for lifting are the structural design of the cage, the built-in auxiliary members, the lifting and fixing elements and handling according to the <b>lifting plan</b> – lifting a 20–30 m cage is a serious crane operation.
+1d52300	The <b>reinforcement cage</b>, assembled as a grid and sufficiently stiffened with diagonal bars, is usually lifted into the trench in one piece by crane. The conditions for lifting are the structural design of the cage, the built-in auxiliary members, the lifting and fixing elements and handling according to the <b>lifting plan</b> – lifting a 20–30 m cage is a serious crane operation.
 a5417f0	Bentonite slurry
 307e8af	The special “raw material” of the diaphragm wall is a mixture of water and bentonite dispersed in it, the <b>bentonite slurry</b>. Bentonite is a very fine-grained colloidal clay consisting predominantly of <b>montmorillonite</b>. Only <b>activated “Na” bentonite</b> can be used for trenching; the viscosity of the slurry can be increased with CMC (a cellulose derivative).
 b0eb069	The slurry does two things at once: it <b>prevents groundwater from flowing in</b>, and it <b>counterbalances</b> the water and earth pressure acting on the side walls of the trench. Mixing it requires a separate mixing and settling “plant” on site: this is where it is made, where it rests, and where the slurry displaced or pumped out of the trench returns for cleaning.
@@ -106,3 +103,6 @@ a5d0091	<i>5</i><span><b>Centrifugal pump</b> – returns the slurry to the tren
 36a4ab8	<i>9</i><span><b>Bentonite silo</b> – storage for the bentonite powder</span>
 a1ec4a7	<i>10</i><span><b>Adding water</b> to the mixer</span>
 205ba3f	The slurry cycle in hydrofraise trenching: the soil-laden slurry (brown) taken from the trench is cleaned by the desander, and the cleaned and fresh slurry (greenish-yellow) returns to the trench from the tank – so the slurry level in the trench can be kept above the groundwater table throughout.
+abe41c8	Reinforcement cage
+a2fcecb	Lifting a reinforcement cage with a crane
+e15f338	It has been used in Hungary <b>since the 1960s</b>. A diaphragm wall consists of a series of panels: each panel is excavated under the protection of bentonite slurry, then a reinforcement cage is lowered into it and it is filled by underwater concreting. It can be built to great depth, in practically any length and plan layout – in return it needs expensive, special equipment, so it is an <b>expensive technology</b>.

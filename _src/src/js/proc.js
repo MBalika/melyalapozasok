@@ -789,7 +789,7 @@ PROC.cfa = {
       tag(g, 58, M.GY - 86, 'mixerautó', { anchor: 'middle' });
       tag(g, 146, M.GY - 62, 'betonpumpa', { anchor: 'middle' });
     } },
-    { w: 290, t: 'Vasalás', d: 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalókosarat a friss betonba süllyesztik.', draw(g, M) {
+    { w: 290, t: 'Vasalás', d: 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalási armatúrát a friss betonba süllyesztik.', draw(g, M) {
       const x = 96, toe = 304;
       concrete(g, x - 15, M.GY, 30, toe - M.GY);
       holeWall(g, x, M.GY, toe, 15);
@@ -800,7 +800,7 @@ PROC.cfa = {
       excavator(g, M, x, ctop - 22, { reach: 70, lift: 40 });
       worker(g, x - 30, { GY: M.GY, pose: 'guide' });
       arrowV(g, x - 46, 140, 178);
-      tag(g, x + 24, 214, 'kosár', { to: [x + 10, 208] });
+      tag(g, x + 24, 214, 'armatúra', { to: [x + 10, 208] });
     } },
   ],
 };
@@ -848,14 +848,14 @@ PROC.franki = {
       tag(g, x + 22, 316, 'hagyma', { to: [x + 16, 300] });
       tag(g, x - 40, 78, 'beton', { anchor: 'middle' });
     } },
-    { w: 200, t: 'Vasalás', d: 'a kosár a csőbe, a hagymáig', draw(g, M) {
+    { w: 200, t: 'Vasalás', d: 'az armatúra a csőbe, a hagymáig', draw(g, M) {
       const x = 66, r = rig(g, M, x, { top: 16, lattice: true });
       casing(g, x, 124, 270, 11, { collar: true });
       bulb(g, x, 292, 32, 24);
       cage(g, x, 96, 286, 8.5);
       Ln(g, x, r.top - 1, x, 96, SK('rope', 1.1));
       arrowV(g, x - 28, 140, 186);
-      tag(g, x - 18, 200, 'kosár', { anchor: 'end', to: [x - 6, 200] });
+      tag(g, x - 18, 200, 'armatúra', { anchor: 'end', to: [x - 6, 200] });
     } },
     { w: 200, t: 'Törzs', d: 'döngölés, közben a cső visszahúzása', draw(g, M) {
       const x = 66, r = rig(g, M, x, { top: 16, lattice: true });
@@ -915,7 +915,7 @@ PROC.csavart = {
       spin(g, x, r.headY + 36, 22);
       tag(g, x + 24, 290, 'friss beton', { to: [x + 8, 282] });
     } },
-    { w: 280, t: 'Vasalás', d: 'A vasalókosarat a friss betonba juttatják, szükség esetén vibrációval.', draw(g, M) {
+    { w: 280, t: 'Vasalás', d: 'A vasalási armatúrát a friss betonba juttatják, szükség esetén vibrációval.', draw(g, M) {
       const x = 76;
       concrete(g, x - 15, M.GY, 30, 306 - M.GY);
       holeWall(g, x, M.GY, 306, 15);
@@ -925,7 +925,7 @@ PROC.csavart = {
       crane(g, M, x, 90, { reach: 120, tipY: 20 });
       worker(g, x - 30, { GY: M.GY, pose: 'guide' });
       arrowV(g, x - 48, 136, 172);
-      tag(g, x + 24, 212, 'kosár', { to: [x + 10, 212] });
+      tag(g, x + 24, 212, 'armatúra', { to: [x + 10, 212] });
       tag(g, x + 24, 98, 'vibrátor', { to: [x + 11, 104] });
     } },
   ],
@@ -953,14 +953,14 @@ PROC.kopeny = {
       tag(g, x + 26, 228, 'víz a csőben', { to: [x + 10, 232] });
       tag(g, x + 26, 282, 'dobfúró', { to: [x + 14, 278] });
     } },
-    { w: 240, t: 'Vasalás', d: 'A vasalókosarat a furatba, a cső belsejébe engedik.', draw(g, M) {
+    { w: 240, t: 'Vasalás', d: 'A vasalási armatúrát a furatba, a cső belsejébe engedik.', draw(g, M) {
       const x = 70;
       casing(g, x, M.GY - 14, 304, 16, { teeth: true, collar: true });
       water(g, x - 16, M.gw, 32, 300 - M.gw);
       cage(g, x, 118, 298, 12);
       crane(g, M, x, 112, { reach: 110, tipY: 18 });
       worker(g, x - 32, { GY: M.GY, pose: 'guide' });
-      tag(g, x + 26, 246, 'kosár', { to: [x + 10, 246] });
+      tag(g, x + 26, 246, 'armatúra', { to: [x + 10, 246] });
     } },
     { w: 300, t: 'Betonozás', d: 'Betonozó csővel betonoznak, közben a béléscsövet folyamatosan visszahúzzák.', draw(g, M) {
       const x = 176, ctop = M.GY - 46, cbot = 262;
@@ -1029,7 +1029,7 @@ PROC.zagy = {
       spin(g, x, r.headBot + 14, 18);
       tag(g, x + 28, M.GY + 24, 'zagyszint', { to: [x + 12, M.GY + 3] });
     } },
-    { w: 240, t: 'Kontraktorcső', d: 'talptisztítás, kosár, a betonozás indul', draw(g, M) {
+    { w: 240, t: 'Kontraktorcső', d: 'talptisztítás, armatúra, a betonozás indul', draw(g, M) {
       const x = 74;
       casing(g, x, M.GY - 10, M.GY + 34, 18, { joints: false, collar: true });
       slurry(g, x - 16, M.GY + 2, 32, 282 - M.GY);
@@ -1386,7 +1386,7 @@ PROC.resfal = {
       crane(g, M, 60, gr.top - 4, { reach: 110, tipY: 18 });
       tag(g, 140, 246, 'zagy', { to: [92, 246] });
     } },
-    { w: 240, t: 'Vasalás, betonozás', d: 'Beemelik a vasalókosarat (hossztól függően 1–3 db), majd két kontraktorcsővel alulról betonoznak.', draw(g, M) {
+    { w: 240, t: 'Vasalás, betonozás', d: 'Beemelik a vasalási armatúrát (hossztól függően 1–3 db), majd két kontraktorcsővel alulról betonoznak.', draw(g, M) {
       rfBase(g, M, 1);
       rfPanel(g, M, 'P1', 'slurry');
       concrete(g, 22, 250, 76, 68);

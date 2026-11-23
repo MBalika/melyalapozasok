@@ -59,7 +59,7 @@ function badge(p, x, y, n, r = 13) {
 const soilBox = (p, x, y, w, hh, cls = 'f-soilA', pat = 'pat-sand', op = 0.7) => { R(p, x, y, w, hh, cls); R(p, x, y, w, hh, '', { fill: `url(#${pat})`, opacity: op }); };
 const conc = (p, x, y, w, hh, o = {}) => { const g = G(p); R(g, x, y, w, hh, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:1', ...o }); R(g, x, y, w, hh, '', { fill: 'url(#pat-conc)' }); return g; };
 const slurry = (p, x, y, w, hh) => { R(p, x, y, w, hh, 'f-slurry', { opacity: 0.92 }); R(p, x, y, w, hh, '', { fill: 'url(#pat-slurry)' }); };
-/** vasalókosár (rácsos) */
+/** vasalási armatúra (rácsos) */
 function cage(p, x, y, w, hh, dx = 7, dy = 9) {
   const g = G(p, { style: 'stroke:var(--rebar);fill:none' });
   R(g, x, y, w, hh, '', { style: 'stroke-width:1.6' });
@@ -114,7 +114,7 @@ const STEPS = [
   ['Résvezető gerenda', 'A rés két oldalán vasbeton gerendapár készül: ez jelöli ki és vezeti a rést.'],
   ['Primer harapások', 'A primer tábla két szélét kiharapják; a kiemelt föld helyét azonnal zagy tölti ki.'],
   ['A tábla közepe', 'A középső harapás után a primer tábla teljes hosszában nyitva áll – zagy alatt.'],
-  ['Vasalás, betonozás', 'Beemelik a vasalókosarat (hossztól függően 1–3 db), majd két kontraktorcsővel alulról betonoznak.'],
+  ['Vasalás, betonozás', 'Beemelik a vasalási armatúrát (hossztól függően 1–3 db), majd két kontraktorcsővel alulról betonoznak.'],
   ['Közbenső tábla', 'Két kész primer tábla között kiharapják a közbenső (szekunder) táblát.'],
   ['Vasalás, betonozás', 'A közbenső tábla vasalása és betonozása után a táblák összefüggő falat alkotnak.'],
 ];

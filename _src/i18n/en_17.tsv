@@ -8,7 +8,6 @@ b83aeb9	Compaction of the soil
 e762e36	<span>The head pushes aside and compacts the soil; the monitor records the torque.</span>
 36853f7	Concreting under pressure
 a043ca6	<span>The concrete flows to the base through the drill stem under pressure, while the stem is withdrawn with rotation.</span>
-92f3dfe	<span>The reinforcement cage is vibrated down into the fresh concrete.</span>
 b8789f5	This will be hard…
 179c41d	Drilling can start
 e632f92	<span>The estimated torque at the base is ≈ ${fmt(T0, 0)} kNm – more than the rig can deliver (${TMAX} kNm).</span>
@@ -112,3 +111,4 @@ a4e6ccc	RC grillage
 aded3de	concreted well
 58b1209	Closed at the bottom (floated)
 7616a1b	The box is built on the bank or in a dry dock, floated into position on open water, then sunk onto the river bed by filling it with water. Here water is not the enemy: it is used as ballast.
+fe0676f	<span>The reinforcement cage is vibrated down into the fresh concrete.</span>

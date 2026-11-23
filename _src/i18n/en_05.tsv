@@ -21,10 +21,6 @@ b433175	Concreting into the bore through a hopper
 7975cea	Concreting hopper above the bore
 75b4a33	CFA rig with a concrete pump, concreting through the drill stem
 8b8d7eb	Concreting through the drill stem (CFA)
-1407bb8	An excavator pushes the reinforcement cage into the fresh concrete
-3806b91	Pushing the reinforcement cage into the finished pile concrete
-5015d30	Lifting a long reinforcement cage into the bore
-83b8b8d	Lifting in the reinforcement cage before concreting
 8e218c4	Concreting through a tremie pipe
 ff79ec7	CFA pile – with a continuous auger
 ee42f2b	In the past two or three decades this piling technology has dominated in Hungary. Its name abbreviates <i>Continuous Flight Auger</i>; in German-speaking countries it is known as the SOB pile, in France as the STARSOL pile. The CFA pile is made with a continuous auger on a hollow drill stem, and concrete is pumped into the bore through the drill stem as the auger is withdrawn.
@@ -42,7 +38,6 @@ fe9574d	Main features, limitations
 03fd842	simple machinery, fast drilling
 946df3d	automatic monitoring: a record for every pile
 ed59bbd	at most approx. 22–24 m long – the length of the auger is limited by the mast of the rig
-a3b1446	the reinforcement cage can only be lowered into fresh concrete – difficult for a long cage
 63aba3a	if withdrawn too fast, the pile can narrow (necking)
 89e0f3f	A record for every pile
 e060007	Modern rigs continuously measure and record the drilling resistance, the concrete pressure at the top of the drill stem, the volume of concrete placed and the withdrawal rate during pile construction, and produce an automatic record for every single pile. This shows afterwards if less concrete reached the bore anywhere than the theoretical volume.
@@ -136,3 +131,8 @@ ef3c0c9	Their material is steel (steel tube, rigid steel element) or another rei
 3a1debb	<b>≤ 300<small>mm</small></b><span>shaft diameter of a bored micropile (the limit is 250–300 mm)</span>
 5148645	<b>≤ 150<small>mm</small></b><span>largest cross-sectional dimension of a driven micropile</span>
 79b9648	<b>100–200<small>mm</small></b><span>diameter of the steel tube core placed in the bore</span>
+e795e86	the reinforcement cage can only be lowered into fresh concrete – difficult for a long cage
+86fbdf2	Lifting in the reinforcement cage before concreting
+bb7fbe1	Lifting a long reinforcement cage into the bore
+620023a	Pushing the reinforcement cage into the finished pile concrete
+a2ad97b	An excavator pushes the reinforcement cage into the fresh concrete
