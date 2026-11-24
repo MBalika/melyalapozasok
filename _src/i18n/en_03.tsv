@@ -1,6 +1,6 @@
 0db7cfe	<b>20–22<small>m</small></b><span>maximum length of the cylindrical–conical spun RC tubular pile (D = 25–50 cm)</span>
 555f111	<b>15–20<small>m</small></b><span>typical maximum length of steel tubular and H-piles</span>
-ac500b2	<b>2–3<small>m</small></b><span>typical length of a ground screw – for lightweight houses and stands</span>
+c0b88fb	<b>2–4<small>m</small></b><span>typical length of a ground screw – for lightweight houses and stands</span>
 fd8ffbf	Timber, steel, reinforced concrete
 3fae033	Timber pile
 59c78e9	Widely used for old buildings and bridges – today only exceptionally, e.g. for environmental and landscape protection reasons, for waterside structures. Its diameter is typically <b>10–15 cm</b> (at least 100 mm), its length at most <b>8–10 m</b>, in very soft soil. Only <b>hardwood</b> can be used (robinia, oak, beech, maple), free of insects and fungi, impregnated; when driving, both the tip and the head must be protected.
@@ -23,7 +23,7 @@ a7a4c3d	view
 dbf3d92	Cross-section of a rolled steel H-section
 f498646	flange
 a4ee6ea	web
-807b887	<b class="t">Steel H-section</b> Rolled section: easier to drive, can be taken through a harder layer – mainly for temporary purposes.
+e533eb5	<b class="t">Steel H-section</b> Rolled section: easier to drive, can be taken through a harder layer.
 0e5e059	Cross-section of a square reinforced concrete pile with four corner bars and links, and its view with a shoe
 e6b620c	=
 500c319	<b class="t">Reinforced concrete, square</b> 30×30 or 40×40 cm, with corner bars and links; L = 4–12 m, in 1 m steps, with a shoe.
@@ -40,8 +40,8 @@ c1381ce	Hollow reinforced concrete pile with an octagonal cross-section
 e57d34c	Adding storeys to a building on timber piles
 9ab3916	When old buildings are surveyed (e.g. for a loft conversion or an added storey – the foundations receive extra load), timber piles often “turn up”. If the groundwater table has dropped in the meantime, the pile heads may have come above it and rotted – this must always be checked before adding load.
 1068e64	Photos – materials
-df2a0b3	A row of old timber piles dug out at the foot of a slope
-d112249	A row of old timber piles – “turning up” during a demolition
+e8521d7	A row of newly installed timber piles at the foot of a slope
+ed38d07	Newly installed timber piles (for environmental reasons)
 91c780a	Large-diameter steel tubular piles on the ground, pile-driving rigs behind them
 3eadafc	Steel tubular piles, with the driving rigs in the background
 44bef21	Stacked rolled steel H-sections
@@ -90,17 +90,17 @@ c636623	Vibration propagation – how much does it shake the neighbour?
 709959f	Measure, don’t guess
 7d8ccbf	In sensitive surroundings the condition of neighbouring buildings is recorded before piling (photos, crack map), and during the work the vibration velocity is monitored with a vibration meter. If the measured value approaches the limit, the technology has to be changed.
 2fa7802	Ground screw – a corkscrew in the garden
-3994856	The <b>ground screw</b> is spreading in Hungary too. It is a hollow steel shaft that carries not a continuous auger but <b>one “thread” every 40–60 cm</b>; it is typically at most <b>2–3 m long</b>. It is driven into the ground by machine (a rotary head mounted on a small excavator) or, for smaller screws, even by hand – with a metal bar pushed through it or a turning extension.
+e6b2a7d	The <b>ground screw</b> is spreading in Hungary too. It is a hollow steel shaft that carries not a continuous auger but <b>one “thread” every 40–60 cm</b>; it is typically at most <b>2–4 m long</b>. It is driven into the ground by machine (a rotary head mounted on a small excavator) or, for smaller screws, even by hand – with a metal bar pushed through it or a turning extension.
 618c5c2	It can be used where the screw can cut a thread into the soil. It can be <b>temporary</b> (easy to unscrew and recover) or <b>permanent</b>. It is used to found lightly loaded, typically one- or two-storey lightweight houses, solar parks, fences and mobile stands. There are also larger-diameter, longer steel tubular piles with helices in sections.
-b0075cd	Structure of the ground screw: head plate, hollow steel shaft, one thread every 40–60 cm, tip; length at most 2–3 m
+5c9b1e7	Structure of the ground screw: head plate, hollow steel shaft, one thread every 40–60 cm, tip; length at most 2–4 m
 7814838	ground level
-a1dd388	=
+1a74db6	=
 b366fc7	=
 31a23b7	head plate – connect here
 1e6ad80	hollow steel shaft
 d8d99f2	“thread” (helix plate)
 191bd2f	tip
-b490032	<b class="t">Structure of the ground screw</b> A hollow steel shaft carrying not a continuous auger but one “thread” every 40–60 cm; at the top is the head plate to which the structure is connected. Its length is typically at most 2–3 m.
+4021e3e	<b class="t">Structure of the ground screw</b> A hollow steel shaft carrying not a continuous auger but one “thread” every 40–60 cm; at the top is the head plate to which the structure is connected. Its length is typically at most 2–4 m.
 3a52fe7	Installing a ground screw by hand: turning it with a metal bar pushed through, or with a turning extension
 7f554f8	with a metal bar
 971f903	metal bar

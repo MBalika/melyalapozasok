@@ -1,10 +1,10 @@
 # A BME-videók adatai (src/js/yt_meta.json): magyar ⇥ angol
 Cölöpalapozások rendszerezése	Classification of pile foundations
 Cölöpalapozások	Pile foundations
-Teherviselő oszlop	Load-bearing column
+Cölöpverés	Pile driving
 CFA-spirál	CFA auger
-Nagyátmérőjű fúrt	Large-diameter bored
-Franki-hagymák	Franki bulbs
+Fúrás dobfúróval	Drilling with a bucket
+Csavart cölöp fúrása	Drilling a screw pile
 Nagyátmérőjű fúrt cölöpök	Large-diameter bored piles
 Fúrás zagy védelmében	Drilling under slurry
 Béléscső	Casing
@@ -38,8 +38,8 @@ Felúszás ellen	Against uplift
 Folyamatos spirállal készített cölöpök (CFA)	Continuous flight auger (CFA) piles
 Fúrás	Drilling
 Furadék a spirálon	Spoil on the auger
-Kosár a friss betonba	Cage into the fresh concrete
-Kosár süllyesztése	Lowering the cage
+Armatúra a friss betonba	Cage into the fresh concrete
+Armatúra süllyesztése	Lowering the cage
 Jet-grouting	Jet grouting
 Talajjavítások	Ground improvement
 Foghíjtelek	Infill site
