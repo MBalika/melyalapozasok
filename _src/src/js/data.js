@@ -34,7 +34,7 @@ const KICK = {
   'Oe5saZFiPJk': ['A nagyátmérőjű fúrt cölöp a valóságban', 'Nagyátmérőjű fúrt cölöp'],
   'hwP8iZzAq6I': ['A csavart cölöp a valóságban', 'Csavart cölöp'],
   'KDKCobw52qk': ['A vert és vibrált cölöp a valóságban', 'Vert, vibrált cölöp'],
-  'D27v2bVmoXc': ['A talajcsavar a valóságban', 'Acél csavart cölöp'],
+  'D27v2bVmoXc': ['A talajcsavar a valóságban', 'Előregyártott acél csavart cölöpök'],
   '_QsH5x0ndtI': ['A Franki-cölöp a valóságban', 'Franki-cölöp'],
   '7M7YPxBn8Xk': ['A mikrocölöp a valóságban', 'Mikrocölöp'],
   '8Zcv7ktWD68': ['A talajjavítások áttekintése', 'Talajjavítások'],

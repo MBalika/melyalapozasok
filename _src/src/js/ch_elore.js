@@ -1,7 +1,7 @@
 // ch_elore – C03 Előregyártott cölöpök: behajtási módok, vibrálás-labor, rezgés a szomszédban, kvíz
 import { register, shell, slider, seg, toggle, select, stat, verdict, figure, svg, h, fmt, clear, clamp, lerp, pathD, loop, EN } from './core.js';
 import { defineQuiz } from './ui.js';
-import { driveScene, vibroLab, vibScene } from './proc.js';
+import { driveScene, vibroLab, vibScene, screwScene } from './proc.js';
 
 const txt = (p, x, y, s, cls = 't-lab', extra = {}) => svg('text', { x, y, class: cls, text: s, ...extra }, p);
 // SVG-felirat alsó (_) vagy felső (^) indexszel: txtI(p, x, y, ['R/R', '_0'], …) – dy-os tspan, nem baseline-shift
@@ -38,9 +38,9 @@ function meterBar(label, n, note) {
 /* =================================================================== 1. behajtási módok */
 const MODES = {
   veres: { t: 'Verés', zaj: 5, rez: 5, teh: 5, talaj: 'laza–közepes talajok; kőzet, kemény betelepülés nem', hasz: 'nagy teherbírású vb. és acélcölöpök', note: 'Ejtőkos, dízel- vagy hidraulikus kos: minden ütés egy lökés a talajba – a környezet ezt hallja és érzi.' },
-  vibro: { t: 'Vibrálás', zaj: 4, rez: 4, teh: 4, talaj: 'elsősorban szemcsés talajok', hasz: 'acél csőcölöpök, H-profilok, szádpallók, vb. cölöpök', note: 'A talajhoz hangolt rezgés ideiglenesen „elfolyósítja” a cölöp körüli talajt – a cölöp szinte „belecsúszik” a talajba.' },
+  vibro: { t: 'Vibrálás', zaj: 4, rez: 4, teh: 4, talaj: 'a legtöbb talajtípus; leghatékonyabb szemcsés talajban', hasz: 'acél csőcölöpök, H-profilok, szádpallók, vb. cölöpök', note: 'A talajhoz hangolt rezgés ideiglenesen „elfolyósítja” a cölöp körüli talajt – a cölöp szinte „belecsúszik” a talajba.' },
   sajto: { t: 'Sajtolás', zaj: 1, rez: 1, teh: 2, talaj: 'puhább talajok', hasz: 'kisebb teherbírású cölöpök, főleg mikrocölöpök', note: 'A sajtó egy ellensúlyra (vagy meglévő szerkezetre) támaszkodva lökethosszanként nyomja le a cölöpöt.' },
-  csavar: { t: 'Csavarás', zaj: 1, rez: 1, teh: 1, talaj: 'ahol a csavar menetet tud vágni (nem köves)', hasz: 'talajcsavarok: könnyű házak, napelemparkok, lelátók', note: 'A forgatófej „dugóhúzóként” hajtja le a menetes szárat – nincs ütés, nincs furadék.' },
+  csavar: { t: 'Csavarás', zaj: 1, rez: 1, teh: 1, talaj: 'kemény, köves talajban korlátozottan', hasz: 'talajcsavarok, csavartányéros cölöpök: könnyűszerkezetes házak, ideiglenes szerkezetek', note: 'A forgatófej „dugóhúzóként” hajtja le a csavartányéros cölöpöt – nincs ütés, nincs talajkiemelés.' },
 };
 register('elo-modok', (root) => {
   const { ctrls, viz, out } = shell(root);
@@ -208,15 +208,39 @@ register('elo-rezges', (root) => {
   upd();
 });
 
+/* =================================================================== 3.6 talajcsavar és csavartányéros cölöp – lehajtás */
+const CSM = {
+  kez: { t: 'Kézzel', v: EN ? '1. ground screw' : '1. talajcsavar', how: 'T-rúddal, két ember', note: 'A villás fejre tolt hajtószáron átdugott T-rudat ketten körbetolják; a menetes, kúpos csúcs „dugóhúzóként” húzza le a csavart. Végül vízmértékkel ellenőrzik a függőlegességet.' },
+  gep: { t: 'Kisebb géppel', v: EN ? '1. ground screw' : '1. talajcsavar', how: 'kézi hidraulikus forgatógéppel', note: 'A kézi forgatógépet egy kis hidraulikus tápegység hajtja; a nyomatékot a földhöz támasztott reakciókar veszi fel, így a kezelőnek csak vezetnie kell a gépet.' },
+  munkagep: { t: 'Munkagéppel', v: '2. csavartányéros cölöp', how: 'kisebb munkagépre szerelt forgatófejjel', note: 'A cölöpök helyét mérőállomással tűzik ki. A kotróra szerelt forgatófej lecsavarja a cölöpöt; a csavartányér a talajba fúrja magát. A fejeket egy szintre igazítják, és felkerül a fejlemez.' },
+};
+register('elo-csavar', (root) => {
+  const { ctrls, viz, out } = shell(root);
+  const m = seg(ctrls, { label: 'Lehajtás módja', options: Object.entries(CSM).map(([v, o]) => ({ v, t: o.t })), value: 'kez', vert: true });
+  const fig = figure(viz, 520, 300);
+  const note = h('p', { class: 'small muted elo-note' });
+  viz.append(note);
+  const oV = stat(out, { label: 'Változat' });
+  const oH = stat(out, { label: 'Eszköz' });
+  oV.el.classList.add('elo-tstat'); oH.el.classList.add('elo-tstat');
+  const CYC = { kez: 18, gep: 13, munkagep: 17 };
+  let mode = 'kez', t0 = null;
+  function setMode(v) { mode = v; t0 = null; const o = CSM[v]; oV.set(0, null, o.v); oH.set(0, null, o.how); note.textContent = o.note; }
+  m.on(setMode); setMode('kez');
+  const draw = (t) => { if (t0 == null) t0 = t; const u = window.__csFix != null ? window.__csFix : (t - t0) % CYC[mode]; screwScene(fig, mode, u, { name: CSM[mode].t.toUpperCase() }); };
+  loop(root, (t) => draw(t));
+  draw(0);
+});
+
 /* =================================================================== kvíz */
 defineQuiz('elore', 'Kvíz – előregyártott cölöpök', [
   { q: 'Miért nő a vert előregyártott cölöp talp- <i>és</i> köpenymenti ellenállása is?', a: ['Mert a kiszorítás tömöríti a cölöp körüli és alatti talajt', 'Mert a verés közben a beton szilárdsága megnő', 'Mert a talajvíz a verés hatására végleg eltávozik', 'Mert a cölöp felülete érdesebb, mint a fúrt cölöpé'], c: 0, e: 'A talajkiszorításos cölöp nem hoz fel talajt: széttolja és tömöríti. Előregyártott cölöpnél ettől a talp- és a köpenymenti ellenállás is nő.' },
-  { q: 'Melyik rétegen <b>nem</b> lehet átverni egy előregyártott vasbeton cölöpöt?', a: ['Erősen cementálódott, vékony pad', 'Laza homok', 'Puha, iszapos agyag', 'Talajvíz alatti finom homok'], c: 0, e: 'Kőzetben, sziklás talajban, kemény (köves) agyagban, erősen cementálódott talajban és tömbös feltöltésben a verés nem alkalmazható – egy vékony betelepülés is megállíthatja a cölöpöt.' },
+  { q: 'Melyik réteg <b>akaszthatja meg</b> egy előregyártott vasbeton cölöp verését?', a: ['Erősen cementálódott, vékony pad', 'Laza homok', 'Puha, iszapos agyag', 'Talajvíz alatti finom homok'], c: 0, e: 'Kőzetben, sziklás talajban, kemény (köves) agyagban, erősen cementálódott talajban és tömbös feltöltésben a verés csak korlátozottan alkalmazható – egy vékony betelepülés is megállíthatja a cölöpöt.' },
   { q: 'Verés közben a beverődés a tervezett talpmélység <b>felett</b> szinte nullára csökken. Mit jelent ez?', a: ['A cölöp elakadt: valószínűleg kemény betelepülésre ért', 'Elérte a teherbíró réteget, készen vagyunk', 'A kos energiája túl nagy', 'A talajvíz felúsztatja a cölöpöt'], c: 0, e: 'Ha a cölöp a tervezett mélység felett áll meg, valami az útjában van. Ilyenkor nem szabad „erővel” tovább verni: a cölöpfej megsérülhet, és a talp sem a tervezett rétegben áll.' },
   { q: 'Hol előnyös az acél csőcölöp?', a: ['Felül puha, laza talaj, alatta tömör szemcsés réteg', 'Ha a felszín közelében kőzet van', 'Nagyon kemény, köves agyagban', 'Ha a cölöpnek fából kell lennie'], c: 0, e: 'A csőcölöp a puha rétegen átjutva a tömör szemcsés rétegbe „beleáll”. Keményebb rétegekhez a H-profil a jobb, mert jobban verhető.' },
   { q: 'Belvárosi foghíjtelek, rezgésre érzékeny szomszéd épület. Melyik a legkockázatosabb cölöptechnológia?', a: ['Vert előregyártott vasbeton cölöp', 'Fúrt CFA-cölöp', 'Csavart, talajkiszorításos cölöp', 'Mikrocölöp'], c: 0, e: 'A verés nagy zajjal és rezgéssel jár, építmények közelében csak erős korlátok mellett alkalmazható. A fúrt, csavart és mikrocölöpök zaj- és rezgésszegények.' },
   { q: 'Milyen talajban hatékony elsősorban a vibrálás?', a: ['Szemcsés talajban', 'Kötött, kemény agyagban', 'Kőzetben', 'Szerves, tőzeges talajban'], c: 0, e: 'A talaj önrezgésszámához hangolt rezgés szemcsés talajban ideiglenesen a minimumra csökkenti az ellenállást. Kötött talajban a kohézió miatt ez a hatás kicsi.' },
   { q: 'Öblítéssel egyidejű vibrálásnál mikor kell az öblítést abbahagyni?', a: ['A cölöpcsúcs (végleges talpmélység) elérése előtt 1–2 m-rel', 'Már a felső 1–2 m után', 'Csak a végleges talpmélység elérésekor', 'Soha, az öblítés végig mehet'], c: 0, e: 'Az öblítést 1–2 m-rel a végleges talpmélység előtt abba kell hagyni, hogy a talp alatti talaj ne lazuljon fel. Utólag a talpat a csöveken át injektálni is lehet.' },
-  { q: 'Melyik jellemző a talajcsavarra?', a: ['40–60 cm-ként egy-egy menet az üreges száron, jellemzően legfeljebb 2–4 m', 'Folyamatos spirál végig, 10–15 m hosszban', 'Nagy átmérőjű vasbeton törzs, kontraktorcsöves betonozással', 'Csak veréssel juttatható le'], c: 0, e: 'A talajcsavar nem folyamatos spirállal készül: 40–60 cm-ként van rajta egy-egy menet. Kis terhelésű, 1–2 szintes könnyűszerkezetes házakhoz, napelemparkokhoz, lelátókhoz használják.' },
+  { q: 'Melyik jellemző a talajcsavarra?', a: ['Csavarással juttatják a talajba, talajkiemelés nélkül; nyomásra és húzásra is igénybe vehető', 'Folyamatos spirál végig, 10–15 m hosszban', 'Nagy átmérőjű vasbeton törzs, kontraktorcsöves betonozással', 'Csak veréssel juttatható le'], c: 0, e: 'A talajcsavart és a csavartányéros cölöpöt csavarással juttatják a talajba, nincs talajkiemelés és elszállítás. Nyomásra és húzásra is igénybe vehető, de csak kisebb terhelésekre: könnyűszerkezetes családi házakhoz, melléképületekhez, ideiglenes szerkezetekhez használják.' },
   { q: 'Miért tartós a facölöp a talajvízszint alatt?', a: ['Mert oxigén hiányában a fa nem korhad', 'Mert a víz kioldja belőle a gyantát', 'Mert a víz alatt a fa megkövesedik', 'Mert ott nagyobb a földnyomás'], c: 0, e: 'Víz alatt, oxigén nélkül a korhasztó gombák és a rovarok nem élnek meg. Ha a talajvízszint lesüllyed, a cölöpfejek a levegőre kerülnek és korhadni kezdenek.' },
 ]);

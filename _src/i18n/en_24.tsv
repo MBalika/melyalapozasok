@@ -37,7 +37,6 @@ edd062b	Round spun piles are at most 20–22 m long.
 25024f5	The pile refuses!
 fc2a79b	In hard (stony) clay the precast pile cannot be driven to the design depth – here it stops at approx. −${fmt(M.stuck, 1)} m.
 7456292	The pile refuses in the fill!
-687fd79	Pile driving cannot be used in fill with large blocks – a single thinner such layer can prevent the pile from getting down.
 6059412	Displacement compacts
 706bb69	The driven pile pushes aside and compacts the soil around it: for a precast pile both the base and the shaft resistance increase.
 5e426c5	Vibration-sensitive neighbour: the riskiest choice

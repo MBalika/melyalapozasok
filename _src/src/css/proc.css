@@ -83,3 +83,7 @@
 :root { --pr-bento: #8a865f; }
 .pr-strip[data-n="6"] .pr-col figcaption b, .pr-strip[data-n="7"] .pr-col figcaption b { font-size: 15.5px; }
 .pr-strip[data-n="6"] .pr-col figcaption, .pr-strip[data-n="7"] .pr-col figcaption { font-size: 13px; padding: 9px 10px 12px; }
+/* 3.6 – talajcsavar-jelenetek */
+:root { --pr-shirt: #55606b; --pr-skin2: #cf9b76; --pr-glove: #2d3237; --pr-trous2: #233140; --pr-vest2: #d86f12; --pr-hel1: #8d959b; --pr-hel2: #50585e; --pr-hel3: #2c3236; --pr-ts: #f2c230; --pr-ts2: #b88f14; --pr-plvl: #1f6fd1; --pr-tool: #f6f8f9; --pr-tool2: #bfc8cf; --pr-drv: #e46a1f; --pr-drv2: #a9480f; --pr-mark: #e8432c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --pr-shirt: #3b444d; --pr-skin2: #a87e60; --pr-glove: #15191c; --pr-trous2: #141c25; --pr-vest2: #b85f12; --pr-hel1: #6e767c; --pr-hel2: #3a4146; --pr-hel3: #1f2427; --pr-ts: #c99f22; --pr-ts2: #85670d; --pr-plvl: #2a64ad; --pr-tool: #c2cad1; --pr-tool2: #7d8790; --pr-drv: #b8551a; --pr-drv2: #7a340b; --pr-mark: #ff6a4a; } }
+:root[data-theme="dark"] { --pr-shirt: #3b444d; --pr-skin2: #a87e60; --pr-glove: #15191c; --pr-trous2: #141c25; --pr-vest2: #b85f12; --pr-hel1: #6e767c; --pr-hel2: #3a4146; --pr-hel3: #1f2427; --pr-ts: #c99f22; --pr-ts2: #85670d; --pr-plvl: #2a64ad; --pr-tool: #c2cad1; --pr-tool2: #7d8790; --pr-drv: #b8551a; --pr-drv2: #7a340b; --pr-mark: #ff6a4a; }

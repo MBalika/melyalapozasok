@@ -125,7 +125,7 @@ function evaluate(S) {
     if (sq && S.D > 40) add('info', 'Szokatlan keresztmetszet', 'A hazai gyakorlatban a négyzetes cölöp 30×30 vagy 40×40 cm-es.');
     const hard = inL.find((l) => l.K.hard);
     if (hard) { M.stuck = Math.min(L, hard.t + 0.9); add('bad', 'A cölöp elakad!', `Kemény (köves) agyagban az előregyártott cölöp nem verhető le a tervezett mélységig – itt kb. −${fmt(M.stuck, 1)} m-en megáll.`); }
-    else if (P.blocks) { M.stuck = 1.6; add('bad', 'A cölöp elakad a feltöltésben!', 'Nagy tömbös feltöltésben a cölöpverés nem alkalmazható – egyetlen vékonyabb ilyen betelepülés is megakadályozhatja, hogy a cölöp lejusson.'); }
+    else if (P.blocks) { M.stuck = 1.6; add('bad', 'A cölöp elakad a feltöltésben!', 'Nagy tömbös feltöltésben a cölöpverés csak korlátozottan alkalmazható – egyetlen vékonyabb ilyen betelepülés is megakadályozhatja, hogy a cölöp lejusson.'); }
     add('ok', 'A kiszorítás tömörít', 'A levert cölöp széttolja és tömöríti maga körül a talajt: előregyártott cölöpnél a talp- és a köpenymenti ellenállás is nő.');
     add(S.nb ? 'bad' : 'warn', S.nb ? 'Rezgésérzékeny szomszéd: a legkockázatosabb választás' : 'Zaj és rezgés', 'A verés jelentős zajt és rezgést kelt, építmények közelében csak erős korlátok mellett alkalmazható.' + (S.nb ? ' Itt fúrt (CFA) vagy csavart cölöp a jobb választás.' : ''));
   }

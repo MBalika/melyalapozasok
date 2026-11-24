@@ -52,16 +52,12 @@ c9f8891	Driving
 30eeb62	high-capacity RC and steel piles
 47acae4	Drop, diesel or hydraulic hammer: every blow is an impulse into the soil – the surroundings hear and feel it.
 7ffefb6	Vibrating
-d4818f2	mainly granular soils
 3f08390	steel tubular piles, H-sections, sheet piles, RC piles
 f5a29fd	Jacking
 0526b4f	softer soils
 3ffc057	piles of lower capacity, mainly micropiles
 bf9e471	The jack reacts against a counterweight (or an existing structure) and pushes the pile down stroke by stroke.
 26852a8	Screwing
-4904320	where the screw can cut a thread (not stony)
-2cb4ff6	ground screws: lightweight houses, solar parks, stands
-8d6900f	The rotary head drives the threaded shaft down “like a corkscrew” – no blows, no spoil.
 e2ed8a0	Method
 0dd7860	Vibration
 d600ccc	Bearing capacity
@@ -117,10 +113,8 @@ cb3a03a	Because the strength of the concrete increases during driving
 3d8e1ed	Because driving removes the groundwater permanently
 eb18d3a	Because the surface of the pile is rougher than that of a bored pile
 6a5b753	A displacement pile brings up no soil: it pushes it aside and compacts it. For a precast pile this increases both the base and the shaft resistance.
-ac698dd	Which layer can a precast reinforced concrete pile <b>not</b> be driven through?
 602e4af	A thin, strongly cemented band
 9ad514b	Fine sand below the groundwater
-de4a203	Driving cannot be used in rock, rocky ground, hard (stony) clay, strongly cemented soil and blocky fill – even a thin intercalation can stop the pile.
 d5b1b39	During driving the set drops almost to zero <b>above</b> the design base depth. What does this mean?
 514b5dc	The pile has refused: it has probably hit a hard intercalation
 f3ae4d5	It has reached the bearing stratum, we are done

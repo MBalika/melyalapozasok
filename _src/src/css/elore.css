@@ -105,3 +105,9 @@ canvas.hsz-cv { max-width: 900px; margin: 0 auto; }
   [data-w="elo-veres"] svg.fig .t-big { font-size: 26px; }
   [data-w="elo-vibro"] svg.fig .t-sm, [data-w="elo-rezges"] svg.fig .t-sm, [data-w="elo-rezges"] svg.fig .t-num { font-size: 20px; }
 }
+
+/* 3.6 – három dobozos előny–hátrány–alkalmazás sor, a két változat ábrája */
+.proscons.pc3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .proscons.pc3 { grid-template-columns: minmax(0, 1fr); } }
+.elo-csfig { margin: 18px 0; }
+.elo-csfig svg { overflow: hidden; border-radius: 8px; }

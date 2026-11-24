@@ -1,15 +1,10 @@
 0db7cfe	<b>20–22<small>m</small></b><span>maximum length of the cylindrical–conical spun RC tubular pile (D = 25–50 cm)</span>
-555f111	<b>15–20<small>m</small></b><span>typical maximum length of steel tubular and H-piles</span>
 c0b88fb	<b>2–4<small>m</small></b><span>typical length of a ground screw – for lightweight houses and stands</span>
 fd8ffbf	Timber, steel, reinforced concrete
 3fae033	Timber pile
 59c78e9	Widely used for old buildings and bridges – today only exceptionally, e.g. for environmental and landscape protection reasons, for waterside structures. Its diameter is typically <b>10–15 cm</b> (at least 100 mm), its length at most <b>8–10 m</b>, in very soft soil. Only <b>hardwood</b> can be used (robinia, oak, beech, maple), free of insects and fungi, impregnated; when driving, both the tip and the head must be protected.
 90d36c1	Below the groundwater table it is very durable; above it, treatment is needed – this way a service life of approx. 100 years can be achieved.
-9600006	<b>Tubular pile</b> (its end is usually closed with a shoe): advantageous where there is soft, loose soil near the surface with a dense granular layer below, into which it can “stand”. The rolled <b>H-section</b> is easier to drive and can be taken through harder layers. It can be extended to almost any length and can usually be recovered – which is why it is more common for temporary purposes.
-fb6afad	Typical maximum length 15–20 m. Corrosion protection is needed: a thicker section, paint or corrosion-resistant steel. Its drawback is the expensive material.
 f31c8d4	Precast reinforced concrete
-d2e2b9f	Durable, of high bearing capacity – the most common worldwide, but in Hungary it has been largely pushed out of the market over the past two decades. In Hungary the typical pile was <b>30×30</b> or <b>40×40 cm</b> square, 4–12 m long (produced in 1 m steps); later round, cylindrical or conical <b>spun RC tubular piles</b> (D = 25–50 cm) appeared, which are much lighter and can be 20–22 m long.
-c72714d	Its drawbacks are the great weight (handling, transport, driving) and the loud noise and strong vibration caused by installation.
 5e411cf	Drawing – cross-sections and shapes
 13b0eac	Cross-section of a timber pile with growth rings, D = 10–15 cm
 313f77a	=
@@ -19,7 +14,6 @@ a48fa7f	hollow
 c59a3cd	closed shoe
 54fac52	cross-section
 a7a4c3d	view
-7bef737	<b class="t">Steel tubular pile</b> Its end is usually closed with a shoe. Maximum length 15–20 m, can be extended by welding.
 dbf3d92	Cross-section of a rolled steel H-section
 f498646	flange
 a4ee6ea	web
@@ -52,14 +46,10 @@ c6c2004	Hollow spun RC tubular piles
 1898bdb	A precast pile can be installed in four ways: by <b>driving</b>, <b>vibrating</b>, <b>screwing</b> or <b>jacking</b>. The method depends on the soil, the type of pile and – more and more often the deciding factor – the <b>surroundings</b>: how much noise and vibration can be tolerated there.
 ef9c593	Installation methods – animated comparison
 0369d2b	Driving and vibrating
-d0ca8b2	<b>Driving:</b> with a mechanical (drop), pneumatic, steam or diesel hammer – modern self-propelled piling rigs typically use a hydraulic hammer. <b>Vibrating:</b> ordinary vibration, vibro-driving, or vibration combined with jetting. Vibration is effective primarily in <b>granular soil</b>: a vibration tuned to the natural frequency of the soil temporarily reduces the soil resistance to a minimum.
 7f6f581	Jacking and screwing
-80ce9f1	<b>Jacking:</b> without driving or vibration, “by pressing” – an option in softer soil and only for piles of smaller bearing capacity (mainly for micropiling), but with much less noise. <b>Screwing:</b> the ground screw cuts a thread into the soil “like a corkscrew” – where the soil is suitable for this, it is quiet and fast (see 3.6).
 f7638ac	Pile driving – blow by blow
 0538547	When driving, every blow of the hammer gives energy to the pile, and the soil resists along the shaft and at the base. In a soft layer the pile advances centimetres per blow, but in the bearing stratum the <b>set</b> (the penetration per blow) decreases. The rig operator logs this: the blow count–depth curve of the <b>driving record</b> is the “biography” of the pile.
 720e9eb	If the set drops almost to zero, the pile “refuses” and stops – it goes no further. This is good news if it happens in the planned bearing stratum, and bad news if a thin hard intercalated layer stops the pile above it.
-eacc1b0	What it cannot be driven through
-99cdc4e	Driving cannot be used in rock, rocky ground, hard (stony) clay, strongly cemented soil or fill with larger blocks – and <b>a single thinner such layer is enough</b> to prevent the piles from being driven to adequate depth. That is why the ground investigation must find these layers too.
 8050210	Short or long? It must be decided in advance
 61e87bb	The length of a precast RC pile has to be chosen before production, based on the ground investigation. If the pile refuses earlier than planned, the excess must be cut off (trimming); if it does not reach the bearing stratum, it must be extended. A steel pile is more flexible in this: it can be extended to almost any length by welding.
 3809a36	Photos – driving and pile trimming
@@ -76,38 +66,14 @@ bc6e357	Setting up the pile on the set-out point at sunset
 bac5627	A trimmed pile head with protruding reinforcing bars
 86c0672	After trimming: exposed reinforcing bars for the pile cap
 7993653	Vibration – “fluidising” the soil
-5dbd842	The vibrator (vibratory hammer) clamped onto the pile generates vertical vibration. If the frequency is tuned to the <b>natural frequency</b> of the soil, the contacts between the grains loosen temporarily, and the resistance along the shaft and below the base <b>drops temporarily to a minimum</b> – the pile sinks almost under its own weight and the pressure of the machine. In cohesive soil this effect is much smaller, so vibration is primarily a method for <b>granular soils</b>.
 d981dfc	Vibration – resonance lab
 f1231dd	Vibration combined with jetting
 3697a05	Vibration is assisted by jetting through thin pipes running along the pile. Jetting must be <b>stopped 1–2 m</b> before the pile tip is reached, so that the soil below the base does not loosen; the pile base can later also be grouted through the pipes.
 00c8699	Noise is a problem here too
-5f6d7b8	Vibration comes with loud noise, which is reduced by so-called <b>screening</b>. At start-up and shut-down the machine passes through the low frequencies – at these moments nearby buildings may also resonate.
 8b6d58c	Vibration next door
 e06ba4e	The vibration from pile driving and vibrating propagates through the soil as waves and attenuates with distance. For buildings the peak <b>vibration velocity</b> (mm/s) governs: an industrial reinforced concrete frame tolerates much more than a residential building – and a listed building or one full of vibration-sensitive machines even less.
 d2250bb	So on an <b>infill site in a city centre</b>, next to a sensitive neighbouring building, a driven precast reinforced concrete pile is the riskiest choice – there a low-noise, low-vibration technology is needed instead: a bored (e.g. CFA), screw or jacked pile, or a micropile.
 c636623	Vibration propagation – how much does it shake the neighbour?
 709959f	Measure, don’t guess
 7d8ccbf	In sensitive surroundings the condition of neighbouring buildings is recorded before piling (photos, crack map), and during the work the vibration velocity is monitored with a vibration meter. If the measured value approaches the limit, the technology has to be changed.
-2fa7802	Ground screw – a corkscrew in the garden
-e6b2a7d	The <b>ground screw</b> is spreading in Hungary too. It is a hollow steel shaft that carries not a continuous auger but <b>one “thread” every 40–60 cm</b>; it is typically at most <b>2–4 m long</b>. It is driven into the ground by machine (a rotary head mounted on a small excavator) or, for smaller screws, even by hand – with a metal bar pushed through it or a turning extension.
-618c5c2	It can be used where the screw can cut a thread into the soil. It can be <b>temporary</b> (easy to unscrew and recover) or <b>permanent</b>. It is used to found lightly loaded, typically one- or two-storey lightweight houses, solar parks, fences and mobile stands. There are also larger-diameter, longer steel tubular piles with helices in sections.
-5c9b1e7	Structure of the ground screw: head plate, hollow steel shaft, one thread every 40–60 cm, tip; length at most 2–4 m
-7814838	ground level
-1a74db6	=
-b366fc7	=
-31a23b7	head plate – connect here
-1e6ad80	hollow steel shaft
-d8d99f2	“thread” (helix plate)
-191bd2f	tip
-4021e3e	<b class="t">Structure of the ground screw</b> A hollow steel shaft carrying not a continuous auger but one “thread” every 40–60 cm; at the top is the head plate to which the structure is connected. Its length is typically at most 2–4 m.
-3a52fe7	Installing a ground screw by hand: turning it with a metal bar pushed through, or with a turning extension
-7f554f8	with a metal bar
-971f903	metal bar
-659a444	with a turning extension
-85cbdba	extension
-747ae61	T-handle
-7a886e5	<b class="t">Installation by hand</b> Smaller screws can also be installed by hand: they are turned with a metal bar pushed through the hole in the head or with a turning extension – the threads pull the screw down “like a corkscrew”.
 9ed19bc	Advantages
-c2705f3	No noise, hardly any vibration
-ffde283	No earthworks, no spoil
-dd971f9	Can be loaded immediately, no curing time

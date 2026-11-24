@@ -1,4 +1,3 @@
-d31215d	The four steps of installing a ground screw
 fb8398d	The four steps of making a vibro stone column
 8cfb62c	The four steps of making a deep-mixed column
 40d9354	The four steps of making a jet column
@@ -44,14 +43,8 @@ db44734	The hollow bar with a sacrificial drill bit is drilled down while rotati
 0e48928	Drilling with flushing
 331889b	hollow steel bar
 7f3c077	The small drilling rig moves into position; if needed it drills inclined holes, even in a cellar.
-965e29d	The sole plate or the supporting structure is bolted to the head plate – it can be loaded immediately.
 eea3e37	Superstructure
 b46cbc8	spirit level
-ef6e2a0	The verticality is checked with a spirit level during installation; the head is brought to the design level.
-3fd56e0	Checking
-ea959a7	It is screwed into the ground with a rotary drive mounted on an excavator (smaller ones by hand, with a bar through the head).
-ed09003	Screwing in
-585a48f	The positions of the screws are set out, and each screw is placed vertically on its point.
 d2f40dd	topsoil fill
 783275b	bentonite mixer
 9d8e684	casing oscillator
@@ -64,7 +57,6 @@ bea00a5	hollow stem
 9848916!	grout body
 a4162d2!	mixed column
 aaeb5b3!	ground screw
-9ec59bc!	sole plate
 71908e7	truck mixer
 68c0350	The four steps of sinking a reinforced concrete well foundation
 e4dee2d	Sinking a well foundation step by step
@@ -97,7 +89,6 @@ a306f13	Tune the vibrator! Find the frequency at which the soil resistance is th
 98313e2	pile tip
 c1767da	rotating eccentric masses
 5dceae6	penetration ≈ ${res.pen.toFixed(1).replace('.', EN ? '.' : ',')} m
-0720fcf	installed ground screws
 4e5b9b6	excavator
 794b020	leader
 01faef3	design depth reached
