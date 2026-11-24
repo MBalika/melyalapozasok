@@ -9,7 +9,6 @@ cf764d0	Silo effect: the earth pressure does not grow indefinitely
 57e1d69	For a long, plane wall the earth pressure increases linearly with depth (Rankine). A panel, however, is <b>of finite length</b>: at both ends of the panel the soil wedge that “wants” to move leans on the adjacent soil at rest, and <b>arching</b> develops – as in a grain silo, where because of wall friction the pressure does not grow indefinitely even at the bottom. So the earth pressure <b>tends to a limit</b> with depth. The most commonly used expression for this is the <b>Schneebeli formula</b> (but many others exist):
 08a250f	<span class="f">σ<sub>x</sub> = <span class="rf-frac"><span>L·γ</span><span>sin 2φ</span></span>·K<sub>a</sub>·(1 − e<sup>−z·sin 2φ / L</sup>) − <span class="rf-frac"><span>c</span><span>tan φ</span></span>·(1 − K<sub>a</sub>)</span>⏎    <span class="fl">L: trench length · γ: unit weight of the soil · φ, c: shear strength parameters · K<sub>a</sub> = tan²(45° − φ/2). At small depth it gives back the Rankine value K<sub>a</sub>·γ·z − 2c·√K<sub>a</sub>, at great depth the earth pressure (for c = 0) tends to L·γ·K<sub>a</sub>/sin 2φ.</span>
 2c8a9d5	The point in one sentence
-51ee173	<b>Shorter panel → stronger arching → smaller earth pressure → more stable trench.</b> That is why a panel of arbitrary length cannot be opened, and why 2.8–5.6 m is the typical panel length.
 7e4b8db	The silo effect at a glance
 5775923	Trench stability lab
 9e4f793	If the slurry level drops…

@@ -49,7 +49,7 @@ function crane(p, x0, y, tip) {
 
 /* ================================================================== 1. Egy résfal anatómiája */
 const ANAT = [
-  { n: 1, x: 205, y: 46, t: 'Résvezető gerenda', d: 'Két, 20–30 cm széles, 1,0–1,5 m magas vasbeton gerenda a rés két oldalán: vezeti a réskanalat, megtámasztja a laza felső talajt, megakadályozza a zagy elszivárgását, és ez a kitűzés alapja is.' },
+  { n: 1, x: 205, y: 46, t: 'Résvezető gerenda', d: 'Két, 20–25 cm széles, 1,0–1,5 m magas vasbeton gerenda a rés két oldalán: vezeti a réskanalat, megtámasztja a laza felső talajt, megakadályozza a zagy elszivárgását, és ez a kitűzés alapja is.' },
   { n: 2, x: 185, y: 196, t: 'Bentonitzagy', d: 'A kiemelt föld helyét azonnal zagy tölti ki (ρ = 1,03–1,12 g/cm³). Belülről nyomja a rés falát, és kizárja a talajvizet – amíg a beton a helyére nem kerül.' },
   { n: 3, x: 205, y: 300, t: 'Réskanál', d: 'Ciklikus munka: leengedés – harapás – kiemelés – ürítés – újra leengedés. Egy harapás jellemzően 2,8 m hosszú: ennyi a nyitott kanál szélessége.' },
   { n: 4, x: 92, y: 110, t: 'Talajvízszint', d: 'A talajvíz kívülről nyomja a rés falát; a víznyomás a talajvízszint alatt a mélységgel lineárisan nő: σ<sub>v</sub> = (z − h)·γ<sub>v</sub>.' },
@@ -151,7 +151,7 @@ const PAN = [
 ];
 PAN.forEach((q) => { q.bites = q.k === 'P' ? [[q.x0, q.x0 + 2.8], [q.x1 - 2.8, q.x1], [q.x0 + 2.8, q.x1 - 2.8]] : [[q.x0, q.x1]]; });
 const EP_STEPS = [
-  { t: 'Résvezető gerenda', d: 'A falvonal két oldalán vasbeton résvezető gerendák készülnek (20–30 cm széles, 1,0–1,5 m magas). Ezek vezetik a réskanalat, és ez a kitűzés alapja is.', dur: 1.6 },
+  { t: 'Résvezető gerenda', d: 'A falvonal két oldalán vasbeton résvezető gerendák készülnek (20–25 cm széles, 1,0–1,5 m magas). Ezek vezetik a réskanalat, és ez a kitűzés alapja is.', dur: 1.6 },
   { t: 'P1 – első harapás', d: 'A réskanál a primer tábla egyik végén kezd: leengedés – harapás – kiemelés – ürítés. A kiemelt föld helyét azonnal bentonitzagy tölti ki, a zagyszint végig a résvezető gerenda teteje közelében marad.', dur: 2.2 },
   { t: 'P1 – második harapás', d: 'A tábla másik vége következik. Egy harapás jellemzően 2,8 m hosszú – ennyi a nyitott réskanál szélessége.', dur: 2.2 },
   { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt talajtömböt is kiemelik: ez a 7,0 m-es tábla így három harapásból áll. (Egy 5,6 m-es tábla két harapással is elkészül.)', dur: 1.8 },
@@ -650,7 +650,7 @@ register('rf-lab', (root) => {
 /* ================================================================== kvíz */
 defineQuiz('rf', 'Kvíz – résfalak', [
   { q: 'Legalább mennyivel legyen a zagyszint a résben a talajvízszint felett?', a: ['1,0–1,5 m-rel', '10–20 cm-rel', 'Legalább 5 m-rel', 'Mindegy, ha elég sűrű a zagy'], c: 0, e: 'A zagy csak kicsit nehezebb a víznél (1,03–1,12 g/cm³), ezért szintelőny kell: legalább 1,0–1,5 m. Ez a többlet tartja egyensúlyban a földnyomást is.' },
-  { q: 'Mekkora egy résmarkolós „harapás” jellemző hossza?', a: ['2,8 m', '0,6 m', '8–10 m', '15 m'], c: 0, e: 'A réskanál nyitott szélessége kb. 2,8 m – ez egyben a legrövidebb kiemelhető réstábla. A szokásos táblák 2,8–5,6 m hosszúak.' },
+  { q: 'Mekkora egy résmarkolós „harapás” jellemző hossza?', a: ['2,8 m', '0,6 m', '8–10 m', '15 m'], c: 0, e: 'A réskanál nyitott szélessége kb. 2,8 m – ez egyben a legrövidebb kiemelhető réstábla. A szokásos táblák 2,8–6,5 (8) m hosszúak.' },
   { q: 'Miért kisebb a rés falára ható földnyomás a Rankine-félénél?', a: ['A tábla két vége felé boltozódás alakul ki (silóhatás)', 'A zagy kémiailag megszilárdítja a talajt', 'A talajvíz felhajtóereje teljesen kiegyenlíti', 'Mert a résfal hajlékony'], c: 0, e: 'A véges hosszú rés mellett a talajék a tábla végeinél a nyugvó talajra támaszkodik; a földnyomás a mélységgel egy határértékhez tart (Schneebeli-képlet).' },
   { q: 'Mi történik, ha hosszabb réstáblát nyitunk ugyanabban a talajban?', a: ['Gyengül a boltozódás, nő a földnyomás, csökken az állékonyság', 'Nő az állékonyság', 'Nincs hatása, csak a betonozás tart tovább', 'A zagy sűrűsége megnő'], c: 0, e: 'Rövidebb tábla → erősebb boltozódás → kisebb földnyomás → állékonyabb rés. Ezért legfeljebb 8–10 m, jellemzően 2,8–5,6 m a táblahossz.' },
   { q: 'Milyen bentonit használható réseléshez?', a: ['Csak aktivált „Na” bentonit', 'Bármilyen helyi agyag', 'Kalciumbentonit cementtel', 'Kvarchomok és víz keveréke'], c: 0, e: 'A bentonit döntően montmorillonitból álló kolloid agyag; réseléshez csak aktivált Na-bentonit jó, a viszkozitás CMC-vel növelhető.' },

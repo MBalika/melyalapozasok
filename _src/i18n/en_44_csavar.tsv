@@ -225,7 +225,6 @@ ba79097	gypsum
 ce0ea98	Quiet and vibration-free
 8942446	The mixing tool can be mounted on a hydraulic excavator with a rotating superstructure, with a mixing head rotating around its axes at the bottom. The mixing head is moved up and down while the binder arrives continuously through the head under high pressure. On average 0.5–0.8 m³ of soil can be mixed per minute; the depth is usually not more than 5 m.
 6abdce7	Mass stabilisation
-d72d06d	Cutter Soil Mixing resembles diaphragm walling with a hydrofraise (cutter), but here only binder is introduced into the ground and the local soil is mixed. With CSM a continuous wall reinforced with steel members can be formed; the panels are 10–15 m deep.
 8fae6be	“Slot-type” deep mixing (CSM)
 a67d097	A high-performance drilling–mixing rig penetrates to the required depth. Fluid binder slurry is fed into the subsoil through a supply pipe and the drill string, mixing the soil; by slowly, gradually and repeatedly lifting the tool to the surface, the subsoil is mixed over its full depth. The finished soilcrete columns are typically 1.0–1.5 m in diameter, with a maximum depth of 50 m.
 cbaf104	Column-type deep mixing
@@ -251,3 +250,19 @@ ab66444	The diameter depends on the permeability of the soil: with single jet 50
 f4192d5	At the final depth the aggregate is gradually released at the bottom; the vibrator penetrates the material several times with an up-and-down movement, pressing it sideways and compacting it.
 fd14c8b	The bottom-feed depth vibrator displaces the soil sideways and – assisted by hydraulic pressure and compressed air – penetrates to the design depth or to the specified soil resistance.
 f437585	With single jet 50–70 cm in clay and 80–100 cm in sand – even larger in coarse-grained soil.
+ec63ced	Thickness 40–120 cm; a panel is typically 2.8–6.5 (8) m long; depth generally 10–30 m (but it can be 100–120 m).
+f326b1e	Cutter Soil Mixing resembles diaphragm walling with a hydrofraise (cutter), but here only binder is introduced into the ground and the local soil is mixed. With CSM a continuous wall reinforced with steel members can be formed; the panels are 10–15 m deep.
+29829a3	<b>Shorter panel → stronger arching → smaller earth pressure → more stable trench.</b> That is why a panel of arbitrary length cannot be opened, and why 2.8–6.5 (8) m is the typical panel length.
+3b1732e	The two reinforced concrete beams built on both sides of the trench near ground level are the basis of the whole job. Their width is <b>20–25 cm</b>, their height <b>1.0–1.5 m</b>; they can be straight walls or L-shaped with an outward-projecting toe. The two beams are usually propped against each other with struts, so they have to be designed as continuous beams. Their tasks:
+b05d8f6	<b>100–120<small>m</small></b><span>the trench can be this deep too</span>
+47372a7	<b>10–30<small>m</small></b><span>usual trench depth</span>
+8189dc0	<b>2.8–6.5<small>(8) m</small></b><span>plan length of a panel made at one time</span>
+f9107a1	<b>40–120<small>cm</small></b><span>width of the trench (40–(50)–60–80–100–120 cm)</span>
+84faad4	Generally 10–30 m, but it can be 100–120 m.
+079c192	10–30 m, even 100–120 m
+d7879d0	40–120 cm thick; panel 2.8–6.5 (8) m
+399b445	The open width of the grab is approx. 2.8 m – this is also the shortest panel that can be excavated. Usual panels are 2.8–6.5 (8) m long.
+5a00bce	Reinforced concrete guide walls are built on both sides of the wall line (20–25 cm wide, 1.0–1.5 m high). They guide the grab and are also the basis of setting out.
+99883ce	Two reinforced concrete beams, 20–25 cm wide and 1.0–1.5 m high, on both sides of the trench: they guide the grab, support the loose upper soil, prevent slurry leakage, and they are also the basis of setting out.
+8ec85cf	The wall section excavated and concreted at once (typically 2.8–6.5 (8) m). First the primary panels are made, then the secondary panels between them.
+be011a2	A panel made at one time is typically 2.8–6.5 (8) m long – this is set by trench stability.

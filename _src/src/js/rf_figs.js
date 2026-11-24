@@ -213,7 +213,7 @@ function renderGW(el, kind) {
   // zagyszint
   P(s, `M${xl + t + gap - 18} ${TY2 + 26} l 6 -9 h -12 z`, '', { style: 'fill:var(--ink2)' });
   // méretek
-  dimH(s, xl, xl + t, 30, '20–30 cm', { ext: 26 });
+  dimH(s, xl, xl + t, 30, '20–25 cm', { ext: 26 });
   dimV(s, 22, TY2, TY2 + hb, '1,0–1,5 m', { dx: 14, anchor: 'start', rot: true });
   L(s, 22, TY2, xl, TY2, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3');
   L(s, 22, TY2 + hb, fl, TY2 + hb, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3');
