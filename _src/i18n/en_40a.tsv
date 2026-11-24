@@ -2,8 +2,6 @@
 006a4ae	Illustrative model: v = v
 293beba	soil resistance R/R
 eb67dbc	Soil resistance (R / R<sub>0</sub>)
-9c780fc	Illustrative model: R = shaft + base; s = E/R − c/2
-0695343	diesel
 cf01447	For this diameter and length in this soil the rig does not have enough torque: a smaller diameter, a shorter pile or a more powerful rig is needed.
 1cb8ef3	In dense, hard soil the displacement head cannot push the soil aside – a replacement (bored, CFA) pile is the right choice here.
 4462fa4	<span>At ${fmt(stuck, 1)} m the torque reached the limit of the rig (${TMAX} kNm). ${S.ok === 'bad' ? 'Tömör, kemény talajban a kiszorító fej nem tudja széttolni a talajt – ide inkább talajhelyettesítéses (fúrt, CFA) cölöp való.' : 'Ekkora átmérőhöz és hosszhoz ebben a talajban ennek a gépnek kevés a nyomatéka: kisebb átmérő, rövidebb cölöp vagy erősebb gép kell.'}</span>

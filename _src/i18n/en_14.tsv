@@ -73,46 +73,7 @@ e717004	vibrator
 eeeb02c	rotation
 f5ac848	penetration ≈ ${fmt(pen, 1)} m
 0942d49	dense sand
-38fddb9	cemented band
-d55f49f	block of concrete rubble
-a20688d	rock
-5da1ae7	Soft clay, dense sand from 7 m
-e28c175	Loose sand, thin cemented band at 3.5 m
-06a37b7	Fill with blocky inclusions, gravel below
-960dda2	Soft clay, rock at 6.5 m
-7fc3fae	steel H-section
 94672e0	drop hammer
-f2d5164	Hammer mass
-4b7023d	Drop height
-526a78e	“Heavy hammer, small drop” – a large drop height breaks the pile head.
-c41a373	One blow
-874172a	▶ Continuous driving
-f036fc1	↺ New pile
-b07be45	Penetration
-e8ecf55	Blow count
-6b723ca	Set
-c2db05d	mm/blow
-35d488e	For the last 10 blows
-6350902	Blow energy η·m·g·h
-fccfa5a	Driving stress (estimate)
-2cd8ff6	Dynamic resistance
-8bdbfca	 <span>Warning: estimated driving stress ≈ ${fmt(sg, 0)} MPa – ${P.conc ? 'a betoncölöp feje megrepedhet, széteshet' : 'az acélprofil feje deformálódhat'}. A heavier hammer and a smaller drop height are gentler.</span>
-8ee29e8	the head of the concrete pile may crack and break up
-18a1c24	the head of the steel section may deform
-d5294ac	Design depth reached
-82c6014	<span>${fmt(st.n, 0)} blows, at the end a set of ${fmt(last10, 0)} mm per 10 blows in the ${lt.n} layer. The dynamic resistance is ≈ ${fmt(st.lastR, 0)} kN – ${st.lastR > 1200 ? 'a cölöp jó teherbíró rétegben áll.' : 'kevés: a cölöp nem ért jó teherbíró rétegbe, vagy a szelvény kicsi.'}</span>
-1cc761e	the pile stands in a good bearing stratum.
-e6d519a	too low: the pile has not reached a good bearing stratum, or the section is too small.
-553da6c	Stopped at the rock surface
-1a03102	<span>The pile cannot be driven into rock: it sits on the rock at ${fmt(st.z, 2)} m. If this is the plan (an end-bearing pile on rock), fine – the excess length must be cut off. Caution: in this case the reflected wave further increases the stress in the pile.</span>
-9f2b2d0	Refusal above the design depth
-809e8b2	Even a thin hard intercalation can stop a driven pile – it must be extracted, and a different section or a different technology is needed.
-4de6a26	Increase the energy, or choose a different pile.
-d34e011	Ready for driving
-04f89b5	<span>The pile (${P.t}, L = ${fmt(P.L, 0)} m) stands in the leader. Strike one blow, or start continuous driving!</span>
-c0f341d	DRIVING RECORD
-673ca50	blows / 0.5 m
-b2b346f	no blows yet
 0af0055	Dense sand
 1a3165d	Cohesive clay
 927ee38	Frequency

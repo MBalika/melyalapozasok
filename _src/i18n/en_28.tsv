@@ -61,12 +61,6 @@ a2a0a66	always, in any soil
 8e3ebf5	Suitable soil
 40177f5	Noise
 9e6042d	loose sand
-e97ecae	RC 30×30 cm
-3c828da	RC 40×40 cm
-41eace1	Hammer
-53d2418	Soil profile
-f888897	Advancing…
-65290d2	design base
 c079769	Loose sand
 524e788	m/min
 84c10eb	Soft, silty clay
@@ -159,6 +153,4 @@ e7676db	False
 6888643	True.
 1337f76	False.
 c0043ee	=
-8e1113a	<span>The pile refused at ${fmt(st.z, 2)} m in ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a')} <b>${lt.n}</b> layer (set ${fmt(last10, 0)} mm for the last 10 blows). ${lt.hard ? 'Egy vékony kemény betelepülés is megállíthatja a vert cölöpöt – ki kell emelni, más szelvény vagy más technológia kell.' : 'Növeld az energiát, vagy válassz más cölöpöt.'}</span>
-b4618fe	<span>The base is now in ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(lt.n) ? 'az' : 'a')} <b>${lt.n}</b> layer, at a depth of ${fmt(st.z, 2)} m.</span>
 834cd58	The bearing stratum (${layerAt(P, P.bear + 0.1).n}) starts only at −${fmt(P.bear, 1)} m; the pile base (−${fmt(Lact, 1)} m) is in ${EN ? 'the' : (/^[aáeéiíoóöőuúüű]/i.test(toeA.n) ? 'az' : 'a')} ${toeA.n} layer: low bearing capacity, large settlement.

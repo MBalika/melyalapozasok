@@ -58,7 +58,6 @@ d0ca8b2	<b>Driving:</b> with a mechanical (drop), pneumatic, steam or diesel ham
 f7638ac	Pile driving – blow by blow
 0538547	When driving, every blow of the hammer gives energy to the pile, and the soil resists along the shaft and at the base. In a soft layer the pile advances centimetres per blow, but in the bearing stratum the <b>set</b> (the penetration per blow) decreases. The rig operator logs this: the blow count–depth curve of the <b>driving record</b> is the “biography” of the pile.
 720e9eb	If the set drops almost to zero, the pile “refuses” and stops – it goes no further. This is good news if it happens in the planned bearing stratum, and bad news if a thin hard intercalated layer stops the pile above it.
-e79f76c	Pile-driving simulator
 eacc1b0	What it cannot be driven through
 99cdc4e	Driving cannot be used in rock, rocky ground, hard (stony) clay, strongly cemented soil or fill with larger blocks – and <b>a single thinner such layer is enough</b> to prevent the piles from being driven to adequate depth. That is why the ground investigation must find these layers too.
 8050210	Short or long? It must be decided in advance
