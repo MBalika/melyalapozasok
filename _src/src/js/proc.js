@@ -1094,46 +1094,6 @@ PROC.nelkul = {
   ],
 };
 
-/* ---------------- Előregyártott vert cölöp */
-PROC.elore = {
-  H: 360, GY: 178, layers: [{ k: 'silt', y: 178, lab: 'puha réteg' }, { k: 'gravel', y: 246, lab: 'teherbíró réteg' }],
-  steps: [
-    { w: 250, t: 'Beemelés', d: 'A gép a cölöpöt a vezetőtoronyba emeli, és a kitűzött pont fölé állítja.', draw(g, M) {
-      const x = 96, r = rig(g, M, x, { top: 14, hoses: false });
-      const ph = hammer(g, x, 22, 10);
-      precast(g, x, ph + 2, M.GY, 8);
-      for (let i = 0; i < 3; i++) R(g, 4, M.GY - 8 - i * 7, 50, 6.5, 'fill:url(#pr-pile)' + `;stroke:${v('conc2')};stroke-width:.6`);
-      R(g, 8, M.GY - 2, 4, 2, F('timber')); R(g, 46, M.GY - 2, 4, 2, F('timber'));
-      worker(g, x - 26, { GY: M.GY, pose: 'signal' });
-      tag(g, x - 22, 58, 'kos', { anchor: 'end', to: [x - 13, 52] });
-      tag(g, 29, M.GY - 40, 'cölöpök', { anchor: 'middle' });
-    } },
-    { w: 250, t: 'Verés', d: 'A hidraulikus kos a cölöpsapkán át üti le a cölöpöt; a vezetőtorony függőlegesen tartja.', draw(g, M) {
-      const x = 96, r = rig(g, M, x, { top: 14, hoses: false });
-      const ph = hammer(g, x, 70, 10);
-      precast(g, x, ph + 2, 230, 8);
-      pushOut(g, x, 214, 10, 2);
-      arrowV(g, x - 34, 150, 196);
-      P(g, `M${x - 16} ${ph - 4} l-6 -3 M${x + 16} ${ph - 4} l6 -3 M${x - 16} ${ph + 2} l-7 1 M${x + 16} ${ph + 2} l7 1`, SK('acc', 1.6, 'stroke-linecap:round'));
-    } },
-    { w: 250, t: 'Beállás', d: 'Az előírt mélység közelében a cölöp „beáll”: ütésenként már csak alig hatol tovább.', draw(g, M) {
-      const x = 96, r = rig(g, M, x, { top: 14, hoses: false });
-      const ph = hammer(g, x, 112, 10);
-      precast(g, x, ph + 2, 272, 8);
-      Ln(g, x + 18, 272, 244, 272, SK('labline', 1.2, 'stroke-dasharray:4 3'));
-      tag(g, 240, 290, 'előírt mélység', { anchor: 'end' });
-    } },
-    { w: 260, t: 'Fejezés', d: 'A tervezett szint fölötti részt visszabontják; a kilógó betonacélt a fejtömbbe kötik.', draw(g, M) {
-      const x = 70;
-      precast(g, x, M.GY - 4, 272, 8, { rebar: 16 });
-      for (let i = 0; i < 4; i++) P(g, `M${x - 30 + i * 13} ${M.GY} l4 -5 l6 1 l2 4z`, F('conc1') + `;stroke:${v('conc2')};stroke-width:.6`);
-      excavator(g, M, x, M.GY - 18, { reach: 76, tool: 'breaker', lift: 40 });
-      Ln(g, x - 26, M.GY - 4, x + 26, M.GY - 4, SK('labline', 1.2, 'stroke-dasharray:4 3'));
-      tag(g, x + 24, M.GY + 22, 'levágási szint', { to: [x + 20, M.GY - 4] });
-    } },
-  ],
-};
-
 /* ---------------- Talajcsavar */
 PROC.csavar = {
   H: 330, GY: 200, layers: [{ k: 'fill', y: 200, lab: 'humuszos feltöltés' }, { k: 'clay', y: 226, lab: EN ? 'clay' : 'agyag' }],
