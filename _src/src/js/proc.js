@@ -1291,7 +1291,7 @@ PROC.dsm = {
 PROC.ko = {
   H: 360, GY: 178, layers: [{ k: 'silt', y: 178, lab: 'iszap' }, { k: 'peat', y: 222, lab: 'puha, szerves réteg' }, { k: 'sand', y: 262, lab: 'homok' }],
   steps: [
-    { w: 270, t: 'Lehajtás', d: 'A rezgő mélyvibrátor oldalra szorítja a talajt, és (sűrített levegővel segítve) a tervezett mélységig hatol.', draw(g, M) {
+    { w: 270, t: 'Lehajtás', d: 'A zsilipes mélyvibrátor a talajt oldalirányba kiszorítja, és – hidraulikus nyomással és sűrített levegővel segítve – a tervezett mélységig vagy a megadott talajellenállásig hatol.', draw(g, M) {
       const x = 112, r = rig(g, M, x, { top: 16, hoses: false });
       vibroflot(g, x, 150, 298, { full: true });
       P(g, `M${x - 40} ${M.GY - 22} L${x - 36} ${M.GY} H${x - 14} L${x - 10} ${M.GY - 22}Z`, F('steel2') + `;stroke:${v('steel3')};stroke-width:.8`);
@@ -1303,7 +1303,7 @@ PROC.ko = {
       tag(g, x + 30, 306, 'mélyvibrátor', { to: [x + 7, 286] });
       tag(g, x - 25, M.GY - 78, EN ? 'gravel' : 'kavics', { anchor: 'middle', to: [x - 25, M.GY - 26] });
     } },
-    { w: 250, t: 'Tömörítés', d: 'Kissé visszahúzzák; a kavics a csúcson át kitölti az üreget, a szár újbóli lenyomása tömöríti és oldalra préseli.', draw(g, M) {
+    { w: 250, t: 'Tömörítés', d: 'A végmélységben az adalékanyagot a mélyponton fokozatosan kiengedik; a vibrátor föl-le mozgással többször behatol az anyagba, oldalirányba nyomja és tömöríti.', draw(g, M) {
       const x = 96, r = rig(g, M, x, { top: 16, hoses: false });
       stoneCol(g, x, 266, 302, 14);
       vibroflot(g, x, 124, 272, { full: true });

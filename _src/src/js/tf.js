@@ -33,7 +33,7 @@ defineTF([
   { s: 'Mikrocölöp teherbírásának számításakor a talpellenállást figyelmen kívül hagyjuk.', v: true, e: 'A palástellenállást a készítés módja határozza meg, ezért próbaterhelés indokolt.' },
   { s: 'Jet-groutingnál a cementszuszpenziót 5–6 bar nyomással juttatják a talajba.', v: false, e: 'Az injektálási nyomás 350–400 bar; az 5–6 bar a levegős dupla jet levegőburkának nyomása.' },
   { s: 'A résfal réstábláját egyszerre akár 30 m hosszan is ki lehet emelni.', v: false, e: 'Egy réstábla legfeljebb 8–10 m, jellemzően 2,8–5,6 m hosszú – ezt a résállékonyság szabja meg.' },
-  { s: 'Jet-groutingnál agyagban kisebb, kavicsban jóval nagyobb átmérőjű oszlop alakul ki.', v: true, e: 'Agyagban legfeljebb kb. 60–70 cm, kavicsban akár 150–200 cm.' },
+  { s: 'Jet-groutingnál agyagban kisebb, kavicsban jóval nagyobb átmérőjű oszlop alakul ki.', v: true, e: 'Szimpla jetnél agyagban 50–70 cm, homokban 80–100 cm – durva szemcsés talajban ennél is nagyobb.' },
   { s: 'Réseléskor a zagyszintnek mindig legalább 1,0–1,5 m-rel a talajvízszint felett kell lennie.', v: true, e: 'A zagynyomásnak a víznyomással és a földnyomással egyensúlyt kell tartania.' },
   { s: 'A résvezető gerenda egyebek mellett megvezeti a réselőszerszámot, és kitűzési alapbázis is.', v: true, e: 'Védi a rés peremét, megtámasztja a laza felső talajt, és megakadályozza a zagy elszivárgását.' },
   { s: 'A réseléshez használt bentonitzagy sűrűsége kb. 1,8–2,0 g/cm³.', v: false, e: 'A zagy sűrűsége ρ = 1,03–1,12 g/cm³; csak aktivált „Na” bentonit használható.' },

@@ -1,26 +1,13 @@
-4d24b5a	és ezek keveréke – a javítandó talaj függvényében	# chapters/06_egyeb.html:174
-5e24576	granulált kohósalak	# chapters/06_egyeb.html:174
-ba79097	gipsz	# chapters/06_egyeb.html:174
-9b81787	mész	# chapters/06_egyeb.html:174
-81abbd1	Kötőanyagok	# chapters/06_egyeb.html:174
-5eb7c5f	Kiválthatja a drágább alapozási, talajjavítási eljárásokat	# chapters/06_egyeb.html:173
-4607f68	Az oszlopok és táblák tetszőleges elrendezésben helyezhetők egymás mellé	# chapters/06_egyeb.html:173
-93290ad	A művelet alacsony hőmérsékleten is végezhető	# chapters/06_egyeb.html:173
-2d5aaae	Jó lehetőséget kínál a szennyezett területek rehabilitására	# chapters/06_egyeb.html:173
-57c851a	Minimális hulladék: nem kell elszállítani a helyi talajt	# chapters/06_egyeb.html:173
-ce0ea98	Csendes és vibrációmentes	# chapters/06_egyeb.html:173
-8942446	A keverőszár forgó felsővázas hidraulikus kotróra szerelhető eszköz, alján a tengelyeken körbeforgó keverőfejjel. A keverőfejet lefelé-felfelé mozgatják, miközben a fejen át nagy nyomással, folyamatosan érkezik a kötőanyag. Percenként átlagosan 0,5–0,8 m³ talaj keverhető át; a mélysége rendszerint nem több 5 m-nél.	# chapters/06_egyeb.html:168
-6abdce7	Tömegstabilizáció	# chapters/06_egyeb.html:168
-d72d06d	A Cutter Soil Mixing a marótárcsás (Hydrofraser) résfalazáshoz hasonlít, de itt csak kötőanyagot visznek be a talajba, és a helyi talajt keverik át. A CSM technológiával folyamatos, acél tagokkal erősített falat lehet kialakítani; a táblák mélysége 10–15 m.	# chapters/06_egyeb.html:167
-8fae6be	„Résszerű” mélykeverés (CSM)	# chapters/06_egyeb.html:167
-a67d097	Egy nagy teljesítményű fúró-keverő berendezéssel lehatolnak a kellő mélységbe. Egy adalékanyag-csövön keresztül folyékony kötőanyag-szuszpenziót juttatnak az altalajba a fúrószáron át, ezzel megkeverik a talajt; az eszköz lassú, fokozatos és ismétlődő felvonásával az altalaj teljes mélységben átkeveredik. A kész talajbeton oszlopok átmérője jellemzően 1,0–1,5 m, a legnagyobb mélység 50 m.	# chapters/06_egyeb.html:166
-cbaf104	Oszlopszerű mélykeverés	# chapters/06_egyeb.html:166
-1955ac2	A kötőanyag típusa a javítandó talajtól függ: <b>mész, cement, gipsz, granulált kohósalak</b> és ezek keveréke. A kötőanyagot szuszpenzióként (<b>nedves eljárás</b>) vagy porként (<b>száraz eljárás</b>, főleg nagy víztartalmú, puha talajban) juttatják ki.	# chapters/06_egyeb.html:161
-87fb652	A <b>mélykeveréses</b> (deep soil mixing) eljárás a gyenge teherbírású talajokhoz <b>kötőanyagot keverve</b> javítja azok mechanikai tulajdonságait. Itt nem nagy nyomású sugár aprózza fel a talajt, hanem maga a keverőszerszám – az elem mérete ezért közel a szerszám méretével egyezik, és jóval kiszámíthatóbb, mint a jet-oszlopé. Az eljárással – a tervezés során elvárt paraméterekkel – <b>egyedi talajbeton cölöpöket</b>, <b>folyamatos talajbeton falat</b> vagy <b>100 %-os tömegstabilizációt</b> alakítanak ki.	# chapters/06_egyeb.html:160
-15175cf	gyenge teherbírású talaj javítása, talajbeton fal, szennyezett terület rehabilitációja	# js/ch_egyeb.js:588
-0417631	talajbeton oszlop (1,0–1,5 m), fal vagy tömegstabilizált tömb	# js/ch_egyeb.js:588
-7938fb7	fúró-keverő berendezés, CSM-maró vagy kotróra szerelt keverőfej	# js/ch_egyeb.js:588
-c227ad8	Helyben kevert talajbeton oszlop; átmérője jellemzően 1,0–1,5 m, közel a keverőszerszáméval egyezik.	# js/proc.js:1273
-0261d31	Az eszköz lassú, fokozatos és ismétlődő felvonásával a talaj teljes mélységben átkeveredik.	# js/proc.js:1266
-5b28d1a	A fúró-keverő berendezés lehatol a kellő mélységbe; a fúrószáron át folyékony kötőanyag-szuszpenziót juttatnak a talajba.	# js/proc.js:1255
-2ee0419	A gyenge teherbírású talajt helyben keverik össze kötőanyaggal (mész, cement, gipsz, kohósalak): talajbeton oszlop, fal vagy tömegstabilizáció.	# js/tf.js:80
+f8912b0	töltésalapozás, ipari padlók alapozása, süllyedéscsökkentés, konszolidáció gyorsítása	# chapters/06_egyeb.html:209
+ee0581d	„talajbeton” oszlop vagy panel; szimpla jetnél 50–100 cm, dupla jetnél kb. 120 cm átmérővel	# chapters/06_egyeb.html:207
+e585c61	A lánctalpas hordozógép a megvezetett, zsilipes mélyvibrátort a kitűzött pont fölé irányítja, és hidraulikus támaszokkal megtámasztja. A rakodógép feltölti az anyagtartályt, amely az árboc mentén felfelé halad, és tartalmát a zsilipbe üríti. A mélyvibrátor a talajt <b>oldalirányba kiszorítva</b> behatol a tervezett mélységig vagy a megadott talajellenállásig; a behatolást a vibráción kívül hidraulikus nyomás és sűrített levegő is segíti. A végmélység elérése után az adalékanyagot a mélyponton fokozatosan kiengedik, a mélyvibrátor föl-le mozgással többször behatol az adalékanyagba, így azt oldalirányba nyomja és <b>tömöríti</b>. A kész oszlop bordás, a gyengébb rétegekben vastagabb. Jellemző alkalmazása a <b>töltésalapozás</b> és az <b>ipari padlók alapozása</b>.	# chapters/06_egyeb.html:187
+272ae3e	A vibrált kőoszlop a <b>mechanikai talajszilárdítás</b> egyik eszköze: kavicsból vagy zúzottkőből álló, szemcsés anyagú „cölöp”. Elvét tekintve a kőtömzsökhöz hasonló módszer, csak kisebb átmérőjű szemcsés anyagú oszlopok, cölöpök alakulnak ki. <b>Gazdaságos</b> talajjavítási megoldás, a legkülönbözőbb talajviszonyokhoz és alapozási követelményekhez igazítható, és rendkívül <b>csendes, alacsony vibrációval</b> jár.	# chapters/06_egyeb.html:186
+47d8c56	Vannak technológiák, amelyek se nem tisztán talajkiszorításosak, se nem tisztán talajhelyettesítésesek – a végeredményük mégis cölöpként (is) működik. Ilyen a pinceajtón is beférő gépekkel készülő mikrocölöp, a talajt 350–400 bar nyomású sugárral szétvágó jet-grouting, a talajt helyben összekeverő mélykeverés és a kavicsból tömörített kőoszlop. Ezekkel lehet egy százéves bérház alá nyúlni, foghíjtelken munkagödröt zárni, vagy puha talajt teherbíróvá tenni.	# chapters/06_egyeb.html:8
+004739b	Aláfogás pincéből, 350–400 bar-os sugár, helyben kevert talaj, kőoszlop.	# js/ch_dontes.js:526
+ab66444	Az átmérő a talaj áteresztőképességétől függ: szimpla jetnél agyagban 50–70 cm, homokban 80–100 cm – durva szemcsés talajban ennél is nagyobb.	# js/ch_egyeb.js:710
+9a81826	töltésalapozás, ipari padlók alapozása, süllyedéscsökkentés	# js/ch_egyeb.js:589
+60b6344	oldalirányba kiszorítja, a kavicsot szakaszosan a talajba tömöríti	# js/ch_egyeb.js:589
+5881e1e	zsilipes mélyvibrátor, csúcsán kavicsadagolás	# js/ch_egyeb.js:589
+f4192d5	A végmélységben az adalékanyagot a mélyponton fokozatosan kiengedik; a vibrátor föl-le mozgással többször behatol az anyagba, oldalirányba nyomja és tömöríti.	# js/proc.js:1306
+fd14c8b	A zsilipes mélyvibrátor a talajt oldalirányba kiszorítja, és – hidraulikus nyomással és sűrített levegővel segítve – a tervezett mélységig vagy a megadott talajellenállásig hatol.	# js/proc.js:1294
+f437585	Szimpla jetnél agyagban 50–70 cm, homokban 80–100 cm – durva szemcsés talajban ennél is nagyobb.	# js/tf.js:36
