@@ -1,16 +1,1 @@
-ec63ced	Vastagsága 40–120 cm; egy réstábla jellemzően 2,8–6,5 (8) m hosszú; mélysége általában 10–30 m (de lehet 100–120 m is).	# chapters/01_alapok.html:71
-f326b1e	A Cutter Soil Mixing a marótárcsás (hydrofraiseres) résfalazáshoz hasonlít, de itt csak kötőanyagot visznek be a talajba, és a helyi talajt keverik át. A CSM technológiával folyamatos, acél tagokkal erősített falat lehet kialakítani; a táblák mélysége 10–15 m.	# chapters/06_egyeb.html:167
-29829a3	<b>Rövidebb réstábla → erősebb boltozódás → kisebb földnyomás → állékonyabb rés.</b> Ezért nem lehet tetszőlegesen hosszú táblát nyitni, és ezért 2,8–6,5 (8) m a jellemző táblahossz.	# chapters/07_resfal.html:192
-3b1732e	A rés két oldalán, a terepszint közelében készülő két vasbeton gerenda a teljes munka alapja. Szélessége <b>20–25 cm</b>, magassága <b>1,0–1,5 m</b>; készülhet egyenes falként vagy L alakban, kifelé nyúló talppal. A két gerendát általában dúcokkal szembetámasztják egymással, ezért többtámaszú tartóként kell méretezni. Feladatai:	# chapters/07_resfal.html:59
-b05d8f6	<b>100–120<small>m</small></b><span>ilyen mély is lehet a rés</span>	# chapters/07_resfal.html:29
-47372a7	<b>10–30<small>m</small></b><span>a szokásos résmélység</span>	# chapters/07_resfal.html:28
-8189dc0	<b>2,8–6,5<small>(8) m</small></b><span>az egyszerre elkészített réstábla alaprajzi hossza</span>	# chapters/07_resfal.html:27
-f9107a1	<b>40–120<small>cm</small></b><span>a rés szélessége (40–(50)–60–80–100–120 cm)</span>	# chapters/07_resfal.html:26
-84faad4	Általában 10–30 m, de 100–120 m-es is lehet.	# js/ch_dontes.js:305
-079c192	10–30 m, akár 100–120 m	# js/ch_dontes.js:304
-d7879d0	40–120 cm vastag; tábla 2,8–6,5 (8) m	# js/ch_dontes.js:304
-399b445	A réskanál nyitott szélessége kb. 2,8 m – ez egyben a legrövidebb kiemelhető réstábla. A szokásos táblák 2,8–6,5 (8) m hosszúak.	# js/ch_resfal.js:653
-5a00bce	A falvonal két oldalán vasbeton résvezető gerendák készülnek (20–25 cm széles, 1,0–1,5 m magas). Ezek vezetik a réskanalat, és ez a kitűzés alapja is.	# js/ch_resfal.js:154
-99883ce	Két, 20–25 cm széles, 1,0–1,5 m magas vasbeton gerenda a rés két oldalán: vezeti a réskanalat, megtámasztja a laza felső talajt, megakadályozza a zagy elszivárgását, és ez a kitűzés alapja is.	# js/ch_resfal.js:52
-8ec85cf	Az egyszerre kiemelt és betonozott falszakasz (jellemzően 2,8–6,5 (8) m). Előbb a primer, majd közöttük a közbenső táblák készülnek.	# js/tf.js:82
-be011a2	Egy egyszerre elkészített réstábla jellemzően 2,8–6,5 (8) m hosszú – ezt a résállékonyság szabja meg.	# js/tf.js:35
+4baaf98	A mikrocölöpöt béléscső védelmében lefúrják. A furatba merev acélbetétet, csavarmenetes acélrudat (pl. Gewi) vagy acélcsövet helyeznek: a toldott rudat a furat aljára eresztik. A furatot cementhabarccsal töltik ki, a cölöpöt alátétlemezzel és lezáró „sapkával” zárják. A furatátmérő 90–150 mm, az acélrúd jellemzően 28–64 mm-es.	# chapters/06_egyeb.html:70
