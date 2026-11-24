@@ -164,3 +164,21 @@ e27b409	positioning, pre-drilling, guide tube
 769d1f9	A short steel guide tube is placed in the upper part of the bore.
 09ac8cd	Positioning, pre-drilling, guide tube
 2df9ecc	The ${k === 'casing' ? 'béléscsöves' : 'zagyos'} bored pile is typically 15–100 m long (in Hungary so far at most 30–40 m); for ${fmt(L, 1)} m the slower, complex technology is rarely economical.
+4f85130	With the hollow-bar micropile, drilling and grouting are done <b>in one pass</b>: the hollow bar is at the same time the drill rod, the grouting pipe and the permanent load-bearing core. The drill bit is lost and the bar stays in the ground. The thin flushing cement grout (w/c ≈ 0.7–1.0) injected during drilling penetrates the soil voids around the bore and cements the surroundings of the bore too; at the final depth a thicker grout (w/c ≈ 0.4–0.5) is injected. This forms a <b>cement body of 20–50 mm</b> around the bar, and outside it a <b>sleeve of cement-permeated soil 30–80 mm thick</b> – the sleeve is “rough”, so the shaft resistance is good.
+a61c2fa	Typically used for the subsequent strengthening of foundations. From an excavated launch pit, a pile tip made from a steel tube welded to a cone is first jacked into the ground with a hydraulic jack, reacting upwards against the foundation or a transfer beam. The pile is extended until the gauge on the jack shows the design jacking force.
+a34117d	Jacked
+79ecdf0	A hollow, permanent, extendable, ribbed steel <b>core bar</b> with a sacrificial drill bit is drilled down (e.g. Ischebeck Titan). Drilling starts with simultaneous injection of thin cement grout; the core bar is extended, and drilling continues together with the grouting.
+7f5366b	Rigid core bar, drilled and grouted
+bde2ad4	The micropile is drilled under the protection of a casing; a rigid steel insert – a threaded steel bar (e.g. Gewi) or a steel tube – is placed in the bore: the extended bar is lowered to the bottom of the bore. The bore is filled with cement grout, and the pile is closed with a bearing plate and a closing “cap”. The bore diameter is 90–150 mm, the steel bar typically 28–64 mm.
+9f6b3c2	Drilled, cased
+882680f	How is it made? – the most common types in Hungary
+57c2d73	taking tensile and compressive as well as cyclic loads, and dynamic loads (e.g. wind load),
+0bcacf0	reducing settlements and displacements in soils of low bearing capacity,
+4303e0c	<b>90–150<small>mm</small></b><span>bore diameter of a drilled micropile; the insert is typically a 28–64 mm steel bar</span>
+83b0c12	Piles with a diameter of <b>less than 30 cm</b> are called <b>micropiles</b>; they can be made by driving, drilling, vibrating or jacking. More precisely, micropiles are bored piles with a shaft diameter of at most 250–300 mm, and driven piles whose shaft diameter or largest cross-sectional dimension does not exceed 150 mm. They are slender elements: they transfer the load to the soil and reduce deformations. Their shaft and base resistance can usually be increased by <b>grout injection</b>, and their shaft can have a constant cross-section, a telescopically varying one, or an enlarged shaft or base.
+c609694	a hollow core bar with a sacrificial drill bit is drilled down, while thin cement grout is injected
+81c9220	What happens when a rigid core bar, drilled and grouted micropile (e.g. Ischebeck Titan) is made?
+3b50d68	At the final depth a thicker grout (w/c ≈ 0.4–0.5) is injected: a cement body forms around the bar, and outside it a cement-permeated soil sleeve.
+22e3515	The hollow core bar with a sacrificial bit is rotated down and extended; meanwhile it is flushed with thin cement grout (w/c ≈ 0.7–1.0), which penetrates the soil voids.
+1be5da9	Hollow, extendable, permanent steel core bar with a sacrificial drill bit, through which thin cement grout is injected while drilling (e.g. Ischebeck Titan).
+fdd27ba	Rigid core-bar micropile

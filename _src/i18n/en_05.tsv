@@ -111,12 +111,10 @@ b13a5e3	Deep mixing
 da0e159	Gravel pile
 5a13275	A gravel column compacted with a vibrating probe: it stiffens and drains – a transition towards ground improvement.
 14fd345	Micropiles
-b8575b3	<b>Micropiles</b> are bored piles with a shaft diameter of at most 250–300 mm, and driven piles whose shaft diameter or largest cross-sectional dimension does not exceed 150 mm. They are slender elements: they transfer the load to the soil and reduce deformations. Their shaft and base resistance can usually be increased by <b>grout injection</b>, and their shaft can have a constant cross-section, a telescopically varying one, or an enlarged shaft or base.
 ef3c0c9	Their material is steel (steel tube, rigid steel element) or another reinforcing material, cement or concrete mortar, or concrete – most often a combination of these: a steel core surrounded by a grouted body.
 620a09d	Their real strength is the <b>equipment</b>: the drilling rig is so small that it fits into a cellar, a place with low headroom or difficult access, and it works without vibration next to the walls of an existing building.
 3a1debb	<b>≤ 300<small>mm</small></b><span>shaft diameter of a bored micropile (the limit is 250–300 mm)</span>
 5148645	<b>≤ 150<small>mm</small></b><span>largest cross-sectional dimension of a driven micropile</span>
-79b9648	<b>100–200<small>mm</small></b><span>diameter of the steel tube core placed in the bore</span>
 e795e86	the reinforcement cage can only be lowered into fresh concrete – difficult for a long cage
 86fbdf2	Lifting in the reinforcement cage before concreting
 bb7fbe1	Lifting a long reinforcement cage into the bore

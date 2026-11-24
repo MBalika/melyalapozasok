@@ -75,7 +75,7 @@ const GLOSS = [
   ['Dobfúró', 'Hengeres fúrószerszám a talaj kiemelésére, elsősorban szemcsés talajban.', 'furt', 'hely'],
   ['Markolt tömbalap', 'Kötött talajban, talajvíz felett, megtámasztás nélkül markolt, legfeljebb 5–6 m mély alap; kútalapnak is nevezik.', 'furt', 'hely'],
   ['Mikrocölöp', 'Fúrva legfeljebb 300 mm, verve legfeljebb 150 mm átmérőjű cölöp; aláfogásra, nehezen megközelíthető helyen. Talpellenállással nem számolunk.', 'egyeb', 'egyeb'],
-  ['Merevbetétes mikrocölöp', 'Elvesző fúrófejes, folyamatosan toldható üreges acélrúd, amelyen át fúrás közben injektálnak (pl. Ischebeck Titan).', 'egyeb', 'egyeb'],
+  ['Merev magrudas mikrocölöp', 'Elvesző fúrófejes, belső furatú, toldható, bennmaradó acél magrúd, amelyen át fúrás közben híg cementtejjel injektálnak (pl. Ischebeck Titan).', 'egyeb', 'egyeb'],
   ['Jet-grouting', 'A talajt 400–600 bar-os folyadéksugár aprózza fel és keveri kötőanyaggal: „talajbeton” oszlop vagy panel jön létre.', 'egyeb', 'egyeb'],
   ['Mélykeverés', 'A keverőszár a talajt helyben keveri össze a kötőanyaggal.', 'egyeb', 'egyeb'],
   ['Résfal', 'Függőleges falú, bentonitzaggyal megtámasztott árok (rés) vasalásával és kibetonozásával készülő fal a talajban; 40–120 cm vastag.', 'resfal', 'fal'],

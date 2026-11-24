@@ -7,7 +7,6 @@ b36b058	deepening the foundation because of an adjacent new building,
 4684db0	transferring the load because of a cavity opened below the foundation (e.g. a utility tunnel).
 ae47cee	Other uses
 8c40aa2	founding new structures – especially in very heterogeneous soil or rock conditions,
-8e8e325	reducing settlements and displacements,
 18fe5ae	improving slope stability, retaining walls, soil reinforcement,
 97c87ec	<b>anchoring against uplift</b> (tension element: e.g. the slab of an underground car park, a pool below the groundwater).
 5233275	New loads in a tight space
@@ -26,13 +25,6 @@ d777ca7	Slope stabilisation
 6ad8068	<b>Slope stabilisation</b>A lattice (crossing) micropile wall through the slip surface.
 89abd8f	New structure on mixed subsoil
 c895f68	<b>New structure on mixed subsoil</b>It can be drilled into rock and into blocky or heterogeneous layers too.
-ef8852d	How is it made? – three routes in Hungarian practice
-87cb157	Bored, grouted
-6767c6d	Replacement drilling with a continuous auger or with flushing, then filling the bore with mortar – with or without post-grouting.
-037c88d	With a steel tube core
-af8c1c8	A steel tube approx. 100–200 mm in diameter is placed in the bore as reinforcement, and the annular space and the tube are filled with mortar. In loose, collapsible soil drilling is done under the protection of a casing.
-84b856a	Hollow bar, grouted
-f254efd	An extendable <b>hollow steel bar</b> with a sacrificial drill bit is drilled down (e.g. Ischebeck Titan), with continuous grouting through the bar during drilling.
 331857e	Section of a hollow-bar grouted micropile
 31d31a1	Reinforced concrete pile cap
 6b9933b	or base slab
@@ -52,7 +44,6 @@ dd199e8	steel bar
 6b4dadd	Sacrificial drill bit
 6ab794f	Section of a hollow-bar grouted micropile (illustrative figure, thicknesses exaggerated). A cement body forms around the bar, and outside it a rough sleeve of cement-permeated soil.
 a9b3618	The hollow-bar micropile
-49e3b70	With the hollow-bar micropile, drilling and grouting are done <b>in one pass</b>: the hollow bar is at the same time the drill rod, the grouting pipe and the permanent load-bearing core. The drill bit is lost and the bar stays in the ground. Continuous grouting forms a <b>cement body of 20–50 mm</b> around the bar, and outside it a <b>sleeve of cement-permeated soil 30–80 mm thick</b> – the sleeve is “rough”, so the shaft resistance is good.
 c4e6955	Resistance and buckling
 abbeccd	When calculating the resistance of a slender micropile, the <b>base resistance is neglected</b>: only the shaft works. There are recommendations for the shaft resistance, but the method of construction is decisive, so a <b>load test</b> is justified. Because of the small diameter, the resistance to buckling must be checked separately if the undrained shear strength of the soil layer is <span class="nw">c<sub>u</sub> &lt; 10 kPa</span>.
 2698e6b	Heads of hollow steel bar micropiles protruding from the reinforcement, with nuts and head plates

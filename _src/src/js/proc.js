@@ -1161,7 +1161,7 @@ PROC.mikro = {
       P(g, `M${x - 6} ${M.GY - 4} h12 l-6 6z`, F('dark2'));
       tag(g, x - 18, M.GY - 40, 'üreges acélrúd', { anchor: 'end', to: [x - 3, M.GY - 40] });
     } },
-    { w: 270, t: 'Fúrás öblítéssel', d: 'Az elvesző fúrófejes, üreges rudat forgatva hajtják le, közben híg cementtejjel öblítenek.', draw(g, M) {
+    { w: 270, t: 'Fúrás öblítéssel', d: 'Az elvesző fúrófejes, belső furatú magrudat forgatva hajtják le és toldják; közben híg cementtejjel (v/c ≈ 0,7–1,0) öblítenek, amely a talajhézagokba hatol.', draw(g, M) {
       const x = 150, r = smallRig(g, M, x, { top: 56, headY: 130 });
       silo(g, M, 22, { w: 20, h: 86 });
       const pl = plant(g, M, 36, { w: 44, h: 24 });
@@ -1175,7 +1175,7 @@ PROC.mikro = {
       tag(g, x + 18, 240, 'elvesző fúrófej', { to: [x + 6, 252] });
       tag(g, x - 14, M.GY - 46, 'cementtej', { anchor: 'end', to: [x - 8, r.headY + 6] });
     } },
-    { w: 270, t: 'Injektálás', d: 'A végső mélységben sűrűbb cementtejet injektálnak: a rúd körül cementtest, azon kívül cementtel átitatott talajköpeny alakul ki.', draw(g, M) {
+    { w: 270, t: 'Injektálás', d: 'A végső mélységben sűrűbb (v/c ≈ 0,4–0,5) cementhabarcsot injektálnak: a rúd körül cementtest, azon kívül cementtel átitatott talajköpeny alakul ki.', draw(g, M) {
       const x = 150, r = smallRig(g, M, x, { top: 56, headY: 166 });
       silo(g, M, 22, { w: 20, h: 86 });
       const pl = plant(g, M, 36, { w: 44, h: 24 });

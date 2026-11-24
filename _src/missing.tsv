@@ -1,31 +1,18 @@
-f00e5de	15–100 m (itthon eddig ≤ 30–40 m)	# chapters/05_furt.html:222
-dc43a3b	80–150 (350) cm	# chapters/05_furt.html:221
-87fdd54	<b>≈ 100<small>m</small></b><span>legnagyobb mélység – a fúrógép kapacitása nem korlátozza; hazánkban eddig legfeljebb 30–40 m</span>	# chapters/05_furt.html:195
-001e6d2	<b>80–150<small>(350) cm</small></b><span>átmérő – nagy átmérőjű, nagy teherbírású cölöp</span>	# chapters/05_furt.html:194
-5fc283e	az iránycső eltávolítása.	# chapters/05_furt.html:188
-2efdf6a	víz (zagy) alatti betonozás a terepszintig, a kontraktorcső folyamatos visszahúzásával – a beton alulról kiszorítja a zagyot;	# chapters/05_furt.html:187
-27dbb35	a cölöptalp tisztítása, a vasalási armatúra behelyezése (szükség esetén toldása), a kontraktorcső elhelyezése toldással;	# chapters/05_furt.html:186
-6f3ab50	talajkiemelés rövid spirállal vagy dobfúróval a kívánt mélységig, a zagy folyamatos pótlásával – a felső iránycső alatt a zagy támasztja meg a furatot;	# chapters/05_furt.html:185
-a66010b	a bentonitos zagy betöltése;	# chapters/05_furt.html:184
-75b0e4e	pontraállás, előfúrás, az iránycső (vezetőcső) lejuttatása;	# chapters/05_furt.html:183
-ebe775e	<b>≈ 100<small>m</small></b><span>legnagyobb mélység; hazánkban eddig legfeljebb 30–40 m</span>	# chapters/05_furt.html:171
-4505187	A furat oldalfalának megtámasztását a felbetonozásig végig a védőcső biztosítja, ezért magas víztartalmú, iszapos talajokban is biztonsággal alkalmazható. A vasalási armatúra behelyezése (szükség esetén toldása) után a cölöpöt betonozó csővel betonozzák fel, és a betonozással együtt a béléscsöveket folyamatosan visszaszedik. A cső lehet <b>visszanyert</b> (betonozás közben kihúzzák) vagy <b>bennmaradó</b> (a talajban marad, pl. a cölöptest védelmére). Fő alkalmazási területe a más technológiával el nem érhető mélységek és átmérők, illetve a nagy teherbírás. Legnagyobb mélysége kb. 100 m; hazánkban eddig legfeljebb 30–40 m-es mélységet alkalmaztak.	# chapters/05_furt.html:165
-0374f1d	Szélsőséges talajviszonyok között is alkalmazható technológia. A béléscsövet folyamatosan juttatják le és toldják – ezzel támasztják meg a furatot –, a talajt pedig a védőcső védelme mellett rövid spirállal vagy dobfúróval (lenyitható, bontókéses fenéklemezzel), esetleg markolóval termelik ki. A cső általában, szemcsés talajban feltétlenül a földkiemelés előtt jár. Víz alatt a furatban pótolják a kiemelt vizet.	# chapters/05_furt.html:164
-c828b44	Szakaszos talajkiemeléssel	# chapters/05_furt.html:45
-3a8f321	Folyamatos spirállal	# chapters/05_furt.html:42
-f15eb8e	A béléscső a felbetonozásig megtámasztja a furat falát, így magas víztartalmú, iszapos talajban is biztonságos; 80–150 (350) cm-es átmérővel, legfeljebb kb. 100 m-es (hazánkban eddig 30–40 m-es) hosszal készül. A CFA legfeljebb 22–24 m-es.	# js/ch_dontes.js:557
-1ee17f6	Akár kb. 100 m hosszú (hazánkban eddig legfeljebb 30–40 m).	# js/ch_dontes.js:295
-9d70dda	A béléscső a furat falát egészen a felbetonozásig megtámasztja, ezért magas víztartalmú, iszapos talajban is biztonsággal alkalmazható – 80–150 (350) cm átmérővel, legfeljebb kb. 100 m (hazánkban eddig 30–40 m) mélységig. A CFA legfeljebb 22–24 m-ig készül, és laza, folyós talajba nem való; megtámasztás nélkül a furat beomlana, a talajcsavar pedig csak 2–4 m-es, kis terhű elem.	# js/ch_dontes.js:190
-ddfc883	A CFA-cölöp átmérője 40–120 cm; a köpenycsöves és a zagyos cölöp 80–150 (350) cm-es átmérővel készül.	# js/ch_furt.js:779
-ecdb59c	${L0} m: belefér a 15–100 m-be	# js/ch_furt.js:722
-eeae9f0	Ø ${D} cm: a 80–150 (350) cm-es tartományban	# js/ch_furt.js:721
-d2541db	iránycső	# js/ch_furt.js:441
-4d74a74	az iránycső eltávolítása, kész a cölöp	# js/g3_phases.js:290
-bb0a8d3	Iránycső ki	# js/g3_phases.js:290
-e27b409	pontraállás, előfúrás, iránycső	# js/g3_phases.js:271
-3749e44	Béléscsöves: D = 80–150 (350) cm, L ≤ kb. 100 m (itthon eddig 30–40 m).	# js/sim3d.js:989
-7361bd0	A betont a terepszintig hozzák fel, majd kiemelik az iránycsövet.	# js/sim3d.js:714
-25765a8	Betonozás a terepszintig, iránycső ki	# js/sim3d.js:714
-769d1f9	A furat felső részébe rövid acél iránycsövet helyeznek.	# js/sim3d.js:706
-09ac8cd	Pontraállás, előfúrás, iránycső	# js/sim3d.js:706
-2df9ecc	A ${k === 'casing' ? 'béléscsöves' : 'zagyos'} fúrt cölöp jellemzően 15–100 m hosszú (hazánkban eddig legfeljebb 30–40 m); ${fmt(L, 1)} m-hez a lassabb, összetett technológia ritkán gazdaságos.	# js/sim3d.js:90
+4f85130	A merevbetétes mikrocölöpnél fúrás és injektálás <b>egy menetben</b> történik: az üreges rúd egyszerre fúrószár, injektálócső és végleges teherhordó betét. A fúrófej elvész, a rúd a talajban marad. A fúrás közben injektált híg öblítő cementtej (v/c ≈ 0,7–1,0) a furat környezetében a talajhézagokba hatolva a furat környezetét is átcementálja; a végső mélységben sűrűbb (v/c ≈ 0,4–0,5) cementhabarccsal injektálnak. Így a rúd körül egy <b>20–50 mm-es cementtest</b>, azon kívül egy <b>30–80 mm vastag, cementtel átitatott talajköpeny</b> alakul ki – a köpeny „érdes”, ezért jó a köpenymenti ellenállás.	# chapters/06_egyeb.html:79
+a61c2fa	Jellemzően alapok utólagos megerősítésére használják. A kiásott indítógödörből először egy kúposra lehegesztett acélcső cölöphegyet sajtolnak a talajba hidraulikus sajtolóhengerrel, alulról az alapnak vagy egy kiváltó gerendának támaszkodva. A cölöpöt addig toldják, amíg a sajtoló mérőórája a tervezett nyomóerőt nem mutatja.	# chapters/06_egyeb.html:72
+a34117d	Sajtolt	# chapters/06_egyeb.html:72
+79ecdf0	Elvesző fúrófejjel ellátott, belső furatú, bennmaradó, toldható, menetbordás acél <b>magrudat</b> hajtanak le (pl. Ischebeck Titan). A fúrás a híg cementtej egyidejű injektálásával kezdődik; a magrudat toldják, és a fúrás az injektálással együtt folytatódik.	# chapters/06_egyeb.html:71
+7f5366b	Merev magrudas, fúrt-injektált	# chapters/06_egyeb.html:71
+bde2ad4	A mikrocölöpöt béléscső védelmében lefúrják; a furatba merev acélbetétet – csavarmenetes acélrudat (pl. Gewi) vagy acélcsövet – helyeznek: a toldott rudat a furat aljára eresztik. A furatot cementhabarccsal töltik ki, a cölöpöt alátétlemezzel és lezáró „sapkával” zárják. A furatátmérő 90–150 mm, az acélrúd jellemzően 28–64 mm-es.	# chapters/06_egyeb.html:70
+9f6b3c2	Fúrt, béléscsöves	# chapters/06_egyeb.html:70
+882680f	Hogyan készül? – hazánkban a leggyakoribb típusok	# chapters/06_egyeb.html:68
+57c2d73	húzó és nyomó, valamint ciklikus igénybevételek, dinamikus terhek (pl. szélteher) felvétele,	# chapters/06_egyeb.html:59
+0bcacf0	gyenge teherbírású talajoknál a süllyedések, elmozdulások csökkentése,	# chapters/06_egyeb.html:58
+4303e0c	<b>90–150<small>mm</small></b><span>a fúrt mikrocölöp furatátmérője; a betét jellemzően 28–64 mm-es acélrúd</span>	# chapters/06_egyeb.html:39
+83b0c12	A <b>30 cm-nél kisebb</b> átmérőjű cölöpöket nevezzük <b>mikrocölöpnek</b>; vert, fúrt, vibrált, illetve sajtolt technológiával is készülhetnek. Pontosabban: mikrocölöpnek a legfeljebb 250–300 mm törzsátmérőjű fúrt cölöpöket, illetve azokat a vert cölöpöket nevezzük, amelyek törzsátmérője vagy legnagyobb keresztmetszeti mérete nem nagyobb 150 mm-nél. Karcsú elemek: a terhet a talajra adják át, és mérséklik az alakváltozásokat. Palást- és talpellenállásuk rendszerint <b>habarcsinjektálással</b> növelhető, a törzsük lehet állandó keresztmetszetű, teleszkóposan változó, törzs- vagy talpbővítéses.	# chapters/06_egyeb.html:32
+c609694	elvesző fúrófejes, belső furatú magrudat hajtanak le, és közben híg cementtejjel injektálnak	# js/ch_egyeb.js:708
+81c9220	Mi történik a merev magrudas, fúrt-injektált mikrocölöp (pl. Ischebeck Titan) készítésekor?	# js/ch_egyeb.js:708
+3b50d68	A végső mélységben sűrűbb (v/c ≈ 0,4–0,5) cementhabarcsot injektálnak: a rúd körül cementtest, azon kívül cementtel átitatott talajköpeny alakul ki.	# js/proc.js:1178
+22e3515	Az elvesző fúrófejes, belső furatú magrudat forgatva hajtják le és toldják; közben híg cementtejjel (v/c ≈ 0,7–1,0) öblítenek, amely a talajhézagokba hatol.	# js/proc.js:1164
+1be5da9	Elvesző fúrófejes, belső furatú, toldható, bennmaradó acél magrúd, amelyen át fúrás közben híg cementtejjel injektálnak (pl. Ischebeck Titan).	# js/tf.js:78
+fdd27ba	Merev magrudas mikrocölöp	# js/tf.js:78
