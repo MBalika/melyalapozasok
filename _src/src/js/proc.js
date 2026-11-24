@@ -1252,7 +1252,7 @@ PROC.jet = {
 PROC.dsm = {
   H: 360, GY: 178, layers: [{ k: 'clay', y: 178, lab: 'puha agyag' }, { k: 'sand', y: 272, lab: 'homok' }],
   steps: [
-    { w: 260, t: 'Lehajtás forgatva', d: 'A lapátos keverőszár forogva hatol le; a kötőanyagot a szár végén juttatják ki.', draw(g, M) {
+    { w: 260, t: 'Lehajtás forgatva', d: 'A fúró-keverő berendezés lehatol a kellő mélységbe; a fúrószáron át folyékony kötőanyag-szuszpenziót juttatnak a talajba.', draw(g, M) {
       const x = 120, r = rig(g, M, x, { top: 16, headY: 96 });
       silo(g, M, 22, { w: 20, h: 86 });
       const pl = plant(g, M, 36, { w: 44, h: 24 });
@@ -1263,14 +1263,14 @@ PROC.dsm = {
       arrowV(g, x - 40, 200, 236);
       tag(g, x + 26, 226, 'keverőlapátok', { to: [x + 16, 236] });
     } },
-    { w: 240, t: 'Visszahúzás keverve', d: 'A tervezett mélységből visszahúzás közben még egyszer átkeveri a talajt.', draw(g, M) {
+    { w: 240, t: 'Visszahúzás keverve', d: 'Az eszköz lassú, fokozatos és ismétlődő felvonásával a talaj teljes mélységben átkeveredik.', draw(g, M) {
       const x = 96, r = rig(g, M, x, { top: 16, headY: 70 });
       column(g, x, M.GY, 304, 19, 'mix');
       mixTool(g, x, r.headBot, 222, 19);
       spin(g, x, r.headBot + 12, 22);
       arrowV(g, x - 40, 236, 196);
     } },
-    { w: 230, t: 'A kész oszlop', d: 'Helyben kevert talaj–kötőanyag elem; mérete közel a keverőszerszáméval egyezik.', draw(g, M) {
+    { w: 230, t: 'A kész oszlop', d: 'Helyben kevert talajbeton oszlop; átmérője jellemzően 1,0–1,5 m, közel a keverőszerszáméval egyezik.', draw(g, M) {
       const x = 90;
       column(g, x, M.GY, 304, 19, 'mix');
       worker(g, x + 38, { GY: M.GY, pose: 'stand' });

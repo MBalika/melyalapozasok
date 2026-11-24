@@ -77,7 +77,7 @@ const GLOSS = [
   ['Mikrocölöp', 'Fúrva legfeljebb 300 mm, verve legfeljebb 150 mm átmérőjű cölöp; aláfogásra, nehezen megközelíthető helyen. Talpellenállással nem számolunk.', 'egyeb', 'egyeb'],
   ['Merev magrudas mikrocölöp', 'Elvesző fúrófejes, belső furatú, toldható, bennmaradó acél magrúd, amelyen át fúrás közben híg cementtejjel injektálnak (pl. Ischebeck Titan).', 'egyeb', 'egyeb'],
   ['Jet-grouting', 'A talajt fúrószáron át 350–400 bar-os folyadéksugár bontja meg, aprózza fel és keveri kötőanyaggal: „talajbeton” oszlop vagy panel jön létre.', 'egyeb', 'egyeb'],
-  ['Mélykeverés', 'A keverőszár a talajt helyben keveri össze a kötőanyaggal.', 'egyeb', 'egyeb'],
+  ['Mélykeverés', 'A gyenge teherbírású talajt helyben keverik össze kötőanyaggal (mész, cement, gipsz, kohósalak): talajbeton oszlop, fal vagy tömegstabilizáció.', 'egyeb', 'egyeb'],
   ['Résfal', 'Függőleges falú, bentonitzaggyal megtámasztott árok (rés) vasalásával és kibetonozásával készülő fal a talajban; 40–120 cm vastag.', 'resfal', 'fal'],
   ['Réstábla (primer, szekunder)', 'Az egyszerre kiemelt és betonozott falszakasz (jellemzően 2,8–5,6 m). Előbb a primer, majd közöttük a közbenső táblák készülnek.', 'resfal', 'fal'],
   ['Harapás', 'A réskanál egy kiemelése; hossza jellemzően 2,8 m, a kanál nyitott szélessége.', 'resfal', 'fal'],

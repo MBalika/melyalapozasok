@@ -1,28 +1,26 @@
-7cbd4c8	A monitor: oldalt a kb. 2,5 mm-es fúvóka.	# chapters/06_egyeb.html:145
-550f95f	Nemcsak talajbeton oszlopokat, hanem <b>jet-paneleket</b> is létre lehet hozni: a felhúzás <b>forgatás nélkül</b>, kétoldali (két, egymással szemben álló) fúvóka alkalmazásával történik – V alakú panel alakul ki. A szomszédos furatokból készült, V alakban egymáshoz csatlakozó panelekből <b>vízzáró függönyfal</b> lesz – kevesebb anyaggal, mint oszlopokból.	# chapters/06_egyeb.html:134
-826fe36	Dupla és tripla jetnél a talaj felaprózódását <b>levegő és/vagy víz</b> is segíti. A változatot a bekapcsolt fúvókák száma és az elérni kívánt átmérő dönti el. Járatos jet-oszlop-átmérők: <b>szimpla jetnél 50–100 cm</b> (agyagban 50–70 cm, homokban 80–100 cm), <b>dupla jetnél kb. 120 cm</b>; dupla jettel készített panelnél 180–200 cm. Az átmérő a talaj áteresztőképességétől függ: agyagban a legkisebb, durva szemcsés talajban a legnagyobb. Egymásba metsző oszlopokkal folytonos fal, szükség esetén vízszintes lemez is készíthető.	# chapters/06_egyeb.html:127
-d9c2eb9	Egyetlen fúvókán át, 350–400 bar nyomással csak cementhabarcsot nyomnak a talajba a visszahúzás-forgatás során.	# chapters/06_egyeb.html:122
-6850df0	<b>Injektálás:</b> a furat talpától kezdve a monitor kb. 2,5 mm-es fúvókáin át 350–400 bar nyomással juttatják a kötőanyagot (cementhabarcsot) a talajba, a fúrórúd <b>lassú forgatása és visszahúzása</b> (25–35 cm/perc) mellett. A fölösleges cementhabarcs a furat mentén a felszínre folyik vissza.	# chapters/06_egyeb.html:113
-67403d3	<b>180–200<small>cm</small></b><span>dupla jettel készített panel</span>	# chapters/06_egyeb.html:106
-d6625eb	<b>≈ 120<small>cm</small></b><span>dupla jet-oszlop átmérője</span>	# chapters/06_egyeb.html:105
-5550490	<b>50–100<small>cm</small></b><span>szimpla jet-oszlop (agyagban 50–70, homokban 80–100 cm)</span>	# chapters/06_egyeb.html:104
-50e960e	<b>25–35<small>cm/perc</small></b><span>a felhúzási sebesség</span>	# chapters/06_egyeb.html:103
-aeedc7a	<b>≈ 2,5<small>mm</small></b><span>a monitor fúvókájának átmérője</span>	# chapters/06_egyeb.html:102
-e8f05d1	<b>350–400<small>bar</small></b><span>az injektálási nyomás</span>	# chapters/06_egyeb.html:101
-10afd4b	A hengeres elem a <b>jet-oszlop</b> (jetcölöp), a habarcsosítással kialakított sík elem a <b>jet-panel</b>. A mélyalapozások közé soroljuk, de sokoldalú: új szerkezetek mélyalapozása, meglévő szerkezet alapsík-mélyítése, alapmegerősítés – szerkezetek alapozásának utólagos megerősítése, mélyítése, akár meglévő építményen belülről –, aláfalazás, süllyedéskompenzáció, függönyfalak (kevéssé vízáteresztő zárófalak), munkatérhatárolás, földtömeg-erősítés, alagútépítési segédszerkezet, talajfolyósodás elleni védekezés.	# chapters/06_egyeb.html:98
-2b2e7b6	A <b>jethabarcsosítás</b> (jet-grouting) kötőanyag nagy nyomású bevitelével megvalósuló talajjavítási eljárás. A technológia lényege, hogy a talajt vagy gyengébb kőzetet egy fúrószáron keresztül <b>nagy nyomású folyadéksugárral megbontjuk, felaprózzuk és kötőanyaggal összekeverjük</b>, ezáltal ún. talajbeton testeket (oszlopot vagy panelt, falat) hozunk létre; a talajt részben helyettesítjük is. A felaprózást nagy kinetikus energiájú folyadéksugár végzi, amely többnyire maga a kötőanyag – általában víz-cement keverék. A talaj szerkezetét szétroncsolják, a keletkező résekbe behatoló cementszuszpenzió a talajjal megkötve <b>„talajbetont”</b> hoz létre. A sugár sebességével szabályozható, mekkora talajtömeget erodál.	# chapters/06_egyeb.html:97
-3ca6c35	Nagyobb átmérő dupla jettel (kb. 120 cm) vagy durva szemcsés talajban.	# js/ch_dontes.js:303
-0b96de6	Kötött talajban kisebb az oszlop (szimpla jetnél agyagban 50–70 cm).	# js/ch_dontes.js:303
-05d451c	nincs verés; 350–400 bar-os sugár	# js/ch_dontes.js:302
-e527516	A kb. 2,5 mm-es fúvókákon 350–400 bar nyomással lövellik ki a kötőanyagot. Az 5–6 bar a levegőburok nyomása a levegős dupla jetnél.	# js/ch_egyeb.js:709
-50f37bc	350–400 bar-os sugárral felaprózza, kötőanyaggal keveri, részben helyettesíti	# js/ch_egyeb.js:587
-4402859	fúrószár, alján a monitor kb. 2,5 mm-es fúvókákkal	# js/ch_egyeb.js:587
-458ce9f	A visszafolyó iszap nem tud a furat mentén a felszínre távozni: a 350–400 bar-os sugár nyomása a talajban halmozódik. A talaj felreped, a felszín – és a szomszéd épület – megemelkedhet. Az iszap kiáramlását végig figyelni kell!	# js/ch_egyeb.js:429
-a575512	jellemzően 25–35 cm/perc	# js/ch_egyeb.js:399
-ee0a8c0	Felhúzási sebesség	# js/ch_egyeb.js:399
-65ad5ea	a jellemző injektálási nyomás 350–400 bar	# js/ch_egyeb.js:398
-9deda2e	<b>Szemléltető modell.</b> Az átmérőt a talaj, a változat, a nyomás és az emelési sebesség alapján a jellemző tartományokba (szimpla jetnél agyagban 50–70 cm, homokban 80–100 cm, dupla jetnél kb. 120 cm) skáláztuk. A valós átmérőt a helyszínen próbaoszlopokkal, kibontással ellenőrzik.	# js/ch_egyeb.js:395
-e8e3bca	A szárat forgatva, 25–35 cm/perc sebességgel húzzák fel: az oszlop alulról felfelé nő, a visszafolyó cementhabarcs a furat mentén a felszínre jut.	# js/proc.js:1227
-e538741	A monitor fúvókáin át 350–400 bar nyomású sugár vágja és keveri a talajt.	# js/proc.js:1217
-76fbcaa	A talajt fúrószáron át 350–400 bar-os folyadéksugár bontja meg, aprózza fel és keveri kötőanyaggal: „talajbeton” oszlop vagy panel jön létre.	# js/tf.js:79
-6bccfcc	Az injektálási nyomás 350–400 bar; az 5–6 bar a levegős dupla jet levegőburkának nyomása.	# js/tf.js:34
+4d24b5a	és ezek keveréke – a javítandó talaj függvényében	# chapters/06_egyeb.html:174
+5e24576	granulált kohósalak	# chapters/06_egyeb.html:174
+ba79097	gipsz	# chapters/06_egyeb.html:174
+9b81787	mész	# chapters/06_egyeb.html:174
+81abbd1	Kötőanyagok	# chapters/06_egyeb.html:174
+5eb7c5f	Kiválthatja a drágább alapozási, talajjavítási eljárásokat	# chapters/06_egyeb.html:173
+4607f68	Az oszlopok és táblák tetszőleges elrendezésben helyezhetők egymás mellé	# chapters/06_egyeb.html:173
+93290ad	A művelet alacsony hőmérsékleten is végezhető	# chapters/06_egyeb.html:173
+2d5aaae	Jó lehetőséget kínál a szennyezett területek rehabilitására	# chapters/06_egyeb.html:173
+57c851a	Minimális hulladék: nem kell elszállítani a helyi talajt	# chapters/06_egyeb.html:173
+ce0ea98	Csendes és vibrációmentes	# chapters/06_egyeb.html:173
+8942446	A keverőszár forgó felsővázas hidraulikus kotróra szerelhető eszköz, alján a tengelyeken körbeforgó keverőfejjel. A keverőfejet lefelé-felfelé mozgatják, miközben a fejen át nagy nyomással, folyamatosan érkezik a kötőanyag. Percenként átlagosan 0,5–0,8 m³ talaj keverhető át; a mélysége rendszerint nem több 5 m-nél.	# chapters/06_egyeb.html:168
+6abdce7	Tömegstabilizáció	# chapters/06_egyeb.html:168
+d72d06d	A Cutter Soil Mixing a marótárcsás (Hydrofraser) résfalazáshoz hasonlít, de itt csak kötőanyagot visznek be a talajba, és a helyi talajt keverik át. A CSM technológiával folyamatos, acél tagokkal erősített falat lehet kialakítani; a táblák mélysége 10–15 m.	# chapters/06_egyeb.html:167
+8fae6be	„Résszerű” mélykeverés (CSM)	# chapters/06_egyeb.html:167
+a67d097	Egy nagy teljesítményű fúró-keverő berendezéssel lehatolnak a kellő mélységbe. Egy adalékanyag-csövön keresztül folyékony kötőanyag-szuszpenziót juttatnak az altalajba a fúrószáron át, ezzel megkeverik a talajt; az eszköz lassú, fokozatos és ismétlődő felvonásával az altalaj teljes mélységben átkeveredik. A kész talajbeton oszlopok átmérője jellemzően 1,0–1,5 m, a legnagyobb mélység 50 m.	# chapters/06_egyeb.html:166
+cbaf104	Oszlopszerű mélykeverés	# chapters/06_egyeb.html:166
+1955ac2	A kötőanyag típusa a javítandó talajtól függ: <b>mész, cement, gipsz, granulált kohósalak</b> és ezek keveréke. A kötőanyagot szuszpenzióként (<b>nedves eljárás</b>) vagy porként (<b>száraz eljárás</b>, főleg nagy víztartalmú, puha talajban) juttatják ki.	# chapters/06_egyeb.html:161
+87fb652	A <b>mélykeveréses</b> (deep soil mixing) eljárás a gyenge teherbírású talajokhoz <b>kötőanyagot keverve</b> javítja azok mechanikai tulajdonságait. Itt nem nagy nyomású sugár aprózza fel a talajt, hanem maga a keverőszerszám – az elem mérete ezért közel a szerszám méretével egyezik, és jóval kiszámíthatóbb, mint a jet-oszlopé. Az eljárással – a tervezés során elvárt paraméterekkel – <b>egyedi talajbeton cölöpöket</b>, <b>folyamatos talajbeton falat</b> vagy <b>100 %-os tömegstabilizációt</b> alakítanak ki.	# chapters/06_egyeb.html:160
+15175cf	gyenge teherbírású talaj javítása, talajbeton fal, szennyezett terület rehabilitációja	# js/ch_egyeb.js:588
+0417631	talajbeton oszlop (1,0–1,5 m), fal vagy tömegstabilizált tömb	# js/ch_egyeb.js:588
+7938fb7	fúró-keverő berendezés, CSM-maró vagy kotróra szerelt keverőfej	# js/ch_egyeb.js:588
+c227ad8	Helyben kevert talajbeton oszlop; átmérője jellemzően 1,0–1,5 m, közel a keverőszerszáméval egyezik.	# js/proc.js:1273
+0261d31	Az eszköz lassú, fokozatos és ismétlődő felvonásával a talaj teljes mélységben átkeveredik.	# js/proc.js:1266
+5b28d1a	A fúró-keverő berendezés lehatol a kellő mélységbe; a fúrószáron át folyékony kötőanyag-szuszpenziót juttatnak a talajba.	# js/proc.js:1255
+2ee0419	A gyenge teherbírású talajt helyben keverik össze kötőanyaggal (mész, cement, gipsz, kohósalak): talajbeton oszlop, fal vagy tömegstabilizáció.	# js/tf.js:80

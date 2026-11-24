@@ -17,12 +17,9 @@ ee278ed	depth vibrator
 7a97798	soft, organic layer
 b56f43d	Intersecting columns form a block, a grid or a wall.
 0e2d1bf	Intersecting: block, wall
-1d5c0c3	A soil–binder element mixed in place; its size is close to that of the mixing tool.
 6ae7ad0	The finished column
-f6a5bdf	From the design depth it mixes the soil once more while being withdrawn.
 0786044	Withdrawing while mixing
 524f053	mixing blades
-12ccb79	The bladed mixing shaft penetrates while rotating; the binder is released at the end of the shaft.
 5298984	Rotating down
 1c5b655	finished column
 222889f	It is cut into the previous one – so intersecting columns form a continuous wall.
