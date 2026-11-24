@@ -402,6 +402,11 @@ function excavator(g, M, x, tipY, o = {}) {
     R(e, x - 6, tipY - 32, 12, 22, F('dark2') + `;stroke:${v('dark')};stroke-width:.8`, { rx: 2 });
     R(e, x - 2, tipY - 10, 4, 10, F('steel2'));
     P(e, `M${x - 2} ${tipY} L${x} ${tipY + 4} L${x + 2} ${tipY}Z`, F('steel3'));
+  } else if (o.tool === 'mount') {
+    // gyorscsatlakozó a kar végén – a munkaeszközt (vibrátor, forgatófej) a hívó rajzolja alá
+    Ln(e, sx2, sy2, x, tipY - 6, SK('exc2', 5, 'stroke-linecap:round'));
+    R(e, x - 6, tipY - 8, 12, 8, F('dark2') + `;stroke:${v('dark')};stroke-width:.7`, { rx: 2 });
+    C(e, x, tipY - 4, 1.6, F('steel1'));
   } else if (o.tool === 'rotary') {
     // forgatómotor (talajcsavar behajtása)
     Ln(e, sx2, sy2, x, tipY - 24, SK('exc2', 5, 'stroke-linecap:round'));
@@ -1531,6 +1536,308 @@ export function kindScene(kind) {
     tg(g, x - 24, GY + 20, EN ? 'no soil removed' : 'nincs kitermelt talaj', { anchor: 'end', to: [x - 8, GY + 2] });
   }
   return s;
+}
+
+/* ================================================================== 3.2 / 3.4 – behajtási animációk */
+// A KDKCobw52qk és D27v2bVmoXc BME-videók gépei alapján: lánctalpas verőgép vezetőtoronnyal és hidraulikus kossal,
+// kotróra szerelt vibrátor, hidraulikus sajtológép ellensúllyal, kotró forgatófejjel (talajcsavar).
+const DRV = { W: 520, H: 268, GY: 168, BL: 224 };
+const ease = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+const clamp01 = (x) => Math.max(0, Math.min(1, x));
+function txtD(g, x, y, text, cls, a = {}) { return el('text', { x, y, class: cls, text, ...a }, g); }
+
+/** Vibrátor a cölöpfejen: rugalmas felfüggesztés, rezgőtest két, ellentétesen forgó excentrikus tömeggel, szorítópofák.
+ *  bot: a pofák alsó éle (cölöpfej), ph: a forgás fázisa (rad). Visszaadja a felfüggesztés tetejét és a test közepét. */
+function vibroUnit(g, cx, bot, ph, o = {}) {
+  const u = g_(g, { class: 'pr-vibro' });
+  const w = o.w ?? 34, hb = o.hb ?? 26, half = o.half ?? 7, yB = bot - 9 - hb, yS = yB - 9;
+  // szorítópofák
+  R(u, cx - half - 6, bot - 11, 6, 13, F('dark'), { rx: 1.5 });
+  R(u, cx + half, bot - 11, 6, 13, F('dark'), { rx: 1.5 });
+  R(u, cx - half - 8, bot - 13, half * 2 + 16, 5, F('dark2'), { rx: 1.5 });
+  // rezgőtest
+  R(u, cx - w / 2, yB, w, hb, F('crane') + `;stroke:${v('crane3')};stroke-width:.9`, { rx: 3 });
+  R(u, cx - w / 2, yB + hb - 5, w, 5, F('crane2'), { rx: 2 });
+  R(u, cx - w / 2 + 2, yB + 2, w - 4, 2, F('steel1', 0.35), { rx: 1 });
+  const r = Math.min(hb * 0.3, w * 0.17), ey = yB + hb * 0.46;
+  for (const [dx, dir] of [[-w * 0.24, 1], [w * 0.24, -1]]) {
+    const ex = cx + dx, a = ph * dir;
+    C(u, ex, ey, r + 1.4, F('dark'));
+    C(u, ex, ey, r, F('steel3'));
+    P(u, `M${ex} ${ey} L${(ex + r * Math.cos(a - 1.15)).toFixed(2)} ${(ey + r * Math.sin(a - 1.15)).toFixed(2)} A${r} ${r} 0 0 1 ${(ex + r * Math.cos(a + 1.15)).toFixed(2)} ${(ey + r * Math.sin(a + 1.15)).toFixed(2)}Z`, F('steel1'));
+    C(u, ex, ey, 1.3, F('dark'));
+  }
+  // felfüggesztés gumibakokkal
+  R(u, cx - w / 2 + 3, yS, w - 6, 6, F('crane2') + `;stroke:${v('crane3')};stroke-width:.7`, { rx: 2 });
+  for (const dx of [-w * 0.3, 0, w * 0.3]) R(u, cx + dx - 3, yS + 6, 6, 3, F('dark'), { rx: 1 });
+  return { top: yS, mid: yB + hb / 2, body: [cx - w / 2, yB, w, hb], ecc: [cx - w * 0.24, ey] };
+}
+/** Acél csőcölöp zárt, kúpos csúccsal (cölöpcsúcs) */
+function pipePile(g, cx, top, tip, half) {
+  const p = g_(g, { class: 'pr-pipe' });
+  R(p, cx - half, top, half * 2, tip - top - 10, 'fill:url(#pr-cyl)' + `;stroke:${v('steel3')};stroke-width:.6`);
+  P(p, `M${cx - half} ${tip - 10} L${cx} ${tip} L${cx + half} ${tip - 10}Z`, F('steel3'));
+  E(p, cx, top, half, 1.8, F('dark2'));
+  return p;
+}
+function pileStock(g, x, y, n, len, o = {}) {
+  // fekvő cölöpök alátétfákon
+  R(g, x + 8, y - 3, 6, 3, F('timber2')); R(g, x + len - 16, y - 3, 6, 3, F('timber2'));
+  for (let i = 0; i < n; i++) {
+    const yy = y - 3 - (i + 1) * (o.d ?? 6);
+    if (o.pipe) R(g, x, yy, len, o.d ?? 6, 'fill:url(#pr-cylh)' + `;stroke:${v('steel3')};stroke-width:.5`, { rx: 2.5 });
+    else { R(g, x, yy, len - 6, o.d ?? 6, 'fill:url(#pr-pile)' + `;stroke:${v('conc2')};stroke-width:.5`); P(g, `M${x + len - 6} ${yy} L${x + len} ${yy + (o.d ?? 6) / 2} L${x + len - 6} ${yy + (o.d ?? 6)}Z`, F('steel3')); }
+  }
+}
+const SHOW = (g, M, labs) => { labs.forEach(([y, t]) => tag(g, 8, y, t, { fs: 11 * TGF })); };
+
+/* ---------- 1. verés: ütéssorozat (beverődés ütésenként; a teherbíró rétegben gyorsan csökken) */
+const VB = (() => { const out = []; let d = 0; const tip0 = DRV.GY + 8; while (out.length < 40) { const y = tip0 + d; const st = y < DRV.BL ? 5.4 : 5.4 * Math.exp(-(y - DRV.BL) / 7.5); if (st < 0.4) break; d += st; out.push(d); } return out; })();
+const TB = 0.62;
+function drvVeres(g, u, st) {
+  const { GY } = DRV, X = 168, M = st.M;
+  const n = VB.length, tb = u - 0.8, i = tb < 0 ? 0 : Math.floor(tb / TB), ph = tb < 0 ? 0 : (tb % TB) / TB;
+  const done = i >= n, prev = i > 0 ? VB[Math.min(i, n) - 1] : 0;
+  let depth = done ? VB[n - 1] : prev + (ph > 0.86 ? (VB[i] - prev) * ease((ph - 0.86) / 0.06) : 0);
+  const ram = done || tb < 0 ? 0 : ph < 0.72 ? ease(ph / 0.72) : ph < 0.86 ? 1 - ((ph - 0.72) / 0.14) ** 2 : 0;
+  const dImp = tb < 0 ? 9 : ph >= 0.86 ? (ph - 0.86) * TB : i > 0 && !done ? (ph + 0.14) * TB : 9;
+  const head = GY - 102 + depth, tip = head + 112, mx = st.r.mx;
+  // cölöp, benne a lefutó nyomáshullám
+  precast(g, X, head, tip, 6);
+  if (dImp < 0.12) R(g, X - 6, head + (dImp / 0.12) * 100, 12, 7, F('steel1', 0.55));
+  // cölöpsapka és hidraulikus kos a vezetőtoronyban
+  const hb = head - 6;
+  R(g, X - 10, hb, 20, 7, F('dark2'), { rx: 1.5 });
+  const top = hb - 46;
+  R(g, X - 12, top, 24, 46, F('mach') + `;stroke:${v('mach3')};stroke-width:.9`, { rx: 3 });
+  R(g, X - 12, top + 6, 24, 4, F('dark')); R(g, X - 12, top + 40, 24, 3, F('mach3'));
+  R(g, X - 6.5, top + 13, 13, 25, F('dark'), { rx: 1.5 });                       // ablak: a belső ejtőtömeg
+  R(g, X - 5, top + 25 - ram * 10, 10, 11, F('steel3') + `;stroke:${v('steel1')};stroke-width:.6`, { rx: 1 });
+  for (const yy of [top + 4, top + 34]) R(g, X + 12, yy, mx - 6 - (X + 12), 5, F('dark2'));   // vezetőpapucsok
+  Ln(g, X, st.r.top - 1, X, top, SK('rope', 1.1));
+  hoseTo(g, X + 10, top + 16, mx - 3, Math.min(GY - 40, top + 46), 18);
+  // ütés hatásai: por a sapkánál, rezgés a terepen, hanghullám
+  if (dImp < 0.45) {
+    const k = dImp / 0.45;
+    for (const [dx, dy] of [[-14, 0], [14, -2], [-9, -5], [10, 4]]) C(g, X + dx * (1 + k), hb + 3 + dy, 2.5 + k * 7, F('cloud', 0.75 * (1 - k)));
+    for (let r = 0; r < 3; r++) E(g, X, GY + 1, 22 + r * 22 + k * 70, 3 + r * 1.6 + k * 4, SK('push', 1.3, `opacity:${(0.65 - r * 0.18) * (1 - k)}`));
+    for (let a = 0; a < 3; a++) P(g, `M${X - 22 - a * 9} ${top + 8 - a * 4} q-${8 + a * 4} ${15 + a * 4} 0 ${30 + a * 8}`, SK('labline', 1.3, `opacity:${0.5 * (1 - k)}`));
+    for (let p = 0; p < 6; p++) { const sx = p % 2 ? 1 : -1, d0 = 16 + (p >> 1) * 11; C(g, X + sx * (d0 + k * 6), GY - 2 - Math.sin(k * Math.PI) * (3 + (p % 3)), 1.3, F('clay2')); }
+  }
+  tg(g, X - 30, top + 12, 'hidraulikus kos', { anchor: 'end', to: [X - 12, top + 18] });
+  tg(g, X - 30, Math.min(GY - 46, head + 34), 'vasbeton cölöp', { anchor: 'end', to: [X - 6, Math.min(GY - 40, head + 34)] });
+  if (done) tg(g, X + 40, tip - 6, 'beállt: a teherbíró rétegben megállt', { to: [X + 5, tip - 6] });
+  return { pen: (tip - GY) / 9, extra: `ütésszám: ${Math.min(i, n)}` };
+}
+/* ---------- 2. vibrálás: kotróra szerelt vibrátor, acél csőcölöp */
+function drvVibro(g, u, st) {
+  const { GY, BL } = DRV, X = 168, Lp = 100, tip0 = GY + 28, tipE = 252;
+  const tu = Math.max(0, u - 1), v1 = 9, v2 = 4.2, d1 = BL - tip0;
+  let d = tu * v1 < d1 ? tu * v1 : d1 + (tu - d1 / v1) * v2;
+  const done = tip0 + d >= tipE; if (done) d = tipE - tip0;
+  const on = u > 0.6 && !done, jig = on ? 1.4 * Math.sin(u * 2 * Math.PI * 26.3) : 0;
+  const tip = tip0 + d + jig, head = tip - Lp;
+  // átmenetileg „elfolyósodó” talaj a köpeny mentén
+  if (on) {
+    R(g, X - 17, GY + 1, 34, tip - GY + 4, F('water', 0.13 + 0.05 * Math.sin(u * 9)), { rx: 12 });
+    for (let k = 0; k < 18; k++) { const yy = GY + 6 + ((k * 37) % Math.max(10, tip - GY - 6)); const sx = k % 2 ? 1 : -1; C(g, X + sx * (10 + (k % 3) * 2.2) + Math.sin(u * 61 + k) * 1.6, yy + Math.cos(u * 57 + k) * 1.2, 1.2, F('clay2', 0.8)); }
+    for (let r = 0; r < 2; r++) { const k = ((u * 1.6 + r * 0.5) % 1); E(g, X, GY + 1, 20 + k * 60, 2 + k * 3, SK('push', 1, `opacity:${0.4 * (1 - k)}`)); }
+  }
+  if (on) for (const dy of [-1.8, 1.8]) pipePile(g, X, head + dy, tip + dy, 7).setAttribute('opacity', '0.25');
+  pipePile(g, X, head, tip, 7);
+  const vu = vibroUnit(g, X, head + 6, u * 26 * 2 * Math.PI * 0.11, { w: 34, hb: 26, half: 7 });
+  excavator(g, st.M, X, vu.top - 1, { tool: 'mount', lift: 30 });
+  hoseTo(g, X + 15, vu.mid - 6, X + 26, vu.top - 30, 10);
+  tg(g, X - 30, vu.mid - 4, 'vibrátor', { anchor: 'end', to: [X - 15, vu.mid - 2] });
+  tg(g, X - 30, Math.min(GY - 12, head + 52), 'acél csőcölöp', { anchor: 'end', to: [X - 7, Math.min(GY - 6, head + 52)] });
+  if (on) tg(g, X + 34, GY + 40, 'átmenetileg „elfolyósodó” talaj', { to: [X + 14, GY + 30] });
+  if (done) tg(g, X + 34, tip - 4, 'elérte a tervezett mélységet', { to: [X + 4, tip - 6] });
+  return { pen: (tip0 + d - GY) / 9 };
+}
+/* ---------- 3. sajtolás: hidraulikus sajtológép ellensúllyal, szorít–nyom–enged–visszaáll ciklus */
+const TC = 2.4, SS = 13;
+function drvSajto(g, u, st) {
+  const { GY, BL } = DRV, X = 236, tip0 = GY + 6, Lp = 96, tipE = 252;
+  const nS = Math.ceil((tipE - tip0) / SS), tu = u - 0.8, c = tu < 0 ? 0 : Math.floor(tu / TC), ph = tu < 0 ? 0 : (tu % TC) / TC;
+  const done = c >= nS;
+  const push = done ? 1 : ph < 0.12 ? 0 : ease(Math.min(1, (ph - 0.12) / 0.5));
+  let d = Math.min(tipE - tip0, (done ? nS : c) * SS + (done ? 0 : push * SS));
+  const tip = tip0 + d, head = tip - Lp;
+  const grip = done ? 0 : ph < 0.12 ? ph / 0.12 : ph < 0.62 ? 1 : ph < 0.72 ? 1 - (ph - 0.62) / 0.1 : 0;
+  const back = done ? 0 : ph > 0.72 ? ease((ph - 0.72) / 0.28) : 0;
+  const cy0 = GY - 74, cy = cy0 + (done ? 0 : (ph < 0.72 ? push : 1 - back) * SS);
+  precast(g, X, head, tip, 6);
+  // hengerek: a kereszttartóból lefelé, a dugattyúrúd a szorító egységig
+  const ch = GY - 124;
+  for (const dx of [-18, 18]) {
+    R(g, X + dx - 4.5, ch, 9, 30, 'fill:url(#pr-cyl)' + `;stroke:${v('steel3')};stroke-width:.6`, { rx: 1.5 });
+    R(g, X + dx - 2, ch + 30, 4, cy - ch - 30, F('steel1') + `;stroke:${v('steel2')};stroke-width:.5`);
+  }
+  // szorító egység (pofák)
+  R(g, X - 26, cy, 52, 22, F('mach2') + `;stroke:${v('mach3')};stroke-width:.9`, { rx: 3 });
+  R(g, X - 26, cy + 9, 52, 3, F('mach3'));
+  const gap = 2.5 * (1 - grip);
+  R(g, X - 6 - 5 - gap, cy + 3, 5, 16, F('dark'), { rx: 1 }); R(g, X + 6 + gap, cy + 3, 5, 16, F('dark'), { rx: 1 });
+  // nyomóerő-mérő
+  const res = tip < BL ? 0.25 + 0.2 * (tip - GY) / (BL - GY) : 0.45 + 0.5 * clamp01((tip - BL) / 28);
+  const load = done ? 0.08 : ph >= 0.12 && ph < 0.62 ? res : 0.08, gx = X + 66, gy = GY - 112;
+  C(g, gx, gy, 12, F('steel1') + `;stroke:${v('dark')};stroke-width:1.4`);
+  P(g, `M${gx - 9} ${gy + 5} A10 10 0 1 1 ${gx + 9} ${gy + 5}`, SK('push', 2, 'opacity:.6'));
+  const a = Math.PI * (0.85 + 1.3 * load);
+  Ln(g, gx, gy, gx + 9 * Math.cos(a), gy + 9 * Math.sin(a), SK('dark', 1.6, 'stroke-linecap:round'));
+  C(g, gx, gy, 1.6, F('dark'));
+  Ln(g, gx - 10, gy + 12, gx - 14, ch + 8, SK('hose', 1.6));
+  tg(g, gx + 18, gy - 4, 'nyomóerő', { to: [gx + 12, gy - 2] });
+  tg(g, X - 40, cy + 11, 'szorító egység', { anchor: 'end', to: [X - 26, cy + 11] });
+  tg(g, X - 40, ch + 14, 'hidraulikus hengerek', { anchor: 'end', to: [X - 22, ch + 14] });
+  if (done) tg(g, X + 40, tip - 4, 'elérte a tervezett mélységet', { to: [X + 5, tip - 6] });
+  return { pen: (tip - GY) / 9 };
+}
+/* ---------- 4. csavarás: kotró forgatófejjel, talajcsavar (közelkép, 1 m = 24 px) */
+function drvCsavar(g, u, st) {
+  const { GY } = DRV, X = 190, Ls = 74, k = 1.5, ax = X + 80;
+  const tu = Math.max(0, u - 0.8), adv = 6, Trev = 0.7, dE = 72;
+  let d = (tu / Trev) * adv; const done = d >= dE; if (done) d = dE;
+  const phi = done ? dE / adv * 2 * Math.PI : (tu / Trev) * 2 * Math.PI;
+  const tip = GY - 2 + d, top = tip - Ls;
+  // kotró (felnagyítva): a kar vége a forgatófej tetején
+  const mountY = top - 30, lx = ax + (X - ax) / k, ly = GY + (mountY - GY) / k;
+  const ex = g_(g, { transform: `translate(${ax} ${GY}) scale(${k}) translate(${-ax} ${-GY})` });
+  excavator(ex, st.M, lx, ly, { tool: 'mount', lift: 26, reach: 52 });
+  // talajcsavar: hátsó menetfelek, szár, elülső menetfelek
+  const plates = []; for (let i = 0; i < 5; i++) { const yy = tip - 11 - i * 12.5; if (yy > top + 6) plates.push(yy); }
+  const rx = 11, ry = 2.8;
+  for (const yy of plates) P(g, `M${X - rx} ${yy} A${rx} ${ry} 0 0 1 ${X + rx} ${yy}`, SK('steel3', 2.6, 'stroke-linecap:round'));
+  R(g, X - 4, top, 8, tip - top - 8, 'fill:url(#pr-cyl)' + `;stroke:${v('steel3')};stroke-width:.5`);
+  for (let s = 0; s < 2; s++) { const c = Math.cos(phi + s * Math.PI); if (c > -0.2) Ln(g, X + 3.3 * Math.sin(phi + s * Math.PI), top + 2, X + 3.3 * Math.sin(phi + s * Math.PI), tip - 9, SK('steel1', 1.1, `opacity:${0.35 + 0.4 * Math.max(0, c)}`)); }
+  P(g, `M${X - 4} ${tip - 8} L${X} ${tip + 2} L${X + 4} ${tip - 8}Z`, F('steel3'));
+  plates.forEach((yy, i) => {
+    P(g, `M${X - rx} ${yy} A${rx} ${ry} 0 0 0 ${X + rx} ${yy}`, SK('steel2', 2.8, 'stroke-linecap:round'));
+    P(g, `M${X - rx} ${yy} A${rx} ${ry} 0 0 0 ${X + rx} ${yy}`, SK('steel1', 1, 'stroke-linecap:round;opacity:.7'));
+    const a = phi + i * 1.3, mxp = X + rx * Math.cos(a), myp = yy + ry * Math.sin(a);
+    if (Math.sin(a) > -0.3) Ln(g, mxp, myp - 2.4, mxp, myp + 2.4, SK('dark', 1.6));      // a menet kezdete: forgás közben körbejár
+  });
+  // fejlemez és forgatófej
+  R(g, X - 13, top - 4, 26, 4, F('steel3'), { rx: 1 });
+  R(g, X - 5, top - 10, 10, 6, F('steel2'));
+  R(g, X - 10, mountY, 20, 22, F('dark2') + `;stroke:${v('dark')};stroke-width:.8`, { rx: 3 });
+  R(g, X - 10, mountY + 7, 20, 3, F('dark'));
+  hoseTo(g, X + 9, mountY + 4, X + 16, mountY - 12, 8);
+  if (!done) spin(g, X, top + 8, 20);
+  // a csavar körül kissé megemelkedő talaj
+  if (d > 4) P(g, `M${X - 20} ${GY} q10 -2.4 16 -1 M${X + 4} ${GY - 1} q6 -1.4 16 1`, SK('clay2', 1.6));
+  tg(g, 150, 34, 'forgatófej', { anchor: 'end', to: [X - 10, mountY + 10] });
+  tg(g, 150, 58, 'fejlemez', { anchor: 'end', to: [X - 13, top - 2] });
+  if (plates.length) tg(g, X + 40, Math.max(GY + 62, plates[0] + 6), 'menet', { to: [X + rx, plates[0] + 1] });
+  tg(g, 150, GY + 74, 'talajcsavar', { anchor: 'end', to: [X - 4, Math.max(top + 8, (top + tip) / 2)] });
+  if (done) tg(g, X + 30, GY - 30, EN ? 'installed: head plate at ground level' : 'lehajtva: a fejlemez a terepen', { to: [X + 13, GY - 4] });
+  return { pen: d / 24 };
+}
+// keskeny kijelzőn a feliratok betűmérete nő, hogy kb. 9–10 képpontos maradjon
+let TGF = 1;
+const tg = (g, x, y, t, o = {}) => tag(g, x, y, t, { fs: 12 * TGF, ...o });
+const fitTGF = (cw, vbw, px = 9.5, mx = 1.8) => (cw > 0 ? Math.round(Math.max(1, Math.min(mx, (px * vbw) / (12 * cw))) * 20) / 20 : 1);
+function drvStatic(g, mode, st) {
+  const { W, GY } = DRV;
+  const M = mode === 'csavar' ? { H: DRV.H, GY, layers: [{ k: 'fill', y: GY }, { k: 'clay', y: GY + 26 }] } : { H: DRV.H, GY, layers: [{ k: 'silt', y: GY }, { k: 'gravel', y: DRV.BL }] };
+  st.M = M;
+  backdrop(g, M, 0, W);
+  if (mode === 'csavar') [[GY + 13, 'humuszos feltöltés'], [GY + 44, 'kötött talaj']].forEach(([y, t]) => tag(g, W - 8, y, t, { fs: 11 * TGF, anchor: 'end' }));
+  else SHOW(g, M, [[GY + 16, 'puha réteg'], [DRV.BL + 16, 'teherbíró réteg']]);
+  if (mode === 'veres') {
+    pileStock(g, 14, GY, 3, 100, { d: 6 });
+    st.r = rig(g, M, 168, { top: 6 });
+    R(g, 168 - 10, GY - 22, 20, 6, F('dark2'), { rx: 1.5 }); Ln(g, 178, GY - 19, st.r.mx - 6, GY - 19, SK('dark2', 3));
+    worker(g, 108, { GY, pose: 'stand' });
+    tg(g, st.r.mx + 40, 34, 'vezetőtorony', { to: [st.r.mx + 6, 40] });
+  } else if (mode === 'vibro') {
+    pileStock(g, 14, GY, 3, 92, { d: 6, pipe: true });
+    worker(g, 118, { GY, pose: 'signal' });
+    tg(g, 330, 96, 'kotró', { to: [262, 142] });
+  } else if (mode === 'sajto') {
+    const X = 236, fy = GY - 30;
+    pileStock(g, 420, GY, 3, 92, { d: 6 });
+    worker(g, 40, { GY, pose: 'stand', dir: 1 });
+    R(g, X - 172, GY - 8, 344, 8, F('dark2'), { rx: 3 });
+    for (const px of [X - 160, X - 60, X + 40, X + 140]) R(g, px, GY - 10, 20, 3, F('dark'));
+    R(g, X - 168, fy, 336, 22, F('mach') + `;stroke:${v('mach3')};stroke-width:.9`, { rx: 3 });
+    R(g, X - 168, fy + 15, 336, 4, F('mach3'));
+    for (const side of [-1, 1]) for (let row = 0; row < 3; row++) for (let col = 0; col < 2; col++) {
+      const bx = side < 0 ? X - 160 + col * 50 : X + 60 + col * 50, by = fy - (row + 1) * 14;
+      R(g, bx, by, 48, 13, 'fill:url(#pr-pile)' + `;stroke:${v('conc2')};stroke-width:.8`, { rx: 1.5 });
+    }
+    for (const dx of [-32, 24]) R(g, X + dx, GY - 132, 8, 102, 'fill:url(#pr-mcyl)' + `;stroke:${v('mach3')};stroke-width:.6`);
+    R(g, X - 40, GY - 136, 80, 12, F('mach') + `;stroke:${v('mach3')};stroke-width:.9`, { rx: 2 });
+    // fülke
+    const cx0 = X + 168;
+    P(g, `M${cx0 - 2} ${fy} V${fy - 30} Q${cx0 - 2} ${fy - 33} ${cx0 + 1} ${fy - 33} H${cx0 + 22} L${cx0 + 26} ${fy}Z`, F('mach') + `;stroke:${v('mach3')};stroke-width:.8`);
+    P(g, `M${cx0 + 1} ${fy - 4} V${fy - 29} H${cx0 + 20.5} L${cx0 + 23.5} ${fy - 4}Z`, 'fill:url(#pr-glass)' + `;stroke:${v('dark')};stroke-width:1`);
+    C(g, cx0 + 10, fy - 17, 3, F('opr'));
+    P(g, `M${cx0 + 4.5} ${fy - 6} Q${cx0 + 5.5} ${fy - 12} ${cx0 + 10} ${fy - 12} Q${cx0 + 14.5} ${fy - 12} ${cx0 + 15.5} ${fy - 6}Z`, F('opr'));
+    tg(g, X - 110, fy - 60, 'ellensúly', { anchor: 'middle', to: [X - 110, fy - 42] });
+  } else {
+    // korábban lehajtott talajcsavarok fejlemezei, raklapon a következők
+    for (const x0 of [30, 78]) { R(g, x0 - 13, GY - 4, 26, 4, F('steel3'), { rx: 1 }); R(g, x0 - 4, GY - 8, 8, 4, F('steel2')); }
+    pileStock(g, 410, GY, 3, 90, { d: 5, pipe: true });
+    worker(g, 162, { GY, pose: 'guide', s: 1.5 });
+    worker(g, 130, { GY, pose: 'stand', s: 1.5 });
+    tg(g, 56, GY - 40, 'kész talajcsavarok', { anchor: 'middle', to: [40, GY - 6] });
+  }
+}
+/** 3.2 – a négy behajtási mód animációja. s: a 520×268-as SVG, u: a mód indítása óta eltelt idő (s) */
+export function driveScene(s, mode, u, labels = {}) {
+  defs(); CUR.W = DRV.W;
+  let st = s.__drv;
+  TGF = fitTGF(s.getBoundingClientRect().width, DRV.W);
+  if (!st || st.mode !== mode || st.tgf !== TGF) {
+    while (s.firstChild) s.removeChild(s.firstChild);
+    st = s.__drv = { mode, sg: g_(s), dg: g_(s), tgf: TGF };
+    drvStatic(st.sg, mode, st);
+  }
+  const g = st.dg; while (g.firstChild) g.removeChild(g.firstChild);
+  const res = mode === 'veres' ? drvVeres(g, u, st) : mode === 'vibro' ? drvVibro(g, u, st) : mode === 'sajto' ? drvSajto(g, u, st) : drvCsavar(g, u, st);
+  txtD(g, DRV.W - 8, 18, labels.pen ? labels.pen(res.pen) : `behatolás ≈ ${res.pen.toFixed(1).replace('.', EN ? '.' : ',')} m`, 't-num halo', { 'text-anchor': 'end' });
+  if (res.extra) txtD(g, DRV.W - 8, 34, res.extra, 't-sm halo', { 'text-anchor': 'end' });
+  if (labels.name) txtD(g, DRV.W - 8, DRV.H - 10, labels.name, 't-big halo', { 'text-anchor': 'end' });
+  return res;
+}
+/** 3.4 – vibrálás-labor bal oldala (300×330): daru kötelén lógó vibrátor, vasbeton cölöp csúccsal, rezgő talaj */
+export function vibroLab(s, t, o) {
+  defs(); CUR.W = 300;
+  const cw = s.getBoundingClientRect().width, narrow = cw > 0 && cw < 260;
+  TGF = fitTGF(cw, 300, 9, 1.35);
+  while (s.firstChild) s.removeChild(s.firstChild);
+  const g = g_(s), GY = 96, X = 132, SC = 24, Lp = 7 * SC;
+  const kk = o.soil === 'agyag' ? 'clay' : o.soil === 'tomor' ? 'sand2' : 'sand';
+  const M = { H: 330, GY, layers: [{ k: kk, y: GY }] };
+  backdrop(g, M, 0, 300);
+  const a = o.a, red = clamp01(1 - o.rr), jig = Math.sin(t * 60) * (1 + 2.5 * a);
+  const head = 66 + o.pen * SC + jig, tip = head + Lp;
+  // rezgő szemcsék a cölöp körül
+  for (let i = 0; i < 70; i++) {
+    const x0 = 10 + hash(i) * 280, y0 = GY + 8 + hash(i + 70) * 225, dd = Math.abs(x0 - X);
+    if (dd < 14) continue;
+    const amp = (1 + 5 * a) * Math.exp(-dd / 70);
+    C(g, x0 + Math.sin(t * 55 + i * 1.7) * amp, y0 + Math.cos(t * 61 + i) * amp * 0.6, o.soil === 'agyag' ? 1.3 : 1.9, F('dark2', 0.45));
+  }
+  // a köpeny mentén átmenetileg „elfolyósodó” zóna – annál erősebb, minél jobban csökken az ellenállás
+  if (o.soil !== 'agyag' && red > 0.05) R(g, X - 24, GY + 1, 48, Math.min(330, tip) - GY + 6, F('water', 0.06 + 0.22 * red), { rx: 18 });
+  // köpenymenti ellenállás: annál több nyíl, minél nagyobb
+  const n = Math.max(1, Math.round(4 * o.rr));
+  for (let k = 0; k < 4; k++) { const y = GY + 34 + k * 46; if (k < n && y < tip - 20) for (const sx of [-1, 1]) arrowV(g, X + sx * 30, y + 12, y - 8, { c: 'push', w: 2, s: 6 }); }
+  // daru kötele, vibrátor, cölöp csúccsal
+  precast(g, X, head, tip, 9);
+  const vu = vibroUnit(g, X, head + 6, t * o.f * 0.9, { w: 62, hb: 44, half: 9 });
+  // daru horogblokkja és kötelei
+  const hbY = vu.top - 12;
+  Ln(g, X - 6, 0, X - 6, hbY, SK('rope', 1.3)); Ln(g, X + 6, 0, X + 6, hbY, SK('rope', 1.3));
+  R(g, X - 10, hbY, 20, 10, F('crane2') + `;stroke:${v('crane3')};stroke-width:.8`, { rx: 2 });
+  Ln(g, X, hbY + 10, X, vu.top, SK('dark', 2.2));
+  hoseTo(g, X + 30, vu.mid, 300, 30, 30);
+  tg(g, X - 42, vu.mid - 6, 'vibrátor', { anchor: 'end', to: [X - 31, vu.mid - 6] });
+  if (!narrow) tg(g, X + 40, vu.ecc[1] + 30, 'forgó excentrikus tömegek', { to: [vu.ecc[0] + 4, vu.ecc[1] + 4] });
+  if (tip < 322) tg(g, X + 34, tip - 6, 'cölöpcsúcs', { to: [X + 4, tip - 6] });
+  if (!narrow) tg(g, 8, GY - 10, 'vasbeton cölöp', { to: [X - 9, GY - 8] });
 }
 
 function init() { document.querySelectorAll('[data-proc]').forEach(render); }

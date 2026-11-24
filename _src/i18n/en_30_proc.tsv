@@ -90,3 +90,20 @@ cc5fd84	CFA rig
 31a51d5	finished pile
 75e0b41	Drilling a screw pile: the displacement head pushes the soil aside
 f01a147	Drilling a CFA pile: the auger brings the soil out
+a306f13	Tune the vibrator! Find the frequency at which the soil resistance is the lowest – and see what cohesive soil cannot do.
+0e9fce4	Around ≈ ${fmt(fopt, 0)} Hz the soil resistance temporarily drops to its minimum – the pile practically “slides” into the ground.
+51bfa9e	Vibration tuned to the soil temporarily “liquefies” the soil around the pile – the pile practically “slides” into the ground.
+58e08db	reinforced concrete pile
+98313e2	pile tip
+c1767da	rotating eccentric masses
+5dceae6	penetration ≈ ${res.pen.toFixed(1).replace('.', EN ? '.' : ',')} m
+0720fcf	installed ground screws
+4e5b9b6	excavator
+794b020	leader
+01faef3	design depth reached
+eb28bc3	clamping unit
+d9bbb9f	jacking force
+e124b45	temporarily “liquefied” soil
+e6167e3	steel tube pile
+48d5eb6	blows: ${Math.min(i, n)}
+7c9b3df	set: stopped in the bearing layer

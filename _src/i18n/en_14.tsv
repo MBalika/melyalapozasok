@@ -54,7 +54,6 @@ c9f8891	Driving
 7ffefb6	Vibrating
 d4818f2	mainly granular soils
 3f08390	steel tubular piles, H-sections, sheet piles, RC piles
-8096f06	Vibration tuned to the soil temporarily “fluidises” the soil around the pile – the pile almost slides in.
 f5a29fd	Jacking
 0526b4f	softer soils
 3ffc057	piles of lower capacity, mainly micropiles
@@ -68,10 +67,7 @@ e2ed8a0	Method
 d600ccc	Bearing capacity
 e717004	vibrator
 1990ece	counterweight
-1d19291	pressure
 380c649	rotary head
-eeeb02c	rotation
-f5ac848	penetration ≈ ${fmt(pen, 1)} m
 0942d49	dense sand
 94672e0	drop hammer
 0af0055	Dense sand
@@ -82,14 +78,12 @@ f5ac848	penetration ≈ ${fmt(pen, 1)} m
 ea23454	Vibration is weak in cohesive soil
 6082438	Because of cohesion, vibration hardly reduces the resistance (at best only by approx. ${fmt(S.k * 100, 0)} %). Driving, jacking or a bored technology is needed here instead.
 18b4f9b	You’ve tuned in!
-2f7730c	Around ≈ ${fmt(fopt, 0)} Hz the soil resistance drops temporarily to a minimum – the pile almost slides in.
 e4bacc2	Frequency too low
 a8c40cd	At such a slow vibration the soil does not yet “fluidise”, but the structures of nearby buildings can resonate in this range – at start-up and shut-down it must be passed through quickly.
 b80fc25	Not quite there yet
 2b4d81b	The optimum is around ≈ ${fmt(fopt, 0)} Hz – ${f < fopt ? 'növeld' : 'csökkentsd'} the frequency.
 e7fb9c7	increase
 dac50f3	decrease
-31d055c	 Jetting also reduces the resistance below the base – but it must be stopped 1–2 m before the final base depth, otherwise the soil below the base loosens.
 588dbe1	building resonance
 7bf7ec0	vibration amplitude
 e947dab	Illustrative model
