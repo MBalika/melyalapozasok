@@ -126,3 +126,41 @@ c42b6ad	Screw pile (e.g. FDP, Screwsol)
 f5e3d77	The rammed concrete bulb gives a large base resistance; a bearing capacity of 2000–3000 kN can be reached. In Hungary it has been pushed out of large-scale industrial use.
 a81cfb1	Displacement drilling head (FDP or Screwsol type) at the end of a hollow drill string, which pushes aside and compacts the soil while drilling; 300–700 mm, up to 18 (20) m.
 b22dbe9	It is effective in loose or medium-dense granular, intermediate or weakly cohesive (soft–firm) soil. It is typically used to found moderately loaded industrial buildings and 5–10-storey residential or office buildings; it is economical and fast. Its spread may be limited at most by the lower structural capacity due to the smaller diameter.
+e09d36b	Modern rigs continuously measure and record the rate of advance of the drill stem during installation and withdrawal, the engine power and the torque needed for rotation, and during concreting the concrete pressure and the volume of concrete placed, and they produce an automatic record for every single pile. This shows afterwards if less concrete reached the bore anywhere than the theoretical volume.
+024773a	for founding industrial buildings, 5–10-storey residential or office buildings and medium-span bridges
+cf133f0	The hollow auger is screwed down with a piling rig; during installation the <b>soil plug on the auger supports the bore</b>. At the required depth <b>concrete is pumped under excess pressure</b> through the drill stem: the pressure pushes the auger up (with the soil plug on it), which has to be assisted by pulling. During withdrawal <b>there is no rotation</b>, so that the soil around the drill stem does not loosen. Finally the reinforcement cage is pushed into the fresh pile concrete. With special drilling heads it can also be used in very hard soils and softer rocks.
+08eba77	One of the <b>most frequently used</b> piling technologies in Hungary: a pile that is quick to build and “efficient”. Its name abbreviates <i>Continuous Flight Auger</i>; in German-speaking countries it is known as the SOB pile, in France as the STARSOL pile. CFA is a <b>replacement</b> pile made with a continuous hollow auger; a concreting outlet with a closing plug is fitted at the bottom of the auger.
+05074ae	CFA is a <b>replacement</b> pile: the soil is brought up by the auger and replaced by concrete. When the continuous auger is screwed down, the spoil is only partly pressed out; the rest stays on the auger, and this <b>soil plug supports the bore</b>. Full displacement is achieved by the drilling head of the screw pile, which brings up almost no spoil.
+50bfc34	Replacement with a soil plug
+88ea866	Concrete is pumped through the drill stem under excess pressure, pushing the auger up (with the soil plug on it) – this is assisted by pulling, without rotation. No vibration is needed: the flowing concrete self-compacts under pressure.
+f00e5de	15–100 m (in Hungary so far ≤ 30–40 m)
+dc43a3b	80–150 (350) cm
+87fdd54	<b>≈ 100<small>m</small></b><span>maximum depth – not limited by the capacity of the rig; in Hungary so far at most 30–40 m</span>
+001e6d2	<b>80–150<small>(350) cm</small></b><span>diameter – a large-diameter pile of high bearing capacity</span>
+5fc283e	removing the guide tube.
+2efdf6a	underwater (under-slurry) concreting up to ground level while the tremie pipe is continuously withdrawn – the concrete displaces the slurry from below;
+27dbb35	cleaning the pile base, placing the reinforcement cage (extending it if necessary), placing the tremie pipe in extended sections;
+6f3ab50	removing the soil with a short auger or drilling bucket to the required depth while continuously topping up the slurry – below the upper guide tube the slurry supports the bore;
+a66010b	filling with bentonite slurry;
+75b0e4e	positioning, pre-drilling, installing the guide tube;
+ebe775e	<b>≈ 100<small>m</small></b><span>maximum depth; in Hungary so far at most 30–40 m</span>
+4505187	The side wall of the bore is supported by the casing all the way until concreting, so the method can be used safely even in silty soils with high water content. After the reinforcement cage is placed (and extended if necessary), the pile is concreted through a concreting pipe, and the casing sections are continuously recovered together with the concreting. The casing can be <b>recovered</b> (withdrawn during concreting) or <b>permanent</b> (left in the ground, e.g. to protect the pile shaft). Its main field of application is depths and diameters that cannot be reached with other technologies, and high bearing capacity. Its maximum depth is approx. 100 m; in Hungary depths of at most 30–40 m have been used so far.
+0374f1d	A technology that can be used even in extreme ground conditions. The casing is continuously sunk and extended – this is what supports the bore – and the soil is removed under the protection of the casing with a short auger or a drilling bucket (with an opening base plate and cutting teeth), possibly a grab. The casing generally, and in granular soil without exception, goes ahead of the excavation. Below water, the water removed from the bore is replaced.
+c828b44	With intermittent excavation
+3a8f321	With a continuous auger
+f15eb8e	The casing supports the wall of the bore until concreting, so it is safe even in silty soil with a high water content; it is made with diameters of 80–150 (350) cm and lengths up to approx. 100 m (in Hungary so far 30–40 m). CFA is at most 22–24 m.
+1ee17f6	Up to approx. 100 m long (in Hungary so far at most 30–40 m).
+9d70dda	The casing supports the wall of the bore all the way until concreting, so it can be used safely even in silty soil with high water content – with diameters of 80–150 (350) cm, to a depth of at most approx. 100 m (in Hungary so far 30–40 m). CFA is made only up to 22–24 m and is not suited to loose, flowing soils; without support the bore would collapse, and the ground screw is only a 2–4 m, lightly loaded element.
+ddfc883	The CFA pile has a diameter of 40–120 cm; cased and slurry-supported piles are made with diameters of 80–150 (350) cm.
+ecdb59c	${L0} m: within 15–100 m
+eeae9f0	Ø ${D} cm: within the 80–150 (350) cm range
+d2541db	guide tube
+4d74a74	removing the guide tube; the pile is complete
+bb0a8d3	Guide tube out
+e27b409	positioning, pre-drilling, guide tube
+3749e44	Cased: D = 80–150 (350) cm, L ≤ approx. 100 m (in Hungary so far 30–40 m).
+7361bd0	The concrete is brought up to ground level, then the guide tube is lifted out.
+25765a8	Concreting to ground level, guide tube out
+769d1f9	A short steel guide tube is placed in the upper part of the bore.
+09ac8cd	Positioning, pre-drilling, guide tube
+2df9ecc	The ${k === 'casing' ? 'béléscsöves' : 'zagyos'} bored pile is typically 15–100 m long (in Hungary so far at most 30–40 m); for ${fmt(L, 1)} m the slower, complex technology is rarely economical.

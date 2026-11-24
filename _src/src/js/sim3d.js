@@ -28,8 +28,8 @@ const PROF = {
 /* ------------------------------------------------------------------ technológiák */
 const TECH = {
   cfa: { t: 'CFA – folyamatos spirál', g: 'talajhelyettesítéses', D: [40, 120, 10, 60], L: 13, ks: 1, kb: 1, yt: 'wqOU4bcUiCk', fault: 'Túl gyors kihúzás', link: '#furt' },
-  casing: { t: 'Béléscsöves fúrt', g: 'talajhelyettesítéses', D: [80, 180, 10, 100], L: 20, ks: 1, kb: 1, yt: 'Oe5saZFiPJk', fault: 'Nincs vízpótlás a csőben', link: '#furt' },
-  slurry: { t: 'Bentonitzagyos fúrt', g: 'talajhelyettesítéses', D: [80, 180, 10, 120], L: 22, ks: 1, kb: 1, yt: 'Oe5saZFiPJk', fault: 'Lesüllyed a zagyszint', link: '#furt' },
+  casing: { t: 'Béléscsöves fúrt', g: 'talajhelyettesítéses', D: [80, 150, 10, 100], L: 20, ks: 1, kb: 1, yt: 'Oe5saZFiPJk', fault: 'Nincs vízpótlás a csőben', link: '#furt' },
+  slurry: { t: 'Bentonitzagyos fúrt', g: 'talajhelyettesítéses', D: [80, 150, 10, 120], L: 22, ks: 1, kb: 1, yt: 'Oe5saZFiPJk', fault: 'Lesüllyed a zagyszint', link: '#furt' },
   dry: { t: 'Fúrt, megtámasztás nélkül', g: 'talajhelyettesítéses', D: [40, 100, 10, 60], L: 8, ks: 1, kb: 1, yt: null, fault: null, link: '#furt' },
   driven: { t: 'Vert előregyártott vasbeton', g: 'talajkiszorításos', D: [30, 50, 5, 40], L: 10, ks: 1.3, kb: 1.3, yt: 'KDKCobw52qk', fault: null, link: '#elore' },
   franki: { t: 'Franki-cölöp', g: 'talajkiszorításos', D: [60, 60, 1, 60], L: 12, ks: 1.2, kb: 1, yt: '_QsH5x0ndtI', fault: null, link: '#helyszini' },
@@ -87,7 +87,7 @@ function evaluate(S) {
     }
   }
   if (k === 'casing' || k === 'slurry') {
-    if (L < 15) add('info', 'Rövid cölöp nagy géppel', `A ${k === 'casing' ? 'béléscsöves' : 'zagyos'} fúrt cölöp jellemzően 15–50 m hosszú; ${fmt(L, 1)} m-hez a lassabb, összetett technológia ritkán gazdaságos.`);
+    if (L < 15) add('info', 'Rövid cölöp nagy géppel', `A ${k === 'casing' ? 'béléscsöves' : 'zagyos'} fúrt cölöp jellemzően 15–100 m hosszú (hazánkban eddig legfeljebb 30–40 m); ${fmt(L, 1)} m-hez a lassabb, összetett technológia ritkán gazdaságos.`);
     if (k === 'casing') {
       add('ok', 'Béléscső a földkiemelés előtt', 'A béléscső megakadályozza a talaj és a talajvíz betörését; szemcsés talajban a csőnek a földkiemelés előtt kell járnia. Magas víztartalmú, iszapos talajban is biztonságos.');
       if (!gwIn && M.fault) add('info', 'Itt nincs mit pótolni', 'Ebben a szelvényben a furat mentén nincs talajvíz, így a vízpótlás hiánya a modellben nem okoz gondot. Próbáld ki az A, B vagy C szelvényben!');
@@ -587,7 +587,7 @@ register('sim3d', (root) => {
       segs.push(new THREE.Vector3(Math.sin(a0) * rc, y0, Math.cos(a0) * rc), new THREE.Vector3(Math.sin(a1) * rc, y1, Math.cos(a1) * rc));
     }
     O.cage = add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(segs), MAT.rebar));
-    // béléscső / vezetőcső
+    // béléscső / iránycső
     O.casing = add(new THREE.Mesh(unitCyl(k === 'franki' ? 0.255 : r + 0.035, 40, true), MAT.steel));
     O.vez = add(new THREE.Mesh(unitCyl(r + 0.12, 40, true), MAT.steel));
     O.slurry = add(new THREE.Mesh(unitCyl(k === 'franki' ? 0.24 : r + (k === 'slurry' ? 0.0 : 0.02), 32), MAT.slurry)); O.slurry.renderOrder = 3;
@@ -703,7 +703,7 @@ register('sim3d', (root) => {
       { t: 'Kész a cölöp', dur: 2.5, d: 'Nagy átmérő, nagy mélység: magas víztartalmú, iszapos talajban is biztonságos – cserébe lassabb, összetett gépészet.', a(st, u) { const cb = lerp(2.2, -1.5, sm(u * 2)); st.casing = u < 0.5 ? { top: cb - L - 1.2, bot: cb } : null; st.tremie = null; st.water = null; done(st, u); } },
     ];
     if (k === 'slurry') return [
-      { t: 'Pontraállás, előfúrás, vezetőcső', dur: 2.5, d: 'A furat felső részébe rövid acél vezetőcsövet helyeznek.', a(st, u) { st.vez = { top: -0.6, bot: 2.6 * sm(u) }; st.d = 2.6 * sm(u); st.bucket = { tip: -2.2, full: false }; st.focus = -2; st.span = 12; } },
+      { t: 'Pontraállás, előfúrás, iránycső', dur: 2.5, d: 'A furat felső részébe rövid acél iránycsövet helyeznek.', a(st, u) { st.vez = { top: -0.6, bot: 2.6 * sm(u) }; st.d = 2.6 * sm(u); st.bucket = { tip: -2.2, full: false }; st.focus = -2; st.span = 12; } },
       { t: 'Zagy betöltése', dur: 2, d: 'A furatot bentonitzaggyal töltik fel – a zagyszint jóval a talajvízszint felett van.', a(st, u) { st.slurry = { top: lerp(2.6, -0.3, sm(u)), bot: 2.6 }; st.focus = 1; st.span = 8; st.lab2 = 'bentonitzagy'; } },
       { t: 'Talajkiemelés zagyos megtámasztással', dur: 7, d: M.fault && M.gwIn ? '<b class="bad">A zagyszint a talajvízszint közelébe süllyedt:</b> megszűnik a túlnyomás, a furat fala beomlik.' : 'Dobfúróval emelik ki a talajt. A zagy kiszorítja a talajvizet, és túlnyomásával megtámasztja a furat falát.', a(st, u) {
         const [d, tip, full] = cycles(u, Math.max(5, Math.round(L / 3)), L); st.d = Math.max(2.6, d); st.bucket = { tip, full }; st.slurry = { top: -0.3, bot: st.d }; st.spoil = 0.85 * u; st.focus = Math.max(d, 0); st.span = 10;
@@ -711,7 +711,7 @@ register('sim3d', (root) => {
       } },
       { t: 'Talptisztítás, vasalás', dur: 3.5, d: 'A talpat kitisztítják, majd a vasalási armatúrát a zagyba engedik.', a(st, u) { st.bucket = null; st.slurry.top = -0.3; cageIn(st, u); } },
       { t: 'Betonozás kontraktorcsővel', dur: 5.5, d: 'A beton alulról tölti ki a furatot, és a könnyebb zagyot felfelé kiszorítja – a zagyot visszanyerik.', a(st, u) { const top = lerp(L, 0.4, sm(u)); st.conc = { top, bot: L }; st.incl = true; st.tremie = { bot: Math.min(L - 0.3, top + 1.6) }; st.slurry = { top: -0.3, bot: top }; st.focus = top; st.span = 10; } },
-      { t: 'Betonozás a terepszintig, vezetőcső ki', dur: 2.5, d: 'A betont a terepszintig hozzák fel, majd kiemelik a vezetőcsövet.', a(st, u) { st.conc.top = lerp(0.4, 0, u); st.slurry = u < 0.4 ? { top: -0.3, bot: lerp(0.4, -0.3, u / 0.4) } : null; st.tremie = u < 0.3 ? st.tremie : null; st.vez = { top: -0.6 - 3 * sm(u), bot: 2.6 - 3 * sm(u) }; st.focus = 0; st.span = 8; } },
+      { t: 'Betonozás a terepszintig, iránycső ki', dur: 2.5, d: 'A betont a terepszintig hozzák fel, majd kiemelik az iránycsövet.', a(st, u) { st.conc.top = lerp(0.4, 0, u); st.slurry = u < 0.4 ? { top: -0.3, bot: lerp(0.4, -0.3, u / 0.4) } : null; st.tremie = u < 0.3 ? st.tremie : null; st.vez = { top: -0.6 - 3 * sm(u), bot: 2.6 - 3 * sm(u) }; st.focus = 0; st.span = 8; } },
       { t: 'Kész a cölöp', dur: 2.5, d: 'Elsősorban nagy átmérőjű, nagy mélységű cölöpökhöz; hazánkban főleg nagy fesztávú hidak alapozásához.', a(st, u) { st.vez = null; done(st, u); } },
     ];
     if (k === 'dry') return [
@@ -986,7 +986,7 @@ register('sim3d', (root) => {
     cD.el.classList.toggle('sim-off', T.D[0] === T.D[1]); cD.input.disabled = T.D[0] === T.D[1];
     cShape.el.style.display = S.tech === 'driven' ? '' : 'none';
     techChip.innerHTML = `<span class="chip grp">${T.g}</span>`;
-    dNote.innerHTML = { franki: 'A cső 46–52 cm-es; a kész cölöp a kiszorítás miatt kb. 60 cm átmérőjű.', driven: 'Négyzetes: 30×30 vagy 40×40 cm, L = 4–12 m · kör (pörgetett): D = 25–50 cm, L ≤ 20–22 m.', micro: 'Mikrocölöp: fúrt törzsátmérő legfeljebb 250–300 mm.', cfa: 'CFA: D = 40–120 cm, L legfeljebb 22–24 m.', casing: 'Béléscsöves: D = 80–180 cm, L = 15–50 (100) m.', slurry: 'Zagyos: D = 80–180 cm, L = 15–50 m.', dry: 'Megtámasztás nélkül: legfeljebb 8–10 m mélységig.', screw: 'Csavart: D = 300–700 mm, L legfeljebb 18 (20) m.' }[S.tech];
+    dNote.innerHTML = { franki: 'A cső 46–52 cm-es; a kész cölöp a kiszorítás miatt kb. 60 cm átmérőjű.', driven: 'Négyzetes: 30×30 vagy 40×40 cm, L = 4–12 m · kör (pörgetett): D = 25–50 cm, L ≤ 20–22 m.', micro: 'Mikrocölöp: fúrt törzsátmérő legfeljebb 250–300 mm.', cfa: 'CFA: D = 40–120 cm, L legfeljebb 22–24 m.', casing: 'Béléscsöves: D = 80–150 (350) cm, L ≤ kb. 100 m (itthon eddig 30–40 m).', slurry: 'Zagyos: D = 80–150 (350) cm, L ≤ kb. 100 m (itthon eddig 30–40 m).', dry: 'Megtámasztás nélkül: legfeljebb 8–10 m mélységig.', screw: 'Csavart: D = 300–700 mm, L legfeljebb 18 (20) m.' }[S.tech];
     const f = T.fault;
     cFault.el.style.display = f ? '' : 'none'; fNote.style.display = f ? '' : 'none';
     if (f) { cFault.el.querySelector('span').textContent = f; fNote.textContent = 'Kapcsold be, és nézd meg, mi romlik el – és mit árul el a lista.'; }

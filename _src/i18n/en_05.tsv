@@ -23,7 +23,6 @@ b433175	Concreting into the bore through a hopper
 8b8d7eb	Concreting through the drill stem (CFA)
 8e218c4	Concreting through a tremie pipe
 ff79ec7	CFA pile – with a continuous auger
-ee42f2b	In the past two or three decades this piling technology has dominated in Hungary. Its name abbreviates <i>Continuous Flight Auger</i>; in German-speaking countries it is known as the SOB pile, in France as the STARSOL pile. The CFA pile is made with a continuous auger on a hollow drill stem, and concrete is pumped into the bore through the drill stem as the auger is withdrawn.
 3df043e	The four phases of making a CFA pile
 1e35440	← swipe sideways for the phases →
 6b75da2	<b>40–120<small>cm</small></b><span>diameter (40, 60, 80, 100, rarely 120 cm)</span>
@@ -40,17 +39,12 @@ fe9574d	Main features, limitations
 ed59bbd	at most approx. 22–24 m long – the length of the auger is limited by the mast of the rig
 63aba3a	if withdrawn too fast, the pile can narrow (necking)
 89e0f3f	A record for every pile
-e060007	Modern rigs continuously measure and record the drilling resistance, the concrete pressure at the top of the drill stem, the volume of concrete placed and the withdrawal rate during pile construction, and produce an automatic record for every single pile. This shows afterwards if less concrete reached the bore anywhere than the theoretical volume.
 7bce691	The most typical defect is <b>necking</b>: if the auger is withdrawn faster than the concrete fills the space released, the wall of the bore is pushed into the place of the concrete, and the pile narrows over that section. That is why the concrete must always arrive with a slight excess pressure, in step with the withdrawal – the concrete consumption is typically somewhat more than the theoretical volume.
 a8bc943	Monitor in the cab of a CFA rig showing depth, pressure and concrete volume
 99d85e3	The depth, concrete pressure and concrete volume can be seen in real time on the rig operator’s monitor
 7cd4116	CFA monitor
 5cc41af	Cased pile
-643f690	A technology that can be used even in extreme ground conditions. The casing is sunk in parallel with the removal of the spoil – with a drilling bucket or auger, possibly a grab – in such a way that the casing generally, and in granular soil without exception, goes ahead of the excavation. Below water, the water removed from the bore is replaced.
-a0bfc8c	The wall of the bore is supported by the casing until concreting, so the method can be used safely even in silty soils with high water content. The pile is concreted through a concreting pipe while the casing is withdrawn at the appropriate rate. The casing can be <b>recovered</b> (withdrawn during concreting) or <b>permanent</b> (it stays in the ground, e.g. to protect the pile shaft). Its main field of application is depths and diameters that cannot be reached with other technologies, and high bearing capacity. In Hungarian practice a depth of 30–40 m has proved sufficient so far.
 78f21b3	The five phases of making a cased pile
-617604f	<b>80–180<small>cm</small></b><span>diameter (80, 100, 120, 150, 180 cm)</span>
-220dec8	<b>15–50<small>(100) m</small></b><span>length; in Hungarian practice 30–40 m has been sufficient so far</span>
 4e179be	Field of application
 65c10c8	in particularly unfavourable soils (too)
 37aca67	for large diameters of at least 80 cm
@@ -61,15 +55,7 @@ ac49161	complex machinery
 23f8cf3	moving and extending the casing is cumbersome
 1aec639	Bentonite-supported (slurry-supported) pile
 03c01e8	The result is very similar to the cased pile, only here the stability of the bore is ensured by the drilling mud, the bentonite slurry. It has spread mainly for large-diameter, deep piles: because of excavation with a drilling bucket and slurry support, the capacity of the rig does not limit the achievable depth. In Hungary it is used mainly for the foundations of long-span bridges.
-491c5ae	positioning, pre-drilling, placing the guide tube;
-25fc146	filling with the drilling fluid (slurry);
-90a5777	removing the soil with a short auger or drilling bucket to the required depth, with slurry support;
-c01b27d	cleaning the pile base, placing the reinforcement, starting concreting through a tremie pipe;
-c95bc22	concreting up to ground level – the concrete displaces the slurry from below;
-00ae074	removing the guide tube.
 842721e	The six construction phases of a bentonite-supported pile
-2bf66ad	<b>80–180<small>cm</small></b><span>diameter</span>
-50f53b0	<b>15–50<small>m</small></b><span>length – not limited by the capacity of the rig</span>
 4026e82	in any soil
 38c1982	complex machinery, a slurry mixing and cleaning plant is needed
 67ff704	slower drilling

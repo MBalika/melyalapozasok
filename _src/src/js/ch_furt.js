@@ -269,7 +269,7 @@ register('furtLab', (root) => {
     sHw.el.hidden = !gw;
     boxBel.hidden = m !== 'bel'; boxZ.hidden = m !== 'k_zagy' || !gw;
     sDh.el.style.opacity = gw ? 1 : 0.45; sDh.input.disabled = !gw;
-    // a zagyszint legfeljebb a vezetőcső tetejéig (0,3 m-rel a terep alá) emelhető: a tényleges szintelőny ennél nem lehet nagyobb
+    // a zagyszint legfeljebb az iránycső tetejéig (0,3 m-rel a terep alá) emelhető: a tényleges szintelőny ennél nem lehet nagyobb
     const szE = Math.min(sSz.v, Math.max(0, hw - 0.3));
     const r = labEval({ soil, gw, hw, z, m, dh: sDh.v, lead: sLead.v, sz: szE });
     const zmax = Math.max(12, z + 3);
@@ -438,7 +438,7 @@ register('furtTremie', (root) => {
   R(bg, 0, yz(HP - 2.5), W, H - yz(HP - 2.5), '', { fill: 'url(#pat-water)', opacity: 0.5 });
   gwMark(bg, W - 100, yz(HP - 2.5), 'talajvíz');
   R(bg, X - BW / 2 - 6, TOP - 14, 8, 40, 'f-steel2'); R(bg, X + BW / 2 - 2, TOP - 14, 8, 40, 'f-steel2');
-  T(bg, X - BW / 2 - 10, TOP + 20, 'vezetőcső', 't-sm halo', { 'text-anchor': 'end' });
+  T(bg, X - BW / 2 - 10, TOP + 20, 'iránycső', 't-sm halo', { 'text-anchor': 'end' });
   T(bg, 10, H - 8, 'szemléltető modell · 16 m-es zagyos furat', 't-sm halo');
   let c, tip, run, inc, plugY, done, breach, last, primed;
   const reset = () => { c = 0; tip = 0.3; run = false; inc = []; plugY = -1; done = false; breach = false; last = 0; primed = false; bPlay.textContent = '▶ Betonozás'; };
@@ -705,8 +705,8 @@ function pickEval(o) {
   // köpenycsöves
   {
     const r = { id: 'kop', t: 'Köpenycsöves (béléscsöves)', s: 2.5, why: [], out: null, href: '#furt-kopeny' };
-    if (D < 80) r.out = 'legalább 80 cm átmérő'; else r.why.push(['ok', `Ø ${D} cm: a 80–180 cm-es tartományban`]);
-    if (L0 < 15) { r.s -= 1; r.why.push(['warn', 'rövid cölöphöz összetett, lassú technológia']); } else r.why.push(['ok', `${L0} m: belefér a 15–50 (100) m-be`]);
+    if (D < 80) r.out = 'legalább 80 cm átmérő'; else r.why.push(['ok', `Ø ${D} cm: a 80–150 (350) cm-es tartományban`]);
+    if (L0 < 15) { r.s -= 1; r.why.push(['warn', 'rövid cölöphöz összetett, lassú technológia']); } else r.why.push(['ok', `${L0} m: belefér a 15–100 m-be`]);
     if (soil === 'laza') { r.s += 1.5; r.why.push(['ok', 'különösen kedvezőtlen, iszapos talajban is biztonságos']); }
     if (gw && (soil === 'szem' || soil === 'laza')) r.why.push(['warn', 'a cső járjon a kiemelés előtt, a vizet pótolni kell']);
     if (big) { r.s += 1; r.why.push(['ok', 'nagy teherbírás']); }
@@ -718,8 +718,8 @@ function pickEval(o) {
   // zagyos
   {
     const r = { id: 'k_zagy', t: 'Bentonitzagyos', s: 2.5, why: [], out: null, href: '#furt-zagy' };
-    if (D < 80) r.out = 'legalább 80 cm átmérő'; else r.why.push(['ok', `Ø ${D} cm: a 80–180 cm-es tartományban`]);
-    if (L0 < 15) { r.s -= 1; r.why.push(['warn', 'rövid cölöphöz összetett technológia']); } else r.why.push(['ok', `${L0} m: belefér a 15–50 m-be`]);
+    if (D < 80) r.out = 'legalább 80 cm átmérő'; else r.why.push(['ok', `Ø ${D} cm: a 80–150 (350) cm-es tartományban`]);
+    if (L0 < 15) { r.s -= 1; r.why.push(['warn', 'rövid cölöphöz összetett technológia']); } else r.why.push(['ok', `${L0} m: belefér a 15–100 m-be`]);
     if (L0 > 30) { r.s += 1; r.why.push(['ok', 'nagy mélységben a gép kapacitása nem korlát']); }
     if (soil === 'laza') { r.s += 0.5; r.why.push(['ok', 'bármely talajban alkalmazható']); }
     if (big) { r.s += 1; r.why.push(['ok', 'nagy teherbírás']); }
@@ -776,7 +776,7 @@ defineQuiz('furt', 'Kvíz – fúrt cölöpök', [
   { q: 'Mikor alkalmazható megtámasztás nélküli furat?', a: ['Kötött talajban, talajvíz felett, legfeljebb 8–10 m-ig', 'Szemcsés talajban, ha a talajvíz mélyen van, legfeljebb 20 m-ig', 'Bármely talajban, ha gyorsan betonozunk', 'Talajvíz alatt, ha a furat rövid'], c: 0, e: 'Kötött talajban, talajvíz felett, nem túl hosszú furatnál – és a kiemelés után rögtön ki kell betonozni.' },
   { q: 'Miért nem kell a CFA-cölöp betonját vibrálni?', a: ['A folyós konzisztencia és a nyomás alatti bedolgozás öntömörödést biztosít', 'Mert a CFA-cölöp vasalatlan', 'Mert a spirál forgása tömöríti', 'Mert a talajdugó összenyomja'], c: 0, e: 'A betont a fúrószáron át, túlnyomással pumpálják: a folyós beton és a nyomás együtt tömörít.' },
   { q: 'Mi a nyakasodás egy CFA-cölöpnél?', a: ['Elvékonyodás, ha a spirált gyorsabban húzzák, mint ahogy a beton a teret kitölti', 'A cölöpfej megvastagodása a túlbetonozástól', 'A vasalási armatúra felúszása a friss betonban', 'A fúrószár elhajlása kemény rétegben'], c: 0, e: 'Ha a betonáram nem tart lépést a húzással, a talaj a beton helyére nyomódik. A gépek ezért folyamatosan mérik a betonnyomást és a betonmennyiséget.' },
-  { q: 'Melyik technológia NEM alkalmas egy 150 cm átmérőjű cölöphöz?', a: ['CFA', 'Köpenycsöves fúrt cölöp', 'Bentonitzagyos fúrt cölöp'], c: 0, e: 'A CFA-cölöp átmérője 40–120 cm; a köpenycsöves és a zagyos cölöp 80–180 cm-ig készül.' },
+  { q: 'Melyik technológia NEM alkalmas egy 150 cm átmérőjű cölöphöz?', a: ['CFA', 'Köpenycsöves fúrt cölöp', 'Bentonitzagyos fúrt cölöp'], c: 0, e: 'A CFA-cölöp átmérője 40–120 cm; a köpenycsöves és a zagyos cölöp 80–150 (350) cm-es átmérővel készül.' },
   { q: 'Kontraktorcsöves betonozásnál mi a legfontosabb szabály?', a: ['A cső vége végig a friss betonba merüljön', 'A cső végét a betonozás elején ki kell emelni a zagyból', 'A betont a cső tetejéről a zagyra kell önteni', 'A zagyot betonozás előtt le kell szivattyúzni a furatból'], c: 0, e: 'Ha a cső vége kiemelkedik, az új beton a zagyon át hullik, keveredik vele, és zagyzárvány – folytonossági hiány – keletkezik.' },
   { q: 'Miért veszélyes a furat talpán maradt fellazult, leülepedett talaj?', a: ['Jelentősen csökkentheti a talpellenállást', 'Növeli a köpenysúrlódást', 'Megakadályozza a vasalás behelyezését', 'Nincs jelentősége, a beton kiszorítja'], c: 0, e: 'A cölöp talpa a fellazult rétegen ül – a talpellenállás jelentősen kisebb lehet a tervezettnél.' },
   { q: 'Melyik talajkiemelő eszköz való elsősorban szemcsés talajhoz?', a: ['Dobfúró', 'Rövid spirál', 'Csavart fúrófej'], c: 0, e: 'A dobfúró a szemcsés talajt a dobban viszi ki; a rövid spirál elsősorban kötött talajhoz való, a csavart fúrófej pedig nem kiemel, hanem kiszorít.' },

@@ -237,7 +237,7 @@ const PH = {
       heap(g, S, S.cx - 46, 26); rig(g, S, 132); auger(g, S.cx, 146, 282, 30, 'f-soilC', S.GY); rot(g, S.cx, 122, 20);
       lab(g, S.cx - 15, 236, 'talajdugó', -1, S.cx - 34);
     }],
-    ['Betonozás', 'A fúrószáron át túlnyomással betont pumpálnak, amely feltolja a spirált – ezt húzással segítik. Vibrálni nem kell: a folyós beton nyomás alatt öntömörödik.', (g, S) => {
+    ['Betonozás', 'A fúrószáron át túlnyomással betont pumpálnak, amely feltolja a spirált (rajta a talajdugóval) – ezt húzással segítik, forgatás nélkül. Vibrálni nem kell: a folyós beton nyomás alatt öntömörödik.', (g, S) => {
       heap(g, S, S.cx - 50, 32); rig(g, S, 66); conc(g, S.cx - 15, 214, 30, 68, true); auger(g, S.cx, 80, 214, 30, 'f-soilC'); up(g, S.cx - 34, 208, 168);
       truck(g, 4, S.GY - 1); hose(g, 32, S.GY - 26, S.cx - 11, 72); lab(g, S.cx + 15, 252, 'beton', 1, S.cx + 30);
     }],
@@ -268,8 +268,8 @@ const PH = {
     }],
   ] },
   zagy: { W: 184, prof: 'p_zagy', items: [
-    ['Előkészítés', 'pontraállás, előfúrás, vezetőcső', (g, S) => {
-      rig(g, S, 22); casing(g, S.cx, S.GY - 10, S.GY + 32, 34); shortAuger(g, S.cx, 36, S.GY + 26, 28); lab(g, S.cx + 20, S.GY + 24, 'vezetőcső', 1, S.cx + 30);
+    ['Előkészítés', 'pontraállás, előfúrás, iránycső', (g, S) => {
+      rig(g, S, 22); casing(g, S.cx, S.GY - 10, S.GY + 32, 34); shortAuger(g, S.cx, 36, S.GY + 26, 28); lab(g, S.cx + 20, S.GY + 24, 'iránycső', 1, S.cx + 30);
     }],
     ['Zagy betöltése', 'bentonitos fúrófolyadék a furatba', (g, S) => {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); slurry(g, S.cx, S.GY - 4, S.GY + 40, 30); P(g, `M8 ${S.GY - 30} H${S.cx - 8} v22`, 's-ink', { fill: 'none', 'stroke-width': 4, opacity: 0.7 });
@@ -287,7 +287,7 @@ const PH = {
       casing(g, S.cx, S.GY - 10, S.GY + 32, 34); conc(g, S.cx - 15, S.GY + 10, 30, 288 - S.GY, true); slurry(g, S.cx, S.GY + 2, S.GY + 10, 30); cage(g, S.cx, S.GY - 18, 296, 26); funnel(g, S.cx, 30, 200);
       P(g, `M${S.cx + 18} ${S.GY - 2} q20 -6 30 -22`, 's-ink', { fill: 'none', 'stroke-width': 2.2, opacity: 0.7 }); T(g, S.cx + 20, S.GY - 30, 'zagy ki', 'start');
     }],
-    ['Vezetőcső ki', 'a vezetőcső eltávolítása, kész a cölöp', (g, S) => {
+    ['Iránycső ki', 'az iránycső eltávolítása, kész a cölöp', (g, S) => {
       conc(g, S.cx - 15, S.GY, 30, 298 - S.GY); cage(g, S.cx, S.GY - 14, 296, 26); casing(g, S.cx, S.GY - 46, S.GY - 6, 34); up(g, S.cx - 30, S.GY - 6, S.GY - 40); up(g, S.cx + 30, S.GY - 6, S.GY - 40);
     }],
   ] },

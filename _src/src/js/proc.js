@@ -780,7 +780,7 @@ PROC.cfa = {
       arrowV(g, x - 38, 196, 236);
       tag(g, x + 24, 280, 'talajdugó', { to: [x + 8, 274] });
     } },
-    { w: 360, t: 'Betonozás', d: 'A fúrószáron át túlnyomással betont pumpálnak, amely feltolja a spirált – ezt húzással segítik. Vibrálni nem kell: a folyós beton nyomás alatt öntömörödik.', draw(g, M) {
+    { w: 360, t: 'Betonozás', d: 'A fúrószáron át túlnyomással betont pumpálnak, amely feltolja a spirált (rajta a talajdugóval) – ezt húzással segítik, forgatás nélkül. Vibrálni nem kell: a folyós beton nyomás alatt öntömörödik.', draw(g, M) {
       const x = 222, toe = 304, tip = 236, top = tip - (M.GY - 2 - 54);
       spoil(g, M, x - 40, 26, 8); spoil(g, M, x + 16, 20, 7);
       const r = rig(g, M, x, { top: 20, headY: top - 24 });
@@ -1008,12 +1008,12 @@ PROC.kopeny = {
 PROC.zagy = {
   H: 360, GY: 178, gw: 196, layers: [{ k: 'fill', y: 178, lab: 'feltöltés' }, { k: 'sand', y: 206, lab: 'homok' }, { k: 'hard', y: 284, lab: 'kemény agyag' }],
   steps: [
-    { w: 230, t: 'Előkészítés', d: 'pontraállás, előfúrás, vezetőcső', draw(g, M) {
+    { w: 230, t: 'Előkészítés', d: 'pontraállás, előfúrás, iránycső', draw(g, M) {
       const x = 90, r = rig(g, M, x, { top: 16, headY: 24 });
       casing(g, x, M.GY - 10, M.GY + 34, 18, { joints: false, collar: true });
       kelly(g, x, r.headBot, M.GY - 6);
       auger(g, x, M.GY - 6, M.GY + 30, 16, { pitch: 12, soilFrom: M.GY - 6, soil: 'fill', pat: 'pr-p-fill' });
-      tag(g, x + 28, M.GY + 26, 'vezetőcső', { to: [x + 20, M.GY + 22] });
+      tag(g, x + 28, M.GY + 26, 'iránycső', { to: [x + 20, M.GY + 22] });
     } },
     { w: 260, t: 'Zagy betöltése', d: 'bentonitos fúrófolyadék a furatba', draw(g, M) {
       const x = 186;
@@ -1064,7 +1064,7 @@ PROC.zagy = {
       arrowH(g, x - 30, x - 66, M.GY - 30, { c: 'slurry2', w: 2.4 });
       tag(g, x - 48, M.GY - 46, 'zagy ki', { anchor: 'middle' });
     } },
-    { w: 250, t: 'Vezetőcső ki', d: 'a vezetőcső eltávolítása, kész a cölöp', draw(g, M) {
+    { w: 250, t: 'Iránycső ki', d: 'az iránycső eltávolítása, kész a cölöp', draw(g, M) {
       const x = 66;
       concrete(g, x - 16, M.GY, 32, 300 - M.GY, false);
       cage(g, x, M.GY - 16, 298, 12);

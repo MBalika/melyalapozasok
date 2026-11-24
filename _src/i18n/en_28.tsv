@@ -137,7 +137,6 @@ d57a665	Excavated soil
 4c8ffb6	The bore collapses!
 3f58175	Refusal!
 544a478	CFA: D = 40–120 cm, L at most 22–24 m.
-042cd03	Slurry-supported: D = 80–180 cm, L = 15–50 m.
 5aba3c1	base: ${pct(cap.Rb / R)} %
 cb7bfa6	${cnt('bad')} errors
 af2659e	${cnt('ok')} OK

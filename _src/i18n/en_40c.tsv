@@ -6,7 +6,6 @@ dabd729	4–12 m; spun: max. 20–22 m
 f88e190	depends on the tool size
 49e1266	Rotate: drag (horizontally on a phone) · zoom: scroll or pinch · the rig is simplified, and the load transfer is an illustrative model.
 624e24e	Eight methods, from CFA through the Franki pile to the micropile. The rigs are simplified; the order and logic of the work phases are real.
-85588c4	The casing supports the wall of the bore right up to concreting, so it can be used safely even in silty soil with a high water content – with diameters of 80–180 cm and lengths of 15–50 (100) m. CFA is built to 22–24 m at most and is not suitable for loose, flowing soil; without support the bore would collapse, and the ground screw is only a 2–4 m element for small loads.
 c9b87b7	well foundation, Ø 2.5 m
 a264ce6	influence depth ≈ ${fmt(HM, 1)} m (Δσ<sub>z</sub> = 0.2·σ′<sub>v0</sub>)
 94ab62b	stress bulb: Δσ<sub>z</sub>/q isobars
