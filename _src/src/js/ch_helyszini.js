@@ -1,5 +1,5 @@
 // ch_helyszini – C04 Franki és csavart cölöpök: kiszorítás vs helyettesítés szemcseszimuláció, Franki-lépések, csavart cölöp monitor, kvíz
-import { register, shell, slider, seg, toggle, select, stat, verdict, figure, svg, h, fmt, clear, clamp, lerp, smooth, pathD, loop, fitCanvas, cssVar, onTheme } from './core.js';
+import { register, shell, slider, seg, toggle, select, stat, verdict, figure, svg, h, fmt, clear, clamp, lerp, smooth, pathD, loop, fitCanvas, cssVar, onTheme, EN } from './core.js';
 import { defineQuiz } from './ui.js';
 import './g3_phases.js';
 
@@ -153,13 +153,13 @@ register('hsz-reszecske', (root) => {
 
 /* =================================================================== 2. Franki-lépések */
 const FSTEPS = [
-  { k: 'Dugó', t: '1. Pontraállás, dugó', d: 'A béléscsövet (Ø 46–52 cm, 30 mm fal) a cölöp helyére állítják, az aljába kb. 1 m magasan száraz betont (vagy kavicsot) töltenek.' },
-  { k: 'Leverés', t: '2. Leverés a dugóval', d: 'A 3 t-ás ejtőkos a csőben a dugót döngöli; a dugó a súrlódás révén magával húzza a csövet. A cső kiszorítja a talajt – sem talaj, sem víz nem jut bele.' },
-  { k: 'Kiverés', t: '3. A dugó kiverése', d: 'A teherbíró rétegben a csövet a verőállványhoz rögzítik, és erőteljes döngöléssel kiverik belőle a betont – kb. 30–40 cm marad a csőben.' },
+  { k: 'Dugó', t: '1. Pontraállás, dugó', d: 'A cölöpözőgép pontraáll és letalpal. A béléscső (Ø 46–52 cm, 30 mm fal, 13 m, toldható) aljába kb. 1 m magasan száraz betont (vagy kavicsot) töltenek.' },
+  { k: 'Leverés', t: '2. Leverés a dugóval', d: 'A 3 t-ás ejtőkos a csőben a dugót döngöli; a dugó a súrlódás révén magával húzza a csövet a teherbíró talajrétegbe. A cső kiszorítja a talajt – sem talaj, sem víz nem jut bele.' },
+  { k: 'Kiverés', t: '3. A dugó kiverése', d: 'A kívánt talpmélység elérése után a csövet a verőállványhoz rögzítik, és erőteljes döngöléssel kiverik belőle a betont – kb. 30–40 cm marad a csőben.' },
   { k: 'Hagyma', t: '4. A „hagyma” kidöngölése', d: 'Újabb és újabb betonadagokat juttatnak a csőbe, és kidöngölik: a talp kiszélesedik, körülötte a talaj tömörödik.' },
-  { k: 'Vasalás', t: '5. Vasalás', d: 'A vasalási armatúrát a csőbe engedik, egészen a hagymáig.' },
-  { k: 'Törzs', t: '6. A törzs betonozása', d: 'Újabb betonadagolás és döngölés mellett a béléscsövet fokozatosan visszahúzzák. A döngölt beton a talajba is benyomódik – a törzs érdes, bordázott.' },
-  { k: 'Kész', t: '7. Kész cölöp', d: 'A kész cölöp átmérője a kiszorítás miatt kb. 60 cm, hossza legfeljebb 16–18 m; 2000–3000 kN teherbírás is elérhető.' },
+  { k: 'Vasalás', t: '5. Vasalás', d: 'Beállítják a vasalást: a vasalási armatúrát a csőbe engedik, egészen a hagymáig.' },
+  { k: 'Törzs', t: '6. A törzs betonozása', d: 'Újabb betonadagolás és döngölés mellett kibetonozzák a cölöptestet, közben a béléscsövet folyamatosan visszanyerik. A döngölt beton a talajba is benyomódik – a törzs érdes, bordázott.' },
+  { k: 'Kész', t: '7. Kész cölöp', d: 'A kész cölöp átmérője a talajkiszorítás miatt kb. 60 cm, hossza legfeljebb 16–18 m. A szabálytalan oldalfelület nagy köpenysúrlódást ad, a nagyméretű „hagymatalp” jelentősen növeli a csúcsellenállást: 2000–3000 kN teherbírás is elérhető.' },
 ];
 register('hsz-franki', (root) => {
   const { ctrls, viz, out } = shell(root);
@@ -282,7 +282,7 @@ register('hsz-franki', (root) => {
 });
 
 /* =================================================================== 3. csavart cölöp – monitor */
-const HEADS = { sima: { t: 'Sima köpenyű', k: 1, vol: 1 }, menetes: { t: 'Csavarmenetes', k: 1.1, vol: 0.85 }, fdp: { t: 'FDP', k: 1.2, vol: 1 } };
+const HEADS = { fdp: { t: 'FDP – sima köpenyű', k: 1.15, vol: 1 }, menetes: { t: EN ? 'Screwsol – threaded' : 'Screwsol – csavarmenetes', k: 1.1, vol: 0.85 } };
 const CSOIL = {
   laza: { t: 'Laza homok', key: 'soilA', q: 1.0, comp: 'jelentős', ok: 'ok' },
   kozep: { t: 'Közepesen tömör homok', key: 'soilD', q: 1.5, comp: 'mérsékelt', ok: 'ok' },
@@ -291,9 +291,9 @@ const CSOIL = {
 };
 register('hsz-csavart', (root) => {
   const { ctrls, viz, out } = shell(root);
-  const sHd = seg(ctrls, { label: 'Fúrófej', options: Object.entries(HEADS).map(([v, o]) => ({ v, t: o.t })), value: 'sima' });
-  const sD = slider(ctrls, { label: 'Átmérő', sym: 'D', min: 300, max: 600, step: 10, value: 450, unit: 'mm', d: 0 });
-  const sL = slider(ctrls, { label: 'Cölöphossz', sym: 'L', min: 6, max: 20, step: 0.5, value: 14, unit: 'm', d: 1 });
+  const sHd = seg(ctrls, { label: 'Fúrófej', options: Object.entries(HEADS).map(([v, o]) => ({ v, t: o.t })), value: 'fdp' });
+  const sD = slider(ctrls, { label: 'Átmérő', sym: 'D', min: 300, max: 700, step: 10, value: 450, unit: 'mm', d: 0 });
+  const sL = slider(ctrls, { label: 'Cölöphossz', sym: 'L', min: 6, max: 18, step: 0.5, value: 14, unit: 'm', d: 1 });
   const sS = select(ctrls, { label: 'Talaj', options: Object.entries(CSOIL).map(([v, o]) => ({ v, t: o.t })), value: 'laza' });
   const bGo = h('button', { type: 'button', class: 'btn btn-acc btn-sm' }, '▶ Fúrás indítása');
   ctrls.append(h('div', { class: 'hsz-btns' }, bGo));
@@ -426,8 +426,8 @@ defineQuiz('helyszini', 'Kvíz – Franki és csavart cölöpök', [
   { q: 'Mekkora teherbírás érhető el egy Franki-cölöppel?', a: ['2000–3000 kN', '200–300 kN', '20–30 kN', '20 000–30 000 kN'], c: 0, e: 'A Franki-cölöp legfeljebb 16–18 m hosszú, átmérője a kiszorítás miatt kb. 60 cm, és 2000–3000 kN-os teherbírás is elérhető vele.' },
   { q: 'Mi történik a talajjal, amikor csavart (talajkiszorításos) cölöpöt fúrnak?', a: ['A fúrófej oldalra tolja és tömöríti, alig jön fel furadék', 'A spirál a teljes talajtérfogatot a felszínre hozza', 'Bentonitzagy szorítja ki a talajt', 'A talajt víz alatti kotrással emelik ki'], c: 0, e: 'A különleges fej fúrás közben maga körül széttolja és tömöríti a talajt. Csak csekély furatanyag kerül a felszínre – nem kell elszállítani.' },
   { q: 'Melyik ellenállás nő elsősorban a helyben készülő csavart cölöpnél a tömörítés miatt?', a: ['A köpenymenti ellenállás', 'Csak a talpellenállás', 'A cölöp húzószilárdsága', 'Egyik sem – csak a beton szilárdsága nő'], c: 0, e: 'Előregyártott (vert) cölöpnél a talp- és a köpenymenti, a helyben készülő csavart cölöpnél elsősorban a köpenymenti ellenállás nő meg.' },
-  { q: 'Hogyan kerül a vasalás a csavart cölöpbe?', a: ['A friss betonba vibrálással juttatják le', 'A fúrás előtt a talajba verik', 'A fúrószárban együtt halad le a fúrófejjel', 'A beton megszilárdulása után befúrják'], c: 0, e: 'A betonozás a fúrószáron át, a szár forgatása és kiemelése közben történik; az előregyártott betonacél armatúrát utána, a friss betonba vibrálják le.' },
-  { q: 'Mekkora a csavart cölöpök járatos átmérője és legnagyobb hossza?', a: ['300–600 mm, kb. 20 m', '80–180 cm, 50 m', '10–30 cm, 6 m', '1,0–1,5 m, 40 m'], c: 0, e: 'A járatos átmérő 300–600 mm, a legnagyobb hossz kb. 20 m. A kisebb átmérő miatti kisebb tartószerkezeti teherbírás korlátozhatja a terjedését.' },
-  { q: 'Melyik csavart cölöprendszer hagy csavarmenetes palástot?', a: ['Screwsol', 'Omega', 'Fundex', 'CFA'], c: 0, e: 'Sima köpenyű pl. az Omega, a Fundex, a De Waal és a CHD; csavarmenetes köpenyű a Screwsol. A CFA nem kiszorításos, hanem talajhelyettesítéses (legfeljebb részleges kiszorítású) fúrt cölöp.' },
+  { q: 'Hogyan kerül a vasalás a csavart cölöpbe?', a: ['A friss betonba helyezik el, szükség esetén vibrációval', 'A fúrás előtt a talajba verik', 'A fúrószárban együtt halad le a fúrófejjel', 'A beton megszilárdulása után befúrják'], c: 0, e: 'A betonozás nyomás alatt, a fúrószáron át történik, a szár folyamatos forgatása és kiemelése közben; a vasalást utána a friss betonba helyezik el, szükség esetén vibrációval.' },
+  { q: 'Mekkora a csavart cölöpök fúrófejének átmérője és a cölöpök legnagyobb hossza?', a: ['300–700 mm, 18 (20) m', '80–180 cm, 50 m', '10–30 cm, 6 m', '1,0–1,5 m, 40 m'], c: 0, e: 'A fúrófej átmérője 300–700 mm, a legnagyobb hossz 18 (20) m. A kisebb átmérő miatti kisebb tartószerkezeti teherbírás korlátozhatja a terjedését.' },
+  { q: 'Melyik csavart cölöprendszer hagy csavarmenetes palástot?', a: ['Screwsol', 'Omega', 'Fundex', 'CFA'], c: 0, e: 'A mélyépítő cégek fúrófejeinek két csoportja van: az FDP típus sima köpenyű (mint a CFA), ilyen pl. az Omega és a Fundex; a Screwsol csavarmenetes palástú, a fúrószárat visszahúzás közben is forgatják. A CFA nem kiszorításos, hanem talajhelyettesítéses fúrt cölöp.' },
   { q: 'Melyik talajban a legkevésbé alkalmas a csavart, talajkiszorításos cölöp?', a: ['Nagyon tömör kavicsban, kemény agyagban', 'Laza homokban', 'Közepesen tömör homokban', 'Puha–gyúrható agyagban'], c: 0, e: 'A technológia laza–közepesen tömör szemcsés, átmeneti és puha–gyúrható kötött talajban népszerű. Nagyon tömör, kemény talajban a fej nem tudja széttolni a talajt.' },
 ]);

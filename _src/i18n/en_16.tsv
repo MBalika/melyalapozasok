@@ -89,22 +89,17 @@ fec198e	DISPLACEMENT
 8633aa0	DISPLACEMENT – SCREW, DRIVEN
 563520d	Plug
 f4358e5	1. Positioning, plug
-ec66257	The casing (Ø 46–52 cm, 30 mm wall) is set at the pile position, and approx. 1 m of dry concrete (or gravel) is placed in its bottom.
 6e76174	Driving
 14f4b02	2. Driving with the plug
-4bd1cb9	The 3 t drop hammer rams the plug inside the tube; through friction the plug drags the tube down with it. The tube displaces the soil – neither soil nor water gets into it.
 a43b743	Driving out
 f99a847	3. Driving out the plug
-b7ced45	In the bearing stratum the tube is fixed to the driving frame, and the concrete is driven out of it by heavy ramming – approx. 30–40 cm stays in the tube.
 5982efa	4. Ramming out the “bulb”
 23de30f	Further batches of concrete are placed in the tube and rammed out: the base widens and the soil around it is compacted.
 4878ded	5. Reinforcement
 dd18f2b	Shaft
 5ddf097	6. Concreting the shaft
-b7ba7f4	The casing is gradually withdrawn while more concrete is added and rammed. The rammed concrete is also pressed into the soil – the shaft is rough and ribbed.
 2ed650a	Done
 660c18b	7. Finished pile
-3084247	Because of the displacement the finished pile is approx. 60 cm in diameter and at most 16–18 m long; a resistance of 2000–3000 kN can be achieved.
 41f042a	Step
 5c87bb6	Batches of concrete rammed into the base
 89fe042	One batch ≈ 0.12 m³ (illustrative value).
@@ -126,4 +121,3 @@ e9b3293	▶ Start drilling
 4c00f7d	Soil pushed aside (does not come up)
 76d2526	A bored pile would produce this much spoil
 3328e0d	The reinforcement cage floating up in the fresh concrete
-ebc9f83	The reinforcement cage is lowered into the tube, right down to the bulb.

@@ -91,3 +91,38 @@ ce01be9	Which layer can <b>stop</b> the driving of a precast reinforced concrete
 e3a4cca	most soil types; most effective in granular soil
 4f34ca5	In fill with large blocks, pile driving can be used only to a limited extent – a single thinner such layer can prevent the pile from getting down.
 0396c7b	Vibration can be used in most soil types and causes less noise than driving; the noise is reduced by screening.
+f926f3e	<b>300–700 mm</b>, up to 18 (20) m
+e743d73	The drawings of the drilling heads are illustrative sketches; the details differ between systems.
+b9859dd	The screw-shaped head “cuts” a pile with a threaded shaft into the soil: the drill string is rotated during withdrawal too. The threads further improve the contact with the soil.
+08f7c93	Screwsol type – threaded shaft
+b0155f4	Full Displacement Pile: the displacement head pushes the soil sideways and compacts it; hardly any spoil comes to the surface. It leaves a pile with a smooth shaft, like CFA. Such systems include Omega, Fundex, De Waal and CHD.
+1daee7d	FDP type – smooth shaft
+ef9b291	Ground engineering companies have developed different drilling heads; they fall into <b>two groups</b>. The diameter of the drilling head is <b>300–700 mm</b>.
+0655bb6	Its advantages are that there is no dynamic effect or noise, and only a little spoil comes to the surface – no need to arrange its removal and disposal. Because of the compaction, its specific bearing capacity is greater than that of a replacement pile of the same size. The rig continuously measures the rate of advance of the drill string during installation and withdrawal, the engine power and the torque needed for rotation, and the concrete pressure during concreting – an automatic record is produced from these data.
+2476f65	Over the past two decades the bored, cast-in-place <b>displacement screw pile</b> has been gaining more and more ground. At the end of the hollow drill string there is a special drilling head: the rig drives it down while screwing and pushing, and the head <b>pushes aside and compacts</b> the soil around itself – without bringing it up. At the required depth <b>concreting under pressure</b> starts through the drill string, while the string is continuously rotated and withdrawn; finally the reinforcement is placed, with vibration if necessary.
+1aa0c7c	In Hungary it was a widespread foundation method in transport construction (bridges) and for industrial buildings and housing-estate buildings. Because of its considerable environmental impact and low productivity, CFA and screw piling technologies have pushed it out of large-scale industrial use – but an updated version is still used in several countries.
+bfff652	Between the irregular shaft surface and the soil the <b>shaft friction is high</b>, which is favourable for the bearing capacity; the large <b>“bulb base”</b> significantly increases the base resistance. Because of the soil displacement, the final pile diameter will be approx. 60 cm.
+6180ff0	The casing is driven into the bearing stratum. Once the required base depth is reached, the tube is fixed to the driving frame, and the concrete is driven out of it by heavy ramming. When only 30–40 cm of concrete is left in the tube, further batches are rammed out one after another: this forms the enlarged <b>“bulb”</b> at the base. Finally the reinforcement is placed, and with more concrete added and rammed the pile shaft is concreted too, while the casing is continuously recovered.
+3db848c	<b>300–700<small>mm</small></b><span>diameter of the drilling head of screw piles; maximum length 18 (20) m</span>
+4bb2679	max. 18 (20) m
+597e59a	300–700 mm
+f498c71	Diameter 300–700 mm.
+2837583	Screw pile (FDP, Screwsol)
+1a6a49b	2000–3000 kN; pushed out in Hungary (environmental impact, low productivity)
+97f18f2	The drilling heads of ground engineering companies fall into two groups: the FDP type has a smooth shaft (like CFA), e.g. Omega and Fundex; Screwsol has a threaded shaft, and the drill string is rotated during withdrawal too. CFA is not a displacement but a replacement bored pile.
+cdb786e	The drilling head diameter is 300–700 mm, the maximum length 18 (20) m. Its spread may be limited by the lower structural capacity due to the smaller diameter.
+d433b41	What are the drilling-head diameter and the maximum length of screw piles?
+1a6e881	Concreting is done under pressure through the drill string, while the string is continuously rotated and withdrawn; the reinforcement is then placed in the fresh concrete, with vibration if necessary.
+a5aa34d	It is placed in the fresh concrete, with vibration if necessary
+3451e13	FDP – smooth shaft
+d98bb4b	Because of the soil displacement the finished pile is approx. 60 cm in diameter and at most 16–18 m long. The irregular shaft surface gives high shaft friction, and the large “bulb base” significantly increases the base resistance: a bearing capacity of 2000–3000 kN can be reached.
+81c455b	With more concrete added and rammed, the pile shaft is concreted while the casing is continuously recovered. The rammed concrete is also pressed into the soil – the shaft is rough and ribbed.
+ad57ca1	The reinforcement is set: the reinforcement cage is lowered into the tube, down to the bulb.
+1872027	Once the required base depth is reached, the tube is fixed to the driving frame, and the concrete is driven out of it by heavy ramming – approx. 30–40 cm stays in the tube.
+b358383	The 3 t drop hammer rams the plug inside the tube; through friction the plug drags the tube down with it into the bearing stratum. The tube displaces the soil – neither soil nor water gets into it.
+a195ede	The piling rig moves onto the pile position and sets its outriggers. Approx. 1 m of dry concrete (or gravel) is placed in the bottom of the casing (Ø 46–52 cm, 30 mm wall, 13 m, extendable).
+c42b6ad	Screw pile (e.g. FDP, Screwsol)
+3f5d687	At most 16–18 m long; a bearing capacity of 2000–3000 kN can be reached. In Hungary it has been pushed out of large-scale industrial use.
+f5e3d77	The rammed concrete bulb gives a large base resistance; a bearing capacity of 2000–3000 kN can be reached. In Hungary it has been pushed out of large-scale industrial use.
+a81cfb1	Displacement drilling head (FDP or Screwsol type) at the end of a hollow drill string, which pushes aside and compacts the soil while drilling; 300–700 mm, up to 18 (20) m.
+b22dbe9	It is effective in loose or medium-dense granular, intermediate or weakly cohesive (soft–firm) soil. It is typically used to found moderately loaded industrial buildings and 5–10-storey residential or office buildings; it is economical and fast. Its spread may be limited at most by the lower structural capacity due to the smaller diameter.

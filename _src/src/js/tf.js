@@ -65,7 +65,7 @@ const GLOSS = [
   ['Cölöpfejezés', 'A leverés után a cölöp fejét a tervezett szintig visszabontják.', 'elore', 'kisz'],
   ['Talajcsavar', 'Csavarással, talajkiemelés nélkül a talajba juttatott acélelem: kúpos, menetes csúcsú talajcsavar vagy csavartányéros cölöp. Jellemzően legfeljebb 2–4 m; kisebb terhekhez, visszanyerhető.', 'elore', 'kisz'],
   ['Franki-cölöp', 'Béléscsöves, helyben vert betoncölöp: a csőbe töltött száraz betondugót ejtőkossal döngölik, a talpon „hagyma” alakul ki.', 'helyszini', 'kisz'],
-  ['Csavart cölöp', 'Üreges fúrószár végén kiszorító fúrófej (Omega, FDP, Fundex, Screwsol), amely fúrás közben széttolja és tömöríti a talajt; 300–600 mm, kb. 20 m-ig.', 'helyszini', 'kisz'],
+  ['Csavart cölöp', 'Üreges fúrószár végén kiszorító fúrófej (FDP vagy Screwsol típus), amely fúrás közben széttolja és tömöríti a talajt; 300–700 mm, 18 (20) m-ig.', 'helyszini', 'kisz'],
   ['CFA-cölöp', 'Folyamatos (végtelenített) spirállal fúrt cölöp: a betont a fúrószáron át, túlnyomással juttatják a furatba; 40–120 cm, 6–22 (24) m.', 'furt', 'hely'],
   ['Talajdugó', 'A CFA spirálján maradó talaj, amely fúrás közben megtámasztja a furat falát.', 'furt', 'hely'],
   ['Nyakasodás', 'A cölöptest helyi elvékonyodása, például ha a CFA fúrószárát a betonozás ütemén túl gyorsan húzzák ki.', 'furt', 'hely'],

@@ -33,7 +33,7 @@ const TECH = {
   dry: { t: 'Fúrt, megtámasztás nélkül', g: 'talajhelyettesítéses', D: [40, 100, 10, 60], L: 8, ks: 1, kb: 1, yt: null, fault: null, link: '#furt' },
   driven: { t: 'Vert előregyártott vasbeton', g: 'talajkiszorításos', D: [30, 50, 5, 40], L: 10, ks: 1.3, kb: 1.3, yt: 'KDKCobw52qk', fault: null, link: '#elore' },
   franki: { t: 'Franki-cölöp', g: 'talajkiszorításos', D: [60, 60, 1, 60], L: 12, ks: 1.2, kb: 1, yt: '_QsH5x0ndtI', fault: null, link: '#helyszini' },
-  screw: { t: 'Csavart, talajkiszorításos', g: 'talajkiszorításos', D: [30, 60, 5, 45], L: 12, ks: 1.3, kb: 1, yt: 'hwP8iZzAq6I', fault: null, link: '#helyszini' },
+  screw: { t: 'Csavart, talajkiszorításos', g: 'talajkiszorításos', D: [30, 70, 5, 45], L: 12, ks: 1.3, kb: 1, yt: 'hwP8iZzAq6I', fault: null, link: '#helyszini' },
   micro: { t: 'Mikrocölöp (merevbetétes)', g: 'egyéb (mikrocölöp)', D: [10, 30, 2, 20], L: 12, ks: 1.2, kb: 0, yt: '7M7YPxBn8Xk', fault: null, link: '#egyeb' },
 };
 // a technológia jellemző hossztartománya: váltáskor az ezen kívüli hossz a technológia alapértékére áll
@@ -133,7 +133,7 @@ function evaluate(S) {
     if (L > 18) add('bad', 'Túl hosszú Franki-cölöp', 'A Franki-cölöp hossza legfeljebb kb. 16–18 m.');
     else if (L > 16) add('warn', 'A Franki-cölöp hosszának határán', 'A hossz legfeljebb kb. 16–18 m lehet.');
     if (P.bear && L < P.bear + 0.5) add('warn', 'Nem éri el a teherbíró réteget', 'A béléscsövet a teherbíró talajrétegbe verik – a hagyma ott ad nagy talpellenállást.');
-    add('ok', 'Kiszélesedő talp: „hagyma”', 'A kidöngölt betonhagyma nagy talpellenállást ad; 2000–3000 kN-os teherbírás is elérhető. Hazánkban mára szinte teljesen eltűnt.');
+    add('ok', 'Kiszélesedő talp: „hagyma”', 'A kidöngölt betonhagyma nagy talpellenállást ad; 2000–3000 kN-os teherbírás is elérhető. Hazánkban a nagy léptékű ipari alkalmazásból kiszorult.');
     add(S.nb ? 'bad' : 'warn', 'Verés, döngölés', 'A béléscsövet ejtőkossal verik le, a betont döngölik – dinamikus hatással és zajjal jár.' + (S.nb ? ' Rezgésérzékeny szomszéd mellett kerülendő.' : ''));
   }
   if (k === 'screw') {
@@ -746,7 +746,7 @@ register('sim3d', (root) => {
         { t: 'Dugó kiverése, hagyma', dur: 3.5, d: 'A csövet rögzítik, a dugót kiverik, és újabb betonadagokkal kiszélesedő talpat – „hagymát” – döngölnek.', a(st, u) { const b = blows(u, 10); st.casing = { top: -1.6 - Lr, bot: L - Lr }; st.plug = u < 0.25 ? { top: L - 1 + u * 2, bot: L } : null; st.bulb = sm(u); st.conc = { top: L - Lr - 0.8 * M.D * st.bulb, bot: L + 0.2 }; st.ram = { bot: st.conc.top - b.lift * 1.6 }; st.focus = L; st.span = 8; st.vibe = b.lift; st.lab = 'hagyma'; } },
         { t: 'Vasalás', dur: 3, d: 'A vasalási armatúrát a béléscsőbe engedik.', a(st, u) { st.ram = { bot: lerp(L - 2, -3, sm(u)) }; cageIn(st, u); } },
         { t: 'Köpeny betonozása, cső visszahúzása', dur: 5.5, d: 'Betonadagolás és döngölés közben a béléscsövet visszahúzzák. A kiszorítás miatt a kész cölöp kb. 60 cm átmérőjű.', a(st, u) { const top = lerp(st.conc.top, 0, sm(u)), cb = Math.min(L - Lr, top + 0.4); st.conc = { top, bot: L + 0.2 }; st.casing = { top: cb - L - 1.6, bot: cb }; st.ram = { bot: Math.max(-2, top - 0.3) - blows(u, 24).lift * 1.4 }; st.focus = top; st.span = 10; } },
-        { t: 'Kész a cölöp', dur: 2.5, d: 'Legfeljebb 16–18 m hosszú; 2000–3000 kN-os teherbírás is elérhető. Hazánkban mára szinte teljesen eltűnt.', a(st, u) { st.casing = null; st.ram = null; done(st, u); } },
+        { t: 'Kész a cölöp', dur: 2.5, d: 'Legfeljebb 16–18 m hosszú; 2000–3000 kN-os teherbírás is elérhető. Hazánkban a nagy léptékű ipari alkalmazásból kiszorult.', a(st, u) { st.casing = null; st.ram = null; done(st, u); } },
       ];
     }
     if (k === 'screw') return [
@@ -986,7 +986,7 @@ register('sim3d', (root) => {
     cD.el.classList.toggle('sim-off', T.D[0] === T.D[1]); cD.input.disabled = T.D[0] === T.D[1];
     cShape.el.style.display = S.tech === 'driven' ? '' : 'none';
     techChip.innerHTML = `<span class="chip grp">${T.g}</span>`;
-    dNote.innerHTML = { franki: 'A cső 46–52 cm-es; a kész cölöp a kiszorítás miatt kb. 60 cm átmérőjű.', driven: 'Négyzetes: 30×30 vagy 40×40 cm, L = 4–12 m · kör (pörgetett): D = 25–50 cm, L ≤ 20–22 m.', micro: 'Mikrocölöp: fúrt törzsátmérő legfeljebb 250–300 mm.', cfa: 'CFA: D = 40–120 cm, L legfeljebb 22–24 m.', casing: 'Béléscsöves: D = 80–180 cm, L = 15–50 (100) m.', slurry: 'Zagyos: D = 80–180 cm, L = 15–50 m.', dry: 'Megtámasztás nélkül: legfeljebb 8–10 m mélységig.', screw: 'Csavart: D = 300–600 mm, L legfeljebb kb. 20 m.' }[S.tech];
+    dNote.innerHTML = { franki: 'A cső 46–52 cm-es; a kész cölöp a kiszorítás miatt kb. 60 cm átmérőjű.', driven: 'Négyzetes: 30×30 vagy 40×40 cm, L = 4–12 m · kör (pörgetett): D = 25–50 cm, L ≤ 20–22 m.', micro: 'Mikrocölöp: fúrt törzsátmérő legfeljebb 250–300 mm.', cfa: 'CFA: D = 40–120 cm, L legfeljebb 22–24 m.', casing: 'Béléscsöves: D = 80–180 cm, L = 15–50 (100) m.', slurry: 'Zagyos: D = 80–180 cm, L = 15–50 m.', dry: 'Megtámasztás nélkül: legfeljebb 8–10 m mélységig.', screw: 'Csavart: D = 300–700 mm, L legfeljebb 18 (20) m.' }[S.tech];
     const f = T.fault;
     cFault.el.style.display = f ? '' : 'none'; fNote.style.display = f ? '' : 'none';
     if (f) { cFault.el.querySelector('span').textContent = f; fNote.textContent = 'Kapcsold be, és nézd meg, mi romlik el – és mit árul el a lista.'; }

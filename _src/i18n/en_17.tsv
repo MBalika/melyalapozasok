@@ -53,15 +53,10 @@ bb41e3c	Only the base resistance
 a7e8083	Neither – only the strength of the concrete increases
 b621d53	For a precast (driven) pile both the base and the shaft resistance increase, for a cast-in-place screw pile primarily the shaft resistance.
 7337d0e	How does the reinforcement get into a screw pile?
-2d5911f	It is vibrated down into the fresh concrete
 aa399bf	It is driven into the ground before drilling
 c8b8b5b	It goes down inside the drill stem together with the drilling head
 2e21790	It is drilled in after the concrete has hardened
-061f123	Concreting takes place through the drill stem while the stem is rotated and withdrawn; the prefabricated reinforcement cage is then vibrated down into the fresh concrete.
-2b077af	What are the usual diameter and the maximum length of screw piles?
-61c0a98	The usual diameter is 300–600 mm, and the maximum length approx. 20 m. The lower structural capacity due to the smaller diameter may limit its spread.
 d7a8a4b	Which screw pile system leaves a threaded shaft?
-ddebda5	Smooth-shaft systems are e.g. Omega, Fundex, De Waal and CHD; Screwsol has a threaded shaft. CFA is not a displacement pile but a replacement (at most partial displacement) bored pile.
 422ccb4	In which soil is the displacement screw pile least suitable?
 856457f	In very dense gravel, hard clay
 a96e75c	In medium-dense sand

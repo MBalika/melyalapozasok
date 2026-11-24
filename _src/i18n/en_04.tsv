@@ -14,35 +14,23 @@ a1d82a4	Soil displacement also works without a finished element. For the <b>Fran
 a40dbf7	<b>3<small>t</small></b><span>mass of the Franki drop hammer – it rams the concrete plug inside the tube</span>
 dd44e93	<b>2–3<small>MN</small></b><span>achievable resistance of a Franki pile (2000–3000 kN), with a length of at most 16–18 m</span>
 fe3b065	<b>≈ 60<small>cm</small></b><span>diameter of the finished Franki pile from a casing of 46–52 cm</span>
-a2be83b	<b>300–600<small>mm</small></b><span>usual diameters of screw piles; maximum length approx. 20 m</span>
 8466981	What happens to the soil?
 7ee5d59	The fate of the soil around the pile depends on the technology. With <b>replacement</b> the soil is removed (bored out) and the hole is filled with concrete – meanwhile the wall of the bore may <b>loosen</b> slightly. With <b>displacement</b> practically no soil comes up: the pile or the drilling head pushes the soil sideways, the grains are pressed together, and the soil is <b>compacted</b>.
 a0280a1	Denser soil gives more friction along the shaft. So for a precast (driven) pile both the base and the shaft resistance increase, and for a cast-in-place screw pile primarily the <b>shaft resistance</b>.
 e75a8ce	Displacement or replacement – particle simulation
 89c7942	Franki pile – rammed base, “bulb”
 4908ac3	The Franki pile is a driven, “monolithic” concrete pile of high bearing capacity, made with a recovered casing. Most often approx. <b>1 m of dry concrete</b> (or gravel) is placed in the bottom of a casing tube <b>46–52 cm in diameter</b>, with 30 mm wall thickness and 13 m long (extendable), and rammed inside the tube with a <b>3 t drop hammer</b>. Through friction the plug drags the tube down with it – the tube goes down without any soil or water getting into it.
-87035ae	In the bearing stratum the tube is fixed to the driving frame, and the concrete is driven out of it by heavy ramming. When only 30–40 cm of concrete is left in the tube, further batches are rammed out one after another: this forms the enlarged <b>“bulb”</b> at the base. Finally – after the reinforcement is placed – the tube is withdrawn while more concrete is added and rammed.
 c420c83	The seven steps of making a Franki pile
 480deed	← swipe sideways for the steps →
 9769051	A disappearing classic
-19f0d23	In Hungary it was widely used until the end of the last century – mainly for the foundations of bridges and industrial buildings – but by now it has almost completely disappeared.
 cdd49a2	Franki pile step by step
 dbeac2a	A row of excavated Franki piles with different bulbous bases
 8fd3479	Excavated Franki piles – the bulbs of the bases are clearly visible
 ae2f502	A person standing next to a large excavated pile bulb
 b7aef03	An excavated bulb – the compacted concrete base greatly increases the bearing capacity
 94a00e0	Screw pile – drilling without spoil
-d403935	Its advantages are that there is no dynamic effect or noise, and only a little spoil comes to the surface – no need to arrange its removal and disposal. Because of the compaction, its specific bearing capacity is greater than that of a replacement pile of the same size. A modern rig continuously measures and records the drilling and concreting data.
 fc2027b	The five steps of making a screw pile
 a1dfef7	Where does it work well?
-fe76953	In loose or medium-dense granular, intermediate or weakly cohesive (soft–firm) soil it is economical and fast for founding moderately loaded industrial facilities. Its spread may be limited at most by the lower structural capacity due to the smaller diameter.
-ec8a851	Smooth shaft
-ebe3b7f	The displacement head leaves a pile with a smooth shaft. Such systems include Omega, Fundex, De Waal and CHD.
-1c6a8f8	Threaded shaft
-e38ca7e	The screw-shaped head “cuts” a pile with a threaded shaft into the soil – the threads further improve the contact with the soil. An example is Screwsol.
-6ae3320	=
-3994383	“Full displacement”: the thick drill tube and the displacement body push the whole pile volume of soil sideways; practically nothing comes to the surface.
-6b5c986	The drawings of the drilling heads are illustrative sketches; the companies have developed different drilling heads, and the details differ between systems.
 cec501f	Screw pile – on the rig operator’s monitor
 c2c4fb6	Drilling rig with a displacement drilling head hanging on the mast
 50f8ab6	Drilling rig with a displacement drilling head – smooth-shaft system
@@ -71,7 +59,6 @@ e093065	<b>30×30–40×40 cm</b>, 4–12 m; tubular pile D = 25–50 cm, 20–2
 79eb7e1	large load, good bearing stratum at the base
 35e8f3a	Screw (cast in place)
 be74a41	displacement, bored, concreted under pressure
-e778c56	<b>300–600 mm</b>, up to approx. 20 m
 074ea64	no dynamic effect
 650c8ab	little
 4e391a8	loose–medium granular, soft cohesive soil, moderate load

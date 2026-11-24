@@ -357,7 +357,7 @@ const ITEMS = [
   { t: 'Talajcsavar', k: 'k', p: 'előregyártott', e: '„Dugóhúzószerűen” csavarják be, menetet vág a talajba, és nem hozza fel.' },
   { t: 'Facölöp', k: 'k', p: 'előregyártott', e: 'Levert keményfa cölöp – régi épületek alatt gyakran „előkerül”.' },
   { t: 'Franki-cölöp', k: 'k', p: 'helyszíni', e: 'A béléscsövet a benne lévő száraz betondugóval verik le, majd talphagymát döngölnek – végig kiszorítja a talajt.' },
-  { t: 'Csavart cölöp (pl. Omega, FDP)', k: 'k', p: 'helyszíni', e: 'A speciális fúrófej fúrás közben széttolja és tömöríti a talajt, alig hoz fel furatanyagot.' },
+  { t: 'Csavart cölöp (pl. FDP, Screwsol)', k: 'k', p: 'helyszíni', e: 'A speciális fúrófej fúrás közben széttolja és tömöríti a talajt, alig hoz fel furatanyagot.' },
   { t: 'Sajtolt cölöp', k: 'k', p: 'előregyártott', e: 'Puhább talajban verés és vibrálás nélkül „nyomják” le – kis zajjal, kisebb teherbírású cölöpöknél.' },
 ];
 register('rsz-valogato', (root) => {
