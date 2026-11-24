@@ -1,7 +1,7 @@
 // ch_elore – C03 Előregyártott cölöpök: behajtási módok, vibrálás-labor, rezgés a szomszédban, kvíz
 import { register, shell, slider, seg, toggle, select, stat, verdict, figure, svg, h, fmt, clear, clamp, lerp, pathD, loop, EN } from './core.js';
 import { defineQuiz } from './ui.js';
-import { driveScene, vibroLab } from './proc.js';
+import { driveScene, vibroLab, vibScene } from './proc.js';
 
 const txt = (p, x, y, s, cls = 't-lab', extra = {}) => svg('text', { x, y, class: cls, text: s, ...extra }, p);
 // SVG-felirat alsó (_) vagy felső (^) indexszel: txtI(p, x, y, ['R/R', '_0'], …) – dy-os tspan, nem baseline-shift
@@ -153,7 +153,9 @@ register('elo-rezges', (root) => {
   const sE = slider(ctrls, { label: 'Ütési energia', sym: 'E', min: 10, max: 80, step: 1, value: 30, unit: 'kJ', d: 0 });
   const sB = seg(ctrls, { label: 'Szomszéd épület', options: Object.entries(BLD).map(([v, o]) => ({ v, t: o.t })), value: 'lakas', vert: true });
   const sR = slider(ctrls, { label: 'Távolság a cölöptől', sym: 'r', min: 2, max: 60, step: 0.5, value: 8, unit: 'm', d: 1 });
-  const fig = figure(viz, 660, 380);
+  const fig = figure(viz, 660, 420);
+  const scene = svg('svg', { x: 0, y: 0, width: 660, height: 200, viewBox: '0 0 660 200' }, fig);
+  const gr = svg('g', {}, fig);
   const ver = verdict(viz);
   const oV = stat(out, { label: 'Rezgéssebesség a szomszédnál', unit: 'mm/s', d: 1 });
   const oL = stat(out, { label: 'Határérték (nagyságrend)', unit: 'mm/s', d: 0 });
@@ -176,31 +178,15 @@ register('elo-rezges', (root) => {
   }
   loop(root, (t) => draw(t));
   function draw(t) {
-    clear(fig);
+    clear(gr);
     const T = TECH[sT.v], B = BLD[sB.v], r = sR.v;
     const v = vAt(sT.v, r) * (T.peak || 1), u = v / B.lim;
-    const GY = 120, X = (m) => 70 + (m / 60) * 510; // a 60 m-re álló épület is beférjen a képbe
-    rect(fig, 0, 0, 660, GY, 'fill:var(--sky)'); soilRect(fig, 0, GY, 660, 42, 'soilA');
-    line(fig, 0, GY, 660, GY, 'stroke:var(--soil-line);stroke-width:1.5');
-    // gép
-    const gx = X(0);
-    rect(fig, gx - 4, 18, 8, GY - 30, 'fill:var(--steelm2)'); rect(fig, gx - 30, GY - 22, 60, 18, 'fill:var(--steelm2)', { rx: 3 });
-    // hullámok
-    const amp = Math.min(1, v10(sT.v) / 15);
-    for (let k = 0; k < 4; k++) { const rr = ((t * 70 + k * 45) % 180); svg('path', { d: `M${gx - rr} ${GY} A${rr} ${rr * 0.32} 0 0 0 ${gx + rr} ${GY}`, style: `fill:none;stroke:var(--bad);stroke-width:${1 + 1.5 * amp}`, opacity: (1 - rr / 180) * (0.25 + 0.6 * amp) }, fig); }
-    // épület
-    const bx = X(r), sh = Math.sin(t * 40) * Math.min(4, u * 2.2);
+    const X = (m) => 70 + (m / 60) * 510;
     const col = u > 1 ? 'var(--bad)' : u > 0.7 ? 'var(--warn)' : 'var(--ok)';
-    const bw = sB.v === 'ipari' ? 70 : 52, bh = sB.v === 'ipari' ? 64 : sB.v === 'mu' ? 84 : 72;
-    const g = svg('g', { transform: `translate(${sh},0)` }, fig);
-    rect(g, bx, GY - bh, bw, bh, 'fill:var(--building);stroke:' + col + ';stroke-width:2.5');
-    if (sB.v === 'mu') svg('path', { d: `M${bx - 4} ${GY - bh} L${bx + bw / 2} ${GY - bh - 26} L${bx + bw + 4} ${GY - bh}Z`, style: 'fill:var(--building2);stroke:' + col + ';stroke-width:2' }, g);
-    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) rect(g, bx + 8 + j * (bw / 2 - 2), GY - bh + 10 + i * 20, bw / 2 - 18, 10, 'fill:var(--building2)');
-    if (u > 1) svg('path', { d: `M${bx + bw * 0.6} ${GY - bh + 4} l-6 12 l8 6 l-7 14`, style: 'fill:none;stroke:var(--bad);stroke-width:1.8' }, g);
-    line(fig, gx, GY + 26, bx, GY + 26, 'stroke:var(--ink);stroke-width:1');
-    txt(fig, (gx + bx) / 2, GY + 22, `r = ${fmt(r, 1)} m`, 't-num halo', { 'text-anchor': 'middle' });
+    vibScene(scene, t, { tech: sT.v, bld: sB.v, r, v, u, v10: v10(sT.v) * (T.peak || 1), vtxt: v < 0.1 ? '< 0,1' : fmt(v, 1) });
+    const fig = gr;
     // grafikon – log y
-    const cx0 = 70, cx1 = X(60), cy0 = 190, cy1 = 336, LMIN = -1, LMAX = 2;
+    const cx0 = 70, cx1 = X(60), cy0 = 232, cy1 = 376, LMIN = -1, LMAX = 2;
     const Yl = (vv) => clamp(cy1 - ((Math.log10(Math.max(vv, 0.1)) - LMIN) / (LMAX - LMIN)) * (cy1 - cy0), cy0 - 6, cy1);
     line(fig, cx0, cy1, cx1, cy1, 'stroke:var(--line2)'); line(fig, cx0, cy0, cx0, cy1, 'stroke:var(--line2)');
     for (const vv of [0.1, 1, 10, 100]) { line(fig, cx0, Yl(vv), cx1, Yl(vv), 'stroke:var(--line);stroke-width:1'); txt(fig, cx0 - 6, Yl(vv) + 4, fmt(vv, vv < 1 ? 1 : 0), 't-sm', { 'text-anchor': 'end' }); }
@@ -215,7 +201,8 @@ register('elo-rezges', (root) => {
     line(fig, cx0, Yl(B.lim), cx1, Yl(B.lim), `stroke:var(--bad);stroke-width:1.4;stroke-dasharray:6 4`);
     txt(fig, cx0 + 6, Yl(B.lim) - 5, `határ: ${B.t.toLowerCase()} ≈ ${B.lim} mm/s`, 't-sm t-bad halo');
     svg('circle', { cx: X(r), cy: Yl(v), r: 6, style: `fill:${col};stroke:var(--surface);stroke-width:2` }, fig);
-    txt(fig, X(44), Yl(vAt(sT.v, 44) * (T.peak || 1)) - 9, T.t, 't-sm t-grp halo', { 'text-anchor': 'middle' });
+    const yc = Yl(vAt(sT.v, 44) * (T.peak || 1)), yl = Yl(B.lim);
+    txt(fig, X(44), Math.abs(yc - yl) < 15 ? Math.max(yc, yl) + 15 : yc - 9, T.t, 't-sm t-grp halo', { 'text-anchor': 'middle' });
     txtI(fig, cx1, cy0 - 8, ['Szemléltető modell: v = v', '_10', '·(10 m / r)', '^n'], 't-sm', { 'text-anchor': 'end' });
   }
   upd();

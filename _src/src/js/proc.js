@@ -1736,6 +1736,8 @@ function drvCsavar(g, u, st) {
 // keskeny kijelzőn a feliratok betűmérete nő, hogy kb. 9–10 képpontos maradjon
 let TGF = 1;
 const tg = (g, x, y, t, o = {}) => tag(g, x, y, t, { fs: 12 * TGF, ...o });
+/** beágyazott <svg> megjelenített szélessége (a getBoundingClientRect a túllógó tartalmat is beleszámolja) */
+const nestW = (s) => { const o = s.ownerSVGElement; if (!o || !o.viewBox.baseVal || !o.viewBox.baseVal.width) return s.getBoundingClientRect().width; return (o.getBoundingClientRect().width / o.viewBox.baseVal.width) * s.width.baseVal.value; };
 const fitTGF = (cw, vbw, px = 9.5, mx = 1.8) => (cw > 0 ? Math.round(Math.max(1, Math.min(mx, (px * vbw) / (12 * cw))) * 20) / 20 : 1);
 function drvStatic(g, mode, st) {
   const { W, GY } = DRV;
@@ -1804,7 +1806,7 @@ export function driveScene(s, mode, u, labels = {}) {
 /** 3.4 – vibrálás-labor bal oldala (300×330): daru kötelén lógó vibrátor, vasbeton cölöp csúccsal, rezgő talaj */
 export function vibroLab(s, t, o) {
   defs(); CUR.W = 300;
-  const cw = s.getBoundingClientRect().width, narrow = cw > 0 && cw < 260;
+  const cw = nestW(s), narrow = cw > 0 && cw < 260;
   TGF = fitTGF(cw, 300, 9, 1.35);
   while (s.firstChild) s.removeChild(s.firstChild);
   const g = g_(s), GY = 96, X = 132, SC = 24, Lp = 7 * SC;
@@ -1838,6 +1840,175 @@ export function vibroLab(s, t, o) {
   if (!narrow) tg(g, X + 40, vu.ecc[1] + 30, 'forgó excentrikus tömegek', { to: [vu.ecc[0] + 4, vu.ecc[1] + 4] });
   if (tip < 322) tg(g, X + 34, tip - 6, 'cölöpcsúcs', { to: [X + 4, tip - 6] });
   if (!narrow) tg(g, 8, GY - 10, 'vasbeton cölöp', { to: [X - 9, GY - 8] });
+}
+
+/* ================================================================== 3.5 – rezgés a szomszédban */
+/** Szomszéd épület: 'ipari' (vb. vázas csarnok), 'lakas' (kétszintes lakóház), 'mu' (műemlék templommal). x: a cölöp felőli homlokzat */
+function nbBuilding(g, kind, x, GY, st) {
+  const b = g_(g, { class: 'pr-nb' });
+  if (kind === 'ipari') {
+    const w = 150, h = 56;
+    R(b, x, GY - h, w, h, F('steel1') + `;stroke:${v('steel3')};stroke-width:1`);
+    for (let xx = x + 6; xx < x + w; xx += 6) Ln(b, xx, GY - h + 2, xx, GY, SK('steel2', 0.6));
+    for (let xx = x; xx <= x + w; xx += 37.5) R(b, xx - 2, GY - h, 4, h, F('steel3'));
+    P(b, `M${x - 4} ${GY - h} L${x + w / 2} ${GY - h - 9} L${x + w + 4} ${GY - h}Z`, F('steel3'));
+    R(b, x + 12, GY - h + 8, w - 24, 6, 'fill:url(#pr-glass)');
+    R(b, x + 48, GY - 34, 30, 34, F('steel2') + `;stroke:${v('steel3')};stroke-width:.8`);
+    for (let yy = GY - 32; yy < GY; yy += 4) Ln(b, x + 48, yy, x + 78, yy, SK('steel3', 0.5));
+    return { w, h: h + 9, wall: [x + 8, GY - 30], obs: [[x - 4, GY - h - 9, w + 8, h + 9]] };
+  }
+  if (kind === 'lakas') {
+    const w = 78, h = 52;
+    R(b, x, GY - h, w, h, F('wallh') + `;stroke:${v('wallh2')};stroke-width:.9`);
+    R(b, x + w - 22, GY - h - 30, 8, 16, F('roof2'));
+    P(b, `M${x - 7} ${GY - h} L${x + w / 2} ${GY - h - 28} L${x + w + 7} ${GY - h}Z`, F('roof') + `;stroke:${v('roof2')};stroke-width:.9`);
+    for (let k = 1; k < 4; k++) Ln(b, x - 7 + k * 6.5, GY - h - k * 4.3, x + w + 7 - k * 6.5, GY - h - k * 4.3, SK('roof2', 0.6));
+    Ln(b, x, GY - h / 2, x + w, GY - h / 2, SK('wallh2', 0.8));
+    for (const [wx, wy] of [[x + 9, GY - h + 7], [x + 33, GY - h + 7], [x + 57, GY - h + 7], [x + 9, GY - 20], [x + 57, GY - 20]]) {
+      R(b, wx, wy, 12, 12, 'fill:url(#pr-glass)' + `;stroke:${v('wallh2')};stroke-width:1`); Ln(b, wx + 6, wy, wx + 6, wy + 12, SK('wallh2', 0.7));
+    }
+    R(b, x + 33, GY - 22, 12, 22, F('timber2'));
+    return { w, h: h + 28, wall: [x + 3, GY - 30], obs: [[x - 7, GY - h - 30, w + 14, h + 30]] };
+  }
+  // műemlék: templom toronnyal, íves ablakokkal, párkánnyal
+  const w = 96, h = 54, tw = 24;
+  R(b, x, GY - h, w, h, F('wallh') + `;stroke:${v('wallh2')};stroke-width:.9`);
+  R(b, x - 2, GY - h - 3, w + 4, 4, F('wallh2'));
+  P(b, `M${x + tw - 2} ${GY - h - 2} L${x + tw + (w - tw) / 2} ${GY - h - 24} L${x + w + 3} ${GY - h - 2}Z`, F('roof') + `;stroke:${v('roof2')};stroke-width:.9`);
+  R(b, x, GY - h - 34, tw, h + 34, F('wallh') + `;stroke:${v('wallh2')};stroke-width:.9`);
+  P(b, `M${x - 3} ${GY - h - 34} L${x + tw / 2} ${GY - h - 66} L${x + tw + 3} ${GY - h - 34}Z`, F('roof2'));
+  Ln(b, x + tw / 2, GY - h - 66, x + tw / 2, GY - h - 74, SK('dark', 1.2)); Ln(b, x + tw / 2 - 3, GY - h - 71, x + tw / 2 + 3, GY - h - 71, SK('dark', 1.2));
+  C(b, x + tw / 2, GY - h - 20, 5, F('steel1') + `;stroke:${v('wallh2')};stroke-width:.8`);
+  for (const wx of [x + tw + 12, x + tw + 34, x + tw + 56]) P(b, `M${wx} ${GY - 12} V${GY - h + 18} a6 6 0 0 1 12 0 V${GY - 12}Z`, 'fill:url(#pr-glass)' + `;stroke:${v('wallh2')};stroke-width:1`);
+  P(b, `M${x + 6} ${GY} V${GY - 16} a6 6 0 0 1 12 0 V${GY}Z`, F('timber2'));
+  return { w, h: h + 74, wall: [x + tw + 4, GY - 26], obs: [[x - 3, GY - h - 74, tw + 6, h + 74], [x + tw - 2, GY - h - 24, w - tw + 5, h + 24]] };
+}
+/** 3.5 – a cölöpözés rezgése és a szomszéd épület. s: 660×200-as SVG. o: { tech, bld, r, v, u, lim, vtxt } */
+export function vibScene(s, t, o) {
+  defs(); CUR.W = 660;
+  while (s.firstChild) s.removeChild(s.firstChild);
+  const cw = nestW(s); TGF = fitTGF(cw, 660, 9, 1.8);
+  const GY = 150, X0 = 150, g = g_(s);
+  const M = { H: 200, GY, layers: [{ k: 'sand', y: GY }, { k: 'gravel', y: 186 }] };
+  backdrop(g, M, 0, 660);
+  // a rezgés erőssége (log-skálán): kos ≈ 1, talajcsavar ≈ 0
+  const I = clamp01((Math.log10(Math.max(o.v10, 0.05)) + 1) / 2.2);
+  const pulse = o.tech === 'vert', T = pulse ? 0.9 : o.tech === 'vibro' ? 0.22 : 0.6;
+  const ph = (t % T) / T;
+  // hullámfrontok a talajban (féltér, a cölöp tövéből)
+  const src = GY + 34;
+  for (let k = 0; k < (pulse ? 3 : 5); k++) {
+    const age = pulse ? ph + k : ((t / T + k) % 5) / 5 * 3;
+    const rr = 14 + age * (pulse ? 150 : 120); if (rr > 560) continue;
+    const op = (0.15 + 0.6 * I) * Math.max(0, 1 - rr / 560) * (pulse ? Math.exp(-age * 0.6) : 1);
+    const arc = `M${X0 - rr} ${GY + 1} A${rr} ${Math.min(rr * 0.42, 60)} 0 0 0 ${X0 + rr} ${GY + 1}`;
+    P(g, arc, SK('push', 4 + 7 * I, `opacity:${(op * 0.22).toFixed(3)}`));
+    P(g, arc, SK('push', 1 + 1.6 * I, `opacity:${Math.min(1, op * 1.25).toFixed(3)}`));
+  }
+  // felszíni hullám (a terep vonala kissé hullámzik): ütésnél hullámcsomag fut ki, vibrálásnál folyamatos
+  const amp = 0.4 + 3.4 * I;
+  let d = `M${X0 + 14} ${GY}`;
+  for (let x = X0 + 14; x <= 664; x += 5) {
+    const dx = x - X0, dec = Math.exp(-dx / 300);
+    const y = pulse ? GY - amp * 1.6 * dec * Math.exp(-((dx - 14 - ph * 520) ** 2) / 1400) * Math.sin(dx / 7) : GY - amp * dec * Math.sin(dx / 14 - t * 34);
+    d += ` L${x} ${y.toFixed(1)}`;
+  }
+  P(g, d, SK('ground', 1.6));
+  // gép (tükrözve: a gépház balra, a szomszéd jobbra) és a cölöp
+  const mg = g_(g, { transform: `translate(${2 * X0} 0) scale(-1 1)` });
+  const hit = pulse && ph < 0.12, jig = o.tech === 'vibro' ? Math.sin(t * 165) * 1.2 : 0;
+  if (o.tech === 'vert') {
+    const r = rig(mg, M, X0, { top: 10 });
+    const head = GY - 58 + (hit ? 1.5 : 0);
+    precast(mg, X0, head, GY + 40, 5);
+    R(mg, X0 - 9, head - 7, 18, 7, F('dark2'), { rx: 1.5 });
+    R(mg, X0 - 10, head - 49, 20, 42, F('mach') + `;stroke:${v('mach3')};stroke-width:.9`, { rx: 3 });
+    R(mg, X0 - 10, head - 43, 20, 3, F('dark'));
+    for (const yy of [head - 45, head - 15]) R(mg, X0 + 10, yy, r.mx - 6 - (X0 + 10), 4, F('dark2'));
+    Ln(mg, X0, r.top, X0, head - 49, SK('rope', 1));
+    if (ph < 0.35) for (const [dx, dy] of [[-12, 0], [12, -2], [-8, -5], [9, 4]]) C(mg, X0 + dx * (1 + ph * 3), head - 3 + dy, 2 + ph * 18, F('cloud', 0.7 * (1 - ph / 0.35)));
+  } else if (o.tech === 'vibro') {
+    const head = GY - 52 + jig;
+    pipePile(mg, X0, head, GY + 40 + jig, 6);
+    const vu = vibroUnit(mg, X0, head + 6, t * 25, { w: 30, hb: 24, half: 6 });
+    excavator(mg, M, X0, vu.top - 1, { tool: 'mount', lift: 26 });
+  } else if (o.tech === 'sajtolt') {
+    const k = 0.5, sg = g_(mg, { transform: `translate(${X0} ${GY}) scale(${k}) translate(${-X0} ${-GY})` });
+    R(sg, X0 - 172, GY - 8, 344, 8, F('dark2'), { rx: 3 });
+    R(sg, X0 - 168, GY - 30, 336, 22, F('mach') + `;stroke:${v('mach3')};stroke-width:1.2`, { rx: 3 });
+    for (const side of [-1, 1]) for (let row = 0; row < 3; row++) for (let col = 0; col < 2; col++) R(sg, side < 0 ? X0 - 160 + col * 50 : X0 + 60 + col * 50, GY - 30 - (row + 1) * 14, 48, 13, 'fill:url(#pr-pile)' + `;stroke:${v('conc2')};stroke-width:1`, { rx: 1.5 });
+    for (const dx of [-32, 24]) R(sg, X0 + dx, GY - 132, 8, 102, 'fill:url(#pr-mcyl)');
+    R(sg, X0 - 40, GY - 136, 80, 12, F('mach') + `;stroke:${v('mach3')};stroke-width:1.2`, { rx: 2 });
+    const cyc = (t % 2.4) / 2.4, push = cyc < 0.6 ? ease(cyc / 0.6) : 1 - ease((cyc - 0.6) / 0.4);
+    precast(sg, X0, GY - 110 + push * 4, GY + 80, 7);
+    R(sg, X0 - 26, GY - 78 + push * 12, 52, 22, F('mach2') + `;stroke:${v('mach3')};stroke-width:1.2`, { rx: 3 });
+    for (const dx of [-18, 18]) R(sg, X0 + dx - 2, GY - 124, 4, 46 + push * 12, F('steel1'));
+  } else if (o.tech === 'csavar') {
+    const ph2 = t * 6, top = GY - 30;
+    excavator(mg, M, X0, top - 18, { tool: 'mount', lift: 24 });
+    R(mg, X0 - 7, top - 18, 14, 14, F('dark2'), { rx: 2 });
+    R(mg, X0 - 3, top - 4, 6, GY + 26 - top, 'fill:url(#pr-cyl)');
+    for (let i = 0; i < 3; i++) { const yy = GY + 22 - i * 14; P(mg, `M${X0 - 9} ${yy} A9 2.4 0 0 0 ${X0 + 9} ${yy}`, SK('steel2', 2.4)); const a = ph2 + i; if (Math.sin(a) > -0.3) Ln(mg, X0 + 9 * Math.cos(a), yy - 2, X0 + 9 * Math.cos(a), yy + 2, SK('dark', 1.3)); }
+  } else {
+    // csavart (helyszíni) vagy CFA: fúrógép, kiszorító fej, illetve folyamatos spirál
+    const r = rig(mg, M, X0, { top: 14, headY: GY - 92 });
+    if (o.tech === 'csavart') dispTool(mg, X0, r.headBot, GY + 36, 9);
+    else { auger(mg, X0, r.headBot, GY + 36, 9, { soilFrom: GY, soilTo: GY + 34 }); spoil(mg, M, X0 + 12, 16, 5); }
+  }
+  // szomszéd épület: a távolság gyökös léptékben (2–60 m), a rezgéssel arányosan billeg; túllépésnél repedések
+  const NBW = { ipari: 154, lakas: 85, mu: 99 };
+  const bx = X0 + 96 + (660 - 8 - NBW[o.bld] - X0 - 96) * Math.pow(clamp01((o.r - 2) / 58), 0.6);
+  const sh = Math.sin(t * (pulse ? 18 : 42)) * Math.min(1.8, o.u * 0.6) * (pulse ? Math.exp(-ph * 4) * 1.6 : 1);
+  const bg = g_(g, { transform: `rotate(${sh.toFixed(3)} ${bx} ${GY})` });
+  const B = nbBuilding(bg, o.bld, bx, GY, 0);
+  if (o.u > 1) {
+    const cx = bx + B.w * 0.55;
+    P(bg, `M${cx} ${GY - B.h * 0.72} l-5 9 l6 6 l-6 11 l5 7`, SK('dark', 1.5, 'stroke-linejoin:round'));
+    P(bg, `M${bx + B.w * 0.18} ${GY - 6} l6 -8 l-2 -7 l6 -6`, SK('dark', 1.3, 'stroke-linejoin:round'));
+  }
+  // rezgésmérő a homlokzaton, fölötte a mérőműszer kijelzője élő rezgésjellel
+  const col = o.u > 1 ? '#e5534b' : o.u > 0.7 ? '#f0b429' : '#57c27a';
+  R(g, B.wall[0] - 4, B.wall[1] - 3, 8, 6, F('dark'), { rx: 1 });
+  C(g, B.wall[0], B.wall[1], 1.3, `fill:${col}`);
+  const hit2 = (rx, ry, rw, rh) => B.obs.some(([ox, oy, ow, oh]) => rx < ox + ow + 4 && rx + rw > ox - 4 && ry < oy + oh + 4 && ry + rh > oy - 4);
+  const top = Math.min(...B.obs.map((q) => q[1]));
+  // a kijelző helye: az épület fölött, mellette vagy (templomnál) a hajó fölött; ha sehol nem fér el, kisebb méretben
+  let m, MW, MH, mx, my;
+  for (const k of [1, 0.86, 0.74, 0.64]) {
+    m = Math.min(1.9, TGF) * k; MW = 136 * m; MH = 58 * m;
+    const cand = [[bx + B.w / 2 - MW / 2, top - 10 - MH], [bx - MW - 14, 6], [bx + NBW[o.bld] + 14, 6]];
+    if (B.obs.length > 1) cand.push([B.obs[1][0] + 6, B.obs[1][1] - 10 - MH], [B.obs[1][0] + B.obs[1][2] - MW, B.obs[1][1] - 10 - MH]);
+    const ok = cand.find(([cx, cy]) => cx >= X0 + 28 && cx + MW <= 656 && cy >= 4 && !hit2(cx, cy, MW, MH));
+    [mx, my] = ok || cand[0];
+    if (ok) break;
+  }
+  mx = Math.max(X0 + 28, Math.min(656 - MW, mx)); my = Math.max(4, my);
+  const ax = Math.max(mx + 10, Math.min(mx + MW - 10, B.wall[0]));
+  Ln(g, B.wall[0], B.wall[1] - 3, ax, my + MH, SK('labline', 1, 'stroke-dasharray:3 2'));
+  R(g, mx, my, MW, MH, `fill:#1c2530;stroke:${col};stroke-width:${1.4 * m}`, { rx: 6 * m });
+  el('text', { x: mx + 8 * m, y: my + 12 * m, class: 'pr-tx', style: `font-size:${9 * m}px;fill:#9fb0c2;font-weight:600;letter-spacing:.04em`, text: 'rezgésmérő' }, g);
+  C(g, mx + MW - 9 * m, my + 8.5 * m, 3 * m, `fill:${col}` + (o.u > 1 ? `;opacity:${0.45 + 0.55 * (Math.sin(t * 12) > 0)}` : ''));
+  // jel: a legújabb pont jobbra, ~2 s-os ablak; a szaggatott vonal a határérték
+  const tx0 = mx + 7 * m, tx1 = mx + MW - 7 * m, ty = my + 29 * m, th = 11 * m, N = 70, win = pulse ? 2.2 : 1.3;
+  for (const sg2 of [-1, 1]) Ln(g, tx0, ty + sg2 * th * 0.78, tx1, ty + sg2 * th * 0.78, 'stroke:#e5534b;stroke-width:.8;stroke-dasharray:3 2;opacity:.75');
+  Ln(g, tx0, ty, tx1, ty, 'stroke:#3b4a5a;stroke-width:.7');
+  const A = th * 0.78 * Math.min(1.25, o.u), nz = (x) => Math.sin(x * 91.7) * 0.5 + Math.sin(x * 37.3) * 0.5;
+  let tr = '';
+  for (let i = 0; i < N; i++) {
+    const tau = t - (N - 1 - i) * win / (N - 1);
+    let sgl;
+    if (pulse) { const age = ((tau % T) + T) % T; sgl = Math.exp(-age * 7) * Math.sin(age * 75); }
+    else if (o.tech === 'vibro') sgl = Math.sin(tau * 2 * Math.PI * 7);
+    else sgl = 0.55 * Math.sin(tau * 2 * Math.PI * 2.3) + 0.45 * nz(tau);
+    const y = ty - Math.max(-th, Math.min(th, A * sgl + th * 0.05 * nz(tau * 3)));
+    tr += `${i ? 'L' : 'M'}${(tx0 + (tx1 - tx0) * i / (N - 1)).toFixed(1)} ${y.toFixed(1)}`;
+  }
+  P(g, tr, `fill:none;stroke:${col};stroke-width:${1.3 * m};stroke-linejoin:round`);
+  el('text', { x: mx + MW / 2, y: my + MH - 7 * m, 'text-anchor': 'middle', class: 'pr-tx', style: `font-size:${11 * m}px;fill:${col};font-weight:700`, text: `v ${/^[<>]/.test(o.vtxt) ? '' : '≈ '}${o.vtxt} mm/s` }, g);
+  // távolság-méretvonal
+  const my2 = GY + 24;
+  Ln(g, X0, my2, bx, my2, SK('labline', 1.2)); for (const xx of [X0, bx]) Ln(g, xx, my2 - 5, xx, my2 + 5, SK('labline', 1.2));
+  tg(g, (X0 + bx) / 2, my2, `r = ${o.r.toFixed(1).replace('.', EN ? '.' : ',')} m`, { anchor: 'middle' });
 }
 
 function init() { document.querySelectorAll('[data-proc]').forEach(render); }
