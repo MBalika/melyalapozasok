@@ -235,8 +235,6 @@ export function initHero() {
       arrows(dyn, -4.8 - 0.75, -1.6 - Math.min(L, D) + 0.2, -1.8, bz + 3.6 + 0.6, 0x4fca8f, 4);
       arrows(dyn, 4.8 + 0.75, -1.6 - Math.min(L, D) + 0.2, -1.8, bz + 3.6 + 0.6, 0x4fca8f, 4);
       for (const x of xs) { const a = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(x, -1.4 - L - 2.0, bz + 3.6), 1.7, 0xf0864a, 0.6, 0.45); dyn.add(a); }
-      addLabel('köpenymenti ellenállás', new THREE.Vector3(-8.2, -1.6 - Math.min(L, D) / 2, bz + 3.6));
-      addLabel('talpellenállás', new THREE.Vector3(0, -1.4 - L - 2.6, bz + 3.6));
       msg = `<b>Cölöpalap: 9 cölöp, L ≈ ${fmt(L, 1)} m</b>A cölöpök átjutnak a puha rétegen, és ${fmt(2.2, 1)} m-re beállnak a teherbíró rétegbe. A terhet a köpenyük mentén és a talpukon adják le – a fejüket összefogó lemez osztja szét rájuk az épület terhét.`;
     }
     if (type === 'resfal') {
@@ -267,7 +265,6 @@ export function initHero() {
       else msg = `<b>Ilyen mélyre nem éri meg</b>${fmt(D, 1)} m mélyre a kútalap már nem gazdaságos: a kutak jellemzően 4–8 m hosszúak. Ennél mélyebb teherbíró rétegnél cölöpöt vagy résfalat választunk.`;
     }
     addLabel(`teherbíró réteg −${fmt(D, 1)} m`, new THREE.Vector3(W / 2 - 5, -D - 0.9, ZC + 0.3), 'acc');
-    addLabel('talajvíz', new THREE.Vector3(-W / 2 + 2.5, -GW - 0.7, ZC + 0.3));
     ver.innerHTML = msg;
     dirty = true;
   }
