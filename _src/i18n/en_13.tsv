@@ -123,11 +123,8 @@ c37247c	check separately
 6e1e38f	Enough for now – but it must be checked
 69c5904	The soil supports the pile
 8315238	Double with air
-4ab8d01	<b>Illustrative model.</b> The diameter has been scaled from the soil, the variant, the pressure and the lifting speed into the typical ranges (at most 60–70 cm in clay, 150–200 cm in gravel). The real diameter is verified on site with trial columns and excavation.
 28ff065	Variant
 dadbefb	Pressure
-54c7564	the usual range is 400–600 bar
-e164dc6	Lifting speed
 82b2f7a	Rotation speed
 52d002e	Column spacing in the wall
 e2daa0f	the return path of the spoil is blocked
@@ -140,7 +137,6 @@ d58d272	Lift per revolution
 2956e80	Wall thickness at the overlap <i>t</i>
 67a8d08	gap!
 b5b3f5b	Risk of hydraulic fracturing
-40f6f3f	The returning spoil cannot escape to the surface along the hole: the pressure of the 400–600 bar jet builds up in the soil. The soil fractures, and the surface – and the neighbouring building – may be lifted. The outflow of spoil must be watched all the time!
 442447e	A gap remains in the wall
 807b2eb	The column spacing (${fmt(s, 2)} m) is not smaller than the diameter (approx. ${fmt(D, 2)} m): the columns do not intersect, and the wall is not watertight. Reduce the spacing or increase the diameter.
 d3df46a	Thin overlap – risky
@@ -156,8 +152,6 @@ ca00001	1 · drilling
 0db7338	drills it out and grouts the bore and its surroundings while drilling
 7a655ad	steel bar + cement body + permeated soil sleeve, Ø 10–30 cm
 8d88dc7	underpinning, strengthening in tight spaces, against uplift
-a4d8e79	drill rod with the monitor at its bottom, with 2–5 mm nozzles
-d32e751	breaks it up with a 400–600 bar jet, mixes it with binder, partly replaces it
 05edb30	“soilcrete” column, its diameter depends on the soil
 753d4a0	underpinning, excavations, cut-off walls
 fc579ae	rotating, bladed mixing shaft

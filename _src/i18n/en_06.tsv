@@ -50,23 +50,13 @@ abbeccd	When calculating the resistance of a slender micropile, the <b>base resi
 2bb8c66	Bar heads with head plates and nuts – tied into the reinforcement of the reinforced concrete slab.
 b098e6a	Underpinning with micropiles
 d48f9d2	Does the micropile buckle?
-df14a48	<b>Jet grouting</b> is the breaking up of soil or weak rock, mixing it with binder and partly replacing it. The breaking up is done by a fluid jet of high kinetic energy, which is mostly the binder itself – usually a water–cement mix. The soil structure is destroyed, and the cement suspension penetrating the resulting gaps sets with the soil to form <b>“soilcrete”</b>. The amount of soil eroded can be controlled by the velocity of the jet.
-a6762d0	The cylindrical element is the <b>jet column</b> (jet pile), the planar element formed by grouting is the <b>jet panel</b>. It is classed among deep foundations, but it is versatile: deep foundations of new structures, deepening the foundation level of an existing structure and strengthening it, underpinning, settlement compensation, low-permeability cut-off walls, excavation support, reinforcing soil masses, auxiliary structures for tunnelling, protection against liquefaction.
-c93f4af	<b>400–600<small>bar</small></b><span>pressure of the binder jet</span>
-a0addbd	<b>2–5<small>mm</small></b><span>diameter of the monitor nozzles</span>
-acd3413	<b>100–200<small>mm</small></b><span>diameter of the pre-drilled hole</span>
-9e6e0f4	<b>60–70<small>cm</small></b><span>maximum column diameter in clay</span>
-a007462	<b>150–200<small>cm</small></b><span>up to this much in gravel</span>
-e94b880	<b>5–6<small>bar</small></b><span>pressure of the air shroud in double jet</span>
 d18f3a2	Two phases: drilling and grouting
 653dabd	<b>Drilling:</b> a 100–200 mm diameter hole to the required depth, with the help of a drilling fluid. The design of the drilling head (the “monitor”) and the pressure depend on the quality of the soil.
-69f1b3b	<b>Grouting:</b> starting from the bottom of the hole, the binder is injected into the soil through the 2–5 mm nozzles of the monitor at a pressure of 400–600 bar, while the drill rod is <b>slowly rotated and withdrawn</b>.
 7108e88	The equipment: silo, mixer, high-pressure pump, drill rod and nozzle – the drilling rig is small, and the pump plant can stand aside, even in a courtyard.
 eb6970c	spoil
 9252b0e	The four variants – how many nozzles are “switched on”?
 c1f4699	=
 78482f4	Single jet
-539ed5e	Only cement suspension is injected into the soil through a single nozzle at 400–600 bar during withdrawal and rotation.
 2c521a8	air + cement
 d3608bf	Double jet with air
 e41bb34	The cement jet of the same pressure is surrounded by an air shroud at 5–6 bar – this increases the range.
@@ -76,10 +66,8 @@ b9cd182	water
 ebada0f	air + water
 c18a285	Triple jet
 3a40a89	A water jet shrouded in an air jet breaks up the soil, and grout is injected at the same time through a separate nozzle for cementation.
-6b3afd7	The variant is decided by the number of nozzles switched on and the diameter to be achieved. The column diameter depends on the permeability of the soil: <b>smallest in clay</b> (at most 60–70 cm), <b>up to 150–200 cm in gravel</b>. Intersecting columns can form a continuous wall, and if needed a horizontal slab too.
 e925c79	Jet column factory
 04cca02	Jet panel: when we don’t rotate
-216356c	Thin panels can also be formed if the rod is <b>not rotated</b> during jetting but pulled up with two opposite nozzles that just “sweep” the soil. Panels made from neighbouring holes, joined to each other in a V shape, form a <b>watertight curtain wall</b> – with less material than columns.
 00c9fb9	If the spoil cannot get out
 1d2b8af	During grouting, attention must be paid to the <b>free outflow</b> of the excess material – the spoil returning to the surface. If it becomes blocked along the hole, the pressure builds up in the soil: hydraulic fracturing can occur, and in extreme cases <b>the building or its surroundings may even be lifted</b> by the excess cement.
 c4c551c	Jet panels in a V shape: plan and elevation
@@ -96,7 +84,6 @@ c7cf25c	A compact drilling rig on an infill site, at the foot of the neighbourin
 54612c6	Cement silo and mixer-pump plant next to a city-centre apartment block
 71dc46b	Silo and mixer-pump plant between the apartment blocks.
 449b391	Jet grouting monitor with a side nozzle
-131f52e	The monitor: the 2–5 mm nozzle on its side.
 5e1f94d	A high-pressure jet from the monitor at the surface, as a trial
 c20c77c	A trial jet at the surface – this is the energy with which it cuts the soil.
 0a48605	Excavated jet columns standing side by side in the side of an excavation

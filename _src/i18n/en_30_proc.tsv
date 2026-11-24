@@ -27,10 +27,8 @@ f6a5bdf	From the design depth it mixes the soil once more while being withdrawn.
 1c5b655	finished column
 222889f	It is cut into the previous one – so intersecting columns form a continuous wall.
 8643a06	The next column
-3d0f068	The column grows from the bottom up; the excess material reaches the surface along the hole as spoil.
 43f7122	Rotation, withdrawal
 2271030	high-pressure pump
-5342d34	A jet at 400–600 bar from the monitor nozzles cuts and mixes the soil.
 ee2fb64	Grouting from the bottom
 d2c60d9	drilling fluid
 84be844	A 100–200 mm hole to the design depth, with drilling fluid.

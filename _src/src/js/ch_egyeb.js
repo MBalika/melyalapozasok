@@ -372,9 +372,9 @@ register('egy-kihajlas', (root) => {
 /* ================================================================== 3. JET-OSZLOPGYÁR */
 const JET_SOIL = {
   k_kavics: { t: 'Kavics', D: [0.8, 2.0], col: '--soilD', grain: 2.6 },
-  k_homok: { t: 'Homok', D: [0.6, 1.6], col: '--soilA', grain: 1.5 },
+  k_homok: { t: 'Homok', D: [0.7, 1.6], col: '--soilA', grain: 1.5 },
   k_iszap: { t: 'Iszap', D: [0.45, 1.0], col: '--soilC', grain: 1.0 },
-  k_agyag: { t: 'Agyag', D: [0.35, 0.7], col: '--soilB', grain: 0.7 },
+  k_agyag: { t: 'Agyag', D: [0.45, 0.9], col: '--soilB', grain: 0.7 },
 };
 const JET_VAR = {
   szimpla: { t: 'Szimpla', f: 0.25, water: false, air: false },
@@ -384,7 +384,7 @@ const JET_VAR = {
 };
 function jetCalc(soil, vr, p, v, n) {
   const S = JET_SOIL[soil], V = JET_VAR[vr];
-  const fp = clamp((p - 300) / 300, 0, 1);
+  const fp = clamp((p - 250) / 200, 0, 1);
   const fs = 0.8 + 0.4 * clamp((60 - v) / 50, 0, 1);
   const f = clamp(V.f * (0.55 + 0.45 * fp) * fs, 0, 1);
   const D = S.D[0] + (S.D[1] - S.D[0]) * f;
@@ -392,11 +392,11 @@ function jetCalc(soil, vr, p, v, n) {
   return { D, dz, gaps: dz > 4 };
 }
 register('egy-jet', (root) => {
-  const { ctrls, viz, out } = shell(root, { foot: '<b>Szemléltető modell.</b> Az átmérőt a talaj, a változat, a nyomás és az emelési sebesség alapján a jellemző tartományokba (agyagban legfeljebb 60–70 cm, kavicsban 150–200 cm) skáláztuk. A valós átmérőt a helyszínen próbaoszlopokkal, kibontással ellenőrzik.' });
+  const { ctrls, viz, out } = shell(root, { foot: '<b>Szemléltető modell.</b> Az átmérőt a talaj, a változat, a nyomás és az emelési sebesség alapján a jellemző tartományokba (szimpla jetnél agyagban 50–70 cm, homokban 80–100 cm, dupla jetnél kb. 120 cm) skáláztuk. A valós átmérőt a helyszínen próbaoszlopokkal, kibontással ellenőrzik.' });
   const soil = seg(ctrls, { label: 'Talaj', options: Object.entries(JET_SOIL).map(([v, s]) => ({ v, t: s.t })), value: 'k_homok' });
   const vr = seg(ctrls, { label: 'Változat', options: Object.entries(JET_VAR).map(([v, s]) => ({ v, t: s.t })), value: 'szimpla' });
-  const pr = slider(ctrls, { label: 'Nyomás', sym: 'p', min: 300, max: 600, step: 10, value: 450, unit: 'bar', d: 0, hint: 'a szokásos tartomány 400–600 bar' });
-  const sp = slider(ctrls, { label: 'Emelési sebesség', sym: 'v', min: 10, max: 60, step: 1, value: 30, unit: 'cm/perc', d: 0 });
+  const pr = slider(ctrls, { label: 'Nyomás', sym: 'p', min: 250, max: 450, step: 10, value: 380, unit: 'bar', d: 0, hint: 'a jellemző injektálási nyomás 350–400 bar' });
+  const sp = slider(ctrls, { label: 'Felhúzási sebesség', sym: 'v', min: 10, max: 60, step: 1, value: 30, unit: 'cm/perc', d: 0, hint: 'jellemzően 25–35 cm/perc' });
   const rpm = slider(ctrls, { label: 'Fordulatszám', sym: 'n', min: 5, max: 25, step: 1, value: 12, unit: '1/perc', d: 0 });
   const ss = slider(ctrls, { label: 'Oszloptávolság a falban', sym: 's', min: 0.3, max: 2.4, step: 0.05, value: 0.6, unit: 'm', d: 2 });
   const blk = toggle(ctrls, { label: 'a visszafolyó iszap útja elzáródik', value: false });
@@ -426,7 +426,7 @@ register('egy-jet', (root) => {
     sDz.set(R.dz, R.gaps ? 'warn' : null);
     sT.set(t, t <= 0 ? 'bad' : t < 0.3 ? 'warn' : 'ok', t <= 0 ? 'rés!' : fmt(t, 2) + '<small>m</small>');
     sN.set(Math.ceil(10 / s) + 1);
-    if (blk.v) vd.set('bad', 'Hidraulikus talajtörés veszélye', 'A visszafolyó iszap nem tud a furat mentén a felszínre távozni: a 400–600 bar-os sugár nyomása a talajban halmozódik. A talaj felreped, a felszín – és a szomszéd épület – megemelkedhet. Az iszap kiáramlását végig figyelni kell!');
+    if (blk.v) vd.set('bad', 'Hidraulikus talajtörés veszélye', 'A visszafolyó iszap nem tud a furat mentén a felszínre távozni: a 350–400 bar-os sugár nyomása a talajban halmozódik. A talaj felreped, a felszín – és a szomszéd épület – megemelkedhet. Az iszap kiáramlását végig figyelni kell!');
     else if (t <= 0) vd.set('bad', 'Rés marad a falban', `Az oszloptávolság (${fmt(s, 2)} m) nem kisebb az átmérőnél (kb. ${fmt(D, 2)} m): az oszlopok nem metszik egymást, a fal nem vízzáró. Sűrítsd a kiosztást, vagy növeld az átmérőt.`.replace(/ m\b/g, ' m'));
     else if (t < 0.3) vd.set('warn', 'Vékony átfedés – kockázatos', `Az átfedésnél csak kb. ${fmt(t, 2)} m vastag a fal. 1 % fúrási ferdeség 10 m mélyen már 10 cm eltérés – mélyebben könnyen rés nyílhat.`.replace(/ (m|cm)\b/g, ' $1'));
     else if (R.gaps) vd.set('warn', 'Csavarvonalas hibák', `Fordulatonként ${fmt(R.dz, 1)} cm emelés túl sok: a sugár nem „söpri végig” a teljes palástot, az oszlopban csavarvonal mentén kezeletlen talaj maradhat. Lassíts, vagy forgass gyorsabban.`.replace(/ cm\b/g, ' cm'));
@@ -584,7 +584,7 @@ register('egy-jet', (root) => {
 /* ================================================================== 4. MIT CSINÁL A TALAJJAL? */
 const GEP = {
   mikro: { t: 'Mikrocölöp', tool: 'üreges, toldható acélrúd elvesző fúrófejjel', soil: 'kifúrja, a furatot és a környezetét fúrás közben injektálja', left: 'acélrúd + cementtest + átitatott talajköpeny, Ø 10–30 cm', use: 'aláfogás, megerősítés szűk helyen, felúszás ellen' },
-  jet: { t: 'Jet-grouting', tool: 'fúrószár, alján a monitor 2–5 mm-es fúvókákkal', soil: '400–600 bar-os sugárral felaprózza, kötőanyaggal keveri, részben helyettesíti', left: '„talajbeton” oszlop, átmérője a talajtól függ', use: 'aláfalazás, munkagödör, vízzáró fal' },
+  jet: { t: 'Jet-grouting', tool: 'fúrószár, alján a monitor kb. 2,5 mm-es fúvókákkal', soil: '350–400 bar-os sugárral felaprózza, kötőanyaggal keveri, részben helyettesíti', left: '„talajbeton” oszlop, átmérője a talajtól függ', use: 'aláfalazás, munkagödör, vízzáró fal' },
   dsm: { t: 'Mélykeverés', tool: 'forgó, lapátos keverőszár', soil: 'helyben, mechanikusan összekeveri a kötőanyaggal – lefelé és felfelé is', left: 'kevert oszlop (tömb, fal), mérete ≈ a szerszámé', use: 'puha talaj javítása, töltések alatt, zárófal' },
   ko: { t: 'Kavicscölöp', tool: 'rezgő szár (mélyvibrátor), csúcsán kavicsadagolás', soil: 'kiszorítja, a kavicsot szakaszosan a talajba tömöríti', left: 'tömörített kavicsoszlop – szemcsés „cölöp”', use: 'süllyedéscsökkentés, konszolidáció gyorsítása' },
 };
@@ -706,7 +706,7 @@ defineQuiz('egy', 'Kvíz – mikrocölöp, jet, keverés', [
   { q: 'Mit hagyunk figyelmen kívül a karcsú mikrocölöp teherbírásának számításakor?', a: ['a talpellenállást', 'a köpenyellenállást', 'az injektálás hatását', 'az acélbetét szilárdságát'], c: 0, e: 'A mikrocölöpnél csak a köpeny dolgozik; mivel a készítés módja meghatározó, próbaterhelést is érdemes végezni.' },
   { q: 'Mikor kell a mikrocölöp kihajlását külön vizsgálni?', a: ['ha a talaj drénezetlen nyírószilárdsága c<sub>u</sub> &lt; 10 kPa', 'ha a cölöp 10 m-nél hosszabb', 'ha a talajvíz a cölöpfej felett van', 'mindig, minden talajban'], c: 0, e: 'A kis átmérő miatt nagyon puha (c<sub>u</sub> &lt; 10 kPa) talajban a talaj oldalirányú megtámasztása kevés – ilyenkor a kihajlás válhat mértékadóvá.' },
   { q: 'Mi történik a merev magrudas, fúrt-injektált mikrocölöp (pl. Ischebeck Titan) készítésekor?', a: ['elvesző fúrófejes, belső furatú magrudat hajtanak le, és közben híg cementtejjel injektálnak', 'előregyártott acélcsövet vernek le, majd kihúzzák', 'a furatot bentonitzaggyal támasztják meg, majd kontraktorcsővel betonoznak', 'a rudat kihúzzák, és a helyét kaviccsal töltik ki'], c: 0, e: 'A rúd egyszerre fúrószár, injektálócső és végleges betét. Körülötte 20–50 mm-es cementtest, azon kívül 30–80 mm-es átitatott talajköpeny alakul ki.' },
-  { q: 'Mekkora nyomással juttatják a talajba a kötőanyagot jet-groutingnál?', a: ['400–600 bar', '5–6 bar', '40–60 bar', '4000–6000 bar'], c: 0, e: 'A 2–5 mm-es fúvókákon 400–600 bar nyomással lövellik ki a kötőanyagot. Az 5–6 bar a levegőburok nyomása a levegős dupla jetnél.' },
+  { q: 'Mekkora nyomással juttatják a talajba a kötőanyagot jet-groutingnál?', a: ['350–400 bar', '5–6 bar', '35–40 bar', '3500–4000 bar'], c: 0, e: 'A kb. 2,5 mm-es fúvókákon 350–400 bar nyomással lövellik ki a kötőanyagot. Az 5–6 bar a levegőburok nyomása a levegős dupla jetnél.' },
   { q: 'Ugyanazzal a technológiával melyik talajban adódik a legnagyobb jet-oszlop?', a: ['kavicsban', 'agyagban', 'iszapban', 'mindegyikben ugyanakkora'], c: 0, e: 'Az átmérő a talaj áteresztőképességétől függ: agyagban legfeljebb 60–70 cm, kavicsban akár 150–200 cm.' },
   { q: 'Mi a levegős dupla jet lényege?', a: ['a cementsugarat 5–6 bar-os levegőburok veszi körül, ezért nő a hatótávolság', 'két cementsugár lő egymással szemben', 'előbb levegővel fúrnak, utána cementtel injektálnak', 'a levegő a visszafolyó iszapot szívja ki'], c: 0, e: 'A levegőburok csökkenti a sugár „fékeződését” a talajban, így nagyobb oszlopátmérő érhető el.' },
   { q: 'Mi a veszélye, ha injektálás közben a visszafolyó iszap nem tud a felszínre távozni?', a: ['hidraulikus talajtörés, a felszín és az épület megemelkedése', 'a jet-oszlop túl vékony lesz', 'a fúrórúd befagy', 'semmi, csak lassabb a munka'], c: 0, e: 'A többletanyag akadálytalan kiáramlását végig figyelni kell – különben a nyomás a talajban halmozódik.' },

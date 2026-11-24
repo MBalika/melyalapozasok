@@ -1214,17 +1214,17 @@ PROC.jet = {
       arrowV(g, x - 28, 196, 232);
       tag(g, x + 20, 250, 'fúrófolyadék', { to: [x + 5, 250] });
     } },
-    { w: 260, t: 'Injektálás a talptól', d: 'A monitor fúvókáin át 400–600 bar nyomású sugár vágja és keveri a talajt.', draw(g, M) {
+    { w: 260, t: 'Injektálás a talptól', d: 'A monitor fúvókáin át 350–400 bar nyomású sugár vágja és keveri a talajt.', draw(g, M) {
       const x = 150, r = smallRig(g, M, x, { top: 36, headY: 132 });
       silo(g, M, 22, { w: 20, h: 86 });
       const pl = plant(g, M, 36, { w: 44, h: 24 });
       hoseTo(g, pl.out[0], pl.out[1], x - 6, r.headY + 4, 10);
       column(g, x, 282, 306, 26, 'jet');
       jetTool(g, x, r.headBot, 294, { jet: 34 });
-      tag(g, x + 22, 252, '400–600 bar', { to: [x + 18, 292] });
+      tag(g, x + 22, 252, '350–400 bar', { to: [x + 18, 292] });
       tag(g, 74, M.GY - 108, 'nagynyomású szivattyú', { anchor: 'middle', to: [58, M.GY - 26] });
     } },
-    { w: 260, t: 'Forgatás, visszahúzás', d: 'Az oszlop alulról felfelé nő; a többletanyag iszapként a furat mentén a felszínre jut.', draw(g, M) {
+    { w: 260, t: 'Forgatás, visszahúzás', d: 'A szárat forgatva, 25–35 cm/perc sebességgel húzzák fel: az oszlop alulról felfelé nő, a visszafolyó cementhabarcs a furat mentén a felszínre jut.', draw(g, M) {
       const x = 150, r = smallRig(g, M, x, { top: 36, headY: 74 });
       silo(g, M, 22, { w: 20, h: 86 });
       const pl = plant(g, M, 36, { w: 44, h: 24 });
