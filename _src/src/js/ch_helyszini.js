@@ -153,7 +153,7 @@ register('hsz-reszecske', (root) => {
 
 /* =================================================================== 2. Franki-lépések */
 const FSTEPS = [
-  { k: 'Dugó', t: '1. Pontraállás, dugó', d: 'A cölöpözőgép pontraáll és letalpal. A béléscső (Ø 46–52 cm, 30 mm fal, 13 m, toldható) aljába kb. 1 m magasan száraz betont (vagy kavicsot) töltenek.' },
+  { k: 'Dugó', t: '1. Pontraállás, dugó', d: 'A cölöpözőgép pontraáll és letalpal. A béléscső (Ø 46–52 cm, 30 mm fal, 13 m, toldható) aljába kb. 1 m magasan száraz betont töltenek.' },
   { k: 'Leverés', t: '2. Leverés a dugóval', d: 'A 3 t-ás ejtőkos a csőben a dugót döngöli; a dugó a súrlódás révén magával húzza a csövet a teherbíró talajrétegbe. A cső kiszorítja a talajt – sem talaj, sem víz nem jut bele.' },
   { k: 'Kiverés', t: '3. A dugó kiverése', d: 'A kívánt talpmélység elérése után a csövet a verőállványhoz rögzítik, és erőteljes döngöléssel kiverik belőle a betont – kb. 30–40 cm marad a csőben.' },
   { k: 'Hagyma', t: '4. A „hagyma” kidöngölése', d: 'Újabb és újabb betonadagokat juttatnak a csőbe, és kidöngölik: a talp kiszélesedik, körülötte a talaj tömörödik.' },
@@ -335,7 +335,7 @@ register('hsz-csavart', (root) => {
     else if (ph === 'done') ver.set('ok', 'Kész a cölöp', `<span>${fmt(L, 1)} m, Ø ${fmt(sD.v, 0)} mm – ${fmt(V, 2)} m³ talajt toltunk oldalra, a felszínre szinte semmi sem jött. Fúrt cölöpnél ugyanez kb. ${fmt(V * 1.25, 1)} m³ (fellazult) furadék lenne.</span>`);
     else if (ph === 'drill') ver.set('', 'Fúrás – forgatás és tolás', '<span>A fej széttolja és tömöríti a talajt; a monitor a nyomatékot rögzíti.</span>');
     else if (ph === 'conc') ver.set('', 'Betonozás nyomás alatt', '<span>A beton a fúrószáron át, nyomás alatt áramlik a talpra, miközben a szárat forgatva kiemelik.</span>');
-    else if (ph === 'cage') ver.set('', 'Vasalás', '<span>A vasalási armatúrát a friss betonba vibrálással juttatják le.</span>');
+    else if (ph === 'cage') ver.set('', 'Vasalás', '<span>A vasalási armatúrát a friss betonba helyezik el, szükség esetén vibrációval.</span>');
     else ver.set(T0 > TMAX ? 'warn' : '', T0 > TMAX ? 'Ez nehéz lesz…' : 'Indulhat a fúrás', T0 > TMAX ? `<span>A becsült nyomaték a talpnál ≈ ${fmt(T0, 0)} kNm – több, mint amennyit a gép tud (${TMAX} kNm).</span>` : `<span>Becsült nyomaték a talpnál ≈ ${fmt(T0, 0)} kNm (a gép határa ${TMAX} kNm).</span>`);
     draw(performance.now() / 1000);
   }
@@ -429,5 +429,5 @@ defineQuiz('helyszini', 'Kvíz – Franki és csavart cölöpök', [
   { q: 'Hogyan kerül a vasalás a csavart cölöpbe?', a: ['A friss betonba helyezik el, szükség esetén vibrációval', 'A fúrás előtt a talajba verik', 'A fúrószárban együtt halad le a fúrófejjel', 'A beton megszilárdulása után befúrják'], c: 0, e: 'A betonozás nyomás alatt, a fúrószáron át történik, a szár folyamatos forgatása és kiemelése közben; a vasalást utána a friss betonba helyezik el, szükség esetén vibrációval.' },
   { q: 'Mekkora a csavart cölöpök fúrófejének átmérője és a cölöpök legnagyobb hossza?', a: ['300–700 mm, 18 (20) m', '80–180 cm, 50 m', '10–30 cm, 6 m', '1,0–1,5 m, 40 m'], c: 0, e: 'A fúrófej átmérője 300–700 mm, a legnagyobb hossz 18 (20) m. A kisebb átmérő miatti kisebb tartószerkezeti teherbírás korlátozhatja a terjedését.' },
   { q: 'Melyik csavart cölöprendszer hagy csavarmenetes palástot?', a: ['Screwsol', 'Omega', 'Fundex', 'CFA'], c: 0, e: 'A mélyépítő cégek fúrófejeinek két csoportja van: az FDP típus sima köpenyű (mint a CFA), ilyen pl. az Omega és a Fundex; a Screwsol csavarmenetes palástú, a fúrószárat visszahúzás közben is forgatják. A CFA nem kiszorításos, hanem talajhelyettesítéses fúrt cölöp.' },
-  { q: 'Melyik talajban a legkevésbé alkalmas a csavart, talajkiszorításos cölöp?', a: ['Nagyon tömör kavicsban, kemény agyagban', 'Laza homokban', 'Közepesen tömör homokban', 'Puha–gyúrható agyagban'], c: 0, e: 'A technológia laza–közepesen tömör szemcsés, átmeneti és puha–gyúrható kötött talajban népszerű. Nagyon tömör, kemény talajban a fej nem tudja széttolni a talajt.' },
+  { q: 'Melyik talajban a legkevésbé alkalmas a csavart, talajkiszorításos cölöp?', a: ['Nagyon tömör kavicsban, kemény agyagban', 'Laza homokban', 'Közepesen tömör homokban', 'Puha–gyúrható agyagban'], c: 0, e: 'A technológia laza–közepesen tömör szemcsés, átmeneti és gyengén kötött (puha–gyúrható) talajban hatékony és népszerű. Nagyon tömör, kemény talajban a fej nem tudja széttolni a talajt.' },
 ]);

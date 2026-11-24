@@ -38,8 +38,6 @@ f93dcfd	No support
 ce3e3c9	Soil on the auger (CFA)
 94d94c1	In granular soil (${SOIL[soil].t.toLowerCase()}) there is no cohesion to hold a vertical wall: the wall trickles away and collapses${wet ? ', a talajvíz alatt pedig a beáramló víz is sodorja a szemcséket' : ''}. Support is needed (casing, slurry or continuous auger).
 8b5e1a9	, and below the groundwater the inflowing water also carries the grains away
-b7f79ec	Below the groundwater the wall starts to move.
-c802012	Even in cohesive soil the bore stands only above the groundwater. Below the water the wall softens, and the water breaking in also loosens the base – the unsupported technology can no longer be used here.
 4dddfa0	The unsupported bore is too deep.
 2ee15e1	Even in cohesive soil above the groundwater, we can only count on the bore standing for a short time up to 8–10 m. Deeper down, the lower part of the wall may start to move.
 58b474e	At the limit: 8–10 m.
@@ -155,7 +153,6 @@ f54a4ae	Nice work!
 4f5292b	Good pace.
 fd690fa	 The concrete flow keeps pace with the withdrawal (${fmt(r * 100, 0)} %). Keep it like this up to the surface!
 e783ace	Drilling…
-e15c4d5	 The auger screws down; the spoil stays on the flights and supports the wall. The flap is closed.
 06fbcc4	cohesive (clay, silt)
 a5083ea	granular (sand, gravel)
 5d5c95b	with loose, flowing or silty layers

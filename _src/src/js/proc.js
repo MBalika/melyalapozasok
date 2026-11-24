@@ -763,14 +763,14 @@ const PROC = {};
 PROC.cfa = {
   H: 360, GY: 178, gw: 226, layers: [{ k: 'clay', y: 178, lab: 'iszapos agyag' }, { k: 'sand', y: 252, lab: 'homok' }],
   steps: [
-    { w: 270, t: 'Kitűzés, pontraállás', d: 'Kitűzik a cölöp helyét, és a gép pontraáll. Az üreges fúrószár alját elvesző sapka vagy „csapóajtó” zárja.', draw(g, M) {
+    { w: 270, t: 'Kitűzés, pontraállás', d: 'Kitűzik a cölöp helyét, és a gép pontraáll. Az üreges fúrószár alján egy betonozónyílás van, ezt zárólap zárja.', draw(g, M) {
       const x = 108, r = rig(g, M, x, { top: 20, headY: 30 });
       auger(g, x, r.headBot, M.GY - 2, 15);
-      tag(g, x + 30, M.GY + 18, 'csapóajtó', { to: [x + 3, M.GY] });
+      tag(g, x + 30, M.GY + 18, 'zárólap', { to: [x + 3, M.GY] });
       tag(g, x - 24, 118, 'üreges szár', { anchor: 'end', to: [x - 4, 118] });
       worker(g, x - 44, { GY: M.GY, pose: 'signal' });
     } },
-    { w: 270, t: 'Furatkészítés', d: 'A spirált földkitermelés nélkül hajtják le: a furadék csak részben nyomódik ki, a spirálon maradó talajdugó folyamatosan támasztja a furat falát.', draw(g, M) {
+    { w: 270, t: 'Furatkészítés', d: 'Az üreges CFA-fúróspirált a cölöpfúró gép lehajtja. Lehajtás-tekerés közben a spirálon lévő talajdugó támasztja meg a furatot.', draw(g, M) {
       const x = 108, toe = 304, top = toe - (M.GY - 2 - 54);
       spoil(g, M, x - 46, 30, 9); spoil(g, M, x + 14, 18, 6);
       const r = rig(g, M, x, { top: 20, headY: top - 24 });
@@ -797,7 +797,7 @@ PROC.cfa = {
       tag(g, 58, M.GY - 86, 'mixerautó', { anchor: 'middle' });
       tag(g, 146, M.GY - 62, 'betonpumpa', { anchor: 'middle' });
     } },
-    { w: 290, t: 'Vasalás', d: 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalási armatúrát a friss betonba süllyesztik.', draw(g, M) {
+    { w: 290, t: 'Vasalás', d: 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalási armatúrát belenyomják a friss cölöpbetonba.', draw(g, M) {
       const x = 96, toe = 304;
       concrete(g, x - 15, M.GY, 30, toe - M.GY);
       holeWall(g, x, M.GY, toe, 15);
@@ -943,7 +943,7 @@ PROC.csavart = {
 PROC.kopeny = {
   H: 360, GY: 178, gw: 214, layers: [{ k: 'silt', y: 178, lab: 'iszapos, puha réteg' }, { k: 'gravel', y: 256, lab: 'homokos kavics' }],
   steps: [
-    { w: 240, t: 'A cső lehajtása', d: 'A béléscsövet rotációval vagy vibrálással hajtják le.', draw(g, M) {
+    { w: 240, t: 'A cső lehajtása', d: 'A béléscsövet rotációval vagy vibrálással, folyamatos toldással juttatják le: ez támasztja meg a furatot.', draw(g, M) {
       const x = 92, bot = 238, r = rig(g, M, x, { top: 16, headY: 66 });
       R(g, x - 16, r.headBot, 32, M.GY - r.headBot, F('bore'));
       casing(g, x, r.headBot, bot, 16, { inner: false, teeth: true, collar: true });
@@ -961,7 +961,7 @@ PROC.kopeny = {
       tag(g, x + 26, 228, 'víz a csőben', { to: [x + 10, 232] });
       tag(g, x + 26, 282, 'dobfúró', { to: [x + 14, 278] });
     } },
-    { w: 240, t: 'Vasalás', d: 'A vasalási armatúrát a furatba, a cső belsejébe engedik.', draw(g, M) {
+    { w: 240, t: 'Vasalás', d: 'A vasalási armatúrát a furatba, a cső belsejébe engedik; szükség esetén toldják.', draw(g, M) {
       const x = 70;
       casing(g, x, M.GY - 14, 304, 16, { teeth: true, collar: true });
       water(g, x - 16, M.gw, 32, 300 - M.gw);
@@ -970,7 +970,7 @@ PROC.kopeny = {
       worker(g, x - 32, { GY: M.GY, pose: 'guide' });
       tag(g, x + 26, 246, 'armatúra', { to: [x + 10, 246] });
     } },
-    { w: 300, t: 'Betonozás', d: 'Betonozó csővel betonoznak, közben a béléscsövet folyamatosan visszahúzzák.', draw(g, M) {
+    { w: 300, t: 'Betonozás', d: 'Kontraktorcsővel, alulról betonoznak; a betonozással együtt a béléscsöveket folyamatosan visszaszedik.', draw(g, M) {
       const x = 176, ctop = M.GY - 46, cbot = 262;
       concrete(g, x - 16, 244, 32, 60);
       R(g, x - 16, ctop, 32, M.GY - ctop, F('bore'));
@@ -1235,7 +1235,7 @@ PROC.jet = {
       E(g, x + 22, M.GY + 1, 22, 3.4, F('grout2', 0.9));
       spin(g, x, r.headBot + 8, 14);
       arrowV(g, x - 40, 214, 178);
-      tag(g, x + 30, M.GY - 16, 'visszafolyó iszap', { to: [x + 22, M.GY] });
+      tag(g, x + 30, M.GY - 16, 'visszafolyó cementhabarcs', { to: [x + 22, M.GY] });
     } },
     { w: 250, t: 'A következő oszlop', d: 'Az előzőbe metszve készül – így egymásba metsző oszlopokból folytonos fal lesz.', draw(g, M) {
       const x = 110, r = smallRig(g, M, x, { top: 36, headY: 74 });
@@ -1291,17 +1291,34 @@ PROC.dsm = {
 PROC.ko = {
   H: 360, GY: 178, layers: [{ k: 'silt', y: 178, lab: 'iszap' }, { k: 'peat', y: 222, lab: 'puha, szerves réteg' }, { k: 'sand', y: 262, lab: 'homok' }],
   steps: [
-    { w: 270, t: 'Lehajtás', d: 'A zsilipes mélyvibrátor a talajt oldalirányba kiszorítja, és – hidraulikus nyomással és sűrített levegővel segítve – a tervezett mélységig vagy a megadott talajellenállásig hatol.', draw(g, M) {
+    { w: 250, t: 'Előkészítés', d: 'A lánctalpas hordozógép a megvezetett, zsilipes mélyvibrátort a kitűzött pont fölé irányítja, és hidraulikus támaszokkal megtámasztja.', draw(g, M) {
+      const x = 96;
+      rig(g, M, x, { top: 16, hoses: false });
+      vibroflot(g, x, 30, M.GY - 6, { full: false });
+      Ln(g, x - 18, M.GY + 1, x + 18, M.GY + 1, SK('acc', 2));
+      Ln(g, x, M.GY - 3, x, M.GY + 5, SK('acc', 2));
+      arrowV(g, x - 30, 70, 120);
+      tag(g, x + 26, M.GY + 22, EN ? 'set-out point' : 'kitűzött pont', { to: [x + 2, M.GY + 2] });
+      tag(g, x + 24, 130, 'mélyvibrátor', { to: [x + 7, 140] });
+    } },
+    { w: 270, t: 'Töltés', d: 'A rakodógép feltölti az anyagtartályt, amely az árboc mentén felfelé halad, és tartalmát a zsilipbe üríti.', draw(g, M) {
       const x = 112, r = rig(g, M, x, { top: 16, hoses: false });
-      vibroflot(g, x, 150, 298, { full: true });
+      vibroflot(g, x, 30, M.GY - 6, { full: true });
       P(g, `M${x - 40} ${M.GY - 22} L${x - 36} ${M.GY} H${x - 14} L${x - 10} ${M.GY - 22}Z`, F('steel2') + `;stroke:${v('steel3')};stroke-width:.8`);
       P(g, `M${x - 39} ${M.GY - 21} Q${x - 25} ${M.GY - 30} ${x - 11} ${M.GY - 21}Z`, F('stone') + `;stroke:${v('stone2')};stroke-width:.6`);
       Ln(g, x - 25, M.GY - 26, r.mx - 6, r.top + 2, SK('rope', 0.9));
       loader(g, M, 2, { lift: 22, full: true });
+      arrowV(g, x - 44, M.GY - 40, 60);
+      tag(g, x - 25, M.GY - 78, EN ? 'gravel' : 'kavics', { anchor: 'middle', to: [x - 25, M.GY - 26] });
+      tag(g, x + 30, 30, EN ? 'airlock' : 'zsilip', { to: [x + 12, 34] });
+    } },
+    { w: 250, t: 'Lehajtás', d: 'A zsilipes mélyvibrátor a talajt oldalirányba kiszorítja, és – hidraulikus nyomással és sűrített levegővel segítve – a tervezett mélységig vagy a megadott talajellenállásig hatol.', draw(g, M) {
+      const x = 96;
+      rig(g, M, x, { top: 16, hoses: false });
+      vibroflot(g, x, 150, 298, { full: true });
       pushOut(g, x, 270, 10, 3);
       arrowV(g, x + 34, 214, 250);
-      tag(g, x + 30, 306, 'mélyvibrátor', { to: [x + 7, 286] });
-      tag(g, x - 25, M.GY - 78, EN ? 'gravel' : 'kavics', { anchor: 'middle', to: [x - 25, M.GY - 26] });
+      tag(g, x + 30, 316, 'mélyvibrátor', { to: [x + 7, 286] });
     } },
     { w: 250, t: 'Tömörítés', d: 'A végmélységben az adalékanyagot a mélyponton fokozatosan kiengedik; a vibrátor föl-le mozgással többször behatol az anyagba, oldalirányba nyomja és tömöríti.', draw(g, M) {
       const x = 96, r = rig(g, M, x, { top: 16, hoses: false });
@@ -1311,7 +1328,7 @@ PROC.ko = {
       pushOut(g, x, 284, 16, 2);
       tag(g, x + 24, 318, 'tömörített kavics', { to: [x + 10, 296] });
     } },
-    { w: 250, t: 'Kiegyenlítés', d: 'Szakaszonként a felszínig építik, végül a felszínt tömörítik, elegyengetik.', draw(g, M) {
+    { w: 250, t: 'Lezárás', d: 'Szakaszonként a felszínig építik, végül a felszínt tömörítik, elegyengetik.', draw(g, M) {
       const x = 96, r = rig(g, M, x, { top: 16, hoses: false });
       stoneCol(g, x, M.GY + 4, 302, 14, { bulge: [222, 262] });
       vibroflot(g, x, 34, M.GY - 2, { full: false });
@@ -1344,14 +1361,14 @@ function rfPanel(g, M, k, kind, o = {}) {
 PROC.resfal = {
   H: 360, GY: 178, gw: 216, layers: [{ k: 'fill', y: 178, lab: 'feltöltés' }, { k: 'sand', y: 200, lab: 'homok' }, { k: 'clay2', y: 272, lab: EN ? 'clay' : 'agyag' }],
   steps: [
-    { w: 240, t: 'Résvezető gerenda', d: 'A rés két oldalán vasbeton gerendapár készül: ez jelöli ki és vezeti a rést.', draw(g, M) {
+    { w: 240, t: 'Résvezető gerenda', d: 'A rés két oldalán 1,0–1,5 m magas, 20–25 cm széles vasbeton gerendapár készül: vezeti a réskanalat, megtámasztja a felső laza talajt, és ez a kitűzési alapbázis.', draw(g, M) {
       R(g, 14, M.GY - 3, 110, 14, 'fill:url(#pr-concg)' + `;stroke:${v('conc2')};stroke-width:.7`);
       R(g, 124, M.GY, 70, 12, F('bore'));
       spoil(g, M, 196, 30, 8, 'fill');
       excavator(g, M, 150, M.GY + 6, { reach: 56, lift: 46 });
       tag(g, 68, M.GY - 30, 'résvezető gerenda', { anchor: 'middle', to: [68, M.GY - 2] });
     } },
-    { w: 240, t: 'Primer harapások', d: 'A primer tábla két szélét kiharapják; a kiemelt föld helyét azonnal zagy tölti ki.', draw(g, M) {
+    { w: 240, t: 'Primer harapások', d: 'Szakaszos réselésnél minden második (primer) tábla készül először: két szélét kiharapják, a kiemelt föld helyét folyamatosan bentonitos résiszap tölti ki.', draw(g, M) {
       rfBase(g, M, 1);
       slurry(g, 22, M.GY + 11, 30, 318 - M.GY - 11); slurry(g, 68, M.GY + 11, 30, 318 - M.GY - 11);
       [22, 52, 68, 98].forEach((xx) => Ln(g, xx, M.GY + 11, xx, 318, SK('wall', 1)));
@@ -1366,7 +1383,7 @@ PROC.resfal = {
       crane(g, M, 60, gr.top - 4, { reach: 110, tipY: 18 });
       tag(g, 140, 246, 'zagy', { to: [92, 246] });
     } },
-    { w: 240, t: 'Vasalás, betonozás', d: 'Beemelik a vasalási armatúrát (hossztól függően 1–3 db), majd két kontraktorcsővel alulról betonoznak.', draw(g, M) {
+    { w: 240, t: 'Vasalás, betonozás', d: 'A tábla végére szakaszoló palló, a résbe a vasalási armatúra (hossztól függően 1–3 db) kerül, majd két betonozócsővel alulról betonoznak.', draw(g, M) {
       rfBase(g, M, 1);
       rfPanel(g, M, 'P1', 'slurry');
       concrete(g, 22, 250, 76, 68);

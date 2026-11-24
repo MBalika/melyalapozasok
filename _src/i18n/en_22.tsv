@@ -8,8 +8,6 @@ ed59e60	Only for aesthetic reasons
 60b4ff3	In dense gravel above the groundwater
 3627284	In hard clay
 9c84b59	If the trench is short and shallow
-f9b9516	Here the shear strength of the soil is low, and the water pressure or the risk of slurry loss is high. Hard clay and rock make excavation difficult (a hydrofraise is needed there), not stability.
-9d94bad	When is a hydrofraise (trench cutter) justified rather than a grab?
 b2a2589	In rock, very hard clay, at great depth and with accuracy requirements
 ce1e90b	For a short, shallow wall in loose sand
 6c092a1	If no slurry is needed
@@ -123,23 +121,16 @@ ce19178	At the specified depth drilling stops; the rig continuously records the 
 1b28e63	specified depth
 213019d	Concreting under pressure through the drill stem, while the stem is withdrawn and rotated.
 292ad20	Setting out, positioning
-db86973	The pile position is set out and the rig is positioned. The bottom of the hollow drill stem is closed by a sacrificial cap or a “flap”.
-a74aa87	flap
 91e4d7d	Drilling the bore
-5a1e56d	The auger is screwed down without removing soil: the spoil is only partly pressed out, and the soil plug remaining on the auger continuously supports the wall of the bore.
 14a8727	soil plug
 0470841	Installing the casing
-b88a7d9	The casing is installed by rotation or vibration.
 ca08d34	Soil removal
 d6bc075	The soil is removed with a drilling bucket under the protection of the casing; the casing goes ahead, and below water the water is replaced.
 d49b455	water in the casing
-38d882d	Concreting through a concreting pipe while the casing is continuously withdrawn.
 71877e1	Finished pile
 f091139	A finished reinforced concrete pile remains in place of the recovered casing.
 80d6466	RC pile
 c2c49de	Preparation
 ed32749	Filling with slurry
 e619697	bentonite drilling fluid into the bore
-67837a6	The reinforcement cage is lowered into the bore, inside the casing.
-af23772	The pile is usually concreted up to the working level, and the reinforcement cage is lowered into the fresh concrete.
 aaf5ff5	The reinforcement cage is placed into the fresh concrete, with vibration if needed.

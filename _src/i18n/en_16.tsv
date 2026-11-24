@@ -38,11 +38,8 @@ de9940f	Groundwater breaks in at the base and loosens the soil
 b7af48c	Nothing, the casing is watertight
 39dced0	The water level difference starts an upward flow at the base (heave): the water carries grains with it. That is why the water removed from the bore must be replaced.
 c313374	When can an unsupported bore be used?
-8f6121a	In cohesive soil, above the groundwater, to at most 8–10 m
 4e3787f	In granular soil, if the groundwater is deep, to at most 20 m
 a3f73a0	In any soil, if we concrete quickly
-8fec1eb	Below the groundwater, if the bore is short
-cd150ce	In cohesive soil, above the groundwater, for a bore that is not too long – and it must be concreted immediately after excavation.
 b85c3b3	Why doesn’t the concrete of a CFA pile need vibrating?
 4f8ba9a	The flowing consistency and placing under pressure make it self-compacting
 0423c09	Because the CFA pile is unreinforced

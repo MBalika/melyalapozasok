@@ -112,7 +112,7 @@ function evaluate(S) {
     if (why.length) {
       const z1 = gwIn ? Math.max(gw, 0.8) : Math.max(gr.t, 0.8), z2 = Math.min(L - 0.5, z1 + 3);
       M.collapse = [z1, Math.max(z1 + 0.8, z2)]; M.incl = M.collapse;
-      add('bad', 'A furat beomlik!', `Megtámasztás nélkül csak kötött talajban, talajvíz felett áll meg a furat – itt ${why.join(', és ')}. Folytonossági hiány, több beton, kisebb köpenymenti ellenállás lenne az eredmény. Válassz béléscsövet, zagyot vagy CFA-t!`);
+      add('bad', 'A furat beomlik!', `Megtámasztás nélkül csak kötött talajban, elsősorban talajvíz felett marad állékony a furat – itt ${why.join(', és ')}. Folytonossági hiány, több beton, kisebb köpenymenti ellenállás lenne az eredmény. Válassz béléscsövet, zagyot vagy CFA-t!`);
     } else add('ok', 'Kötött talaj, talajvíz felett', 'Kemény, kötött talajban, a talajvíz felett a furat rövid ideig magától is megáll – a kiemelés után rögtön be kell betonozni.');
     if (L > 10) add('bad', 'Túl mély megtámasztás nélküli furat', `Megtámasztás nélkül legfeljebb 8–10 m mélységig dolgoznak – itt ${fmt(L, 1)} m.`);
     else if (L > 8) add('warn', 'A határon', `${fmt(L, 1)} m: megtámasztás nélküli furat legfeljebb 8–10 m mély lehet.`);
@@ -124,10 +124,10 @@ function evaluate(S) {
     if (!sq && L > 22) add('bad', 'Túl hosszú előregyártott cölöp', 'A kör keresztmetszetű pörgetett cölöpök legfeljebb 20–22 m hosszúak.');
     if (sq && S.D > 40) add('info', 'Szokatlan keresztmetszet', 'A hazai gyakorlatban a négyzetes cölöp 30×30 vagy 40×40 cm-es.');
     const hard = inL.find((l) => l.K.hard);
-    if (hard) { M.stuck = Math.min(L, hard.t + 0.9); add('bad', 'A cölöp elakad!', `Kemény (köves) agyagban az előregyártott cölöp nem verhető le a tervezett mélységig – itt kb. −${fmt(M.stuck, 1)} m-en megáll.`); }
+    if (hard) { M.stuck = Math.min(L, hard.t + 0.9); add('bad', 'A cölöp elakad!', `Kemény (köves) agyagban a verés csak korlátozottan alkalmazható – itt a cölöp kb. −${fmt(M.stuck, 1)} m-en megáll, nem jut le a tervezett mélységig.`); }
     else if (P.blocks) { M.stuck = 1.6; add('bad', 'A cölöp elakad a feltöltésben!', 'Nagy tömbös feltöltésben a cölöpverés csak korlátozottan alkalmazható – egyetlen vékonyabb ilyen betelepülés is megakadályozhatja, hogy a cölöp lejusson.'); }
     add('ok', 'A kiszorítás tömörít', 'A levert cölöp széttolja és tömöríti maga körül a talajt: előregyártott cölöpnél a talp- és a köpenymenti ellenállás is nő.');
-    add(S.nb ? 'bad' : 'warn', S.nb ? 'Rezgésérzékeny szomszéd: a legkockázatosabb választás' : 'Zaj és rezgés', 'A verés jelentős zajt és rezgést kelt, építmények közelében csak erős korlátok mellett alkalmazható.' + (S.nb ? ' Itt fúrt (CFA) vagy csavart cölöp a jobb választás.' : ''));
+    add(S.nb ? 'bad' : 'warn', S.nb ? 'Rezgésérzékeny szomszéd: a legkockázatosabb választás' : 'Zaj és rezgés', 'A verés jelentős zajt és rezgést kelt, építmények közelében csak korlátozottan használható.' + (S.nb ? ' Itt fúrt (CFA) vagy csavart cölöp a jobb választás.' : ''));
   }
   if (k === 'franki') {
     if (L > 18) add('bad', 'Túl hosszú Franki-cölöp', 'A Franki-cölöp hossza legfeljebb kb. 16–18 m.');
@@ -137,7 +137,8 @@ function evaluate(S) {
     add(S.nb ? 'bad' : 'warn', 'Verés, döngölés', 'A béléscsövet ejtőkossal verik le, a betont döngölik – dinamikus hatással és zajjal jár.' + (S.nb ? ' Rezgésérzékeny szomszéd mellett kerülendő.' : ''));
   }
   if (k === 'screw') {
-    if (L > 20) add('bad', 'Túl hosszú csavart cölöp', 'A csavart cölöp hossza legfeljebb kb. 20 m.');
+    if (L > 20) add('bad', 'Túl hosszú csavart cölöp', 'A csavart cölöp legnagyobb hossza 18 (20) m.');
+    else if (L > 18) add('warn', 'A csavart cölöp hosszának határán', 'A csavart cölöp legnagyobb hossza 18 (20) m.');
     if (inL.some((l) => l.K.hard)) add('warn', 'Kemény agyagban nem ideális', 'A csavart cölöp elsősorban laza vagy közepesen tömör szemcsés és átmeneti, gyengén kötött talajban népszerű és gazdaságos.');
     if (P.bear && L - P.bear > 3) add('warn', 'Mélyen a tömör kavicsban', 'A kiszorító fej tömör rétegben csak nehezen halad – a technológia laza, közepesen tömör talajra való.');
     add('ok', 'Nincs rezgés, alig van furatanyag', 'A fej fúrás közben széttolja és tömöríti a talajt: nő a köpenymenti ellenállás, a felszínre csekély furatanyag kerül, nincs dinamikus és zajhatás.');
@@ -685,11 +686,11 @@ register('sim3d', (root) => {
     const cageIn = (st, u, top = -0.3) => { st.cage = { top: lerp(-Lc - 1.2, top, sm(u)) }; st.focus = clamp(st.cage.top + Lc, -2, L); st.span = 7; };
     const done = (st, u) => { st.cured = u; st.focus = L * 0.5 - 1; st.span = L + 6; st.done = u > 0.5; };
     if (k === 'cfa') return [
-      { t: 'Kitűzés, pontraállás', dur: 2, d: 'A gép a kitűzött pont fölé áll. Az üreges fúrószár alján a csapóajtó zárva van.', a(st, u) { st.auger = { tip: lerp(-1.4, 0, sm(u)), rot: 0 }; st.focus = -Hm * 0.4; st.span = Hm + 5; } },
+      { t: 'Kitűzés, pontraállás', dur: 2, d: 'A gép a kitűzött pont fölé áll. Az üreges fúrószár alján a betonozónyílást zárólap zárja.', a(st, u) { st.auger = { tip: lerp(-1.4, 0, sm(u)), rot: 0 }; st.focus = -Hm * 0.4; st.span = Hm + 5; } },
       { t: 'Fúrás a talpszintig', dur: 5, d: 'A folyamatos spirál becsavarodik a talajba. A spirálon maradó talajdugó támasztja meg a furat falát – külön megtámasztás nem kell.', a(st, u) { const d = u * L; st.d = d; st.auger = { tip: d, rot: (d / 0.6) * TAU }; st.spoil = 0.75 * u; st.focus = d; st.span = 5.5; st.lab = 'talajdugó a spirálon'; } },
       { t: 'Betonozás a fúrószáron át', dur: 5, d: M.fault ? '<b class="bad">Túl gyors kihúzás!</b> A beton nem tudja kitölteni a spirál helyét – a puha rétegben a cölöp elvékonyodik (nyakasodás).' : 'A betont túlnyomással pumpálják a szár belsején át; a beton feltolja a spirált a talajdugóval, a gép közben húzza. A betonnyomást folyamatosan mérik.', a(st, u) { const tip = L * (1 - sm(u)); st.d = L; st.auger = { tip, rot: (L / 0.6) * TAU, fill: L }; st.conc = { top: tip, bot: L }; st.neck = true; st.spoil = 0.75 + 0.25 * u; st.focus = tip; st.span = 5.5; if (M.neck && tip < M.neck[0]) st.alert = 'Nyakasodás!'; } },
-      { t: 'Vasalás a friss betonba', dur: 3.5, d: 'A vasalási armatúrát a friss betonba süllyesztik (nyomják, vibrálják). A betont vibrálni nem kell: a folyós konzisztencia és a nyomás alatti bedolgozás tömörít.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u, fill: L }; cageIn(st, u); } },
-      { t: 'Kész a cölöp', dur: 2.5, d: 'Minden cölöpről automatikus jegyzőkönyv készül: mélység, betonnyomás, bedolgozott betonmennyiség.', a(st, u) { st.auger = null; done(st, u); } },
+      { t: 'Vasalás a friss betonba', dur: 3.5, d: 'A vasalási armatúrát belenyomják a friss cölöpbetonba. A betont vibrálni nem kell: a folyós konzisztencia és a nyomás alatti bedolgozás tömörít.', a(st, u) { st.auger = { tip: lerp(0, -3, sm(u * 2)), rot: 0, away: u, fill: L }; cageIn(st, u); } },
+      { t: 'Kész a cölöp', dur: 2.5, d: 'Folyamatosan mérik a fúrószár előrehaladási sebességét, a motorteljesítményt és a forgatónyomatékot, valamint a betonnyomást: ezekből automata jegyzőkönyv készül.', a(st, u) { st.auger = null; done(st, u); } },
     ];
     if (k === 'casing') return [
       { t: 'Pontraállás, béléscső indítása', dur: 2.5, d: 'A béléscső lefúrását rotációval (vagy vibrálással) kezdik.', a(st, u) { st.casing = { top: -1.2, bot: 1.4 * u }; st.d = 1.4 * u; st.bucket = { tip: -2.2, full: false }; st.focus = -3; st.span = 14; } },
@@ -715,7 +716,7 @@ register('sim3d', (root) => {
       { t: 'Kész a cölöp', dur: 2.5, d: 'Elsősorban nagy átmérőjű, nagy mélységű cölöpökhöz; hazánkban főleg nagy fesztávú hidak alapozásához.', a(st, u) { st.vez = null; done(st, u); } },
     ];
     if (k === 'dry') return [
-      { t: 'Pontraállás', dur: 2, d: 'Kötött talajban, talajvíz felett, legfeljebb 8–10 m-es furat rövid ideig megtámasztás nélkül is megáll.', a(st, u) { st.bucket = { tip: lerp(-3.5, -2.2, u), full: false }; st.focus = -3; st.span = 13; } },
+      { t: 'Pontraállás', dur: 2, d: 'Kötött talajban, elsősorban talajvíz felett, nem túl hosszú (kb. 8–10 m-es) furat rövid ideig megtámasztás nélkül is állékony maradhat.', a(st, u) { st.bucket = { tip: lerp(-3.5, -2.2, u), full: false }; st.focus = -3; st.span = 13; } },
       { t: 'Fúrás rövid spirállal', dur: 6, d: M.collapse ? '<b class="bad">A furat nem állékony:</b> a talajvíz vagy a szemcsés réteg miatt a fal beomlik!' : 'A rövid spirál ciklusokban hordja fel a talajt.', a(st, u) {
         const [d, tip, full] = cycles(u, Math.max(4, Math.round(L / 1.8)), L); st.d = d; st.bucket = { tip, full }; st.spoil = 0.85 * u; st.focus = Math.max(d, 0); st.span = 9;
         if (M.collapse && d > M.collapse[0] + 0.4) { st.collapse = clamp((d - M.collapse[0] - 0.4) / Math.max(1, L - M.collapse[0]), 0, 1); st.alert = 'Beomlik a furat!'; }
@@ -1114,6 +1115,6 @@ defineQuiz('sim', 'Kvíz – a cölöpépítő tanulságai', [
   { q: 'Béléscsöves fúrásnál a talajvíz alatt mit kell tenni a furatban?', a: ['Pótolni a kiemelt vizet, hogy a talpon ne törjön be a talaj', 'Kiszivattyúzni a vizet, hogy száraz legyen a talp', 'Cementtel injektálni a talpat', 'Semmit, a béléscső mindent megold'], c: 0, e: 'Ha a belső vízszint a külső alá kerül, a víznyomás-különbség a talpon betöri és fellazítja a talajt.' },
   { q: 'Melyiknél hagyjuk figyelmen kívül a csúcsellenállást a teherbírás számításakor?', a: ['Mikrocölöp', 'Franki-cölöp', 'Vert előregyártott cölöp', 'Béléscsöves fúrt cölöp'], c: 0, e: 'A karcsú mikrocölöpnél jellemzően csak a köpenymenti ellenállással számolunk.' },
   { q: 'Mi a Franki-cölöp „hagymája”?', a: ['Betonadagokból kidöngölt, kiszélesedő talp', 'A cölöpfej felett hagyott túlnyúló beton', 'A béléscső végére hegesztett acélcsúcs', 'A zaggyal keveredett felső betonréteg'], c: 0, e: 'A dugó kiverése után újabb betonadagokat döngölnek a talpnál – ez a „hagyma” adja a nagy talpellenállást.' },
-  { q: 'Kemény agyag, a talajvíz mélyen van, 8 m-es fúrt cölöp kell. Melyik a legegyszerűbb megtámasztás?', a: ['Megtámasztás nélkül – de rögtön betonozni kell', 'Bentonitzagy', 'Béléscső vízpótlással', 'Sűrített levegő'], c: 0, e: 'Kötött talajban, talajvíz felett, legfeljebb 8–10 m-ig a furat rövid ideig magától is megáll.' },
+  { q: 'Kemény agyag, a talajvíz mélyen van, 8 m-es fúrt cölöp kell. Melyik a legegyszerűbb megtámasztás?', a: ['Megtámasztás nélkül – de rögtön betonozni kell', 'Bentonitzagy', 'Béléscső vízpótlással', 'Sűrített levegő'], c: 0, e: 'Kötött talajban, elsősorban talajvíz felett, nem túl hosszú (kb. 8–10 m-es) furat rövid ideig magától is állékony maradhat.' },
   { q: 'A helyben készülő csavart cölöpnél a kiszorítás elsősorban melyik ellenállást növeli?', a: ['A köpenymenti ellenállást', 'Csak a talpellenállást', 'Egyiket sem', 'Csökkenti a köpenymenti ellenállást'], c: 0, e: 'A fej széttolja és tömöríti a talajt a cölöp körül – ez a köpeny mentén érvényesül.' },
 ]);

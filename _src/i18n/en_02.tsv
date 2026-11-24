@@ -19,7 +19,6 @@ d90d1b3	Wind turbine – here it is not the size of the load but the tilt of the
 d22b539	When water scours the foundation
 7c734db	The water swirls around a bridge pier standing in a river bed: the downflow at the nose of the pier and the <b>horseshoe vortex</b> forming at its foot remove the bed material, and a <b>scour hole</b> develops around the pier. In a flood this can reach several metres within a few hours.
 ae44540	If the pier stands on a shallow foundation and the scour reaches the foundation level, the pier is <b>undermined</b> – one of the most common causes of bridge collapses. That is why river piers are placed on a <b>deep foundation</b> (piles, wells, boxes) reaching below the expected scour depth.
-291e945	The short 3D animation shows how the scour hole develops around the pier over 40 minutes.
 c4d27b5	Scour lab around a bridge pier
 877b4c7	Parts of a pile foundation
 0921324	Scheme of a pile foundation: 1 – columns and floor of the superstructure, 2 – grillage, 3 – pile caps, 4 – piles, 5 – bearing stratum; arrows show the load path
@@ -102,7 +101,6 @@ e17764d	<b>Short pile</b> – approx. 3–5 m long; useful where the bearing str
 c70112f	<b>Large-diameter pile</b> – above 80 cm; these are made <b>exclusively with replacement</b> technology.
 3a77e97	Diameter scale
 77a7037	The pile family tree
-9ad07a9	Pile technologies are best grouped by method of construction: <b>displacement</b> and <b>replacement</b> piles, supplemented by an <b>“other”</b> group. (The complete system of deep foundations – together with diaphragm walls, well and box foundations – is presented in <a href="#alap-fajtak">section 1.2</a>.) Tap a branch to jump to the relevant chapter. The <span class="rsz-ytdot" aria-hidden="true"></span> mark means that a YouTube video with real footage of the technology is also available.
 946f875	<span class="id">C03</span><span>Displacement · precast</span>
 eb9e6b5	Precast piles
 2554d5b	A precast pile is a finished <b>displacement element</b>: it is made in a factory or yard, and on site it is driven, vibrated, jacked or screwed into the ground. As it is installed, it “pushes” the soil aside, so the surrounding soil is compacted – the shaft resistance increases. As a result, <b>both the base and the shaft resistance of the pile increase</b>. Its drawbacks are that installation involves more noise and vibration, and if rock or a very hard “intercalated layer” is in its way, the pile gets stuck and cannot be taken down to the required depth.
@@ -110,4 +108,3 @@ eb9e6b5	Precast piles
 65ef6a7	The soil is <b>removed</b> in some way (bored out – for a CFA pile, for example, the continuous flight auger brings it up), and the resulting hole is filled with the pile material. During construction the surrounding soil may <b>loosen</b> slightly. These piles are always <b>cast in place</b>.
 0c2f208	The soil is not removed: the pile or the drilling tool <b>pushes it aside and compacts it</b>, so no soil comes to the surface. There are two kinds:
 af5948d	<b>precast</b> piles – a finished reinforced concrete or steel element is <b>driven, jacked, vibrated</b> or <b>screwed</b> into the ground; because of the compaction, both the base and the shaft resistance increase;
-d9d3778	<b>cast-in-place</b> piles – we drill with a displacement head (<b>screw pile</b>, shown in the figure) or drive down a tube closed with a gravel plug (<b>Franki pile</b>), and the hole is concreted in place; for the screw pile, mainly the shaft resistance increases.

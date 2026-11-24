@@ -326,7 +326,7 @@ register('rf-epito', (root) => {
   go(0, false); p = 1; draw(0);
 });
 
-/* ================================================================== 3. Markoló vagy hydrofraiser? */
+/* ================================================================== 3. Markoló vagy hydrofraise? */
 const GSOIL = {
   k_homok: { t: 'Homok, kavics', m: 0, f: 0, cls: 'f-soilA', pat: 'pat-sand' },
   k_agyag: { t: 'Puha–közepes agyag', m: 0, f: 0, cls: 'f-soilB', pat: 'pat-clay' },
@@ -342,7 +342,7 @@ register('rf-gep', (root) => {
   ctrls.append(h('p', { class: 'ctl-hint', html: 'A pontszám szemléltető: a döntést a valóságban a talajfeltárás, a mélység, a pontossági előírás és az ajánlati ár együtt adja ki.' }));
   const W = 640, H = 330;
   const fig = figure(viz, W, H, 'fig');
-  const sM = stat(out, { label: 'Résmarkoló', unit: '/ 100', d: 0 }), sF = stat(out, { label: 'Hydrofraiser', unit: '/ 100', d: 0 });
+  const sM = stat(out, { label: 'Résmarkoló', unit: '/ 100', d: 0 }), sF = stat(out, { label: 'Hydrofraise', unit: '/ 100', d: 0 });
   const vd = verdict(out); vd.el.classList.add('rf-span');
   let sc = { m: 0, f: 0 };
   const score = () => {
@@ -350,10 +350,10 @@ register('rf-gep', (root) => {
     const why = [];
     let m = 82, f = 64;
     m += so.m; f += so.f;
-    if (sS.v === 'kozet' || sS.v === 'kemeny') why.push('kőzetben, nagyon kemény agyagban a résfal <b>csak hydrofraiserrel</b> készülhet');
+    if (sS.v === 'kozet' || sS.v === 'kemeny') why.push('kőzetben, nagyon kemény agyagban a résfal <b>csak hydrofraise-zel</b> készülhet');
     if (d > 30) { m -= (d - 30) * 1.6; f += Math.min(14, (d - 30) * 0.6); why.push('nagy mélységben a markoló függőlegessége egyre nehezebben tartható, a marógép végig vezetett'); }
     if (tP.v) { m -= 18; f += 18; why.push('a marógép pontosabb, szebb felületet ad'); }
-    if (tC.v) { m += 10; f -= 34; why.push('a hydrofraiser nagyon drága (marógép + zagytisztító telep)'); }
+    if (tC.v) { m += 10; f -= 34; why.push('a hydrofraise nagyon drága (marógép + zagytisztító telep)'); }
     if (!why.length) why.push('laza vagy közepes talajban, szokásos mélységben a ciklikusan dolgozó réskanál gyors és gazdaságos');
     m = clamp(m, 0, 100); f = clamp(f, 0, 100);
     return { m, f, why };
@@ -376,7 +376,7 @@ register('rf-gep', (root) => {
     L(fig, tipM[0], tipM[1], 172, gy - 26, 'stroke:var(--ink);stroke-width:1.2');
     grab(fig, 172, gy, 22, bob);
     T(fig, 160, H - 10, 'RÉSMARKOLÓ', 't-big', { 'text-anchor': 'middle', style: 'font-size:15px' });
-    // hydrofraiser
+    // hydrofraise
     const tipF = [492, 10];
     crane(fig, 360, ty, tipF);
     R(fig, 482, ty, 20, d * kpx, 'f-slurry'); R(fig, 482, ty, 20, d * kpx, '', { fill: 'url(#pat-slurry)' });
@@ -390,7 +390,7 @@ register('rf-gep', (root) => {
     P(fig, `M496 ${yb - 64} C 520 ${ty - 20}, 560 ${ty - 30}, 580 ${ty - 22}`, '', { style: 'fill:none;stroke:var(--steel);stroke-width:3' });
     R(fig, 566, ty - 28, 62, 28, 'f-bento', { rx: 3, opacity: 0.9 });
     T(fig, 597, ty - 10, 'zagytelep', 't-sm', { 'text-anchor': 'middle', style: 'fill:#fff;font-weight:700' });
-    T(fig, 480, H - 10, 'HYDROFRAISER', 't-big', { 'text-anchor': 'middle', style: 'font-size:15px' });
+    T(fig, 480, H - 10, 'HYDROFRAISE', 't-big', { 'text-anchor': 'middle', style: 'font-size:15px' });
     // mélységskála
     for (let m = 0; m <= 60; m += 10) { L(fig, 316, ty + m * kpx, 324, ty + m * kpx, 'stroke:var(--ink);stroke-width:1'); T(fig, 312, ty + m * kpx + 4, m + ' m', 't-sm halo', { 'text-anchor': 'end' }); }
     L(fig, 320, ty, 320, ty + 60 * kpx, 'stroke:var(--ink);stroke-width:1');
@@ -408,7 +408,7 @@ register('rf-gep', (root) => {
     sc = score();
     sM.set(sc.m, sc.m >= 60 ? 'ok' : sc.m >= 35 ? 'warn' : 'bad');
     sF.set(sc.f, sc.f >= 60 ? 'ok' : sc.f >= 35 ? 'warn' : 'bad');
-    const best = sc.m >= sc.f ? 'Résmarkoló' : 'Hydrofraiser';
+    const best = sc.m >= sc.f ? 'Résmarkoló' : 'Hydrofraise';
     const st = Math.abs(sc.m - sc.f) < 8 ? 'warn' : 'ok';
     vd.set(st, Math.abs(sc.m - sc.f) < 8 ? 'Mindkettő szóba jöhet' : best + ' a jobb választás', '<ul class="rf-why">' + sc.why.map((w) => `<li>${w}</li>`).join('') + '</ul>');
     draw(0);
@@ -656,6 +656,6 @@ defineQuiz('rf', 'Kvíz – résfalak', [
   { q: 'Milyen bentonit használható réseléshez?', a: ['Csak aktivált „Na” bentonit', 'Bármilyen helyi agyag', 'Kalciumbentonit cementtel', 'Kvarchomok és víz keveréke'], c: 0, e: 'A bentonit döntően montmorillonitból álló kolloid agyag; réseléshez csak aktivált Na-bentonit jó, a viszkozitás CMC-vel növelhető.' },
   { q: 'Legkésőbb mennyi idővel a réselés befejezése után kell megkezdeni a betonozást?', a: ['4–5 óra', '24 óra', '7 nap', 'Csak a zagy teljes ülepedése után'], c: 0, e: 'Mielőbb, de legkésőbb 4–5 óra múlva – előtte aljtisztítás, utána folyamatos, megszakítás nélküli víz alatti betonozás.' },
   { q: 'Miért vésik vissza a résfal felső 30–50 cm-ét?', a: ['Mert zaggyal keveredett, gyenge minőségű', 'Mert ott a legnagyobb a hajlítónyomaték', 'Hogy a résvezető gerenda kiférjen', 'Csak esztétikai okból'], c: 0, e: 'A beton felső része a kiszorított zaggyal keveredik. Visszavésés után erre kerül a vasbeton fejgerenda.' },
-  { q: 'Melyik helyzetben a legnehezebb a résállékonyság biztosítása?', a: ['Puha agyagban, tőzegben, folyós homokban, nagyon magas talajvíznél', 'Tömör kavicsban, talajvíz felett', 'Kemény agyagban', 'Ha a rés rövid és sekély'], c: 0, e: 'Itt kicsi a talaj nyírószilárdsága, nagy a víznyomás vagy a zagyveszteség veszélye. Kemény agyag és kőzet a kiemelést nehezíti (ott hydrofraiser kell), nem az állékonyságot.' },
-  { q: 'Mikor indokolt a hydrofraiser (résmaró) a markolóval szemben?', a: ['Kőzetben, nagyon kemény agyagban, nagy mélységnél és pontossági igénynél', 'Rövid, sekély falnál laza homokban', 'Ha nincs szükség zagyra', 'Ha a legolcsóbb megoldás kell'], c: 0, e: 'A marógép bármely talajban és kőzetben, nagy mélységig, pontosan dolgozik – de nagyon drága. Hazánkban a 4-es metrónál alkalmazták (Fővám tér: 48,3 m).' },
+  { q: 'Melyik helyzetben a legnehezebb a résállékonyság biztosítása?', a: ['Puha agyagban, tőzegben, folyós homokban, nagyon magas talajvíznél', 'Tömör kavicsban, talajvíz felett', 'Kemény agyagban', 'Ha a rés rövid és sekély'], c: 0, e: 'Itt kicsi a talaj nyírószilárdsága, nagy a víznyomás vagy a zagyveszteség veszélye. Kemény agyag és kőzet a kiemelést nehezíti (ott hydrofraise kell), nem az állékonyságot.' },
+  { q: 'Mikor indokolt a hydrofraise (résmaró) a markolóval szemben?', a: ['Kőzetben, nagyon kemény agyagban, nagy mélységnél és pontossági igénynél', 'Rövid, sekély falnál laza homokban', 'Ha nincs szükség zagyra', 'Ha a legolcsóbb megoldás kell'], c: 0, e: 'A marógép bármely talajban és kőzetben, nagy mélységig, pontosan dolgozik – de nagyon drága. Hazánkban a 4-es metrónál alkalmazták (Fővám tér: 48,3 m).' },
 ]);

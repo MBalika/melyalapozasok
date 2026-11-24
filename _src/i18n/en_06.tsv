@@ -53,7 +53,7 @@ d48f9d2	Does the micropile buckle?
 d18f3a2	Two phases: drilling and grouting
 653dabd	<b>Drilling:</b> a 100–200 mm diameter hole to the required depth, with the help of a drilling fluid. The design of the drilling head (the “monitor”) and the pressure depend on the quality of the soil.
 7108e88	The equipment: silo, mixer, high-pressure pump, drill rod and nozzle – the drilling rig is small, and the pump plant can stand aside, even in a courtyard.
-eb6970c	spoil
+eb6970c	silt
 9252b0e	The four variants – how many nozzles are “switched on”?
 c1f4699	=
 78482f4	Single jet
@@ -68,8 +68,6 @@ c18a285	Triple jet
 3a40a89	A water jet shrouded in an air jet breaks up the soil, and grout is injected at the same time through a separate nozzle for cementation.
 e925c79	Jet column factory
 04cca02	Jet panel: when we don’t rotate
-00c9fb9	If the spoil cannot get out
-1d2b8af	During grouting, attention must be paid to the <b>free outflow</b> of the excess material – the spoil returning to the surface. If it becomes blocked along the hole, the pressure builds up in the soil: hydraulic fracturing can occur, and in extreme cases <b>the building or its surroundings may even be lifted</b> by the excess cement.
 c4c551c	Jet panels in a V shape: plan and elevation
 e6aad09	Plan
 093d64a	hole position: two nozzles from here

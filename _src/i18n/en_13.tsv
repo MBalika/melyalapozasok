@@ -14,7 +14,6 @@ bce9b26	Loose, medium-dense sand
 06cfae8	Rock, rocky ground
 c4649b3	Hard clay
 e2c2047	Fill with large blocks
-6970760	In rock, hard (stony) clay, strongly cemented soil and fill with large blocks the pile cannot be driven – often even a thin such intercalation stops it. In loose and medium-dense sand driving (vibrating) works well, and the displacement even compacts the soil.
 37a63e2	Which technology is chosen <b>specifically where noise and vibration are restricted</b>?
 28ca6b2	CFA pile
 f318787	Vibrated steel tubular pile
@@ -30,7 +29,6 @@ f318787	Vibrated steel tubular pile
 c6a04bb	With a rope-suspended grab
 02c08f0	With a Kelly-bar grab
 4b19698	With a short auger
-c702359	In rock and very hard clay a diaphragm wall can only be built with a hydrofraise (a reverse-circulation trench cutter with cutter wheels). It is very expensive, but it gives an accurate trench to great depth, in any soil and rock.
 272d527	In which soil is trench stability <b>difficult</b> to ensure?
 69abdc7	In peat, soft clay, flowing sand
 4371dac	In dense sandy gravel above the groundwater
@@ -45,7 +43,6 @@ dae8889	Under the river pier of a long-span bridge
 0157edd	In rock, a very dense, hard layer
 af0309a	In medium-dense granular soil
 a17ea33	In soft–firm cohesive soil
-ca702f9	The displacement drilling head works well in loose to medium-dense granular, intermediate and soft–firm cohesive soil: it pushes aside and compacts the soil. It cannot penetrate a hard, very dense layer.
 e7b4ed6	Which statement is true of large-diameter piles (above 80 cm)?
 2468c4f	They are made exclusively with replacement technology
 9ecd5ec	They are made mainly precast and driven
@@ -126,7 +123,6 @@ c37247c	check separately
 dadbefb	Pressure
 82b2f7a	Rotation speed
 52d002e	Column spacing in the wall
-e2daa0f	the return path of the spoil is blocked
 51265f6	On the left, making a jet column in side view; on the right, the overlapping column wall in plan
 2e2b324	water jet
 b25462d	air shroud

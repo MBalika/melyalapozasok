@@ -44,7 +44,6 @@ d4c973d	For piles the two load-transfer surfaces have their own names: <b>base (
 451cdac	Classification of deep foundations
 3c43f53	<b>Deep foundation</b><small>a load-transferring element between the structure and the deeper bearing stratum</small>
 8513a8e	<span class="alap-ti" data-ti="colop"></span><span class="at-t"><b>Pile foundation</b><small>slender, long column-like elements</small></span>
-d358650	<a href="#elore">displacement</a><a href="#furt">replacement</a><a href="#egyeb">other: micropiles, jet grouting, mixing</a>
 a78c625	<span class="alap-ti" data-ti="resfal"></span><span class="at-t"><b>Diaphragm wall</b><small>a continuous wall in the ground</small></span>
 994f18c	<a href="#resfal">diaphragm wall of panels</a><a href="#resfal">barrette</a>
 fade340	<a href="#kut">well foundation</a><a href="#kut">box foundation · caisson</a>
@@ -56,7 +55,6 @@ e0c8005	Micropiles approx. 10–30 cm, “normal” piles 25 (30)–80 cm, large
 ecc997c	Load transfer
 cde20ed	At discrete points, at the base (tip) and along the shaft; according to the ratio it is an end-bearing, friction or mixed pile. It can also carry tension and horizontal load.
 f697c06	Construction
-745f4c8	Precast and driven, vibrated, jacked or screwed in (displacement), or bored in place and filled with concrete (replacement).
 1abd3de	When do we choose it?
 8c951e7	If the bearing stratum lies deep below weak layers, the load is large, the settlement limit is strict, or scour or uplift is a threat.
 428827e	Example

@@ -212,7 +212,7 @@ function labEval(o) {
     if (szem) {
       Object.assign(r, { st: 'bad', mode: 'wall', zf: 1.2, title: 'A furat beomlik.', txt: `Szemcsés talajban (${SOIL[soil].t.toLowerCase()}) nincs kohézió, ami a függőleges falat megtartaná: a fal kipereg, beomlik${wet ? ', a talajvíz alatt pedig a beáramló víz is sodorja a szemcséket' : ''}. Megtámasztásra van szükség (béléscső, zagy vagy folyamatos spirál).` });
     } else if (wet) {
-      Object.assign(r, { st: 'bad', mode: 'wall', zf: hw, title: 'A talajvíz alatt a fal megindul.', txt: 'Kötött talajban is csak talajvíz felett áll meg a furat. A víz alatt a fal felpuhul, a betörő víz a talpat is fellazítja – a megtámasztás nélküli technológia itt már nem alkalmazható.' });
+      Object.assign(r, { st: 'bad', mode: 'wall', zf: hw, title: 'A talajvíz alatt a fal megindulhat.', txt: 'Kötött talajban is elsősorban talajvíz felett marad állékony a furat. A víz alatt a fal felpuhulhat, a betörő víz a talpat is fellazíthatja – itt béléscső vagy zagy kell.' });
     } else if (z > 10) {
       Object.assign(r, { st: 'bad', mode: 'wall', zf: 8, title: 'Túl mély a megtámasztás nélküli furat.', txt: 'Kötött talajban, talajvíz felett is legfeljebb 8–10 m-ig számíthatunk arra, hogy a furat rövid ideig megáll. Mélyebben a fal alsó része megindulhat.' });
     } else if (z > 8) {
@@ -304,7 +304,7 @@ register('furtLab', (root) => {
       if (gw && hw < z) { const t = hw - szE; const dp = 11.0 * (z - t) - 10 * (z - hw); oX.set(dp, r.st); oX.el.querySelector('.stat-v').innerHTML += '<small>kPa</small>'; }
       else oX.set('–', null, 'talajvíz felett');
     } else if (m === 'k_nincs') { oX.el.querySelector('.stat-l').innerHTML = 'Megtámasztás nélkül (kötött talaj, TV felett)'; oX.set('≤ 8–10 m', SOIL[soil].szem || (gw && hw < z) || z > 10 ? 'bad' : z > 8 ? 'warn' : 'ok', '≤ 8–10 m'); }
-    else { oX.el.querySelector('.stat-l').innerHTML = 'CFA-hossz'; oX.set('6–22 (24) m', z > 24 ? 'bad' : z > 22 ? 'warn' : 'ok', '6–22 (24) m'); }
+    else { oX.el.querySelector('.stat-l').innerHTML = 'CFA-hossz'; oX.set('≤ 22–24 m', z > 24 ? 'bad' : z > 22 ? 'warn' : 'ok', 'legfeljebb 22–24 m'); }
     vd.set(r.st, r.title, ' ' + r.txt);
     t0 = performance.now() / 1000; settled = false;
   };
@@ -669,7 +669,7 @@ register('furtCfa', (root) => {
       if (r < 1) vd.set('bad', 'Vigyázz – nyakasodik!', ` Most ${fmt(r * 100, 0)} %: kevesebb beton érkezik, mint amennyi teret a spirál felszabadít. Lassíts, vagy adj több nyomást!`);
       else if (r > 1.4) vd.set('warn', 'Sok a beton.', ' A beton a talajba préselődik – pazarló, és megemelheti a környezetet. Csökkentsd a nyomást, vagy húzz kicsit gyorsabban.');
       else vd.set('ok', 'Jó ütem.', ` A betonáram lépést tart a húzással (${fmt(r * 100, 0)} %). Tartsd így a felszínig!`);
-    } else if (st.phase === 'drill') vd.set('', 'Fúrás…', ' A spirál lehajt; a furadék a meneteken marad, és megtámasztja a falat. A csapóajtó zárva.');
+    } else if (st.phase === 'drill') vd.set('', 'Fúrás…', ' A spirál lehajt; a furadék a meneteken marad, és megtámasztja a falat. A betonozónyílás zárólapja zárva.');
   };
   fresh();
   loop(root, (tt, dt) => draw(tt, dt));
@@ -730,7 +730,7 @@ function pickEval(o) {
   {
     const r = { id: 'nel', t: 'Megtámasztás nélküli furat', s: 3.5, why: [], out: null, href: '#furt-nelkul' };
     if (soil !== 'kot') r.out = 'csak kötött talajban'; else r.why.push(['ok', 'kötött talaj']);
-    if (gw) r.out = r.out || 'csak talajvíz felett'; else r.why.push(['ok', 'nincs talajvíz']);
+    if (gw) r.out = r.out || 'elsősorban talajvíz felett'; else r.why.push(['ok', 'nincs talajvíz']);
     if (L0 > 10) r.out = r.out || 'legfeljebb 8–10 m mély'; else if (L0 > 8) { r.s -= 1; r.why.push(['warn', 'a 8–10 m-es határon – azonnal betonozni']); } else r.why.push(['ok', `${L0} m ≤ 8 m${L0 <= 6 ? ' (markolt tömbalap, kútalap)' : ''}`]);
     if (big) { r.s -= 1; r.why.push(['warn', 'nagy teherbíráshoz rövid']); }
     r.why.push(['ok', 'egyszerű, olcsó']);
@@ -773,7 +773,7 @@ defineQuiz('furt', 'Kvíz – fúrt cölöpök', [
   { q: 'Mi támasztja meg a furat falát CFA-cölöp készítésekor?', a: ['A spirálon maradó talajdugó', 'Bentonitzagy', 'Acél béléscső', 'Semmi – a betont azonnal bejuttatják'], c: 0, e: 'Lehajtás közben a furadék csak részben nyomódik ki, a spirálon maradó talajdugó folyamatosan támasztja a falat – külön technológia nem kell.' },
   { q: 'Szemcsés talajban hogyan kell a béléscsövet mélyíteni?', a: ['A földkiemelés előtt kell járnia', 'Elég a kiemelés után, ha már látszik a talajvíz', 'Csak a talajvízszint alatt kell', 'Mindegy, a cső a végén úgyis megtámaszt'], c: 0, e: 'Ha a kiemelés megelőzi a csövet, a cső alatti szabad falszakasz beomlik, a talaj befolyik, a környezet fellazul.' },
   { q: 'Mi történik, ha talajvíz alatt a béléscsőben alacsonyabban áll a víz, mint kint?', a: ['A talpon betör a talajvíz, és fellazítja a talajt', 'A cső felúszik', 'A beton gyorsabban köt meg', 'Semmi, a cső vízzáró'], c: 0, e: 'A vízszintkülönbség felfelé irányuló áramlást indít a talpon (felbuzgás): a víz magával ragadja a szemcséket. Ezért a furatban pótolni kell a kiemelt vizet.' },
-  { q: 'Mikor alkalmazható megtámasztás nélküli furat?', a: ['Kötött talajban, talajvíz felett, legfeljebb 8–10 m-ig', 'Szemcsés talajban, ha a talajvíz mélyen van, legfeljebb 20 m-ig', 'Bármely talajban, ha gyorsan betonozunk', 'Talajvíz alatt, ha a furat rövid'], c: 0, e: 'Kötött talajban, talajvíz felett, nem túl hosszú furatnál – és a kiemelés után rögtön ki kell betonozni.' },
+  { q: 'Mikor alkalmazható megtámasztás nélküli furat?', a: ['Kötött talajban, elsősorban talajvíz felett, nem túl hosszú (kb. 8–10 m-es) furatnál', 'Szemcsés talajban, ha a talajvíz mélyen van, legfeljebb 20 m-ig', 'Bármely talajban, ha gyorsan betonozunk', 'Laza homokban, talajvíz alatt, ha a furat rövid'], c: 0, e: 'Kötött talajban, elsősorban talajvíz felett, nem túl hosszú furatnál rövid ideig megtámasztás nélkül is állékony maradhat – de a kiemelés után rögtön ki kell betonozni.' },
   { q: 'Miért nem kell a CFA-cölöp betonját vibrálni?', a: ['A folyós konzisztencia és a nyomás alatti bedolgozás öntömörödést biztosít', 'Mert a CFA-cölöp vasalatlan', 'Mert a spirál forgása tömöríti', 'Mert a talajdugó összenyomja'], c: 0, e: 'A betont a fúrószáron át, túlnyomással pumpálják: a folyós beton és a nyomás együtt tömörít.' },
   { q: 'Mi a nyakasodás egy CFA-cölöpnél?', a: ['Elvékonyodás, ha a spirált gyorsabban húzzák, mint ahogy a beton a teret kitölti', 'A cölöpfej megvastagodása a túlbetonozástól', 'A vasalási armatúra felúszása a friss betonban', 'A fúrószár elhajlása kemény rétegben'], c: 0, e: 'Ha a betonáram nem tart lépést a húzással, a talaj a beton helyére nyomódik. A gépek ezért folyamatosan mérik a betonnyomást és a betonmennyiséget.' },
   { q: 'Melyik technológia NEM alkalmas egy 150 cm átmérőjű cölöphöz?', a: ['CFA', 'Köpenycsöves fúrt cölöp', 'Bentonitzagyos fúrt cölöp'], c: 0, e: 'A CFA-cölöp átmérője 40–120 cm; a köpenycsöves és a zagyos cölöp 80–150 (350) cm-es átmérővel készül.' },

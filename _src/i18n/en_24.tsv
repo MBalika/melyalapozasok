@@ -19,7 +19,6 @@ bd5d8b7	A very long pile
 c61b464	In Hungarian practice a depth of 30–40 m is typically sufficient.
 96c89a4	the groundwater (−${fmt(gw, 1)} m) is above the bottom of the bore
 ad76fc6	the bore passes through a granular layer (${gr.n})
-603f634	Without support the bore stands only in cohesive soil above the groundwater – here ${why.join(', és ')}. The result would be a discontinuity, more concrete and lower shaft resistance. Choose a casing, slurry or CFA!
 b818e34	, and 
 0409013	Cohesive soil, above the groundwater
 d7e0f86	In hard cohesive soil above the groundwater the bore stands by itself for a short time – it must be concreted immediately after excavation.
@@ -34,13 +33,11 @@ b80af9e	Excavated block foundation
 edd062b	Round spun piles are at most 20–22 m long.
 4899a03	In Hungarian practice the square pile is 30×30 or 40×40 cm.
 25024f5	The pile refuses!
-fc2a79b	In hard (stony) clay the precast pile cannot be driven to the design depth – here it stops at approx. −${fmt(M.stuck, 1)} m.
 7456292	The pile refuses in the fill!
 6059412	Displacement compacts
 706bb69	The driven pile pushes aside and compacts the soil around it: for a precast pile both the base and the shaft resistance increase.
 5e426c5	Vibration-sensitive neighbour: the riskiest choice
 d092ae3	Noise and vibration
-e755bec	Driving causes significant noise and vibration; near structures it can only be used under strict limits.
 0115ec2	 A bored (CFA) or screw pile is the better choice here.
 a4ce44c	Franki pile too long
 f876b99	The length of a Franki pile is at most approx. 16–18 m.
@@ -52,7 +49,6 @@ f876b99	The length of a Franki pile is at most approx. 16–18 m.
 a5763ba	The casing is driven down with a drop hammer and the concrete is rammed – with dynamic effects and noise.
 bbc0353	 To be avoided next to a vibration-sensitive neighbour.
 1d7d643	Screw pile too long
-e17c8f3	The length of a screw pile is at most approx. 20 m.
 819f081	Not ideal in hard clay
 e99d789	The screw pile is popular and economical mainly in loose or medium-dense granular and intermediate, weakly cohesive soil.
 f404364	Deep in the dense gravel

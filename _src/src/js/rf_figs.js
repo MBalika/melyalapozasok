@@ -247,7 +247,7 @@ function renderGrab(el) {
 }
 function renderCutter(el) {
   const W = 360, H = 240;
-  const s = mk(el, W, H, 'Hydrofraiser: két ellentétesen forgó marótárcsa, középen a szívócsonk');
+  const s = mk(el, W, H, 'Hydrofraise: két ellentétesen forgó marótárcsa, középen a szívócsonk');
   soilBox(s, 0, 0, W, H, 'f-soilA', 'pat-gravel', 0.8);
   slurry(s, 40, 0, 280, H);
   // keret és szívócső
@@ -281,10 +281,10 @@ function renderCutter(el) {
   T(s, 180, 234, 'a törmelék a szívócsonkba jut', 'rf-t rf-onfill', { 'text-anchor': 'middle' });
 }
 
-/* ================================================================== 4. A zagy útja (hydrofraiser, zagykezelő telep) */
+/* ================================================================== 4. A zagy útja (hydrofraise, zagykezelő telep) */
 function renderZagykor(el) {
   const W = 1000, H = 440, TY4 = 262;
-  const s = mk(el, W, H, 'A zagy útja hydrofraiseres réselésnél: marótárcsa, bontószivattyú, homoktalanító, tartály, szivattyúk, keverő, bentonitsiló', 'rf-zagy');
+  const s = mk(el, W, H, 'A zagy útja hydrofraise-zel végzett réselésnél: marótárcsa, bontószivattyú, homoktalanító, tartály, szivattyúk, keverő, bentonitsiló', 'rf-zagy');
   soilBox(s, 0, TY4, W, H - TY4, 'f-soilA', 'pat-sand', 0.6);
   L(s, 0, TY4, W, TY4, 'stroke:var(--ink);stroke-width:1.6');
   const dirty = 'stroke:var(--soilB);stroke-width:7;fill:none;stroke-linejoin:round;stroke-linecap:round';

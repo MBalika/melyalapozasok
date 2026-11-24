@@ -552,18 +552,20 @@ register('rsz-atmero', (root) => {
 
 /* ================================================================ 2.6 családfa */
 const TREE = { t: 'Cölöpök', c: [
-  { t: 'Talajkiszorításos', g: 1, c: [
-    { t: 'Előregyártott: fa, acél, vasbeton', h: '#elore', yt: 1 },
-    { t: 'Talajcsavar', h: '#elore', yt: 1 },
-    { t: 'Franki-cölöp', h: '#helyszini', yt: 1 },
-    { t: 'Csavart cölöp', h: '#helyszini', yt: 1 }] },
   { t: 'Talajhelyettesítéses', g: 2, c: [
     { t: 'CFA-cölöp', h: '#furt', yt: 1 },
-    { t: 'Béléscsöves fúrt cölöp', h: '#furt', yt: 1 },
-    { t: 'Bentonitzagyos fúrt cölöp', h: '#furt', yt: 1 },
+    { t: 'Markolt résalap', h: '#resfal', yt: 1 },
+    { t: 'Nagyátmérőjű fúrt, béléscsöves', h: '#furt', yt: 1 },
+    { t: 'Nagyátmérőjű fúrt, zagyos', h: '#furt', yt: 1 },
     { t: 'Megtámasztás nélküli furat', h: '#furt' }] },
+  { t: 'Talajkiszorításos', g: 1, c: [
+    { t: EN ? 'Cast-in-place screw' : 'Helyben betonozott csavart', h: '#helyszini', yt: 1 },
+    { t: 'Előregyártott vert/vibrált', h: '#elore', yt: 1 },
+    { t: 'Előregyártott acél csavart', h: '#elore', yt: 1 },
+    { t: 'Franki-cölöp', h: '#helyszini', yt: 1 }] },
+  { t: 'Mikrocölöpök', g: 3, c: [
+    { t: 'Béléscsővel, elvesző fejjel', h: '#egyeb', yt: 1 }] },
   { t: 'Egyéb', g: 3, c: [
-    { t: 'Mikrocölöp', h: '#egyeb', yt: 1 },
     { t: 'Jet-grouting', h: '#egyeb', yt: 1 },
     { t: 'Mélykeverés', h: '#egyeb', yt: 1 },
     { t: 'Kavicscölöp, kőoszlop', h: '#egyeb', yt: 1 }] }] };

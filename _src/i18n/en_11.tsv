@@ -114,7 +114,6 @@ b446d28	Which piling technology is the <b>riskiest</b> here?
 fb4bb9f	Driven precast reinforced concrete pile
 487c999	Bored pile (CFA)
 109e91f	Displacement screw pile
-2447493	Pile driving causes significant noise and vibration, so near structures it can only be used under strict limits – next to vibration-sensitive neighbours it is the riskiest. CFA is chosen specifically where noise and vibration are restricted, the screw pile has no dynamic effect or noise, and the micropile is made with a small rig, without vibration.
 14175f0	Underground car park on the site boundary
 90adc0a	The excavation for a two-level underground car park has to be supported. The groundwater is 2 m below ground level, impermeable clay follows at a depth of 14 m, and old buildings stand directly on the site boundary.
 16ad1f1	Which structure would you choose?
@@ -149,15 +148,12 @@ da07393	Piles 7 m long and 60 cm in diameter are needed under a smaller resident
 ea10d6d	An unsupported bored pile, concreted immediately
 a61c7b3	A bentonite-supported bored pile
 16cb90c	A caisson foundation
-648fd5e	In cohesive soil, above the groundwater, to a depth of at most 8–10 m, the bore is stable for a short time even without support – but it must be concreted immediately after excavation. Slurry is an unnecessary cost here, and the caisson and the diaphragm wall are structures an order of magnitude larger.
 7117c7e	A diaphragm wall into rock
 1f1c234	The excavation of a metro station is enclosed by a 45 m deep diaphragm wall; the lower part of the wall goes into hard marl, rock.
 9e5cdac	What would you excavate the trench with?
-79de413	With a hydrofraise (a trench cutter with cutter wheels)
 f449da6	With a rope-suspended mechanical grab
 787d545	With a Kelly-bar hydraulic grab
 7909617	Not at all: a driven steel sheet pile wall instead of a diaphragm wall
-5f6f870	In rock or very hard clay a diaphragm wall can only be built with a hydrofraise: the cutter wheels break up the material, which is pumped out together with the slurry and then separated outside. It is very expensive, but it gives an accurate trench to great depth, in any soil and rock. In Hungary it was used for the construction of metro line 4: diaphragm walls 48.3 m deep at Fővám tér and 40 m deep at Szent Gellért tér. Sheet piles cannot be driven into rock.
 f58bcd0	A solar park on farmland
 3b7030e	A solar park is being built with several thousand lightly loaded support posts. The soil is medium-dense sand, and the posts must be easy to remove decades later.
 caa4555	What would you found the posts on?
@@ -168,4 +164,3 @@ ad5f791	On large-diameter bored piles
 53d5ba5	Which technology fits here best?
 3d0e389	A cast-in-place displacement screw pile
 76f168a	A cased large-diameter bored pile
-d4153df	The drilling head of the screw pile pushes aside and compacts the soil while drilling: the shaft resistance increases, only a little spoil comes to the surface, and there is no dynamic effect or noise. In loose to medium-dense granular and intermediate soils it is a popular, economical and fast solution for moderately loaded industrial facilities (diameter 300–600 mm, length up to approx. 20 m).

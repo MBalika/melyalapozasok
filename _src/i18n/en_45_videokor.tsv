@@ -1,0 +1,107 @@
+# 2 s-os videó-ellenőrző kör (2026-11-24): a videókhoz igazított szövegek angolul
+9a96386	The short 3D animation shows how the scour hole develops around the pier over 46 minutes.
+ef971cc	Displacement: precast piles are driven, vibrated, jacked or screwed in, or the pile is formed in place with a displacement drilling head or a driven casing (screw pile, Franki pile). Replacement: the soil is drilled out and the hole is filled with concrete. Micropiles are made with a casing or a sacrificial bit.
+6fabcce	<a href="#elore">displacement</a><a href="#furt">replacement</a><a href="#egyeb">micropiles</a><a href="#egyeb">other: jet grouting, mixing</a>
+82e13ff	Pile technologies are grouped into three families by method of construction: <b>replacement</b> piles (CFA pile, grabbed barrette, large-diameter bored piles), <b>displacement</b> piles (cast-in-place screw pile, precast concrete or steel tube driven/vibrated pile, precast steel screw pile, Franki pile), and <b>micropiles</b> made with a casing and a sacrificial bit. In the diagram they are completed by an <b>“other”</b> group: jet grouting, deep mixing and stone columns, which already lead towards ground improvement. (The complete system of deep foundations, including diaphragm walls and well and box foundations, is shown in <a href="#alap-fajtak">section 1.2</a>.) Tap a branch to jump to the relevant chapter. The&nbsp;<span class="rsz-ytdot" aria-hidden="true"></span>&nbsp;mark means that a YouTube video with real footage of the technology is also available.
+97e7484	<b>cast-in-place</b> piles – we drill with a displacement head (<b>screw pile</b>, shown in the figure) or drive down a tube closed with a dry concrete plug (<b>Franki pile</b>), and the hole is concreted in place; for the screw pile, mainly the shaft resistance increases.
+80956bc	Subsequent strengthening and underpinning of smaller structures
+93eeb07	<b>40–120 cm</b>, at most 22–24 m
+9f897c5	The Franki pile is a driven, “monolithic” concrete pile of high bearing capacity, made with a recovered casing. Most often approx. <b>1 m of dry concrete</b> is placed in the bottom of a casing tube <b>46–52 cm in diameter</b>, with 30 mm wall thickness and 13 m long (extendable), and rammed inside the tube with a <b>3 t drop hammer</b>. Through friction the plug drags the tube down with it – the tube goes down without any soil or water getting into it.
+9c05cf5	cohesive soil, mainly above the groundwater
+7bdb715	at most 22–24 m
+69e9530	The same clay that stands for a while when dry can quickly start to move below the groundwater or at a granular intercalation. If the drilling hits water, the unsupported bore may no longer stand – then a casing or slurry is needed.
+ba93099	In cohesive soil, mainly above the groundwater, for piles that are not too long (approx. 8–10 m), the bore may remain stable for a short time even without support – but it must be concreted immediately after excavation. The bore is made with a short auger or a grab; the concrete is placed gravitationally through a hopper.
+bf200c8	<b>22–24<small>m</small></b><span>maximum length – the length of the auger is limited by the mast of the rig</span>
+0b3c91b	One of the <b>most frequently used</b> piling technologies in Hungary: a pile that is quick to build and “efficient”. Its name abbreviates <i>Continuous Flight Auger</i>; in German-speaking countries it is known as the SOB pile, in France as the STARSOL pile. CFA is a <b>replacement</b> pile made with a continuous hollow auger; at the bottom of the auger there is a concreting outlet (with a closing plate).
+bc1975e	In cohesive soil, mainly above the groundwater, for piles that are not too long (approx. 8–10 m), the bore may remain stable for a short time even without support, but it must be concreted immediately after excavation.
+2cf8888	The five steps of making a vibro stone column and the finished columns
+7c02545	During grouting, attention must be paid to the <b>free outflow</b> of the excess material – the cement grout returning to the surface. If it becomes blocked along the hole, the pressure builds up in the soil: hydraulic fracturing can occur, and in extreme cases <b>the building or its surroundings may even be lifted</b> by the excess cement.
+4ca0d1d	If the returning grout cannot get out
+d63fb66	Choose a soil and a jet variant, set the pressure, the lifting speed and the rotation speed – then build an overlapping wall from it. What happens if the returning cement grout cannot escape?
+f7dd26b	max. 22–24 m
+190cf36	The displacement drilling head works well in loose to medium-dense granular, intermediate and weakly cohesive (soft–firm) soil: it pushes aside and compacts the soil. It cannot penetrate a hard, very dense layer.
+9052379	In rock, hard (stony) clay, strongly cemented soil and fill with large blocks driving can only be used to a limited extent – often even a thin such intercalation stops the pile. In loose and medium-dense sand driving (vibrating) works well, and the displacement even compacts the soil.
+27914e4	With a noise and vibration limit, CFA is the obvious choice: fast, monitored, 40–120 cm, at most 22–24 m. In loose to medium-dense granular and intermediate soil the screw pile is also good: no dynamic effect or noise, and hardly any spoil.
+6e0554a	Large-diameter piles (above 80 cm) can only be made by replacement. The casing is safe even in unfavourable silty soil, and bentonite-supported drilling works in any soil: both are made 80–150 (350) cm in diameter, to a depth of at most approx. 100 m (in Hungary so far 30–40 m).
+028f5b7	Below the groundwater an unsupported bore may no longer stand – support is needed.
+c873e5a	mainly above the groundwater
+3e383b8	loose–medium-dense granular, intermediate, weakly cohesive
+de1ff48	Only of limited use in rock, hard clay, or a cemented or blocky layer – even a thin intercalation can stop the pile.
+2b398ee	only of limited use in rock, hard clay, cemented soil or blocky fill; vibration in most soil types
+d3bc9da	One element is typically 15–20 m; with splicing almost any length can be made.
+f598492	element 15–20 m; spliced almost any length
+89c1cd0	The drilling head of the screw pile pushes aside and compacts the soil while drilling: the shaft resistance increases, only a little spoil comes to the surface, and there is no dynamic effect or noise. In loose to medium-dense granular and intermediate soils it is a popular, economical and fast solution for moderately loaded industrial facilities (drilling head diameter 300–700 mm, maximum length 18 (20) m).
+48b5289	In cohesive soil, mainly above the groundwater, for piles that are not too long (approx. 8–10 m), the bore may remain stable for a short time even without support – but it must be concreted immediately after excavation. Slurry is an unnecessary cost here, and the caisson and the diaphragm wall are structures an order of magnitude larger.
+d8f26b1	Pile driving causes significant noise and vibration, so near structures it can only be used to a limited extent – next to vibration-sensitive neighbours it is the riskiest. CFA is chosen specifically where noise and vibration are restricted, the screw pile has no dynamic effect or noise, and the micropile is made with a small rig, without vibration.
+72dde39	What is the danger if the returning cement grout cannot escape to the surface during grouting?
+585902a	the air sucks out the returning grout
+aba7726	The returning cement grout cannot escape to the surface along the hole: the pressure of the 350–400 bar jet builds up in the soil. The soil fractures, and the surface – and the neighbouring building – may be lifted. The outflow must be watched all the time!
+e9d9080	the return path of the cement grout is blocked
+cf50e2b	In cohesive soil, mainly above the groundwater, a bore that is not too long may remain stable for a short time even without support – but it must be concreted immediately after excavation.
+123ce02	In loose sand below the groundwater, if the bore is short
+266a7cd	In cohesive soil, mainly above the groundwater, for a bore that is not too long (approx. 8–10 m)
+a684709	 The auger screws down; the spoil stays on the flights and supports the wall. The closing plate of the concreting outlet is shut.
+1642a6d	Even in cohesive soil the bore remains stable mainly above the groundwater. Below the water the wall may soften, and water breaking in may also loosen the base – a casing or slurry is needed here.
+7d8feb4	Below the groundwater the wall may start to move.
+d6de66e	The technology is effective and popular in loose to medium-dense granular, intermediate and weakly cohesive (soft–firm) soil. In very dense, hard soil the head cannot push the soil aside.
+f75093b	<span>The reinforcement cage is placed into the fresh concrete, with vibration if necessary.</span>
+5afb5ea	The piling rig moves onto the pile position and sets its outriggers. Approx. 1 m of dry concrete is placed in the bottom of the casing (Ø 46–52 cm, 30 mm wall, 13 m, extendable).
+02a200f	With casing, sacrificial bit
+6abbf70	Precast steel screw pile
+4186531	Precast driven/vibrated
+9270f91	Large-diameter bored, slurry
+3e6347d	Large-diameter bored, cased
+73c226b	Grabbed barrette
+f9adb01	closing plate
+bc2af85	The pile position is set out and the rig is positioned. At the bottom of the hollow drill stem there is a concreting outlet, shut by a closing plate.
+40081d7	A stop-end is placed at the end of the panel and the reinforcement cage (1–3 pieces depending on length) goes into the trench, then the panel is concreted from the bottom with two tremie pipes.
+f47b9ef	In staged trenching every second (primary) panel is made first: both ends are excavated, and bentonite slurry continuously fills the space of the excavated soil.
+5b6a9d1	A pair of reinforced concrete guide beams, 1.0–1.5 m high and 20–25 cm wide, is built on both sides of the trench: it guides the grab, supports the loose upper soil and is the setting-out reference.
+e5abd07	Closing
+1298971	The loader fills the material container, which travels up the mast and empties its contents into the airlock.
+f76f357	Filling
+b0c123b	The crawler carrier positions the guided, airlock-fed depth vibrator above the set-out point and supports it with hydraulic outriggers.
+a710230	returning cement grout
+2d692c5	Concreting from the bottom with a tremie pipe; the casings are withdrawn continuously as concreting proceeds.
+250ab58	The reinforcement cage is lowered into the bore, inside the casing; it is spliced if necessary.
+3e542e8	The casing is installed by rotation or vibration and continuously extended: this supports the bore.
+fd2551a	The pile is usually concreted up to the working level, and the reinforcement cage is pushed into the fresh pile concrete.
+ee57b77	The rig screws the hollow CFA auger down. While it is screwed down, the soil plug on the auger flights supports the bore.
+c45213b	In cohesive soil, mainly above the groundwater, a bore that is not too long (approx. 8–10 m) may stand by itself for a short time.
+a13282d	In cohesive soil, mainly above the groundwater, a bore that is not too long (approx. 8–10 m) may remain stable for a short time even without support.
+aeb679b	The advance rate of the drill stem, the engine power, the torque and the concrete pressure are measured continuously: an automatic record is produced from these data.
+bc23004	The reinforcement cage is pushed into the fresh pile concrete. The concrete does not need vibrating: the flowing consistency and placing under pressure compact it.
+ab86934	The rig stands above the set-out point. The concreting outlet at the bottom of the hollow drill stem is shut by a closing plate.
+3dc59a5	The maximum length of a screw pile is 18 (20) m.
+d857801	At the length limit of the screw pile
+f0637af	Driving causes significant noise and vibration; near structures it can only be used to a limited extent.
+352842d	In hard (stony) clay driving can only be used to a limited extent – here the pile stops at approx. −${fmt(M.stuck, 1)} m and does not reach the design depth.
+fab26a3	Without support the bore remains stable only in cohesive soil, mainly above the groundwater – here ${why.join(', és ')}. The result would be a discontinuity, more concrete and lower shaft resistance. Choose a casing, slurry or CFA!
+8df57de	A pile drilled with a continuous auger: the concrete is placed in the bore through the drill stem under excess pressure; 40–120 cm, at most 22–24 m.
+1692acd	Installing a precast pile into the ground with a hammer (mechanical, pneumatic, steam or diesel hammer). Noisy, causes vibration; of only limited use in rock and hard clay.
+f8764e1	In cohesive soil, mainly above the groundwater, a bore that is not too long (approx. 8–10 m) can be made without support, but it must be concreted immediately.
+82bedad	At most 22–24 m long, 40–120 cm in diameter.
+f49271a	For a CFA pile the reinforcement cage is pushed into the freshly placed pile concrete.
+60faf99	Only of limited use in rock, rocky ground, hard (stony) clay, strongly cemented soil and fill with larger blocks – even a thin such intercalation can prevent driving.
+a3fd58e	Cutter Soil Mixing resembles diaphragm walling with a hydrofraise (cutter), but here only binder is introduced into the ground and the local soil is mixed. With CSM a continuous wall reinforced with steel members can be formed; the panels are approx. 50–60 cm wide and 10–15 m deep.
+188d5f6	there is rock or very hard clay – then it can only be built with a hydrofraise
+a1d7926	The slurry cycle in hydrofraise trenching: the soil-laden slurry (brown) taken from the trench is cleaned by the desander, and the cleaned and fresh slurry (greenish-yellow) returns to the trench from the tank – so the slurry level in the trench can be kept above the groundwater table throughout.
+4747940	In Hungary the hydrofraise has so far been deployed in the construction of metro line 4 in Budapest: a diaphragm wall was built <b>40 m deep at Szent Gellért tér</b> and <b>48.3 m deep at Fővám tér</b>, right next to the Danube.
+ba1dbb6	In rock and very hard clay a diaphragm wall can only be built with a hydrofraise (a reverse-circulation trench cutter with cutter wheels). It is very expensive, but it gives an accurate trench to great depth, in any soil and rock.
+cd87a2a	In rock and very hard clay only with a hydrofraise – very expensive.
+c9229ae	In rock or very hard clay a diaphragm wall can only be built with a hydrofraise: the cutter wheels break up the material, which is pumped out together with the slurry and then separated outside. It is very expensive, but it gives an accurate trench to great depth, in any soil and rock. In Hungary it was used for the construction of metro line 4: diaphragm walls 48.3 m deep at Fővám tér and 40 m deep at Szent Gellért tér. Sheet piles cannot be driven into rock.
+a186584	With a hydrofraise (a trench cutter with cutter wheels)
+e3c4057	in rock and very hard clay a diaphragm wall can be built <b>only with a hydrofraise</b>
+749c2f9	The slurry path in hydrofraise trenching: cutter wheel, suction pump, desander, tank, pumps, mixer, bentonite silo
+881a421	In rock or very hard clay a diaphragm wall can only be built with a hydrofraise; in Hungary it was used for the construction of metro line 4.
+e50e5b6	The cutter wheels of the hydrofraise close up
+0f7005b	Hydrofraise on site
+dc09bbb	Hydrofraise cutter on site
+ba5d683	Grab or hydrofraise?
+ad2d0df	Hydrofraise (trench cutter)
+228fc2c	difficult: soft clay, peat, flowing sand; in rock only with a hydrofraise
+df92b87	When is a hydrofraise (trench cutter) justified rather than a grab?
+bf4505d	Here the shear strength of the soil is low, and the water pressure or the risk of slurry loss is high. Hard clay and rock make excavation difficult (a hydrofraise is needed there), not stability.
+ac71bfb	the hydrofraise is very expensive (cutter + slurry cleaning plant)
+4f1fdc1	Hydrofraise: two counter-rotating cutter wheels, with the suction inlet in the middle
+7e0f994	the reinforcement cage can only be pushed into fresh concrete – difficult for a long cage

@@ -51,20 +51,14 @@ d967d99	<b>a) L-shaped beam:</b> the outward-projecting toe keeps it stable even
 152f894	Excavating the soil: grab or cutter
 f22b91f	Diaphragm wall grab (clamshell)
 e9ebad9	A rig with a rigid rod (<b>Kelly</b>) or suspended on ropes, with hydraulic or mechanical (rope) power transmission. The work is <b>cyclic</b>: lowering – bite – lifting – emptying – lowering again. A bite is typically <b>2.8 m</b> long: this is the open width of the grab, and also the shortest panel that can be excavated.
-2359162	Hydrofraise (trench cutter)
 28cb9df	A reverse-circulation cutting machine: counter-rotating <b>cutter wheels</b> break up the soil, which is pumped out together with the bentonite slurry; outside they are separated, the slurry is cleaned and returned to the trench. It can be used to great depth, in any soil and even in <b>rock</b>, and gives a more accurate, neater surface – but it is very expensive.
-43db0b6	Grab or hydrofraise?
 db0f20c	The diaphragm walls of metro line 4
-9b322bd	In Hungary the hydrofraise has so far been deployed in the construction of metro line 4 in Budapest: a diaphragm wall was built <b>40 m deep at Szent Gellért tér</b> and <b>48.3 m deep at Fővám tér</b>, right next to the Danube.
 1e8aeb8	Diaphragm wall construction in pictures
 442a203	Rope-suspended diaphragm wall grab
 5bea3c0	Different grabs
 f9b76e2	Grabs: the width of the open grab gives the length of the bite
 3bc520e	Excavation with a grab from a slurry-filled trench
 6c274a7	The grab rises out of the slurry-filled trench
-0cf45c2	Hydrofraise cutter on site
-b55ac0a	Hydrofraise on site
-114381b	The cutter wheels of the hydrofraise close up
 9f83282	Cutter wheels with teeth – they work in rock too
 4732003	Two counter-rotating cutter wheels
 bba28e4	The two counter-rotating wheels direct the cuttings to the centre
@@ -93,7 +87,6 @@ a5d0091	<i>5</i><span><b>Centrifugal pump</b> – returns the slurry to the tren
 12a0bdd	<i>8</i><span><b>Bentonite mixer</b> – the fresh slurry is made here</span>
 36a4ab8	<i>9</i><span><b>Bentonite silo</b> – storage for the bentonite powder</span>
 a1ec4a7	<i>10</i><span><b>Adding water</b> to the mixer</span>
-205ba3f	The slurry cycle in hydrofraise trenching: the soil-laden slurry (brown) taken from the trench is cleaned by the desander, and the cleaned and fresh slurry (greenish-yellow) returns to the trench from the tank – so the slurry level in the trench can be kept above the groundwater table throughout.
 abe41c8	Reinforcement cage
 a2fcecb	Lifting a reinforcement cage with a crane
 e15f338	It has been used in Hungary <b>since the 1960s</b>. A diaphragm wall consists of a series of panels: each panel is excavated under the protection of bentonite slurry, then a reinforcement cage is lowered into it and it is filled by underwater concreting. It can be built to great depth, in practically any length and plan layout – in return it needs expensive, special equipment, so it is an <b>expensive technology</b>.

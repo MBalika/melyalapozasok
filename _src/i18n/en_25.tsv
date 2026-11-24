@@ -2,14 +2,12 @@
 87a10e6	3D pile builder – section
 564f226	groundwater −${fmt(M.gw, 1)} m
 9e26c25	bearing stratum −${fmt(M.P.bear, 0)} m
-3d8bdc3	The rig stands above the set-out point. The flap at the bottom of the hollow drill stem is closed.
 920f653	Drilling to base level
 ca79b9c	The continuous auger screws into the soil. The soil plug remaining on the auger supports the wall of the bore – no separate support is needed.
 c6c4f77	Concreting through the drill stem
 11a2d77	<b class="bad">Withdrawn too fast!</b> The concrete cannot fill the place of the auger – in the soft layer the pile narrows (necking).
 23bcc0e	The concrete is pumped under excess pressure through the inside of the stem; the concrete pushes the auger up with the soil plug while the rig pulls. The concrete pressure is measured continuously.
 35d6483	Reinforcement into the fresh concrete
-0616d1a	An automatic record is made for every pile: depth, concrete pressure, volume of concrete placed.
 1dd5d42	Positioning, starting the casing
 c3c9f6d	Installing the casing starts with rotation (or vibration).
 c69ec77	Soil removal under the protection of the casing
@@ -28,7 +26,6 @@ b8ff6a2	Soil removal with slurry support
 1075984	Base cleaning, reinforcement
 6010723	The concrete fills the bore from the bottom and displaces the lighter slurry upwards – the slurry is recovered.
 73d247e	Mainly for large-diameter, deep piles; in Hungary mostly for the foundations of long-span bridges.
-16c555d	In cohesive soil above the groundwater, a bore at most 8–10 m deep stands for a short time even without support.
 2f70361	Drilling with a short auger
 abc8359	<b class="bad">The bore is not stable:</b> because of the groundwater or the granular layer the wall collapses!
 4875aef	The short auger brings up the soil in cycles.
@@ -70,4 +67,3 @@ bca8b05	The reinforcement cage is lowered into the casing.
 1712ef5	The reinforcement cage is lowered into the bore immediately.
 6420b92	The base is cleaned, then the reinforcement cage is lowered into the slurry.
 17af54d	The reinforcement cage is lowered into the casing; spacers ensure the concrete cover.
-7d25020	The reinforcement cage is lowered into the fresh concrete (pushed, vibrated). The concrete does not need vibrating: the flowing consistency and placing under pressure compact it.

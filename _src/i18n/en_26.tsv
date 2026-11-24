@@ -60,7 +60,6 @@ b3e6fcb	A steel shoe welded onto the end of the casing
 114b06a	No support – but it must be concreted immediately
 06cdc2f	A casing with water replacement
 283b98c	Compressed air
-0293f7f	In cohesive soil above the groundwater, the bore stands by itself for a short time to at most 8–10 m.
 829f8f8	For a cast-in-place screw pile, which resistance does the displacement mainly increase?
 71c3d3e	The shaft resistance
 bfb28b1	Only the base resistance
@@ -87,7 +86,6 @@ ce085ad	A replacement pile is always cast in place.
 36b11f9	A cast-in-place screw pile brings the soil up while drilling, so a lot of spoil has to be removed.
 dce36c8	The displacement drilling head pushes aside and compacts the soil; only a little spoil comes to the surface.
 968bd20	Pile driving can be used without problems even in hard clay and fill with large blocks.
-d770d0e	It cannot be used in rock, hard clay, strongly cemented soil or blocky fill – even a thin such intercalation can prevent it.
 24d0223	Ground screws are typically 10–15 m long and are for founding heavily loaded bridges.
 9802707	In vibration, by tuning the frequency to the natural frequency of the soil, the soil resistance can be temporarily reduced to a minimum.
 6f03d92	At the base of a Franki pile a widened concrete base, the “bulb”, is formed by ramming.
@@ -106,12 +104,10 @@ a45bd39	For a CFA pile the wall of the bore is supported by the soil plug remain
 0630484	In cased drilling below the groundwater, the water removed must be replaced in the bore, otherwise groundwater may break in at the base.
 9130172	The higher water level outside would disturb the soil with water breaking in at the bottom of the bore.
 28e59b1	The typical length of a CFA pile is 30–50 m.
-3eadf56	It is typically 6–22 (24) m long and 40–120 cm in diameter.
 1cb3a2f	In granular soil the casing goes down after the excavation, lagging behind it.
 7919f83	The casing must generally – in granular soil without exception – go ahead of the excavation.
 db843a8	For a bentonite-supported pile the concrete is dropped freely from the top into the slurry-filled bore.
 d84690b	Concreting is done through a tremie pipe, from the bottom up; the concrete displaces the slurry.
-32ec632	In cohesive soil above the groundwater, a bore at most 8–10 m deep can be made without support, but it must be concreted immediately.
 bc4e1b2	Up to a depth of 5–6 m such a foundation is also called an excavated block foundation or well foundation.
 a65ede4	The shaft diameter of a bored micropile is 400–600 mm.
 10956f3	Bored micropile: at most 250–300 mm; driven micropile: at most 150 mm.
@@ -121,4 +117,3 @@ a65ede4	The shaft diameter of a bored micropile is 400–600 mm.
 e1de366	The shaft resistance is determined by the method of construction, so a load test is justified.
 01ec6e8	In jet grouting the cement suspension is injected into the soil at a pressure of 5–6 bar.
 1b2dba0	A diaphragm wall panel can be excavated in one go as long as 30 m.
-79b8c9d	For a CFA pile the reinforcement cage is lowered into the freshly concreted pile.

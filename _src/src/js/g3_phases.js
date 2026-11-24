@@ -230,10 +230,10 @@ const PH = {
     }],
   ] },
   cfa: { W: 230, GY: 150, prof: 'cfa', items: [
-    ['Kitűzés, pontraállás', 'Kitűzik a cölöp helyét, és a gép pontraáll. Az üreges fúrószár alját elvesző sapka vagy „csapóajtó” zárja.', (g, S) => {
-      rig(g, S, 4); auger(g, S.cx, 18, S.GY - 3, 30); lab(g, S.cx + 3, S.GY + 5, 'csapóajtó', 1, S.cx + 26);
+    ['Kitűzés, pontraállás', 'Kitűzik a cölöp helyét, és a gép pontraáll. Az üreges fúrószár alján egy betonozónyílás van, ezt zárólap zárja.', (g, S) => {
+      rig(g, S, 4); auger(g, S.cx, 18, S.GY - 3, 30); lab(g, S.cx + 3, S.GY + 5, 'zárólap', 1, S.cx + 26);
     }],
-    ['Furatkészítés', 'A spirált földkitermelés nélkül hajtják le: a furadék csak részben nyomódik ki, a spirálon maradó talajdugó folyamatosan támasztja a furat falát.', (g, S) => {
+    ['Furatkészítés', 'Az üreges CFA-fúróspirált a cölöpfúró gép lehajtja. Lehajtás-tekerés közben a spirálon lévő talajdugó támasztja meg a furatot.', (g, S) => {
       heap(g, S, S.cx - 46, 26); rig(g, S, 132); auger(g, S.cx, 146, 282, 30, 'f-soilC', S.GY); rot(g, S.cx, 122, 20);
       lab(g, S.cx - 15, 236, 'talajdugó', -1, S.cx - 34);
     }],
@@ -241,13 +241,13 @@ const PH = {
       heap(g, S, S.cx - 50, 32); rig(g, S, 66); conc(g, S.cx - 15, 214, 30, 68, true); auger(g, S.cx, 80, 214, 30, 'f-soilC'); up(g, S.cx - 34, 208, 168);
       truck(g, 4, S.GY - 1); hose(g, 32, S.GY - 26, S.cx - 11, 72); lab(g, S.cx + 15, 252, 'beton', 1, S.cx + 30);
     }],
-    ['Vasalás', 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalási armatúrát a friss betonba süllyesztik.', (g, S) => {
+    ['Vasalás', 'A cölöpöt általában a munkaszintig betonozzák fel, és a vasalási armatúrát belenyomják a friss cölöpbetonba.', (g, S) => {
       conc(g, S.cx - 15, S.GY, 30, 132, true); cage(g, S.cx, S.GY - 56, 250, 26); down(g, S.cx + 32, S.GY - 44, S.GY + 8);
       lab(g, S.cx - 13, 206, 'armatúra', -1, S.cx - 32);
     }],
   ] },
   kopeny: { W: 200, prof: 'kopeny', items: [
-    ['A cső lehajtása', 'A béléscsövet rotációval vagy vibrálással hajtják le.', (g, S) => {
+    ['A cső lehajtása', 'A béléscsövet rotációval vagy vibrálással, folyamatos toldással juttatják le: ez támasztja meg a furatot.', (g, S) => {
       rig(g, S, S.GY - 26, { head: false }); R(g, S.cx - 22, S.GY - 26, 44, 14, 'f-steel', { rx: 2, style: 'stroke:var(--steelm2);stroke-width:1.2' }); L(g, S.cx + 22, S.GY - 19, S.cx + 24, S.GY - 19, 's-steel', 3);
       casing(g, S.cx, S.GY - 30, 160, 30); rot(g, S.cx, S.GY - 34, 26); down(g, S.cx - 36, 110, 150); lab(g, S.cx + 19, 140, 'béléscső', 1, S.cx + 34);
     }],
@@ -255,11 +255,11 @@ const PH = {
       rig(g, S, 22); casing(g, S.cx, S.GY - 30, 272, 30); hole(g, S.cx, S.GY - 30, 262, 30); water(g, S.cx, 116, 262, 30); stem(g, S.cx, 36, 230, 5); bucket(g, S.cx, 258, 26);
       lab(g, S.cx - 15, 116, 'víz a csőben', -1, S.cx - 30);
     }],
-    ['Vasalás', 'A vasalási armatúrát a furatba, a cső belsejébe engedik.', (g, S) => {
+    ['Vasalás', 'A vasalási armatúrát a furatba, a cső belsejébe engedik; szükség esetén toldják.', (g, S) => {
       casing(g, S.cx, S.GY - 30, 272, 30); hole(g, S.cx, S.GY - 30, 270, 30); water(g, S.cx, 116, 270, 30); cage(g, S.cx, 26, 266, 26); L(g, S.cx, 4, S.cx, 26, 's-muted', 1.2);
       lab(g, S.cx + 13, 200, 'armatúra', 1, S.cx + 32);
     }],
-    ['Betonozás', 'Betonozó csővel betonoznak, közben a béléscsövet folyamatosan visszahúzzák.', (g, S) => {
+    ['Betonozás', 'Kontraktorcsővel, alulról betonoznak; a betonozással együtt a béléscsöveket folyamatosan visszaszedik.', (g, S) => {
       conc(g, S.cx - 15, 176, 30, 94, true); casing(g, S.cx, S.GY - 50, 212, 30); hole(g, S.cx, S.GY - 50, 176, 30); water(g, S.cx, 116, 176, 30); cage(g, S.cx, 30, 266, 26); funnel(g, S.cx, 28, 236);
       up(g, S.cx - 36, 200, 160); up(g, S.cx + 36, 200, 160); truck(g, 4, S.GY - 3); hose(g, 30, S.GY - 26, S.cx - 14, 30);
     }],

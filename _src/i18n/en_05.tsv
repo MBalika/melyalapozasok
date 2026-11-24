@@ -3,7 +3,6 @@ d5bd8cf	With bentonite slurry
 3386ecf	With soil
 fd383a4	For a continuous auger (CFA) the plug of soil remaining on the auger supports the surrounding soil – no separate technology is needed, which is a significant advantage.
 e3c69de	Not at all – because it is not needed
-893e3c3	In cohesive soil, above the groundwater, to a depth of at most 8–10 m, the bore stands for a short time even without support, but it must be concreted immediately after excavation.
 df52932	If the bore is not held
 0e4af63	The bore may collapse: a <b>discontinuity</b> forms in the pile shaft, the required concrete volume increases, and the loosened wall can greatly reduce the <b>shaft resistance</b>. Soil falling to the bottom impairs the <b>base resistance</b>.
 fd50871	Bore stability lab
@@ -26,7 +25,6 @@ ff79ec7	CFA pile – with a continuous auger
 3df043e	The four phases of making a CFA pile
 1e35440	← swipe sideways for the phases →
 6b75da2	<b>40–120<small>cm</small></b><span>diameter (40, 60, 80, 100, rarely 120 cm)</span>
-a1af03d	<b>6–22<small>(24) m</small></b><span>length – the length of the auger is limited by the mast of the rig</span>
 b093abf	When is it a good choice?
 e4141d0	in any soil except loose, flowing soils – in fine sand with particular care
 0673cce	on projects needing many pile diameters and lengths
@@ -62,10 +60,8 @@ ac49161	complex machinery
 f9ee358	the slurry must be treated after concreting
 19b4478	Unsupported bore
 d0c77ff	Unsupported bored pile: drilling and concreting
-fae5ffd	In cohesive soil, above the groundwater, to a depth of at most 8–10 m, the bore stands even without support – but only for a short time, so it must be concreted immediately after excavation. The bore is made with a short auger or a grab; the concrete is placed gravitationally through a hopper.
 39680f3	A body excavated to a depth of 5–6 m and filled with concrete is also called an <b>excavated block foundation</b> or, in Hungarian practice, a <b>“well foundation”</b> – this is already a transition between shallow and deep foundations (“real” well and box foundations are covered in C08).
 c0458ac	Water changes everything
-aafb502	The same clay that stands for a while when dry can quickly start to move below the groundwater or at a granular intercalation. If the drilling hits water, the unsupported technology can no longer be used.
 7cf031c	Which one to choose?
 c21bfb5	=
 76484cf	Cased
@@ -80,7 +76,6 @@ d159f15	Bentonite-supported
 711d439	any soil except loose, flowing soils; with care in fine sand
 4fb9fef	even in particularly unfavourable soil
 3b15fe6	any soil
-edef334	cohesive soil, above the groundwater
 37a60a1	soil plug on the auger
 2e0dd08	steel casing
 4784deb	bentonite slurry
@@ -114,7 +109,6 @@ ef3c0c9	Their material is steel (steel tube, rigid steel element) or another rei
 620a09d	Their real strength is the <b>equipment</b>: the drilling rig is so small that it fits into a cellar, a place with low headroom or difficult access, and it works without vibration next to the walls of an existing building.
 3a1debb	<b>≤ 300<small>mm</small></b><span>shaft diameter of a bored micropile (the limit is 250–300 mm)</span>
 5148645	<b>≤ 150<small>mm</small></b><span>largest cross-sectional dimension of a driven micropile</span>
-e795e86	the reinforcement cage can only be lowered into fresh concrete – difficult for a long cage
 86fbdf2	Lifting in the reinforcement cage before concreting
 bb7fbe1	Lifting a long reinforcement cage into the bore
 620023a	Pushing the reinforcement cage into the finished pile concrete

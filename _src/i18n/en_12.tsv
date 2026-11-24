@@ -22,7 +22,6 @@ d8bbac0	It needs a driving rig.
 766c3fc	Not excavation support.
 a885611	Steel tubular and H-pile
 c99fb5c	tube or “H” section
-d14897b	≤ 15–20 m (extendable)
 debb951	tube: soft at the top, dense granular below; the H-section also gets through harder layers
 69f1b6c	corrosion protection needed
 e6fd716	driving, vibrating: noise, vibration
@@ -30,18 +29,15 @@ e13ffb1	recoverable; expensive material
 ea3e48f	Driving, vibrating: noise and vibration.
 03a6fec	The H-section is easier to drive, but driving is limited in rock and hard clay.
 9b26a3c	Large-diameter piles are made only by replacement.
-43e8374	Typically at most 15–20 m.
 7772cac	It needs a driving rig or a vibrator.
 92dc97b	As piles it is not a watertight wall (that is what sheet piles are for).
 4406360	Precast RC pile (driven, vibrated)
 3f37c14	30×30, 40×40 cm; spun: Ø 25–50 cm
 2e81d35	4–12 m; spun at most 20–22 m
-07de0e7	no: rock, hard clay, cemented soil, blocky fill; vibration mainly in granular soil
 4c8de47	no obstacle
 b72be04	fast (made in advance)
 b09759b	factory element; the head is broken back to the design level
 1436b93	Driving causes significant noise and vibration – next to a sensitive neighbour it is the riskiest.
-25f4918	It cannot be driven into rock, hard clay, or a cemented or blocky layer – even a thin intercalation can stop it.
 eb2f367	Even as a spun tubular pile at most 20–22 m.
 1ab85bd	It needs a large driving rig.
 4f0cb3a	Ground screw (steel screw pile)
@@ -57,7 +53,6 @@ bde2d1b	A driven technology: it gets through hard, stony layers with difficulty.
 4ca185f	The finished diameter is approx. 60 cm.
 3ed7e5e	At most 16–18 m long.
 fade35f	It needs a tall driving frame.
-3312d84	loose–medium-dense granular, intermediate, soft–firm cohesive
 463884b	no dynamic effect or noise
 ab58aea	little spoil; the smaller diameter limits the bearing capacity
 ee1daec	No dynamic effect or noise.
@@ -99,10 +94,8 @@ c1cf2da	By drilling with slurry support: no driving.
 6c348e2	with a short auger or a grab
 6ca802f	≤ 8–10 m (excavated block foundation up to 5–6 m)
 d5a5aab	cohesive soil only
-34f7675	above the groundwater only
 0f3e874	concrete immediately after excavation
 2b79673	Simple drilling, no driving.
-aef7b9b	Below the groundwater the bore collapses – support is needed.
 42e9050	A bore at most 8–10 m deep is stable.
 92095c1	For large diameters the stability of the bore is questionable.
 d10ca76	It needs a drilling rig.
@@ -122,14 +115,12 @@ ff94999	A slender element: only the shaft carries load; buckling in soft soil.
 de28739	In tight spaces too, for strengthening foundations and underpinning.
 be0e63d	Drilling and grouting: no driving.
 bd193c3	Good for excavation support and as a low-permeability cut-off wall, but watertightness is delicate.
-4c4fb93	difficult: soft clay, peat, flowing sand; in rock only with a hydrofraise
 73fb514	watertight; the slurry level at least 1.0–1.5 m above the groundwater
 55cfd2e	relatively quiet, free of vibration
 5c77ec7	moderate; expensive machines
 c131b2c	can be load-tested; isotope or seismic concrete testing
 58c4fe3	Watertight, stiff: it can also be the permanent side wall of an underground car park.
 aaaecd8	Relatively free of noise and vibration.
-15c0a3b	In rock and very hard clay only with a hydrofraise – very expensive.
 4df9bf8	Large cross-section, high bearing capacity, small settlement.
 eb18cd9	It needs a large trenching rig and a slurry plant.
 4a1a3d7	No groundwater lowering is needed.
@@ -201,9 +192,7 @@ ff72d71	Micropile or jet grouting
 006a7e9	Well foundation – or a short bored pile
 5e6cbb9	The well foundation is economical if the bearing stratum is not too deep, and especially with high groundwater, when the foundation level has to be taken below the water table. Today it is made as an excavated foundation with a recovered steel casing – but a short bored pile is often its competitor.
 df3a7bd	Cased or bentonite-supported bored pile
-961167f	Large-diameter piles (above 80 cm) can only be made by replacement. The casing is safe even in unfavourable silty soil (80–180 cm, 15–50, even 100 m), and bentonite-supported drilling works in any soil and to great depth (80–180 cm, 15–50 m).
 75a66e6	CFA or screw pile
-d9b9591	With a noise and vibration limit, CFA is the obvious choice: fast, monitored, 40–120 cm, 6–22 (24) m. In loose to medium-dense granular and intermediate soil the screw pile is also good: no dynamic effect or noise, and hardly any spoil.
 765d4d2	Driven precast, CFA or screw pile
 8532937	Without a vibration limit, the driven precast pile may also come into question – if there is no rock, hard clay, cemented or blocky layer in its path – and the displacement even compacts the soil. The final decision is made by the soil, the load and the economy.
 3d4672c	Question ${SPINE.indexOf(id) + 1}
