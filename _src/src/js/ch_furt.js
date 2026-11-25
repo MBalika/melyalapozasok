@@ -2,6 +2,7 @@
 import { register, shell, slider, seg, toggle, select, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop, onTheme } from './core.js';
 import { defineQuiz } from './ui.js';
 import './g3_phases.js';
+import { toolScene, TOOL_LOOP } from './proc.js';
 
 /* ------------------------------------------------------------------ rajzsegédek */
 const T = (p, x, y, s, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: s, ...o }, p);
@@ -71,129 +72,19 @@ register('furtTool', (root) => {
   const { ctrls, viz, out } = shell(root);
   const s = seg(ctrls, { label: 'Eszköz', options: Object.entries(TOOLS).map(([v, o]) => ({ v, t: o.t })), value: 'rovid', vert: true });
   const chips = h('div', { class: 'chips' }); ctrls.append(h('div', { class: 'ctl' }, h('span', { class: 'ctl-lab' }, 'Melyik talajhoz?'), chips));
-  const W = 560, H = 380, G0 = 150, X = 262, BW = 74, MAXD = 180, LC = 142;
-  const fig = figure(viz, W, H);
+  const fig = figure(viz, 600, 360, 'fig pr-svg furt-toolfig');
   const cap = h('p', { class: 'furt-cap' }); viz.append(cap);
-  const bg = G(fig), dyn = G(fig);
-  // háttér: talaj, terep, gép árboca
-  R(bg, 0, 0, W, G0, 'f-sky');
-  soilRect(bg, 0, G0, W, H - G0, 'k_agyag');
-  L(bg, 0, G0, W, G0, 'stroke:var(--soil-line);stroke-width:2');
-  rigL(bg, X, G0);
-  T(bg, 12, 22, 'fúrógép (vázlat)', 't-sm halo');
   out.remove();
-  let typ = s.v, depth = 40, pile = 0, last = -1;
-  const reset = () => { depth = 40; pile = 0; last = -1; };
+  let typ = s.v, t0 = null;
   const paintInfo = () => {
     const o = TOOLS[typ];
     cap.innerHTML = `<b>${o.t}.</b> ${o.txt}`;
     chips.innerHTML = o.soils.map(([t, st]) => `<span class="chip ${st}">${st === 'ok' ? '✓' : st === 'warn' ? '~' : '✗'} ${t}</span>`).join('');
   };
-  s.on((v) => { typ = v; reset(); paintInfo(); });
+  s.on((v) => { typ = v; t0 = null; paintInfo(); });
   paintInfo();
-  // eszközrajzolók (y: az eszköz alja)
-  const kelly = (g, yTop) => R(g, X - 5, 16, 10, Math.max(0, yTop - 16), 'f-steel2');
-  // forgatófej az árbocon (a fúrószár tetején)
-  const drive = (g, y) => { L(g, X - 46, y + 7, X - 12, y + 7, 'stroke:var(--steelm2);stroke-width:6'); R(g, X - 13, y, 26, 14, 'f-steel', { rx: 3, style: 'stroke:var(--steelm2);stroke-width:1.2' }); };
-  const flights = (g, y0, y1, ph, soil, soilFrom = -1e9) => {
-    R(g, X - 4, y0, 8, y1 - y0, 'f-steel2');
-    const pitch = 22;
-    if (soil && y1 > Math.max(y0, soilFrom)) R(g, X - BW / 2, Math.max(y0, soilFrom), BW, y1 - Math.max(y0, soilFrom), '', { style: 'fill:color-mix(in srgb, var(--soilB) 80%, var(--soilE))' });
-    for (let y = y0 + ((ph * pitch) % pitch); y < y1; y += pitch) {
-      if (soil && y + 4 >= soilFrom) P(g, [[X - BW / 2 + 4, y + 4], [X + BW / 2 - 4, y + 13], [X + BW / 2 - 4, y + 20], [X - BW / 2 + 4, y + 11]], 'fill:var(--soilB);opacity:.9', true);
-      L(g, X - BW / 2 + 3, y, X + BW / 2 - 3, y + 9, 'stroke:var(--steelm2);stroke-width:3.4;stroke-linecap:round');
-    }
-  };
-  const spoil = (g, n) => {
-    const k = clamp(n, 0, 1);
-    if (k <= 0) return;
-    P(g, [[X + 60, G0], [X + 60 + 60 * k + 30, G0], [X + 90 + 30 * k, G0 - 34 * k], [X + 76, G0 - 30 * k]], 'fill:var(--soilB);stroke:var(--soil-line);stroke-width:1', true);
-    T(g, X + 100, G0 - 40 * k - 6, 'kiemelt föld', 't-sm halo');
-  };
-  const draw = (tt) => {
-    clear(dyn);
-    const g = dyn;
-    const per = typ === 'cfa' ? 7 : typ === 'obl' ? 6 : 4.2;
-    const cyc = Math.floor(tt / per), u = (tt % per) / per;
-    if (cyc !== last) {
-      if (typ === 'cfa' || typ === 'obl') { depth = 40; pile = 0; }
-      else if (last >= 0) { if (depth + 26 > MAXD) { depth = 40; pile = 0; } else { depth += 26; pile += 0.12; } }
-      last = cyc;
-    }
-    // a furat (üreg) aktuális mélysége
-    let dNow;
-    if (typ === 'cfa') dNow = 10 + 130 * clamp(u / 0.8, 0, 1);
-    else if (typ === 'obl') dNow = 20 + 150 * clamp(u / 0.8, 0, 1);
-    else dNow = u < 0.3 ? depth : u < 0.5 ? depth + 26 * (u - 0.3) / 0.2 : depth + 26;
-    const yB = G0 + Math.max(10, dNow);
-    if (typ === 'obl') R(g, X - 22, G0, 44, yB - G0, 'f-water', { style: 'opacity:.9' });
-    else R(g, X - BW / 2, G0, BW, yB - G0, 'f-surface', { opacity: 0.92 });
-    if (typ === 'marko') { // béléscső
-      L(g, X - BW / 2 - 3, G0 - 14, X - BW / 2 - 3, Math.max(G0 + 10, yB - 8), 'stroke:var(--steelm2);stroke-width:5');
-      L(g, X + BW / 2 + 3, G0 - 14, X + BW / 2 + 3, Math.max(G0 + 10, yB - 8), 'stroke:var(--steelm2);stroke-width:5');
-      T(g, X + BW / 2 + 10, G0 + 26, 'béléscső', 't-sm halo');
-    }
-    spoil(g, typ === 'cfa' ? clamp(u / 0.8, 0, 1) * 0.55 : typ === 'obl' ? 0 : pile + (u > 0.85 ? 0.12 * (u - 0.85) / 0.15 : 0));
-    const yTopTool = 26;
-    let label = '';
-    if (typ === 'cfa') {
-      const ph = tt * 2.2;
-      const yb = yB, yt = yb - LC; // a spirál hossza állandó: a forgatófej az árbocon lefelé csúszik
-      drive(g, yt - 14);
-      flights(g, yt, yb, ph, true, G0);
-      label = u < 0.8 ? 'lehajtás – a furadék a meneteken marad' : 'végső mélység – jöhet a betonozás';
-    } else if (typ === 'obl') {
-      kelly(g, yTopTool);
-      drive(g, G0 - 44);
-      R(g, X - 5, yTopTool, 10, yB - yTopTool - 10, 'f-steel2');
-      P(g, [[X - 14, yB - 12], [X + 14, yB - 12], [X + 8, yB], [X - 8, yB]], 'fill:var(--steelm2)', true);
-      // folyadékáram: le a rúdban, fel a résben
-      const fl = (tt * 60) % 30;
-      for (let y = yTopTool + fl; y < yB - 14; y += 30) ar(g, X, y, X, y + 14, 'var(--surface)', 2, 5);
-      for (let y = yB - 20 - fl; y > G0 + 6; y -= 30) {
-        ar(g, X - 16, y + 12, X - 16, y, 'var(--water)', 2, 5); ar(g, X + 16, y + 12, X + 16, y, 'var(--water)', 2, 5);
-        C(g, X - 13 + rnd(y) * 4, y + 6, 1.8, 'f-ink', { opacity: 0.6 }); C(g, X + 13 + rnd(y + 3) * 4, y + 4, 1.8, 'f-ink', { opacity: 0.6 });
-      }
-      // ülepítő
-      P(g, [[X + 70, G0], [X + 150, G0], [X + 140, G0 + 26], [X + 80, G0 + 26]], 'fill:var(--water-fill);stroke:var(--water);stroke-width:1.5', true);
-      ar(g, X + 18, G0 - 6, X + 74, G0 + 6, 'var(--water)', 2, 6);
-      T(g, X + 82, G0 + 44, 'ülepítő', 't-sm t-water halo');
-      label = 'a fej feltöri a talajt, a folyadék kiszállítja';
-    } else {
-      // szakaszos eszközök: le – fúr – fel – ürít
-      let yb;
-      if (u < 0.3) yb = lerp(G0 - 6, yB, u / 0.3);
-      else if (u < 0.5) yb = yB;
-      else if (u < 0.8) yb = lerp(yB, G0 - 8, (u - 0.5) / 0.3);
-      else yb = G0 - 8;
-      const full = u >= 0.42 && u < 0.86;
-      const empt = u >= 0.8;
-      if (typ === 'rovid') {
-        const ph = u > 0.3 && u < 0.5 ? tt * 3 : u > 0.8 ? tt * 8 : 0;
-        kelly(g, yb - 66); drive(g, 26);
-        flights(g, yb - 66, yb, ph, full && !(u > 0.82));
-        if (u > 0.8) for (let i = 0; i < 7; i++) { const k = ((u - 0.8) / 0.2 + i / 7) % 1; C(g, X + 40 + k * 50, yb - 30 + k * 26 - Math.sin(k * 3) * 18, 4, 'f-soilB'); }
-      } else if (typ === 'dob') {
-        kelly(g, yb - 70); drive(g, 26);
-        R(g, X - BW / 2 + 4, yb - 70, BW - 8, 66, 'f-steel', { rx: 3 });
-        if (full) R(g, X - BW / 2 + 8, yb - 60 + (empt ? 50 * (u - 0.8) / 0.2 : 0), BW - 16, 54 - (empt ? 50 * (u - 0.8) / 0.2 : 0), 'f-soilA');
-        for (let i = 0; i < 6; i++) P(g, [[X - BW / 2 + 6 + i * 11, yb - 4], [X - BW / 2 + 11 + i * 11, yb + 4], [X - BW / 2 + 16 + i * 11, yb - 4]], 'fill:var(--steelm2)', true);
-        if (empt) { L(g, X - BW / 2 + 4, yb - 4, X - BW / 2 + 4 + 40 * Math.cos(0.9), yb - 4 + 40 * Math.sin(0.9), 'stroke:var(--steelm2);stroke-width:4');
-          for (let i = 0; i < 8; i++) { const k = ((u - 0.8) / 0.2 + i / 8) % 1; C(g, X + 30 + k * 62 + rnd(i) * 8, yb + 2 - Math.sin(k * 3) * 16 + k * (G0 - yb - 8), 3, 'f-soilA'); } }
-      } else if (typ === 'marko') {
-        const open = u < 0.34 || u > 0.82 ? 1 : u < 0.44 ? 1 - (u - 0.34) / 0.1 : 0;
-        L(g, X, 15, X, yb - 60, 'stroke:var(--ink2);stroke-width:2');
-        R(g, X - 16, yb - 66, 32, 26, 'f-steel2', { rx: 3 });
-        const jaw = (sg) => P(g, [[X, yb - 42], [X + sg * (BW / 2 - 6 + open * 10), yb - 30], [X + sg * (BW / 2 - 10 + open * 16), yb - 4 - open * 6], [X + sg * 3, yb + 2 - open * 10]], 'fill:var(--steelm);stroke:var(--steelm2);stroke-width:1.5', true);
-        jaw(-1); jaw(1);
-        if (full && open < 0.6) R(g, X - 16, yb - 26, 32, 20, 'f-soilB', { opacity: 0.85 });
-        if (u > 0.82) for (let i = 0; i < 7; i++) { const k = ((u - 0.82) / 0.18 + i / 7) % 1; C(g, X + 26 + k * 66 + rnd(i + 9) * 8, yb - 6 - Math.sin(k * 3) * 16 + k * (G0 - yb), 3.5, 'f-soilB'); }
-      }
-      label = u < 0.3 ? '1 · le a furatba' : u < 0.5 ? '2 · fúrás, telítődés' : u < 0.8 ? '3 · kiemelés' : '4 · ürítés a furat mellett';
-    }
-    T(g, W - 12, H - 14, label, 't-lab halo', { 'text-anchor': 'end' });
-  };
-  loop(root, (tt) => draw(tt));
+  const draw = (t) => { if (t0 == null) t0 = t; const u = window.__toolFix != null ? window.__toolFix : (t - t0) % TOOL_LOOP[typ]; toolScene(fig, typ, u, { name: TOOLS[typ].t.toUpperCase() }); };
+  loop(root, (t) => draw(t));
   draw(0);
 });
 

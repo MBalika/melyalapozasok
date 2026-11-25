@@ -1,0 +1,34 @@
+# 5.1 Így dolgozik a fúrófej – animált jelenetek (proc.js toolScene)
+96c059e	depth ≈ ${fmtM(res.depth)} m
+fd24fb6	the bore is complete
+b0c1330	4 · the spoil settles out, the fluid is reused
+921e1a6	3 · in the annulus it lifts the cuttings
+5f7ee3e	2 · the flushing fluid flows down the rod
+e5fb778	1 · the bit breaks up the soil
+e194ea6	pump
+ed20634	cuttings rising
+42a3782	drill rod
+31035e1	flushing swivel
+850b16e	6 · back over the bore
+e028874	5 · the bottom flap opens, emptying
+66d3046	4 · the upper structure of the rig slews
+e1de3a3	2 · drilling – the soil enters the bucket
+118abee	1 · lowering into the slurry-filled bore
+cdd2d8f	the upper structure slews
+e097fda	Kelly bar
+7adecda	7 · back over the casing
+c8fe1ec	6 · the jaws open, emptying
+d39311b	5 · luffing the boom out over the heap
+411578e	4 · lifting out
+361c58f	3 · closing, it bites into the soil
+c38ee8a	2 · dropped to the bottom with open jaws
+ae615fb	1 · the casing goes ahead
+73c1d35	grab
+590a52d	4 · finished concrete column – reinforcement next
+cef7379	3 · withdrawal without rotation, concreted from below
+23d6f3e	2 · final depth – concreting starts
+b817411	1 · screwing down – the soil stays on the flights
+ec89aa0	soil plug on the flights
+21f3230	4 · spinning off the soil
+f524b46	2 · drilling – the flights fill up
+6f37de5	1 · lowering into the bore
