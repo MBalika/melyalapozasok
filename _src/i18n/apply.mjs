@@ -53,7 +53,7 @@ if (process.argv[1].endsWith('apply.mjs')) {
   const { out, missing, errors, unused } = applyAll(root, files, T);
   const seen = new Set(); const miss = missing.filter(u => !seen.has(u.id) && seen.add(u.id));
   if (miss.length) { fs.writeFileSync(path.join(outDir, '..', 'missing.tsv'), miss.map(u => `${u.id}\t${u.t.replace(/\n/g, '⏎')}\t# ${u.file}:${u.line}`).join('\n') + '\n'); }
-  console.log(`hiányzó: ${miss.length} · hiba: ${errors.length} · fel nem használt: ${unused.length}`); errors.slice(0, 40).forEach(e => console.log('  ' + e)); if (unused.length) console.log('  fel nem használt:', unused.slice(0, 20).join(' '));
+  console.log(`hiányzó: ${miss.length} · hiba: ${errors.length} · fel nem használt: ${unused.length}`); errors.slice(0, 40).forEach(e => console.log('  ' + e)); if (unused.length) console.log('  fel nem használt:', unused.slice(0, 20).join(' ')); if (process.env.UNUSED_OUT) fs.writeFileSync(process.env.UNUSED_OUT, unused.join('\n') + '\n');
   for (const f in out) { const p = path.join(outDir, f); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, out[f]); }
   // a sorhoz kötött kulcs (id@fájl:sor) elcsúszott, ha nem használtuk: a forrás változott, a sorszámot frissíteni kell
   const lost = unused.filter(k => k.includes('@')); if (lost.length) console.log('  elcsúszott sorkulcsok:', lost.join(' '));

@@ -1,30 +1,5 @@
-bc46e31	Shaft area
-b83aeb9	Compaction of the soil
 43fbe9c	↺ Again
-2a272bd	The drilling head is stuck
 53ab1c6	The pile is finished
-72ce723	<span>${fmt(L, 1)} m, Ø ${fmt(sD.v, 0)} mm – we pushed ${fmt(V, 2)} m³ of soil sideways, and almost nothing came to the surface. A bored pile would produce approx. ${fmt(V * 1.25, 1)} m³ of (loosened) spoil.</span>
-7d45b34	Drilling – rotation and thrust
-e762e36	<span>The head pushes aside and compacts the soil; the monitor records the torque.</span>
-36853f7	Concreting under pressure
-a043ca6	<span>The concrete flows to the base through the drill stem under pressure, while the stem is withdrawn with rotation.</span>
-b8789f5	This will be hard…
-179c41d	Drilling can start
-e632f92	<span>The estimated torque at the base is ≈ ${fmt(T0, 0)} kNm – more than the rig can deliver (${TMAX} kNm).</span>
-c2eae6b	<span>Estimated torque at the base ≈ ${fmt(T0, 0)} kNm (rig limit ${TMAX} kNm).</span>
-54c66b7	little spoil
-d9ac1e4	MONITOR · SCREW PILE
-7e53d47	depth of the drilling head – concreting
-a22da57	depth of the drilling head
-5953b43	rig limit
-b67b9e3	torque (kNm)
-f73573d	concrete pressure
-a5078e3	standby
-eb7ed0a	DRILLING
-ee00674	CONCRETING
-1fc46b2	REINFORCEMENT
-add188c	DONE
-bc2d59c	Illustrative, horizontally 3×
 592e186	Quiz – Franki and screw piles
 9c35ae6	What pulls the casing of a Franki pile down into the ground?
 80ff191	The concrete plug rammed inside the tube, through friction

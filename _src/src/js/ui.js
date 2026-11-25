@@ -172,7 +172,7 @@ function initVideos() {
 }
 
 /* ---------------------------------------------------------------- BME YouTube-kártyák */
-const ytImg = (id, f) => `img/yt/${id}/${f}`;
+const ytImg = (id, f) => `img/yt/${id}/${f}?v=${VH.yt[id + '/' + f] || 1}`;
 function openYT(id) {
   const y = YT[id]; if (!y) return;
   const m = $('#ytmodal');

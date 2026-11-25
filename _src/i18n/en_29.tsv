@@ -10,7 +10,6 @@ cc1390c	Increase the flow velocity and see what happens to the shallow foundatio
 405d4af	Choose a method: the animation shows how the machine works, and the card in what soil and with how much noise and vibration.
 4923336	Choose a technology and a neighbouring building, and move the piling location. The curves are order-of-magnitude values from a simplified attenuation model; the faint curves show the other technologies.
 b57cf16	Step through or play the construction. The size of the bulb is given by the number of rammed concrete batches – watch how many times the base area grows.
-cddaacd	Choose a drilling head, diameter, length and soil, and start drilling: the monitor shows the depth, the torque and the concrete pressure – and below, how much soil did NOT come up.
 f4f1ea2	Choose a tool and watch its working cycle in the bore. Which soil is it for?
 d8daf4f	Set the soil, the groundwater, the depth and the method of support. Does the bore stand – or collapse?
 ded7d33	You are the rig operator: pull up the auger and feed the concrete. The record shows everything.
@@ -48,7 +47,6 @@ c2c1c25!	soil
 128bb77!	bulb
 83e5927	SECTION
 e6c37ff	PLAN
-177e7c4	REFUSAL
 796a9d8	MIXED
 7cf36e0	RECOMMENDED
 02b73a8	img/thumb/en/${n}.jpg?v=3

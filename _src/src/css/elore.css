@@ -90,14 +90,8 @@
 @media (max-width: 620px) { .gal.elo-gg { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
 @media (max-width: 600px) { .elo-dw .dn, .elo-dw .dl { font-size: 15px; } .elo-dw .dl.mut { font-size: 13px; } }
 
-/* csavart cölöp: jelenet + monitor */
-.hsz-duo { display: grid; grid-template-columns: minmax(0, 400fr) minmax(0, 248fr); gap: 0; align-items: start; }
-.hsz-duo > svg { width: 100%; height: auto; display: block; }
+/* keskeny nézet: nagyobb betű a zsugorodó vásznakon */
 @media (max-width: 600px) {
-  .hsz-duo { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-  .hsz-duo > svg.hsz-mon { max-width: 300px; margin: 0 auto; }
-  [data-w="hsz-csavart"] .hsz-duo svg.fig .t-sm, [data-w="hsz-csavart"] .hsz-duo svg.fig .t-num { font-size: 14px; }
-  [data-w="hsz-csavart"] .hsz-duo svg.fig .t-big { font-size: 19px; }
   /* a 720 egység széles verésszimulátor felére zsugorodik: nagyobb betű */
   [data-w="elo-veres"] svg.fig .t-sm, [data-w="elo-veres"] svg.fig .t-num { font-size: 21px; }
   [data-w="elo-veres"] svg.fig .t-big { font-size: 26px; }

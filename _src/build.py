@@ -124,9 +124,10 @@ if sys.argv[1:2] == ['catalog']:
     r = subprocess.run(['node', str(I18N / 'worksheet.mjs'), str(SRC), *FILES], capture_output=True, text=True)
     (I18N / 'ws.tsv').write_text(r.stdout, encoding='utf-8'); print(r.stdout.count('\n'), 'egység → i18n/ws.tsv', r.stderr[-500:]); sys.exit(0)
 
-# videóoldalak tartalomhash-e a lejátszó URL-jébe (?v=…), hogy a böngésző gyorsítótára ne a régi videót adja
+# videóoldalak és YouTube-kártyaképek tartalomhash-e az URL-be (?v=…), hogy a böngésző gyorsítótára ne a régit adja
 import hashlib
 VH = {k: {p.stem: hashlib.md5(p.read_bytes()).hexdigest()[:8] for p in sorted((R.parent / d).glob('v*.html'))} for k, d in (('hu', 'video'), ('en', 'video/en'))}
+VH['yt'] = {f'{p.parent.name}/{p.name}': hashlib.md5(p.read_bytes()).hexdigest()[:8] for p in sorted((R.parent / 'img' / 'yt').glob('*/*')) if p.suffix in ('.jpg', '.png')}   # a YouTube-kártyák képei (7 napig gyorsítótárazva)
 (SRC / 'js' / 'vh.json').write_text(json.dumps(VH, indent=1) + '\n', encoding='utf-8')
 build(SRC, 'hu', f'dev-{BID}.html' if BID else 'index.html')
 if BID: sys.exit(0)
