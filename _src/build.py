@@ -124,6 +124,10 @@ if sys.argv[1:2] == ['catalog']:
     r = subprocess.run(['node', str(I18N / 'worksheet.mjs'), str(SRC), *FILES], capture_output=True, text=True)
     (I18N / 'ws.tsv').write_text(r.stdout, encoding='utf-8'); print(r.stdout.count('\n'), 'egység → i18n/ws.tsv', r.stderr[-500:]); sys.exit(0)
 
+# videóoldalak tartalomhash-e a lejátszó URL-jébe (?v=…), hogy a böngésző gyorsítótára ne a régi videót adja
+import hashlib
+VH = {k: {p.stem: hashlib.md5(p.read_bytes()).hexdigest()[:8] for p in sorted((R.parent / d).glob('v*.html'))} for k, d in (('hu', 'video'), ('en', 'video/en'))}
+(SRC / 'js' / 'vh.json').write_text(json.dumps(VH, indent=1) + '\n', encoding='utf-8')
 build(SRC, 'hu', f'dev-{BID}.html' if BID else 'index.html')
 if BID: sys.exit(0)
 
@@ -131,6 +135,7 @@ if BID: sys.exit(0)
 EN = R / '.en'; shutil.rmtree(EN, ignore_errors=True); (EN / 'js').mkdir(parents=True); (EN / 'chapters').mkdir()
 shutil.copy(SRC / 'style.css', EN / 'style.css'); (EN / 'css').mkdir()
 for p in (SRC / 'css').glob('*.css'): shutil.copy(p, EN / 'css' / p.name)
+shutil.copy(SRC / 'js' / 'vh.json', EN / 'js' / 'vh.json')
 # a BME-videók adatai (cím, lejátszási lista, képaláírások) angolul – i18n/en_yt.tsv: magyar ⇥ angol
 YT = dict(l.split('\t', 1) for l in (I18N / 'en_yt.tsv').read_text(encoding='utf-8').splitlines() if '\t' in l and not l.startswith('#'))
 meta = json.loads((SRC / 'js' / 'yt_meta.json').read_text(encoding='utf-8')); miss = []

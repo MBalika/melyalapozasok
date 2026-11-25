@@ -2,6 +2,7 @@
 // galéria, fülek, kvíz, igaz/hamis, megjelenés görgetéskor, formázás-őr
 import { $, $$, h, fireTheme, GUARD, EN } from './core.js';
 import { CHAPTERS, VIDEOS, YT, YT_GROUPS } from './data.js';
+import VH from './vh.json';
 
 /* ---------------------------------------------------------------- téma */
 function initTheme() {
@@ -139,7 +140,7 @@ function openVideo(n) {
   curIdx = order.indexOf(n);
   const m = $('#vmodal');
   $('#vmTitle', m).textContent = `${v.t}`;
-  $('#vmFrame', m).src = `video/${EN ? 'en/' : ''}${n}.html?v=2#autoplay`;
+  $('#vmFrame', m).src = `video/${EN ? 'en/' : ''}${n}.html?v=${(EN ? VH.en : VH.hu)[n] || 2}#autoplay`;
   $('#vmInfo', m).textContent = `${curIdx + 1} / ${order.length} · ${v.d} · zene: ${v.g}`;
   m.hidden = false; document.body.style.overflow = 'hidden';
   setTimeout(() => $('#vmFrame', m).focus(), 300);
