@@ -520,9 +520,9 @@ register('dnt-tree', (root) => {
 
 /* ================================================================== C11 NÉZÉSI ÚTVONAL */
 const ROUTE = [
-  { t: 'Indulás: mi a mélyalap?', ch: [['#alapok', 'C01'], ['#rendszer', 'C02']], v: ['v1'], yt: ['c3vKfjgqJdA', 'er4WW_v5qgk'], s: 'Mikor kell mélyalap, hogyan adja át a terhet a talp és a köpeny – és milyen cölöpfajták vannak.' },
+  { t: 'Indulás: mi a mélyalap?', ch: [['#alapok', 'C01'], ['#rendszer', 'C02']], v: ['v1', 'v2'], yt: ['c3vKfjgqJdA', 'er4WW_v5qgk'], s: 'Mikor kell mélyalap, hogyan adja át a terhet a talp és a köpeny, milyen cölöpfajták vannak – és miben más a kiszorításos és a helyettesítéses cölöp.' },
   { t: 'Kiszorításos cölöpök', ch: [['#elore', 'C03'], ['#helyszini', 'C04']], v: [], yt: ['KDKCobw52qk', 'D27v2bVmoXc', '_QsH5x0ndtI', 'hwP8iZzAq6I'], s: 'Verés, vibrálás, csavarás, Franki-hagyma: a talajt széttolják és tömörítik.' },
-  { t: 'Fúrt cölöpök', ch: [['#furt', 'C05']], v: ['v2'], yt: ['wqOU4bcUiCk', 'Oe5saZFiPJk'], s: 'Talajhelyettesítés, furatállékonyság, betonozás – előbb az elv, aztán a CFA és a béléscsöves gép.' },
+  { t: 'Fúrt cölöpök', ch: [['#furt', 'C05']], v: [], yt: ['wqOU4bcUiCk', 'Oe5saZFiPJk'], s: 'Talajhelyettesítés, furatállékonyság, betonozás – a CFA és a béléscsöves gép a valóságban.' },
   { t: 'Mikrocölöp, jet, keverés', ch: [['#egyeb', 'C06']], v: [], yt: ['7M7YPxBn8Xk', 'MPjXIhchN-w', 'wh31VB1fY_8', 'cNkNZV6kgqk'], s: 'Aláfogás pincéből, 350–400 bar-os sugár, helyben kevert talaj, kőoszlop.' },
   { t: 'Résfal', ch: [['#resfal', 'C07']], v: ['v3'], yt: ['f_41-sJhGK8'], s: 'Miért nem omlik be a zaggyal teli rés? Utána a valódi markoló és a betonozás.' },
   { t: 'Kút, szekrény, keszon', ch: [['#kut', 'C08']], v: ['v4'], yt: [], s: 'Süllyesztés önsúllyal, vágóél, túlnyomás és zsilipek – ehhez csak animáció van.' },

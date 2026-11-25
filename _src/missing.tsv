@@ -1,1 +1,7 @@
-4baaf98	A mikrocölöpöt béléscső védelmében lefúrják. A furatba merev acélbetétet, csavarmenetes acélrudat (pl. Gewi) vagy acélcsövet helyeznek: a toldott rudat a furat aljára eresztik. A furatot cementhabarccsal töltik ki, a cölöpöt alátétlemezzel és lezáró „sapkával” zárják. A furatátmérő 90–150 mm, az acélrúd jellemzően 28–64 mm-es.	# chapters/06_egyeb.html:70
+70ee4b5	A magyarázó animáció a két eljárást külön-külön, lépésről lépésre mutatja be – a következő fejezetek technológiái erre épülnek.	# chapters/02_rendszer.html:259
+ff8eee9	A családfa első elágazása a készítés módja. <b>Talajkiszorításnál</b> a cölöp, a kiszorító fej vagy a zárt cső végig kitölti a furatot, így furatállékonysági gond nincs. <b>Talajhelyettesítésnél</b> a talajt kiemeljük, ezért a furatot a betonozásig meg kell támasztani: béléscsővel, bentonitzaggyal vagy a spirálon maradó talajjal.	# chapters/02_rendszer.html:258
+df343db	A tömörebb talaj nagyobb súrlódást ad a köpeny mentén. Előregyártott (vert) cölöpnél ezért a talp- és a köpenymenti ellenállás is nő, a helyben készülő csavart cölöpnél pedig elsősorban a <b>köpenymenti ellenállás</b>. A két eljárást lépésről lépésre a <a href="#rsz-fa">2.6 alfejezet</a> magyarázó animációja mutatja be.	# chapters/04_helyszini.html:21
+d30aaea	Talajhelyettesítés, furatállékonyság, betonozás – a CFA és a béléscsöves gép a valóságban.	# js/ch_dontes.js:525
+2a7cb26	Mikor kell mélyalap, hogyan adja át a terhet a talp és a köpeny, milyen cölöpfajták vannak – és miben más a kiszorításos és a helyettesítéses cölöp.	# js/ch_dontes.js:523
+37b7bed	Két cölöpcsalád lépésről lépésre: kitöltött furat, megtámasztás, vasalás, betonozás	# js/data.js:23
+47643e2	Talajhelyettesítés vs. talajkiszorítás	# js/data.js:23

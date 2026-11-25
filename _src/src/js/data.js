@@ -19,11 +19,11 @@ export const CHAPTERS = [
 
 // Saját magyarázó animációk (video/vN.html + vN.mp3)
 export const VIDEOS = [
-  { n: 'v1', t: 'A mélyalapozás alapjai', d: '2:31', g: 'nu-disco', grp: 0, s: 'Mikor kell mélyalap? Csúcs- és köpenymenti ellenállás, álló, lebegő és vegyes cölöp' },
-  { n: 'v2', t: 'Kiszorítás és furatállékonyság', d: '2:45', g: 'drum & bass', grp: 2, s: 'Mi történik a talajjal? Béléscső, zagy, talajdugó – és ami rosszul sülhet el' },
-  { n: 'v3', t: 'Résállékonyság', d: '2:48', g: 'synthwave', grp: 4, s: 'Bentonitzagy, zagyszint a talajvíz felett, silóhatás, réstábla-hossz' },
-  { n: 'v4', t: 'Kút, szekrény, keszon', d: '2:45', g: 'melodic house', grp: 5, s: 'Süllyesztés önsúllyal, vágóél, rekeszfalak, túlnyomás és zsilipek' },
-  { n: 'v5', t: 'Összefoglaló és kvíz', d: '2:28', g: 'UK garage', grp: 6, s: 'Térkép a mélyalapokról és hat kvízkérdés – teszteld magad!' },
+  { n: 'v1', t: 'A mélyalapozás alapjai', d: '2:31', g: 'cinematic', grp: 0, s: 'Mikor kell mélyalap? Csúcs- és köpenymenti ellenállás, álló, lebegő és vegyes cölöp' },
+  { n: 'v2', t: 'Talajhelyettesítés vs. talajkiszorítás', d: '2:59', g: 'indie pop', grp: 0, s: 'Két cölöpcsalád lépésről lépésre: kitöltött furat, megtámasztás, vasalás, betonozás' },
+  { n: 'v3', t: 'Résállékonyság', d: '2:48', g: 'lo-fi', grp: 4, s: 'Bentonitzagy, zagyszint a talajvíz felett, silóhatás, réstábla-hossz' },
+  { n: 'v4', t: 'Kút, szekrény, keszon', d: '2:45', g: 'cinematic', grp: 5, s: 'Süllyesztés önsúllyal, vágóél, rekeszfalak, túlnyomás és zsilipek' },
+  { n: 'v5', t: 'Összefoglaló és kvíz', d: '2:28', g: 'indie pop', grp: 6, s: 'Térkép a mélyalapokról és hat kvízkérdés – teszteld magad!' },
 ];
 
 // BME Építőmérnöki Kar – YouTube (valós felvételek). A képek: img/yt/<id>/t.jpg, p1–p4.jpg, qr.png
