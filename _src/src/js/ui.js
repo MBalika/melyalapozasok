@@ -152,7 +152,7 @@ function initVideos() {
   $$('.vcard[data-video]').forEach((b) => {
     const v = VMAP[b.dataset.video]; if (!v) return;
     b.classList.add('grp' + v.grp);
-    b.append(thumb(v.n), h('div', { class: 'vmeta' }, h('div', { class: 'vk' }, `Magyarázó animáció · ${order.indexOf(v.n) + 1} / ${order.length}`), h('b', {}, v.t), h('span', {}, v.s)));
+    b.append(thumb(v.n), h('div', { class: 'vmeta' }, h('div', { class: 'vk' }, `Magyarázó animáció · ${order.indexOf(v.n) + 1} / ${order.length}`), h('b', {}, v.t), ...(b.hasAttribute('data-nosub') ? [] : [h('span', {}, v.s)])));
     b.addEventListener('click', () => openVideo(v.n));
     b.setAttribute('aria-label', `Videó lejátszása: ${v.t}`);
   });

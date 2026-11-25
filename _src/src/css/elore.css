@@ -2,7 +2,7 @@
 
 /* anyagkártyák keresztmetszet-ikonnal */
 .elo-mat .card { display: flex; flex-direction: column; }
-.elo-xs { width: 120px; height: 70px; display: block; margin: 0 0 8px; }
+.elo-xs { width: 120px; height: 70px; display: block; margin: 0 auto 8px; }
 .elo-mat .card p.small { margin-top: auto; padding-top: 6px; }
 
 /* módszer-értékelő sávok */
