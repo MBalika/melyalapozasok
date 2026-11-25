@@ -46,8 +46,6 @@
 .hsz-row { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 22px; }
 .hsz-row > .ctl { flex: 1 1 220px; min-width: 0; }
 .hsz-row > .tog { flex: 0 1 auto; }
-canvas.hsz-cv { width: 100%; display: block; }
-canvas.hsz-cv { max-width: 900px; margin: 0 auto; }
 
 /* keskeny kijelzőn a széles ábrák SVG-feliratai nagyobbak (a viewBox miatt különben olvashatatlanok) */
 @media (max-width: 600px) {
@@ -55,7 +53,6 @@ canvas.hsz-cv { max-width: 900px; margin: 0 auto; }
   [data-w^="elo-"] svg.fig .t-num, [data-w^="hsz-"] svg.fig .t-num { font-size: 17px; }
   [data-w^="elo-"] svg.fig .t-lab, [data-w^="hsz-"] svg.fig .t-lab { font-size: 17px; }
   [data-w^="elo-"] svg.fig .t-big, [data-w^="hsz-"] svg.fig .t-big { font-size: 24px; }
-  [data-w="hsz-reszecske"] svg.fig .t-sm { font-size: 19px; }
 }
 
 /* ---------------------------------------------------------------- 2. kör: saját rajzok és rendezett rácsok (C03) */

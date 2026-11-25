@@ -262,10 +262,8 @@ d7879d0	40–120 cm thick; panel 2.8–6.5 (8) m
 8ec85cf	The wall section excavated and concreted at once (typically 2.8–6.5 (8) m). First the primary panels are made, then the secondary panels between them.
 be011a2	A panel made at one time is typically 2.8–6.5 (8) m long – this is set by trench stability.
 4baaf98	The micropile is drilled under the protection of a casing. A rigid steel insert, a threaded steel bar (e.g. Gewi) or a steel tube, is placed in the bore: the extended bar is lowered to the bottom of the bore. The bore is filled with cement grout, and the pile is closed with a bearing plate and a closing “cap”. The bore diameter is 90–150 mm, the steel bar typically 28–64 mm.
-70ee4b5	The explainer animation shows the two methods separately, step by step – the technologies in the following chapters build on it.
-3ca1523	The two main groups differ in what happens to the bore. With <b>soil displacement</b> the pile, the displacement head or the closed tube fills the bore all the time, so there is no bore stability problem. With <b>soil replacement</b> the soil is removed, so the bore has to be supported until concreting: with a casing, bentonite slurry or the soil left on the auger.
-df343db	Denser soil gives more friction along the shaft. So for a precast (driven) pile both the base and the shaft resistance increase, and for a cast-in-place screw pile primarily the <b>shaft resistance</b>. The explainer animation in <a href="#rsz-fa">section 2.6</a> shows the two methods step by step.
 d30aaea	Replacement, bore stability, concreting – the CFA and the casing rig in reality.
 2a7cb26	When is a deep foundation needed, how do the base and the shaft transfer the load, what kinds of piles are there – and how do displacement and replacement piles differ.
 37b7bed	Two pile families step by step: filled bore, support, reinforcement, concreting
 47643e2	Soil replacement vs. soil displacement
+a0280a1	Denser soil gives more friction along the shaft. So for a precast (driven) pile both the base and the shaft resistance increase, and for a cast-in-place screw pile primarily the <b>shaft resistance</b>.

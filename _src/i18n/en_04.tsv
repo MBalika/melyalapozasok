@@ -14,9 +14,7 @@ a1d82a4	Soil displacement also works without a finished element. For the <b>Fran
 a40dbf7	<b>3<small>t</small></b><span>mass of the Franki drop hammer – it rams the concrete plug inside the tube</span>
 dd44e93	<b>2–3<small>MN</small></b><span>achievable resistance of a Franki pile (2000–3000 kN), with a length of at most 16–18 m</span>
 fe3b065	<b>≈ 60<small>cm</small></b><span>diameter of the finished Franki pile from a casing of 46–52 cm</span>
-8466981	What happens to the soil?
 7ee5d59	The fate of the soil around the pile depends on the technology. With <b>replacement</b> the soil is removed (bored out) and the hole is filled with concrete – meanwhile the wall of the bore may <b>loosen</b> slightly. With <b>displacement</b> practically no soil comes up: the pile or the drilling head pushes the soil sideways, the grains are pressed together, and the soil is <b>compacted</b>.
-e75a8ce	Displacement or replacement – particle simulation
 89c7942	Franki pile – rammed base, “bulb”
 c420c83	The seven steps of making a Franki pile
 480deed	← swipe sideways for the steps →

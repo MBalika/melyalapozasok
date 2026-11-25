@@ -68,20 +68,6 @@ c65b1ab	It doesn’t matter, the concrete displaces it
 6990547	Which soil removal tool is primarily for granular soil?
 745b2ca	Screw drilling head
 0e0907c	The drilling bucket carries granular soil out in the bucket; the short auger is mainly for cohesive soil, and the screw drilling head does not remove but displaces.
-d2f9abc	Grains around the pile in plan: replacement and displacement
-9e59081	Progress
-a8ed72d	Colouring by compaction
-b2b5849	Replacement: change in density along the shaft
-eee3057	Displacement: change in density along the shaft
-05c3cb3	Soil brought to the surface (D = 50 cm)
-884c003	original density
-986d685	distance from the pile axis
-dd8bd22	replacement (drilling)
-9e57087	displacement
-b894419	REPLACEMENT
-fec198e	DISPLACEMENT
-72fae32	REPLACEMENT – DRILLING
-8633aa0	DISPLACEMENT – SCREW, DRIVEN
 563520d	Plug
 f4358e5	1. Positioning, plug
 6e76174	Driving

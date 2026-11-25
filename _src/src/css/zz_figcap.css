@@ -1,0 +1,12 @@
+/* ===== Ábramagyarázatok középen (2026-11-25, a felhasználó kérése: „ahol ilyen ábra magyarázat van,
+   minden középre legyen rendezve”) =====
+   Minden ábra alatti magyarázat (figcaption és benne a cím, a szöveg; ábrafelirat-bekezdés, jelmagyarázat)
+   vízszintesen középen. A keskeny lépéssávokban nincs szó közbeni elválasztás, a sorok kiegyensúlyozottak. */
+main figcaption, main figcaption :is(span, p, small, h5, div, b), .hsz-cap, .furt-cap, .elo-note, .kf-cap, .kf-row.kf-text .kf-cap,
+.rf-figcap, .rf-stepd { text-align: center !important; text-align-last: center !important; }
+main figcaption b { justify-content: center; }
+.rsz-tleg, .tt-legend, .kf-legend { justify-content: center; }
+.pr-col figcaption span, .g3-ph figcaption span, .rf-stepd, .egy-sfig figcaption, .furt-tool figcaption, .kf-cap { hyphens: none; text-wrap: balance; }
+/* résfal lépéskártyái: a szám, a cím és a szöveg egymás alatt, középen */
+.rf-step figcaption { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.rf-stepn { align-self: center; }
