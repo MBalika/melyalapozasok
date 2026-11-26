@@ -3,13 +3,12 @@ d5bd8cf	With bentonite slurry
 3386ecf	With soil
 fd383a4	For a continuous auger (CFA) the plug of soil remaining on the auger supports the surrounding soil – no separate technology is needed, which is a significant advantage.
 e3c69de	Not at all – because it is not needed
-df52932	If the bore is not held
+338721a	If the bore is not supported
 0e4af63	The bore may collapse: a <b>discontinuity</b> forms in the pile shaft, the required concrete volume increases, and the loosened wall can greatly reduce the <b>shaft resistance</b>. Soil falling to the bottom impairs the <b>base resistance</b>.
-fd50871	Bore stability lab
 203f62d	Why does the casing need water?
 d4a4bd4	Below the groundwater, removing soil from the casing also removes water. If the water level inside the tube falls below that outside, the difference starts a flow towards the bottom of the tube: the water bursts in upwards at the base, carries grains with it, and loosens the soil exactly where the pile base will sit. That is why the water level inside the tube is kept at least at the outside level.
 4412407	Slurry and groundwater
-5bdb1c6	Bentonite slurry is denser than water and forms a thin layer of low permeability on the wall of the bore (filter cake), through which its excess pressure is transferred to the soil. For this, the slurry level must be kept above the groundwater table – the details are discussed under diaphragm walls (C07).
+b97e294	Bentonite slurry is denser than water and forms a thin layer of low permeability on the wall of the bore (filter cake), through which its excess pressure is transferred to the soil. For this, the slurry level must be kept above the groundwater table – the details are discussed under diaphragm walls (C07).
 b2544e0	Concreting and reinforcement
 9ee0444	The pile can be made in two sequences: <b>concreting – compaction – reinforcement</b>, or <b>reinforcement – concreting – compaction</b>. Concreting can be gravitational or pneumatic (under pressure): through a concreting hopper, through the casing, or for CFA through the drill stem.
 3944c77	<b>Compaction.</b> With a dropped rammer (tamping – not in flowing concrete), or by “re-driving” the casing. In concreting under pressure the placing itself compacts.

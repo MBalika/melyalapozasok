@@ -9,11 +9,10 @@ e99abfb	Why is a timber pile durable below the groundwater table?
 07d03ec	Because the earth pressure is higher there
 5b04028	Under water, without oxygen, rot fungi and insects cannot live. If the groundwater table drops, the pile heads come into the air and start to rot.
 9407265	Clay (cohesive)
-9b1c3ad	Risky
 8dec81c	Short auger
 79c3fd6	cohesive soil
 1149f78	granular soil
-251eee6	An auger of a few flights at the end of the Kelly bar. It drills down, fills up, the rig lifts it out, then spins the soil off beside the bore – and starts again. It is effective mainly in cohesive soil: granular soil trickles out from between the flights.
+8851d2c	An auger of a few flights at the end of the Kelly bar. It drills down, fills up, the rig lifts it out, then spins the soil off beside the bore – and starts again. It is effective mainly in cohesive soil: granular soil trickles out from between the flights. In stiff cohesive soil without groundwater the bore stays stable even without support – so no casing is needed here.
 27ebf13	Continuous auger
 2d8d1d7	The auger runs along the whole pile length and penetrates to the final depth in a single pass. The spoil stays between the flights and supports the wall of the bore meanwhile – this is the basis of the CFA pile. It can be used in any soil.
 f1b9630	Grab
@@ -24,93 +23,11 @@ d84a5a3	Cylindrical grab: it is dropped to the bottom of the bore with open jaws
 ece4888	excavated soil
 6e30f68	casing
 cfa69a9	3 · lifting out
-f93dcfd	No support
-66c7009	Casing
-ce3e3c9	Soil on the auger (CFA)
-94d94c1	In granular soil (${SOIL[soil].t.toLowerCase()}) there is no cohesion to hold a vertical wall: the wall trickles away and collapses${wet ? ', a talajvíz alatt pedig a beáramló víz is sodorja a szemcséket' : ''}. Support is needed (casing, slurry or continuous auger).
-8b5e1a9	, and below the groundwater the inflowing water also carries the grains away
-4dddfa0	The unsupported bore is too deep.
-2ee15e1	Even in cohesive soil above the groundwater, we can only count on the bore standing for a short time up to 8–10 m. Deeper down, the lower part of the wall may start to move.
-58b474e	At the limit: 8–10 m.
-e0f86dd	In cohesive soil above the groundwater it may still stand – but only for a short time. It must be concreted immediately after excavation, and the condition of the wall must be watched.
-be14e84	Stands for a short time.
-d408fa1	Cohesive soil, above the groundwater, ${fmt(z, 0)} m: the bore is stable even without support – but it must be concreted immediately after excavation.${z <= 6 ? ' (5–6 m-ig ezt markolt tömbalapnak, kútalapnak is nevezik.)' : ''}
-2f61034	 (Up to 5–6 m this is also called an excavated block foundation or well foundation.)
-ac8e029	The soil flows in under the casing.
-67d2f05	If the excavation gets ahead of the casing, in granular soil the free wall section below the casing collapses, the soil flows into the bore under the casing, and the surroundings loosen. In granular soil the casing must always go ahead of the excavation.
-5b641dd	Base heave!
-9edefa7	The water inside the casing is ${fmt(-dh, 1)} m lower than outside. The difference starts an upward flow at the base: the water breaks in, carries grains with it, and loosens the soil where the pile base will sit. The water removed must be replaced.
-d17fa05	The water inside the casing is ${fmt(-dh, 1)} m lower than outside. In cohesive soil the flow is slow, but the base may soften and heave. The water level in the bore must be kept at the outside level.
-5c0ec55	Works in cohesive soil – but not recommended.
-d58aae1	In cohesive soil the short free section below the casing may stand for a short time, so the casing “generally” goes ahead, not necessarily. Still, it is safer to advance it before excavating.
-f70033c	The casing holds the wall.
-0860d23	The steel casing prevents the soil and groundwater from breaking in
-3efa8b2	, and the water kept in the casing
-f500bfe	 balances the external water pressure
-e28bfd3	. Its drawback: moving and extending the casing is cumbersome and slow.
-8dc7b81	The slurry excess pressure is too small.
-17d10e7	The slurry level is only ${fmt(sz, 2)} m above the groundwater table. So the slurry pressure is hardly greater than the water pressure and can no longer counterbalance the earth pressure: the wall starts to move below the groundwater.
-a165b38	The excess pressure is tight.
-21b113a	The slurry level is ${fmt(sz, 2)} m above the groundwater – too little. The slurry level must be kept at least 1.0–1.5 m above the groundwater table.
-b396e23	It stands – but the slurry is being lost.
-52096da	In highly permeable gravel the slurry can leak into the pores (slurry loss), and the slurry level falls. It must be monitored and topped up continuously; a denser slurry is needed if necessary.
-09cba48	The slurry supports the wall.
-999626f	The bentonite slurry is denser than water, displaces the groundwater and supports the wall of the bore with its excess pressure
-1cd8cbc	 – the slurry level is ${fmt(sz, 1)} m above the groundwater
-59081ac	There is no CFA this long.
-20aec5a	The length of the continuous auger is tied to the mast of the rig: a CFA pile is at most approx. 22–24 m. This depth needs a cased or slurry technology.
-b1a194f	At the upper limit.
-1476f66	22–24 m is the upper range of CFA: only with a large rig and careful planning.
-4bf799b	It stands – with particular care.
-4494263	In fine sand below the groundwater, CFA needs particular care (it is not even recommended in loose, flowing soil): if the auger rotates too much relative to its penetration, it brings up more soil than the volume of the bore, and the surroundings loosen. Drilling and concreting must be done steadily, without interruption.
-488047e	The soil plug supports it.
-f677600	The soil plug remaining on the auger continuously supports the wall of the bore; no separate support technology is needed. The concrete is pumped in through the drill stem during withdrawal.
-33bbe4b	Groundwater present
 a8467d2	Depth of the groundwater table
-2874b35	Depth of the bore
-88adc66	Support
-2b34c87	Water level inside the casing relative to outside
-6de7482	The casing goes ahead of the excavation
-82759ff	Slurry level above the groundwater table
 3f75bcb	groundwater
-97ca789	The diameter is not to scale · illustrative model
-9355479	Not feasible
-2f57a00	Inside − outside water level
 db18dcd	no groundwater
-e0e63c5	Slurry excess pressure at the base
-ce8b44f	above the groundwater
-bf6b3fd	Unsupported (cohesive soil, above GWT)
-fcf62de	inside water level
-e98b87d	← end of the casing
-c797a2f	the auger does not reach down
-9c7cd85	loosened surroundings
-83f42e3	heave – loosened base
-6359a1c	softening base
-9654971	Embedment of the pipe in the concrete (target)
-328df0d	The operator dismantles the pipe in 2 m sections and lifts it so that its end stays at least this deep in the concrete. With a target below 1 m, one lift can easily pull it out.
-1c48ccb	▶ Concreting
-6805cbf	Pull the pipe out!
-a0a680b	Before the first batch of concrete a plug (e.g. a sponge ball) is placed in the pipe so that the concrete does not mix with the slurry.
-8908462	Concrete level above the base
-bda77bb	Embedment of the pipe
-f4e973f	Pile shaft
-374fb9f	illustrative model · 16 m slurry-filled bore
 1670812	❚❚ Pause
-d2af6c0	▶ New pile
-12b27bc	slurry inclusion
 efe4b12	plug
-18345fb	displaced slurry → tank
-89db4cc	the head is broken back to here
-91473e9	sound
-d81151f	Slurry inclusion – a discontinuity.
-dbdd822	 The end of the pipe came out of the concrete: the new concrete fell through the slurry, mixed with it, and a weak, slurry-laden layer remained in the pile shaft. The pipe must always be lifted so that its end stays in the fresh concrete.
-b7f3920	The pile is finished.
-c3df109	 The concrete filled the bore from the bottom up, in one body, and displaced the slurry. The top layer mixed with slurry is broken off when the pile head is formed – that is why the pile is concreted above the design head level.
-9b05270	The embedment is too small.
-2399732	 The end of the pipe is barely in the concrete: a sudden lift could bring it out. It is safer to work with a greater embedment.
-8ad9904	OK: the end of the pipe is in the concrete.
-f24d7d0	Start concreting!
-d472faa	 The concrete fills the bore from the bottom through the end of the pipe and lifts the concrete already placed; the slurry does not mix with it.
 ac85719	Pile length
 5010a48	Withdrawal rate
 b76a6af	Concrete pressure
@@ -165,4 +82,3 @@ e95f679	automatic monitoring, record
 4bc085a	Cased
 48f54dd	diameter at least 80 cm
 fbb5731	a complex, slow technology for a short pile
-055d9a6	 The bore contains slurry and the reinforcement cage. The concrete is placed through the hopper and the tremie pipe, starting from the bottom of the bore.

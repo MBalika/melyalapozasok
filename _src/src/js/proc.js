@@ -2356,11 +2356,11 @@ export function screwScene(s, mode, u, labels = {}) {
 const TS = { W: 600, H: 360 };
 const TSM = {
   rovid: { GY: 168, cyc: 6.8, n: 5, step: 32, layers: [{ k: 'fill', y: 168 }, { k: 'clay', y: 184 }, { k: 'clay2', y: 286 }],
-    labs: [[176, 'feltöltés'], [236, 'kötött talaj'], [306, 'kemény agyag']] },
+    labs: [[176, 'feltöltés'], [226, 'kemény, kötött talaj'], [254, 'nincs talajvíz'], [312, 'kemény agyag']] },
   cfa: { GY: 188, cyc: 13.4, n: 1, layers: [{ k: 'fill', y: 188 }, { k: 'clay', y: 204 }, { k: 'sand', y: 272 }], gw: 252,
     labs: [[196, 'feltöltés'], [238, EN ? 'silty clay' : 'iszapos agyag'], [300, EN ? 'sand' : 'homok']] },
-  marko: { GY: 168, cyc: 6.6, n: 5, step: 30, layers: [{ k: 'fill', y: 168 }, { k: 'sand', y: 186 }, { k: 'gravel', y: 266 }], gw: 214,
-    labs: [[176, 'feltöltés'], [200, EN ? 'sand' : 'homok'], [290, EN ? 'sandy gravel' : 'homokos kavics']] },
+  marko: { GY: 218, cyc: 6.6, n: 4, step: 20, layers: [{ k: 'fill', y: 218 }, { k: 'sand', y: 234 }, { k: 'gravel', y: 300 }], gw: 262,
+    labs: [[226, 'feltöltés'], [250, EN ? 'sand' : 'homok'], [312, EN ? 'sandy gravel' : 'homokos kavics']] },
   dob: { GY: 168, cyc: 6.4, n: 5, step: 28, layers: [{ k: 'fill', y: 168 }, { k: 'sand2', y: 186 }, { k: 'gravel', y: 262 }], gw: 208,
     labs: [[176, 'feltöltés'], [200, EN ? 'sand' : 'homok'], [290, EN ? 'sandy gravel' : 'homokos kavics']] },
 };
@@ -2494,6 +2494,7 @@ function tsRovid(g, st, u) {
   tgs(g, xT - 30, 64, 'Kelly-rúd', { anchor: 'end', to: [xT - 4, Math.max(kTop + 10, Math.min(headY - 16, 74))] });
   tgs(g, xT - 30, headY + 12, 'forgatófej', { anchor: 'end', to: [xT - 17, headY + 10] });
   tgs(g, X + 26, Math.max(GY + 34, Math.min(TS.H - 40, bot - 20)), 'rövid spirál', { to: [xT + half - 2, bot - LA / 2] });
+  if (dep > GY + 44) tgs(g, X - half - 26, GY + 40, 'nincs megtámasztás', { anchor: 'end', to: [X - half - 1, GY + 30] });
   if (moved > 0.05) tgs(g, X - 104, GY - 46, 'kiemelt föld', { anchor: 'end', to: [X - SL - 18, GY - 4 - 10 * moved] });
   const PH = ['', '1 · leengedés a furatba', '2 · fúrás – a menetek megtelnek', '3 · kiemelés', '4 · a gép felsőváza elfordul', '5 · lerázás gyors pörgetéssel a furat mellé', '6 · vissza a furat fölé', 'a furat elkészült'];
   return { phase: PH[phs], depth: (dep - GY) / 30 };
@@ -2541,37 +2542,40 @@ function tsCfa(g, st, u) {
 
 /* ---------- 3. markoló a béléscsőben, daruról */
 function tsMarko(g, st, u) {
-  const M = st.M, GY = M.GY, X = 214, half = 17, m = TSM.marko, N = m.n, CY = m.cyc, STEP = m.step, HANG = GY - 30, XD = X - 62;
+  // Egyetlen hosszú béléscső (toldás nélkül): a csőmozgató a kiemeléssel együtt folyamatosan süllyeszti, ezért elején
+  // magasan kilóg a terepből, a végén is a csőmozgató fölé ér. A markoló mindig a cső teteje fölött lóg.
+  const M = st.M, GY = M.GY, X = 214, half = 17, m = TSM.marko, N = m.n, CY = m.cyc, STEP = m.step, XD = X - 66, LC = 130;
   const done = u >= N * CY, k = done ? N - 1 : Math.floor(u / CY), tau = done ? CY : u - k * CY, D0 = GY + 8 + k * STEP;
+  const uc = Math.min(u, N * CY), cas = GY + 30 + STEP * uc / CY, ctop = cas - LC, HANG = ctop - 12;
   const OI = 0.42; // nyitás a csőben: a kagylók nem érhetnek a cső falához
-  let bot = HANG, xh = X, open = OI, full = 0, dep = D0 + STEP, cas = D0 + STEP + 14, phs = 7, dumpK = -1, osc = 0;
+  let bot = HANG, xh = X, open = OI, full = 0, dep = D0 + STEP, phs = 7, dumpK = -1;
   if (done) { open = 0.2; phs = 8; }
-  else if (tau < 1.2) { const p = ease(tau / 1.2); cas = D0 + 14 + STEP * p; dep = D0; osc = Math.sin(tau * 9) * (1 - Math.abs(2 * tau / 1.2 - 1)); phs = 1; open = OI; }
+  else if (tau < 1.2) { dep = D0; phs = 1; }
   else if (tau < 1.9) { const p = (tau - 1.2) / 0.7; bot = lerp2(HANG, D0, p * p); dep = D0; phs = 2; }
   else if (tau < 2.6) { const p = ease((tau - 1.9) / 0.7); open = OI * (1 - p); dep = D0 + STEP * p; bot = dep; full = p; phs = 3; }
   else if (tau < 3.8) { bot = lerp2(D0 + STEP, HANG, ease((tau - 2.6) / 1.2)); open = 0; full = 1; phs = 4; }
   else if (tau < 4.8) { xh = lerp2(X, XD, ease((tau - 3.8) / 1.0)); open = 0; full = 1; phs = 5; }
   else if (tau < 5.5) { xh = XD; dumpK = (tau - 4.8) / 0.7; open = ease(Math.min(1, dumpK * 2.2)); full = 1 - ease(dumpK); phs = 6; }
   else { const p = ease((tau - 5.5) / 1.1); xh = lerp2(XD, X, p); open = lerp2(1, OI, p); phs = 7; }
+  const osc = done ? 0 : Math.sin(u * 9);
   const moved = (k + (phs >= 6 ? (dumpK < 0 ? 1 : ease(dumpK)) : 0)) / N;
   // furat a csőben, talajvíz a csőben (belső vízszint ≥ külső)
-  const ctop = GY - 16;
   R(g, X - half, ctop, half * 2, Math.max(0, dep - ctop), F('bore'));
   if (dep > M.gw - 6) water(g, X - half, M.gw - 6, half * 2, dep - (M.gw - 6));
-  casing(g, X, ctop, cas, half, { inner: false, teeth: true, collar: true, seg: 52 });
-  spoil(g, M, XD - 28, 26 + 30 * moved, 4 + 14 * moved, 'sand');
-  // csőmozgató (oszcillátor) a cső körül, hidraulikus tápegység
-  const og = g_(g, { transform: `translate(${(osc * 1.6).toFixed(2)} 0)` }), ow = 40 - half - 4.6;
+  casing(g, X, ctop, cas, half, { inner: false, teeth: true, collar: true, joints: false });
+  spoil(g, M, XD - 30, 26 + 30 * moved, 4 + 14 * moved, 'sand');
+  // csőmozgató (oszcillátor) a cső körül: forgatva-nyomva viszi le a csövet; hidraulikus tápegység
+  const og = g_(g, { transform: `translate(${(osc * 1.2).toFixed(2)} 0)` }), ow = 40 - half - 4.6;
   for (const x0 of [X - 40, X + half + 4.6]) {
     R(og, x0, GY - 24, ow, 24, F('mach') + `;stroke:${v('mach3')};stroke-width:.8`, { rx: 2 });
     R(og, x0, GY - 24, ow, 6, F('mach2'), { rx: 2 });
     R(og, x0 + ow / 2 - 3, GY - 44, 6, 20, 'fill:url(#pr-cyl)');
   }
   R(og, X - half - 6, GY - 20, 3, 14, F('dark2')); R(og, X + half + 3, GY - 20, 3, 14, F('dark2'));
-  worker(g, X - 104, { GY, pose: phs === 2 || phs === 5 ? 'signal' : 'stand', dir: 1 });
+  worker(g, X - 108, { GY, pose: phs === 2 || phs === 5 ? 'signal' : 'stand', dir: 1 });
   plant(g, M, X + 58, { w: 40, h: 22, col: 'mach' });
   hoseTo(g, X + 40, GY - 12, X + 58, GY - 12, 6);
-  if (phs === 1) { arrowH(g, X - 56, X - 74, GY - 12, { w: 2.2, s: 7 }); arrowH(g, X + 56, X + 74, GY - 12, { w: 2.2, s: 7 }); arrowV(g, X - 50, GY - 50, GY - 30, { w: 2.2, s: 7 }); }
+  if (!done) { arrowV(g, X + half + 13, ctop + 14, ctop + 38, { w: 2.2, s: 7 }); if (phs === 1) { arrowH(g, X - 56, X - 74, GY - 12, { w: 2.2, s: 7 }); arrowH(g, X + 56, X + 74, GY - 12, { w: 2.2, s: 7 }); } }
   // daru: a gém dőlésével viszi a markolót a furat fölül a kupac fölé
   const CB = X + 132, fx = CB - 10, fy = GY - 31, tip0 = -30, Lb = Math.hypot(X - fx, tip0 - fy);
   const tipY = fy - Math.sqrt(Math.max(0, Lb * Lb - (xh - fx) * (xh - fx)));
@@ -2580,18 +2584,18 @@ function tsMarko(g, st, u) {
   // ürítéskor a föld a kupacra hull
   if (dumpK >= 0) for (let i = 0; i < 16; i++) {
     const a = dumpK - (i / 16) * 0.5;
-    if (a <= 0 || a > 0.55) continue;
-    const x = xh + (hash(i) - 0.5) * 22, y = Math.min(GY - 4 - 10 * moved, bot - 4 + 0.5 * 700 * a * a);
+    if (a <= 0 || a > 0.62) continue;
+    const x = xh + (hash(i) - 0.5) * 22, y = Math.min(GY - 4 - 10 * moved, bot - 4 + 0.5 * 900 * a * a);
     clod(g, x, y, 2.4 + 1.6 * hash(i + 4), 'sand', i * 30);
   }
-  if (phs === 2) arrowV(g, X - 44, GY + 6, GY + 46);
-  if (phs === 4) arrowV(g, X - 44, GY + 46, GY + 6);
-  tgs(g, xh - 30, Math.max(60, bot - 44), 'markoló', { anchor: 'end', to: [xh - 11, bot - 44] });
-  tgs(g, X - 30, Math.min(TS.H - 18, cas - 12), 'béléscső', { anchor: 'end', to: [X - half - 3, cas - 16] });
-  tgs(g, X + 40, GY - 52, 'csőmozgató', { to: [X + 22, GY - 22] });
-  if (dep > M.gw + 4) tgs(g, X + 30, Math.min(TS.H - 14, M.gw + 28), 'víz a csőben', { to: [X + 6, Math.min(dep - 4, M.gw + 18)] });
+  if (phs === 2) arrowV(g, X - 48, GY + 6, GY + 40);
+  if (phs === 4) arrowV(g, X - 48, GY + 40, GY + 6);
+  tgs(g, xh - 30, Math.max(40, Math.min(GY - 70, bot - 44)), 'markoló', { anchor: 'end', to: [xh - 11, bot - 44] });
+  tgs(g, X - 34, Math.min(TS.H - 18, cas - 12), 'béléscső', { anchor: 'end', to: [X - half - 3, cas - 16] });
+  tgs(g, X + 34, GY + 20, 'csőmozgató', { to: [X + 26, GY - 6] });
+  if (dep > M.gw + 4) tgs(g, X + 30, Math.min(TS.H - 14, M.gw + 26), 'víz a csőben', { to: [X + 6, Math.min(dep - 4, M.gw + 16)] });
   tgs(g, CB + 34, GY - 74, EN ? 'crane' : 'daru', { anchor: 'middle', to: [CB + 26, GY - 46] });
-  const PH = ['', '1 · a béléscső előre megy', '2 · nyitott pofákkal a furat aljára ejtik', '3 · összezárva beleharap a talajba', '4 · kiemelés', '5 · a gém kiengedésével a kupac fölé', '6 · a pofák kinyílnak, ürítés', '7 · vissza a cső fölé', 'a furat elkészült'];
+  const PH = ['', '1 · a csőmozgató folyamatosan süllyeszti a béléscsövet', '2 · nyitott pofákkal a furat aljára ejtik', '3 · összezárva beleharap a talajba', '4 · kiemelés', '5 · a gém kiengedésével a kupac fölé', '6 · a pofák kinyílnak, ürítés', '7 · vissza a cső fölé', 'a furat elkészült'];
   return { phase: PH[phs], depth: (dep - GY) / 30 };
 }
 

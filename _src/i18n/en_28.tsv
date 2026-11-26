@@ -60,17 +60,8 @@ a2a0a66	always, in any soil
 c079769	Loose sand
 524e788	m/min
 84c10eb	Soft, silty clay
-9758a42	Stable
-dc75b3e	Collapses
 b012cb4	For which soil?
 7b585ea	Bentonite slurry
-eaa729f	The bore collapses.
-e11c101	The base may soften.
-2f05ef6	The bore
-61af960	design: ${fmt(z, 0)} m
-5dfe30d	collapsed soil at the base
-c646ab2	starting…
-8f64502	it’s out!
 ecf2a02	Concrete placed
 77a87d8	A lot of concrete was used.
 1a361cf	Too much concrete.
