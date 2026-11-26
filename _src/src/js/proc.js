@@ -457,6 +457,16 @@ function holeWall(g, cx, top, bot, half) {
 }
 function cage(g, cx, top, bot, half) {
   const c = g_(g, { class: 'pr-cage' });
+  if (half < 9) {
+    // keskeny (hosszú, karcsú) cölöpnél ritkább rajz, hogy a beton látsszon a vasak között
+    Ln(c, cx - half + 1, top, cx - half + 1, bot, SK('rebar', 1.5));
+    Ln(c, cx + half - 1, top, cx + half - 1, bot, SK('rebar', 1.5));
+    let d = '';
+    for (let y = top + 6; y < bot - 3; y += 13) d += `M${cx - half + 1} ${y} L${cx + half - 1} ${y + 3} `;
+    P(c, d, SK('rebar2', 0.9, 'opacity:.85'));
+    for (let y = top + 22; y < bot - 10; y += 46) { C(c, cx - half, y, 1.4, F('spacer')); C(c, cx + half, y + 8, 1.4, F('spacer')); }
+    return c;
+  }
   const xs = [cx - half + 2, cx - half * 0.35, cx + half * 0.35, cx + half - 2];
   xs.forEach((x, i) => Ln(c, x, top, x, bot, SK('rebar', i === 0 || i === 3 ? 1.8 : 1.2)));
   let d = '';
