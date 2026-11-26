@@ -58,8 +58,6 @@ bd5a18a	State
 a2b2b6b	Initial state
 9baf555	The strip footing of the old masonry wall is overloaded: the pressure under the footing on the soft layer is high, the wall has settled and cracked – or storeys are to be added, which would bring even more load. The bearing stratum lies deeper.
 f8d3e82	Drilling
-176c279	Drilling from the cellar
-f9cf6e3	The small drilling rig fits into the cellar. They drill obliquely down through the existing footing to the bearing stratum; along the wall the inclination of the piles alternates. No driving, no vibration – the house can remain occupied.
 7ca01d0	Grouting
 340a350	Core and grouting
 78dc5a7	A steel core is placed in the bore (or the hollow drill rod stays in), and the grout is injected from the bottom up. In the bearing stratum the cement body and the permeated, rough sleeve form.
@@ -67,8 +65,6 @@ f9cf6e3	The small drilling rig fits into the cellar. They drill obliquely down t
 b139172	Connection to the foundation
 4045ba9	The upper part of the pile is bonded to the old structure by grouting within the existing footing (with a new reinforced concrete capping beam if needed). It is often preloaded with a jack so that the load is transferred immediately.
 89293c3	The micropiles transfer the load of the wall to the bearing stratum along their shafts – no base resistance is assumed. The pressure under the old footing decreases and the settlement stops; the basement can even be deepened.
-0cd0838	<b>Illustrative figure</b>, with distorted scale: in reality the micropiles are typically 6–15 m long, closely spaced along the wall, with alternating inclination. How the load is shared between the footing and the piles depends on the preloading and on further settlement.
-38be008	Section: old wall with a strip footing, cellar, soft layer and a deeper bearing stratum; the micropiles are installed from the cellar, through the footing
 ed59a57	Load on the old footing
 b7696b5	Load on the micropiles
 768c08b	What works in the pile
@@ -83,34 +79,6 @@ b7696b5	Load on the micropiles
 f7d377c	pressure under the footing
 b2944e7	shaft (base ≈ 0)
 dae0cb3	shaft – developing
-a85e105	Self-drilling bar Ø30/11
-25c1446	Self-drilling bar Ø40/16
-46814f1	Steel tube 114.3×9
-3b291e2	<b>Illustrative model:</b> a bar on an elastic foundation.<br>Lateral subgrade reaction of the soil: <i>k</i> ≈ 67·<i>c</i><sub>u</sub>; λ = (<i>EI</i>/<i>k</i>)<sup>¼</sup>.<br>Without a free length: <i>N</i><sub>cr</sub> = 2·√(<i>k</i>·<i>EI</i>),<br>with a free length: <i>N</i><sub>cr</sub> ≈ π²·<i>EI</i> / (<i>L</i><sub>f</sub> + π·λ/√2)².<br>The critical force is compared with the typical resistance of a hollow-bar grouted micropile, 130–180 kN.<br>The stiffness of the cement body is taken as <i>E</i> ≈ 10 GPa, uncracked; the values are without partial factors. Design requires the standard verification.
-ebb9a9f	Resistance of the micropile <i>R</i>
-c5c561e	R = 130–180 kN – resistance
-ea96977	buckling limits it
-1129448	the shaft resistance
-f96998b	The soil is so soft (or the free length so long) that the pile already buckles at ${fmt(R.Ncr, 0)} kN – before it reaches its resistance of 130–180 kN. Then buckling must be checked separately: a stiffer core, a larger cement body, or eliminating the free length helps.
-39f8481	Borderline: buckling limits it
-158c9d4	The critical force (${fmt(R.Ncr, 0)} kN) falls within the 130–180 kN resistance band: the pile cannot be used up to its full resistance. A stiffer core, the support of the cement body, or a shorter free length helps.
-60abf68	c<sub>u</sub> < 10 kPa: buckling must be checked separately. In this model the critical force (${fmt(R.Ncr, 0)} kN) is still above 180 kN, but cracking of the cement body or a small cavity quickly reverses this.
-9e7444d	The critical force (${fmt(R.Ncr, 0)} kN) is greater than the resistance of 130–180 kN: the lateral support is enough, so the shaft resistance governs, not buckling. Switch off the stiffness of the cement body, or add a free length – and watch the curve!
-144663d	the stiffness of the cement body is also included
-c273078	Undrained shear strength
-34236b2	Free (unsupported) length
-651079f	e.g. a cavity, a deepened cellar, very loose fill under the pile head
-ba557b9	On the left the micropile in the soil with its buckled shape, on the right the critical force as a function of the undrained shear strength
-74845ae	Bending stiffness <i>EI</i>
-910551c	Critical (buckling) force <i>N</i><sub>cr</sub>
-572ed70	Governing
-0933b43	pile cap, footing
-f7fa131	half-wave
-c37247c	check separately
-4757108	buckling
-9540203	Buckling governs
-6e1e38f	Enough for now – but it must be checked
-69c5904	The soil supports the pile
 8315238	Double with air
 28ff065	Variant
 dadbefb	Pressure
@@ -161,5 +129,12 @@ b8c03ff	compaction
 0fb8137	What is the maximum shaft diameter of a <b>bored</b> micropile?
 fadda6b	The shaft diameter of a bored micropile is at most 250–300 mm; the 150 mm limit applies to the largest cross-sectional dimension of a <b>driven</b> micropile.
 a23cca8	What is neglected when calculating the resistance of a slender micropile?
-
-ca936e7!	soft clay, silt: 10–25 kPa; very soft, organic soil: below 10 kPa
+35c72d4	The wall of an old apartment block stands on an overloaded, cracked strip footing. Step through how the micropiles take over the load – drilled from the cellar and from outside, without demolishing the house.
+ac201b6	Section: old wall with a strip footing, cellar, soft layer and a deeper bearing stratum; the micropiles are drilled alternately from the cellar and from outside, obliquely through the footing, and cross each other
+d525b26	<b>Illustrative figure</b>, with distorted scale: in reality the micropiles are typically 6–15 m long, closely spaced along the wall, drilled alternately from the cellar and from outside with crossing inclinations. How the load is shared between the footing and the piles depends on the preloading and on further settlement.
+ab54658	The small drilling rig fits into the cellar: from there they drill obliquely down through the existing footing to the bearing stratum. The next pile is drilled from outside, from ground level, with the opposite inclination, also through the footing. The piles thus cross each other, and are installed alternately along the wall, offset from one another. No driving, no vibration – the house can remain occupied.
+7112de8	Drilling from the cellar and from outside
+097a3ee	crossing micropiles
+fbe1c83	plan view
+ab16376	from outside
+d346eba	next pile from outside, offset
