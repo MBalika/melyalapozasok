@@ -1195,7 +1195,7 @@ const NK = { half: 9, toe: 426 };
 PROC.nelkul = {
   H: 470, GY: 250, layers: [{ k: 'clay', y: 250, lab: 'kötött talaj (agyag)', ly: 446 }],
   steps: [
-    { w: 240, t: 'Fúrás', d: 'Rövid spirállal (vagy markolóval) kötött talajban, talajvíz felett: a furat fala megtámasztás nélkül áll.', draw(g, M) {
+    { w: 240, t: 'Fúrás', d: 'Rövid spirállal (vagy markolóval) kötött talajban, elsősorban talajvíz felett: a nem túl hosszú furat fala rövid ideig megtámasztás nélkül is megállhat.', draw(g, M) {
       const x = 86, H = NK.half, ab = 330, LA = 46, r = rig(g, M, x, { top: 12, rope: true, headY: 30 });
       spoil(g, M, x - 66, 34, 10, 'clay');
       R(g, x - H, M.GY, H * 2, NK.toe - M.GY, F('bore'));
@@ -1344,7 +1344,7 @@ PROC.jet = {
       const pl = plant(g, M, 36, { w: 44, h: 24 });
       hoseTo(g, pl.out[0], pl.out[1], x - 6, r.headY + 4, 10);
       column(g, x, 282, 306, 26, 'jet');
-      jetTool(g, x, r.headBot, 294, { jet: 34 });
+      jetTool(g, x, r.headBot, 294, { jet: 23 });
       tag(g, x + 22, 252, '350–400 bar', { to: [x + 18, 292] });
       tag(g, 74, M.GY - 108, 'nagynyomású szivattyú', { anchor: 'middle', to: [58, M.GY - 26] });
     } },
@@ -1355,7 +1355,7 @@ PROC.jet = {
       hoseTo(g, pl.out[0], pl.out[1], x - 6, r.headY + 4, 10);
       column(g, x, 230, 306, 26, 'jet');
       R(g, x - 4, M.GY, 8, 230 - M.GY, F('grout2', 0.8));
-      jetTool(g, x, r.headBot, 236, { jet: 34 });
+      jetTool(g, x, r.headBot, 236, { jet: 23 });
       E(g, x + 22, M.GY + 1, 22, 3.4, F('grout2', 0.9));
       spin(g, x, r.headBot + 8, 14);
       arrowV(g, x - 40, 214, 178);
@@ -1365,7 +1365,7 @@ PROC.jet = {
       const x = 110, r = smallRig(g, M, x, { top: 36, headY: 74 });
       column(g, 66, M.GY + 8, 306, 26, 'jet');
       column(g, x, 232, 306, 26, 'jet');
-      jetTool(g, x, r.headBot, 238, { jet: 30 });
+      jetTool(g, x, r.headBot, 238, { jet: 23 });
       R(g, x - 4, M.GY, 8, 232 - M.GY, F('grout2', 0.8));
       tag(g, 22, M.GY + 40, 'kész oszlop', { to: [56, M.GY + 40] });
     } },
@@ -2984,5 +2984,98 @@ export function cfaMonitor(s, o) {
   box(224, 62, 'FOGYÁS', rr != null ? f1(rr * 100, 0) : '–', '%', rr == null ? MC.tx : rr < 1 ? MC.bad : rr > 1.4 ? MC.warn : MC.ok);
 }
 
-function init() { document.querySelectorAll('[data-proc]').forEach(render); document.querySelectorAll('svg[data-csfig]').forEach((f) => { screwParts(f); let w0 = 0; new ResizeObserver(() => { const w = f.getBoundingClientRect().width; if (Math.abs(w - w0) > 8) { w0 = w; screwParts(f); } }).observe(f); }); }
+/* ================================================================== 6. fejezet – a négy módszer kártyaképe */
+// Kis, de teljes jelenet a folyamatábrák elemtárából: gép, eszköz, kész oszlop, talajrétegek, néhány felirat.
+const CARD = { W: 400, H: 250, GY: 140 };
+function microPile(g, x0, y0, x1, y1, w = 6) {
+  const a = Math.atan2(y1 - y0, x1 - x0), nx = -Math.sin(a), ny = Math.cos(a), n = 10;
+  let l = '', r = '';
+  for (let i = 0; i <= n; i++) {
+    const t = i / n, x = x0 + (x1 - x0) * t, y = y0 + (y1 - y0) * t, ww = w * (1 + 0.35 * Math.sin(i * 1.9) * (i > 0 && i < n ? 1 : 0));
+    l += `${i ? 'L' : 'M'}${(x + nx * ww).toFixed(1)} ${(y + ny * ww).toFixed(1)} `;
+    r = `L${(x - nx * ww).toFixed(1)} ${(y - ny * ww).toFixed(1)} ` + r;
+  }
+  P(g, l + r + 'Z', F('grout2', 0.6) + `;stroke:${v('grout2')};stroke-width:.8`);
+  P(g, l + r + 'Z', 'fill:url(#pr-groutg)', { opacity: 0.55 });
+  Ln(g, x0, y0 - 6, x1, y1 + 4, SK('steel3', 2.6, 'stroke-linecap:round'));
+}
+export function methodCard(s, kind) {
+  defs(); CUR.W = CARD.W;
+  const { W, H, GY } = CARD, tg = (g, x, y, t, o = {}) => tag(g, x, y, t, { fs: 13, ...o });
+  while (s.firstChild) s.removeChild(s.firstChild);
+  s.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const L = {
+    mikro: [{ k: 'fill', y: GY }, { k: 'clay', y: GY + 14 }, { k: 'gravel', y: 206 }],
+    jet: [{ k: 'sand', y: GY }, { k: 'clay2', y: 214 }],
+    dsm: [{ k: 'clay', y: GY }, { k: 'sand', y: 216 }],
+    ko: [{ k: 'silt', y: GY }, { k: 'peat', y: 172 }, { k: 'sand', y: 212 }],
+  }[kind];
+  const M = { H, GY, layers: L, gw: kind === 'jet' ? 176 : null };
+  const g = g_(s);
+  backdrop(g, M, 0, W);
+  if (kind === 'mikro') {
+    // meglévő épület aláfogása: ferde mikrocölöpök a sávalap alatt, mellette a kis fúrógép
+    const bx = 214, bw = 176;
+    R(g, bx, 30, bw, GY - 30, F('wallh') + `;stroke:${v('wallh2')};stroke-width:.9`);
+    R(g, bx - 3, 26, bw + 6, 6, F('wallh2'));
+    for (let r0 = 0; r0 < 2; r0++) for (let c = 0; c < 4; c++) R(g, bx + 16 + c * 42, 44 + r0 * 44, 20, 24, 'fill:url(#pr-glass)' + `;stroke:${v('wallh2')};stroke-width:1`);
+    R(g, bx + bw - 34, GY - 32, 18, 32, F('timber2'));
+    concrete(g, bx - 12, GY, 34, 20, false);
+    concrete(g, bx + bw - 22, GY, 34, 20, false);
+    microPile(g, bx - 2, GY + 18, bx - 40, 238, 5);
+    microPile(g, bx + 12, GY + 18, bx + 42, 238, 5);
+    R(g, bx - 9, GY + 12, 12, 4, F('steel3')); R(g, bx + 6, GY + 12, 12, 4, F('steel3'));
+    const x = 96, r = smallRig(g, M, x, { top: 46, headY: 84 });
+    R(g, x - 5, GY, 10, 214 - GY, F('grout1', 0.7));
+    R(g, x - 2.2, r.headBot, 4.4, 214 - r.headBot, 'fill:url(#pr-cyl)');
+    P(g, `M${x - 6} 214 h12 l-6 6z`, F('dark2'));
+    spin(g, x, r.headBot + 6, 12);
+    tg(g, bx + bw / 2, 16, 'meglévő épület', { anchor: 'middle' });
+    tg(g, bx + 60, 196, 'mikrocölöp', { to: [bx + 30, 196] });
+    tg(g, 30, 22, 'kis fúrógép', { to: [x + 2, 60] });
+  } else if (kind === 'jet') {
+    // a monitor fúvókáiból nagy nyomású sugár vágja a talajt, alulról nő a talajbeton oszlop; a habarcs visszafolyik
+    silo(g, M, 22, { w: 20, h: 84 });
+    const pl = plant(g, M, 38, { w: 44, h: 24 });
+    const x = 176, ny = 196, r = smallRig(g, M, x, { top: 30, headY: 66 });
+    hoseTo(g, pl.out[0], pl.out[1], x - 6, r.headY + 4, 12);
+    column(g, 316, GY + 4, 246, 28, 'jet');
+    column(g, x, ny - 4, 246, 28, 'jet');
+    R(g, x - 4, GY, 8, ny - GY, F('grout2', 0.8));
+    jetTool(g, x, r.headBot, ny, { jet: 25 }); // a sugár hossza = az oszlop sugara
+    E(g, x + 20, GY + 1, 20, 3.4, F('grout2', 0.9));
+    spin(g, x, r.headBot + 8, 14);
+    arrowV(g, x - 40, 222, 186, { w: 2.4, s: 7 });
+    tg(g, x + 46, 224, '350–400 bar', { to: [x + 38, ny] });
+    tg(g, 316, 116, EN ? 'soilcrete column' : 'talajbeton oszlop', { anchor: 'middle', to: [316, GY + 20] });
+    tg(g, 62, 30, 'szivattyú', { anchor: 'middle', to: [58, GY - 24] });
+  } else if (kind === 'dsm') {
+    // fúró-keverő berendezés: a kötőanyagot a száron át juttatják be, a lapátok helyben keverik; mellette kész oszlopok
+    silo(g, M, 22, { w: 20, h: 84 });
+    const pl = plant(g, M, 38, { w: 44, h: 24 });
+    const x = 156, r = rig(g, M, x, { top: 6, headY: 54 });
+    hoseTo(g, pl.out[0], pl.out[1], x - 14, r.headY + 6, 14);
+    column(g, 336, GY, 246, 17, 'mix'); column(g, 364, GY, 246, 17, 'mix');
+    column(g, x, GY, 232, 17, 'mix');
+    mixTool(g, x, r.headBot, 234, 17);
+    spin(g, x, r.headBot + 12, 20);
+    tg(g, x - 30, 222, 'keverőlapátok', { anchor: 'end', to: [x - 16, 224] });
+    tg(g, 350, 112, EN ? 'mixed columns' : 'kevert oszlopok', { anchor: 'middle', to: [350, GY + 18] });
+  } else {
+    // mélyvibrátor: lehajtva kiszorítja a talajt, a kavicsot a talpon fokozatosan kiengedi és tömöríti
+    const x = 168;
+    loader(g, M, 4, { lift: 18, full: true });
+    rig(g, M, x, { top: 6, hoses: false });
+    stoneCol(g, 350, GY, 244, 13, { bulge: [172, 212] });
+    stoneCol(g, x, 204, 244, 13);
+    vibroflot(g, x, 64, 210, { full: true });
+    pushOut(g, x, 186, 9, 2);
+    tg(g, x - 26, GY + 18, 'mélyvibrátor', { anchor: 'end', to: [x - 6, GY + 18] });
+    tg(g, 350, 112, EN ? 'gravel column' : 'kavicsoszlop', { anchor: 'middle', to: [350, GY + 14] });
+    tg(g, 230, 234, 'tömörített kavics', { anchor: 'end', to: [x + 12, 230] });
+  }
+  return s;
+}
+
+function init() { document.querySelectorAll('svg[data-pcard]').forEach((f) => methodCard(f, f.dataset.pcard)); document.querySelectorAll('[data-proc]').forEach(render); document.querySelectorAll('svg[data-csfig]').forEach((f) => { screwParts(f); let w0 = 0; new ResizeObserver(() => { const w = f.getBoundingClientRect().width; if (Math.abs(w - w0) > 8) { w0 = w; screwParts(f); } }).observe(f); }); }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

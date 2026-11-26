@@ -292,7 +292,7 @@ const PH = {
     }],
   ] },
   nelkul: { W: 200, prof: 'nelkul', items: [
-    ['Fúrás', 'Rövid spirállal (vagy markolóval) kötött talajban, talajvíz felett: a furat fala megtámasztás nélkül áll.', (g, S) => {
+    ['Fúrás', 'Rövid spirállal (vagy markolóval) kötött talajban, elsősorban talajvíz felett: a nem túl hosszú furat fala rövid ideig megtámasztás nélkül is megállhat.', (g, S) => {
       rig(g, S, 22); hole(g, S.cx, S.GY, 244, 34); shortAuger(g, S.cx, 36, 244, 30); lab(g, S.cx + 17, 170, 'a fal megáll', 1, S.cx + 30);
     }],
     ['Betonozás', 'A kiemelés után rögtön betonoznak, tölcsérrel, gravitációsan.', (g, S) => {
