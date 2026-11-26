@@ -1276,52 +1276,98 @@ PROC.csavar = {
 };
 
 /* ---------------- Merevbetétes, injektálásos mikrocölöp */
+// Merev magrudas, fúrt-injektált (TITAN-típusú) mikrocölöp a BME-videó (Béléscsővel és elvesző fejjel készített
+// mikrocölöpök, 1:36–3:10, animáció) szerint: elvesző fúrófej, belső furatú, menetbordás, toldható magrúd, fúrás közben
+// híg cementtejjel (v/c ≈ 0,7–1,0) öblítve, a végén sűrűbb habarccsal (v/c ≈ 0,4–0,5) injektálva. Lépték ≈ 16,7 egység/m
+// (12 m-es cölöp); a furat átmérője a láthatóság kedvéért kb. négyszeresre nagyítva.
+const MK = { H: 470, GY: 250, toe: 450, mid: 340, bh: 5.5, zh: 10 };
+function titanBar(g, x, top, bot, o = {}) {
+  const b = g_(g, { class: 'pr-titan' });
+  R(b, x - 2.6, top, 5.2, bot - top - 6, 'fill:url(#pr-cyl)');
+  let d = '';
+  for (let y = top + 2; y < bot - 8; y += 3.2) d += `M${x - 2.6} ${y.toFixed(1)} l5.2 1.6 `;
+  P(b, d, SK('steel3', 0.8, 'opacity:.9'));
+  for (const cy of o.couplers ?? []) { R(b, x - 4.2, cy - 6, 8.4, 12, 'fill:url(#pr-cyl)' + `;stroke:${v('steel3')};stroke-width:.8`, { rx: 1.5 }); Ln(b, x - 4.2, cy, x + 4.2, cy, SK('steel3', 0.8)); }
+  // elvesző fúrófej: keresztélű, edzett vágóélekkel
+  P(b, `M${x - 6} ${bot - 7} H${x + 6} L${x + 5} ${bot - 1} L${x + 2} ${bot + 1} H${x - 2} L${x - 5} ${bot - 1}Z`, F('acc') + `;stroke:${v('dark2')};stroke-width:.8`);
+  for (const k of [-4, -1.4, 1.4, 4]) Ln(b, x + k, bot - 1, x + k * 0.8, bot + 2, SK('dark2', 1.1));
+  return b;
+}
+function groutPlant(g, M, x, o = {}) {
+  // keverő-szivattyú egység (piros konténer, keverőtartály) és cementzsákok raklapon
+  const GY = M.GY, p = g_(g, { class: 'pr-groutplant' });
+  R(p, x, GY - 34, 40, 34, F('acc') + `;stroke:${v('dark2')};stroke-width:.8`, { rx: 2 });
+  for (let i = 5; i < 38; i += 5) Ln(p, x + i, GY - 30, x + i, GY - 4, SK('dark2', 0.6, 'opacity:.35'));
+  R(p, x + 40, GY - 26, 18, 26, 'fill:url(#pr-cylw)' + `;stroke:${v('drum3')};stroke-width:.8`, { rx: 3 });
+  E(p, x + 49, GY - 26, 9, 2.6, F('drum3'));
+  E(p, x + 49, GY - 25.5, 7, 1.8, F('grout1'));
+  R(p, x + 4, GY - 30, 14, 10, F('dark2'), { rx: 1 });
+  if (o.bags !== false) { R(p, x - 26, GY - 4, 22, 4, F('timber2')); for (let r0 = 0; r0 < 2; r0++) for (let c = 0; c < 2; c++) R(p, x - 25 + c * 10.5, GY - 10 - r0 * 6, 10, 6, F('grout1') + `;stroke:${v('grout2')};stroke-width:.7`, { rx: 1.5 }); }
+  return { out: [x + 40, GY - 10] };
+}
+function groutBody(g, x, top, bot, bh, zh, seed = 0) {
+  // átitatott talajköpeny (szabálytalan) és a rúd körüli cementtest
+  let l = `M${x - zh} ${top}`, r = '';
+  for (let y = top; y <= bot; y += 12) { const w = zh * (0.75 + 0.45 * hash(y * 0.37 + seed)); l += ` L${(x - w).toFixed(1)} ${y}`; r = ` L${(x + zh * (0.75 + 0.45 * hash(y * 0.53 + seed + 9))).toFixed(1)} ${y}` + r; }
+  P(g, l + ` Q${x} ${bot + 8} ${x + zh} ${bot}` + r + 'Z', F('grout2', 0.42) + `;stroke:${v('grout2')};stroke-width:.8;stroke-dasharray:3 2`);
+  R(g, x - bh, top, bh * 2, bot - top, 'fill:url(#pr-groutg)', { rx: 2 });
+  R(g, x - bh, top, bh * 2, bot - top, SK('concedge', 0.8, 'opacity:.7'), { rx: 2 });
+}
 PROC.mikro = {
-  H: 360, GY: 178, layers: [{ k: 'fill', y: 178, lab: 'feltöltés' }, { k: 'clay', y: 204, lab: EN ? 'clay' : 'agyag' }, { k: 'gravel', y: 270, lab: 'homokos kavics' }],
+  H: MK.H, GY: MK.GY, layers: [{ k: 'fill', y: MK.GY, lab: 'feltöltés' }, { k: 'clay', y: 268, lab: EN ? 'clay' : 'agyag' }, { k: 'gravel', y: 360, lab: 'homokos kavics' }],
   steps: [
-    { w: 230, t: 'Pontraállás', d: 'A kis fúrógép a helyére áll; szükség szerint ferdén, akár pincében is dolgozik.', draw(g, M) {
-      const x = 110, r = smallRig(g, M, x, { top: 56, headY: 64 });
-      R(g, x - 2.6, r.headBot, 5.2, M.GY - 4 - r.headBot, 'fill:url(#pr-cyl)');
-      P(g, `M${x - 6} ${M.GY - 4} h12 l-6 6z`, F('dark2'));
-      tag(g, x - 18, M.GY - 40, 'üreges acélrúd', { anchor: 'end', to: [x - 3, M.GY - 40] });
+    { w: 240, t: 'Fúrórudazat beállítása', d: 'A kis fúrógép a helyére áll (akár ferdén, pincében is); a forgatófejbe a belső furatú, menetbordás magrudat és az elvesző fúrófejet fogják.', draw(g, M) {
+      const x = 150, r = smallRig(g, M, x, { top: 60, headY: 96 });
+      const gp = groutPlant(g, M, 30);
+      hoseTo(g, gp.out[0], gp.out[1], x - 9, r.headY + 6, 14);
+      titanBar(g, x, r.headBot, M.GY - 2);
+      tag(g, x - 20, 150, 'menetbordás magrúd', { anchor: 'end', to: [x - 3, 150] });
+      tag(g, x + 22, M.GY + 24, 'elvesző fúrófej', { to: [x + 5, M.GY - 4] });
+      tag(g, 50, M.GY - 58, EN ? 'grout plant' : 'keverő-szivattyú', { anchor: 'middle', to: [50, M.GY - 34] });
     } },
-    { w: 270, t: 'Fúrás öblítéssel', d: 'Az elvesző fúrófejes, belső furatú magrudat forgatva hajtják le és toldják; közben híg cementtejjel (v/c ≈ 0,7–1,0) öblítenek, amely a talajhézagokba hatol.', draw(g, M) {
-      const x = 150, r = smallRig(g, M, x, { top: 56, headY: 130 });
-      silo(g, M, 22, { w: 20, h: 86 });
-      const pl = plant(g, M, 36, { w: 44, h: 24 });
-      hoseTo(g, pl.out[0], pl.out[1], x - 6, r.headY + 4, 10);
-      R(g, x - 6, M.GY, 12, 252 - M.GY, F('grout1', 0.7));
-      R(g, x - 2.6, r.headBot, 5.2, 252 - r.headBot, 'fill:url(#pr-cyl)');
-      P(g, `M${x - 7} 252 h14 l-7 7z`, F('dark2'));
-      E(g, x, M.GY + 1, 16, 3, F('grout1', 0.9));
-      spin(g, x, r.headBot + 8, 14);
-      arrowV(g, x - 26, 196, 232);
-      tag(g, x + 18, 240, 'elvesző fúrófej', { to: [x + 6, 252] });
-      tag(g, x - 14, M.GY - 46, 'cementtej', { anchor: 'end', to: [x - 8, r.headY + 6] });
+    { w: 270, t: 'Fúrás híg cementtejjel', d: 'A magrudat forgatva hajtják le; a fúrással egyidejűleg híg cementtejjel (v/c ≈ 0,7–1,0) öblítenek, amely a talajhézagokba hatolva a furat környezetét is átcementálja.', draw(g, M) {
+      const x = 170, bot = MK.mid, r = smallRig(g, M, x, { top: 60, headY: 170 });
+      const gp = groutPlant(g, M, 30);
+      hoseTo(g, gp.out[0], gp.out[1], x - 9, r.headY + 6, 12);
+      groutBody(g, x, M.GY, bot - 4, 4, MK.zh - 1, 3);
+      titanBar(g, x, r.headBot, bot);
+      E(g, x - 2, M.GY + 0.5, 20, 3.2, F('grout2', 0.95));
+      spin(g, x, r.headBot + 6, 13);
+      arrowV(g, x - 34, M.GY + 40, M.GY + 80);
+      for (const sx of [-1, 1]) for (let y = M.GY + 30; y < bot - 10; y += 26) arrowH(g, x + sx * 6, x + sx * 16, y, { w: 1.6, s: 5, c: 'grout2' });
+      tag(g, x + 24, M.GY + 70, 'híg cementtej', { to: [x + 9, M.GY + 70] });
+      tag(g, x - 26, M.GY + 18, EN ? 'returning flush' : 'visszafolyó öblítés', { anchor: 'end', to: [x - 16, M.GY + 1] });
     } },
-    { w: 270, t: 'Injektálás', d: 'A végső mélységben sűrűbb (v/c ≈ 0,4–0,5) cementhabarcsot injektálnak: a rúd körül cementtest, azon kívül cementtel átitatott talajköpeny alakul ki.', draw(g, M) {
-      const x = 150, r = smallRig(g, M, x, { top: 56, headY: 166 });
-      silo(g, M, 22, { w: 20, h: 86 });
-      const pl = plant(g, M, 36, { w: 44, h: 24 });
-      hoseTo(g, pl.out[0], pl.out[1], x - 6, r.headY + 4, 10);
-      P(g, `M${x - 12} ${M.GY + 4} Q${x - 15} 250 ${x - 11} 296 L${x + 11} 296 Q${x + 15} 250 ${x + 12} ${M.GY + 4}Z`, F('grout2', 0.55));
-      R(g, x - 7, M.GY, 14, 294 - M.GY, 'fill:url(#pr-groutg)', { rx: 3 });
-      R(g, x - 2.6, r.headBot, 5.2, 294 - r.headBot, 'fill:url(#pr-cyl)');
-      P(g, `M${x - 7} 294 h14 l-7 7z`, F('dark2'));
-      tag(g, x + 22, 236, 'cementtest', { to: [x + 6, 236] });
-      tag(g, x + 22, 266, 'átitatott talaj', { to: [x + 12, 262] });
+    { w: 240, t: 'Magrúd toldása', d: 'A következő magrúdszakaszt összekötő elemmel (menetes hüvellyel) toldják, és a fúrást a cementtej egyidejű injektálásával folytatják.', draw(g, M) {
+      const x = 110, bot = MK.mid, cy = 196, r = smallRig(g, M, x, { top: 60, headY: 92 });
+      groutBody(g, x, M.GY, bot - 4, 4, MK.zh - 1, 3);
+      titanBar(g, x, r.headBot, bot, { couplers: [cy] });
+      R(g, x - 9, cy - 10, 18, 20, F('acc', 0.22), { rx: 4 });
+      worker(g, x - 30, { GY: M.GY, pose: 'guide' });
+      tag(g, x + 30, cy - 34, 'összekötő elem', { to: [x + 5, cy] });
+    } },
+    { w: 270, t: 'Végső injektálás', d: 'A végső mélységben sűrűbb (v/c ≈ 0,4–0,5) cementhabarcsot injektálnak: a magrúd körül cementtest, azon kívül cementtel átitatott talajköpeny alakul ki.', draw(g, M) {
+      const x = 170, r = smallRig(g, M, x, { top: 60, headY: M.GY - 36 });
+      const gp = groutPlant(g, M, 30);
+      hoseTo(g, gp.out[0], gp.out[1], x - 9, r.headY + 6, 8);
+      groutBody(g, x, M.GY, MK.toe - 4, MK.bh, MK.zh + 2, 7);
+      titanBar(g, x, r.headBot, MK.toe, { couplers: [M.GY + 40, M.GY + 130] });
+      tag(g, x + 26, 330, 'cementtest', { to: [x + MK.bh, 330] });
+      tag(g, x + 26, 380, 'átitatott talaj', { to: [x + MK.zh, 380] });
+      tag(g, x - 22, 420, 'v/c ≈ 0,4–0,5', { anchor: 'end', to: [x - MK.bh, 420] });
     } },
     { w: 230, t: 'Fejlemez', d: 'A rúdfejre fejlemezt és anyákat szerelnek, és a vasbeton fejtömb vagy lemez vasalásába kötik.', draw(g, M) {
       const x = 96;
-      P(g, `M${x - 12} ${M.GY + 4} Q${x - 15} 250 ${x - 11} 296 L${x + 11} 296 Q${x + 15} 250 ${x + 12} ${M.GY + 4}Z`, F('grout2', 0.55));
-      R(g, x - 7, M.GY, 14, 294 - M.GY, 'fill:url(#pr-groutg)', { rx: 3 });
-      R(g, x - 2.6, M.GY - 26, 5.2, 320 - M.GY, 'fill:url(#pr-cyl)');
-      R(g, 22, M.GY - 34, 190, 34, 'fill:url(#pr-concg)' + `;stroke:${v('conc2')};stroke-width:.8`);
-      R(g, 22, M.GY - 34, 190, 34, 'fill:url(#pr-p-conc)', { opacity: 0.6 });
-      for (let xx = 30; xx < 210; xx += 14) { C(g, xx, M.GY - 28, 1.8, F('rebar')); C(g, xx, M.GY - 6, 1.8, F('rebar')); }
-      R(g, x - 13, M.GY - 16, 26, 4, F('steel3'));
-      R(g, x - 5, M.GY - 21, 10, 5, F('dark2'));
-      tag(g, x + 24, M.GY - 52, 'fejlemez és anyák', { to: [x + 10, M.GY - 16] });
+      groutBody(g, x, M.GY, MK.toe - 4, MK.bh, MK.zh + 2, 7);
+      titanBar(g, x, M.GY - 30, MK.toe, { couplers: [M.GY + 40, M.GY + 130] });
+      concrete(g, 22, M.GY - 38, 190, 38, false);
+      for (let xx = 30; xx < 210; xx += 14) { C(g, xx, M.GY - 32, 1.8, F('rebar')); C(g, xx, M.GY - 6, 1.8, F('rebar')); }
+      Ln(g, 26, M.GY - 32, 208, M.GY - 32, SK('rebar', 1.2)); Ln(g, 26, M.GY - 6, 208, M.GY - 6, SK('rebar', 1.2));
+      R(g, x - 14, M.GY - 18, 28, 5, F('steel3'), { rx: 1 });
+      R(g, x - 5, M.GY - 24, 10, 6, F('dark2'), { rx: 1 });
+      R(g, x - 5, M.GY - 13, 10, 5, F('dark2'), { rx: 1 });
+      tag(g, x + 24, M.GY - 62, 'fejlemez és anyák', { to: [x + 12, M.GY - 18] });
+      tag(g, x + 24, 360, 'kész mikrocölöp', { to: [x + MK.zh, 360] });
     } },
   ],
 };
@@ -2999,11 +3045,107 @@ function microPile(g, x0, y0, x1, y1, w = 6) {
   P(g, l + r + 'Z', 'fill:url(#pr-groutg)', { opacity: 0.55 });
   Ln(g, x0, y0 - 6, x1, y1 + 4, SK('steel3', 2.6, 'stroke-linecap:round'));
 }
+// Épülethomlokzat ablakokkal (kártyaképekhez)
+function facade(g, x, y, w, hh, o = {}) {
+  R(g, x, y, w, hh, F(o.col ?? 'wallh') + `;stroke:${v('wallh2')};stroke-width:.9`);
+  R(g, x - 3, y - 5, w + 6, 6, F('wallh2'));
+  const cols = Math.max(1, Math.floor((w - 12) / 34)), rows = Math.max(1, Math.floor((hh - 10) / 40));
+  for (let r0 = 0; r0 < rows; r0++) for (let c = 0; c < cols; c++) R(g, x + 12 + c * ((w - 12) / cols), y + 10 + r0 * 40, 18, 22, 'fill:url(#pr-glass)' + `;stroke:${v('wallh2')};stroke-width:1`);
+}
+const seis = (g, x, y) => { P(g, `M${x - 30} ${y} l6 -6 l6 12 l6 -12 l6 12 l6 -12 l6 12 l6 -12 l6 6`, SK('push', 2, 'stroke-linejoin:round')); arrowH(g, x - 34, x - 52, y, { w: 2.2, s: 6, c: 'push' }); arrowH(g, x + 26, x + 44, y, { w: 2.2, s: 6, c: 'push' }); };
+// 6.1 – a mikrocölöp alkalmazási területei (nyolc kártyakép)
+function useCard(g, kind) {
+  const { W, H } = CARD, tg = (gg, x, y, t, o = {}) => tag(gg, x, y, t, { fs: 13, ...o });
+  const lay = (GY, L, gw) => { const M = { H, GY, layers: L, gw }; backdrop(g, M, 0, W); return M; };
+  if (kind === 'u-pince') {
+    const GY = 168, M = lay(GY, [{ k: 'clay', y: GY }, { k: 'gravel', y: 214 }]);
+    // a földszint és a pince metszete: alacsony belmagasság, a kis gép a pinceföden át fúr
+    R(g, 0, 0, W, GY, F('wallh'));
+    concrete(g, 0, 0, W, 16, false); concrete(g, 0, 70, W, 14, false); concrete(g, 0, GY - 8, W, 8, false);
+    R(g, 0, 16, 14, GY - 16, F('wallh2')); R(g, W - 14, 16, 14, GY - 16, F('wallh2'));
+    for (let c = 0; c < 4; c++) R(g, 40 + c * 90, 26, 22, 32, 'fill:url(#pr-glass)' + `;stroke:${v('wallh2')};stroke-width:1`);
+    const x = 90, r = smallRig(g, { ...M, GY: GY - 8 }, x, { top: 98, headY: 104 });
+    R(g, x - 2.2, r.headBot, 4.4, 226 - r.headBot, 'fill:url(#pr-cyl)');
+    microPile(g, x, GY + 4, x, 238, 4.5);
+    concrete(g, 262, GY - 20, 70, 12, false); R(g, 286, 84, 22, GY - 104, 'fill:url(#pr-concg)');
+    for (const px of [272, 322]) microPile(g, px, GY - 8, px, 240, 4.5);
+    tg(g, 236, 104, 'alacsony belmagasság', { anchor: 'middle' });
+    tg(g, 360, 196, 'új pillér', { anchor: 'end', to: [297, 110] });
+  } else if (kind === 'u-reng') {
+    const GY = 150, M = lay(GY, [{ k: 'clay', y: GY }, { k: 'gravel', y: 212 }]);
+    facade(g, 70, 18, 260, GY - 18);
+    concrete(g, 150, GY - 6, 100, 30, false);
+    R(g, 186, 40, 28, GY - 46, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:.8`);
+    for (const [a, b] of [[160, 120], [175, 150], [225, 250], [240, 280]]) microPile(g, a, GY + 20, b, 244, 4.2);
+    seis(g, 340, GY + 26); seis(g, 60, GY + 26);
+    tg(g, 200, 236, 'ferde, keresztező mikrocölöpök', { anchor: 'middle' });
+  } else if (kind === 'u-sully') {
+    const GY = 150, M = lay(GY, [{ k: 'clay', y: GY }, { k: 'peat', y: 182 }, { k: 'gravel', y: 216 }]);
+    facade(g, 40, 22, 320, GY - 30);
+    P(g, `M${250} ${40} l-8 16 l10 10 l-10 18 l6 14`, SK('push', 2));
+    concrete(g, 30, GY - 8, 340, 22, false);
+    for (const px of [60, 140, 260, 340]) microPile(g, px, GY + 12, px, 244, 4.2);
+    tg(g, 200, 200, 'puha, szerves réteg', { anchor: 'middle' });
+    tg(g, 200, 234, 'teherbíró réteg', { anchor: 'middle' });
+  } else if (kind === 'u-felusz') {
+    const GY = 70, M = lay(GY, [{ k: 'sand', y: GY }, { k: 'gravel', y: 200 }], 92);
+    // száraz mélygarázs a talajvízben: kívülről víznyomás, alulról felhajtóerő; a húzott mikrocölöpök fogják le
+    R(g, 66, GY - 10, 268, 170 - GY, F('wallh'));
+    concrete(g, 52, GY - 10, 14, 112, false); concrete(g, 334, GY - 10, 14, 112, false); concrete(g, 52, 160, 296, 16, false);
+    for (const px of [126, 200, 274]) arrowV(g, px, 190, 178, { w: 1.8, s: 5, c: 'water' });
+    for (const sx of [44, 356]) for (const yy of [110, 140]) arrowH(g, sx + (sx < 200 ? -14 : 14), sx + (sx < 200 ? -2 : 2), yy, { w: 1.6, s: 5, c: 'water' });
+    for (const px of [92, 160, 240, 308]) { microPile(g, px, 168, px, 244, 4.2); arrowV(g, px + 12, 192, 228, { w: 2, s: 6 }); }
+    arrowV(g, 200, 150, 104, { w: 3.4, s: 10, c: 'water' });
+    tg(g, 214, 122, EN ? 'uplift U' : 'felhajtóerő U');
+    tg(g, 200, 238, 'húzott mikrocölöpök', { anchor: 'middle' });
+  } else if (kind === 'u-alafog') {
+    const GY = 120, M = lay(GY, [{ k: 'fill', y: GY }, { k: 'clay', y: 136 }, { k: 'gravel', y: 210 }]);
+    R(g, 172, 0, 56, 176, F('wallh2') + `;stroke:${v('wallh2')};stroke-width:.8`);
+    for (let y = 8; y < 176; y += 12) Ln(g, 172, y, 228, y, SK('wallh', 0.8, 'opacity:.6'));
+    concrete(g, 150, 176, 100, 26, false);
+    microPile(g, 160, 168, 112, 246, 4.4); microPile(g, 240, 168, 288, 246, 4.4);
+    R(g, 150, 166, 16, 8, F('steel3')); R(g, 234, 166, 16, 8, F('steel3'));
+    tg(g, 300, 30, 'régi falazott fal', { anchor: 'middle', to: [228, 50] });
+    tg(g, 80, 196, 'ferde mikrocölöp', { anchor: 'middle', to: [128, 220] });
+  } else if (kind === 'u-godor') {
+    const GY = 70, M = lay(GY, [{ k: 'clay', y: GY }, { k: 'gravel', y: 206 }]);
+    R(g, 0, GY - 1, 160, 132, 'fill:url(#pr-sky)'); R(g, 0, 200, 160, 4, F('ground'));
+    microPile(g, 164, GY + 4, 164, 238, 3.6);
+    concrete(g, 156, GY - 6, 18, 14, false);
+    microPile(g, 172, 96, 330, 176, 3.6);
+    facade(g, 250, 8, 130, GY - 8);
+    tg(g, 80, 120, 'munkagödör', { anchor: 'middle' });
+    tg(g, 250, 214, 'ferde mikrocölöp-horgony', { anchor: 'middle', to: [280, 158] });
+  } else if (kind === 'u-rezsu') {
+    const M = lay(250, [{ k: 'sand', y: 250 }]);
+    void M;
+    const d = 'M0 60 L90 60 L300 170 L400 170 L400 260 L0 260Z';
+    R(g, 0, 0, W, H, 'fill:url(#pr-sky)');
+    P(g, d, F('clay')); P(g, d, 'fill:url(#pr-p-clay)');
+    P(g, 'M0 214 L400 214 L400 260 L0 260Z', F('gravel')); P(g, 'M0 214 L400 214 L400 260 L0 260Z', 'fill:url(#pr-p-gravel)');
+    P(g, 'M0 60 L90 60 L300 170 L400 170', SK('ground', 1.6));
+    R(g, 0, 56, 90, 4, F('dark2'));
+    P(g, 'M30 60 C 60 180, 220 200, 320 170', SK('push', 2, 'stroke-dasharray:7 5'));
+    for (const [a, b] of [[140, 110], [156, 196], [168, 140], [182, 228]]) microPile(g, a, 92 + (a - 140) * 0.5, b, 246, 3.8);
+    P(g, `M134 ${86} L188 ${114} L184 ${122} L130 ${94}Z`, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:.8`);
+    tg(g, 300, 216, 'csúszólap', { anchor: 'middle', to: [258, 186] });
+    tg(g, 70, 140, 'rácsos mikrocölöp-fal', { anchor: 'middle', to: [150, 150] });
+  } else {
+    const GY = 130, M = lay(GY, [{ k: 'fill', y: GY }, { k: 'rock', y: 196 }]);
+    for (const [cx, cy, rr] of [[40, 160, 12], [120, 176, 9], [250, 150, 14], [330, 172, 10], [190, 182, 8]]) E(g, cx, cy, rr, rr * 0.8, F('rock') + `;stroke:${v('stone2')};stroke-width:1`);
+    facade(g, 70, 22, 260, GY - 34);
+    concrete(g, 60, GY - 12, 280, 22, false);
+    for (const px of [90, 160, 240, 310]) microPile(g, px, GY + 10, px, 244, 4.2);
+    tg(g, 360, 168, 'tömbös feltöltés', { anchor: 'end' });
+    tg(g, 360, 226, EN ? 'rock' : 'kőzet', { anchor: 'end' });
+  }
+}
 export function methodCard(s, kind) {
   defs(); CUR.W = CARD.W;
   const { W, H, GY } = CARD, tg = (g, x, y, t, o = {}) => tag(g, x, y, t, { fs: 13, ...o });
   while (s.firstChild) s.removeChild(s.firstChild);
   s.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  if (kind.startsWith('u-')) { const g0 = g_(s); useCard(g0, kind); return s; }
   const L = {
     mikro: [{ k: 'fill', y: GY }, { k: 'clay', y: GY + 14 }, { k: 'gravel', y: 206 }],
     jet: [{ k: 'sand', y: GY }, { k: 'clay2', y: 214 }],
