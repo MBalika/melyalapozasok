@@ -1,7 +1,7 @@
 // C06 – Egyéb cölöpök: mikrocölöp (aláfogás), jet-grouting (oszlopgyár), mélykeverés, kavicscölöp
 import { register, shell, slider, seg, toggle, stat, verdict, h, svg, figure, clear, fmt, clamp, lerp, smooth, cssVar, onTheme, loop, pathD } from './core.js';
 import { defineQuiz } from './ui.js';
-import { underpinScene } from './proc.js';
+import { underpinScene, jetFactory } from './proc.js';
 
 /* ------------------------------------------------------------------ segédek */
 const txt = (p, x, y, t, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: t, ...o }, p);
@@ -135,23 +135,21 @@ register('egy-jet', (root) => {
   const ss = slider(ctrls, { label: 'Oszloptávolság a falban', sym: 's', min: 0.3, max: 2.4, step: 0.05, value: 0.6, unit: 'm', d: 2 });
   const blk = toggle(ctrls, { label: 'a visszafolyó cementhabarcs útja elzáródik', value: false });
 
-  const cv = h('canvas', { class: 'fig egy-cv', role: 'img', 'aria-label': 'Bal oldalt a jet-oszlop készítése oldalnézetben, jobb oldalt az átfedéses oszlopfal felülnézetben' });
-  viz.append(cv);
+  const fig = figure(viz, 740, 380, 'fig egy-cv');
+  fig.setAttribute('aria-label', 'Bal oldalt a jet-oszlop készítése metszetben – gép, monitor, sugarak, visszafolyó cementhabarcs –, jobb oldalt az átfedéses oszlopfal felülnézetben');
   viz.append(h('div', { class: 'legend' },
-    h('span', {}, h('i', { style: { background: 'var(--grout)' } }), 'talajbeton (jet-oszlop)'),
-    h('span', {}, h('i', { style: { background: 'var(--water)' } }), 'vízsugár'),
-    h('span', {}, h('i', { style: { background: 'var(--sky)' } }), 'levegőburok'),
-    h('span', {}, h('i', { style: { background: 'var(--bad)' } }), 'rés a falban')));
+    h('span', {}, h('i', { style: { background: 'var(--pr-grout1)', border: '1px solid var(--pr-concedge)' } }), 'talajbeton (jet-oszlop)'),
+    h('span', {}, h('i', { style: { background: 'var(--pr-fresh2)' } }), 'cementhabarcs-sugár'),
+    h('span', {}, h('i', { style: { background: 'var(--pr-water)' } }), 'vízsugár'),
+    h('span', {}, h('i', { style: { background: 'var(--pr-air)', border: '1px dashed var(--pr-water)' } }), 'levegőburok'),
+    h('span', {}, h('i', { style: { background: 'var(--pr-push)' } }), 'rés a falban')));
   const sD = stat(out, { label: 'Oszlopátmérő <i>D</i>', unit: 'm', d: 2 });
   const sDz = stat(out, { label: 'Emelés fordulatonként', unit: 'cm', d: 1 });
   const sT = stat(out, { label: 'Falvastagság az átfedésnél <i>t</i>' });
   const sN = stat(out, { label: 'Oszlop 10 m falhoz', unit: 'db', d: 0 });
   const vd = verdict(viz);
 
-  const C = {};
-  const cols = () => { for (const k of ['--soilA', '--soilB', '--soilC', '--soilD', '--grout', '--water', '--sky', '--ink', '--muted', '--bad', '--ok', '--steelm2', '--surface', '--line2', '--warn', '--surface2', '--fresh']) C[k] = cssVar(k); };
-  cols();
-  let st = null, phase = 4.5, heave = 0;
+  let phase = 4.5, heave = 0;
   const upd = () => {
     const R = jetCalc(soil.v, vr.v, pr.v, sp.v, rpm.v);
     const s = ss.v, D = R.D;
@@ -168,151 +166,19 @@ register('egy-jet', (root) => {
     return { R, t };
   };
   let S = upd();
-  [soil, vr, pr, sp, rpm, ss, blk].forEach((c) => c.on(() => { S = upd(); if (!blk.v) heave = 0; draw(); }));
-
-  // vászonfelirat a kártya színével rajzolt hátlapon (a talajmintán is olvasható, sötét témában megfordul)
-  const chip = (s, x, y, align) => {
-    const ctx = st.ctx;
-    ctx.font = `700 12px ${MONO()}`; ctx.textAlign = align; ctx.textBaseline = 'alphabetic';
-    const tw = ctx.measureText(s).width, x0 = align === 'center' ? x - tw / 2 : x;
-    ctx.globalAlpha = 0.9; ctx.fillStyle = C['--surface']; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x0 - 5, y - 13, tw + 10, 18, 5); else ctx.rect(x0 - 5, y - 13, tw + 10, 18); ctx.fill(); ctx.globalAlpha = 1;
-    ctx.fillStyle = C['--ink']; ctx.fillText(s, x, y);
+  const SOILK = { k_kavics: 'gravel', k_homok: 'sand', k_iszap: 'silt', k_agyag: 'clay' };
+  const KIND = { szimpla: 'j-1', levegos: 'j-2a', vizes: 'j-2w', tripla: 'j-3' };
+  const NW = watchNarrow(viz, 560, () => draw(true));
+  const draw = (full = false) => {
+    const R = S.R, T = 9 * Math.sqrt(30 / sp.v);
+    jetFactory(fig, {
+      full, nar: NW.v, soil: SOILK[soil.v], kind: KIND[vr.v], D: R.D, DTxt: `${fmt(R.D, 2)}\u00A0m`, s: ss.v, sTxt: `${fmt(ss.v, 2)}\u00A0m`, t: S.t, tTxt: `${fmt(S.t, 2)}\u00A0m`,
+      u: (phase % T) / T, drill: 0.16, rise: 0.86, ang: phase * rpm.v * 2 * Math.PI / 60 * 3, ph: phase, gaps: R.gaps, dz: R.dz, blk: blk.v, heave, p: pr.v,
+    });
   };
-  const draw = () => {
-    if (!st || !st.w || st.w < 200) return;
-    const { ctx, w, h: HH, narrow } = st;
-    const R = S.R, D = R.D, so = JET_SOIL[soil.v], V = JET_VAR[vr.v];
-    ctx.clearRect(0, 0, w, HH);
-    const split = narrow ? w : Math.round(w * 0.42), H = narrow ? Math.round(HH * 0.6) : HH;
-    // ---------------- oldalnézet
-    ctx.save(); ctx.beginPath(); ctx.rect(0, 0, split, H); ctx.clip();
-    const gy = H * 0.14 - heave * H * 0.035, bot = H * 0.93;
-    ctx.fillStyle = C['--surface2']; ctx.fillRect(0, 0, split, H);
-    ctx.fillStyle = C[so.col];
-    ctx.beginPath(); ctx.moveTo(0, H * 0.14);
-    if (heave > 0) { ctx.lineTo(split * 0.15, H * 0.14); ctx.quadraticCurveTo(split * 0.5, gy - heave * H * 0.05, split * 0.85, H * 0.14); }
-    ctx.lineTo(split, H * 0.14); ctx.lineTo(split, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
-    ctx.fillStyle = C['--ink']; ctx.globalAlpha = 0.17;
-    for (let i = 0; i < 260; i++) { const y = H * 0.16 + ((i * 41.7) % (H * 0.82)); ctx.beginPath(); ctx.arc((i * 97.3) % split, y, so.grain, 0, 7); ctx.fill(); }
-    ctx.globalAlpha = 1;
-    const cx = split * 0.5;
-    const pxm = (split * 0.86) / 2.1;
-    const T = 9 * Math.sqrt(30 / sp.v); // egy oszlop ideje, s
-    const u = (phase % T) / T;
-    const drill = 0.16, rise = 0.86;
-    const top = H * 0.2;
-    let my; // monitor helye
-    if (u < drill) my = lerp(top - H * 0.08, bot, u / drill);
-    else if (u < rise) my = lerp(bot, top, (u - drill) / (rise - drill));
-    else my = top;
-    const colTop = u < drill ? bot : my;
-    const half = (D * pxm) / 2;
-    // a tervezett oszlop körvonala
-    ctx.setLineDash([5, 5]); ctx.strokeStyle = C['--ink']; ctx.globalAlpha = 0.45; ctx.lineWidth = 1.2;
-    ctx.strokeRect(cx - half, top, 2 * half, bot - top); ctx.setLineDash([]); ctx.globalAlpha = 1;
-    // kész oszlop (alulról a monitorig)
-    if (colTop < bot) {
-      ctx.fillStyle = C['--grout'];
-      ctx.beginPath();
-      const steps = 30;
-      for (let i = 0; i <= steps; i++) { const y = lerp(colTop, bot, i / steps); const wob = 1 + 0.06 * Math.sin(y * 0.09 + so.grain) * (soil.v === 'k_kavics' ? 1.6 : 1); ctx.lineTo(cx - half * wob, y); }
-      for (let i = steps; i >= 0; i--) { const y = lerp(colTop, bot, i / steps); const wob = 1 + 0.06 * Math.sin(y * 0.11 + 1.3) * (soil.v === 'k_kavics' ? 1.6 : 1); ctx.lineTo(cx + half * wob, y); }
-      ctx.closePath(); ctx.fill();
-      // csavarvonalas hibák
-      if (R.gaps) {
-        ctx.save(); ctx.clip();
-        ctx.strokeStyle = C[so.col]; ctx.lineWidth = Math.min(10, (R.dz - 4) * 3 + 3);
-        const pitch = clamp(R.dz * 5, 18, 60);
-        for (let y = colTop - 40; y < bot + 40; y += pitch) { ctx.beginPath(); ctx.moveTo(cx - half - 4, y); ctx.lineTo(cx + half + 4, y + pitch * 0.45); ctx.stroke(); }
-        ctx.restore();
-      }
-    }
-    // fúrórúd
-    ctx.fillStyle = C['--steelm2'];
-    ctx.fillRect(cx - 4, gy - H * 0.12, 8, my - gy + H * 0.12);
-    // fúrógép-árboc
-    ctx.fillRect(cx - 9, 0, 6, gy); ctx.fillRect(cx + 3, 0, 6, gy);
-    ctx.fillRect(cx - 14, gy - 10, 28, 10);
-    // monitor + sugarak
-    ctx.fillStyle = C['--ink']; ctx.fillRect(cx - 6, my - 10, 12, 20);
-    if (u >= drill && u < rise) {
-      const ang = phase * rpm.v * 2 * Math.PI / 60 * 3; // gyorsított forgás a láthatóságért
-      const dir = Math.cos(ang);
-      const L = half * Math.abs(dir) + 2, sg = dir >= 0 ? 1 : -1;
-      if (V.air) { ctx.strokeStyle = C['--sky']; ctx.lineWidth = 12; ctx.globalAlpha = 0.75; ctx.beginPath(); ctx.moveTo(cx + sg * 6, my - (V.water ? 6 : 0)); ctx.lineTo(cx + sg * (6 + L), my - (V.water ? 6 : 0)); ctx.stroke(); ctx.globalAlpha = 1; }
-      if (V.water) { ctx.strokeStyle = C['--water']; ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(cx + sg * 6, my - 6); ctx.lineTo(cx + sg * (6 + L), my - 6); ctx.stroke(); }
-      ctx.strokeStyle = C['--fresh']; ctx.lineWidth = 4;
-      const gyj = V.water ? my + 7 : my;
-      const sg2 = V.water ? -sg : sg; const L2 = V.water ? half * 0.55 * Math.abs(dir) + 2 : L;
-      ctx.beginPath(); ctx.moveTo(cx + sg2 * 6, gyj); ctx.lineTo(cx + sg2 * (6 + L2), gyj); ctx.stroke();
-      // visszafolyó iszap a rúd mentén
-      if (!blk.v) {
-        ctx.fillStyle = C['--fresh'];
-        for (let i = 0; i < 10; i++) { const yy = my - ((phase * 60 + i * 23) % Math.max(10, my - gy)); ctx.beginPath(); ctx.arc(cx + (i % 2 ? 7 : -7), yy, 2.2, 0, 7); ctx.fill(); }
-        ctx.beginPath(); ctx.ellipse(cx, gy, 30, 4, 0, 0, 7); ctx.fill();
-      }
-    }
-    if (blk.v && heave > 0.2) {
-      ctx.strokeStyle = C['--bad']; ctx.lineWidth = 2;
-      for (const [x0, a] of [[0.25, 1], [0.7, -1], [0.45, 1]]) { ctx.beginPath(); let x = split * x0, y = H * 0.15; ctx.moveTo(x, y); for (let k = 0; k < 4; k++) { x += a * 6; y += 9; ctx.lineTo(x + (k % 2 ? 4 : -4), y); } ctx.stroke(); }
-    }
-    chip(u < drill ? '1 · fúrás' : u < rise ? '2 · injektálás' : '3 · kész oszlop', 8, 20, 'left');
-    chip('D ≈ ' + fmt(D, 2).replace(' ', '') + '\u00A0m', cx, bot + 15 > H - 5 ? H - 7 : bot + 15, 'center');
-    ctx.restore();
-    // ---------------- felülnézet (jobb oldalt, keskeny kijelzőn alul)
-    ctx.save();
-    const PX = narrow ? 0 : split, PY = narrow ? H : 0, PW = w - PX, PH = HH - PY;
-    ctx.translate(PX, PY); ctx.beginPath(); ctx.rect(0, 0, PW, PH); ctx.clip();
-    const px0 = 16, pw = PW - 28, pcy = PH * 0.54;
-    ctx.fillStyle = C[so.col]; ctx.fillRect(0, 0, PW, PH);
-    ctx.fillStyle = C['--ink']; ctx.globalAlpha = 0.14;
-    for (let i = 0; i < 220; i++) { ctx.beginPath(); ctx.arc((i * 61.7) % PW, (i * 37.3) % PH, so.grain * 0.9, 0, 7); ctx.fill(); }
-    ctx.globalAlpha = 1;
-    if (narrow) { ctx.fillStyle = C['--surface']; ctx.fillRect(0, 0, PW, 2); }
-    const s = ss.v, N = 5;
-    const span = (N - 1) * s + D;
-    const k = Math.min(pw / span, (PH * 0.58) / D);
-    const xs = px0 + (pw - span * k) / 2 + (D * k) / 2;
-    const r = (D * k) / 2;
-    ctx.fillStyle = C['--grout'];
-    for (let i = 0; i < N; i++) { ctx.beginPath(); ctx.arc(xs + i * s * k, pcy, r, 0, 7); ctx.fill(); }
-    ctx.strokeStyle = C['--ink']; ctx.lineWidth = 1; ctx.globalAlpha = 0.5;
-    for (let i = 0; i < N; i++) { ctx.beginPath(); ctx.arc(xs + i * s * k, pcy, r, 0, 7); ctx.stroke(); }
-    ctx.globalAlpha = 1;
-    for (let i = 0; i < N; i++) { ctx.fillStyle = C['--steelm2']; ctx.beginPath(); ctx.arc(xs + i * s * k, pcy, 3, 0, 7); ctx.fill(); }
-    // rések / falvastagság
-    if (S.t <= 0) {
-      ctx.strokeStyle = C['--bad']; ctx.lineWidth = 4;
-      for (let i = 0; i < N - 1; i++) { const x = xs + (i + 0.5) * s * k; ctx.beginPath(); ctx.moveTo(x, pcy - 16); ctx.lineTo(x, pcy + 16); ctx.stroke(); }
-    } else {
-      const x = xs + 1.5 * s * k, tt = (S.t * k) / 2;
-      ctx.strokeStyle = C['--ink']; ctx.lineWidth = 1.4;
-      ctx.beginPath(); ctx.moveTo(x, pcy - tt); ctx.lineTo(x, pcy + tt); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x - 5, pcy - tt); ctx.lineTo(x + 5, pcy - tt); ctx.moveTo(x - 5, pcy + tt); ctx.lineTo(x + 5, pcy + tt); ctx.stroke();
-      chip('t ≈ ' + fmt(S.t, 2) + '\u00A0m', clamp(x, 50, PW - 50), Math.min(PH - 8, pcy + r + 20), 'center');
-    }
-    // osztásméret
-    const yd = pcy - r - 12;
-    ctx.strokeStyle = C['--ink']; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(xs, yd); ctx.lineTo(xs + s * k, yd); ctx.moveTo(xs, yd - 5); ctx.lineTo(xs, yd + 5); ctx.moveTo(xs + s * k, yd - 5); ctx.lineTo(xs + s * k, yd + 5); ctx.stroke();
-    chip('s = ' + fmt(s, 2) + '\u00A0m', clamp(xs + (s * k) / 2, 46, PW - 46), Math.max(46, yd - 9), 'center');
-    chip('felülnézet · oszlopsor', 8, 20, 'left');
-    ctx.restore();
-  };
-  // saját illesztés: keskeny kijelzőn az oldalnézet és a felülnézet egymás alá kerül
-  st = { ctx: cv.getContext('2d'), w: 0, h: 0, narrow: false };
-  const fit = () => {
-    const W = cv.clientWidth || cv.parentElement.clientWidth;
-    const narrow = W < 560, HH = Math.round(W * (narrow ? 1.25 : 0.5));
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
-    cv.width = Math.round(W * dpr); cv.height = Math.round(HH * dpr); cv.style.height = HH + 'px';
-    st.ctx.setTransform(dpr, 0, 0, dpr, 0, 0); st.w = W; st.h = HH; st.narrow = narrow;
-    draw();
-  };
-  new ResizeObserver(fit).observe(cv.parentElement);
-  fit();
-  onTheme(() => { cols(); draw(); });
-  loop(cv, (t, dt) => { phase += dt; if (blk.v) heave = Math.min(1, heave + dt * 0.4); draw(); });
+  [soil, vr, pr, sp, rpm, ss, blk].forEach((c) => c.on(() => { S = upd(); if (!blk.v) heave = 0; draw(true); }));
+  draw(true);
+  loop(fig, (t, dt) => { phase += dt; if (blk.v) heave = Math.min(1, heave + dt * 0.4); draw(); });
 });
 
 /* ================================================================== 4. MIT CSINÁL A TALAJJAL? */

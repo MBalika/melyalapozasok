@@ -56,7 +56,6 @@ eb6970c	silt
 9252b0e	The four variants – how many nozzles are “switched on”?
 c1f4699	=
 78482f4	Single jet
-2c521a8	air + cement
 d3608bf	Double jet with air
 e41bb34	The cement jet of the same pressure is surrounded by an air shroud at 5–6 bar – this increases the range.
 b9cd182	water
@@ -67,11 +66,6 @@ c18a285	Triple jet
 3a40a89	A water jet shrouded in an air jet breaks up the soil, and grout is injected at the same time through a separate nozzle for cementation.
 e925c79	Jet column factory
 04cca02	Jet panel: when we don’t rotate
-c4c551c	Jet panels in a V shape: plan and elevation
-e6aad09	Plan
-093d64a	hole position: two nozzles from here
-3e3dd59	“sweeps” in two directions
-9309920	Elevation
 be7ee82	V-shaped jet panel: made from the holes without rotation, pulled up with nozzles on both sides; adjacent panels meeting each other form a watertight curtain wall.
 1562cfc	Jet grouting in the field
 09519e4	An exposed thin jet panel in the ground

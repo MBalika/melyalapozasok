@@ -3305,12 +3305,291 @@ function useCard(g, kind) {
     tg(g, 360, 226, EN ? 'rock' : 'kőzet', { anchor: 'end' });
   }
 }
+/* ================================================================== 6.2 – jet-grouting: sugarak, változatok */
+// A sugár iránya k = ±1; L: a hatótávolság (= a kialakuló oszlop sugara), w: a sugár félszélessége a végén.
+function jetCement(g, x, y, L, k = 1, w = 4) {
+  if (L < 2) return;
+  P(g, `M${x} ${y - w * 0.35} L${x + k * L} ${y - w} Q${x + k * (L + w)} ${y} ${x + k * L} ${y + w} L${x} ${y + w * 0.35}Z`, F('fresh2') + `;stroke:${v('grout2')};stroke-width:.8`);
+  Ln(g, x, y, x + k * L * 0.96, y, SK('grout1', Math.max(1, w * 0.45), 'stroke-linecap:round;opacity:.9'));
+}
+function jetWater(g, x, y, L, k = 1, w = 3) {
+  if (L < 2) return;
+  P(g, `M${x} ${y - w * 0.3} L${x + k * L} ${y - w} Q${x + k * (L + w)} ${y} ${x + k * L} ${y + w} L${x} ${y + w * 0.3}Z`, F('water', 0.85));
+  Ln(g, x, y, x + k * L * 0.96, y, SK('halo', Math.max(0.8, w * 0.35), 'stroke-linecap:round;opacity:.7'));
+}
+function jetAir(g, x, y, L, k = 1, w = 9) {
+  if (L < 2) return;
+  P(g, `M${x} ${y - w * 0.45} L${x + k * L} ${y - w} Q${x + k * (L + w * 0.8)} ${y} ${x + k * L} ${y + w} L${x} ${y + w * 0.45}Z`, F('air', 0.62) + `;stroke:${v('water')};stroke-width:.8;stroke-dasharray:3 2`);
+}
+function jetSpray(g, x, y, k = 1, s = 1, col = 'fresh2') {
+  for (let i = 0; i < 7; i++) C(g, x + k * (2 + (i % 3) * 3.2) * s, y + (i - 3) * 2.4 * s, (0.9 + (i % 2) * 0.6) * s, F(i % 2 ? col : 'sand2', 0.85));
+}
+// Egy változat sugarai a monitorból (x: a monitor fala, y: a felső fúvóka szintje); s: nagyítás
+const JV = { 'j-1': { cem: 1 }, 'j-2a': { cem: 1, air: 1 }, 'j-2w': { wat: 1, low: 1 }, 'j-3': { wat: 1, air: 1, low: 1 } };
+function jetSet(g, kind, x, y, L, k = 1, s = 1) {
+  const V = JV[kind] ?? JV['j-1'];
+  if (V.air) jetAir(g, x, y, L * 1.02, k, 9 * s);
+  if (V.cem) { jetCement(g, x, y, L, k, 4 * s); jetSpray(g, x + k * L, y, k, s); }
+  if (V.wat) { jetWater(g, x, y, L, k, 3.2 * s); jetSpray(g, x + k * L, y, k, s, 'water'); }
+  if (V.low) jetCement(g, x, y + 14 * s, L * 0.42, k, 3.4 * s);
+}
+function jetMonitor(g, x, top, y, s = 1, kind = 'j-1') {
+  // fúrórúd és monitor; a fúvókák a monitor jobb oldalán, y-on (és alsó cementfúvóka 14·s-sel lejjebb)
+  const V = JV[kind] ?? JV['j-1'], rw = 3.6 * s, mw = 5.6 * s;
+  R(g, x - rw, top, rw * 2, y - top, 'fill:url(#pr-cyl)');
+  R(g, x - mw, y - 12 * s, mw * 2, (V.low ? 34 : 24) * s, 'fill:url(#pr-cyl)' + `;stroke:${v('steel3')};stroke-width:${0.8 * s}`, { rx: 2 * s });
+  const yb = y + (V.low ? 22 : 12) * s;
+  P(g, `M${x - mw} ${yb} L${x} ${yb + 7 * s} L${x + mw} ${yb}Z`, F('dark2'));
+  for (const yy of V.low ? [y, y + 14 * s] : [y]) R(g, x + mw - 1.2 * s, yy - 2.2 * s, 2.6 * s, 4.4 * s, F('dark'), { rx: 0.8 * s });
+}
+// A négy jet-változat kártyaképe: metszet a monitorral és a sugarakkal, a kész oszlop alul, nagyítás a fúvókákra.
+function jetCard(g, kind) {
+  const { W, H } = CARD, GY = 62, tg = (gg, x, y, t, o = {}) => tag(gg, x, y, t, { fs: 16, ...o });
+  const M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: 'sand', y: GY + 18 }, { k: 'sand2', y: 200 }] };
+  backdrop(g, M, 0, W);
+  const half = { 'j-1': 28, 'j-2a': 42, 'j-2w': 40, 'j-3': 54 }[kind], x = 118, my = 150;
+  // visszafolyó cementhabarcs: gyűjtőgödör a furat szájánál
+  P(g, `M${x - 6} ${GY} L${x + 4} ${GY + 9} H${x + 46} L${x + 54} ${GY}Z`, F('grout2') + `;stroke:${v('grout2')};stroke-width:.8`);
+  E(g, x + 26, GY + 3, 24, 3.6, F('fresh2', 0.9));
+  // kész oszlop alul (a monitor alatt), fölötte a furat
+  column(g, x, my + 6, 246, half, 'jet');
+  R(g, x - 7, GY, 14, my - GY, F('grout2', 0.75));
+  for (let i = 0; i < 6; i++) C(g, x + (i % 2 ? 5 : -5), GY + 10 + i * ((my - GY - 20) / 5), 1.5, F('fresh2'));
+  // a sugár zónája: felaprózott talaj és habarcs
+  E(g, x, my + 2, half + 3, 9, F('grout2', 0.55));
+  jetMonitor(g, x, 0, my, 1, kind);
+  jetSet(g, kind, x + 5.6, my, half - 4, 1, 1);
+  jetSet(g, kind, x - 5.6, my, half - 4, -1, 1);
+  spin(g, x, my - 30, 16);
+  arrowV(g, x - half - 12, my + 26, my - 14, { w: 2.4, s: 7 });
+  // nagyítás a fúvókákra
+  const bx = 304, by = 118, br = 70;
+  Ln(g, x + 6, my - 13, bx - br * 0.86, by - br * 0.5, SK('labline', 1, 'stroke-dasharray:3 3'));
+  Ln(g, x + 6, my + 14, bx - br * 0.86, by + br * 0.5, SK('labline', 1, 'stroke-dasharray:3 3'));
+  C(g, x + 6, my, 16, SK('labline', 1.2, 'stroke-dasharray:3 3') + ';fill:none');
+  const cid = `pr-jb-${kind}-${Math.random().toString(36).slice(2, 7)}`;
+  const cp = el('clipPath', { id: cid }, g); C(cp, bx, by, br, '');
+  const zb = g_(g, { 'clip-path': `url(#${cid})` });
+  R(zb, bx - br, by - br, br * 2, br * 2, F('sand')); R(zb, bx - br, by - br, br * 2, br * 2, 'fill:url(#pr-p-sand)');
+  const zx = bx - 30, zy = by - 8;
+  jetMonitor(zb, zx, by - br, zy, 2.4, kind);
+  jetSet(zb, kind, zx + 13.4, zy, 120, 1, 2.2);
+  C(g, bx, by, br, SK('halo', 5) + ';fill:none'); C(g, bx, by, br, SK('labedge', 1.6) + ';fill:none');
+  const V = JV[kind];
+  const lab = V.wat ? (V.air ? (EN ? 'air + water' : 'levegő + víz') : (EN ? 'water' : 'víz')) : V.air ? (EN ? 'air + grout' : 'levegő + cementhabarcs') : (EN ? 'cement grout' : 'cementhabarcs');
+  tg(g, bx, 206, lab, { anchor: 'middle', to: [bx + 14, zy] });
+  if (V.low) tg(g, bx, 232, EN ? 'cement grout' : 'cementhabarcs', { anchor: 'middle', to: [bx - 6, zy + 33] });
+}
+// Jet-panel: felül alaprajz (V alakú panelek a furatokból, két fúvóka, forgatás nélkül), alul ferde nézet a kész és a készülő panelekkel.
+function jetDir(g, x, y, ang, fn) { const r = g_(g, { transform: `rotate(${ang.toFixed(1)} ${x} ${y})` }); fn(r); return r; }
+function panelCard(g) {
+  // A furat a panel közepén van; a két, egymással szemben álló fúvókából forgatás nélkül felhúzva V (ék) alakú panel
+  // nő ki mindkét irányba (a sugár szétnyílik). A szomszédos panelek váltakozó szögben, a végeiknél összeérve zárt falat adnak.
+  const W = 520, H = 430, tg = (gg, x, y, t, o = {}) => tag(gg, x, y, t, { fs: 13, ...o });
+  // ---------------- alaprajz
+  const py0 = 30, py1 = 176;
+  R(g, 8, py0, W - 16, py1 - py0, F('sand') + `;stroke:${v('labedge')};stroke-width:1`, { rx: 10 });
+  R(g, 8, py0, W - 16, py1 - py0, 'fill:url(#pr-p-sand)', { rx: 10 });
+  const V = [[-20, 84], [70, 146], [160, 84], [250, 146], [340, 84], [430, 146], [520, 84]];
+  const ACT = 4; // ez a panel most készül; utána még nincs kész
+  const cp = el('clipPath', { id: 'pr-pnl-clip' }, g); R(cp, 8, py0, W - 16, py1 - py0, '', { rx: 10 });
+  const pl = g_(g, { 'clip-path': 'url(#pr-pnl-clip)' });
+  const mid = (i) => [(V[i][0] + V[i + 1][0]) / 2, (V[i][1] + V[i + 1][1]) / 2];
+  const wedge = (gg, i, w0, w1, st, ext = 6) => {
+    // ék alakú panel: a furatnál w0, a végeken w1 félszélesség; a végek kissé túlnyúlnak (átfedés)
+    const a = V[i], b = V[i + 1], m = mid(i), dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
+    const A = [a[0] - ux * ext, a[1] - uy * ext], B = [b[0] + ux * ext, b[1] + uy * ext];
+    P(gg, `M${A[0] + nx * w1} ${A[1] + ny * w1} L${m[0] + nx * w0} ${m[1] + ny * w0} L${B[0] + nx * w1} ${B[1] + ny * w1} L${B[0] - nx * w1} ${B[1] - ny * w1} L${m[0] - nx * w0} ${m[1] - ny * w0} L${A[0] - nx * w1} ${A[1] - ny * w1}Z`, st);
+  };
+  for (let i = 0; i < V.length - 1; i++) {
+    if (i > ACT) wedge(pl, i, 3, 8, SK('labline', 1.1, 'stroke-dasharray:4 3') + ';fill:none');
+    else if (i === ACT) wedge(pl, i, 3, 8, F('grout1', 0.55) + `;stroke:${v('concedge')};stroke-width:1;stroke-dasharray:4 3`);
+    else { wedge(pl, i, 3, 8, F('grout1') + `;stroke:${v('concedge')};stroke-width:1`); wedge(pl, i, 1, 3, F('grout2', 0.9), 0); }
+  }
+  // a készülő panel: két, egymással szemben álló fúvóka a panel két irányába
+  const h0 = mid(ACT);
+  for (const t of [V[ACT], V[ACT + 1]]) {
+    const ang = (Math.atan2(t[1] - h0[1], t[0] - h0[0]) * 180) / Math.PI;
+    jetDir(pl, h0[0], h0[1], ang, (r) => { jetCement(r, h0[0] + 6, h0[1], 48, 1, 5); jetSpray(r, h0[0] + 54, h0[1], 1, 1.1); });
+  }
+  for (let i = 0; i < V.length - 1; i++) { const [x, y] = mid(i); if (i > ACT) { C(pl, x, y, 6, SK('labline', 1.2, 'stroke-dasharray:3 2') + ';fill:none'); continue; } C(pl, x, y, 6.5, F('dark2') + `;stroke:${v('halo')};stroke-width:1.4`); C(pl, x, y, 2.4, F('steel2')); }
+  tg(g, 22, py0 + 2, EN ? 'plan' : 'alaprajz', { fs: 12 });
+  const m1 = mid(1), m2 = mid(2);
+  tg(g, m1[0] - 40, 166, EN ? 'borehole' : 'furat', { anchor: 'middle', to: [m1[0] - 3, m1[1] + 4] });
+  tg(g, m2[0] + 8, 62, EN ? 'jet panel' : 'jet-panel', { anchor: 'middle', to: [m2[0] + 22, m2[1] - 2] });
+  tg(g, 412, 44, 'két, szemben álló fúvóka', { anchor: 'middle', to: [h0[0] + 4, h0[1] - 6] });
+  // ---------------- nézet (ferde rálátás)
+  const yg = 262, yb = 412, Z = 64, kx = 0.55, ky = 0.38;
+  const X = (x, z) => x + kx * z, Y = (y, z) => y - ky * z;
+  const vz = V.map(([x, y]) => [x, y < 120 ? Z : 0]);
+  R(g, 8, 188, W - 16, yg - Z * ky - 188, 'fill:url(#pr-sky)');
+  P(g, `M8 ${Y(yg, Z)} H${W - 8} V${yb + 10} H8Z`, F('sand'));
+  P(g, `M8 ${Y(yg, Z)} H${W - 8} V${yb + 10} H8Z`, 'fill:url(#pr-p-sand)');
+  const ym = 318; // a monitor szintje a készülő panelnél
+  const faces = [];
+  for (let i = 0; i < vz.length - 1; i++) faces.push([vz[i], vz[i + 1], i]);
+  faces.sort((a, b) => (b[0][1] + b[1][1]) - (a[0][1] + a[1][1]));
+  for (const [a, b, i] of faces) {
+    const back = a[1] < b[1];
+    const q = (y0) => `M${X(a[0], a[1])} ${Y(y0, a[1])} L${X(b[0], b[1])} ${Y(y0, b[1])} L${X(b[0], b[1])} ${Y(yb, b[1])} L${X(a[0], a[1])} ${Y(yb, a[1])}Z`;
+    if (i > ACT) { P(g, q(yg), SK('labline', 1.1, 'stroke-dasharray:4 3') + ';fill:none'); continue; }
+    if (i === ACT) P(g, q(yg), SK('labline', 1.1, 'stroke-dasharray:4 3') + ';fill:none');
+    const top = i === ACT ? ym : yg;
+    P(g, q(top), F(back ? 'grout2' : 'grout1') + `;stroke:${v('concedge')};stroke-width:1`);
+    for (let y = top + 12; y < yb - 4; y += 14) Ln(g, X(a[0], a[1]), Y(y, a[1]), X(b[0], b[1]), Y(y, b[1]), SK('grout2', 0.8, 'opacity:.55'));
+  }
+  // a terepfelszín (felülről látott sáv) eltakarja a panelek felső részét; rajta a fal nyomvonala
+  R(g, 8, Y(yg, Z), W - 16, yg - Y(yg, Z), F('fill'));
+  R(g, 8, Y(yg, Z), W - 16, yg - Y(yg, Z), 'fill:url(#pr-p-fill)', { opacity: 0.6 });
+  Ln(g, 8, yg, W - 8, yg, SK('ground', 1.6));
+  for (let i = 0; i < vz.length - 1; i++) {
+    const a = vz[i], b = vz[i + 1], d = `M${X(a[0], a[1])} ${Y(yg, a[1])} L${X(b[0], b[1])} ${Y(yg, b[1])}`;
+    if (i >= ACT) P(g, d, SK('labline', 1.2, 'stroke-dasharray:4 3'));
+    else { P(g, d, SK('concedge', 6, 'stroke-linecap:round')); P(g, d, SK('grout1', 4, 'stroke-linecap:round')); }
+    const mx = (X(a[0], a[1]) + X(b[0], b[1])) / 2, my2 = (Y(yg, a[1]) + Y(yg, b[1])) / 2;
+    if (i < ACT) C(g, mx, my2, 3, F('dark2'));
+  }
+  // kis fúrógép a készülő panel furata fölött; a rúd forgatás nélkül emelkedik, a két sugár szemben, a panel síkjában vág
+  const A = vz[ACT], B = vz[ACT + 1], hz = (A[1] + B[1]) / 2, hx = X((A[0] + B[0]) / 2, hz), gy2 = Y(yg, hz), my = Y(ym, hz);
+  const r = smallRig(g, { H, GY: gy2 }, hx, { top: 196, headY: 214 });
+  R(g, hx - 3, r.headBot, 6, my - r.headBot, 'fill:url(#pr-cyl)');
+  R(g, hx - 5, my - 10, 10, 22, 'fill:url(#pr-cyl)' + `;stroke:${v('steel3')};stroke-width:.8`, { rx: 2 });
+  for (const t of [A, B]) {
+    const ang = (Math.atan2(Y(ym, t[1]) - my, X(t[0], t[1]) - hx) * 180) / Math.PI;
+    jetDir(g, hx, my, ang, (q) => { jetCement(q, hx + 6, my, 42, 1, 4.5); jetSpray(q, hx + 48, my, 1, 1.1); });
+  }
+  arrowV(g, hx - 24, my + 40, my - 4, { w: 2.6, s: 8 });
+  tg(g, W - 14, 402, 'felhúzás forgatás nélkül', { anchor: 'end', to: [hx - 24, my + 34] });
+  tg(g, 22, 200, EN ? 'view' : 'nézet', { fs: 12 });
+  tg(g, 120, 400, 'V alakú panelek', { anchor: 'middle', to: [X(160, Z) - 10, 360] });
+}
+// 6.2 – Jet-oszlopgyár: bal oldalt metszet (gép, monitor, sugarak, oszlop, visszafolyó habarcs), jobb oldalt felülnézet.
+// o: { nar, soil ('gravel'|'sand'|'silt'|'clay'), kind ('j-1'…), D (m), s (m), t (m), u (0…1 ciklus), drill, rise, ang, gaps, dz, blk, heave, p, full }
+const JF = { SW: 400, PW: 340, H: 380, GY: 100, top: 132, bot: 356, pxm: 76 };
+function jetFacStatic(g, o) {
+  const { SW, H, GY } = JF, M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: o.soil, y: GY + 16 }] };
+  CUR.W = SW;
+  backdrop(g, M, 0, SW);
+  silo(g, M, 26, { w: 20, h: 74 });
+  const pl = plant(g, M, 42, { w: 46, h: 24 });
+  const cx = 150, r = smallRig(g, M, cx, { top: 22, headY: 50 });
+  hoseTo(g, pl.out[0], pl.out[1], cx - 6, r.headY + 4, 14);
+  tag(g, 64, GY - 40, `p = ${o.p} bar`, { fs: o.fz - 0.5, anchor: 'middle', to: [62, GY - 24] });
+  return r;
+}
+function jetFacPlan(g, o) {
+  const { PW } = JF, H = o.ph, sk = SOIL[o.soil];
+  CUR.W = PW;
+  R(g, 6, 6, PW - 12, H - 12, F(sk[0]) + `;stroke:${v('labedge')};stroke-width:1`, { rx: 10 });
+  R(g, 6, 6, PW - 12, H - 12, `fill:url(#${sk[1]})`, { rx: 10 });
+  const N = 5, D = o.D, sp = o.s, span = (N - 1) * sp + D, k = Math.min((PW - 44) / span, (H - 150) / D, 150 / D), r = (D * k) / 2, cy = H * 0.52;
+  const x0 = PW / 2 - ((N - 1) * sp * k) / 2;
+  Ln(g, 14, cy, PW - 14, cy, SK('labline', 1, 'stroke-dasharray:6 4'));
+  for (let i = 0; i < N; i++) C(g, x0 + i * sp * k, cy, r, F('grout1', 0.78) + `;stroke:${v('concedge')};stroke-width:1.2`);
+  for (let i = 0; i < N; i++) { C(g, x0 + i * sp * k, cy, r * 0.62, SK('grout2', 0.8, 'opacity:.45') + ';fill:none'); C(g, x0 + i * sp * k, cy, 3.6, F('dark2') + `;stroke:${v('halo')};stroke-width:1`); }
+  if (o.t <= 0) {
+    for (let i = 0; i < N - 1; i++) { const x = x0 + (i + 0.5) * sp * k; Ln(g, x, cy - 18, x, cy + 18, SK('push', 4, 'stroke-linecap:round')); }
+    tag(g, PW / 2, cy + r + 26, EN ? 'gap in the wall!' : 'rés a falban!', { fs: o.fz, anchor: 'middle' });
+  } else {
+    const x = x0 + 1.5 * sp * k, tt = (o.t * k) / 2;
+    Ln(g, x, cy - tt, x, cy + tt, SK('labtx', 1.4)); Ln(g, x - 5, cy - tt, x + 5, cy - tt, SK('labtx', 1.4)); Ln(g, x - 5, cy + tt, x + 5, cy + tt, SK('labtx', 1.4));
+    tag(g, x, Math.min(H - 22, cy + r + 24), `t ≈ ${o.tTxt}`, { fs: o.fz, anchor: 'middle', to: [x, cy + tt] });
+  }
+  const yd = cy - r - 16;
+  Ln(g, x0, yd, x0 + sp * k, yd, SK('labtx', 1.2)); Ln(g, x0, yd - 5, x0, yd + 5, SK('labtx', 1.2)); Ln(g, x0 + sp * k, yd - 5, x0 + sp * k, yd + 5, SK('labtx', 1.2));
+  tag(g, x0 + (sp * k) / 2, Math.max(48, yd - 14), `s = ${o.sTxt}`, { fs: o.fz, anchor: 'middle' });
+  tag(g, 18, 26, EN ? 'plan · row of columns' : 'felülnézet · oszlopsor', { fs: o.fz - 0.5 });
+}
+function jetFacDyn(g, o, r) {
+  const { SW, GY, top, bot, pxm } = JF, cx = 150, half = (o.D * pxm) / 2;
+  CUR.W = SW;
+  const u = o.u, drill = o.drill, rise = o.rise;
+  let my;
+  if (u < drill) my = top - 20 + (bot - top + 20) * (u / drill);
+  else if (u < rise) my = bot - (bot - top) * ((u - drill) / (rise - drill));
+  else my = top;
+  const inj = u >= drill && u < rise, colTop = u < drill ? bot : my;
+  // szomszéd épület: elzáródó visszafolyásnál megemelkedik és megreped
+  const lift = o.heave * 9;
+  const bg = g_(g, { transform: `translate(0 ${-lift}) rotate(${(-o.heave * 1.6).toFixed(2)} 392 ${GY})` });
+  facade(bg, 296, 42, 96, GY - 42);
+  if (o.heave > 0.25) P(bg, 'M318 54 l-6 12 l8 8 l-7 12 l6 8', SK('push', 2));
+  if (o.heave > 0) {
+    const hh = o.heave * 16;
+    P(g, `M40 ${GY} Q 200 ${GY - hh * 1.6} 400 ${GY - hh * 0.7} V${GY + 2} H40Z`, F('fill'));
+    P(g, `M40 ${GY} Q 200 ${GY - hh * 1.6} 400 ${GY - hh * 0.7}`, SK('ground', 1.4));
+    if (o.heave > 0.35) for (const [x, a] of [[210, 1], [262, -1], [108, 1]]) { let d = `M${x} ${GY + 4}`, xx = x, yy = GY + 4; for (let i = 0; i < 4; i++) { xx += a * 5; yy += 10; d += ` L${xx + (i % 2 ? 4 : -4)} ${yy}`; } P(g, d, SK('push', 1.8)); }
+  }
+  // a tervezett oszlop körvonala és a kész oszlop (alulról a monitorig)
+  R(g, cx - half, top, half * 2, bot - top, SK('labline', 1.1, 'stroke-dasharray:5 4') + ';fill:none', { rx: 4 });
+  if (colTop < bot - 2) {
+    const wob = o.soil === 'gravel' ? 2.6 : 1.2;
+    let d = '';
+    const n = 24;
+    for (let i = 0; i <= n; i++) { const y = colTop + ((bot - colTop) * i) / n; d += `${i ? 'L' : 'M'}${(cx - half - wob * Math.sin(y * 0.09)).toFixed(1)} ${y.toFixed(1)} `; }
+    for (let i = n; i >= 0; i--) { const y = colTop + ((bot - colTop) * i) / n; d += `L${(cx + half + wob * Math.sin(y * 0.11 + 1.3)).toFixed(1)} ${y.toFixed(1)} `; }
+    d += 'Z';
+    P(g, d, 'fill:url(#pr-groutg)' + `;stroke:${v('concedge')};stroke-width:1`);
+    for (let y = colTop + 8; y < bot - 4; y += 10) P(g, `M${cx - half + 3} ${y} Q${cx} ${y + 5} ${cx + half - 3} ${y}`, SK('grout2', 0.9, 'opacity:.7'));
+    if (o.gaps) {
+      const cid = 'pr-jf-clip';
+      const cp = el('clipPath', { id: cid }, g); P(cp, d, '');
+      const gg = g_(g, { 'clip-path': `url(#${cid})` }), pitch = Math.max(16, Math.min(56, o.dz * 5)), lw = Math.min(10, (o.dz - 4) * 3 + 3);
+      for (let y = colTop - 40; y < bot + 40; y += pitch) Ln(gg, cx - half - 4, y, cx + half + 4, y + pitch * 0.45, SK(SOIL[o.soil][0], lw));
+    }
+  }
+  // furat a monitor fölött, benne a visszafolyó habarcs
+  R(g, cx - 7, GY, 14, Math.max(0, my - 12 - GY), F(inj && !o.blk ? 'grout2' : 'bore', 0.85));
+  if (inj && !o.blk) {
+    for (let i = 0; i < 9; i++) { const yy = my - 14 - ((o.ph * 70 + i * 23) % Math.max(10, my - 14 - GY)); C(g, cx + (i % 2 ? 5 : -5), yy, 1.8, F('fresh2')); }
+    P(g, `M${cx - 6} ${GY} L${cx - 14} ${GY + 8} H${cx - 46} L${cx - 54} ${GY}Z`, F('grout2') + `;stroke:${v('grout2')};stroke-width:.8`);
+    E(g, cx - 30, GY + 2, 24, 3.8, F('fresh2', 0.9));
+  }
+  // rúd és monitor; fúrásnál fúrófej, injektáláskor forgó sugarak
+  jetMonitor(g, cx, r.headBot, my, 1.25, o.kind);
+  if (inj) {
+    const c = Math.cos(o.ang), k = c >= 0 ? 1 : -1, L = Math.max(0, (half - 7) * Math.abs(c));
+    E(g, cx, my + 3, half + 2, 10, F('grout2', 0.5));
+    jetSet(g, o.kind, cx + k * 7, my, L, k, 1.15);
+    spin(g, cx, my - 34, 16);
+    arrowV(g, cx - half - 14, my + 34, my - 10, { w: 2.4, s: 7 });
+    if (o.blk) {
+      for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2, r0 = 18 + o.heave * 6; arrowP(g, `M${cx + Math.cos(a) * 12} ${my + Math.sin(a) * 12} L${cx + Math.cos(a) * r0} ${my + Math.sin(a) * r0}`, { w: 1.8, c: 'push' }); }
+    }
+  } else if (u < drill) spin(g, cx, my - 30, 13);
+  const ph = u < drill ? (EN ? '1 · drilling' : '1 · fúrás') : inj ? (EN ? '2 · jetting' : '2 · injektálás') : (EN ? '3 · finished column' : '3 · kész oszlop');
+  tag(g, 196, 18, ph, { fs: o.fz });
+  tag(g, cx, Math.min(JF.H - 12, bot + 13), `D ≈ ${o.DTxt}`, { fs: o.fz, anchor: 'middle' });
+  if (o.blk && o.heave > 0.2) tag(g, 250, GY + 46, EN ? 'pressure builds up!' : 'a nyomás halmozódik!', { fs: o.fz, anchor: 'middle', to: [cx + 22, my - 10] });
+}
+export function jetFactory(fig, o) {
+  defs();
+  o.ph = o.nar ? 270 : JF.H;
+  const nar = o.nar, W = nar ? JF.SW : JF.SW + JF.PW, H = nar ? JF.H + 8 + o.ph : JF.H;
+  o.fz = nar ? 15 : 12.5;
+  if (o.full || !fig._dy || fig._nar !== nar) {
+    while (fig.firstChild) fig.removeChild(fig.firstChild);
+    fig.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    fig.classList.add('pr-svg');
+    const cp = el('clipPath', { id: 'pr-jf-side' }, fig); R(cp, 0, 0, JF.SW, JF.H, '');
+    const side = g_(fig, { 'clip-path': 'url(#pr-jf-side)' });
+    fig._rig = jetFacStatic(side, o);
+    fig._dy = g_(side);
+    const plan = g_(fig, { transform: nar ? `translate(${(JF.SW - JF.PW) / 2} ${JF.H + 8})` : `translate(${JF.SW} 0)` });
+    jetFacPlan(plan, o);
+    fig._nar = nar;
+  }
+  while (fig._dy.firstChild) fig._dy.removeChild(fig._dy.firstChild);
+  jetFacDyn(fig._dy, o, fig._rig);
+}
 export function methodCard(s, kind) {
   defs(); CUR.W = CARD.W;
   const { W, H, GY } = CARD, tg = (g, x, y, t, o = {}) => tag(g, x, y, t, { fs: 13, ...o });
   while (s.firstChild) s.removeChild(s.firstChild);
   s.setAttribute('viewBox', `0 0 ${W} ${H}`);
   if (kind.startsWith('u-')) { const g0 = g_(s); useCard(g0, kind); return s; }
+  if (kind === 'j-panel') { CUR.W = 520; s.setAttribute('viewBox', '0 0 520 430'); const g0 = g_(s); panelCard(g0); return s; }
+  if (kind.startsWith('j-')) { const g0 = g_(s); jetCard(g0, kind); return s; }
   const L = {
     mikro: [{ k: 'fill', y: GY }, { k: 'clay', y: GY + 14 }, { k: 'gravel', y: 206 }],
     jet: [{ k: 'sand', y: GY }, { k: 'clay2', y: 214 }],

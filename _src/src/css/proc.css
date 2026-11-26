@@ -15,7 +15,7 @@
   --pr-rebar: #b3502a; --pr-rebar2: #c96b3d; --pr-spacer: #ece9e2;
   --pr-slurry1: rgba(138, 133, 96, 0.8); --pr-slurry2: rgba(116, 110, 76, 0.92); --pr-slurryd: rgba(55, 52, 28, 0.35);
   --pr-grout1: #f0ede6; --pr-grout2: #d8d4c9; --pr-stone: #dcd7cd; --pr-stone2: #8d877b; --pr-mix2: rgba(110, 100, 86, 0.35);
-  --pr-water: #2a8fd2; --pr-wall: rgba(40, 26, 14, 0.6);
+  --pr-water: #2a8fd2; --pr-air: #eef8ff; --pr-wall: rgba(40, 26, 14, 0.6);
   --pr-hose: #23292e; --pr-hose2: #9ba7b1;
   --pr-acc: #e1432a; --pr-push: #d62a2a; --pr-halo: #ffffff; --pr-warn: #d97706; --pr-ok: #15803d;
   --pr-labbg: rgba(255, 255, 255, 0.95); --pr-labedge: rgba(20, 30, 40, 0.2); --pr-labline: #1c2731; --pr-labtx: #16212c;
@@ -36,7 +36,7 @@
     --pr-rebar: #d06a3a; --pr-rebar2: #e0814f; --pr-spacer: #b3b0a9;
     --pr-slurry1: rgba(110, 106, 76, 0.85); --pr-slurry2: rgba(90, 86, 58, 0.95);
     --pr-grout1: #b9b5ab; --pr-grout2: #9c988e; --pr-stone: #a49f96; --pr-stone2: #5d584f;
-    --pr-water: #59bdf0; --pr-wall: rgba(0, 0, 0, 0.6); --pr-hose: #0e1114; --pr-hose2: #5c6974;
+    --pr-water: #59bdf0; --pr-air: #c9e6f7; --pr-wall: rgba(0, 0, 0, 0.6); --pr-hose: #0e1114; --pr-hose2: #5c6974;
     --pr-acc: #ff6a4a; --pr-push: #ff5a52; --pr-halo: #0d151d; --pr-warn: #f59e0b; --pr-ok: #34d399;
     --pr-labbg: rgba(16, 24, 33, 0.94); --pr-labedge: rgba(255, 255, 255, 0.2); --pr-labline: #d8e2ea; --pr-labtx: #e8eef3;
     --pr-skin: #c99a78; --pr-vest: #f07f1c; --pr-refl: #c9d1d6; --pr-trous: #1c2733; --pr-helmet: #e3e3dc; --pr-helmet2: #8f8f87;
@@ -56,7 +56,7 @@
   --pr-rebar: #d06a3a; --pr-rebar2: #e0814f; --pr-spacer: #b3b0a9;
   --pr-slurry1: rgba(110, 106, 76, 0.85); --pr-slurry2: rgba(90, 86, 58, 0.95);
   --pr-grout1: #b9b5ab; --pr-grout2: #9c988e; --pr-stone: #a49f96; --pr-stone2: #5d584f;
-  --pr-water: #59bdf0; --pr-wall: rgba(0, 0, 0, 0.6); --pr-hose: #0e1114; --pr-hose2: #5c6974;
+  --pr-water: #59bdf0; --pr-air: #c9e6f7; --pr-wall: rgba(0, 0, 0, 0.6); --pr-hose: #0e1114; --pr-hose2: #5c6974;
   --pr-acc: #ff6a4a; --pr-push: #ff5a52; --pr-halo: #0d151d; --pr-warn: #f59e0b; --pr-ok: #34d399;
   --pr-labbg: rgba(16, 24, 33, 0.94); --pr-labedge: rgba(255, 255, 255, 0.2); --pr-labline: #d8e2ea; --pr-labtx: #e8eef3;
   --pr-skin: #c99a78; --pr-vest: #f07f1c; --pr-refl: #c9d1d6; --pr-trous: #1c2733; --pr-helmet: #e3e3dc; --pr-helmet2: #8f8f87;
