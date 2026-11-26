@@ -445,8 +445,10 @@ function excavator(g, M, x, tipY, o = {}) {
 
 /* ================================================================== szerszámok, anyagok */
 function concrete(g, x, y, w, hh, fresh = true) {
+  // hűvös szürke beton, sötét kontúrral – a talajtól egyértelműen elváljon
   R(g, x, y, w, hh, fresh ? 'fill:url(#pr-freshg)' : 'fill:url(#pr-concg)');
   R(g, x, y, w, hh, 'fill:url(#pr-p-conc)');
+  if (hh > 2) R(g, x + 0.5, y + 0.5, Math.max(0, w - 1), hh - 1, SK('concedge', 1.1, 'opacity:.85'));
 }
 function holeWall(g, cx, top, bot, half) {
   // a furat fala: vékony sötét vonal és árnyék
@@ -1177,27 +1179,39 @@ PROC.zagy = {
 };
 
 /* ---------------- Megtámasztás nélküli fúrt cölöp */
+// Ø 0,8 m, kb. 8 m mély cölöp (≈ 22 egység/m): a rövid spirál a furat teljes szélességét kitöltő talajjal jön fel;
+// betonozáskor a tölcsér csövének vége végig a friss betonba merül (kb. 2 m).
+const NK = { half: 9, toe: 426 };
 PROC.nelkul = {
-  H: 360, GY: 178, layers: [{ k: 'clay', y: 178, lab: 'kötött talaj (agyag)', ly: 330 }],
+  H: 470, GY: 250, layers: [{ k: 'clay', y: 250, lab: 'kötött talaj (agyag)', ly: 446 }],
   steps: [
     { w: 240, t: 'Fúrás', d: 'Rövid spirállal (vagy markolóval) kötött talajban, talajvíz felett: a furat fala megtámasztás nélkül áll.', draw(g, M) {
-      const x = 86, r = rig(g, M, x, { top: 16, rope: true, headY: 22 });
+      const x = 86, H = NK.half, ab = 330, LA = 46, r = rig(g, M, x, { top: 12, rope: true, headY: 30 });
       spoil(g, M, x - 66, 34, 10, 'clay');
-      R(g, x - 17, M.GY, 34, 290 - M.GY, F('bore'));
-      holeWall(g, x, M.GY, 290, 17);
-      kelly(g, x, r.headBot, 252);
-      auger(g, x, 252, 288, 15, { pitch: 12, soilFrom: 252, soil: 'clay' });
-      tag(g, x + 28, 214, 'a fal megáll', { to: [x + 17, 214] });
+      R(g, x - H, M.GY, H * 2, NK.toe - M.GY, F('bore'));
+      P(g, `M${x - H} ${NK.toe - 3} Q${x} ${NK.toe + 4} ${x + H} ${NK.toe - 3}`, F('bore'));
+      holeWall(g, x, M.GY, NK.toe - 2, H);
+      kelly(g, x, r.headBot, ab - LA);
+      // a menetek közét a furat teljes szélességéig talaj tölti ki
+      auger(g, x, ab - LA, ab, H, { pitch: 11, soilFrom: ab - LA + 4, soilTo: ab - 3, soil: 'clay' });
+      arrowV(g, x - H - 18, ab - 10, ab - 44);
+      tag(g, x + 20, 380, 'a fal megáll', { to: [x + H, 380] });
+      tag(g, x + 20, ab - LA / 2, EN ? 'soil on the flights' : 'talaj a meneteken', { to: [x + H - 1, ab - LA / 2] });
     } },
-    { w: 240, t: 'Betonozás', d: 'A kiemelés után rögtön betonoznak, tölcsérrel, gravitációsan.', draw(g, M) {
-      const x = 70;
-      R(g, x - 17, M.GY, 34, 290 - M.GY, F('bore'));
-      concrete(g, x - 17, 226, 34, 64);
-      holeWall(g, x, M.GY, 290, 17);
-      tremie(g, x, M.GY - 40, 210, { full: true });
+    { w: 240, t: 'Betonozás', d: 'A kiemelés után rögtön betonoznak, tölcsérrel, gravitációsan; a cső vége végig a friss betonba merül.', draw(g, M) {
+      const x = 70, H = NK.half, ct = 336, emb = 44;
+      R(g, x - H, M.GY, H * 2, NK.toe - M.GY, F('bore'));
+      concrete(g, x - H, ct, H * 2, NK.toe - ct);
+      P(g, `M${x - H} ${NK.toe - 3} Q${x} ${NK.toe + 4} ${x + H} ${NK.toe - 3}Z`, 'fill:url(#pr-freshg)');
+      holeWall(g, x, M.GY, NK.toe - 2, H);
+      tremie(g, x, M.GY - 40, ct + emb, { full: true });
+      // a bemerülés jelölése
+      Ln(g, x + H + 6, ct, x + H + 6, ct + emb, SK('labline', 1.2));
+      Ln(g, x + H + 3, ct, x + H + 9, ct, SK('labline', 1.2)); Ln(g, x + H + 3, ct + emb, x + H + 9, ct + emb, SK('labline', 1.2));
       mixer(g, M, 98, -1);
       P(g, `M${100} ${M.GY - 36} L${x + 15} ${M.GY - 38}`, SK('steel3', 3.4, 'stroke-linecap:round'));
-      tag(g, x + 28, 262, 'beton', { to: [x + 12, 262] });
+      tag(g, x + 22, ct + emb / 2, 'a cső vége a betonban', { to: [x + H + 6, ct + emb / 2] });
+      tag(g, x + 22, 404, 'beton', { to: [x + 5, 404] });
     } },
   ],
 };

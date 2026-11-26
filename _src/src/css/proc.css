@@ -11,7 +11,7 @@
   --pr-drum1: #ffffff; --pr-drum2: #d6dde3; --pr-drum3: #98a5b0; --pr-acc2: #2b7cd2; --pr-lamp: #ffcf4f;
   --pr-dark: #2a3036; --pr-dark2: #4a535b; --pr-steel1: #f3f6f8; --pr-steel2: #a8b4be; --pr-steel3: #5c6a76; --pr-rope: #343b42;
   --pr-glass1: #dcf0fb; --pr-glass2: #7ea6c1; --pr-opr: #36414b;
-  --pr-conc1: #c5c2bb; --pr-conc2: #dad7d0; --pr-fresh1: #9c9992; --pr-fresh2: #b6b3ac; --pr-agg1: #85817a; --pr-agg2: #ebe8e1;
+  --pr-conc1: #b3b9c0; --pr-conc2: #ccd1d6; --pr-fresh1: #8a9299; --pr-fresh2: #a7aeb5; --pr-concedge: #4f565d; --pr-agg1: #85817a; --pr-agg2: #ebe8e1;
   --pr-rebar: #b3502a; --pr-rebar2: #c96b3d; --pr-spacer: #ece9e2;
   --pr-slurry1: rgba(138, 133, 96, 0.8); --pr-slurry2: rgba(116, 110, 76, 0.92); --pr-slurryd: rgba(55, 52, 28, 0.35);
   --pr-grout1: #f0ede6; --pr-grout2: #d8d4c9; --pr-stone: #dcd7cd; --pr-stone2: #8d877b; --pr-mix2: rgba(110, 100, 86, 0.35);
@@ -32,7 +32,7 @@
     --pr-pump: #a9b2ba; --pr-pump3: #5c6974; --pr-truck: #b9c1c8; --pr-truck2: #5c6974; --pr-drum1: #c7ced4; --pr-drum2: #97a2ab; --pr-drum3: #5f6c77;
     --pr-dark: #15191d; --pr-dark2: #2c343b; --pr-steel1: #d5dde3; --pr-steel2: #8794a0; --pr-steel3: #46525c; --pr-rope: #b9c4cc;
     --pr-glass1: #4c6c84; --pr-glass2: #22384a; --pr-opr: #101519;
-    --pr-conc1: #8d8a84; --pr-conc2: #a4a19a; --pr-fresh1: #6c6a64; --pr-fresh2: #817e77; --pr-agg1: #4f4c47; --pr-agg2: #b3b0a9;
+    --pr-conc1: #87909a; --pr-conc2: #9ea6ae; --pr-fresh1: #68717a; --pr-fresh2: #7f8891; --pr-concedge: #c9d0d6; --pr-agg1: #4f4c47; --pr-agg2: #b3b0a9;
     --pr-rebar: #d06a3a; --pr-rebar2: #e0814f; --pr-spacer: #b3b0a9;
     --pr-slurry1: rgba(110, 106, 76, 0.85); --pr-slurry2: rgba(90, 86, 58, 0.95);
     --pr-grout1: #b9b5ab; --pr-grout2: #9c988e; --pr-stone: #a49f96; --pr-stone2: #5d584f;
@@ -52,7 +52,7 @@
   --pr-pump: #a9b2ba; --pr-pump3: #5c6974; --pr-truck: #b9c1c8; --pr-truck2: #5c6974; --pr-drum1: #c7ced4; --pr-drum2: #97a2ab; --pr-drum3: #5f6c77;
   --pr-dark: #15191d; --pr-dark2: #2c343b; --pr-steel1: #d5dde3; --pr-steel2: #8794a0; --pr-steel3: #46525c; --pr-rope: #b9c4cc;
   --pr-glass1: #4c6c84; --pr-glass2: #22384a; --pr-opr: #101519;
-  --pr-conc1: #8d8a84; --pr-conc2: #a4a19a; --pr-fresh1: #6c6a64; --pr-fresh2: #817e77; --pr-agg1: #4f4c47; --pr-agg2: #b3b0a9;
+  --pr-conc1: #87909a; --pr-conc2: #9ea6ae; --pr-fresh1: #68717a; --pr-fresh2: #7f8891; --pr-concedge: #c9d0d6; --pr-agg1: #4f4c47; --pr-agg2: #b3b0a9;
   --pr-rebar: #d06a3a; --pr-rebar2: #e0814f; --pr-spacer: #b3b0a9;
   --pr-slurry1: rgba(110, 106, 76, 0.85); --pr-slurry2: rgba(90, 86, 58, 0.95);
   --pr-grout1: #b9b5ab; --pr-grout2: #9c988e; --pr-stone: #a49f96; --pr-stone2: #5d584f;
