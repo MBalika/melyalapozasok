@@ -111,3 +111,8 @@ svg .g3x-lab { font-weight: 700; font-size: 11px; }
 .proscons .con.furt-neu li::marker { content: "•  "; color: var(--grp); }
 /* a fázisábrák keskeny kártyáiban a leírás balra zárt (sorkizárva lyukas lenne) */
 .g3-phases .g3-ph figcaption span { text-align: left; }
+/* CFA-monitor: a gép metszete és a fülkemonitor egymás mellett, keskeny nézetben egymás alatt */
+#furt .cfa-pair { display: grid; grid-template-columns: 34fr 30fr; gap: 12px; align-items: start; }
+#furt .cfa-pair svg { width: 100%; height: auto; display: block; }
+#furt .cfa-pair .cfa-scene { border-radius: 10px; overflow: hidden; }
+@media (max-width: 640px) { #furt .cfa-pair { grid-template-columns: 1fr; } #furt .cfa-pair .cfa-mon { max-width: 380px; margin-inline: auto; } }

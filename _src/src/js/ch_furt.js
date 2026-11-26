@@ -1,54 +1,8 @@
 // C05 – Fúrt (talajhelyettesítéses) cölöpök: fúrófejek, CFA-monitor, technológiaválasztó, kvíz
-import { register, shell, slider, seg, toggle, select, stat, verdict, svg, figure, clear, fmt, clamp, pathD, h, loop, onTheme } from './core.js';
+import { register, shell, slider, seg, toggle, select, stat, verdict, figure, clear, fmt, clamp, h, loop } from './core.js';
 import { defineQuiz } from './ui.js';
 import './g3_phases.js';
-import { toolScene, TOOL_LOOP } from './proc.js';
-
-/* ------------------------------------------------------------------ rajzsegédek */
-const T = (p, x, y, s, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: s, ...o }, p);
-const R = (p, x, y, w, hh, cls, o = {}) => svg('rect', { x, y, width: Math.max(0, w), height: Math.max(0, hh), class: cls, ...o }, p);
-const C = (p, cx, cy, r, cls, o = {}) => svg('circle', { cx, cy, r: Math.max(0, r), class: cls, ...o }, p);
-const L = (p, x1, y1, x2, y2, style, o = {}) => svg('line', { x1, y1, x2, y2, style, ...o }, p);
-const P = (p, pts, style, close = false, o = {}) => svg('path', { d: pathD(pts, close), style, ...o }, p);
-const G = (p, o = {}) => svg('g', o, p);
-function ar(p, x1, y1, x2, y2, col = 'var(--ink)', w = 2, hd = 7) {
-  const g = G(p);
-  const a = Math.atan2(y2 - y1, x2 - x1);
-  L(g, x1, y1, x2 - Math.cos(a) * hd * 0.6, y2 - Math.sin(a) * hd * 0.6, `stroke:${col};stroke-width:${w};stroke-linecap:round`);
-  P(g, [[x2, y2], [x2 - Math.cos(a - 0.45) * hd, y2 - Math.sin(a - 0.45) * hd], [x2 - Math.cos(a + 0.45) * hd, y2 - Math.sin(a + 0.45) * hd]], `fill:${col}`, true);
-  return g;
-}
-const SOIL = {
-  k_homok: { t: 'Homok', cls: 'f-soilA', pat: 'pat-sand', szem: true },
-  k_kavics: { t: 'Kavics', cls: 'f-soilC', pat: 'pat-gravel', szem: true },
-  k_agyag: { t: 'Agyag (kötött)', cls: 'f-soilB', pat: 'pat-clay', szem: false },
-};
-function soilRect(p, x, y, w, hh, key) {
-  const s = SOIL[key];
-  R(p, x, y, w, hh, s.cls);
-  R(p, x, y, w, hh, '', { fill: `url(#${s.pat})`, opacity: 0.75 });
-}
-/**
- * Sematikus cölöpözőgép a furat bal oldalán: lánctalpas alváz, felsőváz fülkével és ellensúllyal,
- * a terepre támaszkodó árboc hátsó kitámasztással, fent konzol a furat tengelyéig (X).
- * o.off: az árboc távolsága a furat tengelyétől; o.top: az árboc teteje (lehet a kép felett is: a kép levágja).
- */
-function rigL(p, X, G0, o = {}) {
-  const g = G(p), mx = X - (o.off ?? 46), top = o.top ?? 6;
-  R(g, mx - 122, G0 - 16, 104, 16, 'f-steel2', { rx: 8 });
-  for (let i = 0; i < 6; i++) { C(g, mx - 112 + i * 16.8, G0 - 8, 4.6, 'f-surface', { opacity: 0.85 }); C(g, mx - 112 + i * 16.8, G0 - 8, 1.6, 'f-steel2'); }
-  R(g, mx - 114, G0 - 40, 86, 22, 'f-steel', { rx: 4, style: 'stroke:var(--steelm2);stroke-width:1.2' });
-  R(g, mx - 120, G0 - 47, 24, 29, 'f-steel2', { rx: 3 });
-  R(g, mx - 56, G0 - 62, 28, 44, 'f-steel', { rx: 4, style: 'stroke:var(--steelm2);stroke-width:1.2' });
-  R(g, mx - 52, G0 - 58, 20, 16, 'f-surface', { rx: 2, opacity: 0.88 });
-  L(g, mx - 4, Math.max(top, 0) + (G0 - Math.max(top, 0)) * 0.3, mx - 100, G0 - 44, 'stroke:var(--steelm2);stroke-width:3;stroke-linecap:round');
-  L(g, mx - 28, G0 - 28, mx - 5, G0 - 28, 'stroke:var(--steelm2);stroke-width:6');
-  R(g, mx - 5, top, 10, G0 - top, 'f-acc');
-  for (let y = Math.max(top, 0) + 10; y < G0 - 12; y += 14) L(g, mx - 3.5, y, mx + 3.5, y + 8, 'stroke:var(--surface);stroke-width:1;opacity:.45');
-  R(g, mx - 10, G0 - 4, 20, 4, 'f-steel2');
-  if (o.jib !== false) { R(g, mx - 5, top, X - mx + 12, 7, 'f-acc', { rx: 2 }); C(g, X, top + 8, 5, 'f-steel2'); C(g, X, top + 8, 1.6, 'f-surface'); }
-  return g;
-}
+import { toolScene, TOOL_LOOP, cfaScene, cfaMonitor } from './proc.js';
 
 /* ================================================================== 1. Fúrófejek munkaciklusa */
 const TOOLS = {
@@ -88,45 +42,20 @@ register('furtCfa', (root) => {
   const bGo = h('button', { class: 'btn btn-acc btn-sm', type: 'button' }, '▶ Fúrás és betonozás');
   const bFast = h('button', { class: 'btn btn-line btn-sm', type: 'button', 'aria-pressed': 'false' }, '×4 gyorsítás');
   row.append(bGo, bFast); ctrls.append(row);
-  const W = 600, H = 452, G0 = 78, BOT = 432;
-  const fig = figure(viz, W, H);
+  // bal oldalon a gép metszetben, jobbra a fülkemonitor (keskeny nézetben egymás alatt)
+  const pair = h('div', { class: 'cfa-pair' }); viz.append(pair);
+  const figS = figure(pair, 340, 470, 'fig pr-svg cfa-scene');
+  const figM = figure(pair, 300, 470, 'fig cfa-mon');
   const vd = verdict(viz);
   const rep = h('div', { class: 'furt-rep', hidden: true }); viz.append(rep);
   const oZ = stat(out, { label: 'A spirál talpa', unit: 'm' }), oQ = stat(out, { label: 'Betonáram', unit: 'm³/óra', d: 0 }), oR = stat(out, { label: 'Betonfogyás / elméleti', unit: '%' }), oV = stat(out, { label: 'Bedolgozott beton', unit: 'm³' });
-  const bg = G(fig), dyn = G(fig);
-  const XS = 190, BWmax = 92; // metszet
-  const CX0 = 330, CX1 = 580; // diagram
-  const rMin = 0, rMax = 1.6;
-  const cx = (r) => CX0 + (clamp(r, rMin, rMax) - rMin) / (rMax - rMin) * (CX1 - CX0);
   let st, fast = false, pileNo = 17;
   const A = () => Math.PI * (sD.v / 100) ** 2 / 4;
   const Q = () => sP.v * 0.1; // m³/perc
-  const sc = () => (BOT - G0) / sL.v;
-  const paintBg = () => {
-    clear(bg);
-    const L0 = sL.v, k = sc();
-    R(bg, 0, 0, W, G0, 'f-sky');
-    soilRect(bg, 0, G0, 290, H - G0, 'k_homok');
-    R(bg, 0, G0 + 0.45 * (BOT - G0), 290, 0.25 * (BOT - G0), 'f-soilE', { opacity: 0.55 });
-    T(bg, 8, G0 + 0.45 * (BOT - G0) + 16, 'puha, iszapos réteg', 't-sm halo');
-    L(bg, 0, G0, 290, G0, 'stroke:var(--soil-line);stroke-width:2');
-    T(bg, 8, G0 + 16, 'közepes homok', 't-sm halo');
-    // gép
-    rigL(bg, XS, G0, { off: 58, top: -12, jib: false }); // a magas árboc a kép fölé nyúlik
-    // diagram háttér
-    R(bg, CX0, G0, CX1 - CX0, BOT - G0, 'f-surface', { style: 'stroke:var(--line2);stroke-width:1' });
-    R(bg, cx(1.0), G0, cx(1.25) - cx(1.0), BOT - G0, 'f-ok', { opacity: 0.12 });
-    for (const r of [0, 0.5, 1, 1.5]) { L(bg, cx(r), G0, cx(r), BOT, `stroke:var(--line2);stroke-width:${r === 1 ? 2 : 1}`); T(bg, cx(r), BOT + 15, fmt(r * 100, 0) + ' %', 't-sm', { 'text-anchor': 'middle' }); }
-    T(bg, (CX0 + CX1) / 2, G0 - 26, 'betonfogyás / elméleti', 't-lab', { 'text-anchor': 'middle' });
-    T(bg, cx(1.12), G0 - 8, 'jó tartomány', 't-sm t-ok', { 'text-anchor': 'middle' });
-    const stp = L0 > 16 ? 4 : 2;
-    for (let z = 0; z <= L0; z += stp) { L(bg, CX0 - 6, G0 + z * k, CX0, G0 + z * k, 'stroke:var(--ink2)'); T(bg, CX0 - 9, G0 + z * k + 4, `${z}`, 't-sm', { 'text-anchor': 'end' }); }
-    T(bg, CX0 - 9, G0 - 8, 'm', 't-sm', { 'text-anchor': 'end' });
-  };
   const fresh = () => {
     const L0 = sL.v, n = Math.round(L0 / 0.25);
-    st = { phase: 'idle', z: 0, bins: new Array(n).fill(null), n, vol: 0, pmin: Infinity, vmax: 0, tsum: 0 };
-    rep.hidden = true; paintBg();
+    st = { phase: 'idle', z: 0, bins: new Array(n).fill(null), pb: new Array(n).fill(null), vb: new Array(n).fill(null), n, vol: 0, pmin: Infinity, vmax: 0, tsum: 0, tot: null };
+    rep.hidden = true;
     vd.set('', 'Készen áll a gép.', ' Indítsd a fúrást: a spirál lehajt a végső mélységig, aztán te húzod fel – a betonnyomással és a húzási sebességgel együtt.');
   };
   sD.on(() => { if (st.phase !== 'pull') fresh(); }); sL.on(() => { if (st.phase !== 'pull' && st.phase !== 'drill') fresh(); });
@@ -134,6 +63,7 @@ register('furtCfa', (root) => {
   bFast.addEventListener('click', () => { fast = !fast; bFast.setAttribute('aria-pressed', fast); bFast.classList.toggle('on', fast); bFast.textContent = fast ? '×1 normál' : '×4 gyorsítás'; });
   const finish = () => {
     st.phase = 'done';
+    st.tot = st.vol / (A() * sL.v);
     const a = A(), L0 = sL.v, Vth = a * L0;
     const bins = st.bins.map((b) => b ?? 0);
     let lo = Infinity, loZ = 0; const necks = [];
@@ -159,54 +89,25 @@ register('furtCfa', (root) => {
   };
   const draw = (tt, dt) => {
     const sp = (fast ? 4 : 1) * 0.8; // szimulált perc / valós s
-    const L0 = sL.v, k = sc();
-    if (st.phase === 'drill') { st.z = Math.min(L0, st.z + dt * 6 * (fast ? 3 : 1)); if (st.z >= L0) st.phase = 'pull'; }
+    const L0 = sL.v;
+    if (st.phase === 'drill') { st.z = Math.min(L0, st.z + dt * 1.6 * (fast ? 3 : 1)); if (st.z >= L0) st.phase = 'pull'; }
     else if (st.phase === 'pull') {
       const dtm = dt * sp, v = sV.v, q = Q(), a = A();
-      const dz = v * dtm;
-      const z0 = st.z, z1 = Math.max(0, z0 - dz);
+      const z0 = st.z, z1 = Math.max(0, z0 - v * dtm);
       const r = q / (v * a);
-      for (let i = Math.floor(z1 / 0.25); i <= Math.min(st.n - 1, Math.floor((z0 - 1e-9) / 0.25)); i++) st.bins[i] = r;
+      for (let i = Math.floor(z1 / 0.25); i <= Math.min(st.n - 1, Math.floor((z0 - 1e-9) / 0.25)); i++) { st.bins[i] = r; st.pb[i] = sP.v; st.vb[i] = v; }
       st.vol += Math.min(q * dtm, a * (z0 - z1) * 3);
       st.pmin = Math.min(st.pmin, sP.v); st.vmax = Math.max(st.vmax, v); st.tsum += dtm;
       st.z = z1;
       if (st.z <= 0) finish();
     }
-    clear(dyn);
-    const g = dyn;
-    const bw = BWmax * sD.v / 120;
-    const xl = XS - bw / 2;
-    // kész cölöp (alulról)
-    for (let i = 0; i < st.n; i++) {
-      const r = st.bins[i]; if (r === null) continue;
-      const y = G0 + i * 0.25 * k, hh = 0.25 * k + 0.3;
-      const w = r < 1 ? bw * Math.sqrt(Math.max(0.08, r)) : bw * Math.sqrt(Math.min(r, 1.35));
-      R(g, XS - w / 2, y, w, hh, r < 1 ? 'f-bad' : 'f-fresh', { opacity: r < 1 ? 0.75 : 1 });
-      // diagram oszlop
-      R(g, CX0, y, cx(r) - CX0, hh, r < 1 ? 'f-bad' : r > 1.4 ? 'f-warn' : 'f-grp');
-    }
-    for (const rr of [1, 1.25]) L(g, cx(rr), G0, cx(rr), BOT, `stroke:var(--${rr === 1 ? 'ink' : 'ok'});stroke-width:1.5;stroke-dasharray:${rr === 1 ? '0' : '4 3'};opacity:.7`);
-    // furat a spirál felett/alatt
-    if (st.phase === 'drill' || st.phase === 'pull') {
-      const yb = G0 + st.z * k;
-      const yt = yb - L0 * k; // a spirál teteje (a fúrás elején a kép felett van)
-      R(g, XS - 4, Math.max(0, yt), 8, yb - Math.max(0, yt), 'f-steel2');
-      if (yt - 14 > -14) { L(g, XS - 58, yt - 7, XS - 12, yt - 7, 'stroke:var(--steelm2);stroke-width:6'); R(g, XS - 13, yt - 14, 26, 14, 'f-steel', { rx: 3, style: 'stroke:var(--steelm2);stroke-width:1.2' }); }
-      const pitch = 20, ph = (tt * (st.phase === 'drill' ? 60 : 10)) % pitch;
-      // a menetek között végig talaj van: fúráskor a terep alatt, húzáskor a kiemelt szakaszon is
-      const ys0 = st.phase === 'drill' ? G0 : Math.max(0, yt);
-      for (let y = Math.max(0, yt) - pitch + ph; y < yb - 4; y += pitch) {
-        if (y + 4 >= ys0) P(g, [[xl + 2, y + 4], [xl + bw - 2, y + 12], [xl + bw - 2, y + 18], [xl + 2, y + 10]], 'fill:color-mix(in srgb, var(--soilA) 62%, var(--soilE))', true);
-        L(g, xl + 1, y, xl + bw - 1, y + 8, 'stroke:var(--steelm2);stroke-width:3;stroke-linecap:round');
-      }
-      if (st.phase === 'pull' && sP.v > 0) { const kk = (tt * 3) % 1; ar(g, XS, yb - 30 + kk * 20, XS, yb - 6 + kk * 14, 'var(--surface)', 2, 6); }
-      // aktuális sor a diagramon
-      L(g, CX0, yb, CX1, yb, 'stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3');
-      if (st.phase === 'pull') { const r = Q() / (sV.v * A()); C(g, cx(r), yb, 6, r < 1 ? 'f-bad' : 'f-ok', { style: 'stroke:var(--surface);stroke-width:2' }); }
-    }
-    T(g, XS, BOT + 16, `Ø ${sD.v} cm · ${fmt(L0, 0)} m`, 't-sm', { 'text-anchor': 'middle' });
-    // kimenetek
     const q = Q(), r = q / (sV.v * A());
+    const o = { L: L0, D: sD.v, z: st.z, phase: st.phase, bins: st.bins, pb: st.pb, vb: st.vb, tt, p: sP.v, v: sV.v, r, tot: st.tot, pile: pileNo, pumpOn: st.phase === 'pull' && sP.v > 0 };
+    // nyugalomban (készenlét, kész cölöp) csak akkor rajzol újra, ha valami változott
+    const sig = `${st.phase}|${st.z}|${sD.v}|${L0}|${sV.v}|${sP.v}|${pileNo}|${Math.round(figS.getBoundingClientRect().width)}`;
+    const moving = st.phase === 'drill' || st.phase === 'pull';
+    if (moving || sig !== st.sig) { st.sig = sig; cfaScene(figS, o); cfaMonitor(figM, o); }
+    // kimenetek
     oZ.set(st.z, null);
     oQ.set(q * 60, null);
     oR.set(r * 100, r < 1 ? 'bad' : r < 1.05 || r > 1.4 ? 'warn' : 'ok', fmt(r * 100, 0));
@@ -215,12 +116,11 @@ register('furtCfa', (root) => {
       if (r < 1) vd.set('bad', 'Vigyázz – nyakasodik!', ` Most ${fmt(r * 100, 0)} %: kevesebb beton érkezik, mint amennyi teret a spirál felszabadít. Lassíts, vagy adj több nyomást!`);
       else if (r > 1.4) vd.set('warn', 'Sok a beton.', ' A beton a talajba préselődik – pazarló, és megemelheti a környezetet. Csökkentsd a nyomást, vagy húzz kicsit gyorsabban.');
       else vd.set('ok', 'Jó ütem.', ` A betonáram lépést tart a húzással (${fmt(r * 100, 0)} %). Tartsd így a felszínig!`);
-    } else if (st.phase === 'drill') vd.set('', 'Fúrás…', ' A spirál lehajt; a furadék a meneteken marad, és megtámasztja a falat. A betonozónyílás zárólapja zárva.');
+    } else if (st.phase === 'drill') vd.set('', 'Fúrás…', ' A spirál forogva lehajt; a furadék a meneteken marad, és megtámasztja a furat falát. A betonozónyílás zárólapja zárva.');
   };
   fresh();
   loop(root, (tt, dt) => draw(tt, dt));
   draw(0, 0);
-  onTheme(paintBg);
 });
 
 /* ================================================================== 5. Technológiaválasztó */
