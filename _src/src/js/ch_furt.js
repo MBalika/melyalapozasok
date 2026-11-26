@@ -37,7 +37,7 @@ register('furtCfa', (root) => {
   const sD = seg(ctrls, { label: 'Átmérő', options: [40, 60, 80, 100, 120].map((v) => ({ v, t: v + ' cm' })), value: 60 });
   const sL = slider(ctrls, { label: 'Cölöphossz', min: 6, max: 24, step: 1, value: 14, unit: 'm', d: 0 });
   const sV = slider(ctrls, { label: 'Húzási sebesség', sym: 'v', min: 0.2, max: 4, step: 0.1, value: 1.5, unit: 'm/perc', d: 1 });
-  const sP = slider(ctrls, { label: 'Betonnyomás', sym: 'p', min: 0, max: 10, step: 0.5, value: 5, unit: 'bar', d: 1, hint: 'Szemléltető modell: a betonáram a nyomással arányos (1 bar ≈ 6 m³/óra).' });
+  const sP = slider(ctrls, { label: 'Betonnyomás', sym: 'p', min: 0, max: 10, step: 0.5, value: 5, unit: 'bar', d: 1, hint: 'Szemléltető modell: a betonáram a nyomással arányos (Ø 60 cm-nél 1 bar ≈ 6 m³/óra, nagyobb átmérőnél arányosan nagyobb szivattyúval).' });
   const row = h('div', { class: 'play-row' });
   const bGo = h('button', { class: 'btn btn-acc btn-sm', type: 'button' }, '▶ Fúrás és betonozás');
   const bFast = h('button', { class: 'btn btn-line btn-sm', type: 'button', 'aria-pressed': 'false' }, '×4 gyorsítás');
@@ -51,7 +51,7 @@ register('furtCfa', (root) => {
   const oZ = stat(out, { label: 'A spirál talpa', unit: 'm' }), oQ = stat(out, { label: 'Betonáram', unit: 'm³/óra', d: 0 }), oR = stat(out, { label: 'Betonfogyás / elméleti', unit: '%' }), oV = stat(out, { label: 'Bedolgozott beton', unit: 'm³' });
   let st, fast = false, pileNo = 17;
   const A = () => Math.PI * (sD.v / 100) ** 2 / 4;
-  const Q = () => sP.v * 0.1; // m³/perc
+  const Q = () => sP.v * 0.1 * (sD.v / 60) ** 2; // m³/perc – nagyobb cölöphöz arányosan nagyobb szivattyú
   const fresh = () => {
     const L0 = sL.v, n = Math.round(L0 / 0.25);
     st = { phase: 'idle', z: 0, bins: new Array(n).fill(null), pb: new Array(n).fill(null), vb: new Array(n).fill(null), n, vol: 0, pmin: Infinity, vmax: 0, tsum: 0, tot: null };

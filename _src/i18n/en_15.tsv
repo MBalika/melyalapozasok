@@ -30,7 +30,7 @@ efe4b12	plug
 ac85719	Pile length
 5010a48	Withdrawal rate
 b76a6af	Concrete pressure
-a5fe583	Illustrative model: the concrete flow is proportional to the pressure (1 bar ≈ 6 m³/hour).
+afc6d80	Illustrative model: the concrete flow is proportional to the pressure (for Ø 60 cm 1 bar ≈ 6 m³/hour; larger diameters use a proportionally larger pump).
 7ce1030	▶ Drilling and concreting
 1af61b2	×4 speed
 5636fe1	Tip of the auger
