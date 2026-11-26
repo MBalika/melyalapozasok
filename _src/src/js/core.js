@@ -490,7 +490,8 @@ export const GUARD = (() => {
     obs = new MutationObserver(recs => {
       for (const r of recs) {
         const t = r.type === 'characterData' ? r.target.parentElement : r.target;
-        if (t) pend.add(t);
+        // az animált SVG-ábrák (folyamatábrák, jelenetek) belseje nem formázandó szöveg: nem kell újra átnézni
+        if (t && !(t instanceof SVGElement)) pend.add(t);
       }
       if (!sched) { sched = true; requestAnimationFrame(flush); }
     });
