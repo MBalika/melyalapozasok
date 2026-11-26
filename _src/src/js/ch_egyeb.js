@@ -1,7 +1,7 @@
 // C06 – Egyéb cölöpök: mikrocölöp (aláfogás, kihajlás), jet-grouting (oszlopgyár), mélykeverés, kavicscölöp
 import { register, shell, slider, seg, toggle, stat, verdict, h, svg, figure, clear, fmt, clamp, lerp, smooth, cssVar, onTheme, loop, pathD } from './core.js';
 import { defineQuiz } from './ui.js';
-import { underpinScene } from './proc.js';
+import { underpinScene, buckleScene } from './proc.js';
 
 /* ------------------------------------------------------------------ segédek */
 const txt = (p, x, y, t, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: t, ...o }, p);
@@ -150,18 +150,6 @@ register('egy-kihajlas', (root) => {
     const g = svg('g', { transform: nar ? 'translate(90 0)' : null }, fig);
     const PX = 40, X = 114, CAP0 = 30, CAP1 = 54;   // X: a fejtömb (34–194) tengelye
     const ys = CAP1 + lf.v * PX;
-    const soilShade = clamp((cu.v - 2) / 40, 0, 1);
-    svg('rect', { x: 20, y: ys, width: 190, height: 390 - ys, class: soilShade < 0.35 ? 'f-soilF' : soilShade < 0.7 ? 'f-soilB' : 'f-soilE' }, g);
-    svg('rect', { x: 20, y: ys, width: 190, height: 390 - ys, fill: 'url(#pat-clay)', opacity: 0.55 }, g);
-    if (lf.v > 0) {
-      svg('rect', { x: 20, y: CAP1, width: 190, height: ys - CAP1, class: 'f-surface', opacity: 0.7 }, g);
-      svg('line', { x1: 20, y1: ys, x2: 210, y2: ys, class: 's-soil', 'stroke-width': 1.4, 'stroke-dasharray': '5 4' }, g);
-      txt(g, nar ? 14 : 26, (CAP1 + ys) / 2 + 4, 'szabad szakasz', 't-sm', { 'text-anchor': nar ? 'end' : 'start' });
-    }
-    svg('rect', { x: 34, y: CAP0, width: 160, height: CAP1 - CAP0, class: 'f-conc' }, g);
-    svg('rect', { x: 34, y: CAP0, width: 160, height: CAP1 - CAP0, fill: 'url(#pat-conc)' }, g);
-    txt(g, 124, CAP0 - 8, 'fejtömb, alap', 't-sm');
-    carrow(g, X, 0, X, CAP0 - 2, 'var(--bad)', 3, 9);
     // kihajlási alak (torzított)
     const Lepx = (lf.v + (Math.PI * R.lam) / Math.SQRT2) * PX;
     const halfPx = R.half * PX;
@@ -178,18 +166,7 @@ register('egy-kihajlas', (root) => {
       }
       pts.push([X + w, y]); base.push([X, y]);
     }
-    svg('path', { d: pathD(base), fill: 'none', class: 's-muted', 'stroke-width': 1, 'stroke-dasharray': '3 4' }, g);
-    svg('path', { d: pathD(pts), fill: 'none', style: 'stroke:var(--grout)', 'stroke-width': gr.v ? 9 : 0, 'stroke-linecap': 'round', opacity: 0.9 }, g);
-    svg('path', { d: pathD(pts), fill: 'none', class: 's-steel', 'stroke-width': 3.2, 'stroke-linecap': 'round' }, g);
-    // félhullám méret
-    const hy0 = ys + 6, hy1 = Math.min(384, ys + 6 + halfPx);
-    svg('line', { x1: 186, y1: hy0, x2: 186, y2: hy1, class: 's-ink', 'stroke-width': 1 }, g);
-    svg('line', { x1: 181, y1: hy0, x2: 191, y2: hy0, class: 's-ink', 'stroke-width': 1 }, g);
-    svg('line', { x1: 181, y1: hy1, x2: 191, y2: hy1, class: 's-ink', 'stroke-width': 1 }, g);
-    // a felirat sötét talajon áll: kis hátlapot kap, hogy világos és sötét témában is olvasható legyen
-    svg('rect', { x: 122, y: (hy0 + hy1) / 2 - 17, width: 61, height: 33, rx: 6, class: 'f-surface', opacity: 0.92 }, g);
-    txt(g, 178, (hy0 + hy1) / 2 - 4, 'félhullám', 't-sm', { 'text-anchor': 'end' });
-    txt(g, 178, (hy0 + hy1) / 2 + 10, nb(fmt(R.half, 1) + ' m'), 't-num', { 'text-anchor': 'end' });
+    buckleScene(g, { cu: cu.v, lf: lf.v, ys, pts, base, half: R.half, halfPx, grout: gr.v, X, CAP0, CAP1, nar, crit: R.Ncr < KH_R[0] });
     // ---------------- jobb panel: N_cr(c_u)
     const c = svg('g', {}, fig);
     const x0 = nar ? 52 : 290, x1 = nar ? 386 : 700, y0 = nar ? 735 : 350, y1 = nar ? 440 : 30;

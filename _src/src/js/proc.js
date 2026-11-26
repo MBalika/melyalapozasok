@@ -3147,6 +3147,55 @@ export function underpinScene(fig, o) {
   tg(g, nar ? 470 : 600, CEIL[1] + 46, 'alacsony belmagasság');
 }
 
+/* ================================================================== 6.1 – Kihajlás: a mikrocölöp a talajban (bal panel) */
+// o: { cu, lf, ys, pts (kihajlott tengely), base, half (m), halfPx, grout, X, CAP0, CAP1, nar, crit (a kihajlás mértékadó) }
+export function buckleScene(g, o) {
+  defs(); CUR.W = 230;
+  const { X, CAP0, CAP1, ys, pts, base, halfPx } = o, x0 = 20, x1 = 210, BOT = 390;
+  // talaj a szilárdság szerint: nagyon puha szerves – puha iszap – agyag
+  const sk = o.cu < 10 ? 'peat' : o.cu < 25 ? 'silt' : 'clay', [col, pat] = SOIL[sk];
+  R(g, x0, 0, x1 - x0, CAP1, 'fill:url(#pr-sky)');
+  R(g, x0, ys, x1 - x0, BOT - ys, F(col)); R(g, x0, ys, x1 - x0, BOT - ys, `fill:url(#${pat})`);
+  R(g, x0, ys, x1 - x0, BOT - ys, 'fill:url(#pr-deep)');
+  if (o.lf > 0) {
+    // ágyazatlan szakasz: üreg, nagyon laza feltöltés vagy lemélyített pince a fejtömb alatt
+    R(g, x0, CAP1, x1 - x0, ys - CAP1, F('bore'));
+    Ln(g, x0, ys, x1, ys, SK('layer', 1.4, 'stroke-dasharray:5 4'));
+    tag(g, X - 14, (CAP1 + ys) / 2 + 2, 'szabad szakasz', { fs: o.nar ? 13 : 10.5, anchor: 'end' });
+  } else Ln(g, x0, CAP1, x1, CAP1, SK('ground', 1.6));
+  // oldalirányú ágyazás: rugók a cölöp két oldalán, a merevség a c_u-val nő
+  const kk = Math.min(1, 0.25 + o.cu / 40), sp = 22;
+  for (let y = ys + 14; y < BOT - 8; y += sp) {
+    let w = X; for (const p of pts) if (Math.abs(p[1] - y) < 2) { w = p[0]; break; }
+    for (const sx of [-1, 1]) {
+      const a = w + sx * 9, b = sx < 0 ? x0 + 6 : x1 - 6, n = 7, amp = 2 + 3 * kk;
+      let d = `M${a.toFixed(1)} ${y}`;
+      for (let i = 1; i < n; i++) d += ` L${(a + ((b - a) * i) / n).toFixed(1)} ${(y + (i % 2 ? -amp : amp)).toFixed(1)}`;
+      d += ` L${b} ${y}`;
+      P(g, d, SK('halo', 2.6 + 0.8 * kk, 'opacity:.35;stroke-linejoin:round'));
+      P(g, d, SK('dark2', 0.9 + 0.8 * kk, 'opacity:.7;stroke-linejoin:round'));
+      R(g, b - (sx < 0 ? 3 : 0), y - 4, 3, 8, F('dark2', 0.5));
+    }
+  }
+  // a cölöp: torzítatlan tengely, cementtest és menetbordás acélrúd a kihajlott alakon
+  P(g, 'M' + base.map((p) => `${p[0]} ${p[1]}`).join(' L'), SK('labline', 1, 'stroke-dasharray:3 4'));
+  const d = 'M' + pts.map((p) => `${p[0].toFixed(1)} ${p[1]}`).join(' L');
+  if (o.grout) { P(g, d, SK('concedge', 13, 'stroke-linecap:round;opacity:.55')); P(g, d, SK('grout1', 11, 'stroke-linecap:round')); }
+  P(g, d, SK(o.crit ? 'push' : 'steel3', 4, 'stroke-linecap:round'));
+  P(g, d, SK('steel1', 1.2, 'stroke-linecap:round;opacity:.9'));
+  // fejtömb és a teher
+  concrete(g, 34, CAP0, 160, CAP1 - CAP0, false);
+  R(g, X - 9, CAP1 - 8, 18, 4, F('steel3'));
+  arrowV(g, X, 0, CAP0 - 2, { w: 3.2, s: 10, c: 'push' });
+  tag(g, 206, 14, 'fejtömb, alap', { fs: o.nar ? 13 : 11, anchor: 'end' });
+  // félhullám
+  const hy0 = ys + 6, hy1 = Math.min(BOT - 6, ys + 6 + halfPx);
+  Ln(g, 203, hy0, 203, hy1, SK('labline', 1.2)); Ln(g, 198, hy0, 208, hy0, SK('labline', 1.2)); Ln(g, 198, hy1, 208, hy1, SK('labline', 1.2));
+  const fz = o.nar ? 12.5 : 10, ym = (hy0 + hy1) / 2;
+  tag(g, 199, ym - fz * 0.9, EN ? 'half-wave' : 'félhullám', { fs: fz, anchor: 'end' });
+  tag(g, 199, ym + fz * 0.9, `${o.half.toFixed(1).replace('.', EN ? '.' : ',')} m`, { fs: fz, anchor: 'end' });
+}
+
 /* ================================================================== 6. fejezet – a négy módszer kártyaképe */
 // Kis, de teljes jelenet a folyamatábrák elemtárából: gép, eszköz, kész oszlop, talajrétegek, néhány felirat.
 const CARD = { W: 400, H: 250, GY: 140 };
