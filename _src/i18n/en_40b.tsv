@@ -8,7 +8,6 @@ a395c23	concreting – reinforcement, reinforcement – concreting
 861f111	casing, bentonite slurry, soil on the auger, not needed
 13949b8	short auger, continuous auger, grab, drilling bucket
 db3d9e5	slurry level
-7671f71	the footing
 9c41bc4	wall load
 27acfde	in gravel
 2c61847	in clay
@@ -27,7 +26,6 @@ b14856d	min
 632cc5e	anchors
 63d3da0	bulkhead wall
 2db62e7	working chamber
-d979f73@js/ch_egyeb.js:109	basement
 8351eb3	DECOMPRESSION
 56ab49a@js/ch_kut.js:111	GWT
 56ab49a@js/ch_resfal.js:88	GWT

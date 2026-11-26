@@ -3030,6 +3030,123 @@ export function cfaMonitor(s, o) {
   box(224, 62, 'FOGYÁS', rr != null ? f1(rr * 100, 0) : '–', '%', rr == null ? MC.tx : rr < 1 ? MC.bad : rr > 1.4 ? MC.warn : MC.ok);
 }
 
+/* ================================================================== 6.1 – Aláfogás mikrocölöppel (lépésenkénti metszet) */
+// o: { step 0–4, k (0–1, a lépés animációja), nar (keskeny nézet), talp (a talpra jutó teherhányad) }
+// A meglévő falazott fal sávalapja alatt a pincéből, kompakt fúrógéppel, ferdén, az alaptesten át fúrt, injektált
+// magrudas mikrocölöpök; a fal mentén a dőlés váltakozik (a következő cölöp másik síkban).
+const UP = { W: 720, H: 430, WALL: [320, 390], FT: [290, 420, 190, 235], FLOOR: 160, CEIL: [30, 44], TERR: 70, HARD: 318 };
+function incl(g, P0, P1, fn) {
+  // függőlegesen (lefelé) rajzolt elemet a P0→P1 irányba forgat
+  const dx = P1[0] - P0[0], dy = P1[1] - P0[1], L = Math.hypot(dx, dy), ang = (-Math.atan2(dx, dy) * 180) / Math.PI;
+  const r = g_(g, { transform: `rotate(${ang.toFixed(2)} ${P0[0]} ${P0[1]})` });
+  fn(r, P0[0], P0[1], L);
+  return r;
+}
+export function underpinScene(fig, o) {
+  defs(); CUR.W = UP.W;
+  const { WALL, FT, FLOOR, CEIL, TERR, HARD, W, H } = UP, { step, k, nar } = o;
+  while (fig.firstChild) fig.removeChild(fig.firstChild);
+  fig.setAttribute('viewBox', nar ? '196 0 424 430' : '0 0 720 430');
+  fig.classList.add('pr-svg');
+  const fs = nar ? 15 : 12, tg = (gg, x, y, t, oo = {}) => tag(gg, x, y, t, { fs, ...oo });
+  const M = { H, GY: TERR, layers: [{ k: 'clay', y: TERR }, { k: 'gravel', y: HARD }] };
+  const g = g_(fig);
+  backdrop(g, M, 0, W);
+  // épületbelső: földszint és pince (födém, padló)
+  R(g, WALL[1], 0, W - WALL[1], FLOOR, F('wallh'));
+  concrete(g, WALL[1], CEIL[0], W - WALL[1], CEIL[1] - CEIL[0], false);
+  concrete(g, WALL[1], FLOOR, W - WALL[1], 9, false);
+  for (let x = WALL[1] + 40; x < W; x += 110) R(g, x, 6, 26, 20, 'fill:url(#pr-glass)' + `;stroke:${v('wallh2')};stroke-width:1`);
+  // falazott fal téglakötéssel és a beton sávalap
+  R(g, WALL[0], 0, WALL[1] - WALL[0], FT[2], F('wallh2'));
+  let br = '';
+  for (let y = 8, r0 = 0; y < FT[2]; y += 12, r0++) { br += `M${WALL[0]} ${y} H${WALL[1]} `; for (let x = WALL[0] + (r0 % 2 ? 12 : 24); x < WALL[1]; x += 24) br += `M${x} ${y} v12 `; }
+  P(g, br, SK('wallh', 0.9, 'opacity:.75'));
+  concrete(g, FT[0], FT[2], FT[1] - FT[0], FT[3] - FT[2], false);
+  P(g, 'M374 64 l-6 14 l8 10 l-7 16 l9 12 l-6 18', SK('push', 2.4, `stroke-linejoin:round;opacity:${step === 0 ? 1 : 0.35}`));
+  // cölöpök: A a pincéből kifelé, a fal alá; B (halványan) a másik síkban, befelé
+  const A0 = [405, 190], A1 = [326, 414], B0 = [412, 190], B1 = [446, 414];
+  const kh = (P0, P1) => (HARD - P0[1]) / (P1[1] - P0[1]);
+  const pile = (P0, P1, faint) => {
+    let len = 1, grout = 0;
+    if (step === 1) len = faint ? Math.max(0, Math.min(1, (o.anim - 0.45) / 0.55)) : Math.min(1, o.anim / 0.7);
+    else if (step >= 2) grout = step === 2 ? k : 1;
+    if (step === 0 || len <= 0.01) return;
+    const pg = g_(g, { opacity: faint ? 0.5 : 1 });
+    incl(pg, P0, P1, (r, x, y0, L) => {
+      const bot = y0 + L * len;
+      if (grout > 0) {
+        const top = y0 + L * (1 - grout), kk = y0 + L * kh(P0, P1);
+        // átitatott köpeny a teherbíró rétegben, cementtest végig
+        if (bot > kk) { const t0 = Math.max(top, kk); P(r, `M${x - 11} ${t0} Q${x - 14} ${(t0 + bot) / 2} ${x - 11} ${bot - 2} Q${x} ${bot + 9} ${x + 11} ${bot - 2} Q${x + 14} ${(t0 + bot) / 2} ${x + 11} ${t0}Z`, F('grout2', 0.5) + `;stroke:${v('grout2')};stroke-width:.8;stroke-dasharray:3 2`); }
+        R(r, x - 6, top, 12, bot - top, 'fill:url(#pr-groutg)', { rx: 3 });
+        R(r, x - 6, top, 12, bot - top, SK('concedge', 0.8, 'opacity:.7'), { rx: 3 });
+      } else if (step === 1) R(r, x - 6, y0, 12, bot - y0, F('bore'), { rx: 3 });
+      titanBar(r, x, y0 - (step >= 3 ? 4 : 0), bot);
+    });
+  };
+  pile(B0, B1, true); pile(A0, A1, false);
+  // kompakt fúrógép a pincében, ferde árboccal a fúrás irányában (1–2. lépés)
+  if (step === 1 || step === 2) {
+    const rg = g_(g, { opacity: step === 1 ? 1 : 1 - k * 0.9 });
+    const tx = 440, GYb = FLOOR;
+    R(rg, tx, GYb - 12, 98, 12, F('dark'), { rx: 6 });
+    R(rg, tx + 3, GYb - 9, 92, 6, F('dark2'), { rx: 3 });
+    for (let i = 0; i < 5; i++) C(rg, tx + 10 + i * 19.5, GYb - 6, 2.4, F('dark'));
+    P(rg, `M${tx + 8} ${GYb - 13} V${GYb - 30} H${tx + 70} Q${tx + 78} ${GYb - 30} ${tx + 78} ${GYb - 22} V${GYb - 13}Z`, F('mach') + `;stroke:${v('mach3')};stroke-width:.8`);
+    for (let i = 0; i < 5; i++) Ln(rg, tx + 40 + i * 4, GYb - 27, tx + 40 + i * 4, GYb - 16, SK('mach3', 1));
+    // árboc a cölöp vonalában, a padlótól a födém alá; a forgatófej rajta fut, alatta a magrúd a furatba
+    const d = [A0[0] - A1[0], A0[1] - A1[1]], dl = Math.hypot(d[0], d[1]), u = [d[0] / dl, d[1] / dl], nrm = [u[1], -u[0]];
+    const at = (y) => [A0[0] + u[0] * ((y - A0[1]) / u[1]), y];
+    const f0 = at(FLOOR + 2), f1 = at(CEIL[1] + 10), off = 9;
+    Ln(rg, f0[0] + nrm[0] * off, f0[1] + nrm[1] * off, f1[0] + nrm[0] * off, f1[1] + nrm[1] * off, SK('mach', 9, 'stroke-linecap:butt'));
+    Ln(rg, f0[0] + nrm[0] * (off - 3.5), f0[1] + nrm[1] * (off - 3.5), f1[0] + nrm[0] * (off - 3.5), f1[1] + nrm[1] * (off - 3.5), SK('mach3', 2));
+    const hk = step === 1 ? 0.1 + 0.75 * Math.min(1, o.anim / 0.7) : 0.1;
+    const hp = [f1[0] + (f0[0] - f1[0]) * hk, f1[1] + (f0[1] - f1[1]) * hk];
+    Ln(rg, hp[0], hp[1], f0[0], f0[1], SK('steel2', 4.4));
+    incl(rg, hp, f0, (r, x, y0) => { R(r, x - 10, y0 - 9, 20, 18, F('mach') + `;stroke:${v('mach3')};stroke-width:.8`, { rx: 2 }); R(r, x + 10, y0 - 6, 6, 12, F('mach2')); });
+    Ln(rg, tx + 10, GYb - 20, f0[0] + nrm[0] * off + (f1[0] - f0[0]) * 0.45, f0[1] + (f1[1] - f0[1]) * 0.45, SK('dark', 3, 'stroke-linecap:round'));
+    R(rg, f0[0] - 8, FLOOR - 5, 22, 5, F('dark2'), { rx: 1 });
+    worker(rg, tx + 112, { GY: FLOOR, pose: 'guide', dir: -1 });
+    tg(rg, nar ? 452 : 470, FLOOR + 30, 'kompakt fúrógép', { to: [tx + 40, FLOOR - 14] });
+  }
+  if (step >= 1 && !nar) tg(g, B1[0] + 14, B1[1] - 24, 'a következő cölöp (másik síkban)', { to: [B1[0] - 4, B1[1] - 20] });
+  if (step >= 2 && !(nar && step >= 4)) tg(g, nar ? 204 : 60, nar ? 404 : 390, nar ? 'cementtest + köpeny' : 'cementtest + átitatott köpeny', { to: [A1[0] + 4, A1[1] - 22] });
+  // bekötés: új vasbeton fejgerenda az alap mellett, előterhelés sajtóval
+  if (step >= 3) {
+    const hl = g_(g, { opacity: step === 3 ? k : 1 });
+    concrete(hl, FT[1], FT[2] - 2, 46, FT[3] - FT[2] + 4, false);
+    for (let x = FT[1] + 6; x < FT[1] + 44; x += 9) { C(hl, x, FT[2] + 6, 1.5, F('rebar')); C(hl, x, FT[3] - 4, 1.5, F('rebar')); }
+    E(hl, 404, 212, 22, 32, SK('acc', 2.4, 'stroke-dasharray:5 4'));
+    tg(hl, nar ? 600 : 474, nar ? 262 : 206, nar ? 'bekötés az alapba' : 'bekötés: injektálva az alapba + új fejgerenda', { anchor: nar ? 'end' : 'start', to: [424, 222] });
+    if (step === 3) { const yy = 120 - 18 * Math.sin(k * Math.PI); R(hl, 396, yy - 22, 16, 22, F('acc'), { rx: 2 }); arrowV(hl, 404, yy, 178, { w: 3, s: 9 }); tg(hl, 420, 118, 'előterhelés sajtóval'); }
+  }
+  // falteher és talp alatti feszültség
+  arrowV(g, 355, -2, 46, { w: 4, s: 12, c: 'push' });
+  tg(g, 372, 22, EN ? 'wall load' : 'falteher');
+  const talp = o.talp, nA = 6;
+  for (let i = 0; i < nA; i++) { const x = FT[0] + 12 + (i * (FT[1] - FT[0] - 24)) / (nA - 1), L = 10 + 34 * talp; arrowV(g, x, FT[3] + L + 2, FT[3] + 3, { w: 2.2, s: 6, c: 'warn' }); }
+  tg(g, nar ? 204 : FT[0] - 6, FT[3] + 58, 'talp alatti feszültség', { anchor: nar ? 'start' : 'end' });
+  if (step >= 4) {
+    // köpenymenti ellenállás a teherbíró rétegben; a talpellenállással nem számolunk
+    const kA = kh(A0, A1);
+    for (let i = 0; i < 4; i++) {
+      const t = kA + ((1 - kA) * (i + 0.4)) / 4, P = [A0[0] + (A1[0] - A0[0]) * t, A0[1] + (A1[1] - A0[1]) * t];
+      arrowP(g, `M${P[0] + 15} ${P[1] + 12} L${P[0] + 18} ${P[1] - 2}`, { w: 2.2, c: 'ok' }); head(g, P[0] + 18.5, P[1] - 4, -80, { s: 6, c: 'ok' });
+      arrowP(g, `M${P[0] - 15} ${P[1] + 12} L${P[0] - 12} ${P[1] - 2}`, { w: 2.2, c: 'ok' }); head(g, P[0] - 11.5, P[1] - 4, -80, { s: 6, c: 'ok' });
+    }
+    tg(g, nar ? 204 : A1[0] + 34, nar ? 404 : A1[1] - 40, 'köpenymenti ellenállás', nar ? { to: [A1[0] - 10, A1[1] - 40] } : {});
+    C(g, A1[0], A1[1] + 3, 8, SK('push', 1.8)); Ln(g, A1[0] - 6, A1[1] + 9, A1[0] + 6, A1[1] - 3, SK('push', 1.8));
+    tg(g, nar ? A1[0] + 16 : A1[0] - 16, A1[1] + 6, EN ? 'base: 0' : 'talp: 0', { anchor: nar ? 'start' : 'end' });
+  }
+  // feliratok
+  tg(g, nar ? 204 : 12, TERR + 22, nar ? (EN ? 'soft clay' : 'puha agyag') : 'puha agyag, feltöltés');
+  tg(g, nar ? 204 : 12, HARD + 20, nar ? 'teherbíró réteg' : 'teherbíró réteg (kavicsos homok)');
+  tg(g, nar ? 204 : 12, TERR - 12, 'utca felőli oldal');
+  tg(g, nar ? 470 : 600, CEIL[1] + 24, EN ? 'basement' : 'pince');
+  tg(g, nar ? 470 : 600, CEIL[1] + 46, 'alacsony belmagasság');
+}
+
 /* ================================================================== 6. fejezet – a négy módszer kártyaképe */
 // Kis, de teljes jelenet a folyamatábrák elemtárából: gép, eszköz, kész oszlop, talajrétegek, néhány felirat.
 const CARD = { W: 400, H: 250, GY: 140 };

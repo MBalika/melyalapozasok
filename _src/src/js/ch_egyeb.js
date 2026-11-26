@@ -1,6 +1,7 @@
 // C06 – Egyéb cölöpök: mikrocölöp (aláfogás, kihajlás), jet-grouting (oszlopgyár), mélykeverés, kavicscölöp
 import { register, shell, slider, seg, toggle, stat, verdict, h, svg, figure, clear, fmt, clamp, lerp, smooth, cssVar, onTheme, loop, pathD } from './core.js';
 import { defineQuiz } from './ui.js';
+import { underpinScene } from './proc.js';
 
 /* ------------------------------------------------------------------ segédek */
 const txt = (p, x, y, t, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: t, ...o }, p);
@@ -79,126 +80,15 @@ register('egy-alafogas', (root) => {
   const sRes = stat(out, { label: 'Ami a cölöpben dolgozik' });
 
   // geometria
-  const WALL = [320, 390], FT = [290, 420, 190, 235], FLOOR = 160, CEIL = [30, 44], TERR = 70, HARD = 318, BOT = 430;
-  const A0 = [405, 190], A1 = [326, 414];   // „A” cölöp: a pincéből kifelé dőlve, a fal alá
-  const B0 = [412, 190], B1 = [446, 414];   // „B” cölöp: másik síkban, befelé dőlve
-  const at = (P0, P1, k) => [lerp(P0[0], P1[0], k), lerp(P0[1], P1[1], k)];
 
   let step = 0, t0 = 0, anim = 1;
   const NW = watchNarrow(viz, 560, () => draw());
   const draw = () => {
-    const nar = NW.v;
-    fig.setAttribute('viewBox', nar ? '196 0 424 430' : '0 0 720 430');
+    const nar = NW.v, k = smooth(anim);
     fig.classList.toggle('egy-sm', nar);
-    const LX = nar ? 204 : 12, PXL = nar ? 470 : 600;
-    clear(fig);
-    const g = svg('g', {}, fig);
-    const k = smooth(anim);
-    // talaj: kint terep, bent pince
-    svg('rect', { x: 0, y: TERR, width: 720, height: HARD - TERR, class: 'f-soilB' }, g);
-    svg('rect', { x: 0, y: TERR, width: 720, height: HARD - TERR, fill: 'url(#pat-clay)', opacity: 0.5 }, g);
-    svg('rect', { x: 0, y: HARD, width: 720, height: BOT - HARD, class: 'f-soilD' }, g);
-    svg('rect', { x: 0, y: HARD, width: 720, height: BOT - HARD, fill: 'url(#pat-gravel)', opacity: 0.8 }, g);
-    svg('line', { x1: 0, y1: HARD, x2: 720, y2: HARD, class: 's-soil', 'stroke-width': 1.2, 'stroke-dasharray': '6 4' }, g);
-    txt(g, LX, TERR + 22, nar ? 'puha agyag' : 'puha agyag, feltöltés', 'egy-sl');
-    txt(g, LX, HARD + 20, nar ? 'teherbíró réteg' : 'teherbíró réteg (kavicsos homok)', 'egy-sl');
-    // pince: padló, födém, levegő
-    svg('rect', { x: WALL[1], y: 0, width: 720 - WALL[1], height: FLOOR, class: 'f-surface' }, g);
-    svg('rect', { x: WALL[1], y: CEIL[0], width: 720 - WALL[1], height: CEIL[1] - CEIL[0], class: 'f-conc' }, g);
-    svg('rect', { x: WALL[1], y: FLOOR, width: 720 - WALL[1], height: 8, class: 'f-conc2' }, g);
-    txt(g, PXL, CEIL[1] + 18, 'pince', 't-sm');
-    txt(g, PXL, CEIL[1] + 32, 'alacsony belmagasság', 't-sm');
-    // kint: terepvonal
-    svg('line', { x1: 0, y1: TERR, x2: WALL[0], y2: TERR, class: 's-ink', 'stroke-width': 1.5 }, g);
-    txt(g, LX, TERR - 8, 'utca felőli oldal', 't-sm');
-    // fal (falazott) + sávalap (beton, téglalap)
-    svg('rect', { x: WALL[0], y: 0, width: WALL[1] - WALL[0], height: FT[2], class: 'f-bld2' }, g);
-    for (let y = 8; y < FT[2]; y += 12) svg('line', { x1: WALL[0], y1: y, x2: WALL[1], y2: y, class: 's-line', 'stroke-width': 0.8 }, g);
-    for (let y = 8, r = 0; y < FT[2]; y += 12, r++) for (let x = WALL[0] + (r % 2 ? 12 : 24); x < WALL[1]; x += 24) svg('line', { x1: x, y1: y, x2: x, y2: y + 12, class: 's-line', 'stroke-width': 0.8 }, g);
-    svg('rect', { x: FT[0], y: FT[2], width: FT[1] - FT[0], height: FT[3] - FT[2], class: 'f-conc' }, g);
-    svg('rect', { x: FT[0], y: FT[2], width: FT[1] - FT[0], height: FT[3] - FT[2], fill: 'url(#pat-conc)' }, g);
-    // repedés a falban (0. lépés erősen, utána halványul)
-    const crack = svg('path', { d: 'M374 64 l-6 14 l8 10 l-7 16 l9 12 l-6 18', fill: 'none', class: 's-bad', 'stroke-width': 2.2, 'stroke-linejoin': 'round' }, g);
-    crack.setAttribute('opacity', step === 0 ? 1 : 0.35);
-
-    // fúrógép a pincében (1–2. lépés)
-    if (step === 1 || step === 2) {
-      const rg = svg('g', { opacity: step === 1 ? 1 : 1 - k * 0.85 }, g);
-      const m0 = at(A0, A1, -0.12), m1 = at(A0, A1, -0.56);
-      svg('rect', { x: 446, y: 126, width: 92, height: 26, rx: 4, class: 'f-acc' }, rg);
-      svg('rect', { x: 440, y: 150, width: 104, height: 10, rx: 5, class: 'f-ink', opacity: 0.8 }, rg);
-      svg('line', { x1: 452, y1: 138, x2: lerp(m0[0], m1[0], 0.45), y2: lerp(m0[1], m1[1], 0.45), class: 's-steel', 'stroke-width': 5, 'stroke-linecap': 'round' }, rg);
-      svg('line', { x1: m0[0], y1: m0[1], x2: m1[0], y2: m1[1], class: 's-steel', 'stroke-width': 8, 'stroke-linecap': 'round' }, rg);
-      txt(rg, nar ? 470 : 548, nar ? 116 : 120, 'kompakt fúrógép', 't-sm');
-    }
-    // cölöpök
-    const drawPile = (P0, P1, faint) => {
-      const pg = svg('g', { opacity: faint ? 0.45 : 1 }, g);
-      let len = 1, grout = 0;
-      if (step === 1) { len = faint ? smooth((anim - 0.45) / 0.55) : smooth(anim / 0.7); grout = 0; }
-      else if (step >= 2) { len = 1; grout = step === 2 ? k : 1; }
-      if (len <= 0) return;
-      const E = at(P0, P1, len);
-      if (grout > 0) {
-        // cementtest: alulról felfelé nő; a teherbíró rétegben vastagabb (átitatott köpeny)
-        const gs = 1 - grout;
-        const S = at(P0, P1, Math.max(0, gs));
-        svg('line', { x1: S[0], y1: S[1], x2: P1[0], y2: P1[1], style: 'stroke:var(--grout)', 'stroke-width': 11, 'stroke-linecap': 'round', opacity: 0.95 }, pg);
-        const kh = (HARD - P0[1]) / (P1[1] - P0[1]);
-        const H0 = at(P0, P1, Math.max(kh, gs));
-        if (Math.max(kh, gs) < 1) svg('line', { x1: H0[0], y1: H0[1], x2: P1[0], y2: P1[1], style: 'stroke:var(--grout)', 'stroke-width': 19, 'stroke-linecap': 'round', opacity: 0.7 }, pg);
-      }
-      svg('line', { x1: P0[0], y1: P0[1], x2: E[0], y2: E[1], class: step === 1 && !faint ? 's-ink' : 's-steel', 'stroke-width': step === 1 ? 2.5 : 4, 'stroke-linecap': 'round' }, pg);
-      if (step === 1 && !faint && len < 1) svg('circle', { cx: E[0], cy: E[1], r: 5, class: 'f-steel2' }, pg);
-    };
-    if (step >= 1) { drawPile(B0, B1, true); drawPile(A0, A1, false); }
-    if (step >= 1) {
-      txt(g, B1[0] + 10, B1[1] - 30, 'a következő cölöp', 'egy-sl');
-      txt(g, B1[0] + 10, B1[1] - 17, '(másik síkban)', 'egy-sl');
-    }
-    if (step >= 2) {
-      const L = at(A0, A1, 0.9);
-      if (!nar) svg('line', { x1: L[0] - 8, y1: L[1], x2: 196, y2: 380, class: 's-muted', 'stroke-width': 1 }, g);
-      txt(g, nar ? LX : 60, nar ? HARD + 40 : 394, nar ? 'cementtest + köpeny' : 'cementtest + átitatott köpeny', 'egy-sl');
-    }
-    // bekötés kiemelése
-    if (step >= 3) {
-      const hl = svg('g', { opacity: step === 3 ? k : 1 }, g);
-      svg('rect', { x: FT[1], y: FT[2] - 2, width: 46, height: FT[3] - FT[2] + 4, class: 'f-conc2' }, hl);
-      svg('rect', { x: FT[1], y: FT[2] - 2, width: 46, height: FT[3] - FT[2] + 4, fill: 'url(#pat-conc)' }, hl);
-      svg('ellipse', { cx: 404, cy: 212, rx: 20, ry: 30, fill: 'none', class: 's-acc', 'stroke-width': 2.4, 'stroke-dasharray': '5 4' }, hl);
-      txt(hl, 474, 206, nar ? 'bekötés az' : 'bekötés: injektálva az', 't-lab', { 'font-size': 12 });
-      txt(hl, 474, 221, nar ? 'alapba' : 'alapba + új fejgerenda', 't-lab', { 'font-size': 12 });
-      if (step === 3) { carrow(hl, 404, 120 - 18 * Math.sin(k * Math.PI), 404, 176, 'var(--accent)', 3, 10); txt(hl, 414, 116, 'előterhelés sajtóval', 't-sm'); }
-    }
-    // terhek
     const pileShare = step >= 4 ? 0.8 * k : step === 3 ? 0.35 * k : 0;
     const talpShare = 1 - pileShare;
-    carrow(g, 355, -2, 355, 46, 'var(--bad)', 4, 12);
-    txt(g, 366, 26, 'falteher', 't-lab', { 'font-size': 12.5 });
-    // talp alatti feszültség
-    const nArr = 6;
-    for (let i = 0; i < nArr; i++) {
-      const x = FT[0] + 12 + (i * (FT[1] - FT[0] - 24)) / (nArr - 1);
-      const L = 10 + 34 * talpShare;
-      carrow(g, x, FT[3] + L + 2, x, FT[3] + 2, 'var(--warn)', 2, 6);
-    }
-    txt(g, nar ? LX : FT[0] - 4, FT[3] + 58, 'talp alatti feszültség', 'egy-sl', { 'text-anchor': nar ? 'start' : 'end' });
-    if (step >= 4) {
-      // köpenymenti ellenállás a teherbíró rétegben (felfelé ható kis nyilak)
-      const kh = (HARD - A0[1]) / (A1[1] - A0[1]);
-      for (let i = 0; i < 4; i++) {
-        const P = at(A0, A1, kh + ((1 - kh) * (i + 0.4)) / 4);
-        carrow(g, P[0] + 14, P[1] + 12, P[0] + 18, P[1] - 4, 'var(--ok)', 2.2, 6);
-        carrow(g, P[0] - 14, P[1] + 12, P[0] - 10, P[1] - 4, 'var(--ok)', 2.2, 6);
-      }
-      txt(g, A1[0] + 34, A1[1] - 44, 'köpenymenti', 't-lab t-ok halo', { 'font-size': 12 });
-      txt(g, A1[0] + 34, A1[1] - 30, 'ellenállás', 't-lab t-ok halo', { 'font-size': 12 });
-      const T = A1;
-      svg('circle', { cx: T[0], cy: T[1] + 2, r: 8, fill: 'none', class: 's-bad', 'stroke-width': 1.8 }, g);
-      svg('line', { x1: T[0] - 6, y1: T[1] + 8, x2: T[0] + 6, y2: T[1] - 4, class: 's-bad', 'stroke-width': 1.8 }, g);
-      txt(g, T[0] - 14, T[1] + 6, 'talp: 0', 't-sm t-bad halo', { 'text-anchor': 'end' });
-    }
+    underpinScene(fig, { step, k, nar, anim, talp: talpShare });
     sTalp.set(talpShare * 100, step >= 4 ? 'ok' : step === 0 ? 'bad' : null);
     sPile.set(pileShare * 100, step >= 4 ? 'ok' : null);
     sRes.set(step >= 4 ? 'köpeny (talp ≈ 0)' : step >= 2 ? 'köpeny – kialakulóban' : '–', step >= 4 ? 'ok' : null);
