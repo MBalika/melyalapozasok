@@ -113,7 +113,63 @@ function jumpTo(el, push) {
   };
   requestAnimationFrame(tick);
 }
+/* ---------------------------------------------------------------- frissítés után ugyanott
+   Görgetéskor (és az oldal elhagyásakor) megjegyezzük, melyik statikus elem van a fejléc alatt és mennyire
+   csúszott fel; újratöltéskor (vagy vissza/előre lépéskor) ehhez az elemhez térünk vissza – a címsorban maradt
+   régi #horgony helyett. A lusta widgetek és képek közben megváltoztatják a fölöttük lévő tartalom magasságát,
+   ezért ~4 s-ig utánaigazítunk, amíg a felhasználó maga nem görget. */
+const POS_KEY = 'mz-pos:' + location.pathname;
+let posMarks = [], posRestoring = false;
+function navType() {
+  try { const e = performance.getEntriesByType('navigation')[0]; if (e) return e.type; } catch (e) { /* */ }
+  try { return ({ 1: 'reload', 2: 'back_forward' })[performance.navigation.type] || 'navigate'; } catch (e) { return 'navigate'; }
+}
+const headH = () => { const tb = $('.topbar'); return tb ? Math.max(0, tb.getBoundingClientRect().bottom) : 0; };
+function posCollect() {
+  // csak a statikus (a HTML-ben meglévő) elemek: a widgetek, kártyák belsejét a szkriptek rajzolják, ezért nem stabil
+  posMarks = [...document.querySelectorAll('main :is([id], h2, h3, h4, p, li, figure, table, .w, .card, .callout, [data-proc], [data-ytc])')]
+    .filter((n) => !n.closest('svg') && !(n.parentElement && n.parentElement.closest('.w, [data-proc], [data-ytc], .quiz, .tf')));
+}
+function posSave() {
+  if (posRestoring || !posMarks.length) return;
+  const H = headH() + 1; let best = -1, bh = Infinity;
+  for (let i = 0; i < posMarks.length; i++) {
+    const r = posMarks[i].getBoundingClientRect();
+    if (r.top <= H && r.bottom > H && r.height > 0 && r.height < bh) { best = i; bh = r.height; }
+  }
+  const d = { i: best, off: best >= 0 ? H - posMarks[best].getBoundingClientRect().top : 0, y: scrollY, t: Date.now() };
+  try { sessionStorage.setItem(POS_KEY, JSON.stringify(d)); } catch (e) { /* */ }
+}
+function initPosMemory() {
+  posCollect();
+  let tm = 0;
+  addEventListener('scroll', () => { clearTimeout(tm); tm = setTimeout(posSave, 250); }, { passive: true });
+  addEventListener('pagehide', posSave);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') posSave(); });
+  const nt = navType();
+  if (nt !== 'reload' && nt !== 'back_forward') return false;
+  let p = null; try { p = JSON.parse(sessionStorage.getItem(POS_KEY) || 'null'); } catch (e) { /* */ }
+  if (!p) return false;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const el = p.i >= 0 ? posMarks[p.i] : null;
+  const target = () => (el ? el.getBoundingClientRect().top + scrollY - (headH() + 1) + p.off : p.y);
+  posRestoring = true;
+  const t0 = performance.now(); let stable = 0, done = false;
+  const stop = () => { if (done) return; done = true; posRestoring = false; removeEventListener('wheel', stop); removeEventListener('touchstart', stop); removeEventListener('keydown', stop); removeEventListener('mousedown', stop); };
+  const o = { passive: true };
+  addEventListener('wheel', stop, o); addEventListener('touchstart', stop, o); addEventListener('keydown', stop, o); addEventListener('mousedown', stop, o);
+  const tick = () => {
+    if (done) return;
+    const y = Math.max(0, target());
+    if (Math.abs(scrollY - y) > 1.5) { scrollTo({ top: y, behavior: 'instant' }); stable = 0; } else stable++;
+    if (performance.now() - t0 < 4000 || stable < 30) { if (performance.now() - t0 < 6000) requestAnimationFrame(tick); else stop(); } else stop();
+  };
+  tick();
+  return true;
+}
+
 function initJump() {
+  const restored = initPosMemory();
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -125,7 +181,7 @@ function initJump() {
     jumpTo(el, true);
   });
   addEventListener('popstate', () => { const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) jumpTo(el, false); });
-  if (location.hash) {
+  if (location.hash && !restored) {
     const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
     if (el) addEventListener('load', () => jumpTo(el, false), { once: true });
   }
