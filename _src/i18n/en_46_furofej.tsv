@@ -7,13 +7,6 @@ e028874	5 · the bottom flap opens, emptying
 e1de3a3	2 · drilling – the soil enters the bucket
 118abee	1 · lowering into the slurry-filled bore
 e097fda	Kelly bar
-7adecda	7 · back over the casing
-c8fe1ec	6 · the jaws open, emptying
-d39311b	5 · luffing the boom out over the heap
-411578e	4 · lifting out
-361c58f	3 · closing, it bites into the soil
-c38ee8a	2 · dropped to the bottom with open jaws
-72184ca	1 · the oscillator sinks the casing continuously
 73c1d35	grab
 590a52d	4 · finished concrete column – reinforcement next
 cef7379	3 · withdrawal without rotation, concreted from below
@@ -38,3 +31,16 @@ eb7ed0a	DRILLING
 c481066	concrete hose
 64d021f	CONSUMPTION
 d4bfd7b	NECKING
+1582ae7	slurry supply
+5995e8f	slurry mixing plant
+12c89d6	adding the next casing section (bolted joint)
+22d57f8	7 · dropped to the bottom with open jaws
+92316c8	5 · the jaws open, emptying
+fd0196d	3 · lifting out inside the casing
+f338499	2 · the grab closes and bites into the soil
+97de840	1 · the rotary head turns and presses the casing down
+4077664	spare casing sections
+98d2f72	casing joint
+adc066d	slurry top-up
+5b7c7eb	with an auger or drilling bucket, under slurry; the slurry is topped up continuously
+dfc0480	The rotary head of the rig turns the casing and presses it down; the casing sections are added continuously: this supports the bore.
