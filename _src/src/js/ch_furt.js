@@ -66,7 +66,6 @@ const TOOLS = {
   cfa: { t: 'Folyamatos spirál', soils: [['kötött talaj', 'ok'], ['szemcsés talaj', 'ok']], txt: 'A spirál a teljes cölöphosszon végigér, és egyetlen menetben hatol le a végső mélységig. A furadék a menetek között marad, és közben megtámasztja a furat falát – ez a CFA-cölöp alapja. Bármely talajban használható.' },
   marko: { t: 'Markoló', soils: [['kötött talaj', 'ok'], ['szemcsés talaj', 'ok']], txt: 'Hengeres markolókanál: nyitott pofákkal ejtik a furat aljára, összezárva beleharap a talajba, majd a furat mellett ürítik. Bármely talajban használható, feltöltésben, köves rétegben is; gyakran az acél béléscső védelmében dolgozik.' },
   dob: { t: 'Dobfúró', soils: [['kötött talaj', 'warn'], ['szemcsés talaj', 'ok']], txt: 'Fogazott aljú, hengeres dob: forgatás közben a talaj a dob alján lévő nyíláson át a dobba kerül. Megtelve kiemelik, és a nyitható fenéklapon át ürítik. Elsősorban szemcsés talajban hatékony, ahol a spirálról a talaj leperegne.' },
-  obl: { t: 'Öblítéses fúrás', soils: [['kötött talaj', 'ok'], ['szemcsés talaj', 'ok']], txt: 'A fúrófej csak feltöri, fellazítja a talajt a furat talpán; a fellazított anyagot az öblítőfolyadék szállítja ki: a fúrórúdon le, a rúd és a furatfal közötti résben fel, a felszínen egy ülepítőbe. Kis átmérőjű fúrásoknál, mikrocölöpöknél gyakori.' },
 };
 register('furtTool', (root) => {
   const { ctrls, viz, out } = shell(root);

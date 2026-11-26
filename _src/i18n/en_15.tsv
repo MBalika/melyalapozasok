@@ -20,12 +20,9 @@ f1b9630	Grab
 d84a5a3	Cylindrical grab: it is dropped to the bottom of the bore with open jaws, bites into the soil as it closes, and is emptied beside the bore. It can be used in any soil, in fill and stony layers too; it often works under the protection of a steel casing.
 11e5e86	Drilling bucket
 54eed3c	A cylindrical bucket with a toothed bottom: while it rotates, the soil enters the bucket through the opening in its bottom. When full it is lifted out and emptied through the hinged bottom flap. Effective mainly in granular soil, where the soil would trickle off an auger.
-5a6d881	Flush drilling
-9eb1e2d	The drilling head only breaks up and loosens the soil at the bottom of the bore; the loosened material is carried out by the flushing fluid: down the drill rod, up the gap between the rod and the wall of the bore, and into a settling tank at the surface. Common for small-diameter drilling and micropiles.
 572b0f5	Tool
 ece4888	excavated soil
 6e30f68	casing
-25bbc55	settling tank
 cfa69a9	3 · lifting out
 f93dcfd	No support
 66c7009	Casing
