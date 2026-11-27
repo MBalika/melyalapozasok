@@ -3585,17 +3585,19 @@ export function jetFactory(fig, o) {
 /* ================================================================== 6. fejezet – „Mit csinál a talajjal?” */
 // Ugyanabban a puha talajban négy technológia: a gép, a szerszám és az elem a folyamat szerint (o: { kind, u, ph, nar, full }).
 const SOS = { W: 640, H: 400, GY: 96, HARD: 282, BOT: 352, X: 300 };
+// a kavicscölöpnél a hosszú, megvezetett mélyvibrátornak magas árboc kell: több ég, sekélyebb metszet
+const sosG = (kind) => (kind === 'ko' ? { ...SOS, GY: 188, HARD: 292, BOT: 352 } : SOS);
 const sEase = (t) => (t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t));
 const sLerp = (a, b, t) => a + (b - a) * t;
 function soilStatic(g, o) {
-  const { W, H, GY, HARD } = SOS, M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: 'clay', y: GY + 14 }, { k: 'sand', y: HARD }] };
+  const { W, H, GY, HARD } = sosG(o.kind), M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: 'clay', y: GY + 14 }, { k: 'sand', y: HARD }] };
   backdrop(g, M, 0, W);
   const LX = o.nar ? 158 : 12, fz = o.nar ? 15 : 12.5;
-  tag(g, LX, GY + 44, EN ? 'soft clay' : 'puha agyag', { fs: fz });
+  tag(g, LX, GY + (o.kind === 'ko' ? 34 : 44), EN ? 'soft clay' : 'puha agyag', { fs: fz });
   tag(g, LX, HARD + 22, EN ? 'sand' : 'homok', { fs: fz });
 }
 function soilDyn(g, o) {
-  const { GY, HARD, BOT, X } = SOS, M = { H: SOS.H, GY }, u = o.u, ph = o.ph, fz = o.nar ? 15 : 12.5;
+  const { GY, HARD, BOT, X } = sosG(o.kind), M = { H: SOS.H, GY }, u = o.u, ph = o.ph, fz = o.nar ? 15 : 12.5;
   const tg = (x, y, t, oo = {}) => tag(g, x, y, t, { fs: fz, ...oo });
   let lbl = '';
   if (o.kind === 'mikro') {
@@ -3667,24 +3669,28 @@ function soilDyn(g, o) {
     lbl = u < d1 ? (EN ? '1 · down: mixing, adding binder' : '1 · lehajtás: keverés, kötőanyag-adagolás') : u < d2 ? (EN ? '2 · withdrawal: mixing again' : '2 · visszahúzás: újrakeverés') : (EN ? '3 · finished mixed column' : '3 · kész kevert oszlop');
     if (u >= d1 && !o.nar) tg(X + 150, 236, EN ? 'mixed soil (soil concrete)' : 'kevert talaj (talajbeton)', { to: [X + half + 2, 236] });
   } else {
-    const d1 = 0.32, d2 = 0.86, top = GY + 12;
-    loader(g, M, X - 158, { lift: 18, full: true });
-    const r = rig(g, M, X, { top: 6, hoses: false });
+    // a zsilipes mélyvibrátor állandó hosszúságú (toldócsövekkel együtt): a hordozógép árbocán, szánon vezetve süllyed és emelkedik
+    const d1 = 0.32, d2 = 0.86, top = GY + 12, VL = BOT - GY + 6;
+    loader(g, M, X - 170, { lift: 18, full: true });
     let tip, base;
-    if (u < d1) { tip = sLerp(GY + 6, BOT, sEase(u / d1)); base = BOT; }
+    if (u < d1) { tip = sLerp(GY - 4, BOT, sEase(u / d1)); base = BOT; }
     else if (u < d2) { base = sLerp(BOT, top, (u - d1) / (d2 - d1)); tip = base + 4 - 16 * Math.abs(Math.sin(ph * 5)); }
-    else { base = top; tip = GY - 6; }
+    else { base = top; tip = GY - 4; }
+    const vt = tip - VL;
+    const r = rig(g, M, X, { top: -10, hoses: false, headY: vt - 22 });
+    // anyagtartály (skip) a gép mellett, kötéllel az árboc tetejére
+    P(g, `M${X - 46} ${GY - 22} L${X - 42} ${GY} H${X - 20} L${X - 16} ${GY - 22}Z`, F('steel2') + `;stroke:${v('steel3')};stroke-width:.8`);
+    P(g, `M${X - 45} ${GY - 21} Q${X - 31} ${GY - 30} ${X - 17} ${GY - 21}Z`, F('stone') + `;stroke:${v('stone2')};stroke-width:.6`);
     if (base < BOT) {
       if (base < HARD) stoneCol(g, X, base, HARD + 2, 24);
       stoneCol(g, X, Math.max(base, HARD), BOT, 18);
     }
-    if (u < d2) {
-      vibroflot(g, X, Math.max(22, tip - 150), tip, { full: true });
-      if (u < d1) pushOut(g, X, tip - 18, 8, 2);
-      else pushOut(g, X, base - 6, (base < HARD ? 24 : 18) + 2, 2, { c: 'ok' });
-    }
+    vibroflot(g, X, vt, tip, { full: u >= d1 && u < d2 });
+    if (u < d1) pushOut(g, X, tip - 18, 8, 2);
+    else if (u < d2) pushOut(g, X, base - 6, (base < HARD ? 24 : 18) + 2, 2, { c: 'ok' });
     lbl = u < d1 ? (EN ? '1 · down: the soil is pushed aside' : '1 · lehajtás: a talaj oldalra szorul') : u < d2 ? (EN ? '2 · gravel in portions, compaction' : '2 · kavics adagolása, tömörítés') : (EN ? '3 · finished gravel column' : '3 · kész kavicscölöp');
-    if (u >= d1 && !o.nar) tg(X + 110, 236, 'tömörített kavics', { to: [X + 24, 236] });
+    if (u >= d1 && !o.nar) { const ty = Math.min(BOT - 12, Math.max(HARD - 26, base + 14)); tg(X + 110, ty, 'tömörített kavics', { to: [X + (ty < HARD ? 26 : 20), ty] }); }
+    if (!o.nar) { const ty = Math.min(GY - 34, vt + 64); tg(X - 70, ty, 'mélyvibrátor', { anchor: 'end', to: [X - 8, ty] }); }
   }
   const LX = o.nar ? 158 : 12;
   tag(g, LX, o.nar ? 370 : 18, lbl, { fs: fz + 0.5 });
