@@ -22,7 +22,7 @@ export const VIDEOS = [
   { n: 'v1', t: 'A mélyalapozás alapjai', d: '2:31', g: 'cinematic', grp: 0, s: 'Mikor kell mélyalap? Csúcs- és köpenymenti ellenállás, álló, lebegő és vegyes cölöp' },
   { n: 'v2', t: 'Talajhelyettesítés vs. talajkiszorítás', d: '2:59', g: 'indie pop', grp: 0, s: 'Két cölöpcsalád lépésről lépésre: kitöltött furat, megtámasztás, vasalás, betonozás' },
   { n: 'v3', t: 'Résállékonyság', d: '2:19', g: 'lo-fi', grp: 4, s: 'Zagynyomás, víznyomás és földnyomás; silóhatás, zagyszint, réstábla-hossz' },
-  { n: 'v4', t: 'Kút, szekrény, keszon', d: '2:45', g: 'cinematic', grp: 5, s: 'Süllyesztés önsúllyal, vágóél, rekeszfalak, túlnyomás és zsilipek' },
+  { n: 'v4', t: 'Kút, szekrény, keszon', d: '2:50', g: 'cinematic', grp: 5, s: 'Süllyesztés önsúllyal, vágóél, rekeszfalak, túlnyomás és zsilipek' },
   { n: 'v5', t: 'Összefoglaló és kvíz', d: '2:28', g: 'indie pop', grp: 6, s: 'Térkép a mélyalapokról és hat kvízkérdés – teszteld magad!' },
 ];
 
