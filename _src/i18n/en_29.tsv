@@ -18,7 +18,6 @@ c8c4161	The excavation of an underground car park with a diaphragm wall – move
 1958827	Figure
 afe3c42	Build a wall section 30 m long and 20 m deep: plan view at the top, longitudinal section below. Step through the phases – or click a panel!
 3aa0c48	Drag the trench length: how does the soil arch at the two ends of the panel, and how much smaller is the earth pressure than the Rankine value? (Sand, φ = 32°, γ′ = 10 kN/m³.)
-62933dd	Set the soil, the groundwater, the slurry and the panel length – the pressure diagram shows where the slurry holds the trench, and where it would collapse. (Illustrative model.)
 7536c9b	Size the well, choose a soil and tricks – then start the grab! Does it reach the bearing stratum, or get stuck halfway? (Illustrative model.)
 3a2e47a	Of well rings<small>precast elements</small>|Cylindrical<small>concreted in one piece</small>|Cylindrical<small>with a shoulder offset</small>|Tapered<small>widening downwards</small>|Tapered<small>with a shoulder offset</small>|Friction reduction<small>thixotropic slurry or gravel</small>
 0616c7f	a) Reinforced concrete<small>links along the edge</small>|b) Steel angle edge reinforcement<small>the edge protected by a steel angle</small>|c) Steel pre-cutting edge<small>a protruding, anchored steel edge</small>|d) Geometry of the shoulder offset<small>α ≤ 35°, steel pre-cutting edge</small>

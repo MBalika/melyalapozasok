@@ -10,9 +10,8 @@ cf764d0	Silo effect: the earth pressure does not grow indefinitely
 08a250f	<span class="f">σ<sub>x</sub> = <span class="rf-frac"><span>L·γ</span><span>sin 2φ</span></span>·K<sub>a</sub>·(1 − e<sup>−z·sin 2φ / L</sup>) − <span class="rf-frac"><span>c</span><span>tan φ</span></span>·(1 − K<sub>a</sub>)</span>⏎    <span class="fl">L: trench length · γ: unit weight of the soil · φ, c: shear strength parameters · K<sub>a</sub> = tan²(45° − φ/2). At small depth it gives back the Rankine value K<sub>a</sub>·γ·z − 2c·√K<sub>a</sub>, at great depth the earth pressure (for c = 0) tends to L·γ·K<sub>a</sub>/sin 2φ.</span>
 2c8a9d5	The point in one sentence
 7e4b8db	The silo effect at a glance
-5775923	Trench stability lab
 9e4f793	If the slurry level drops…
-5053596	A sudden loss of slurry – if the slurry leaks, for example, into a coarse gravel layer, an old sewer or a cellar – can reduce the level difference relative to the groundwater within minutes. Then slurry must be topped up immediately, which is why there is always a reserve at the plant. You can try what happens with the <b>slurry level</b> slider of the lab.
+40027af	A sudden loss of slurry – if the slurry leaks, for example, into a coarse gravel layer, an old sewer or a cellar – can reduce the level difference relative to the groundwater within minutes. Then slurry must be topped up immediately, which is why there is always a reserve at the plant.
 1d58edf	Concreting, inspection
 ae067a5	Concreting follows the rules of <b>underwater concreting</b>, with a concreting hopper and a tremie pipe: the concrete fills the trench from the bottom up while displacing the lighter slurry – the slurry is pumped out and returned to the plant. The end of the tremie pipe is always immersed in the fresh concrete, so the concrete does not mix with the slurry.
 4b3500a	Underwater concreting: one concreting pipe (tremie) goes into a bored pile and two into a panel; the concrete fills the bore or the trench from the bottom. The head, concreted up to the casting level and mixed with slurry, is broken back to the cut-off level

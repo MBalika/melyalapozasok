@@ -89,3 +89,8 @@ svg.rf-svg .t-bad { fill: var(--bad); }
 @media (max-width: 760px) { .rf-rules ul { columns: 1; } }
 
 .factbar.rf-col .fact { display: flex; flex-direction: column; justify-content: center; }
+
+/* 7.1 „Mire használják?” – egyedül álló kártya: a felsorolás két hasábban */
+.rf-uses ul { columns: 2; column-gap: 34px; }
+.rf-uses li { break-inside: avoid; }
+@media (max-width: 680px) { .rf-uses ul { columns: 1; } }

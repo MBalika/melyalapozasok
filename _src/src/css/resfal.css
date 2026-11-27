@@ -44,8 +44,7 @@
 .rf-figw img { width: 100%; }
 
 /* ábrák */
-.rf-labfig, .rf-epfig, .kut-sfig { touch-action: pan-y; }
-.rf-lab .w-ctrls { gap: 10px; }
+.rf-epfig, .kut-sfig { touch-action: pan-y; }
 
 .factbar.rf-fb2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .rf-pair img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }

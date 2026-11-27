@@ -1,6 +1,5 @@
 378d589	Pressures on the right-hand wall of the trench: from inside the slurry pressure (σ<sub>p</sub>, drawn to the left), from outside the water pressure (σ<sub>v</sub>) and the earth pressure (σ<sub>x</sub>). For a panel of finite length, σ<sub>x</sub> falls short of the Rankine value because of arching. Illustrative numerical example: sand, φ = 32°, γ = 18 kN/m³ (below the groundwater table γ′ = 10 kN/m³), h = 2.0 m, t = 0.5 m, ρ = 1.08 g/cm³ (γ<sub>b</sub> = 10.8 kN/m³), L = 5.6 m, trench depth 20 m
 a3fb768	2 · grouting
-6609899	<span><i style="background:var(--slurry)"></i><span class="rf-lg">slurry pressure σ<sub>p</sub></span></span><span><i style="background:var(--water-fill);border-color:var(--water)"></i><span class="rf-lg">water pressure σ<sub>v</sub></span></span><span><i style="background:var(--bad);height:3px"></i>water + soil (with silo effect)</span><span><i style="background:repeating-linear-gradient(90deg,var(--muted) 0 5px,transparent 5px 8px);height:3px;border:0"></i>water + soil (Rankine)</span>
 24aa075	slurry
 ec48880	base
 5c322d4	ram
@@ -13,7 +12,6 @@ db3d9e5	slurry level
 2c61847	in clay
 4b0f3c9	in silt
 a6fbffa	capping beam
-0ee9c49	guide wall
 384f402	stuck
 b14856d	min
 04eeb63	wet
@@ -27,4 +25,3 @@ b14856d	min
 2db62e7	working chamber
 8351eb3	DECOMPRESSION
 56ab49a@js/ch_kut.js:111	GWT
-56ab49a@js/ch_resfal.js:312	GWT
