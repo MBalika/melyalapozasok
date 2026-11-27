@@ -6,8 +6,6 @@ ba4b28b	Vibrating down a steel casing
 fc636b1	Vibrating down the steel casing
 c8d612c	Excavating soil from the casing with a grab
 4995cc7	Excavating soil from inside the casing
-e1bae8e	Grab bucket above the mouth of the finished well
-bd3d540	Grab bucket above the mouth of the casing
 65661d4	Box foundations
 ffd21a2	The principle is the same as for the well foundation, but while wells support the structure <b>at discrete points</b>, the <b>plan of the box matches</b> the <b>plan</b> of the structure – for example a bridge pier or a whole building – so it is much larger. Bridges used to be founded this way almost always, the older Danube bridges in Budapest too.
 04855c5	The soil is removed from inside the box, <b>open at the top and bottom</b>, by dredging – below the groundwater by underwater dredging, with dewatering if needed. The box is <b>built and sunk in stages</b>: one stage is <b>6–8 m</b>. At the bottom there is a larger cutting edge all round, and inside <b>stiffening cross walls</b> divide it into cells. In easily dredged soil it can be sunk as deep as <b>40–50 m</b>.
@@ -29,7 +27,6 @@ be68e67	Section of a caisson: compressed air expels the water from the working c
 a947dbb	<b>≈ 10<small>m</small></b><span>approx. 1 bar of extra pressure is needed per this water depth</span>
 4ed0bb8	<b>2<small>airlocks</small></b><span>one for people, one for materials and soil</span>
 fd71bd5	<span class="f">p ≈ γ<sub>v</sub>·h<sub>v</sub></span>⏎    <span class="fl"><i>the required excess pressure</i> – h<sub>v</sub>: depth of the cutting edge below the water level, γ<sub>v</sub> ≈ 9.81 kN/m³; 100 kPa = 1 bar ≈ 10.2 m of water column</span>
-d96be5c	Caisson pressure calculator
 d6afaa1	Caisson disease
 7d8b094	At high pressure more nitrogen dissolves in the blood and tissues. If the worker returns to normal air pressure too quickly, the gas forms bubbles – the result can be joint pain, paralysis, even death. It is the same as decompression sickness in divers. That is why the pressure in the personnel airlock had to be reduced slowly, in stages.
 b86ef7d	The price of the Brooklyn Bridge

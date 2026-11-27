@@ -71,8 +71,6 @@ ecf2a02	Concrete placed
 1528bd9	↺ Back to ground level
 3ba088d	It doesn’t budge
 731a7d2	Stops at ${fmt(m.zs, 1)} m
-a33484e	Working chamber
-c4c5f46	${Math.round(tot)} min
 2ec19e2	The noise
 7084607	${fmt(100 * c.f, 0)}${NB}% base
 6890246	Situation

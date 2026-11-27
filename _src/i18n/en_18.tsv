@@ -7,37 +7,9 @@ d423ae7	water ballast
 550fa57	cross walls, underwater dredging
 b9264cd	airlock
 a303a82	working chamber under air pressure
-188ebff	Water depth in the river
-4042acb	Cutting edge below the river bed
-1e7bbba	Compressor: excess pressure in the chamber
-5eac53f	Set it to the required pressure
-0971d9f	The pores of the soil communicate with the river: at the level of the cutting edge the pressure of a water column h<sub>v</sub> = h<sub>1</sub> + h<sub>2</sub> acts.
-71c3427	Required excess pressure
-bf758d7	Water column above the cutting edge
-3231b29	Decompression on the way out (illustrative)
-50d9ef4	dry
-1165406	flooded
-935b26d	escaping
 c37564b	river bed
 1d884fa	personnel airlock
-046fd3f	bar excess pressure
-1d35944	PRESSURE GAUGE
-ca66231	required
-91378df	set
-6ffe6e5	air escaping
-b69c604	Dry working chamber
-c034e26	The air pressure just expels the water from under the cutting edge – work can go on.
-c9a1b5c	Water is breaking in
-aad7651	The pressure is too low: the water stands ${fmt(st.hin, 1)} m high in the chamber. Raise the compressor pressure!
-57ea445	Flooded!
-62b05ef	The excess pressure is far below the water pressure: the working chamber floods.
-0073ca3	Air is escaping
-7ef38f6	The pressure is too high: the air bubbles out under the cutting edge, and the soil may be disturbed too. The required pressure is enough.
-5e13414	This is too deep
-3ec7532	${fmt(req, 2)} bar would be needed – this exceeds the 3.2–3.5 bar limit; people cannot work at such an excess pressure.
 112441a	At the limit
-cb2c9de	We are in the 3.2–3.5 bar band: short shifts, very long decompression.
-92dfddd	<b>Illustrative model.</b> The decompression time only indicates the order of magnitude (it grows steeply with pressure) – it is not a real decompression table.
 6001001	Quiz – well, box, caisson
 526d2a6	What takes the shell of a well or box foundation down into the depth?
 84e812f	Its own weight, while the soil is removed from inside
