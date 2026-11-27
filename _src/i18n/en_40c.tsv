@@ -9,10 +9,19 @@ c9b87b7	well foundation, Ø 2.5 m
 a264ce6	influence depth ≈ ${fmt(HM, 1)} m (Δσ<sub>z</sub> = 0.2·σ′<sub>v0</sub>)
 94ab62b	stress bulb: Δσ<sub>z</sub>/q isobars
 
-6d952a6	Well
 2eb388f	mixed
 e009d22	warnings: ${cnt('warn')}
 cb7bfa6	errors: ${cnt('bad')}
 2ea4c4d@js/data.js:16#2	Videos
 66d2f2a	fast
 f256198	From the Ground improvement playlist
+1846727	3D builder
+6a495f0	Well, caisson
+ebc70f9	Micro, jet, mixing
+af02d6e	Practice, revision
+72cde06	Sinking
+1142821	Slurry trenching
+2e6aa41	Special techniques
+9755d7f	Soil replacement
+8059886	Soil displacement
+692955d	Introduction

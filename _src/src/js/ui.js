@@ -53,9 +53,20 @@ function initChapterPiles() {
 function initNav() {
   const chs = CHAPTERS.map((c) => ({ ...c, el: document.getElementById(c.id) })).filter((c) => c.el);
   const topnav = $('#topnav'), plan = $('#navplan'), rail = $('#pilerail');
+  // fejezetcsoportok (a színcsoportok neve): a fejlécsávban és a cölöpkiosztási terven is ez tagol
+  const NAVG = ['Bevezetés', 'Talajkiszorítás', 'Talajhelyettesítés', 'Különleges eljárások', 'Réselés', 'Süllyesztés', 'Gyakorlás, ismétlés'];
+  let g = null, row = null, prow = null;
   for (const c of chs) {
-    topnav?.append(h('a', { href: '#' + c.id, 'data-ch': c.id }, c.nav));
-    plan?.append(h('a', { href: '#' + c.id, 'data-ch': c.id, html: pileSVG(c.pile, c.grp, 40) + `<span>${c.t}</span>` }));
+    if (c.grp !== g) {
+      g = c.grp;
+      const same = chs.filter((x) => x.grp === g), span = same.length > 1 ? `${same[0].pile}–${same[same.length - 1].pile}` : c.pile;
+      row = h('div', { class: 'tn-row' });
+      topnav?.append(h('div', { class: 'tn-g grp' + g, role: 'group', 'aria-label': NAVG[g] }, h('span', { class: 'tn-cap' }, NAVG[g]), row));
+      prow = h('div', { class: 'np-row' });
+      plan?.append(h('div', { class: 'np-g grp' + g }, h('div', { class: 'np-cap' }, h('b', {}, NAVG[g]), same.length > 1 ? h('i', {}, span) : null), prow));
+    }
+    row.append(h('a', { href: '#' + c.id, 'data-ch': c.id, title: `${c.pile} · ${c.t}` }, h('i', {}, c.pile), h('span', {}, c.nav)));
+    prow.append(h('a', { href: '#' + c.id, 'data-ch': c.id, html: pileSVG(c.pile, c.grp, 36) + `<span><i>${c.pile}</i><b>${c.t}</b></span>` }));
     rail?.append(h('a', { href: '#' + c.id, 'data-ch': c.id, 'aria-label': `${c.pile} – ${c.t}`, html: pileSVG(c.pile, c.grp, 30) + `<span>${c.pile} · ${c.t}</span>` }));
   }
   const sheet = $('#navsheet');
@@ -73,7 +84,7 @@ function initNav() {
     cur = id;
     $$('[data-ch]').forEach((el) => {
       const k = chs.findIndex((c) => c.id === el.dataset.ch);
-      el.classList.toggle('on', el.dataset.ch === cur);
+      el.classList.toggle('on', el.dataset.ch === cur); el.classList.toggle('done', k >= 0 && k < i);
       const p = $('.pile', el);
       if (p) { p.classList.toggle('cur', k === i); p.classList.toggle('done', k < i); }
     });
