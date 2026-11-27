@@ -75,7 +75,7 @@ ef3c053	2 · Technology
 064956a	3 · Result
 5e7a2ca	The ratio bar shows how much is carried by the base and how much by the shaft – layer by layer. The checklist shows the limitations of the technology.
 94a7d33	Try it
-35c0bcb	Four small tasks
+bdaba42	Three small tasks
 a517748	End-bearing or mixed?
 5e99376	A CFA pile in profile A: at 13 m it is drilled 3 m into the gravel. Look at the ratio bar, then drag the length to 20 m. When does the pile tip over into “mixed”?
 5421331	Set up ▶
@@ -83,8 +83,6 @@ eede980	Driving in the city centre
 63bd156	A driven reinforced concrete pile in hard clay, next to a vibration-sensitive neighbour. How many red rows do you get? Try the screw pile and the CFA pile here too.
 6fc7819	A bore below the groundwater
 3f1cb7e	An unsupported bored pile in profile A, where the groundwater is at 2 m. What happens to the bore? Which technology solves it – and why?
-104c26a	Withdrawn too fast
-503d3bc	CFA in the peaty profile C, withdrawn too fast. Where does the pile narrow, and what does the concrete volume reveal? Then look at the micropile in the same place.
 efc0c45	Build the pile!
 134a977	<b class="t">What is the model based on?</b>
 3b1da0f	Every layer has a unit shaft resistance and a unit base resistance; these are summed over the shaft and the base of the pile. For the displacement technologies a higher value is used because of compaction (for precast piles at both the base and the shaft, for screw piles at the shaft), for the Franki pile the larger base area of the bulb counts, and for the micropile the base resistance is neglected. The classification follows the 2/3 rule. The numbers are <b>illustrative</b>: they help you see what load transfer depends on – the actual design of piles is taught in later geotechnical courses.

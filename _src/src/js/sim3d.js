@@ -301,10 +301,6 @@ register('sim3d', (root) => {
   const cL = slider(C, { label: 'Cölöphossz', sym: 'L', min: 4, max: 50, step: 0.5, value: S.L, unit: 'm', d: 1 });
   const dNote = h('div', { class: 'sim-ctl-note' });
   C.append(dNote);
-  C.append(h('div', { class: 'sim-ctl-h' }, 'Kivitelezési hiba'));
-  const cFault = toggle(C, { label: '–', value: false });
-  const fNote = h('div', { class: 'sim-ctl-note' });
-  C.append(fNote);
   const ytBox = h('div', { class: 'sim-yt' });
   C.append(ytBox);
 
@@ -988,10 +984,6 @@ register('sim3d', (root) => {
     cShape.el.style.display = S.tech === 'driven' ? '' : 'none';
     techChip.innerHTML = `<span class="chip grp">${T.g}</span>`;
     dNote.innerHTML = { franki: 'A cső 46–52 cm-es; a kész cölöp a kiszorítás miatt kb. 60 cm átmérőjű.', driven: 'Négyzetes: 30×30 vagy 40×40 cm, L = 4–12 m · kör (pörgetett): D = 25–50 cm, L ≤ 20–22 m.', micro: 'Mikrocölöp: fúrt törzsátmérő legfeljebb 250–300 mm.', cfa: 'CFA: D = 40–120 cm, L legfeljebb 22–24 m.', casing: 'Béléscsöves: D = 80–150 (350) cm, L ≤ kb. 100 m (itthon eddig 30–40 m).', slurry: 'Zagyos: D = 80–150 (350) cm, L ≤ kb. 100 m (itthon eddig 30–40 m).', dry: 'Megtámasztás nélkül: legfeljebb 8–10 m mélységig.', screw: 'Csavart: D = 300–700 mm, L legfeljebb 18 (20) m.' }[S.tech];
-    const f = T.fault;
-    cFault.el.style.display = f ? '' : 'none'; fNote.style.display = f ? '' : 'none';
-    if (f) { cFault.el.querySelector('span').textContent = f; fNote.textContent = 'Kapcsold be, és nézd meg, mi romlik el – és mit árul el a lista.'; }
-    else { fNote.style.display = ''; fNote.textContent = S.tech === 'dry' ? 'Itt a talaj dönt: próbáld ki talajvíz alatt vagy homokban.' : 'Ennél a technológiánál a talaj és a hossz dönt – figyeld a listát.'; }
     ytBox.innerHTML = '';
     if (T.yt) { ytBox.append(h('div', { class: 'sim-ctl-h' }, 'Valós felvétel')); const b = h('button', {}); ytMini(b, T.yt); ytBox.append(b); }
   }
@@ -1061,11 +1053,10 @@ register('sim3d', (root) => {
   const schedule = (keep = false) => { if (rbPending) return; rbPending = true; requestAnimationFrame(() => { rbPending = false; playing = false; rebuild(keep); paintPlay(); }); };
   cProf.on((v) => { S.prof = v; schedule(); });
   cNb.on((v) => { S.nb = v; schedule(true); });
-  cTech.on((v) => { S.tech = v; const T = TECH[v]; techRanges(); cD.set(T.D[3], false); const [l0, l1] = LRANGE[v]; if (S.L < l0 || S.L > l1) cL.set(T.L, false); S.fault = false; cFault.set(false, false); schedule(); });
+  cTech.on((v) => { S.tech = v; const T = TECH[v]; techRanges(); cD.set(T.D[3], false); const [l0, l1] = LRANGE[v]; if (S.L < l0 || S.L > l1) cL.set(T.L, false); schedule(); });
   cShape.on((v) => { S.shape = v; schedule(); });
   cD.on(() => schedule());
   cL.on(() => schedule());
-  cFault.on((v) => { S.fault = v; schedule(); });
   viewSeg.on((v) => { setView(v); setGrpLabs(); });
   tl.addEventListener('input', () => { playing = false; T = (tl.value / 1000) * total; tl.style.setProperty('--p', (tl.value / 10) + '%'); apply(stateAt(T)); paintPlay(); req(); });
   const startAt = () => steps.reduce((acc, s, i) => { acc.push((acc[i - 1] ?? 0) + (i ? steps[i - 1].dur : 0)); return acc; }, []);
@@ -1085,12 +1076,11 @@ register('sim3d', (root) => {
     1: { tech: 'cfa', prof: 'A', D: 60, L: 13, nb: false, fault: false },
     2: { tech: 'driven', prof: 'D', D: 40, L: 10, nb: true, fault: false, shape: 'sq' },
     3: { tech: 'dry', prof: 'A', D: 60, L: 9, nb: false, fault: false },
-    4: { tech: 'cfa', prof: 'C', D: 60, L: 16, nb: false, fault: true },
   };
   const applyPreset = (key) => {
     const p = PRESETS[key]; if (!p) return;
     Object.assign(S, p);
-    cProf.set(p.prof, false); cTech.set(p.tech, false); techRanges(); cD.set(p.D, false); cL.set(p.L, false); cNb.set(p.nb, false); cFault.set(p.fault, false); if (p.shape) cShape.set(p.shape, false);
+    cProf.set(p.prof, false); cTech.set(p.tech, false); techRanges(); cD.set(p.D, false); cL.set(p.L, false); cNb.set(p.nb, false); if (p.shape) cShape.set(p.shape, false);
     viewSeg.set('kozeli', false); S.view = 'kozeli';
     rebuild(); T = 0; apply(stateAt(0)); setView('kozeli');
     playing = true; lastT = 0; paintPlay(); req();

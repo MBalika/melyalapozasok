@@ -1,8 +1,8 @@
 /* C09 – 3D cölöpépítő (#szimulator) */
 .sim-how { margin: 6px 0 4px; }
 .sim-how h4 { color: var(--grp); }
-.sim-tasks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 6px 0 8px; }
-@media (max-width: 760px) { .sim-tasks { grid-template-columns: minmax(0, 1fr); } }
+.sim-tasks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 6px 0 8px; }
+@media (max-width: 980px) { .sim-tasks { grid-template-columns: minmax(0, 1fr); } }
 .sim-task { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; gap: 4px 12px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
 .sim-task-n { grid-row: span 2; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font: 800 18px/1 var(--f-display); background: var(--grp); color: #fff; }
 .sim-task b { font-family: var(--f-display); font-size: 20px; font-weight: 750; display: block; line-height: 1.1; }
