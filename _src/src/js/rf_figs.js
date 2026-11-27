@@ -303,29 +303,16 @@ function renderPress(el) {
   T(s, 46, yb + 20, 'z = 20 m', 'rf-tn');
 }
 
-/* ================================================================== 6. Betonozás: fúrt cölöp és réstábla */
+/* ================================================================== 6. Betonozás: réstábla */
 function renderBeton(el) {
   const W = 1000, H = 580;
-  const s = mk(el, W, H, 'Fúrt cölöp és réstábla betonozása: munkaszint, betonozási és visszavésési szint, betonszint, armatúra, betonozó tölcsér és csövek', 'rf-beton');
+  const s = mk(el, W, H, 'Réstábla betonozása: munkaszint, betonozási és visszavésési szint, betonszint, armatúra, betonozó tölcsér és csövek', 'rf-beton');
+  s.setAttribute('viewBox', `120 0 ${W - 120} ${H}`);
   const TY6 = 150, BOT6 = 540, Bz = 430; // terep, talp, pillanatnyi betonszint
   const LV = [[TY6, 'munkaszint'], [TY6 + 22, 'betonozási szint'], [TY6 + 46, 'visszavésési szint'], [Bz, 'betonszint']];
   // talaj
   soilBox(s, 0, TY6, W, BOT6 + 26 - TY6, 'f-soilA', 'pat-soil', 0.55);
-  // ---------- fúrt cölöp
-  const px = 96, pw = 56;
-  slurry(s, px, TY6, pw, BOT6 - TY6);
-  conc(s, px, Bz, pw, BOT6 - Bz);
-  R(s, px - 6, TY6 - 16, 6, 54, 'f-steel', { style: 'stroke:var(--ink);stroke-width:1' }); R(s, px + pw, TY6 - 16, 6, 54, 'f-steel', { style: 'stroke:var(--ink);stroke-width:1' });
-  const pc = G(s, { style: 'stroke:var(--rebar);fill:none' });
-  R(pc, px + 6, TY6 + 10, pw - 12, BOT6 - TY6 - 18, '', { style: 'stroke-width:1.6' });
-  for (let y = TY6 + 10; y < BOT6 - 14; y += 14) L(pc, px + 6, y + 14, px + pw - 6, y, 'stroke-width:.9');
-  L(pc, px + pw / 2, TY6 + 10, px + pw / 2, BOT6 - 8, 'stroke-width:.9');
-  C(s, px + pw / 2, 74, 26, '', { style: 'fill:var(--surface);stroke:var(--ink);stroke-width:1.6' });
-  dimH(s, px + pw / 2 - 26, px + pw / 2 + 26, 36, 'cölöpátmérő', { ext: 38 });
-  dimV(s, 40, TY6, BOT6, 'fúrási mélység', { rot: true, dx: -12 });
-  lead(s, px - 3, TY6 + 18, 4, TY6 + 76, 'megvezető cső', { cls: 'rf-ts' });
-  lead(s, px + pw - 8, 300, 196, 300, 'armatúra', { cls: 'rf-ts' });
-  T(s, px + pw / 2, BOT6 + 22, 'fúrt cölöp', 'rf-tb', { 'text-anchor': 'middle' });
+  dimV(s, 152, TY6, BOT6, 'résmélység', { rot: true, dx: -12 });
   // ---------- réstábla (hosszmetszet + felülnézet)
   const x0 = 330, x1 = 720;
   slurry(s, x0, TY6, x1 - x0, BOT6 - TY6);
@@ -370,13 +357,12 @@ function renderBeton(el) {
 }
 /* kiegészítő ábrák: szerkezeti elemek metszete, vasalási részlet */
 function renderShapes(el) {
-  const s = mk(el, 420, 170, 'Résfallal készíthető szerkezeti elemek metszete: kör, téglalap, T és kereszt alakú');
+  const s = mk(el, 420, 170, 'Résfallal készíthető szerkezeti elemek metszete: téglalap, T és kereszt alakú');
   const cs = 'fill:var(--concrete);stroke:var(--ink);stroke-width:1.6';
-  C(s, 48, 70, 28, '', { style: cs });
-  R(s, 104, 50, 92, 40, '', { style: cs, rx: 3 });
-  P(s, 'M222 34 h 84 v 28 h -28 v 50 h -28 v -50 h -28 Z', '', { style: cs });
-  P(s, 'M354 26 h 28 v 30 h 30 v 28 h -30 v 30 h -28 v -30 h -30 v -28 h 30 Z', '', { style: cs });
-  const lb = [[48, 'cölöp'], [150, 'réstábla'], [264, 'T alakú'], [368, 'kereszt']];
+  R(s, 40, 50, 100, 40, '', { style: cs, rx: 3 });
+  P(s, 'M176 34 h 84 v 28 h -28 v 50 h -28 v -50 h -28 Z', '', { style: cs });
+  P(s, 'M318 26 h 28 v 30 h 30 v 28 h -30 v 30 h -28 v -30 h -30 v -28 h 30 Z', '', { style: cs });
+  const lb = [[90, 'réstábla'], [218, 'T alakú'], [332, 'kereszt']];
   for (const [x, t] of lb) T(s, x, 150, t, 'rf-t', { 'text-anchor': 'middle' });
 }
 function renderCover(el) {

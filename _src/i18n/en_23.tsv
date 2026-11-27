@@ -80,14 +80,11 @@ a4f622b	Slurry pressure and water and earth pressure on the wall of the trench w
 a55c2c5	water pressure
 c202031	with arching
 12ce15b	Rankine
-900f629	Concreting a bored pile and a panel: working level, casting and cut-off levels, concrete level, reinforcement, concreting hopper and pipes
+1f1f105	Concreting a panel: working level, casting and cut-off levels, concrete level, reinforcement, concreting hopper and pipes
 11e2327	casting level
 0c304ed	cut-off level
-64ac905	pile diameter
-3f8ee25	drilling depth
-a3d8df5	guide tube
+9ab65b1	trench depth
 44a3a80	reinforcement
-449fb41	bored pile
 c9ec0a4	concreting hopper
 6ab0409	concreting pipe
 462a18b	(tremie pipe)
@@ -95,8 +92,7 @@ c9ec0a4	concreting hopper
 18f4163	wall thickness
 b68c954	guide wall
 c1ff4e5	section of the diaphragm wall
-08f1ef1	Sections of structural elements that can be built as diaphragm walls: circular, rectangular, T-shaped and cross-shaped
-f78dfd1	pile
+e026798	Sections of structural elements that can be built as diaphragm walls: rectangular, T-shaped and cross-shaped
 84f0edc	panel
 a3fff36	T-shaped
 f412d5b	Reinforcement detail: clear spacing between the bars and concrete cover
