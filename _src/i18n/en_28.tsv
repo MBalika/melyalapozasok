@@ -73,9 +73,6 @@ ecf2a02	Concrete placed
 731a7d2	Stops at ${fmt(m.zs, 1)} m
 a33484e	Working chamber
 c4c5f46	${Math.round(tot)} min
-20e6988	The soil has loosened
-337dd4b	The right
-1c3af4c	The left
 2ec19e2	The noise
 7084607	${fmt(100 * c.f, 0)}${NB}% base
 6890246	Situation

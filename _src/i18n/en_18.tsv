@@ -38,35 +38,6 @@ aad7651	The pressure is too low: the water stands ${fmt(st.hin, 1)} m high in th
 112441a	At the limit
 cb2c9de	We are in the 3.2–3.5 bar band: short shifts, very long decompression.
 92dfddd	<b>Illustrative model.</b> The decompression time only indicates the order of magnitude (it grows steeply with pressure) – it is not a real decompression table.
-ad6a68a	middle
-1224c7a	Dredging in the ${c} cell
-3e83d2b	All three cells (even dredging)
-2ceb6d1	Monitoring (survey measurement)
-d6656c2	↺ New box
-0ed15fd	Tip: if one side is lower, dredge on the <b>other</b> side. In a hard layer the soil under the cell hardly diminishes; in a loose, flowing pocket, however, you easily over-dredge – and the surroundings loosen.
-f95b104	Depth (average)
-126bbf3	Tilt
-1a6e734	Stage
-ad0134d	Maximum tilt
-352b11e	hard lens
-fb33065	loose, flowing pocket
-f381e89	subsidence crater
-5d6e4b6	tiltmeter
-bfbb464	The tilt is exaggerated sixfold in the drawing.
-415a97a	Without monitoring: a tilt of a few tenths of a per cent cannot be seen with the naked eye…
-0b40ccd	concreting a new stage…
-dcd113f	Jammed!
-1889c50	<p>The box tilted and wedged itself into the soil – this is irreparable. Start again and watch the tiltmeter: dredge on the side <b>opposite</b> the lower side.</p>
-4fc78a2	Down – nice and straight!
-6955b28	Down, but it tilted strongly on the way
-296d214	<p>The box has reached the bearing stratum (20 m); the maximum tilt was ${fmt(s.mx * 100, 2)} %. The base slab can follow.${(s.lL + s.lR) > 0.3 ? ' A túlkotrás miatt azonban roskadási tölcsér alakult ki a környezetben.' : ''}</p>
-16f00d4	 However, because of over-dredging a subsidence crater formed in the surroundings.
-16d0e1d	<p>You dredged too much in the loose pocket: the soil flows in under the cutting edge, and a subsidence crater opens at the surface. In such a case dredge less, and more carefully, on that side.</p>
-89576d7	The box is tilting!
-9b38336	<p>${s.th > 0 ? 'A jobb' : 'A bal'} side is lower. Switch off dredging there and work on the other side.</p>
-9573474	Sinking in progress
-d1f5031	Ready to start
-5c029ce	<p>The box is built and sunk in stages of 6–8 m (here 7 m); when its top gets close to ground level, the next stage is concreted.</p>
 6001001	Quiz – well, box, caisson
 526d2a6	What takes the shell of a well or box foundation down into the depth?
 84e812f	Its own weight, while the soil is removed from inside
