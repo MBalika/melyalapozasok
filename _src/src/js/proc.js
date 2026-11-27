@@ -1540,10 +1540,10 @@ PROC.resfal = {
     } },
     { w: 240, t: 'Primer harapások', d: 'Szakaszos réselésnél minden második (primer) tábla készül először: két szélét kiharapják, a kiemelt föld helyét folyamatosan bentonitos résiszap tölti ki.', draw(g, M) {
       rfBase(g, M, 1);
-      slurry(g, 22, M.GY + 11, 27, 318 - M.GY - 11); slurry(g, 57, M.GY + 11, 27, 318 - M.GY - 11);
-      [22, 49, 57, 84].forEach((xx) => Ln(g, xx, M.GY + 11, xx, 318, SK('wall', 1)));
-      const gr = grab(g, 70.5, 300, 12.5, 0.5);
-      crane(g, M, 70.5, gr.top - 4, { reach: 104, tipY: 18 });
+      slurry(g, 22, M.GY + 11, 24, 318 - M.GY - 11); slurry(g, 60, M.GY + 11, 24, 318 - M.GY - 11);
+      [22, 46, 60, 84].forEach((xx) => Ln(g, xx, M.GY + 11, xx, 318, SK('wall', 1)));
+      const gr = grab(g, 72, 300, 12, 0.5);
+      crane(g, M, 72, gr.top - 4, { reach: 104, tipY: 18 });
       el('text', { x: 53, y: 310, 'text-anchor': 'middle', class: 'pr-tx pr-big', text: 'P' }, g);
     } },
     { w: 240, t: 'A tábla közepe', d: 'A középső harapás után a primer tábla teljes hosszában nyitva áll – zagy alatt.', draw(g, M) {
@@ -3876,7 +3876,7 @@ function init() { document.querySelectorAll('svg[data-pcard]').forEach((f) => me
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
 /* ================================================================== 7.2 – Réstábla-építő (felül felülnézet, alatta hosszmetszet a fal tengelyében) */
-export const PB = { W: 800, H: 566, X0: 84, PXM: 21, LEN: 30, SY: 114, GY: 150, DM: 13, DEP: 20, PY: [26, 88], TY: [50, 66] };
+export const PB = { W: 800, H: 566, X0: 84, PXM: 18, LEN: 35, SY: 114, GY: 150, DM: 13, DEP: 20, PY: [26, 88], TY: [50, 66] };
 PB.BOT = PB.GY + PB.DM * PB.DEP; PB.GH = 24.5; // a zárt réskanál fél szélessége (nyitva 2,8–2,9 m)
  PB.X = (m) => PB.X0 + m * PB.PXM;
 const pbS = (x) => { const t = clamp01(x); return t * t * (3 - 2 * t); };

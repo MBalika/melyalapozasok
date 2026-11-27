@@ -71,20 +71,21 @@ register('rf-anat', (root) => {
 });
 
 /* ================================================================== 2. Réstábla-építő */
-// öt, egyformán 6,0 m hosszú tábla (a primer és a szekunder tábla a valóságban is hasonló hosszú); mindegyik három harapás
+// öt, egyformán 7,0 m hosszú tábla (a primer és a szekunder tábla a valóságban is hasonló hosszú); mindegyik három harapás:
+// két szélső, 2,8 m-es harapás, köztük 1,4 m széles talajtömb marad a harmadik harapásra (ennél keskenyebb csíkot nem terveznek)
 const PAN = [
-  { id: 'P1', k: 'P', x0: 0, x1: 6 },
-  { id: 'S1', k: 'S', x0: 6, x1: 12 },
-  { id: 'P2', k: 'P', x0: 12, x1: 18 },
-  { id: 'S2', k: 'S', x0: 18, x1: 24 },
-  { id: 'P3', k: 'P', x0: 24, x1: 30 },
+  { id: 'P1', k: 'P', x0: 0, x1: 7 },
+  { id: 'S1', k: 'S', x0: 7, x1: 14 },
+  { id: 'P2', k: 'P', x0: 14, x1: 21 },
+  { id: 'S2', k: 'S', x0: 21, x1: 28 },
+  { id: 'P3', k: 'P', x0: 28, x1: 35 },
 ];
 PAN.forEach((q) => { q.bites = [[q.x0, q.x0 + 2.8], [q.x1 - 2.8, q.x1], [q.x0 + 2.8, q.x1 - 2.8]]; });
 const EP_STEPS = [
   { t: 'Résvezető gerenda', d: 'A falvonal két oldalán vasbeton résvezető gerendák készülnek (20–25 cm széles, 1,0–1,5 m magas). Ezek vezetik a réskanalat, és ez a kitűzés alapja is.', dur: 2.4 },
   { t: 'P1 – első harapás', d: 'A réskanál a primer tábla egyik végén kezd: leengedés – harapás – kiemelés – ürítés. A kiemelt föld helyét azonnal bentonitzagy tölti ki, a zagyszint végig a résvezető gerenda teteje közelében marad.', dur: 6.0 },
   { t: 'P1 – második harapás', d: 'A tábla másik vége következik. Egy harapás jellemzően 2,8–2,9 m hosszú – ennyi a nyitott réskanál szélessége.', dur: 6.0 },
-  { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt talajtömböt is kiemelik: ez a 6,0 m-es tábla így három harapásból áll.', dur: 6.0 },
+  { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt, kb. 1,4 m széles talajtömböt is kiemelik: ez a 7,0 m-es tábla így három harapásból áll.', dur: 6.0 },
   { t: 'Szakaszoló pallók, vasalási armatúrák', d: 'Aljtisztítás után a tábla két végére szakaszoló palló kerül, majd daruval beemelik a két vasalási armatúrát.', dur: 5.0 },
   { t: 'P1 betonozása két kontraktorcsővel', d: 'Alulról felfelé, folyamatosan betonoznak. A nehezebb beton kiszorítja a zagyot, amelyet visszaszivattyúznak a telepre. A csövek vége végig a friss betonba merül.', dur: 4.0 },
   { t: 'A többi primer tábla: P2, P3', d: 'Ugyanígy készül el P2 és P3. A primer táblák között egy-egy táblányi talaj marad a helyén – itt lesznek a hasonló hosszúságú közbenső (szekunder) táblák.', dur: 12.0 },
