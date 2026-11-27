@@ -1384,7 +1384,7 @@ PROC.jet = {
       arrowV(g, x - 28, 196, 232);
       tag(g, x + 20, 250, 'fúrófolyadék', { to: [x + 5, 250] });
     } },
-    { w: 260, t: 'Injektálás a talptól', d: 'A monitor fúvókáin át 350–400 bar nyomású sugár vágja és keveri a talajt.', draw(g, M) {
+    { w: 260, t: 'Injektálás a talptól', d: 'A fúvókákon át 350–400 bar nyomású sugár vágja és keveri a talajt.', draw(g, M) {
       const x = 150, r = smallRig(g, M, x, { top: 36, headY: 132 });
       silo(g, M, 22, { w: 20, h: 86 });
       const pl = plant(g, M, 36, { w: 44, h: 24 });
