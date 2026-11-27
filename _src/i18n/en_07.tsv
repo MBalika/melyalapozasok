@@ -70,7 +70,7 @@ a5417f0	Bentonite slurry
 307e8af	The special “raw material” of the diaphragm wall is a mixture of water and bentonite dispersed in it, the <b>bentonite slurry</b>. Bentonite is a very fine-grained colloidal clay consisting predominantly of <b>montmorillonite</b>. Only <b>activated “Na” bentonite</b> can be used for trenching; the viscosity of the slurry can be increased with CMC (a cellulose derivative).
 b0eb069	The slurry does two things at once: it <b>prevents groundwater from flowing in</b>, and it <b>counterbalances</b> the water and earth pressure acting on the side walls of the trench. Mixing it requires a separate mixing and settling “plant” on site: this is where it is made, where it rests, and where the slurry displaced or pumped out of the trench returns for cleaning.
 7294631	<b>1.03–1.12<small>g/cm³</small></b><span>density of the slurry during trenching</span>
-fe20fca	<b>≥ 1.0–1.5<small>m</small></b><span>how far the slurry level must be above the groundwater table</span>
+316dc9c	<b>≥ 1.0–1.5<small>m</small></b><span>the slurry level must be at least this far above the groundwater table</span>
 58a55ab	A jelly that flows
 e004583	Bentonite slurry is <b>thixotropic</b>: at rest it sets like a jelly, and when stirred or pumped it flows again. At the wall of the trench part of the water seeps into the soil, and the bentonite platelets deposit a thin, almost impermeable <b>filter cake</b> on the surface – through this the slurry transfers its pressure to the soil grains.
 af25c55	← swipe sideways for the figure →

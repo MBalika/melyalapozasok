@@ -1,7 +1,7 @@
 // C07 – Résfalak: saját, statikus SVG-ábrák (a régi, beszkennelt rajzok helyett)
 // A HTML-ben: <div class="rf-fig…" data-rffig="név"></div> – betöltéskor azonnal kirajzolódnak (nem lusták, így nem ugrál az oldal).
 import { svg, h, pathD } from './core.js';
-import { rfGrabFig, rfCutterFig } from './proc.js';
+import { rfGrabFig, rfCutterFig, rfSlurryFig } from './proc.js';
 
 /* ------------------------------------------------------------------ rajzsegédek */
 const T = (p, x, y, s, cls = 'rf-t', o = {}) => svg('text', { x, y, class: cls, text: s, ...o }, p);
@@ -237,65 +237,9 @@ function renderCutter(el) {
 
 /* ================================================================== 4. A zagy útja (hydrofraise, zagykezelő telep) */
 function renderZagykor(el) {
-  const W = 1000, H = 440, TY4 = 262;
-  const s = mk(el, W, H, 'A zagy útja hydrofraise-zel végzett réselésnél: marótárcsa, bontószivattyú, homoktalanító, tartály, szivattyúk, keverő, bentonitsiló', 'rf-zagy');
-  soilBox(s, 0, TY4, W, H - TY4, 'f-soilA', 'pat-sand', 0.6);
-  L(s, 0, TY4, W, TY4, 'stroke:var(--ink);stroke-width:1.6');
-  const dirty = 'stroke:var(--soilB);stroke-width:7;fill:none;stroke-linejoin:round;stroke-linecap:round';
-  const clean = 'stroke:var(--bento);stroke-width:7;fill:none;stroke-linejoin:round;stroke-linecap:round';
-  // rés és marógép
-  slurry(s, 62, TY4, 92, H - TY4);
-  R(s, 52, TY4 - 8, 112, 10, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:.8' });
-  P(s, `M${120} ${TY4 + 9} l 7 -10 h -14 z`, '', { style: 'fill:var(--ink2)' });
-  const fx = 76, fw = 64, fy0 = TY4 + 22, fy1 = 404;
-  R(s, fx, fy0, fw, fy1 - fy0, '', { style: 'fill:none;stroke:var(--warn);stroke-width:4' });
-  for (let y = fy0; y < fy1 - 20; y += 38) { L(s, fx, y, fx + fw, y + 38, 'stroke:var(--warn);stroke-width:2.4'); L(s, fx, y + 38, fx + fw, y + 38, 'stroke:var(--warn);stroke-width:2.4'); }
-  for (const cx of [91, 125]) { C(s, cx, 416, 17, 'f-steel2', { style: 'stroke:var(--ink);stroke-width:1.4' }); for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4; C(s, cx + Math.cos(a) * 18, 416 + Math.sin(a) * 18, 3, 'f-ink'); } }
-  R(s, 98, 372, 20, 22, 'f-steel', { style: 'stroke:var(--ink);stroke-width:1.2', rx: 4 });
-  // 2 → 3: talajjal terhelt zagy fel a homoktalanítóra
-  P(s, `M108 372 V 40 Q108 28 120 28 H 440 Q452 28 452 40 V 118`, '', { style: dirty });
-  ar(s, 452, 100, 452, 124, 'var(--soilB)', 4, 14);
-  // tartály (4) + homoktalanító (3)
-  R(s, 300, 150, 190, TY4 - 150, '', { style: 'fill:var(--surface2);stroke:var(--ink);stroke-width:1.6' });
-  slurry(s, 302, 176, 186, TY4 - 178);
-  P(s, 'M330 186 l 7 -10 h -14 z', '', { style: 'fill:var(--ink2)' });
-  P(s, 'M410 122 H 500 V 150 Z', 'f-grp', { opacity: 0.85, style: 'stroke:var(--ink);stroke-width:1.4' });
-  P(s, 'M410 122 H 500 V 150 H 410 Z', '', { style: 'fill:none;stroke:var(--ink);stroke-width:1.4' });
-  for (const x of [424, 444, 464]) ar(s, x, 152, x, 174, 'var(--ink2)', 2, 7);
-  // 3 → 6: leválasztott talaj
-  P(s, 'M500 136 H 548 Q 560 136 560 148 V 196', '', { style: 'stroke:var(--soilB);stroke-width:6;fill:none' });
-  ar(s, 560, 186, 560, 206, 'var(--soilB)', 3, 10);
-  P(s, `M520 ${TY4} Q 562 206 604 ${TY4} Z`, 'f-soilB', { style: 'stroke:var(--ink);stroke-width:1.2' });
-  P(s, `M520 ${TY4} Q 562 206 604 ${TY4} Z`, '', { fill: 'url(#pat-gravel)', opacity: 0.9 });
-  // 4 → 5 → rés: tisztított zagy vissza
-  P(s, `M300 236 H 236`, '', { style: clean });
-  C(s, 222, 240, 17, 'f-steel', { style: 'stroke:var(--ink);stroke-width:1.4' });
-  P(s, `M206 240 H 176 Q 164 240 164 252 V ${TY4 + 6}`, '', { style: clean });
-  ar(s, 164, TY4 - 6, 164, TY4 + 20, 'var(--bento)', 4, 14);
-  // keverő (8), szivattyú (7), siló (9), víz (10)
-  R(s, 724, 214, 100, TY4 - 214, '', { style: 'fill:var(--surface2);stroke:var(--ink);stroke-width:1.6' });
-  slurry(s, 726, 226, 96, TY4 - 228);
-  L(s, 774, 196, 774, 246, 'stroke:var(--ink);stroke-width:2');
-  P(s, 'M752 246 h 44', '', { style: 'stroke:var(--ink);stroke-width:4;stroke-linecap:round' });
-  P(s, `M724 240 H 692`, '', { style: clean });
-  C(s, 676, 244, 17, 'f-steel', { style: 'stroke:var(--ink);stroke-width:1.4' });
-  P(s, `M676 227 V 96 Q676 84 664 84 H 322 Q 310 84 310 96 V 164`, '', { style: clean });
-  ar(s, 310, 146, 310, 172, 'var(--bento)', 4, 14);
-  P(s, 'M876 60 H 956 V 196 L 924 226 H 908 L 876 196 Z', 'f-warn', { opacity: 0.85, style: 'stroke:var(--ink);stroke-width:1.6' });
-  L(s, 882, 226, 882, TY4, 'stroke:var(--ink);stroke-width:2.4'); L(s, 950, 226, 950, TY4, 'stroke:var(--ink);stroke-width:2.4');
-  P(s, 'M916 226 L 792 182', '', { style: 'stroke:var(--steelm2);stroke-width:11;stroke-linecap:round' });
-  P(s, 'M916 226 L 792 182', '', { style: 'stroke:var(--ink);stroke-width:1;stroke-dasharray:4 4' });
-  ar(s, 792, 184, 792, 208, 'var(--ink)', 2.4, 9);
-  ar(s, 748, 150, 748, 210, 'var(--water)', 3, 11);
-  T(s, 748, 140, 'víz', 'rf-ts', { 'text-anchor': 'middle' });
-  // jelölők
-  const B = [[1, 46, 416], [2, 140, 383], [3, 520, 112], [4, 400, 214], [5, 222, 210], [6, 618, 238], [7, 676, 214], [8, 846, 232], [9, 916, 120], [10, 718, 150]];
+  const s = mk(el, 1060, 470, 'A zagy útja hydrofraise-zel végzett réselésnél: marótárcsa, bontószivattyú, homoktalanító, tartály, szivattyúk, keverő, bentonitsiló', 'rf-zagy');
+  const B = rfSlurryFig(s, { dirty: 'talajjal terhelt zagy', clean: 'tisztított, ill. friss zagy', water: 'víz' });
   for (const [n, x, y] of B) badge(s, x, y, n, 15);
-  // jelmagyarázat-sáv
-  P(s, 'M560 36 h 46', '', { style: dirty });
-  T(s, 616, 42, 'talajjal terhelt zagy', 'rf-ts');
-  P(s, 'M780 36 h 46', '', { style: clean });
-  T(s, 836, 42, 'tisztított, ill. friss zagy', 'rf-ts');
 }
 
 /* ================================================================== 5. Nyomások a rés falán (σp, σv, σx) */

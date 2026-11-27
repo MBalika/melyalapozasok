@@ -4092,3 +4092,77 @@ export function rfCutterFig(s, L) {
   tag(g, 250, 40, L.pipe, { fs: 12, to: [212, 46] });
   tag(g, 200, H - 14, L.chips, { fs: 12, anchor: 'middle', to: [200, cy + 36] });
 }
+
+/* ================================================================== 7.x – a zagy körforgása hydrofraise-zel végzett réselésnél (zagykezelő telep) */
+export function rfSlurryFig(s, L) {
+  defs(); s.classList.add('pr-svg'); const W = 1060, H = 470, GY = 262; CUR.W = W;
+  const g = g_(s), M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: 'sand', y: GY + 16 }, { k: 'gravel', y: 396 }] };
+  backdrop(g, M, 0, W);
+  // csővezeték áramlásjelzéssel (az útvonal az áramlás irányában halad)
+  const pipe = (p, d, col, w = 7) => { P(p, d, SK('pcase', w + 2.6, 'stroke-linecap:round;stroke-linejoin:round')); P(p, d, SK(col, w, 'stroke-linecap:round;stroke-linejoin:round')); const f = P(p, d, SK('pflow', 2.2, 'stroke-dasharray:3 13;stroke-linecap:round;opacity:.8')); el('animate', { attributeName: 'stroke-dashoffset', from: '16', to: '0', dur: '0.9s', repeatCount: 'indefinite' }, f); };
+  const DIRTY = 'pdirty', CLEAN = 'pclean';
+  const pumpU = (x, y) => { R(g, x - 26, y - 4, 16, 16, F('cont') + `;stroke:${v('cont3')};stroke-width:.8`, { rx: 2 }); R(g, x - 20, y + 12, 34, 4, F('dark')); C(g, x, y, 15, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:1.2`); const im = g_(g); for (let i = 0; i < 3; i++) Ln(im, x, y, x + Math.cos(i * 2.094) * 9, y + Math.sin(i * 2.094) * 9, SK('dark2', 2.4, 'stroke-linecap:round')); C(im, x, y, 3, F('dark')); el('animateTransform', { attributeName: 'transform', type: 'rotate', from: `0 ${x} ${y}`, to: `360 ${x} ${y}`, dur: '1.6s', repeatCount: 'indefinite' }, im); };
+  // ---------------- rés a hydrofraise-zel, a darun
+  const x0 = 160, x1 = 250, cx = 205, BOT = 442, wy = 420;
+  for (const [x, w] of [[x0 - 16, 16], [x1, 16]]) { R(g, x, GY - 6, w, 26, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:.8`); R(g, x, GY - 6, w, 26, 'fill:url(#pr-p-conc)'); }
+  const fl = `M${x0} ${GY + 2} V${wy + 6} A26 26 0 0 0 ${cx} ${wy + 22} A26 26 0 0 0 ${x1} ${wy + 6} V${GY + 2}Z`;
+  P(g, fl, F('bore')); const cg = g_(g); P(cg, fl, 'fill:url(#pr-slurryg)'); P(cg, fl, 'fill:url(#pr-p-slurry)'); P(g, fl, SK('wall', 1.1)); Ln(g, x0, GY + 8, x1, GY + 8, SK('slurry2', 1.4));
+  pbCrane(g, M, cx, GY + 30, -1);
+  const fy0 = GY + 44, fy1 = 398, hw = 34, hf = F('hf') + `;stroke:${v('hf3')};stroke-width:.9`;
+  P(g, `M${cx - hw} ${fy0 + 10} L${cx - 12} ${fy0 - 12} H${cx + 12} L${cx + hw} ${fy0 + 10}Z`, hf);
+  for (const sx of [-1, 1]) R(g, cx + sx * hw - (sx > 0 ? 7 : 0), fy0 + 8, 7, fy1 - fy0 - 8, hf);
+  const mid = (fy0 + fy1) / 2;
+  for (const [a, b] of [[fy0 + 12, mid], [mid, fy1 - 4]]) { Ln(g, cx - hw + 6, a, cx + hw - 6, b, SK('hf2', 3)); Ln(g, cx + hw - 6, a, cx - hw + 6, b, SK('hf2', 3)); }
+  for (const y of [fy0 + 8, mid - 3, fy1 - 6]) R(g, cx - hw, y, 2 * hw, 6, hf, { rx: 1 });
+  for (const wx of [cx - 20, cx + 20]) { P(g, `M${wx - 15} ${fy1} H${wx + 15} L${wx + 10} ${wy - 6} H${wx - 10}Z`, F('hf2') + `;stroke:${v('hf3')};stroke-width:.8`); const w = g_(g), dir = wx < cx ? -1 : 1; for (let i = 0; i < 10; i++) P(g_(w, { transform: `rotate(${i * 36} ${wx} ${wy})` }), `M${wx - 3} ${wy - 15} L${wx - 2 + dir * 2} ${wy - 23} L${wx + 3 + dir * 2} ${wy - 23} L${wx + 3} ${wy - 15}Z`, F('spacer') + `;stroke:${v('steel3')};stroke-width:.6`); C(w, wx, wy, 17, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:1.1`); C(w, wx, wy, 9, F('steel3')); C(w, wx, wy, 3, F('dark')); el('animateTransform', { attributeName: 'transform', type: 'rotate', from: `0 ${wx} ${wy}`, to: `${dir * 360} ${wx} ${wy}`, dur: '5s', repeatCount: 'indefinite' }, w); }
+  R(g, cx - 10, fy1 - 30, 20, 26, F('dark2') + `;stroke:${v('dark')};stroke-width:.8`, { rx: 4 }); C(g, cx, fy1 - 17, 5.5, F('steel2'));
+  // ---------------- zagykezelő telep: tartály (4), fölötte homoktalanító (3)
+  const TX0 = 340, TX1 = 540, TT = 162;
+  for (const x of [TX0 + 96, TX1 - 6]) Ln(g, x, 112, x, TT, SK('steel3', 3));
+  R(g, TX0, TT, TX1 - TX0, GY - TT, F('cont') + `;stroke:${v('cont3')};stroke-width:1`, { rx: 2 });
+  for (let x = TX0 + 8; x < TX1 - 4; x += 12) Ln(g, x, TT + 3, x, GY - 3, SK('cont3', 0.8, 'opacity:.55'));
+  R(g, TX0 + 14, TT + 14, TX1 - TX0 - 28, GY - TT - 26, F('bore') + `;stroke:${v('cont3')};stroke-width:1`, { rx: 3 });
+  slurry(g, TX0 + 15, TT + 34, TX1 - TX0 - 30, GY - TT - 47); P(g, `M${TX0 + 36} ${TT + 32} l6 -9 h-12z`, F('labline'));
+  Ln(g, TX0 + 100, TT + 20, TX0 + 100, GY - 34, SK('steel3', 2.4)); P(g, `M${TX0 + 82} ${GY - 34} h36`, SK('steel3', 4, 'stroke-linecap:round'));
+  // homoktalanító: hidrociklonok és ferde rázószita; a homok a csúszdán a depóniára hull
+  const DX0 = 436, DX1 = 548;
+  R(g, DX0 - 4, 108, DX1 - DX0 + 8, 8, F('steel3'), { rx: 1 });
+  for (const x of [DX0 + 14, DX0 + 36, DX0 + 58]) { P(g, `M${x - 9} 78 H${x + 9} L${x + 2.5} 108 H${x - 2.5}Z`, 'fill:url(#pr-cylw)' + `;stroke:${v('drum3')};stroke-width:.8`); R(g, x - 10, 70, 20, 9, F('cont') + `;stroke:${v('cont3')};stroke-width:.7`, { rx: 2 }); }
+  P(g, `M${DX0} 122 L${DX1 + 6} 142 V152 L${DX0} 132Z`, F('mach') + `;stroke:${v('mach3')};stroke-width:.9`);
+  for (let x = DX0 + 8; x < DX1; x += 8) Ln(g, x, 123.5 + (x - DX0) * 0.176, x, 131 + (x - DX0) * 0.176, SK('mach3', 0.8));
+  for (const x of [DX0 + 18, DX0 + 46, DX0 + 74]) arrowV(g, x, 140 + (x - DX0) * 0.176, TT + 26, { w: 1.8, s: 5, c: 'pclean' });
+  P(g, `M${DX1 + 6} 146 L${DX1 + 34} 176`, SK('steel3', 5, 'stroke-linecap:round'));
+  spoil(g, M, 556, 108, 46, 'gravel');
+  for (let i = 0; i < 5; i++) { const c = C(g, DX1 + 36 + (i % 2) * 5, 180, 2.4, F('gravel') + `;stroke:${v('layer')};stroke-width:.5`); el('animate', { attributeName: 'cy', values: `178;${GY - 44}`, dur: '1.1s', begin: `${(-i * 0.22).toFixed(2)}s`, repeatCount: 'indefinite' }, c); }
+  // ---------------- friss zagy: bentonitsiló (9), csigás adagoló, keverő (8), víz (10)
+  const MX0 = 742, MX1 = 852, MT = 196;
+  silo(g, M, 968, { w: 66, h: 196, band: 'slurry2' });
+  P(g, `M962 ${GY - 30} L${MX1 - 22} ${MT - 12}`, SK('dark', 12.5, 'stroke-linecap:round')); P(g, `M962 ${GY - 30} L${MX1 - 22} ${MT - 12}`, SK('steel2', 10, 'stroke-linecap:round'));
+  { const f = P(g, `M962 ${GY - 30} L${MX1 - 22} ${MT - 12}`, SK('steel3', 8, 'stroke-dasharray:2 7')); el('animate', { attributeName: 'stroke-dashoffset', from: '9', to: '0', dur: '0.7s', repeatCount: 'indefinite' }, f); }
+  for (let i = 0; i < 4; i++) { const c = C(g, MX1 - 26 + (i % 2) * 4, MT - 6, 1.8, F('spacer')); el('animate', { attributeName: 'cy', values: `${MT - 8};${MT + 22}`, dur: '0.8s', begin: `${(-i * 0.2).toFixed(1)}s`, repeatCount: 'indefinite' }, c); }
+  R(g, MX0, MT, MX1 - MX0, GY - MT, 'fill:url(#pr-cylw)' + `;stroke:${v('drum3')};stroke-width:1`, { rx: 3 });
+  R(g, MX0 + 8, MT + 10, MX1 - MX0 - 16, GY - MT - 18, F('bore'), { rx: 2 }); slurry(g, MX0 + 9, MT + 24, MX1 - MX0 - 18, GY - MT - 33);
+  R(g, MX0 + 34, MT - 22, 30, 14, F('cont') + `;stroke:${v('cont3')};stroke-width:.8`, { rx: 2 }); R(g, MX0 + 14, MT - 9, 70, 6, F('steel3'), { rx: 1 });
+  Ln(g, MX0 + 49, MT - 4, MX0 + 49, GY - 22, SK('steel3', 2.6)); { const b = P(g, `M${MX0 + 30} ${GY - 22} h38`, SK('steel3', 4.4, 'stroke-linecap:round')); el('animate', { attributeName: 'd', values: `M${MX0 + 30} ${GY - 22} h38;M${MX0 + 44} ${GY - 22} h10;M${MX0 + 30} ${GY - 22} h38`, dur: '1.2s', repeatCount: 'indefinite' }, b); }
+  P(g, `M${MX0 + 18} 120 V${MT + 4}`, SK('dark', 7.6, 'stroke-linecap:round')); P(g, `M${MX0 + 18} 120 V${MT + 4}`, SK('water', 5, 'stroke-linecap:round')); R(g, MX0 + 10, 136, 16, 7, F('acc'), { rx: 2 });
+  for (let i = 0; i < 3; i++) { const c = C(g, MX0 + 18, MT + 8, 2, F('water')); el('animate', { attributeName: 'cy', values: `${MT + 6};${MT + 24}`, dur: '0.6s', begin: `${(-i * 0.2).toFixed(1)}s`, repeatCount: 'indefinite' }, c); }
+  worker(g, 884, { GY, dir: 1, pose: 'stand' });
+  // ---------------- csövek: talajjal terhelt zagy (2 → 3), tisztított zagy (4 → 5 → rés), friss zagy (8 → 7 → 4)
+  Ln(g, 292, 90, 292, GY, SK('steel3', 3)); R(g, 285, 84, 14, 5, F('steel3'));
+  pipe(g, `M${cx + 14} ${fy1 - 20} V98 Q${cx + 14} 84 ${cx + 28} 84 H${DX0 - 22} Q${DX0 - 8} 84 ${DX0 - 8} 98 V120`, DIRTY);
+  pumpU(302, GY - 18);
+  pipe(g, `M${TX0} ${GY - 22} H318`, CLEAN); pipe(g, `M286 ${GY - 18} H${x1 + 6} Q${x1 - 8} ${GY - 18} ${x1 - 8} ${GY - 6} V${GY + 16}`, CLEAN);
+  pumpU(700, GY - 18);
+  pipe(g, `M${MX0} ${GY - 22} H716`, CLEAN); pipe(g, `M686 ${GY - 18} H676 Q668 ${GY - 18} 668 ${GY - 30} V62 Q668 48 654 48 H${TX0 + 40} Q${TX0 + 26} 48 ${TX0 + 26} 62 V${TT + 22}`, CLEAN);
+  const chev = (x, y, a) => { const c = g_(g, { transform: `translate(${x} ${y}) rotate(${a})` }); P(c, 'M-5 -6 L4 0 L-5 6', SK('pcase', 5.4, 'stroke-linecap:round;stroke-linejoin:round')); P(c, 'M-5 -6 L4 0 L-5 6', SK('pflow', 2.4, 'stroke-linecap:round;stroke-linejoin:round')); };
+  chev(cx + 14, 190, -90); chev(330, 84, 0); chev(266, GY - 18, 180); chev(668, 140, -90); chev(540, 48, 180); chev(TX0 + 26, 112, 90); chev(728, GY - 22, 180);
+  for (const [a, b, c, d] of [[150, wy, cx - 38, wy], [262, fy1 - 18, cx + 11, fy1 - 17]]) { Ln(g, a, b, c, d, SK('halo', 3.4, 'stroke-linecap:round')); Ln(g, a, b, c, d, SK('labline', 1.3)); C(g, c, d, 2.6, F('labline')); }
+  // korlát és létra a tartályon
+  for (let x = TX0 + 4; x <= TX0 + 84; x += 20) Ln(g, x, TT, x, TT - 16, SK('acc', 1.6));
+  Ln(g, TX0 + 4, TT - 16, TX0 + 84, TT - 16, SK('acc', 2)); Ln(g, TX0 + 4, TT - 8, TX0 + 84, TT - 8, SK('acc', 1.2));
+  // jelmagyarázat
+  const lg = (x, col, t) => { P(g, `M${x} ${H - 18} h34`, SK('pcase', 9.6, 'stroke-linecap:round')); P(g, `M${x} ${H - 18} h34`, SK(col, 7, 'stroke-linecap:round')); tag(g, x + 44, H - 18, t, { fs: 12 }); };
+  lg(330, DIRTY, L.dirty); lg(590, CLEAN, L.clean);
+  tag(g, MX0 + 18, 108, L.water, { fs: 12, anchor: 'middle' });
+  return [[1, 136, wy], [2, 276, fy1 - 18], [3, 580, 112], [4, 440, 222], [5, 302, GY - 52], [6, 610, GY - 26], [7, 700, GY - 52], [8, 824, 238], [9, 968, 108], [10, MX0 - 12, 150]];
+}
