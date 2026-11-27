@@ -18,19 +18,10 @@ af7875f	<b>Diaphragm wall: retaining wall and foundation in one</b>The ${fmt(Lw,
 4246c4d	<b>Well foundation: still competitive here</b>The bearing stratum is at ${fmt(D, 1)} m – the wells (diameter 0.8–3.0 m, length 4–8 m) are sunk by their own weight while the soil is removed from inside.
 83756e6	<b>Not worth it this deep</b>At ${fmt(D, 1)} m depth a well foundation is no longer economical: wells are typically 4–8 m long. For a deeper bearing stratum we choose piles or a diaphragm wall.
 dedcefa	bearing stratum −${fmt(D, 1)} m
-91bb8e9	Sinking a well foundation: the slewing excavator removes the soil from inside the reinforced concrete shell with a grab bucket
-c00e51a	sinks
-844deda	under its
-7df62bd	own weight
 ce377d6	reinforced concrete shell wall
 609f534	grab bucket
 d8850e1	cutting edge
 95c4972	slewing excavator
-2e8f438	Scheme of a well foundation: the wells are tied together by a spanning, distributing reinforced concrete grillage, on which the superstructure stands
-d743b81	spanning, distributing
-b94b247	superstructure
-81b001d	Load transfer of a well foundation: the column load is carried to the wells by the spanning beam, and by the wells to the bearing stratum
-20d24cb	bending moment diagram
 09d1aae	spanning beam
 e2ea26f	well
 84b78ae	well rings
@@ -38,10 +29,8 @@ e2ea26f	well
 b53f70e	shell widening downwards
 2106da1	steel edge 100×10
 54c130c	every 25 cm
-c7aca58	outside
 6af46f7	steel pre-cutting edge
 d9b939b	Open sunk box: section (cutting edge all round, cross walls, underwater dredging, stages of 6–8 m) and plan (cells)
-be6184a	stage
 4b2f6f2	cutting edge all round
 211c1bb	section: underwater dredging in the cells
 77c1a12	cells between the cross walls;
@@ -52,7 +41,6 @@ f036289	the outer outline = that of the structure
 05088cb	air line
 e7b95da	shaft tube
 aa51e96	pier body
-775fefc	(excess pressure)
 bf3aad1	well figure error
 4c1706f	Layout
 1d9f19e	Hero error

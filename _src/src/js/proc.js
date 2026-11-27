@@ -1611,8 +1611,8 @@ PROC.kut = {
       R(g, x - 36, M.GY, 72, 246 - M.GY, F('bore'));
       water(g, x - 36, M.gw, 72, 246 - M.gw);
       well(g, x, M.GY - 28, bot, 36);
-      const gr = grab(g, x, 238, 20, 0.6);
-      crane(g, M, x, gr.top - 4, { reach: 124, tipY: 18 });
+      const gr = grabR(g, x, 240, 19, 0.55, 0, 'sand');
+      crane(g, M, x, gr.top, { reach: 124, tipY: 18 });
       spoil(g, M, 150, 36, 10, 'sand');
       arrowV(g, x - 60, 200, 238); arrowV(g, x + 60, 200, 238);
       tag(g, x + 52, 296, 'a kút saját súlyától süllyed', { anchor: 'middle' });
@@ -1624,7 +1624,8 @@ PROC.kut = {
       water(g, x - 36, M.gw, 72, 266 - M.gw);
       well(g, x, M.GY - 58, bot, 36, { fresh: M.GY - 22, joint: M.GY - 22 });
       worker(g, x + 66, { GY: M.GY, pose: 'guide' });
-      tag(g, x + 58, M.GY - 74, 'új szakasz', { to: [x + 46, M.GY - 40] });
+      mixer(g, M, x + 84, 1);
+      tag(g, x + 58, M.GY - 80, 'új szakasz', { to: [x + 46, M.GY - 40] });
     } },
     { w: 260, t: 'Zárás, kitöltés', d: 'A teherbíró rétegben víz alatti betonozással zárófenék készül, majd a kút belsejét sovány betonnal kitöltik.', draw(g, M) {
       const x = 92, bot = 304;
@@ -1632,6 +1633,7 @@ PROC.kut = {
       R(g, x - 36, M.GY - 58, 72, 280 - (M.GY - 58), F('grout1', 0.35));
       concrete(g, x - 36, 280, 72, bot - 280);
       well(g, x, M.GY - 58, bot, 36, { joint: M.GY - 22 });
+      tremie(g, x, M.GY - 96, 224, { full: true }); mixer(g, M, x + 62, 1);
       tag(g, x + 54, 296, 'zárófenék', { to: [x + 20, 292] });
       tag(g, x + 54, 236, 'sovány beton', { to: [x + 20, 236] });
     } },
@@ -4166,3 +4168,6 @@ export function rfSlurryFig(s, L) {
   tag(g, MX0 + 18, 108, L.water, { fs: 12, anchor: 'middle' });
   return [[1, 136, wy], [2, 276, fy1 - 18], [3, 580, 112], [4, 440, 222], [5, 302, GY - 52], [6, 610, GY - 26], [7, 700, GY - 52], [8, 824, 238], [9, 968, 108], [10, MX0 - 12, 150]];
 }
+
+/* a 8. fejezet (kút, szekrény, keszon) ábráinak eszköztára – lásd kut_art.js */
+export const KIT = { defs, v, F, SK, g_, R, P, C, E, Ln, el, hash, backdrop, tag, arrowP, head, arrowV, arrowH, worker, crane, mixer, excavator, concrete, casing, water, slurry, tremie, grab, grabR, dwGrab, tipper, pbBig, silo, spoil, vibroUnit, carSide, cage, hoseTo, loader, pump, CUR, EN, SOIL };
