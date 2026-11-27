@@ -1594,48 +1594,106 @@ function well(g, cx, top, bot, half, o = {}) {
   }
   return w;
 }
+/** Kétpofás markolóedény („csipegető markoló”) kötélen vagy kotrókaron: fejtömb forgatóval, két munkahenger,
+ *  két negyedhenger alakú kagyló vágóéllel. bot: a zárt kagylók alsó éle, half: a zárt edény fél szélessége, open: 0..1.
+ *  o.full + o.soil: föld a zárt kagylókban; o.hang === 'stick': kotrókarra szerelve (nincs kötélszem). Visszaadja a felfüggesztés tetejét. */
+function clam(g, cx, bot, half, open = 0.5, o = {}) {
+  const h = half, py = bot - h * 1.02, p = h * 0.34, sw = Math.max(0.45, h / 24), b = g_(g, { class: 'pr-clam' });
+  const ang = open * 36, col = o.col ?? 'acc', f2 = (x) => x.toFixed(2);
+  if (o.full && open < 0.35) { const [c, pat] = SOIL[o.soil ?? 'sand']; const d = `M${f2(cx - h * 0.86)} ${f2(py + h * 0.1)} Q${cx} ${f2(py - h * 0.5)} ${f2(cx + h * 0.86)} ${f2(py + h * 0.1)}Z`; P(b, d, F(c)); P(b, d, `fill:url(#${pat})`); P(b, d, SK('layer', 0.6 * sw)); }
+  const lug = [];
+  for (const s of [-1, 1]) {
+    const px = cx + s * p, th = (-s * ang * Math.PI) / 180;
+    const j = g_(b, { transform: `rotate(${f2(-s * ang)} ${f2(px)} ${f2(py)})` });
+    P(j, `M${f2(cx + s * p * 0.2)} ${f2(py - h * 0.1)} L${f2(cx + s * h)} ${f2(py + h * 0.04)} Q${f2(cx + s * h * 1.02)} ${bot} ${cx} ${bot} L${cx} ${f2(bot - h * 0.46)} L${f2(cx + s * p * 0.2)} ${f2(py + h * 0.2)}Z`, F(col) + `;stroke:${v('dark')};stroke-width:${f2(1.1 * sw)};stroke-linejoin:round`);
+    P(j, `M${f2(cx + s * h * 0.88)} ${f2(py + h * 0.16)} Q${f2(cx + s * h * 0.9)} ${f2(bot - h * 0.14)} ${f2(cx + s * h * 0.1)} ${f2(bot - h * 0.13)}`, SK('dark', 1.2 * sw, 'opacity:.4'));
+    P(j, `M${f2(cx + s * h * 0.78)} ${f2(py + h * 0.14)} L${f2(cx + s * h * 0.5)} ${f2(py + h * 0.1)}`, SK('halo', 1.5 * sw, 'opacity:.4;stroke-linecap:round'));
+    P(j, `M${f2(px)} ${f2(py)} L${f2(cx + s * h * 0.56)} ${f2(py + h * 0.58)}`, SK('dark2', h * 0.17, 'stroke-linecap:round'));
+    P(j, `M${cx} ${f2(bot - h * 0.46)} L${cx} ${bot} Q${f2(cx + s * h * 0.5)} ${bot} ${f2(cx + s * h * 0.72)} ${f2(bot - h * 0.2)}`, SK('dark', 2.4 * sw, 'stroke-linecap:round;stroke-linejoin:round'));
+    C(j, px, py, h * 0.1, F('steel2') + `;stroke:${v('dark')};stroke-width:${f2(0.8 * sw)}`);
+    const dx = s * h * 0.78 - s * p, dy = h * 0.02;
+    lug.push([px + dx * Math.cos(th) - dy * Math.sin(th), py + dx * Math.sin(th) + dy * Math.cos(th), s]);
+  }
+  const ty = py - h * 0.62;
+  for (const [lx, ly, s] of lug) { const ax = cx + s * h * 0.2, ay = ty + h * 0.14, mx = ax + (lx - ax) * 0.58, my = ay + (ly - ay) * 0.58; Ln(b, ax, ay, mx, my, SK('dark2', h * 0.13, 'stroke-linecap:round')); Ln(b, mx, my, lx, ly, SK('steel1', h * 0.06, 'stroke-linecap:round')); C(b, lx, ly, h * 0.055, F('dark')); }
+  R(b, cx - p - h * 0.14, py - h * 0.14, 2 * p + h * 0.28, h * 0.28, F('dark2') + `;stroke:${v('dark')};stroke-width:${f2(0.8 * sw)}`, { rx: h * 0.08 });
+  R(b, cx - h * 0.3, ty, h * 0.6, h * 0.52, F('dark2') + `;stroke:${v('dark')};stroke-width:${f2(0.9 * sw)}`, { rx: h * 0.07 });
+  R(b, cx - h * 0.22, ty + h * 0.1, h * 0.44, h * 0.12, F('steel2', 0.55), { rx: h * 0.03 });
+  R(b, cx - h * 0.15, ty - h * 0.22, h * 0.3, h * 0.24, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:${f2(0.7 * sw)}`, { rx: h * 0.04 });
+  const top = ty - h * 0.22;
+  if (o.hang === 'stick') return { top };
+  E(b, cx, top - h * 0.1, h * 0.09, h * 0.11, SK('dark', 1.6 * sw));
+  return { top: top - h * 0.2 };
+}
+// zsaluzat a köpenyfal külső oldalán (fatáblák hevederekkel, ferde támaszokkal) és kiálló csatlakozó vasak a fal tetején
+function kutForm(g, x, top, bot, half, GY) {
+  for (const k of [-1, 1]) { const xo = x + k * (half + 11), fx = k < 0 ? xo - 4.5 : xo;
+    R(g, fx, top - 3, 4.5, bot - top + 3, F('timber') + `;stroke:${v('timber2')};stroke-width:.7`);
+    for (let y = top + 8; y < bot - 4; y += 16) R(g, k < 0 ? fx - 3 : fx + 4.5, y, 3, 3.4, F('timber2'));
+    if (bot >= GY - 2) Ln(g, xo + k * 6, top + 16, xo + k * 26, GY, SK('timber2', 2.2, 'stroke-linecap:round'));
+    for (const dx of [3.5, 8]) Ln(g, x + k * (half + dx), top + 2, x + k * (half + dx), top - 10, SK('rebar', 1.2, 'stroke-linecap:round')); }
+}
+// daruról függő betonozókonténer (kübli), a betonsugárral
+function kutSkip(g, cx, y, to) {
+  Ln(g, cx, 0, cx, y - 9, SK('rope', 1.3)); P(g, `M${cx - 11} ${y - 9} L${cx} ${y - 16} L${cx + 11} ${y - 9}`, SK('rope', 1.1));
+  P(g, `M${cx - 13} ${y - 9} H${cx + 13} L${cx + 5} ${y + 14} H${cx - 5}Z`, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:.9`);
+  P(g, `M${cx - 11} ${y - 7} Q${cx} ${y - 13} ${cx + 11} ${y - 7}Z`, F('fresh1'));
+  if (to) R(g, cx - 1.6, y + 14, 3.2, to - y - 14, F('fresh1'));
+}
+const KW = 42, KX = 104; // a kút belső fél szélessége és tengelye a lépésoszlopban
+const kutPit = (g, x, bot, f) => P(g, `M${x - KW - 12} ${bot - 3} Q${x} ${bot + 16} ${x + KW + 12} ${bot - 3} L${x + KW} ${bot - 18} H${x - KW}Z`, f);
 PROC.kut = {
-  H: 360, GY: 178, gw: 214, layers: [{ k: 'fill', y: 178, lab: 'feltöltés' }, { k: 'sand', y: 206, lab: 'homok' }, { k: 'gravel', y: 284, lab: 'teherbíró kavics' }],
+  H: 372, GY: 178, gw: 214, layers: [{ k: 'fill', y: 178, lab: 'feltöltés' }, { k: 'sand', y: 206, lab: 'homok' }, { k: 'gravel', y: 290, lab: 'teherbíró kavics' }],
   steps: [
     { w: 250, t: 'Első szakasz', d: 'A terepen megépítik a vágóélt és a köpeny első szakaszát.', draw(g, M) {
-      const x = 92;
-      R(g, x - 36, M.GY - 52, 72, M.GY - (M.GY - 52), F('bore'));
-      well(g, x, M.GY - 52, M.GY + 4, 36);
-      worker(g, x + 70, { GY: M.GY, pose: 'stand' });
-      tag(g, x + 52, M.GY + 24, 'vágóél', { to: [x + 44, M.GY - 2] });
-      tag(g, x, M.GY - 70, 'vasbeton köpeny', { anchor: 'middle', to: [x - 40, M.GY - 40] });
+      const x = KX, top = M.GY - 88, bot = M.GY + 2;
+      R(g, x - KW, top, 2 * KW, M.GY - top, F('bore'));
+      well(g, x, top, bot, KW, { fresh: M.GY - 40 });
+      kutForm(g, x, top, bot - 16, KW, M.GY);
+      kutSkip(g, x + KW + 5, top - 34, top);
+      worker(g, x + KW + 52, { GY: M.GY, dir: -1, pose: 'guide' });
+      worker(g, x + KW + 74, { GY: M.GY, dir: -1 });
+      tag(g, 6, top - 16, 'vasbeton köpeny', { to: [x - KW - 5, top + 26] });
+      tag(g, x + KW + 34, M.GY + 22, 'vágóél', { to: [x + KW + 9, M.GY] });
+      tag(g, x + KW + 34, top + 4, EN ? 'formwork' : 'zsaluzat', { to: [x + KW + 14, top + 20] });
     } },
-    { w: 270, t: 'Kotrás, süllyedés', d: 'Belülről markolóval kiszedik a földet, a vágóél alól is; a kút a saját súlyától süllyed.', draw(g, M) {
-      const x = 92, bot = 252;
-      R(g, x - 36, M.GY - 28, 72, M.GY - (M.GY - 28), F('bore'));
-      R(g, x - 36, M.GY, 72, 246 - M.GY, F('bore'));
-      water(g, x - 36, M.gw, 72, 246 - M.gw);
-      well(g, x, M.GY - 28, bot, 36);
-      const gr = grabR(g, x, 240, 19, 0.55, 0, 'sand');
-      crane(g, M, x, gr.top, { reach: 124, tipY: 18 });
-      spoil(g, M, 150, 36, 10, 'sand');
-      arrowV(g, x - 60, 200, 238); arrowV(g, x + 60, 200, 238);
-      tag(g, x + 52, 296, 'a kút saját súlyától süllyed', { anchor: 'middle' });
+    { w: 280, t: 'Kotrás, süllyedés', d: 'Belülről markolóval kiszedik a földet, a vágóél alól is; a kút a saját súlyától süllyed.', draw(g, M) {
+      const x = KX, bot = 244, top = bot - 90;
+      R(g, x - KW, top, 2 * KW, bot - 16 - top, F('bore')); kutPit(g, x, bot, F('bore'));
+      water(g, x - KW, M.gw, 2 * KW, bot - 16 - M.gw); kutPit(g, x, bot, F('water', 0.32));
+      well(g, x, top, bot, KW);
+      const gr = clam(g, x, bot + 3, 25, 0.75, { soil: 'sand' });
+      crane(g, M, x, gr.top, { reach: 136, tipY: 18 });
+      spoil(g, M, x + KW + 22, 38, 12, 'sand');
+      arrowV(g, x - KW - 26, 190, 232); arrowV(g, x + KW + 26, 190, 232);
+      tag(g, x + KW + 22, 266, 'markolóedény', { to: [x + 18, bot - 14] });
+      tag(g, x + 40, 318, 'a kút saját súlyától süllyed', { anchor: 'middle' });
     } },
-    { w: 250, t: 'Toldás', d: 'A köpenyt szakaszonként (vagy kútgyűrűkkel) magasítják, és tovább süllyesztik.', draw(g, M) {
-      const x = 92, bot = 270;
-      R(g, x - 36, M.GY - 58, 72, M.GY + 58 - M.GY, F('bore'));
-      R(g, x - 36, M.GY, 72, 266 - M.GY, F('bore'));
-      water(g, x - 36, M.gw, 72, 266 - M.gw);
-      well(g, x, M.GY - 58, bot, 36, { fresh: M.GY - 22, joint: M.GY - 22 });
-      worker(g, x + 66, { GY: M.GY, pose: 'guide' });
-      mixer(g, M, x + 84, 1);
-      tag(g, x + 58, M.GY - 80, 'új szakasz', { to: [x + 46, M.GY - 40] });
+    { w: 260, t: 'Toldás', d: 'A köpenyt szakaszonként (vagy kútgyűrűkkel) magasítják, és tovább süllyesztik.', draw(g, M) {
+      const x = KX, bot = 264, top = bot - 144, jy = bot - 90;
+      R(g, x - KW, top, 2 * KW, bot - 16 - top, F('bore')); kutPit(g, x, bot, F('bore'));
+      water(g, x - KW, M.gw, 2 * KW, bot - 16 - M.gw); kutPit(g, x, bot, F('water', 0.32));
+      well(g, x, top, bot, KW, { fresh: jy, joint: jy });
+      kutForm(g, x, top, jy - 2, KW, M.GY);
+      kutSkip(g, x - KW - 5, top - 34, top);
+      worker(g, x + KW + 30, { GY: M.GY, pose: 'guide' });
+      mixer(g, M, x + KW + 50, 1);
+      tag(g, x + KW + 22, top - 14, 'új szakasz', { to: [x + KW + 7, top + 24] });
     } },
     { w: 260, t: 'Zárás, kitöltés', d: 'A teherbíró rétegben víz alatti betonozással zárófenék készül, majd a kút belsejét sovány betonnal kitöltik.', draw(g, M) {
-      const x = 92, bot = 304;
-      concrete(g, x - 36, M.GY - 58, 72, 280 - (M.GY - 58), false);
-      R(g, x - 36, M.GY - 58, 72, 280 - (M.GY - 58), F('grout1', 0.35));
-      concrete(g, x - 36, 280, 72, bot - 280);
-      well(g, x, M.GY - 58, bot, 36, { joint: M.GY - 22 });
-      tremie(g, x, M.GY - 96, 224, { full: true }); mixer(g, M, x + 62, 1);
-      tag(g, x + 54, 296, 'zárófenék', { to: [x + 20, 292] });
-      tag(g, x + 54, 236, 'sovány beton', { to: [x + 20, 236] });
+      const x = KX, bot = 322, top = M.GY, py = bot - 46;
+      // sovány beton kitöltés a terepszintig
+      concrete(g, x - KW, top, 2 * KW, py - top, false); R(g, x - KW, top, 2 * KW, py - top, F('grout1', 0.4));
+      // zárófenék: a vágóél alatti, ferde részt is teljesen kitölti, a talpig
+      const pd = `M${x - KW} ${py} H${x + KW} V${bot - 18} L${x + KW + 11} ${bot} Q${x} ${bot + 12} ${x - KW - 11} ${bot} L${x - KW} ${bot - 18}Z`;
+      P(g, pd, 'fill:url(#pr-freshg)'); P(g, pd, 'fill:url(#pr-p-conc)'); P(g, pd, SK('concedge', 1.1));
+      well(g, x, top, bot, KW, { joint: bot - 90 });
+      Ln(g, x - KW, top + 0.6, x + KW, top + 0.6, SK('concedge', 1.2));
+      worker(g, x + KW + 34, { GY: M.GY, pose: 'guide' });
+      mixer(g, M, x + KW + 52, 1);
+      tag(g, x + KW + 24, 236, 'sovány beton', { to: [x + 16, 236] });
+      tag(g, x + KW + 24, bot - 22, 'zárófenék', { to: [x + 20, bot - 20] });
+      tag(g, 8, M.GY - 18, 'a kút teteje a terepszinten', { to: [x - KW + 6, M.GY] });
     } },
   ],
 };
@@ -4170,4 +4228,4 @@ export function rfSlurryFig(s, L) {
 }
 
 /* a 8. fejezet (kút, szekrény, keszon) ábráinak eszköztára – lásd kut_art.js */
-export const KIT = { defs, v, F, SK, g_, R, P, C, E, Ln, el, hash, backdrop, tag, arrowP, head, arrowV, arrowH, worker, crane, mixer, excavator, concrete, casing, water, slurry, tremie, grab, grabR, dwGrab, tipper, pbBig, silo, spoil, vibroUnit, carSide, cage, hoseTo, loader, pump, CUR, EN, SOIL };
+export const KIT = { defs, v, F, SK, g_, R, P, C, E, Ln, el, hash, backdrop, tag, arrowP, head, arrowV, arrowH, worker, man, crane, mixer, excavator, concrete, casing, water, slurry, tremie, grab, grabR, clam, skip, dwGrab, tipper, pbBig, silo, spoil, vibroUnit, carSide, cage, hoseTo, loader, pump, CUR, EN, SOIL };

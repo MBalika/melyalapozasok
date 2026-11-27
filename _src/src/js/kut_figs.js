@@ -2,7 +2,7 @@
 // Használat a HTML-ben: <div class="kf-svg" data-kfig="kotro"></div> – betöltéskor rajzolódik.
 import { svg, pathD, EN } from './core.js';
 
-import { artKotro, artSema, artEro, artValt, artEdge, artNyitott, artGenf, artGenfKesz, artKeszon } from './kut_art.js';
+import { artKotro, artSema, artEro, artValt, artEdge, artNyitott, artGenf, artKeszon } from './kut_art.js';
 const NS = (p, tag, a = {}) => svg(tag, a, p);
 const mk = (el, w, hh, label) => { const s = svg('svg', { viewBox: `0 0 ${w} ${hh}`, class: 'kf', role: 'img', 'aria-label': label || '' }); el.appendChild(s); return s; };
 const G = (p, a = {}) => NS(p, 'g', a);
@@ -100,9 +100,9 @@ function panels(el, keys, W, H, draw) {
 /* az ábrák rajzolói: kut_art.js (a folyamatábrák elemtárából) */
 const figValt = (el) => panels(el, (el.dataset.v || 'gyuru,hengeres,hvall,kupos,kvall,surl').split(','), 200, 300, artValt);
 const figEdge = (el) => panels(el, (el.dataset.v || 'vb,szog,elo,geo').split(','), 220, 300, artEdge);
-const figGenf = (el) => panels(el, (el.dataset.v || 'u1,u2,u3').split(','), 240, 470, artGenf);
+const figGenf = (el) => panels(el, (el.dataset.v || 'u1,u2,u3,u4').split(','), 640, 472, artGenf);
 
-const FIGS = { kotro: artKotro, sema: artSema, ero: artEro, valt: figValt, edge: figEdge, nyitott: artNyitott, genf: figGenf, genfkesz: artGenfKesz, keszon: artKeszon };
+const FIGS = { kotro: artKotro, sema: artSema, ero: artEro, valt: figValt, edge: figEdge, nyitott: artNyitott, genf: figGenf, keszon: artKeszon };
 function initKutFigs() {
   document.querySelectorAll('[data-kfig]').forEach((el) => {
     if (el.dataset.kready) return; el.dataset.kready = '1';

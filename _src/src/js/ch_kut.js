@@ -1,5 +1,5 @@
 // C08 – Kút-, szekrény- és keszonalapozás: kútsüllyesztő, acél köpenycsöves kút, szekrénytípusok, keszon-nyomás, elferdülés-monitor, kvíz
-import { register, shell, slider, seg, toggle, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop } from './core.js';
+import { register, shell, slider, seg, toggle, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop, EN } from './core.js';
 import { defineQuiz } from './ui.js';
 import './kut_figs.js';
 import { artSully, artAcel, artTipus } from './kut_art.js';
@@ -180,8 +180,8 @@ register('kut-sully', (root) => {
 /* ================================================================== 2. Acél köpenycsöves kútalap */
 register('kut-acel', (root) => {
   const { viz } = shell(root, { layout: 'wide', out: false });
-  const fig = figure(viz, 760, 330, 'fig kut-afig');
-  artAcel(fig, ['Levibrálás, markolás', 'Teherbíró rétegen', 'Betonozás', 'Kész kút'], { pull: 'a cső kihúzása', trem: 'kontraktorcső', pier: 'pillér', beam: 'vb. gerendarács', well: 'kibetonozott kút' });
+  const fig = figure(viz, 760, 400, 'fig kut-afig');
+  artAcel(fig, ['Levibrálás', EN ? 'Grabbing' : 'Markolás', 'Betonozás, csőhúzás', 'Kész kút'], { pull: 'a cső kihúzása', trem: 'kontraktorcső', pier: 'pillér', beam: 'vb. gerendarács', well: 'kibetonozott kút', vib: 'vibrátor', cas: 'acél köpenycső – egy darabban', grab: 'markolóedény', fresh: 'friss beton' });
 });
 
 /* ================================================================== 3. Három szekrény */
