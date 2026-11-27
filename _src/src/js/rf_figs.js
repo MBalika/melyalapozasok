@@ -1,6 +1,7 @@
 // C07 – Résfalak: saját, statikus SVG-ábrák (a régi, beszkennelt rajzok helyett)
 // A HTML-ben: <div class="rf-fig…" data-rffig="név"></div> – betöltéskor azonnal kirajzolódnak (nem lusták, így nem ugrál az oldal).
 import { svg, h, pathD } from './core.js';
+import { rfGrabFig, rfCutterFig } from './proc.js';
 
 /* ------------------------------------------------------------------ rajzsegédek */
 const T = (p, x, y, s, cls = 'rf-t', o = {}) => svg('text', { x, y, class: cls, text: s, ...o }, p);
@@ -208,8 +209,9 @@ function renderGW(el, kind) {
   // terepszint
   L(s, 0, TY2, xl, TY2, 'stroke:var(--ink);stroke-width:1.6');
   L(s, xr + t, TY2, W, TY2, 'stroke:var(--ink);stroke-width:1.6');
-  // dúc a két gerenda között
+  // dúcok a két gerenda között: felül és alul
   R(s, xl + t, TY2 + 10, gap, 11, 'f-timber', { style: 'stroke:var(--timber2);stroke-width:1' });
+  R(s, xl + t, TY2 + hb - 21, gap, 11, 'f-timber', { style: 'stroke:var(--timber2);stroke-width:1' });
   // zagyszint
   P(s, `M${xl + t + gap - 18} ${TY2 + 26} l 6 -9 h -12 z`, '', { style: 'fill:var(--ink2)' });
   // méretek
@@ -219,66 +221,18 @@ function renderGW(el, kind) {
   L(s, 22, TY2 + hb, fl, TY2 + hb, 'stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3');
   if (kind === 'L') dimH(s, fl, xl + t, TY2 + hb + 20, '1,0–1,5 m', { dy: 18, ext: -18 });
   lead(s, xl + t + gap / 2, TY2 + 15, 262, 38, 'dúc', { cls: 'rf-ts' });
+  L(s, xl + t + gap * 0.72, TY2 + hb - 16, 258, 36, 'stroke:var(--ink2);stroke-width:1'); C(s, xl + t + gap * 0.72, TY2 + hb - 16, 2.4, 'f-ink');
   T(s, kind === 'L' ? 316 : 300, 128, 'talaj', 'rf-ts rf-onfill', { 'text-anchor': 'end' });
 }
 
 /* ================================================================== 3. Réskanál és marótárcsák */
 function renderGrab(el) {
-  const W = 360, H = 240, TY3 = 48;
-  const s = mk(el, W, H, 'Résmarkoló: a nyitott réskanál a zagyos résben');
-  R(s, 0, 0, W, TY3, 'f-sky');
-  soilBox(s, 0, TY3, W, H - TY3);
-  slurry(s, 90, TY3 + 4, 180, H - TY3 - 4);
-  R(s, 80, TY3 - 2, 200, 10, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:.8' });
-  // kanál: nyitva, a harapás hossza 2,8 m
-  const cx = 180, yb = 196, w = 140;
-  const body = G(s);
-  R(body, cx - 34, yb - 96, 68, 46, 'f-warn', { style: 'stroke:var(--ink);stroke-width:1.4', rx: 3 });
-  R(body, cx - 26, yb - 90, 10, 34, 'f-steel', { style: 'stroke:var(--ink);stroke-width:.8' });
-  R(body, cx + 16, yb - 90, 10, 34, 'f-steel', { style: 'stroke:var(--ink);stroke-width:.8' });
-  P(body, `M${cx - 30} ${yb - 50} L${cx - 4} ${yb - 50} L${cx - 14} ${yb} L${cx - w / 2} ${yb - 14} Z`, 'f-steel2', { style: 'stroke:var(--ink);stroke-width:1.4' });
-  P(body, `M${cx + 30} ${yb - 50} L${cx + 4} ${yb - 50} L${cx + 14} ${yb} L${cx + w / 2} ${yb - 14} Z`, 'f-steel2', { style: 'stroke:var(--ink);stroke-width:1.4' });
-  for (const k of [-1, 1]) for (let i = 0; i < 4; i++) { const x = cx + k * (w / 2 - 4 - i * 13); const y = yb - 14 + i * 3.6; P(body, `M${x} ${y} l ${-k * 3} 8 l ${-k * 6} -7 z`, 'f-ink'); }
-  L(s, cx, 6, cx, yb - 96, 'stroke:var(--ink);stroke-width:2.2');
-  L(s, cx - 6, 6, cx - 6, yb - 96, 'stroke:var(--ink);stroke-width:1');
-  dimH(s, cx - w / 2, cx + w / 2, yb + 22, '≈ 2,8 m – egy harapás', { dy: 18, cls: 'rf-tn rf-tn15' });
-  T(s, 98, TY3 + 38, 'zagy', 'rf-t rf-onfill');
-  T(s, 350, TY3 + 38, 'talaj', 'rf-t rf-onfill', { 'text-anchor': 'end' });
+  const s = mk(el, 400, 280, 'Résmarkoló: a nyitott réskanál a zagyos résben');
+  rfGrabFig(s, { bite: '≈ 2,8 m – egy harapás', slurry: 'zagy', soil: 'talaj' });
 }
 function renderCutter(el) {
-  const W = 360, H = 240;
-  const s = mk(el, W, H, 'Hydrofraise: két ellentétesen forgó marótárcsa, középen a szívócsonk');
-  soilBox(s, 0, 0, W, H, 'f-soilA', 'pat-gravel', 0.8);
-  slurry(s, 40, 0, 280, H);
-  // keret és szívócső
-  R(s, 70, 0, 220, 56, 'f-warn', { style: 'stroke:var(--ink);stroke-width:1.4' });
-  R(s, 166, 0, 28, 132, 'f-steel', { style: 'stroke:var(--ink);stroke-width:1.2' });
-  // tárcsák
-  const wheel = (cx, cy, dir) => {
-    const g = G(s);
-    const r = 62;
-    for (let i = 0; i < 10; i++) {
-      const a = (i / 10) * Math.PI * 2 + (dir > 0 ? 0.1 : -0.1);
-      const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
-      P(g, `M${x} ${y} L${cx + Math.cos(a + 0.12) * (r + 13)} ${cy + Math.sin(a + 0.12) * (r + 13)} L${cx + Math.cos(a + 0.2) * r} ${cy + Math.sin(a + 0.2) * r} Z`, 'f-ink');
-    }
-    C(g, cx, cy, r, 'f-steel2', { style: 'stroke:var(--ink);stroke-width:1.6' });
-    C(g, cx, cy, r * 0.62, 'f-steel', { style: 'stroke:var(--ink);stroke-width:1' });
-    C(g, cx, cy, 5, 'f-ink');
-    // forgásirány: alul a középső szívócsonk felé
-    const a1 = dir > 0 ? 2.45 : 0.69, a2 = dir > 0 ? 1.2 : 1.94, rr = r * 0.4;
-    const x1 = cx + Math.cos(a1) * rr, y1 = cy + Math.sin(a1) * rr, x2 = cx + Math.cos(a2) * rr, y2 = cy + Math.sin(a2) * rr;
-    P(g, `M${x1} ${y1} A ${rr} ${rr} 0 0 ${dir > 0 ? 0 : 1} ${x2} ${y2}`, '', { style: 'fill:none;stroke:var(--surface);stroke-width:3' });
-    const ta = a2 + (dir > 0 ? -Math.PI / 2 : Math.PI / 2);
-    ar(g, x2 - Math.cos(ta) * 4, y2 - Math.sin(ta) * 4, x2 + Math.cos(ta) * 2, y2 + Math.sin(ta) * 2, 'var(--surface)', 3, 9);
-  };
-  wheel(112, 150, 1); wheel(248, 150, -1);
-  // törmelék a csonk felé és fel a csőben
-  const bits = [[150, 222], [164, 206], [196, 210], [210, 224], [174, 186], [186, 196], [180, 166], [172, 146], [186, 120], [178, 96], [184, 70], [176, 44], [182, 20]];
-  for (const [x, y] of bits) C(s, x, y, 3.6, 'f-soilB', { style: 'stroke:var(--ink);stroke-width:.6' });
-  ar(s, 180, 150, 180, 112, 'var(--ink)', 2, 7); ar(s, 180, 70, 180, 30, 'var(--ink)', 2, 7);
-  T(s, 200, 104, 'szívócső', 'rf-t rf-onfill');
-  T(s, 180, 234, 'a törmelék a szívócsonkba jut', 'rf-t rf-onfill', { 'text-anchor': 'middle' });
+  const s = mk(el, 400, 280, 'Hydrofraise: két ellentétesen forgó marótárcsa, középen a szívócsonk');
+  rfCutterFig(s, { pipe: 'szívócső', chips: 'a törmelék a szívócsonkba jut' });
 }
 
 /* ================================================================== 4. A zagy útja (hydrofraise, zagykezelő telep) */

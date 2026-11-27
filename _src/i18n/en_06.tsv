@@ -10,21 +10,21 @@ ae47cee	Other uses
 18fe5ae	improving slope stability, retaining walls, soil reinforcement,
 97c87ec	<b>anchoring against uplift</b> (tension element: e.g. the slab of an underground car park, a pool below the groundwater).
 5233275	New loads in a tight space
-bbf0aa7	<b>New loads in a tight space</b>The small drilling rig works even in a cellar with low headroom.
+3922231	<b>New loads in a tight space</b>The small drilling rig works even in a cellar with low headroom
 c954953	Seismic strengthening
-aed7643	<b>Seismic strengthening</b>Inclined, crossing micropiles under the column.
+695449b	<b>Seismic strengthening</b>Inclined, crossing micropiles under the column
 2ee07d1	Stopping settlement
-81f7915	<b>Stopping settlement</b>The load of the existing foundation is carried down to a deeper, better layer.
+30fce87	<b>Stopping settlement</b>The load of the existing foundation is carried down to a deeper, better layer
 2e13c4c	Anchoring against uplift
-925c578	<b>Anchoring against uplift</b>Tension elements hold down the slab standing in the groundwater.
+588235b	<b>Anchoring against uplift</b>Tension elements hold down the slab standing in the groundwater
 26902a4	Underpinning
-f35e48c	<b>Underpinning</b>The old strip footing is drilled through obliquely from both sides and supported.
+d085849	<b>Underpinning</b>The old strip footing is drilled through obliquely from both sides and supported
 584e0ba	Excavation support
-41935ad	<b>Excavation support</b>A micropile wall on a tight site, anchored with an inclined micropile.
+1e88087	<b>Excavation support</b>A micropile wall on a tight site, anchored with an inclined micropile
 d777ca7	Slope stabilisation
-6ad8068	<b>Slope stabilisation</b>A lattice (crossing) micropile wall through the slip surface.
+086589b	<b>Slope stabilisation</b>A lattice (crossing) micropile wall through the slip surface
 89abd8f	New structure on mixed subsoil
-c895f68	<b>New structure on mixed subsoil</b>It can be drilled into rock and into blocky or heterogeneous layers too.
+29c021a	<b>New structure on mixed subsoil</b>It can be drilled into rock and into blocky or heterogeneous layers too
 331857e	Section of a hollow-bar grouted micropile
 31d31a1	Reinforced concrete pile cap
 6b9933b	or base slab
@@ -42,12 +42,12 @@ ca89f07	inside the bar too
 b0dd6d4	Hollow, threaded
 dd199e8	steel bar
 6b4dadd	Sacrificial drill bit
-6ab794f	Section of a hollow-bar grouted micropile (illustrative figure, thicknesses exaggerated). A cement body forms around the bar, and outside it a rough sleeve of cement-permeated soil.
+c9bddcc	Section of a hollow-bar grouted micropile (illustrative figure, thicknesses exaggerated). A cement body forms around the bar, and outside it a rough sleeve of cement-permeated soil
 a9b3618	The hollow-bar micropile
 c4e6955	Resistance and buckling
 abbeccd	When calculating the resistance of a slender micropile, the <b>base resistance is neglected</b>: only the shaft works. There are recommendations for the shaft resistance, but the method of construction is decisive, so a <b>load test</b> is justified. Because of the small diameter, the resistance to buckling must be checked separately if the undrained shear strength of the soil layer is <span class="nw">c<sub>u</sub> &lt; 10 kPa</span>.
 2698e6b	Heads of hollow steel bar micropiles protruding from the reinforcement, with nuts and head plates
-2bb8c66	Bar heads with head plates and nuts – tied into the reinforcement of the reinforced concrete slab.
+fc905b3	Bar heads with head plates and nuts – tied into the reinforcement of the reinforced concrete slab
 b098e6a	Underpinning with micropiles
 d18f3a2	Two phases: drilling and grouting
 653dabd	<b>Drilling:</b> a 100–200 mm diameter hole to the required depth, with the help of a drilling fluid. The design of the drilling head (the “monitor”) and the pressure depend on the quality of the soil.
@@ -66,30 +66,30 @@ c18a285	Triple jet
 3a40a89	A water jet shrouded in an air jet breaks up the soil, and grout is injected at the same time through a separate nozzle for cementation.
 e925c79	Jet column factory
 04cca02	Jet panel: when we don’t rotate
-be7ee82	V-shaped jet panel: made from the holes without rotation, pulled up with nozzles on both sides; adjacent panels meeting each other form a watertight curtain wall.
+f4607d0	V-shaped jet panel: made from the holes without rotation, pulled up with nozzles on both sides; adjacent panels meeting each other form a watertight curtain wall
 1562cfc	Jet grouting in the field
 09519e4	An exposed thin jet panel in the ground
-f952e09	Exposed jet panel: pulled up without rotation, with nozzles on both sides.
+8b8ccce	Exposed jet panel: pulled up without rotation, with nozzles on both sides
 a513c11	A small crawler jet grouting rig on an infill site, in front of an old fire wall
-c7cf25c	A compact drilling rig on an infill site, at the foot of the neighbouring fire wall.
+adbbca3	A compact drilling rig on an infill site, at the foot of the neighbouring fire wall
 54612c6	Cement silo and mixer-pump plant next to a city-centre apartment block
-71dc46b	Silo and mixer-pump plant between the apartment blocks.
+4bfa1d7	Silo and mixer-pump plant between the apartment blocks
 19ae8a7	Jet grouting drill head with a side nozzle
 1c00b98	A high-pressure fluid jet from the drill head at the surface, as a trial
-29af3d3	A “trial shot” at the surface – this is the energy with which the fluid jet breaks up the soil.
+b375cb0	A “trial shot” at the surface – this is the energy with which the fluid jet breaks up the soil
 0a48605	Excavated jet columns standing side by side in the side of an excavation
-7ad7d68	Excavated jet columns: the varying diameter is clearly visible.
+d971527	Excavated jet columns: the varying diameter is clearly visible
 ee17c9f	Intersecting jet columns exposed in an excavation under an old building
-d79655e	Foundation deepening: an exposed jet column wall under the neighbouring building.
+5e5cc22	Foundation deepening: an exposed jet column wall under the neighbouring building
 6e62f5c	Excavation wall under an old building with its foundation strengthened by jet columns, exposed
-ff50372	Jet columns reaching under the foundation of the old building, in the side of the pit.
+0ab3261	Jet columns reaching under the foundation of the old building, in the side of the pit
 a093667	Exposed jet columns widening downwards under old masonry
-16c93cc	Continuous jet columns under the old foundation.
+685a616	Continuous jet columns under the old foundation
 97fd55e	A jet grouting rig at the bottom of a deep excavation, between tall fire walls
-c5b25e3	Strengthening the foundation of a neighbouring building on an infill site.
+bcc7c30	Strengthening the foundation of a neighbouring building on an infill site
 990000f	Deep mixing in the field
 50fffe6	Deep mixing rig with multi-axis bladed mixing shafts
-ffeef90	Multi-axis bladed mixing shafts.
+5a8c104	Multi-axis bladed mixing shafts
 f8c4c36	Excavated, intersecting deep-mixed columns
-6b4e2a0	Excavated, intersecting mixed columns.
+3dffcbe	Excavated, intersecting mixed columns
 50d8b7c	Gravel pile, vibro stone column

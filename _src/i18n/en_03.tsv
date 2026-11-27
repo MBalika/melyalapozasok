@@ -8,7 +8,7 @@ f31c8d4	Precast reinforced concrete
 5e411cf	Drawing – cross-sections and shapes
 13b0eac	Cross-section of a timber pile with growth rings, D = 10–15 cm
 313f77a	=
-a4177fb	<b class="t">Timber</b> Hardwood (robinia, oak, beech, maple), D ≥ 100 mm; at most 8–10 m long, into very soft soil.
+1ec72e2	<b class="t">Timber</b> Hardwood (robinia, oak, beech, maple), D ≥ 100 mm; at most 8–10 m long, into very soft soil
 edd2d15	Cross-section and view of a steel tubular pile with a closed shoe
 a48fa7f	hollow
 c59a3cd	closed shoe
@@ -17,18 +17,18 @@ a7a4c3d	view
 dbf3d92	Cross-section of a rolled steel H-section
 f498646	flange
 a4ee6ea	web
-e533eb5	<b class="t">Steel H-section</b> Rolled section: easier to drive, can be taken through a harder layer.
+afa146c	<b class="t">Steel H-section</b> Rolled section: easier to drive, can be taken through a harder layer
 0e5e059	Cross-section of a square reinforced concrete pile with four corner bars and links, and its view with a shoe
 e6b620c	=
-500c319	<b class="t">Reinforced concrete, square</b> 30×30 or 40×40 cm, with corner bars and links; L = 4–12 m, in 1 m steps, with a shoe.
+3110476	<b class="t">Reinforced concrete, square</b> 30×30 or 40×40 cm, with corner bars and links; L = 4–12 m, in 1 m steps, with a shoe
 8526d80	Hollow cross-section and cylindrical and conical views of a spun reinforced concrete tubular pile
 bec0b92	=
 54877d4	cylindrical
 fb4c624	conical
-f8068a7	<b class="t">Reinforced concrete, round – spun</b> Hollow tubular pile, cylindrical or conical: D = 50 cm, or 25 → 50 cm. At most 20–22 m long.
+949721c	<b class="t">Reinforced concrete, round – spun</b> Hollow tubular pile, cylindrical or conical: D = 50 cm, or 25 → 50 cm. At most 20–22 m long
 c1381ce	Hollow reinforced concrete pile with an octagonal cross-section
 65ffde6	void
-08d16e4	<b class="t">Reinforced concrete, octagonal</b> Besides round and square, it is also produced with a hollow octagonal cross-section.
+d9a2811	<b class="t">Reinforced concrete, octagonal</b> Besides round and square, it is also produced with a hollow octagonal cross-section
 0be222f	A palace on 13 659 piles
 6fb6933	In Amsterdam the Royal Palace (the 17th-century town hall) is traditionally said to stand on <b>13 659 timber piles</b>, and most of Venice stands on forests of piles driven into the water. The secret is the water: below the groundwater table there is no oxygen, so the timber does not rot and lasts for centuries.
 e57d34c	Adding storeys to a building on timber piles

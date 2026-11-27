@@ -1,19 +1,19 @@
 0e8d423	Towers to scale
 0a5e0bf	Photos
 3f83e75	The CN Tower in the Toronto skyline
-0cfdb57	CN Tower, Toronto – 553 m. Its load is transferred to the bearing stratum by a foundation taken down 15 m.
+490c638	CN Tower, Toronto – 553 m. Its load is transferred to the bearing stratum by a foundation taken down 15 m
 9165b60	The Taipei 101 tower
-b90230a	Taipei 101 – the loads of the tower are carried down to the deeper bearing stratum by large-diameter bored piles.
+68cd872	Taipei 101 – the loads of the tower are carried down to the deeper bearing stratum by large-diameter bored piles
 6bd0b76	Exposed large-diameter bored piles in an excavation
-3c641cf	Large-diameter bored piles in the side of an excavation – the workers next to them give the scale.
+123e286	Large-diameter bored piles in the side of an excavation – the workers next to them give the scale
 58f7525	A huge drilling tool for a large-diameter pile
-a43ca7a	Drilling tool for a large-diameter pile – piles socketed into rock need a tool like this.
+614e005	Drilling tool for a large-diameter pile – piles socketed into rock need a tool like this
 bc90f0a	The Petronas Twin Towers in Kuala Lumpur
-5e34619	Petronas Twin Towers, Kuala Lumpur – 452 m. The bearing stratum lies deep, so the foundation also reaches very deep.
+cab773f	Petronas Twin Towers, Kuala Lumpur – 452 m. The bearing stratum lies deep, so the foundation also reaches very deep
 33dab00	A wind turbine in a snowy landscape
-d90d1b3	Wind turbine – here it is not the size of the load but the tilt of the tower that governs.
+80096e1	Wind turbine – here it is not the size of the load but the tilt of the tower that governs
 40bcd13	An offshore wind farm
-928da09	Offshore wind farm – the towers are mostly supported by steel tubular piles driven into the seabed.
+017f7f4	Offshore wind farm – the towers are mostly supported by steel tubular piles driven into the seabed
 2cd5a20	Did you know?
 9c8d9d5	The <b>Burj Khalifa</b> (828 m) is almost twice as tall as the Petronas Towers, yet it stands on piles “only” approx. 43 m long. Under the Petronas, however, excavated reinforced concrete elements (barrettes) longer than 100 m were needed, because there the bearing stratum lies very deep. So the depth of the foundation is set primarily by the soil.
 d22b539	When water scours the foundation
@@ -22,7 +22,7 @@ ae44540	If the pier stands on a shallow foundation and the scour reaches the fou
 c4d27b5	Scour lab around a bridge pier
 877b4c7	Parts of a pile foundation
 0921324	Scheme of a pile foundation: 1 – columns and floor of the superstructure, 2 – grillage, 3 – pile caps, 4 – piles, 5 – bearing stratum; arrows show the load path
-bb2578a	Scheme and load transfer of a pile foundation: the load of the superstructure is distributed to the piles by the pile caps and the grillage, and the piles transfer it to the soil along their shafts and at their bases.
+7360c9c	Scheme and load transfer of a pile foundation: the load of the superstructure is distributed to the piles by the pile caps and the grillage, and the piles transfer it to the soil along their shafts and at their bases
 bd7f6c5	The pile foundation of a new structure has two main parts: the <b>piles</b>, and the <b>cap, slab and/or pile grillage</b> (beam grillage) tying their heads together. The connecting structure distributes the load of the superstructure to the piles and makes them work together.
 6e1390b	Pile cap, grillage, slab
 70351fc	What else are piles good for?
@@ -80,7 +80,7 @@ f111cb9	bending
 13a416e	<span>In tension</span>
 40c8463	<span>In bending</span>
 4b0ad55	<span><i style="background:var(--soilB)"></i>weaker layer</span>⏎      <span><i style="background:var(--soilD)"></i>bearing stratum</span>⏎      <span><i style="background:var(--water-fill)"></i>water</span>⏎      <span><i class="l" style="border-color:var(--ok)"></i>shaft resistance</span>⏎      <span><i class="l" style="border-color:var(--accent)"></i>base resistance</span>⏎      <span><i class="l" style="border-color:var(--muted)"></i>lateral displacement</span>⏎      <span><i class="l" style="border-color:var(--grp)"></i>lateral soil resistance</span>
-3e9c591	Types of action on piles: in compression (end-bearing, friction, mixed, displacement), in tension and horizontally loaded (bending, anchor) piles.
+56b99d3	Types of action on piles: in compression (end-bearing, friction, mixed, displacement), in tension and horizontally loaded (bending, anchor) piles
 55685a0	Which pile is in compression, which in tension?
 59b1bc1	By material
 1e1c42e	Reinforced concrete

@@ -1,5 +1,5 @@
 // C07 – Résfalak: anatómia, réstábla-építő, gépválasztó, silóhatás, résállékonyság-labor, kvíz
-import { anatScene, RFA } from './proc.js';
+import { anatScene, RFA, panelScene, PB, biteKin } from './proc.js';
 import { register, shell, slider, seg, toggle, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop } from './core.js';
 import { defineQuiz } from './ui.js';
 import './rf_figs.js';
@@ -24,28 +24,6 @@ function ar(p, x1, y1, x2, y2, col = 'var(--ink)', w = 2, hd = 7) {
 function soil(p, x, y, w, hh, cls = 'f-soilA', pat = 'pat-sand', op = 0.75) {
   R(p, x, y, w, hh, cls);
   R(p, x, y, w, hh, '', { fill: `url(#${pat})`, opacity: op });
-}
-/** réskanál (markoló) – cx: közép, yb: alsó él, w: szélesség */
-function grab(p, cx, yb, w, open = 0.4) {
-  const g = G(p);
-  const hh = 16, jaw = 12;
-  R(g, cx - w / 2 + 4, yb - hh - jaw, w - 8, hh, 'f-warn', { style: 'stroke:var(--ink);stroke-width:1', rx: 2 });
-  const o = open * 6;
-  P(g, `M${cx - w / 2 + 4} ${yb - jaw} L${cx - 2} ${yb - jaw} L${cx - 4 - o} ${yb} L${cx - w / 2 - o} ${yb - 3} Z`, 'f-steel2');
-  P(g, `M${cx + w / 2 - 4} ${yb - jaw} L${cx + 2} ${yb - jaw} L${cx + 4 + o} ${yb} L${cx + w / 2 + o} ${yb - 3} Z`, 'f-steel2');
-  return g;
-}
-/** lánctalpas alapgép gémmel – x0: a talp bal széle, y: terepszint, tip: a gém csúcsa */
-function crane(p, x0, y, tip) {
-  const g = G(p);
-  R(g, x0, y - 10, 88, 10, 'f-steel2', { rx: 5 });
-  for (let i = 0; i < 6; i++) C(g, x0 + 8 + i * 14.4, y - 5, 3, 'f-surface', { opacity: 0.55 });
-  R(g, x0 + 10, y - 34, 64, 24, 'f-acc', { rx: 3 });
-  R(g, x0 + 54, y - 46, 20, 14, 'f-steel', { rx: 2 });
-  R(g, x0 + 57, y - 43, 14, 8, 'f-sky', { opacity: 0.9 });
-  L(g, x0 + 60, y - 30, tip[0], tip[1], 'stroke:var(--steelm2);stroke-width:5;stroke-linecap:round');
-  L(g, x0 + 60, y - 30, tip[0], tip[1], 'stroke:var(--surface);stroke-width:1.2;stroke-dasharray:3 5;opacity:.6');
-  return g;
 }
 
 /* ================================================================== 1. Egy résfal anatómiája */
@@ -102,37 +80,37 @@ const PAN = [
 ];
 PAN.forEach((q) => { q.bites = q.k === 'P' ? [[q.x0, q.x0 + 2.8], [q.x1 - 2.8, q.x1], [q.x0 + 2.8, q.x1 - 2.8]] : [[q.x0, q.x1]]; });
 const EP_STEPS = [
-  { t: 'Résvezető gerenda', d: 'A falvonal két oldalán vasbeton résvezető gerendák készülnek (20–25 cm széles, 1,0–1,5 m magas). Ezek vezetik a réskanalat, és ez a kitűzés alapja is.', dur: 1.6 },
-  { t: 'P1 – első harapás', d: 'A réskanál a primer tábla egyik végén kezd: leengedés – harapás – kiemelés – ürítés. A kiemelt föld helyét azonnal bentonitzagy tölti ki, a zagyszint végig a résvezető gerenda teteje közelében marad.', dur: 2.2 },
-  { t: 'P1 – második harapás', d: 'A tábla másik vége következik. Egy harapás jellemzően 2,8 m hosszú – ennyi a nyitott réskanál szélessége.', dur: 2.2 },
-  { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt talajtömböt is kiemelik: ez a 7,0 m-es tábla így három harapásból áll. (Egy 5,6 m-es tábla két harapással is elkészül.)', dur: 1.8 },
-  { t: 'Szakaszoló pallók, vasalási armatúrák', d: 'Aljtisztítás után a tábla két végére szakaszoló palló kerül, majd daruval beemelik a két vasalási armatúrát.', dur: 2.0 },
-  { t: 'P1 betonozása két kontraktorcsővel', d: 'Alulról felfelé, folyamatosan betonoznak. A nehezebb beton kiszorítja a zagyot, amelyet visszaszivattyúznak a telepre. A csövek vége végig a friss betonba merül.', dur: 2.6 },
-  { t: 'A többi primer tábla: P2, P3', d: 'Ugyanígy készül el P2 és P3. A primer táblák között egy-egy harapásnyi talaj marad a helyén – itt lesznek a közbenső táblák.', dur: 3.6 },
-  { t: 'Közbenső táblák kiharapása', d: 'S1 és S2 egyetlen harapással nyílik ki. A szakaszoló pallók vezetik a kanalat, és védik a már kész primer táblák betonját.', dur: 2.4 },
-  { t: 'Közbenső táblák vasalása, betonozása', d: 'A szakaszoló pallókat kihúzzák – a hézagot a betonba ágyazott duzzadószalag tömíti –, beemelik a vasalási armatúrákat, és betonoznak. A fal most már folytonos.', dur: 3.0 },
-  { t: 'Kész a fal: fejgerenda', d: 'A táblák felső 30–50 cm-e zaggyal keveredett, gyenge beton: ezt visszavésik, és a falat vasbeton fejgerenda fogja össze. A résvezető gerendák elbonthatók.', dur: 2.4 },
+  { t: 'Résvezető gerenda', d: 'A falvonal két oldalán vasbeton résvezető gerendák készülnek (20–25 cm széles, 1,0–1,5 m magas). Ezek vezetik a réskanalat, és ez a kitűzés alapja is.', dur: 2.4 },
+  { t: 'P1 – első harapás', d: 'A réskanál a primer tábla egyik végén kezd: leengedés – harapás – kiemelés – ürítés. A kiemelt föld helyét azonnal bentonitzagy tölti ki, a zagyszint végig a résvezető gerenda teteje közelében marad.', dur: 6.0 },
+  { t: 'P1 – második harapás', d: 'A tábla másik vége következik. Egy harapás jellemzően 2,8 m hosszú – ennyi a nyitott réskanál szélessége.', dur: 6.0 },
+  { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt talajtömböt is kiemelik: ez a 7,0 m-es tábla így három harapásból áll. (Egy 5,6 m-es tábla két harapással is elkészül.)', dur: 6.0 },
+  { t: 'Szakaszoló pallók, vasalási armatúrák', d: 'Aljtisztítás után a tábla két végére szakaszoló palló kerül, majd daruval beemelik a két vasalási armatúrát.', dur: 5.0 },
+  { t: 'P1 betonozása két kontraktorcsővel', d: 'Alulról felfelé, folyamatosan betonoznak. A nehezebb beton kiszorítja a zagyot, amelyet visszaszivattyúznak a telepre. A csövek vége végig a friss betonba merül.', dur: 4.0 },
+  { t: 'A többi primer tábla: P2, P3', d: 'Ugyanígy készül el P2 és P3. A primer táblák között egy-egy harapásnyi talaj marad a helyén – itt lesznek a közbenső táblák.', dur: 12.0 },
+  { t: 'Közbenső táblák kiharapása', d: 'S1 és S2 egyetlen harapással nyílik ki. A szakaszoló pallók vezetik a kanalat, és védik a már kész primer táblák betonját.', dur: 5.0 },
+  { t: 'Közbenső táblák vasalása, betonozása', d: 'A szakaszoló pallókat kihúzzák – a hézagot a betonba ágyazott duzzadószalag tömíti –, beemelik a vasalási armatúrákat, és betonoznak. A fal most már folytonos.', dur: 6.0 },
+  { t: 'Kész a fal: fejgerenda', d: 'A táblák felső 30–50 cm-e zaggyal keveredett, gyenge beton: ezt visszavésik, és a falat vasbeton fejgerenda fogja össze. A résvezető gerendák elbonthatók.', dur: 2.8 },
 ];
 const JUMP = { P1: 1, S1: 7, P2: 6, S2: 7, P3: 6 };
 function epState(s, p) {
-  const st = { guide: 0, gone: 0, top: 0, pan: PAN.map((q) => ({ b: q.bites.map(() => 0), cage: 0, conc: 0, stop: 0 })), grabs: [] };
+  const st = { guide: 0, gone: 0, top: 0, pull: false, pan: PAN.map((q) => ({ b: q.bites.map(() => 0), cage: 0, conc: 0, stop: 0 })), grabs: [] };
   const seq = (i, f, a, b) => clamp((f - a) / (b - a), 0, 1);
-  const bite = (i, j, f) => { st.pan[i].b[j] = Math.max(st.pan[i].b[j], f); if (f > 0 && f < 1) st.grabs.push([i, j, f]); };
+  const bite = (i, j, f, n = 3) => { st.pan[i].b[j] = Math.max(st.pan[i].b[j], biteKin(f, n).d); if (f > 0 && f < 1) st.grabs.push([i, j, f, n]); };
   const apply = (k, f) => {
     switch (k) {
       case 0: st.guide = f; break;
       case 1: bite(0, 0, f); break;
       case 2: bite(0, 1, f); break;
       case 3: bite(0, 2, f); break;
-      case 4: st.pan[0].stop = seq(0, f, 0, 0.3); st.pan[0].cage = seq(0, f, 0.3, 1); break;
+      case 4: st.pan[0].stop = seq(0, f, 0, 0.4); st.pan[0].cage = seq(0, f, 0.4, 1); break;
       case 5: st.pan[0].conc = f; break;
       case 6: for (const i of [2, 4]) {
-        bite(i, 0, seq(i, f, 0, 0.15)); bite(i, 1, seq(i, f, 0.15, 0.3)); bite(i, 2, seq(i, f, 0.3, 0.42));
-        st.pan[i].stop = seq(i, f, 0.42, 0.48); st.pan[i].cage = seq(i, f, 0.48, 0.6); st.pan[i].conc = seq(i, f, 0.6, 1);
+        bite(i, 0, seq(i, f, 0, 0.17), 1); bite(i, 1, seq(i, f, 0.17, 0.34), 1); bite(i, 2, seq(i, f, 0.34, 0.5), 1);
+        st.pan[i].stop = seq(i, f, 0.5, 0.6); st.pan[i].cage = seq(i, f, 0.6, 0.76); st.pan[i].conc = seq(i, f, 0.76, 1);
       } break;
-      case 7: for (const i of [1, 3]) bite(i, 0, f); break;
-      case 8: for (const i of [0, 2, 4]) st.pan[i].stop = 1 - seq(i, f, 0, 0.15);
-        for (const i of [1, 3]) { st.pan[i].cage = seq(i, f, 0.15, 0.4); st.pan[i].conc = seq(i, f, 0.4, 1); } break;
+      case 7: for (const i of [1, 3]) bite(i, 0, f, 2); break;
+      case 8: st.pull = f < 1; for (const i of [0, 2, 4]) st.pan[i].stop = 1 - seq(i, f, 0, 0.2);
+        for (const i of [1, 3]) { st.pan[i].cage = seq(i, f, 0.2, 0.5); st.pan[i].conc = seq(i, f, 0.5, 1); } break;
       case 9: st.top = f; st.gone = seq(0, f, 0, 0.4); break;
     }
   };
@@ -148,109 +126,22 @@ register('rf-epito', (root) => {
   const dots = h('div', { class: 'stepbtns rf-dots' });
   const dotB = EP_STEPS.map((s, i) => { const b = h('button', { type: 'button', title: s.t }, String(i + 1)); b.addEventListener('click', () => go(i)); dots.append(b); return b; });
   viz.append(h('div', { class: 'play-row' }, h('div', { class: 'stepbtns' }, btnPrev, btnPlay, btnNext, btnReset), dots));
-  const W = 660, H = 372;
-  const fig = figure(viz, W, H, 'fig rf-epfig');
+  const fig = figure(viz, PB.W, PB.H, 'fig rf-epfig');
   const txt = h('div', { class: 'steptext' }); viz.append(txt);
   const sEx = stat(out, { label: 'Kiemelt talaj', unit: 'm³', d: 0 }), sZ = stat(out, { label: 'Zagy a résben', unit: 'm³', d: 0 }), sB = stat(out, { label: 'Bedolgozott beton', unit: 'm³', d: 0 }), sT = stat(out, { label: 'Kész táblák' });
-  const X = (m) => 40 + m * 22, EY0 = 130, EY1 = 330, DY = (EY1 - EY0);
   const TH_ = 0.6, DEP = 20;
   let step = 0, p = 1, playing = false, hold = 0;
-  const uid = 'rfc' + Math.random().toString(36).slice(2, 7);
+  const LAB = { plan: 'FELÜLNÉZET', sec: 'HOSSZMETSZET A FAL TENGELYÉBEN', slv: 'zagyszint', head: 'zaggyal keveredett felső 30–50 cm', cap: 'fejgerenda', gw: 'résvezető gerenda', prim: ' · primer', sec2: ' · szekunder' };
+  let hits = null;
   const draw = (tt) => {
-    clear(fig);
     const st = epState(step, p);
-    const defs = svg('defs', {}, fig);
-    const cp = svg('clipPath', { id: uid }, defs); R(cp, 0, 98, W, EY1 - 98);
-    // ---- felülnézet
-    T(fig, 40, 16, 'FELÜLNÉZET', 't-sm', { style: 'letter-spacing:.12em;font-weight:700' });
-    soil(fig, 30, 24, 600, 74, 'f-soilA', 'pat-sand', 0.6);
-    const gw = (1 - st.gone) * st.guide;
-    if (gw > 0) for (const y of [46, 70]) R(fig, X(0) - 6, y, (X(26.6) - X(0) + 12) * st.guide, 8, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:1', opacity: 1 - st.gone });
-    // ---- hosszmetszet
-    T(fig, 40, 116, 'HOSSZMETSZET A FAL TENGELYÉBEN', 't-sm', { style: 'letter-spacing:.12em;font-weight:700' });
-    R(fig, 30, 98, 600, EY0 - 98, 'f-sky', { opacity: 0.6 });
-    soil(fig, 30, EY0, 600, 222, 'f-soilA', 'pat-sand', 0.6);
-    for (let m = 0; m <= 20; m += 5) { L(fig, 30, EY0 + m * 10, 36, EY0 + m * 10, 'stroke:var(--muted);stroke-width:1'); T(fig, 26, EY0 + m * 10 + 4, String(m), 't-sm', { 'text-anchor': 'end' }); }
-    T(fig, 26, EY1 + 18, 'm', 't-sm', { 'text-anchor': 'end' });
-    if (gw > 0) R(fig, X(0) - 6, EY0, (X(26.6) - X(0) + 12) * st.guide, 13, 'f-conc', { opacity: 0.45 * (1 - st.gone), style: 'stroke:var(--concrete2);stroke-dasharray:3 3' });
-    const conc = G(fig), clipG = G(fig, { 'clip-path': `url(#${uid})` });
+    panelScene(fig, { st, step, t: tt, pan: PAN, L: LAB });
+    if (!hits) { // kattintható táblák (a rajz fölött, átlátszó)
+      hits = G(fig);
+      PAN.forEach((q) => { const hit = R(hits, PB.X(q.x0), 24, PB.X(q.x1) - PB.X(q.x0), PB.H - 30, '', { style: 'fill:transparent;cursor:pointer' }); hit.addEventListener('click', () => go(JUMP[q.id])); svg('title', { text: `${q.id} – ugrás az építéséhez` }, hit); });
+    } else fig.append(hits);
     let vEx = 0, vB = 0, done = 0;
-    PAN.forEach((q, i) => {
-      const s = st.pan[i];
-      q.bites.forEach(([a, b], j) => {
-        const d = s.b[j]; if (d <= 0) return;
-        vEx += (b - a) * TH_ * DEP * d;
-        R(conc, X(a), 55, X(b) - X(a), 14, 'f-slurry');
-        R(conc, X(a), EY0 + 3, X(b) - X(a), DY * d - 3, 'f-slurry', { opacity: 0.92 });
-        R(conc, X(a), EY0 + 3, X(b) - X(a), DY * d - 3, '', { fill: 'url(#pat-slurry)' });
-      });
-      if (s.conc > 0) {
-        vB += (q.x1 - q.x0) * TH_ * DEP * s.conc;
-        const yc = EY1 - DY * s.conc;
-        R(conc, X(q.x0), yc, X(q.x1) - X(q.x0), EY1 - yc, 'f-conc');
-        R(conc, X(q.x0), yc, X(q.x1) - X(q.x0), EY1 - yc, '', { fill: 'url(#pat-conc)' });
-        R(conc, X(q.x0), 55, X(q.x1) - X(q.x0), 14, 'f-conc', { opacity: clamp(s.conc * 1.4, 0, 1) });
-        if (s.conc >= 1) {
-          done++;
-          if (st.top < 0.45) { R(conc, X(q.x0), EY0, X(q.x1) - X(q.x0), 4.5, 'f-bento', { opacity: 0.85 }); }
-        }
-        if (s.conc < 1) {
-          const xs = q.k === 'P' ? [q.x0 + 1.75, q.x1 - 1.75] : [(q.x0 + q.x1) / 2];
-          for (const xm of xs) {
-            R(clipG, X(xm) - 2, 100, 4, yc + 12 - 100, 'f-steel2');
-            P(clipG, `M${X(xm) - 7} 100 h14 l-5 8 h-4 z`, 'f-steel2');
-          }
-        }
-      }
-      // vasalási armatúra
-      if (s.cage > 0) {
-        const off = -(1 - s.cage) * 230;
-        const cg = q.k === 'P' ? [[q.x0 + 0.2, (q.x0 + q.x1) / 2 - 0.15], [(q.x0 + q.x1) / 2 + 0.15, q.x1 - 0.2]] : [[q.x0 + 0.25, q.x1 - 0.25]];
-        for (const [a, b] of cg) {
-          const gg = G(clipG, { transform: `translate(0 ${off})` });
-          R(gg, X(a), EY0 + 2, X(b) - X(a), DY - 8, '', { style: 'fill:none;stroke:var(--rebar);stroke-width:1.6' });
-          for (let x = X(a) + 7; x < X(b) - 3; x += 8) L(gg, x, EY0 + 2, x, EY1 - 6, 'stroke:var(--rebar);stroke-width:.6;opacity:.7');
-          for (let y = EY0 + 18; y < EY1 - 6; y += 18) L(gg, X(a), y, X(b), y, 'stroke:var(--rebar);stroke-width:.6;opacity:.7');
-          if (s.cage < 1) L(gg, (X(a) + X(b)) / 2, EY0 + 2, (X(a) + X(b)) / 2, EY0 - 120, 'stroke:var(--ink);stroke-width:1');
-          R(conc, X(a), 59, X(b) - X(a), 6, '', { style: 'fill:none;stroke:var(--rebar);stroke-width:1.2', opacity: s.cage });
-        }
-      }
-      // szakaszoló pallók
-      if (s.stop > 0 && q.k === 'P') for (const xe of [q.x0, q.x1]) {
-        const dx = xe === q.x0 ? -1 : 1;
-        R(clipG, X(xe) - (dx < 0 ? 3 : 0), EY0 - 6 - (1 - s.stop) * 200, 3, DY + 6, 'f-ink', { opacity: 0.8 });
-        R(conc, X(xe) - (dx < 0 ? 3 : 0), 54, 3, 16, 'f-ink', { opacity: 0.8 * s.stop });
-      }
-    });
-    // réskanál
-    for (const [i, j, d] of st.grabs) {
-      const [a, b] = PAN[i].bites[j];
-      const cx = (X(a) + X(b)) / 2;
-      const bob = Math.sin((tt || 0) * 5 + i) * 0.5 + 0.5;
-      const yb = EY0 + DY * d - bob * 10;
-      L(clipG, cx, 100, cx, yb - 26, 'stroke:var(--ink);stroke-width:1.2');
-      grab(clipG, cx, yb, 2.8 * 22, bob);
-      P(fig, `M${X(a)} 52 h${X(b) - X(a)} M${X(a)} 72 h${X(b) - X(a)}`, '', { style: 'stroke:var(--warn);stroke-width:2;fill:none' });
-    }
-    // fejgerenda
-    if (st.top > 0.45) {
-      const k = clamp((st.top - 0.45) / 0.55, 0, 1);
-      R(fig, X(0), EY0 - 8, (X(26.6) - X(0)) * k, 13, 'f-conc2', { style: 'stroke:var(--ink);stroke-width:1' });
-      R(fig, X(0) - 2, 52, (X(26.6) - X(0) + 4) * k, 20, '', { style: 'fill:none;stroke:var(--ink);stroke-width:1.4' });
-      if (k > 0.6) T(fig, X(13.3), EY0 - 13, 'fejgerenda', 't-sm halo', { 'text-anchor': 'middle' });
-    }
-    // táblacímkék + kattintható zónák
-    PAN.forEach((q) => {
-      const cx = (X(q.x0) + X(q.x1)) / 2;
-      T(fig, cx, 90, q.id, 't-num halo', { 'text-anchor': 'middle', style: `font-size:11px;fill:${q.k === 'P' ? 'var(--ink)' : 'var(--grp)'}` });
-      T(fig, cx, EY1 + 16, q.id + (q.k === 'P' ? ' · primer' : ' · szekunder'), 't-sm', { 'text-anchor': 'middle' });
-      const hit = R(fig, X(q.x0), 24, X(q.x1) - X(q.x0), EY1 - 24, '', { style: 'fill:transparent;cursor:pointer' });
-      hit.addEventListener('click', () => go(JUMP[q.id]));
-      svg('title', { text: `${q.id} – ugrás az építéséhez` }, hit);
-    });
-    if (step >= 1 && step <= 8) T(fig, 626, EY0 + 14, 'zagyszint', 't-sm halo', { 'text-anchor': 'end' });
-    if (step === 9 && st.top < 0.45) T(fig, 626, EY0 + 14, 'zaggyal keveredett felső 30–50 cm', 't-sm halo', { 'text-anchor': 'end' });
-    // kiírások
+    PAN.forEach((q, i) => { const s = st.pan[i]; q.bites.forEach(([a, b], j) => { vEx += (b - a) * TH_ * DEP * s.b[j]; }); vB += (q.x1 - q.x0) * TH_ * DEP * s.conc; if (s.conc >= 1) done++; });
     sEx.set(vEx); sZ.set(Math.max(0, vEx - vB)); sB.set(vB); sT.set(`${done} / 5`, done === 5 ? 'ok' : null);
   };
   const paint = () => {
@@ -275,98 +166,6 @@ register('rf-epito', (root) => {
     }
   });
   go(0, false); p = 1; draw(0);
-});
-
-/* ================================================================== 3. Markoló vagy hydrofraise? */
-const GSOIL = {
-  k_homok: { t: 'Homok, kavics', m: 0, f: 0, cls: 'f-soilA', pat: 'pat-sand' },
-  k_agyag: { t: 'Puha–közepes agyag', m: 0, f: 0, cls: 'f-soilB', pat: 'pat-clay' },
-  kemeny: { t: 'Kemény agyag, márga', m: -70, f: 15, cls: 'f-soilE', pat: 'pat-clay' },
-  kozet: { t: 'Kőzet', m: -100, f: 25, cls: 'f-rock', pat: 'pat-rock' },
-};
-register('rf-gep', (root) => {
-  const { ctrls, viz, out } = shell(root);
-  const sS = seg(ctrls, { label: 'Talaj a fal mélységében', options: Object.entries(GSOIL).map(([v, o]) => ({ v, t: o.t })), value: 'k_homok', vert: true });
-  const sD = slider(ctrls, { label: 'A fal mélysége', min: 10, max: 60, step: 1, value: 25, unit: 'm' });
-  const tP = toggle(ctrls, { label: 'Nagy pontosság kell (függőlegesség, sima felület)', value: false });
-  const tC = toggle(ctrls, { label: 'Szűk a költségkeret', value: false });
-  ctrls.append(h('p', { class: 'ctl-hint', html: 'A pontszám szemléltető: a döntést a valóságban a talajfeltárás, a mélység, a pontossági előírás és az ajánlati ár együtt adja ki.' }));
-  const W = 640, H = 330;
-  const fig = figure(viz, W, H, 'fig');
-  const sM = stat(out, { label: 'Résmarkoló', unit: '/ 100', d: 0 }), sF = stat(out, { label: 'Hydrofraise', unit: '/ 100', d: 0 });
-  const vd = verdict(out); vd.el.classList.add('rf-span');
-  let sc = { m: 0, f: 0 };
-  const score = () => {
-    const so = GSOIL[sS.v], d = sD.v;
-    const why = [];
-    let m = 82, f = 64;
-    m += so.m; f += so.f;
-    if (sS.v === 'kozet' || sS.v === 'kemeny') why.push('kőzetben, nagyon kemény agyagban a résfal <b>csak hydrofraise-zel</b> készülhet');
-    if (d > 30) { m -= (d - 30) * 1.6; f += Math.min(14, (d - 30) * 0.6); why.push('nagy mélységben a markoló függőlegessége egyre nehezebben tartható, a marógép végig vezetett'); }
-    if (tP.v) { m -= 18; f += 18; why.push('a marógép pontosabb, szebb felületet ad'); }
-    if (tC.v) { m += 10; f -= 34; why.push('a hydrofraise nagyon drága (marógép + zagytisztító telep)'); }
-    if (!why.length) why.push('laza vagy közepes talajban, szokásos mélységben a ciklikusan dolgozó réskanál gyors és gazdaságos');
-    m = clamp(m, 0, 100); f = clamp(f, 0, 100);
-    return { m, f, why };
-  };
-  const draw = (t = 0) => {
-    clear(fig);
-    const so = GSOIL[sS.v], d = sD.v, ty = 70, kpx = 3.9;
-    R(fig, 0, 0, W, ty, 'f-sky');
-    const top = sS.v === 'kemeny' ? 8 : sS.v === 'kozet' ? 10 : 0;
-    if (top) soil(fig, 0, ty, W, top * kpx, 'f-soilA', 'pat-sand');
-    soil(fig, 0, ty + top * kpx, W, H - ty - top * kpx, so.cls, so.pat, 0.8);
-    const best = sc.m >= sc.f ? 'm' : 'f';
-    const yb = ty + d * kpx;
-    // markoló
-    const tipM = [172, 10];
-    crane(fig, 40, ty, tipM);
-    R(fig, 162, ty, 20, d * kpx, 'f-slurry'); R(fig, 162, ty, 20, d * kpx, '', { fill: 'url(#pat-slurry)' });
-    const bob = 0.5 + 0.5 * Math.sin(t * 2.4);
-    const gy = ty + 30 + (d * kpx - 30) * (0.55 + 0.45 * bob);
-    L(fig, tipM[0], tipM[1], 172, gy - 26, 'stroke:var(--ink);stroke-width:1.2');
-    grab(fig, 172, gy, 22, bob);
-    T(fig, 160, H - 10, 'RÉSMARKOLÓ', 't-big', { 'text-anchor': 'middle', style: 'font-size:15px' });
-    // hydrofraise
-    const tipF = [492, 10];
-    crane(fig, 360, ty, tipF);
-    R(fig, 482, ty, 20, d * kpx, 'f-slurry'); R(fig, 482, ty, 20, d * kpx, '', { fill: 'url(#pat-slurry)' });
-    L(fig, tipF[0], tipF[1], 492, yb - 64, 'stroke:var(--ink);stroke-width:1.2');
-    R(fig, 485, yb - 64, 14, 50, 'f-acc', { style: 'stroke:var(--ink);stroke-width:1' });
-    for (const cx of [487, 497]) {
-      const wg = G(fig, { transform: `rotate(${(cx === 487 ? 1 : -1) * t * 160} ${cx} ${yb - 8})` });
-      C(wg, cx, yb - 8, 7.5, 'f-steel2');
-      for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3; L(wg, cx, yb - 8, cx + Math.cos(a) * 8.5, yb - 8 + Math.sin(a) * 8.5, 'stroke:var(--surface);stroke-width:1.2'); }
-    }
-    P(fig, `M496 ${yb - 64} C 520 ${ty - 20}, 560 ${ty - 30}, 580 ${ty - 22}`, '', { style: 'fill:none;stroke:var(--steel);stroke-width:3' });
-    R(fig, 566, ty - 28, 62, 28, 'f-bento', { rx: 3, opacity: 0.9 });
-    T(fig, 597, ty - 10, 'zagytelep', 't-sm', { 'text-anchor': 'middle', style: 'fill:#fff;font-weight:700' });
-    T(fig, 480, H - 10, 'HYDROFRAISE', 't-big', { 'text-anchor': 'middle', style: 'font-size:15px' });
-    // mélységskála
-    for (let m = 0; m <= 60; m += 10) { L(fig, 316, ty + m * kpx, 324, ty + m * kpx, 'stroke:var(--ink);stroke-width:1'); T(fig, 312, ty + m * kpx + 4, m + ' m', 't-sm halo', { 'text-anchor': 'end' }); }
-    L(fig, 320, ty, 320, ty + 60 * kpx, 'stroke:var(--ink);stroke-width:1');
-    for (const [m, s] of [[40, 'Szent Gellért tér · 40 m'], [48.3, 'Fővám tér · 48,3 m']]) {
-      L(fig, 324, ty + m * kpx, 340, ty + m * kpx, 'stroke:var(--g6);stroke-width:1.5');
-      T(fig, 344, ty + m * kpx + 4, s, 't-sm halo', { style: 'fill:var(--g6);font-weight:700' });
-    }
-    // kiemelés
-    const bx = best === 'm' ? 6 : 326;
-    R(fig, bx, 4, 308, H - 8, '', { rx: 12, style: 'fill:none;stroke:var(--grp);stroke-width:3' });
-    R(fig, bx + 214, 10, 88, 20, 'f-grp', { rx: 10 });
-    T(fig, bx + 258, 24, 'JAVASOLT', '', { 'text-anchor': 'middle', style: 'font:800 11px var(--f-mono);fill:#fff;letter-spacing:.08em' });
-  };
-  const upd = () => {
-    sc = score();
-    sM.set(sc.m, sc.m >= 60 ? 'ok' : sc.m >= 35 ? 'warn' : 'bad');
-    sF.set(sc.f, sc.f >= 60 ? 'ok' : sc.f >= 35 ? 'warn' : 'bad');
-    const best = sc.m >= sc.f ? 'Résmarkoló' : 'Hydrofraise';
-    const st = Math.abs(sc.m - sc.f) < 8 ? 'warn' : 'ok';
-    vd.set(st, Math.abs(sc.m - sc.f) < 8 ? 'Mindkettő szóba jöhet' : best + ' a jobb választás', '<ul class="rf-why">' + sc.why.map((w) => `<li>${w}</li>`).join('') + '</ul>');
-    draw(0);
-  };
-  [sS, sD, tP, tC].forEach((c) => c.on(upd));
-  upd();
-  loop(root, (t) => draw(t));
 });
 
 /* ================================================================== közös: földnyomás silóhatással (Schneebeli-féle) */

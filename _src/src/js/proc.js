@@ -3874,3 +3874,221 @@ export function methodCard(s, kind) {
 
 function init() { document.querySelectorAll('svg[data-pcard]').forEach((f) => methodCard(f, f.dataset.pcard)); document.querySelectorAll('[data-proc]').forEach(render); document.querySelectorAll('svg[data-csfig]').forEach((f) => { screwParts(f); let w0 = 0; new ResizeObserver(() => { const w = f.getBoundingClientRect().width; if (Math.abs(w - w0) > 8) { w0 = w; screwParts(f); } }).observe(f); }); }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+
+/* ================================================================== 7.2 – Réstábla-építő (felül felülnézet, alatta hosszmetszet a fal tengelyében) */
+export const PB = { W: 800, H: 566, X0: 84, PXM: 24, SY: 114, GY: 150, DM: 13, DEP: 20, PY: [26, 88], TY: [50, 66] };
+PB.BOT = PB.GY + PB.DM * PB.DEP; PB.GH = 27; // a zárt réskanál fél szélessége (nyitva 2,8 m)
+ PB.X = (m) => PB.X0 + m * PB.PXM;
+const pbS = (x) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
+/** A réskanál egy harapása n menetben: leengedés nyitva – harapás – kiemelés – átfordulás – ürítés a billenőplatóra. f: 0…1 */
+export function biteKin(f, n = 3) {
+  if (f <= 0) return { d: 0, y: 0, open: 1, full: false, sw: 0, on: false, k: 0 };
+  if (f >= 1) return { d: 1, y: 0, open: 0, full: false, sw: 0, on: false, k: n };
+  const u = f * n, k = Math.min(n - 1, Math.floor(u)), ph = u - k, d0 = k / n, d1 = (k + 1) / n, sm = (a, b) => pbS((ph - a) / (b - a));
+  const dig = sm(0.3, 0.44);
+  return { d: d0 + (d1 - d0) * dig, y: ph < 0.46 ? sm(0.02, 0.3) : 1 - sm(0.46, 0.74), open: 1 - dig + sm(0.84, 0.92), full: ph > 0.4 && ph < 0.88, sw: sm(0.74, 0.84) - sm(0.93, 1), on: true, k: k + (ph > 0.88 ? 1 : 0) };
+}
+/** Hidraulikus réskanál: kötélkorongos fej, rácsos vezetőkeret, munkahenger, két fogazott kagyló; cx: tengely, bot: a zárt kagylók alja */
+function dwGrab(g, cx, bot, half, open = 0, full = false) {
+  const b = g_(g, { class: 'pr-grab' }), hw = half * 0.9, hy = bot - 24, f0 = bot - 38, f1 = bot - 88, top = bot - 104;
+  const body = F('mach') + `;stroke:${v('mach3')};stroke-width:.8`;
+  // fej a két kötélkoronggal
+  P(b, `M${cx - hw} ${f1} L${cx - 13} ${top + 6} H${cx + 13} L${cx + hw} ${f1}Z`, body);
+  R(b, cx - 12, top - 3, 24, 11, F('dark'), { rx: 2 });
+  for (const s of [-1, 1]) { C(b, cx + s * 6, top + 2.5, 4.6, F('steel2')); C(b, cx + s * 6, top + 2.5, 1.5, F('dark')); }
+  // vezetőkeret: két oszlop kopóléccel, keresztgerendák, andráskeresztek; középen a munkahenger
+  R(b, cx - 3.6, f1 + 8, 7.2, 30, F('dark2'), { rx: 1.5 }); R(b, cx - 1.6, f1 + 36, 3.2, f0 - f1 - 30, F('steel1'));
+  const mid = (f0 + f1) / 2;
+  for (const [a, c] of [[f1 + 4, mid], [mid, f0 - 3]]) { Ln(b, cx - hw + 5, a, cx + hw - 5, c, SK('mach2', 2.6)); Ln(b, cx + hw - 5, a, cx - hw + 5, c, SK('mach2', 2.6)); C(b, cx, (a + c) / 2, 2.4, F('dark2')); }
+  for (const s of [-1, 1]) { R(b, cx + s * hw - (s > 0 ? 6 : 0), f1, 6, f0 - f1, body); R(b, cx + s * (hw + 0.6) - (s > 0 ? 0 : 1.6), f1 + 5, 1.6, f0 - f1 - 10, F('dark')); }
+  for (const y of [f1, mid - 3, f0 - 5]) R(b, cx - hw, y, 2 * hw, 6, body, { rx: 1 });
+  // törzs és villa a kagylók csapjaihoz
+  P(b, `M${cx - hw} ${f0} H${cx + hw} L${cx + 13} ${hy - 4} V${hy + 4} H${cx - 13} V${hy - 4}Z`, body);
+  // kagylók (a csap körül nyílnak), vágóél, fogak; teli kanálban föld
+  const ang = open * 38;
+  for (const s of [-1, 1]) {
+    const px = cx + s * 7, j = g_(b, { transform: `rotate(${(-s * ang).toFixed(1)} ${px} ${hy})` });
+    if (full && open < 0.35) E(j, cx + s * half * 0.5, hy + 1, half * 0.42, 6.5, F('sand2') + `;stroke:${v('layer')};stroke-width:.6`);
+    const d = `M${cx} ${hy - 5} L${cx} ${bot} Q${cx + s * half * 0.92} ${bot + 1.5} ${cx + s * half} ${bot - 14} L${cx + s * half} ${hy - 1} L${cx + s * 12} ${hy - 6}Z`;
+    P(j, d, F('mach2') + `;stroke:${v('mach3')};stroke-width:.8`);
+    P(j, `M${cx} ${bot} Q${cx + s * half * 0.92} ${bot + 1.5} ${cx + s * half} ${bot - 14}`, SK('dark2', 2.4, 'stroke-linecap:round'));
+    P(j, `M${cx + s * half * 0.3} ${bot - 9} Q${cx + s * half * 0.7} ${bot - 8} ${cx + s * half * 0.82} ${bot - 17}`, SK('mach3', 1.2, 'opacity:.7'));
+    for (let i = 0; i < 3; i++) P(j, `M${cx + s * (1 + i * 4.5)} ${bot - 0.5} l${-s * 1.5} 4.4 l${s * 3.4} -3.6z`, F('steel3'));
+    C(j, px, hy, 3, F('dark')); C(j, px, hy, 1.2, F('steel1'));
+  }
+  return { top: top - 3, r: [[cx - 6, top - 2], [cx + 6, top - 2]] };
+}
+/** Billenőplatós tehergépkocsi oldalnézetben; x: bal széle, dir: 1 = a fülke jobbra; load: 0…1 */
+function tipper(g, M, x, dir = 1, load = 0) {
+  const GY = M.GY, t = g_(g, { class: 'pr-truck', transform: dir === 1 ? '' : `translate(${2 * x + 68} 0) scale(-1 1)` });
+  R(t, x + 1, GY - 14, 64, 4.5, F('dark'));
+  if (load > 0.02) P(t, `M${x + 3} ${GY - 27} Q${x + 22} ${GY - 30 - 11 * load} ${x + 41} ${GY - 27}Z`, F('sand2') + `;stroke:${v('layer')};stroke-width:.6`);
+  P(t, `M${x} ${GY - 28} H${x + 44} V${GY - 14.5} H${x + 3.5}Z`, F('acc') + `;stroke:${v('dark2')};stroke-width:.8`);
+  for (let i = 1; i < 4; i++) Ln(t, x + 3 + i * 10.4, GY - 27, x + 3 + i * 10.4, GY - 15.5, SK('dark2', 0.8, 'opacity:.55'));
+  P(t, `M${x + 47} ${GY - 13} V${GY - 31} Q${x + 47} ${GY - 34.5} ${x + 50.5} ${GY - 34.5} H${x + 58} Q${x + 65.5} ${GY - 32.5} ${x + 66.5} ${GY - 23} V${GY - 13}Z`, F('truck') + `;stroke:${v('truck2')};stroke-width:.8`);
+  P(t, `M${x + 50.5} ${GY - 23} V${GY - 31.5} H${x + 58} Q${x + 63} ${GY - 30.5} ${x + 63.5} ${GY - 23}Z`, 'fill:url(#pr-glass)' + `;stroke:${v('dark')};stroke-width:.8`);
+  C(t, x + 56, GY - 26.5, 2.2, F('opr')); R(t, x + 63, GY - 18.5, 4, 2.4, F('lamp'), { rx: 0.8 });
+  [x + 11, x + 23, x + 56].forEach((cx) => { C(t, cx, GY - 6.2, 6.2, F('dark')); C(t, cx, GY - 6.2, 3.1, F('steel2')); C(t, cx, GY - 6.2, 1.2, F('dark2')); });
+  return t;
+}
+// a jelenet nagyított gépei (daru, mixer, billenős): a talppont körül 1,3-szoros
+const pbBig = (g, x, GY, k = 1.3) => g_(g, { transform: `translate(${x} ${GY}) scale(${k}) translate(${-x} ${-GY})` });
+function pbCrane(g, M, x, hookY, side) {
+  const k = 1.3, GY = M.GY; crane(pbBig(g, x, GY, k), M, x, GY + (hookY - GY) / k, { reach: side > 0 ? 62 : -116, tipY: GY + (5 - GY) / k });
+}
+function pbPlan(g, o) {
+  const { X, PY, TY } = PB, st = o.st, L = o.L, x0 = X(0), x1 = X(26.6), gw = (1 - st.gone) * st.guide;
+  R(g, 0, 0, PB.W, PB.SY, F('labbg')); 
+  R(g, 30, PY[0], PB.W - 60, PY[1] - PY[0], F('sand'), { rx: 3 }); R(g, 30, PY[0], PB.W - 60, PY[1] - PY[0], 'fill:url(#pr-p-sand)', { rx: 3 });
+  R(g, 30, PY[0], PB.W - 60, PY[1] - PY[0], SK('layer', 1), { rx: 3 });
+  tag(g, 36, 13, L.plan, { fs: 11.5 }); tag(g, 36, PB.SY - 12, L.sec, { fs: 11.5 });
+  // résvezető gerendák (munkahézagokkal)
+  if (gw > 0) for (const y of [TY[0] - 9, TY[1]]) { const w = (x1 - x0 + 16) * st.guide; R(g, x0 - 8, y, w, 9, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:.8`, { opacity: 1 - st.gone }); for (let x = x0 + 60; x < x0 - 8 + w; x += 96) Ln(g, x, y + 1, x, y + 8, SK('concedge', 0.7, 'opacity:.6')); }
+  PAN_.forEach((q, i) => {
+    const s = st.pan[i];
+    q.bites.forEach(([a, b], j) => { if (s.b[j] > 0) { R(g, X(a), TY[0], X(b) - X(a), TY[1] - TY[0], 'fill:url(#pr-slurryg)'); R(g, X(a), TY[0], X(b) - X(a), TY[1] - TY[0], 'fill:url(#pr-p-slurry)'); } });
+    if (s.conc > 0) { const gg = g_(g, { opacity: clamp01(s.conc * 1.6).toFixed(2) }); concrete(gg, X(q.x0), TY[0], X(q.x1) - X(q.x0), TY[1] - TY[0], s.conc < 1); }
+    pbCages(q).forEach(([a, b], k) => { const c = clamp01(s.cage * (q.k === 'P' ? 2 : 1) - k); if (c > 0) { R(g, X(a), TY[0] + 3, X(b) - X(a), TY[1] - TY[0] - 6, SK('rebar', 1.3), { opacity: c }); for (let x = X(a) + 6; x < X(b) - 2; x += 7) Ln(g, x, TY[0] + 3, x, TY[1] - 3, SK('rebar2', 0.6, `opacity:${(c * 0.8).toFixed(2)}`)); } });
+    if (q.k === 'P') [q.x0, q.x1].forEach((xe, k) => { const c = st.pull ? s.stop : clamp01(s.stop * 2 - k); if (c > 0) R(g, X(xe) - (k ? 0 : 3.4), TY[0] - 1, 3.4, TY[1] - TY[0] + 2, F('steel3') + `;stroke:${v('dark')};stroke-width:.6`, { opacity: c }); });
+    if (s.conc > 0 && s.conc < 1) pbTrem(q).forEach((xm) => { C(g, X(xm), (TY[0] + TY[1]) / 2, 3.6, F('steel1') + `;stroke:${v('steel3')};stroke-width:1`); });
+    el('text', { x: (X(q.x0) + X(q.x1)) / 2, y: PY[1] - 6, 'text-anchor': 'middle', class: 'pr-tx', style: `font-size:12px;font-weight:800;paint-order:stroke;stroke:${v('sand')};stroke-width:3px;stroke-linejoin:round${q.k === 'S' ? `;fill:${v('ok')}` : ''}`, text: q.id }, g);
+  });
+  // a dolgozó réskanál felülről: a harapás körvonala
+  for (const [i, j, f, n] of st.grabs) { const [a, b] = PAN_[i].bites[j], K = biteKin(f, n); if (K.sw < 0.5) { const mx = (X(a) + X(b)) / 2; R(g, mx - 32.5, TY[0] + 1, 65, TY[1] - TY[0] - 2, F('mach', 0.85) + `;stroke:${v('mach3')};stroke-width:1`, { rx: 2 }); Ln(g, mx, TY[0] + 2, mx, TY[1] - 2, SK('mach3', 1.2)); for (const s of [-1, 1]) C(g, (X(a) + X(b)) / 2 + s * 5, (TY[0] + TY[1]) / 2, 2, F('dark')); } }
+  if (st.top > 0.45) { const k = clamp01((st.top - 0.45) / 0.55); R(g, x0 - 3, TY[0] - 3, (x1 - x0 + 6) * k, TY[1] - TY[0] + 6, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:1.2`, { rx: 1 }); }
+}
+let PAN_ = [];
+const pbCages = (q) => q.k === 'P' ? [[q.x0 + 0.25, (q.x0 + q.x1) / 2 - 0.15], [(q.x0 + q.x1) / 2 + 0.15, q.x1 - 0.25]] : [[q.x0 + 0.25, q.x1 - 0.25]];
+const pbTrem = (q) => q.k === 'P' ? [q.x0 + 1.75, q.x1 - 1.75] : [(q.x0 + q.x1) / 2];
+function pbStatic(g, o) {
+  const { W, GY, BOT, DM, X } = PB, M = { H: PB.H - PB.SY, GY, layers: [{ k: 'fill', y: GY }, { k: 'sand', y: GY + 20 }, { k: 'gravel', y: GY + 136 }, { k: 'clay2', y: GY + 218 }] };
+  backdrop(g, M, 0, W);
+  // zagytelep a háttérben: siló, keverő
+  const far = g_(g, { opacity: 0.9 }); silo(far, M, 28, { w: 20, h: 84, band: 'slurry2' }); plant(far, M, 40, { w: 40, h: 22 });
+  for (let m = 0; m <= PB.DEP; m += 5) { const y = GY + m * DM; Ln(g, X(0) - 16, y, X(0) - 8, y, SK('labline', 1.2)); el('text', { x: X(0) - 20, y: y + 4, 'text-anchor': 'end', class: 'pr-tx', style: `font-size:12px;paint-order:stroke;stroke:${v('halo')};stroke-width:3px;stroke-linejoin:round`, text: String(m) }, g); }
+  el('text', { x: X(0) - 20, y: BOT + 20, 'text-anchor': 'end', class: 'pr-tx', style: `font-size:12px;paint-order:stroke;stroke:${v('halo')};stroke-width:3px;stroke-linejoin:round`, text: 'm' }, g);
+  Ln(g, X(0) - 12, GY, X(0) - 12, BOT, SK('labline', 1.2));
+  return M;
+}
+function pbDyn(g, o, M) {
+  const { W, GY, BOT, DM, X } = PB, DY = BOT - GY, st = o.st, L = o.L, tt = o.t || 0, x0 = X(0), x1 = X(26.6), gw = (1 - st.gone) * st.guide;
+  const back = g_(g), below = g_(g), front = g_(g);
+  // résvezető gerenda (a rés mögötti gerenda belső oldala)
+  if (gw > 0) { const w = (x1 - x0 + 16) * st.guide, gg = g_(below, { opacity: (1 - st.gone).toFixed(2) }); R(gg, x0 - 8, GY - 4, w, 20, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:.9`); R(gg, x0 - 8, GY - 4, w, 20, 'fill:url(#pr-p-conc)'); for (let x = x0 + 60; x < x0 - 8 + w; x += 96) Ln(gg, x, GY - 3, x, GY + 15, SK('concedge', 0.7, 'opacity:.6'));
+    if (o.step === 0 && st.guide < 1) { const xe = x0 - 8 + w; pbBig(back, xe + 8, GY, 1.3).append(mixer(g_(back), M, xe + 8, 1)); worker(front, xe - 14, { GY, dir: 1, pose: 'guide' }); } }
+  PAN_.forEach((q, i) => {
+    const s = st.pan[i], qx0 = X(q.x0), qx1 = X(q.x1);
+    // kiemelt rész zaggyal
+    q.bites.forEach(([a, b], j) => { const d = s.b[j]; if (d <= 0) return; const hh = DY * d; R(below, X(a), GY + 2, X(b) - X(a), hh - 2, F('bore')); slurry(below, X(a), GY + 6, X(b) - X(a), Math.max(0, hh - 6)); });
+    const maxd = Math.max(...s.b);
+    if (maxd > 0) { const a = Math.min(...q.bites.filter((_, j) => s.b[j] > 0).map((bb) => bb[0])), b = Math.max(...q.bites.filter((_, j) => s.b[j] > 0).map((bb) => bb[1])); if (s.b.every((d) => d >= 1)) P(below, `M${X(a)} ${GY + 2} V${BOT} H${X(b)} V${GY + 2}`, SK('wall', 1.1)); }
+    // armatúrák
+    pbCages(q).forEach(([a, b], k) => { const c = clamp01(s.cage * (q.k === 'P' ? 2 : 1) - k); if (c <= 0) return;
+      const top = GY + 4 - (1 - pbS(c)) * (DY + 30), bot = top + DY - 10, cg = g_(below);
+      R(cg, X(a), top, X(b) - X(a), bot - top, SK('rebar', 1.7));
+      for (let x = X(a) + 7; x < X(b) - 3; x += 8) Ln(cg, x, top, x, bot, SK('rebar', 0.8, 'opacity:.8'));
+      let d = ''; for (let y = top + 14; y < bot - 4; y += 15) d += `M${X(a)} ${y}H${X(b)}`; P(cg, d, SK('rebar2', 0.8, 'opacity:.8'));
+      for (let y = top + 22; y < bot - 60; y += 78) P(cg, `M${X(a) + 3} ${y + 52} L${X(b) - 3} ${y}`, SK('rebar2', 1.1, 'opacity:.7'));
+      for (let y = top + 30; y < bot - 10; y += 60) for (const x of [X(a), X(b)]) C(cg, x, y, 1.7, F('spacer'));
+      if (c < 1) { const cx = (X(a) + X(b)) / 2; P(front, `M${X(a) + 8} ${top} L${cx} ${top - 16} L${X(b) - 8} ${top}`, SK('rope', 1)); pbCrane(back, M, cx, top - 19, cx < 520 ? 1 : -1); } });
+    // szakaszoló pallók
+    if (q.k === 'P') [q.x0, q.x1].forEach((xe, k) => { const c = st.pull ? s.stop : clamp01(s.stop * 2 - k); if (c <= 0) return; const up = (1 - pbS(c)) * (DY + 26), xx = X(xe) - (k ? 0 : 4);
+      R(below, xx, GY - 10 - up, 4, DY + 10, F('steel3') + `;stroke:${v('dark')};stroke-width:.6`); R(below, xx + (k ? -1.8 : 4), GY - 4 - up, 1.8, DY, F('water', 0.9)); R(below, xx - 1.5, GY - 14 - up, 7, 5, F('dark'), { rx: 1 });
+      if (c < 1) { if (st.pull) Ln(front, xx + 2, GY - 14 - up, xx + 2, 0, SK('rope', 1)); else pbCrane(back, M, xx + 2, GY - 15 - up, xx < 520 ? 1 : -1); } });
+    // betonozás: beton alulról, betonozócsövek tölcsérrel, mixer
+    if (s.conc > 0) {
+      const yc = BOT - DY * s.conc;
+      concrete(below, qx0, yc, qx1 - qx0, BOT - yc, s.conc < 1);
+      if (s.conc >= 1 && st.top < 0.45) { R(below, qx0, GY, qx1 - qx0, 6, F('slurry2', 0.75)); R(below, qx0, GY, qx1 - qx0, 6, 'fill:url(#pr-p-conc)'); }
+      if (s.conc < 1) { const xs = pbTrem(q); xs.forEach((xm) => tremie(below, X(xm), GY - 22, Math.min(BOT - 4, yc + 34), { full: true }));
+        const mx = X(xs[xs.length - 1]) + 16; pbBig(back, mx, GY, 1.3).append(mixer(g_(back), M, mx, 1)); worker(front, X(xs[0]) - 22, { GY, dir: 1, pose: 'guide' }); }
+    }
+  });
+  // réskanál a darun, billenős a kiemelt földnek
+  for (const [i, j, f, n] of st.grabs) {
+    const [a, b] = PAN_[i].bites[j], K = biteKin(f, n), cx0 = (X(a) + X(b)) / 2, side = cx0 < 520 ? 1 : -1, tx = cx0 - side * 78;
+    const cx = cx0 + (tx - cx0) * K.sw, yUp = GY - 10, yDn = GY + DY * K.d - (K.open > 0.5 ? 3 : 0), bot = yUp + (yDn - yUp) * K.y;
+    const tr = pbBig(back, tx, GY, 1.3); tipper(tr, M, tx - 22, side > 0 ? -1 : 1, clamp01((K.k / n) * 0.85 + 0.1 * (i % 2)));
+    pbCrane(back, M, cx, bot - 106, side);
+    dwGrab(front, cx, bot, PB.GH, K.open, K.full);
+    if (K.sw > 0.9 && K.open > 0.2 && K.open < 1) for (let k = 0; k < 7; k++) C(front, cx + (hash(k + i) - 0.5) * 30, bot + 2 + ((tt * 60 + k * 9) % 22), 1.6, F('sand2'));
+    worker(front, cx0 + side * 46, { GY, dir: side > 0 ? 1 : -1, pose: 'signal' });
+  }
+  // fejgerenda
+  if (st.top > 0.45) { const k = clamp01((st.top - 0.45) / 0.55); R(front, x0 - 3, GY - 9, (x1 - x0 + 6) * k, 15, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:1.2`, { rx: 1 }); R(front, x0 - 3, GY - 9, (x1 - x0 + 6) * k, 15, 'fill:url(#pr-p-conc)'); if (k > 0.6) tag(front, X(13.3), GY - 26, L.cap, { fs: 12.5, anchor: 'middle', to: [X(13.3), GY - 4] }); }
+  // feliratok
+  if (o.step >= 1 && o.step <= 8) tag(front, W - 8, GY + 30, L.slv, { fs: 12, anchor: 'end', to: [x1 + 2, GY + 6] });
+  if (o.step === 9 && st.top < 0.45) tag(front, W - 8, GY + 30, L.head, { fs: 12, anchor: 'end', to: [x1 - 20, GY + 3] });
+  if (o.step === 0) tag(front, X(4), GY - 24, L.gw, { fs: 12, to: [X(2.4), GY + 4] });
+  PAN_.forEach((q) => { el('text', { x: (X(q.x0) + X(q.x1)) / 2, y: BOT + 20, 'text-anchor': 'middle', class: 'pr-tx', style: `font-size:12px;paint-order:stroke;stroke:${v('halo')};stroke-width:3px;stroke-linejoin:round`, text: q.id + (q.k === 'P' ? L.prim : L.sec2) }, front); });
+}
+export function panelScene(fig, o) {
+  defs(); CUR.W = PB.W; PAN_ = o.pan;
+  if (!fig._pb) {
+    while (fig.firstChild) fig.removeChild(fig.firstChild);
+    fig.classList.add('pr-svg');
+    const cid = 'pbc' + Math.random().toString(36).slice(2, 7), d = el('defs', {}, fig), cp = el('clipPath', { id: cid }, d); el('rect', { x: 0, y: 0, width: PB.W, height: PB.H - PB.SY }, cp);
+    const sec = g_(fig, { transform: `translate(0 ${PB.SY})`, 'clip-path': `url(#${cid})` });
+    fig._pb = { M: pbStatic(g_(sec), o), dy: g_(sec), plan: g_(fig) };
+  }
+  const S = fig._pb;
+  for (const n of [S.dy, S.plan]) while (n.firstChild) n.removeChild(n.firstChild);
+  CUR.W = PB.W; pbDyn(S.dy, o, S.M); pbPlan(S.plan, o);
+}
+
+/* ================================================================== 7.1 – gépkártyák: résmarkoló és hydrofraise (a BME „Résfalazás” videó felvételei alapján) */
+export function rfGrabFig(s, L) {
+  defs(); s.classList.add('pr-svg'); const W = 400, H = 280, GY = 44, cx = 200, bot = 236, k = 1.75; CUR.W = W;
+  const g = g_(s), M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: 'sand', y: GY + 18 }, { k: 'gravel', y: 206 }] };
+  backdrop(g, M, 0, W);
+  const x0 = cx - 60, x1 = cx + 60;
+  // résvezető gerenda a rés mögött, a rés zaggyal; a fenéken a még ki nem emelt talaj
+  R(g, x0 - 26, GY - 5, x1 - x0 + 52, 22, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:.9`); R(g, x0 - 26, GY - 5, x1 - x0 + 52, 22, 'fill:url(#pr-p-conc)');
+  R(g, x0, GY + 2, x1 - x0, bot + 6 - GY, F('bore')); slurry(g, x0, GY + 8, x1 - x0, bot - GY);
+  P(g, `M${x0} ${bot + 8} Q${cx - 30} ${bot - 2} ${cx} ${bot - 12} Q${cx + 30} ${bot - 2} ${x1} ${bot + 8}Z`, F('gravel')); P(g, `M${x0} ${bot + 8} Q${cx - 30} ${bot - 2} ${cx} ${bot - 12} Q${cx + 30} ${bot - 2} ${x1} ${bot + 8}Z`, 'fill:url(#pr-p-gravel)');
+  P(g, `M${x0} ${GY + 2} V${bot + 8} M${x1} ${GY + 2} V${bot + 8}`, SK('wall', 1.2));
+  // kötelek és tömlő a darutól, a nyitott réskanál a fenéken
+  Ln(g, cx - 6 * k, 0, cx - 6 * k, bot - 104 * k, SK('rope', 1.6)); Ln(g, cx + 6 * k, 0, cx + 6 * k, bot - 104 * k, SK('rope', 1.6)); P(g, `M${cx + 26} 0 Q${cx + 30} ${GY + 20} ${cx + 12} ${bot - 96 * k}`, SK('hose', 2.4));
+  dwGrab(g_(g, { transform: `translate(${cx} ${bot}) scale(${k}) translate(${-cx} ${-bot})` }), cx, bot, 27, 0.8, false);
+  // méret: egy harapás
+  const dy = bot + 26; Ln(g, x0, dy, x1, dy, SK('labline', 1.2)); for (const x of [x0, x1]) Ln(g, x, dy - 6, x, dy + 6, SK('labline', 1.2));
+  tag(g, cx, dy, L.bite, { fs: 12, anchor: 'middle' });
+  tag(g, x0 + 4, GY + 34, L.slurry, { fs: 12, anchor: 'end', to: [x0 + 12, GY + 40] });
+  tag(g, W - 8, 150, L.soil, { fs: 12, anchor: 'end' });
+}
+export function rfCutterFig(s, L) {
+  defs(); s.classList.add('pr-svg'); const W = 400, H = 280, x0 = 62, x1 = 338, cy = 196, r = 50; CUR.W = W;
+  const g = g_(s);
+  R(g, 0, 0, W, H, F('gravel')); R(g, 0, 0, W, H, 'fill:url(#pr-p-gravel)'); R(g, 0, 150, W, H - 150, F('rock', 0.9)); R(g, 0, 150, W, H - 150, 'fill:url(#pr-p-rock)');
+  P(g, `M0 150 H${W}`, SK('layer', 1, 'stroke-dasharray:6 4'));
+  // rés zaggyal; a fenék a két marótárcsa ívét követi
+  const fl = `M${x0} 0 V${cy + 12} A${r + 14} ${r + 14} 0 0 0 200 ${cy + 44} A${r + 14} ${r + 14} 0 0 0 ${x1} ${cy + 12} V0Z`;
+  P(g, fl, F('bore')); P(g, fl, 'fill:url(#pr-slurryg)'); P(g, fl, 'fill:url(#pr-p-slurry)'); P(g, fl, SK('wall', 1.2));
+  const hf = F('hf') + `;stroke:${v('hf3')};stroke-width:1`;
+  // vezetőkeret: bordás lemez, oldalt vezetőlécek; középen a szívócső az iszapszivattyúval
+  R(g, x0 + 14, -4, x1 - x0 - 28, 104, hf, { rx: 3 });
+  for (let x = x0 + 34; x < x1 - 30; x += 15) { if (Math.abs(x - 200) < 22) continue; R(g, x, 6, 6, 84, F('hf2'), { rx: 1.5 }); }
+  for (const sx of [x0 + 8, x1 - 16]) R(g, sx, 0, 8, 150, F('dark2'), { rx: 2 });
+  R(g, 188, -4, 24, 176, 'fill:url(#pr-cyl)' + `;stroke:${v('steel3')};stroke-width:.9`);
+  R(g, 180, 62, 40, 30, F('dark2'), { rx: 4 }); C(g, 200, 77, 9, F('steel2')); C(g, 200, 77, 3, F('dark'));
+  // törmelék a szívócsőben fölfelé
+  for (let i = 0; i < 6; i++) { const c = C(g, 194 + (i % 3) * 6, 160, 2.6, F('sand2') + `;stroke:${v('layer')};stroke-width:.5`); el('animate', { attributeName: 'cy', values: '168;-6', dur: '2.4s', begin: `${(-i * 0.4).toFixed(1)}s`, repeatCount: 'indefinite' }, c); }
+  // hajtóművek és a szívófej
+  for (const wx of [200 - 62, 200 + 62]) { P(g, `M${wx - 36} 96 H${wx + 36} L${wx + 26} ${cy - 6} H${wx - 26}Z`, F('hf2') + `;stroke:${v('hf3')};stroke-width:1`); R(g, wx - 14, 108, 28, 26, F('hf3'), { rx: 3 }); }
+  P(g, `M186 172 H214 L222 ${cy + 40} H178Z`, F('dark2') + `;stroke:${v('dark')};stroke-width:.8`); R(g, 182, cy + 30, 36, 6, F('steel3'), { rx: 1 });
+  // marótárcsák: fogtartók keményfém fogakkal; alul a szívófej felé forognak
+  [[200 - 62, -1], [200 + 62, 1]].forEach(([wx, dir]) => {
+    const w = g_(g);
+    for (let i = 0; i < 12; i++) { const t = g_(w, { transform: `rotate(${i * 30} ${wx} ${cy})` }); P(t, `M${wx - 7} ${cy - r + 4} L${wx - 5 + dir * 3} ${cy - r - 12} L${wx + 6 + dir * 3} ${cy - r - 12} L${wx + 7} ${cy - r + 4}Z`, F('spacer') + `;stroke:${v('steel3')};stroke-width:.8`); P(t, `M${wx + dir * 9} ${cy - r - 17} L${wx - 3 + dir * 3} ${cy - r - 11} H${wx + 5 + dir * 3}Z`, F('dark')); }
+    C(w, wx, cy, r, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:1.4`); C(w, wx, cy, r * 0.62, F('steel3')); for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; C(w, wx + Math.cos(a) * r * 0.4, cy + Math.sin(a) * r * 0.4, 3, F('dark')); }
+    C(w, wx, cy, 7, F('dark')); C(w, wx, cy, 2.6, F('steel1'));
+    el('animateTransform', { attributeName: 'transform', type: 'rotate', from: `0 ${wx} ${cy}`, to: `${dir * 360} ${wx} ${cy}`, dur: '7s', repeatCount: 'indefinite' }, w);
+    // forgásirány
+    const rr = r * 0.8, A = (a) => [wx + Math.cos(a * Math.PI / 180) * rr, cy - Math.sin(a * Math.PI / 180) * rr];
+    const [ax, ay] = A(dir < 0 ? 150 : 30), [bx, by] = A(dir < 0 ? 240 : -60);
+    arrowP(g, `M${ax.toFixed(1)} ${ay.toFixed(1)} A${rr} ${rr} 0 0 ${dir < 0 ? 0 : 1} ${bx.toFixed(1)} ${by.toFixed(1)}`, { w: 2.6, c: 'acc' }); head(g, bx + (dir < 0 ? 4 : -4), by + 2, dir < 0 ? 28 : 152, { c: 'acc', s: 8 });
+  });
+  for (let i = 0; i < 7; i++) C(g, 172 + i * 9 + (i % 2) * 2, cy + 44 - Math.abs(i - 3) * 3, 2.4, F('sand2') + `;stroke:${v('layer')};stroke-width:.5`);
+  tag(g, 250, 40, L.pipe, { fs: 12, to: [212, 46] });
+  tag(g, 200, H - 14, L.chips, { fs: 12, anchor: 'middle', to: [200, cy + 36] });
+}

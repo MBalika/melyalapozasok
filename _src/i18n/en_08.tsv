@@ -15,15 +15,15 @@ cf764d0	Silo effect: the earth pressure does not grow indefinitely
 5053596	A sudden loss of slurry – if the slurry leaks, for example, into a coarse gravel layer, an old sewer or a cellar – can reduce the level difference relative to the groundwater within minutes. Then slurry must be topped up immediately, which is why there is always a reserve at the plant. You can try what happens with the <b>slurry level</b> slider of the lab.
 1d58edf	Concreting, inspection
 ae067a5	Concreting follows the rules of <b>underwater concreting</b>, with a concreting hopper and a tremie pipe: the concrete fills the trench from the bottom up while displacing the lighter slurry – the slurry is pumped out and returned to the plant. The end of the tremie pipe is always immersed in the fresh concrete, so the concrete does not mix with the slurry.
-cbfd454	Underwater concreting: one concreting pipe (tremie) goes into a bored pile and two into a panel; the concrete fills the bore or the trench from the bottom. The head, concreted up to the casting level and mixed with slurry, is broken back to the cut-off level.
+4b3500a	Underwater concreting: one concreting pipe (tremie) goes into a bored pile and two into a panel; the concrete fills the bore or the trench from the bottom. The head, concreted up to the casting level and mixed with slurry, is broken back to the cut-off level
 575f47a	The rules of concreting
 4aa26b6	Concreting must start <b>as soon as possible</b> after excavation is finished, but no later than <b>4–5 hours</b> afterwards.
 2ef7156	Before that, <b>base cleaning</b> is needed: the soil and sand grains settled at the bottom of the trench must be removed.
 fef4642	<b>Continuous</b> concreting is required, without interruption.
 e6009f5	The top approx. <b>30–50 cm</b> of the wall is mixed with slurry; it must be broken out, chiselled and re-concreted – the <b>capping beam</b> sits on it.
 7e8eb73	After the wall is finished, the concrete quality is usually checked by <b>radioactive isotope</b> or <b>seismic</b> testing.
-a6cd2bc	Plan of trench-built structural elements: a panel can be straight, but also T-shaped or cross-shaped.
-afb4422	Reinforcement detail: the concrete must also flow between the bars (clear spacing) and reach the required cover everywhere.
+7aca4e0	Plan of trench-built structural elements: a panel can be straight, but also T-shaped or cross-shaped
+4c425c6	Reinforcement detail: the concrete must also flow between the bars (clear spacing) and reach the required cover everywhere
 5208e7e	What we see after excavation
 27607dc	Concreting a panel from a truck mixer on a city-centre site
 847b36f	Concreting on a city-centre infill site
@@ -62,7 +62,7 @@ cf11d16	<a href="#kut-elv"><span>8.1</span><b>The principle of sinking</b></a>�
 80cea19	The essence of both methods is the same: a <b>reinforced concrete shell wall</b> of varying – even very large – diameter is sunk <b>under its own weight</b> while the soil is removed from inside with a “clamshell” grab. When the required level (the bearing stratum) has been reached, either a <b>base slab</b> is made or the well is completely <b>filled with concrete</b> – the latter is not typical for box foundations.
 3ffb31b	The body sinks if its <b>weight</b> (plus any ballast) overcomes the <b>friction on the shell</b> and the <b>soil resistance under the cutting edge</b>. Below the groundwater, buoyancy reduces the effective weight. So sinking is a continuous balancing act: the grab also removes the soil from under the cutting edge, and the shell friction is reduced by lubrication or a shoulder offset.
 ac60803	It is typically <b>economical</b> (and competitive with piles) if the bearing stratum is <b>not too deep</b>. It was used most often when the groundwater was high and the foundation level had to be taken below the water table: meanwhile the shell prevents the working space from collapsing.
-c34570e	Excavation in a well foundation: the slewing excavator “picks” the soil out of the inside of the shell with a grab bucket, and the well sinks under its own weight.
+b217efb	Excavation in a well foundation: the slewing excavator “picks” the soil out of the inside of the shell with a grab bucket, and the well sinks under its own weight
 6a002a1	<span class="f">G + G<sub>b</sub> − U &gt; S + R<sub>v</sub></span>⏎    <span class="fl"><i>condition for sinking</i> – G: weight of the shell, G<sub>b</sub>: ballast, U: buoyancy below the groundwater, S: shell friction, R<sub>v</sub>: soil resistance under the cutting edge</span>
 9b3bc07	Well sinker
 9e4600d	Well foundations
@@ -78,9 +78,9 @@ b096af0	<b>4–8<small>m</small></b><span>length of the well</span>
 822ee5b	Scheme and load transfer of a well foundation
 8d523c6	Wells, grillage, superstructure<small>the top of the grillage is horizontal, the beams have a rectangular cross-section</small>
 033d8c3	The load path<small>column load F → spanning beam (M) → R onto the well → base and shaft resistance</small>
-58538b0	The wells are tied together by a spanning, distributing reinforced concrete grillage (or slab). The columns of the superstructure can also stand between the wells: the grillage carries their load to the wells in bending, and the wells carry it to the bearing stratum.
+ba7cf13	The wells are tied together by a spanning, distributing reinforced concrete grillage (or slab). The columns of the superstructure can also stand between the wells: the grillage carries their load to the wells in bending, and the wells carry it to the bearing stratum
 e25c1f3	Variants of well foundations
 0f49130	The shell can be cylindrical or widening downwards (tapered), and it can project all round at the bottom (shoulder offset). In that case the cutting edge cuts a larger hole than the shell above it, so the upper part of the wall does not rub against the soil all the way; thixotropic slurry or rolling gravel can be placed in the resulting gap.
 1f67c24	The cutting edge – the “blade” of the well
 1bd7667	The lower end of the shell is a tapering <b>cutting edge</b> ending in an edge: this penetrates the soil while the grab removes the soil inside. It can be made purely of <b>reinforced concrete</b>, with <b>steel angle edge reinforcement</b>, or with a protruding <b>steel pre-cutting edge</b>; a cutting-edge ring is often placed around it. The inclination of the inner sloping face from the vertical is at most approx. 35°, and the external shoulder offset reduces the shell friction.
-d4a4e82	Cutting-edge details in vertical section (outside face of the shell on the left). The dimensions show typical steel sections.
+7348b4a	Cutting-edge details in vertical section (outside face of the shell on the left). The dimensions show typical steel sections

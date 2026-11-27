@@ -54,7 +54,7 @@ figure.fig-ppt.rf-figw { max-width: 600px; margin: 22px auto; }
 @media (max-width: 640px) {
   #resfal .w-viz, #kut .w-viz { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   #resfal .w-viz > svg.fig, #kut .w-viz > svg.fig { min-width: 540px; }
-  #resfal .w-viz > svg.rf-anatfig { min-width: 640px; }
+  #resfal .w-viz > svg.rf-anatfig, #resfal .w-viz > svg.rf-epfig { min-width: 640px; }
   .rf-info { min-height: 0; }
 }
 
