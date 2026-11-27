@@ -58,8 +58,7 @@ const ANAT = [
   { n: 6, x: 438, y: 62, t: 'Fejgerenda', d: 'A fal felső 30–50 cm-e zaggyal keveredett, ezt visszavésik; a táblákat vasbeton fejgerenda fogja össze, erre csatlakozik a felszerkezet.' },
   { n: 7, x: 722, y: 320, t: 'Résfal', d: 'Vasbeton panelek folytonos, 40–120 cm vastag fala. Merev és vízzáró – itt egyben a mélygarázs végleges oldalfala, és a felette álló épület terhét is leviszi.' },
   { n: 8, x: 600, y: 150, t: 'Födémek', d: 'A garázsszintek födémei támasztják meg a falat. Top-down építésnél felülről lefelé készülnek: a gödör kiemelése a födémek alatt halad.' },
-  { n: 9, x: 438, y: 334, t: 'Beágyazás', d: 'A fal lába a vízzáró agyagba kötve a talajvizet is kizárja a gödörből – így nincs szükség talajvízszint-süllyesztésre a környéken.' },
-  { n: 10, x: 389, y: 46, t: 'Szomszéd épület', d: 'A résfal viszonylag zaj- és rezgésmentesen készül, és merev fal: ezért építhető közvetlenül a telekhatáron álló épület mellett is.' },
+  { n: 9, x: 389, y: 46, t: 'Szomszéd épület', d: 'A résfal viszonylag zaj- és rezgésmentesen készül, és merev fal: ezért építhető közvetlenül a telekhatáron álló épület mellett is.' },
 ];
 register('rf-anat', (root) => {
   const { viz } = shell(root, { layout: 'wide', out: false });
