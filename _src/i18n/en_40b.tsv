@@ -1,4 +1,4 @@
-378d589	Pressures on the right-hand wall of the trench: from inside the slurry pressure (σ<sub>p</sub>, drawn to the left), from outside the water pressure (σ<sub>v</sub>) and the earth pressure (σ<sub>x</sub>). For a panel of finite length, σ<sub>x</sub> falls short of the Rankine value because of arching. Illustrative numerical example: sand, φ = 32°, γ = 18 kN/m³ (below the groundwater table γ′ = 10 kN/m³), h = 2.0 m, t = 0.5 m, ρ = 1.08 g/cm³ (γ<sub>b</sub> = 10.8 kN/m³), L = 5.6 m, trench depth 20 m
+b271183	Pressures on the right-hand wall of the trench: from inside the slurry pressure (σ<sub>p</sub>, drawn to the left), from outside the water pressure (σ<sub>v</sub>) and – drawn on a separate axis – the earth pressure (σ<sub>x</sub>). For a panel of finite length, because of arching σ<sub>x</sub> tends to a limit with depth and falls far short of the Rankine value. Illustrative numerical example: sand, φ = 32°, γ = 18 kN/m³ (below the groundwater table γ′ = 10 kN/m³), h = 2.0 m, t = 0.5 m, ρ = 1.08 g/cm³ (γ<sub>b</sub> = 10.8 kN/m³), L = 5.6 m, trench depth 20 m
 a3fb768	2 · grouting
 24aa075	slurry
 ec48880	base
@@ -25,3 +25,4 @@ b14856d	min
 2db62e7	working chamber
 8351eb3	DECOMPRESSION
 56ab49a@js/ch_kut.js:111	GWT
+3c5dc9d	earth pressure

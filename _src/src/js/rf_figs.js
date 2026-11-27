@@ -244,16 +244,16 @@ function renderZagykor(el) {
 
 /* ================================================================== 5. Nyomások a rés falán (σp, σv, σx) */
 function renderPress(el) {
-  const W = 640, H = 580;
+  const W = 760, H = 580;
   const s = mk(el, W, H, 'A zagynyomás és a víz- és földnyomás a rés falán a mélység mentén', 'rf-press');
   // számpélda (szemléltető): homok φ = 32°, γ = 18 / γ′ = 10 kN/m³, h = 2,0 m, t = 0,5 m, ρ = 1,08 g/cm³, L = 5,6 m, D = 20 m
   const D = 20, t = 0.5, hw = 2, gb = 10.8, gw = 10, phi = 32 * Math.PI / 180, Lr = 5.6;
   const Ka = Math.tan(Math.PI / 4 - phi / 2) ** 2, s2 = Math.sin(2 * phi);
-  const y0 = 64, ky = (500 - y0) / D, X0 = 330, kx = 0.9;
+  const y0 = 64, ky = (500 - y0) / D, X0 = 300, kx = 1.1;
   const Y = (z) => y0 + z * ky;
   // talajtömbök
   soilBox(s, 46, y0, X0 - 34 - 46, Y(D) - y0, 'f-soilA', 'pat-sand', 0.35);
-  soilBox(s, X0, y0, 300, Y(D) - y0, 'f-soilA', 'pat-sand', 0.35);
+  soilBox(s, X0, y0, W - 10 - X0, Y(D) - y0, 'f-soilA', 'pat-sand', 0.35);
   R(s, X0 - 34, y0, 34, Y(D) - y0, 'f-slurry', { opacity: 0.35 });
   // résvezető
   R(s, X0 - 50, y0, 16, 1.2 * ky, 'f-conc', { style: 'stroke:var(--ink);stroke-width:1' });
@@ -272,9 +272,13 @@ function renderPress(el) {
   for (let z = t + 0.8; z < D; z += 0.8) L(s, X0 - sp(z) * kx, Y(z), X0, Y(z), 'stroke:var(--ink2);stroke-width:.7');
   // σv (jobbra, kék)
   P(s, pathD([[X0, Y(hw)], [X0, Y(D)], [X0 + sv(D) * kx, Y(D)]], true), 'f-water', { style: 'stroke:var(--water);stroke-width:1.4' });
-  // σv + σx (boltozódás) és Rankine
-  P(s, pathD(pts.map(([z, a]) => [X0 + (sv(z) + a) * kx, Y(z)])), '', { style: 'fill:none;stroke:var(--ink);stroke-width:2.2' });
-  P(s, pathD(pts.map(([z, , b]) => [X0 + (sv(z) + b) * kx, Y(z)])), '', { style: 'fill:none;stroke:var(--bad);stroke-width:1.8;stroke-dasharray:7 5' });
+  // σx külön tengelyen: boltozódással (folytonos, a mélységgel határértékhez tart) és Rankine szerint (szaggatott)
+  const X1 = X0 + sv(D) * kx + 56, last = pts[pts.length - 1];
+  P(s, pathD([...pts.map(([z, a]) => [X1 + a * kx, Y(z)]), [X1, Y(D)], [X1, Y(0)]], true), '', { style: 'fill:color-mix(in srgb, var(--rebar) 34%, transparent);stroke:none' });
+  L(s, X1, y0, X1, Y(D), 'stroke:var(--ink2);stroke-width:1.2');
+  P(s, pathD(pts.map(([z, , b]) => [X1 + b * kx, Y(z)])), '', { style: 'fill:none;stroke:var(--bad);stroke-width:1.8;stroke-dasharray:7 5' });
+  P(s, pathD(pts.map(([z, a]) => [X1 + a * kx, Y(z)])), '', { style: 'fill:none;stroke:var(--ink);stroke-width:2.4' });
+  T(s, X1 - 28, Y(16.2) - 8, '+', 'rf-tbig', { 'text-anchor': 'middle' });
   // tengely, szintek
   ar(s, 30, y0 - 20, 30, y0 + 70, 'var(--ink)', 1.6, 8); T(s, 18, y0 + 66, 'z', 'rf-t', { 'text-anchor': 'middle', style: 'font-style:italic' });
   L(s, 46, y0, X0 - 50, y0, 'stroke:var(--ink);stroke-width:1.6'); L(s, X0 + 16, y0, W - 10, y0, 'stroke:var(--ink);stroke-width:1.6');
@@ -289,17 +293,18 @@ function renderPress(el) {
   T(s, X0 - 110, Y(15) + 34, 'zagynyomás', 'rf-ts', { 'text-anchor': 'middle' });
   TH(s, X0 + 64, Y(16.2), sub('σ', 'v'), 'rf-tbig', { 'text-anchor': 'middle' });
   T(s, X0 + 64, Y(16.2) + 34, 'víznyomás', 'rf-ts', { 'text-anchor': 'middle' });
-  const [zA, aA] = pts[Math.round(11 / dz)];
-  lead(s, X0 + (sv(zA) + aA) * kx, Y(zA), 520, Y(8.6), '', {});
-  TH(s, 520, Y(8.6), `${sub('σ', 'v')} + ${sub('σ', 'x')}`, 'rf-t rf-onfill');
-  T(s, 520, Y(8.6) + 19, 'boltozódással', 'rf-ts rf-onfill');
-  const [zB, , bB] = pts[Math.round(6 / dz)];
-  lead(s, X0 + (sv(zB) + bB) * kx, Y(zB), 520, Y(4.2), 'Rankine-féle', { cls: 'rf-ts t-bad rf-onfill' });
+  const [zA, aA] = pts[Math.round(12 / dz)];
+  lead(s, X1 + aA * kx, Y(zA), X1 + 96, Y(13.4), 'boltozódással', { cls: 'rf-ts rf-onfill' });
+  const [zB, , bB] = pts[Math.round(8.5 / dz)];
+  lead(s, X1 + bB * kx, Y(zB), X1 + 96, Y(6.4), 'Rankine-féle', { cls: 'rf-ts t-bad rf-onfill' });
+  TH(s, X1 + 150, Y(16.2), sub('σ', 'x'), 'rf-tbig', { 'text-anchor': 'middle' });
+  T(s, X1 + 150, Y(16.2) + 34, 'földnyomás', 'rf-ts rf-onfill', { 'text-anchor': 'middle' });
   // összevetés a talpon
   const yb = Y(D) + 30;
   T(s, X0 - sp(D) * kx, yb, `${Math.round(sp(D))} kPa`, 'rf-tn', { 'text-anchor': 'middle' });
-  T(s, X0 + (sv(D) + pts[pts.length - 1][1]) * kx, yb, `${Math.round(sv(D) + pts[pts.length - 1][1])} kPa`, 'rf-tn', { 'text-anchor': 'middle' });
-  T(s, X0 + (sv(D) + pts[pts.length - 1][2]) * kx, yb + 20, `${Math.round(sv(D) + pts[pts.length - 1][2])} kPa`, 'rf-tn t-bad', { 'text-anchor': 'middle' });
+  T(s, X0 + sv(D) * kx, yb, `${Math.round(sv(D))} kPa`, 'rf-tn', { 'text-anchor': 'middle' });
+  T(s, X1 + last[1] * kx, yb, `${Math.round(last[1])} kPa`, 'rf-tn', { 'text-anchor': 'middle' });
+  T(s, X1 + last[2] * kx + 8, yb + 20, `${Math.round(last[2])} kPa`, 'rf-tn t-bad', { 'text-anchor': 'middle' });
   T(s, 46, yb + 20, 'z = 20 m', 'rf-tn');
 }
 
