@@ -182,7 +182,7 @@ bc66a89	Of the types of deep foundation (<a href="#alap-fajtak">1.2</a>), the <b
 550f95f	Not only soilcrete columns but also <b>jet panels</b> can be made: the rod is withdrawn <b>without rotation</b>, using two-sided (two opposite) nozzles – a V-shaped panel is formed. Panels made from neighbouring holes, joined to each other in a V shape, form a <b>watertight curtain wall</b> – with less material than columns.
 826fe36	In double and triple jet, the breaking up of the soil is also assisted by <b>air and/or water</b>. The variant is decided by the number of nozzles switched on and the diameter to be achieved. Usual jet column diameters: <b>50–100 cm with single jet</b> (50–70 cm in clay, 80–100 cm in sand), <b>approx. 120 cm with double jet</b>; 180–200 cm for a panel made with double jet. The diameter depends on the permeability of the soil: smallest in clay, largest in coarse-grained soil. Intersecting columns can form a continuous wall, and if needed a horizontal slab too.
 d9c2eb9	Only cement grout is injected into the soil through a single nozzle at 350–400 bar during withdrawal and rotation.
-6850df0	<b>Grouting:</b> starting from the bottom of the hole, the binder (cement grout) is injected into the soil through the approx. 2.5 mm nozzles of the monitor at a pressure of 350–400 bar, while the drill rod is <b>slowly rotated and withdrawn</b> (25–35 cm/min). The surplus cement grout flows back to the surface along the hole.
+66d2cd1	<b>Grouting:</b> starting from the bottom of the hole, the binder (cement grout) is injected into the soil through the approx. 2.5 mm nozzles of the drill head at a pressure of 350–400 bar, while the drill rod is <b>slowly rotated and withdrawn</b> (25–35 cm/min). The surplus cement grout flows back to the surface along the hole.
 67403d3	<b>180–200<small>cm</small></b><span>panel made with double jet</span>
 d6625eb	<b>≈ 120<small>cm</small></b><span>diameter of a double-jet column</span>
 5550490	<b>50–100<small>cm</small></b><span>single-jet column (50–70 cm in clay, 80–100 cm in sand)</span>
@@ -196,7 +196,7 @@ e8f05d1	<b>350–400<small>bar</small></b><span>injection pressure</span>
 05d451c	no driving; a jet at 350–400 bar
 e527516	The binder is jetted through the approx. 2.5 mm nozzles at a pressure of 350–400 bar. 5–6 bar is the pressure of the air shroud in the air double jet.
 50f37bc	breaks it up with a 350–400 bar jet, mixes it with binder and partly replaces it
-4402859	drill string with the monitor at its foot, with approx. 2.5 mm nozzles
+d90bc3a	drill string with the drill head at its foot, with approx. 2.5 mm nozzles
 a575512	typically 25–35 cm/min
 ee0a8c0	Withdrawal rate
 65ad5ea	the typical injection pressure is 350–400 bar
