@@ -251,7 +251,6 @@ const ROUTE = [
   { t: 'Mikrocölöp, jet-grouting, mélykeverés, kavicscölöp', ch: [['#egyeb', 'C06']], v: [], yt: ['7M7YPxBn8Xk', 'MPjXIhchN-w', 'wh31VB1fY_8', 'cNkNZV6kgqk'], s: 'Aláfogás pincéből, 350–400 bar-os sugár, helyben kevert talaj, kőoszlop.' },
   { t: 'Résfal', ch: [['#resfal', 'C07']], v: ['v3'], yt: ['f_41-sJhGK8'], s: 'Miért nem omlik be a zaggyal teli rés? Utána a valódi markoló és a betonozás.' },
   { t: 'Kút, szekrény, keszon', ch: [['#kut', 'C08']], v: ['v4'], yt: [], s: 'Süllyesztés önsúllyal, vágóél, túlnyomás és zsilipek – ehhez csak animáció van.' },
-  { t: 'Ismétlés vizsga előtt', ch: [['#dontes', 'C10'], ['#teszt', 'C12']], v: ['v5'], yt: [], s: 'Összefoglaló kvízzel, aztán döntési helyzetek és 40 igaz/hamis állítás.' },
 ];
 const VIDX = Object.fromEntries(VIDEOS.map((v, i) => [v.n, i]));
 function playOwn(n) { const tiles = document.querySelectorAll('#vlib .vtile'); const t = tiles[VIDX[n]]; if (t) t.click(); }

@@ -6,7 +6,7 @@ BME Építőmérnöki Kar, Alapozás, 8. előadás: cölöpalapok (előregyárto
 
 ## Felépítés
 - `index.html` – a kész, egyfájlos oldal (a buildből; CSS + JS beágyazva, three.js-szel együtt)
-- `video/v1–v5.html` – a magyarázó animációk (önálló lejátszók, a hang beágyazva)
+- `video/v1–v4.html` – a magyarázó animációk (önálló lejátszók, a hang beágyazva)
 - `img/yt/<id>/` – a BME YouTube-videók kártyáinak képei (`t.jpg` indexkép, `p1–p4.jpg` képkockák, `qr.png`); a metaadatok a `_src/src/js/yt_meta.json`-ban és a `data.js`-ben
 - `img/ppt/` – képek az előadásanyagból, `img/thumb/` – videó-bélyegképek
 - `vendor/hyphenopoly/` – magyar elválasztás (Hyphenopoly 6, MIT); a sorkizárást és a nem törő egységeket a `core.js` `GUARD` modulja kezeli
@@ -32,4 +32,4 @@ A videók zenéje (2026-11) valódi hangszerek felvett mintáiból készült –
 
 ## Angol változat (/en)
 
-Élő: https://melyalapozasok.vercel.app/en („Deep foundations”). Ugyanabból a magyar forrásból épül: a `python3 build.py` az `index.html` mellett az `en.html`-t is elkészíti (előtte egyszer: `cd i18n && npm install`). A fordítás: `_src/i18n/en_*.tsv` (magyar szöveg azonosítója ⇥ angol), a BME-videók adatai: `_src/i18n/en_yt.tsv`. Ha a magyar szöveg változik, az angol build leáll, a hiányzók: `_src/i18n/missing.tsv`; munkalap: `python3 build.py catalog`. Az angol magyarázó videók: `video/en/v1–v5.html`, indexképeik: `img/thumb/en/`. A magyar forrás angolhoz szükséges kapcsait (EN jelző, nyelvváltó, angol tördelési szabályok) a `_src/i18n/prep_hu.py` teszi bele (idempotens).
+Élő: https://melyalapozasok.vercel.app/en („Deep foundations”). Ugyanabból a magyar forrásból épül: a `python3 build.py` az `index.html` mellett az `en.html`-t is elkészíti (előtte egyszer: `cd i18n && npm install`). A fordítás: `_src/i18n/en_*.tsv` (magyar szöveg azonosítója ⇥ angol), a BME-videók adatai: `_src/i18n/en_yt.tsv`. Ha a magyar szöveg változik, az angol build leáll, a hiányzók: `_src/i18n/missing.tsv`; munkalap: `python3 build.py catalog`. Az angol magyarázó videók: `video/en/v1–v4.html`, indexképeik: `img/thumb/en/`. A magyar forrás angolhoz szükséges kapcsait (EN jelző, nyelvváltó, angol tördelési szabályok) a `_src/i18n/prep_hu.py` teszi bele (idempotens).

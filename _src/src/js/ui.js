@@ -189,7 +189,7 @@ function initJump() {
 
 /* ---------------------------------------------------------------- saját videók */
 const VMAP = Object.fromEntries(VIDEOS.map((v) => [v.n, v]));
-const thumb = (n) => h('div', { class: 'vthumb' }, h('img', { src: `img/thumb/${n}.jpg?v=5`, alt: '', loading: 'lazy', decoding: 'async', onerror: (e) => { e.target.style.visibility = 'hidden'; } }), h('span', { class: 'vplay' }), h('span', { class: 'vdur' }, VMAP[n]?.d || ''));
+const thumb = (n) => h('div', { class: 'vthumb' }, h('img', { src: `img/thumb/${n}.jpg?v=6`, alt: '', loading: 'lazy', decoding: 'async', onerror: (e) => { e.target.style.visibility = 'hidden'; } }), h('span', { class: 'vplay' }), h('span', { class: 'vdur' }, VMAP[n]?.d || ''));
 const order = VIDEOS.map((v) => v.n); let curIdx = 0;
 function openVideo(n) {
   const v = VMAP[n]; if (!v) return;
