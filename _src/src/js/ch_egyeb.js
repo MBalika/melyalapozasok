@@ -184,7 +184,7 @@ register('egy-jet', (root) => {
 /* ================================================================== 4. MIT CSINÁL A TALAJJAL? */
 const GEP = {
   mikro: { t: 'Mikrocölöp', tool: 'üreges, toldható acélrúd elvesző fúrófejjel', soil: 'kifúrja, a furatot és a környezetét fúrás közben injektálja', left: 'acélrúd + cementtest + átitatott talajköpeny, Ø 10–30 cm', use: 'aláfogás, megerősítés szűk helyen, felúszás ellen' },
-  jet: { t: 'Jet-grouting', tool: 'fúrószár, alján a monitor kb. 2,5 mm-es fúvókákkal', soil: '350–400 bar-os sugárral felaprózza, kötőanyaggal keveri, részben helyettesíti', left: '„talajbeton” oszlop, átmérője a talajtól függ', use: 'aláfalazás, munkagödör, vízzáró fal' },
+  jet: { t: 'Jet-grouting', tool: 'fúrószár, alján a monitor kb. 2,5 mm-es fúvókákkal', soil: '350–400 bar-os sugárral felaprózza, kötőanyaggal keveri, részben helyettesíti', left: '„talajbeton” oszlop, átmérője a talajtól függ', use: 'alapmegerősítés, munkagödör, vízzáró fal' },
   dsm: { t: 'Mélykeverés', tool: 'fúró-keverő berendezés, CSM-maró vagy kotróra szerelt keverőfej', soil: 'helyben, mechanikusan összekeveri a kötőanyaggal – lefelé és felfelé is', left: 'talajbeton oszlop (1,0–1,5 m), fal vagy tömegstabilizált tömb', use: 'gyenge teherbírású talaj javítása, talajbeton fal, szennyezett terület rehabilitációja' },
   ko: { t: 'Kavicscölöp', tool: 'zsilipes mélyvibrátor, csúcsán kavicsadagolás', soil: 'oldalirányba kiszorítja, a kavicsot szakaszosan a talajba tömöríti', left: 'tömörített kavicsoszlop – szemcsés „cölöp”', use: 'töltésalapozás, ipari padlók alapozása, süllyedéscsökkentés' },
 };
