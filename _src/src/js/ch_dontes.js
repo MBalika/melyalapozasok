@@ -44,7 +44,7 @@ const FLAGS = [
 ];
 
 register('dnt-matrix', (root) => {
-  const { viz } = shell(root, { layout: 'wide', out: false, foot: '<b>Tájékoztató összevetés</b> a jellemző értékekkel. A határok nem élesek: egy-egy technológia speciális géppel, kiegészítő eljárással a „kizárt” helyzetben is megoldható lehet – a végső szó a tervezőé.' });
+  const { viz } = shell(root, { layout: 'wide', out: false, foot: '<b>Tájékoztató összevetés</b> a jellemző értékekkel. A határok nem élesek: egy-egy technológia speciális géppel, kiegészítő eljárással a „kizárt” helyzetben is megoldható lehet – a végső szó a tervezőé. A terhelés nem befolyásolja a besorolást (figyelmen kívül van hagyva).' });
   const on = new Set();
   let grp = 'all';
   const flagBox = h('div', { class: 'dnt-flags', role: 'group', 'aria-label': 'Helyszíni feltételek' });
