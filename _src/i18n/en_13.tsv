@@ -116,14 +116,10 @@ a03db5a	Animation: the tool of the chosen technology penetrates the soft soil an
 35b4d86	▶ Continue
 8b4ff67	<dt>Tool</dt><dd>${G.tool}</dd><dt>With the soil</dt><dd>${G.soil}</dd><dt>What remains</dt><dd>${G.left}</dd><dt>Typical use</dt><dd>${G.use}</dd>
 886f2e6	1 · drilling and grouting at once
-e3818fd	2 · the grout sets, the bar stays in
 a5178ca	3 · finished micropile
 bd1b902	1 · penetration
 8db58ae	2 · feeding gravel, compaction
 935c898	2 · grouting while rotating, upwards
-fbbf8dc	2 · mixing while withdrawing
-36abc38	3 · finished element
-b8c03ff	compaction
 9fb71b9	Quiz – micropiles, jet grouting, mixing
 0fb8137	What is the maximum shaft diameter of a <b>bored</b> micropile?
 fadda6b	The shaft diameter of a bored micropile is at most 250–300 mm; the 150 mm limit applies to the largest cross-sectional dimension of a <b>driven</b> micropile.

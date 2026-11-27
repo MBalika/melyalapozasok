@@ -3582,6 +3582,130 @@ export function jetFactory(fig, o) {
   while (fig._dy.firstChild) fig._dy.removeChild(fig._dy.firstChild);
   jetFacDyn(fig._dy, o, fig._rig);
 }
+/* ================================================================== 6. fejezet – „Mit csinál a talajjal?” */
+// Ugyanabban a puha talajban négy technológia: a gép, a szerszám és az elem a folyamat szerint (o: { kind, u, ph, nar, full }).
+const SOS = { W: 640, H: 400, GY: 96, HARD: 282, BOT: 352, X: 300 };
+const sEase = (t) => (t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t));
+const sLerp = (a, b, t) => a + (b - a) * t;
+function soilStatic(g, o) {
+  const { W, H, GY, HARD } = SOS, M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: 'clay', y: GY + 14 }, { k: 'sand', y: HARD }] };
+  backdrop(g, M, 0, W);
+  const LX = o.nar ? 158 : 12, fz = o.nar ? 15 : 12.5;
+  tag(g, LX, GY + 44, EN ? 'soft clay' : 'puha agyag', { fs: fz });
+  tag(g, LX, HARD + 22, EN ? 'sand' : 'homok', { fs: fz });
+}
+function soilDyn(g, o) {
+  const { GY, HARD, BOT, X } = SOS, M = { H: SOS.H, GY }, u = o.u, ph = o.ph, fz = o.nar ? 15 : 12.5;
+  const tg = (x, y, t, oo = {}) => tag(g, x, y, t, { fs: fz, ...oo });
+  let lbl = '';
+  if (o.kind === 'mikro') {
+    const d1 = 0.55, d2 = 0.8, dr = sEase(u / d1), bot = u < d1 ? sLerp(GY + 4, BOT, dr) : BOT;
+    const gp = groutPlant(g, M, X - 128);
+    const done = u >= d2, hy = done ? 14 : sLerp(14, GY - 36, u < d1 ? dr : 1);
+    const r = smallRig(g, M, X, { top: 6, headY: hy });
+    if (!done) hoseTo(g, gp.out[0], gp.out[1], X - 9, r.headY + 6, 14);
+    const zh = u < d1 ? 14 : 17, bh = u < d1 ? 6.5 : 6.5 + 2.5 * sEase((u - d1) / (d2 - d1));
+    if (bot > GY + 10) groutBody(g, X, GY + 2, bot, bh, zh, 3);
+    const rt = done ? GY - 8 : r.headBot, cps = []; for (let y = bot - 70; y > rt + 10; y -= 70) cps.push(y);
+    titanBar(g, X, rt, bot, { couplers: cps });
+    if (done) { R(g, X - 11, GY - 5, 22, 5, F('steel3'), { rx: 1 }); R(g, X - 5, GY - 11, 10, 6, F('steel2'), { rx: 1 }); }
+    if (u < d2) {
+      // a furat mentén visszafolyó cementtej és a tócsa
+      for (let i = 0; i < 7; i++) { const yy = bot - 10 - ((ph * 60 + i * 31) % Math.max(10, bot - GY - 14)); C(g, X + (i % 2 ? 7 : -7), yy, 1.6, F('fresh2')); }
+      E(g, X - 22, GY + 1.5, 18, 3, F('fresh2', 0.85));
+    }
+    lbl = u < d1 ? (EN ? '1 · drilling and grouting at once' : '1 · fúrás és injektálás egyszerre') : u < d2 ? (EN ? '2 · final grouting with thick grout' : '2 · végső injektálás sűrű habarccsal') : (EN ? '3 · finished micropile' : '3 · kész mikrocölöp');
+    if (u >= d1 && !o.nar) tg(X + 48, 250, 'cementtest + átitatott köpeny', { to: [X + 16, 250] });
+  } else if (o.kind === 'jet') {
+    const d1 = 0.3, d2 = 0.86, top = GY + 14;
+    const my = u < d1 ? sLerp(GY - 6, BOT - 4, sEase(u / d1)) : u < d2 ? sLerp(BOT - 4, top, (u - d1) / (d2 - d1)) : top;
+    silo(g, M, X - 150, { w: 20, h: 78 });
+    const pl = plant(g, M, X - 134, { w: 44, h: 24 });
+    const hy = sLerp(14, GY - 40, (my - GY + 6) / (BOT - GY));
+    const r = smallRig(g, M, X, { top: 6, headY: hy });
+    hoseTo(g, pl.out[0], pl.out[1], X - 9, r.headY + 6, 14);
+    const inj = u >= d1 && u < d2, colTop = u < d1 ? BOT : u < d2 ? my : top;
+    const hC = 40, hS = 50;
+    if (colTop < BOT) {
+      if (colTop < HARD) column(g, X, colTop, HARD + 2, hC, 'jet');
+      column(g, X, Math.max(colTop, HARD), BOT, hS, 'jet');
+      R(g, X - hC, colTop, hC * 2, Math.min(HARD, BOT) - colTop, SK('concedge', 1, 'opacity:.8') + ';fill:none', { rx: 4 });
+    }
+    R(g, X - 7, GY, 14, Math.max(0, my - 12 - GY), F(inj ? 'grout2' : 'bore', 0.85));
+    if (inj) {
+      for (let i = 0; i < 8; i++) { const yy = my - 14 - ((ph * 70 + i * 23) % Math.max(10, my - 14 - GY)); C(g, X + (i % 2 ? 4.5 : -4.5), yy, 1.7, F('fresh2')); }
+      E(g, X - 26, GY + 2, 22, 3.6, F('fresh2', 0.9));
+      const hh = my < HARD ? hC : hS, c = Math.cos(ph * 7), k = c >= 0 ? 1 : -1;
+      E(g, X, my + 3, hh + 2, 9, F('grout2', 0.5));
+      jetMonitor(g, X, r.headBot, my, 1.2, 'j-1');
+      jetSet(g, 'j-1', X + k * 7, my, Math.max(0, (hh - 7) * Math.abs(c)), k, 1.2);
+      spin(g, X, my - 34, 16);
+      arrowV(g, X - hh - 14, my + 34, my - 10, { w: 2.4, s: 7 });
+    } else { jetMonitor(g, X, r.headBot, my, 1.2, 'j-1'); if (u < d1) spin(g, X, my - 30, 13); }
+    lbl = u < d1 ? (EN ? '1 · drilling down' : '1 · lehajtás') : u < d2 ? (EN ? '2 · jetting while rotating, upwards' : '2 · injektálás forgatva, felfelé') : (EN ? '3 · finished jet column' : '3 · kész jet-oszlop');
+    if (u >= d1 && !o.nar) tg(X + 70, 236, EN ? 'soil concrete' : 'talajbeton', { to: [X + 36, 236] });
+  } else if (o.kind === 'dsm') {
+    const d1 = 0.4, d2 = 0.86, half = 34;
+    const tb = u < d1 ? sLerp(GY + 4, BOT, sEase(u / d1)) : u < d2 ? sLerp(BOT, GY + 30, (u - d1) / (d2 - d1)) : GY + 30;
+    silo(g, M, X - 150, { w: 20, h: 82 });
+    const pl = plant(g, M, X - 134, { w: 44, h: 24 });
+    const hy = sLerp(20, GY - 66, (tb - GY - 4) / (BOT - GY - 4));
+    const r = rig(g, M, X, { top: 6, headY: hy });
+    hoseTo(g, pl.out[0], pl.out[1], X - 14, r.headY + 6, 14);
+    // egyszer (lefelé) kevert, illetve kétszer (felfelé is) kevert talaj
+    if (u < d1) { if (tb > GY + 6) { const c1 = g_(g, { opacity: 0.62 }); column(c1, X, GY, tb, half, 'mix'); } }
+    else {
+      const c1 = g_(g, { opacity: 0.62 }); column(c1, X, GY, u < d2 ? tb : GY, half, 'mix');
+      column(g, X, u < d2 ? tb : GY, BOT, half, 'mix');
+      R(g, X - half, GY, half * 2, BOT - GY, SK('concedge', 1, 'stroke-dasharray:4 3;opacity:.7') + ';fill:none', { rx: 3 });
+    }
+    if (u < d2) {
+      mixTool(g, X, r.headBot, tb, half * (0.55 + 0.45 * Math.abs(Math.cos(ph * 6))));
+      spin(g, X, Math.min(tb - 40, r.headBot + 30), 20);
+      for (let i = 0; i < 5; i++) C(g, X + (i - 2) * 5, tb + 3 + (i % 2) * 3, 1.8, F('fresh2'));
+    } else R(g, X - 4, r.headBot, 8, GY + 20 - r.headBot, 'fill:url(#pr-cyl)');
+    lbl = u < d1 ? (EN ? '1 · down: mixing, adding binder' : '1 · lehajtás: keverés, kötőanyag-adagolás') : u < d2 ? (EN ? '2 · withdrawal: mixing again' : '2 · visszahúzás: újrakeverés') : (EN ? '3 · finished mixed column' : '3 · kész kevert oszlop');
+    if (u >= d1 && !o.nar) tg(X + 150, 236, EN ? 'mixed soil (soil concrete)' : 'kevert talaj (talajbeton)', { to: [X + half + 2, 236] });
+  } else {
+    const d1 = 0.32, d2 = 0.86, top = GY + 12;
+    loader(g, M, X - 158, { lift: 18, full: true });
+    const r = rig(g, M, X, { top: 6, hoses: false });
+    let tip, base;
+    if (u < d1) { tip = sLerp(GY + 6, BOT, sEase(u / d1)); base = BOT; }
+    else if (u < d2) { base = sLerp(BOT, top, (u - d1) / (d2 - d1)); tip = base + 4 - 16 * Math.abs(Math.sin(ph * 5)); }
+    else { base = top; tip = GY - 6; }
+    if (base < BOT) {
+      if (base < HARD) stoneCol(g, X, base, HARD + 2, 24);
+      stoneCol(g, X, Math.max(base, HARD), BOT, 18);
+    }
+    if (u < d2) {
+      vibroflot(g, X, Math.max(22, tip - 150), tip, { full: true });
+      if (u < d1) pushOut(g, X, tip - 18, 8, 2);
+      else pushOut(g, X, base - 6, (base < HARD ? 24 : 18) + 2, 2, { c: 'ok' });
+    }
+    lbl = u < d1 ? (EN ? '1 · down: the soil is pushed aside' : '1 · lehajtás: a talaj oldalra szorul') : u < d2 ? (EN ? '2 · gravel in portions, compaction' : '2 · kavics adagolása, tömörítés') : (EN ? '3 · finished gravel column' : '3 · kész kavicscölöp');
+    if (u >= d1 && !o.nar) tg(X + 110, 236, 'tömörített kavics', { to: [X + 24, 236] });
+  }
+  const LX = o.nar ? 158 : 12;
+  tag(g, LX, o.nar ? 370 : 18, lbl, { fs: fz + 0.5 });
+  const PW = o.nar ? 324 : 616, pg = Math.min(1, o.u / 0.86);
+  R(g, LX, 388, PW, 6, F('halo', 0.9), { rx: 3 });
+  R(g, LX, 388, PW * pg, 6, F('acc'), { rx: 3 });
+}
+export function soilScene(fig, o) {
+  defs();
+  CUR.W = SOS.W;
+  if (o.full || !fig._dy || fig._nar !== o.nar) {
+    while (fig.firstChild) fig.removeChild(fig.firstChild);
+    fig.setAttribute('viewBox', o.nar ? '150 0 340 400' : `0 0 ${SOS.W} ${SOS.H}`);
+    fig.classList.add('pr-svg');
+    soilStatic(g_(fig), o);
+    fig._dy = g_(fig);
+    fig._nar = o.nar;
+  }
+  while (fig._dy.firstChild) fig._dy.removeChild(fig._dy.firstChild);
+  soilDyn(fig._dy, o);
+}
 export function methodCard(s, kind) {
   defs(); CUR.W = CARD.W;
   const { W, H, GY } = CARD, tg = (g, x, y, t, o = {}) => tag(g, x, y, t, { fs: 13, ...o });

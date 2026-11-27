@@ -1,7 +1,7 @@
 // C06 – Egyéb cölöpök: mikrocölöp (aláfogás), jet-grouting (oszlopgyár), mélykeverés, kavicscölöp
 import { register, shell, slider, seg, toggle, stat, verdict, h, svg, figure, clear, fmt, clamp, lerp, smooth, cssVar, onTheme, loop, pathD } from './core.js';
 import { defineQuiz } from './ui.js';
-import { underpinScene, jetFactory } from './proc.js';
+import { underpinScene, jetFactory, soilScene } from './proc.js';
 
 /* ------------------------------------------------------------------ segédek */
 const txt = (p, x, y, t, cls = 't-lab', o = {}) => svg('text', { x, y, class: cls, text: t, ...o }, p);
@@ -203,101 +203,12 @@ register('egy-gepek', (root) => {
     const G = GEP[tech.v];
     info.innerHTML = `<dt>Szerszám</dt><dd>${G.tool}</dd><dt>A talajjal</dt><dd>${G.soil}</dd><dt>Ami marad</dt><dd>${G.left}</dd><dt>Jellemző felhasználás</dt><dd>${G.use}</dd>`;
   };
-  tech.on(() => { phase = 0; fill(); draw(); });
+  tech.on(() => { phase = 0; fill(); draw(true); });
   fill();
-  const SURF = 76, BOTT = 350, HARD = 296, X = 320;
-  const NW = watchNarrow(viz, 560, () => draw());
-  const draw = () => {
-    const nar = NW.v, LX = nar ? 166 : 10;
-    fig.setAttribute('viewBox', nar ? '160 0 320 400' : '0 0 640 400');
-    clear(fig);
-    const g = svg('g', {}, fig);
-    const T = 8, u = (phase % T) / T;
-    const down = 0.34, up = 0.88;
-    const tv = tech.v;
-    // talaj
-    svg('rect', { x: 0, y: SURF, width: 640, height: HARD - SURF, class: 'f-soilB' }, g);
-    svg('rect', { x: 0, y: SURF, width: 640, height: HARD - SURF, fill: 'url(#pat-clay)', opacity: 0.55 }, g);
-    svg('rect', { x: 0, y: HARD, width: 640, height: 400 - HARD, class: 'f-soilA' }, g);
-    svg('rect', { x: 0, y: HARD, width: 640, height: 400 - HARD, fill: 'url(#pat-sand)' }, g);
-    svg('line', { x1: 0, y1: SURF, x2: 640, y2: SURF, class: 's-ink', 'stroke-width': 1.5 }, g);
-    txt(g, LX + 4, SURF + 20, 'puha agyag', 'egy-sl'); txt(g, LX + 4, HARD + 20, 'homok', 'egy-sl');
-    // gép
-    svg('rect', { x: X - 70, y: SURF - 26, width: 80, height: 20, rx: 4, class: 'f-acc' }, g);
-    svg('rect', { x: X - 76, y: SURF - 8, width: 92, height: 8, rx: 4, class: 'f-ink', opacity: 0.8 }, g);
-    svg('rect', { x: X + 12, y: 8, width: 7, height: SURF - 10, class: 'f-steel2' }, g);
-    svg('rect', { x: X - 20, y: 8, width: 7, height: SURF - 10, class: 'f-steel2' }, g);
-    // szerszám mélysége
-    let ty;
-    if (u < down) ty = lerp(SURF, BOTT, smooth(u / down));
-    else if (u < up) ty = lerp(BOTT, SURF, (u - down) / (up - down));
-    else ty = SURF;
-    if (tv === 'mikro') ty = u < down * 1.5 ? lerp(SURF, BOTT, smooth(u / (down * 1.5))) : BOTT;
-    const lbl = tv === 'mikro'
-      ? (u < down * 1.5 ? '1 · fúrás és injektálás egyszerre' : u < up ? '2 · a habarcs megköt, a rúd bent marad' : '3 · kész mikrocölöp')
-      : (u < down ? '1 · lehajtás' : u < up ? (tv === 'ko' ? '2 · kavics adagolása, tömörítés' : tv === 'jet' ? '2 · injektálás forgatva, felfelé' : '2 · keverés visszahúzás közben') : '3 · kész elem');
-    // elem
-    const el = svg('g', {}, g);
-    if (tv === 'mikro') {
-      const bt = u < down * 1.5 ? ty : BOTT;
-      svg('path', { d: `M${X - 9} ${SURF} L${X - 9} ${bt} L${X + 9} ${bt} L${X + 9} ${SURF} Z`, class: 'f-grout', opacity: 0.95 }, el);
-      if (bt > HARD) svg('rect', { x: X - 14, y: HARD, width: 28, height: bt - HARD, rx: 8, class: 'f-grout', opacity: 0.7 }, el);
-      svg('rect', { x: X - 3, y: SURF - 70, width: 6, height: bt - SURF + 70, class: 'f-steel2' }, el);
-      svg('path', { d: `M${X - 8} ${bt - 6} L${X + 8} ${bt - 6} L${X} ${bt + 8}Z`, class: 'f-ink' }, el);
-      if (u < down * 1.5) for (let i = 0; i < 6; i++) carrow(el, X + 8, bt - 4 - i * 2, X + 24 + (i % 3) * 4, bt - 14 - i * 6, 'var(--muted)', 1.4, 5);
-    } else if (tv === 'jet') {
-      const R = 62;
-      if (u >= down) {
-        const yTop = u < up ? ty : SURF + 6;
-        svg('rect', { x: X - R, y: yTop, width: 2 * R, height: BOTT - yTop, rx: 10, class: 'f-grout' }, el);
-        if (BOTT > HARD && yTop < HARD + 40) svg('rect', { x: X - R - 8, y: Math.max(yTop, HARD), width: 2 * R + 16, height: BOTT - Math.max(yTop, HARD), rx: 12, class: 'f-grout', opacity: 0.9 }, el);
-      }
-      svg('rect', { x: X - 4, y: SURF - 70, width: 8, height: ty - SURF + 70, class: 'f-steel2' }, el);
-      svg('rect', { x: X - 7, y: ty - 10, width: 14, height: 18, class: 'f-ink' }, el);
-      if (u >= down && u < up) {
-        const d = Math.cos(phase * 7);
-        const L = (R + 6) * Math.abs(d), sg = d >= 0 ? 1 : -1;
-        svg('line', { x1: X + sg * 7, y1: ty, x2: X + sg * (7 + L), y2: ty, style: 'stroke:var(--fresh)', 'stroke-width': 4, 'stroke-linecap': 'round' }, el);
-      }
-    } else if (tv === 'dsm') {
-      const R = 48;
-      const yTop = u < down ? SURF : u < up ? SURF : SURF;
-      const mixed = u < down ? ty : BOTT;
-      if (mixed > SURF) svg('rect', { x: X - R, y: yTop, width: 2 * R, height: mixed - yTop, class: 'egy-mix', opacity: u < down ? 0.55 : u < up ? 0.55 + 0.45 * ((u - down) / (up - down)) : 1 }, el);
-      if (u >= down && u < up) svg('rect', { x: X - R, y: ty, width: 2 * R, height: BOTT - ty, class: 'egy-mix' }, el);
-      svg('rect', { x: X - 4, y: SURF - 70, width: 8, height: ty - SURF + 70, class: 'f-steel2' }, el);
-      if (u < up) for (let i = 0; i < 3; i++) {
-        const yy = ty - 6 - i * 16, d = Math.cos(phase * 6 + i * 1.1);
-        svg('line', { x1: X - R * Math.abs(d), y1: yy, x2: X + R * Math.abs(d), y2: yy, class: 's-steel', 'stroke-width': 5, 'stroke-linecap': 'round' }, el);
-      }
-    } else if (tv === 'ko') {
-      // bordás kavicsoszlop alulról felfelé
-      const yTop = u < down ? BOTT : u < up ? ty : SURF + 4;
-      if (yTop < BOTT) {
-        const pts = [];
-        for (let y = BOTT; y >= yTop; y -= 6) { const soft = y < HARD ? 1 : 0.6; pts.push([X - (26 + 9 * soft * (0.6 + 0.4 * Math.sin(y * 0.11))), y]); }
-        const back = pts.map(([x, y]) => [2 * X - x, y]).reverse();
-        svg('path', { d: pathD([...pts, ...back], true), class: 'f-soilD' }, el);
-        svg('path', { d: pathD([...pts, ...back], true), fill: 'url(#pat-gravel)' }, el);
-      }
-      const vy = u < down ? ty : u < up ? ty + 10 * Math.max(0, Math.sin(phase * 5)) : SURF;
-      svg('rect', { x: X - 13, y: SURF - 70, width: 26, height: vy - SURF + 70, rx: 10, class: 'f-steel2' }, el);
-      svg('path', { d: `M${X - 13} ${vy - 4} L${X + 13} ${vy - 4} L${X} ${vy + 12}Z`, class: 'f-steel2' }, el);
-      if (u < down) { carrow(el, X + 16, vy - 8, X + 40, vy - 8, 'var(--ink)', 1.6, 6); carrow(el, X - 16, vy - 8, X - 40, vy - 8, 'var(--ink)', 1.6, 6); }
-      else if (u < up) { carrow(el, X + 36, vy + 4, X + 58, vy + 4, 'var(--ok)', 2, 7); carrow(el, X - 36, vy + 4, X - 58, vy + 4, 'var(--ok)', 2, 7); }
-      if (u >= down && u < up) txt(el, X + 66, vy + 8, 'tömörítés', 't-sm t-ok halo');
-    }
-    const lb = svg('g', {}, g);
-    svg('rect', { x: LX, y: 10, width: nar ? 308 : 286, height: 30, rx: 8, class: 'f-surface', opacity: 0.92 }, lb);
-    txt(lb, LX + 10, 30, lbl, 't-lab', { 'font-size': 13.5, 'font-weight': 700 });
-    // folyamatjelző
-    const pg = Math.min(1, u / up);
-    const PW = nar ? 300 : 620;
-    svg('rect', { x: LX, y: 380, width: PW, height: 6, rx: 3, class: 'f-bg2' }, g);
-    svg('rect', { x: LX, y: 380, width: PW * pg, height: 6, rx: 3, class: 'f-grp' }, g);
-  };
+  const NW = watchNarrow(viz, 560, () => draw(true));
+  const draw = (full = false) => soilScene(fig, { full, nar: NW.v, kind: tech.v, u: (phase % 9) / 9, ph: phase });
   loop(fig, (t, dt) => { if (run) { phase += dt; draw(); } });
-  draw();
+  draw(true);
 });
 
 /* ================================================================== KVÍZ */
