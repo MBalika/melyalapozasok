@@ -3674,7 +3674,8 @@ function soilDyn(g, o) {
     loader(g, M, X - 170, { lift: 18, full: true });
     let tip, base;
     if (u < d1) { tip = sLerp(GY - 4, BOT, sEase(u / d1)); base = BOT; }
-    else if (u < d2) { base = sLerp(BOT, top, (u - d1) / (d2 - d1)); tip = base + 4 - 16 * Math.abs(Math.sin(ph * 5)); }
+    // tömörítés: a vibrátor csúcsa végig a kavicsoszlopban marad; kicsit megemelve a csúcsnál kiengedi a kavicsot, majd visszanyomja
+    else if (u < d2) { base = sLerp(BOT, top, (u - d1) / (d2 - d1)); tip = base + 34 - 14 * Math.abs(Math.sin(ph * 5)); }
     else { base = top; tip = GY - 4; }
     const vt = tip - VL;
     const r = rig(g, M, X, { top: -10, hoses: false, headY: vt - 22 });
@@ -3687,7 +3688,12 @@ function soilDyn(g, o) {
     }
     vibroflot(g, X, vt, tip, { full: u >= d1 && u < d2 });
     if (u < d1) pushOut(g, X, tip - 18, 8, 2);
-    else if (u < d2) pushOut(g, X, base - 6, (base < HARD ? 24 : 18) + 2, 2, { c: 'ok' });
+    else if (u < d2) {
+      // a csúcsból kilépő kavics (a zsilipen át alul adagolva)
+      const lift = Math.max(0, Math.sin(ph * 10)), n = 3 + Math.round(lift * 5);
+      for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI + 0.2, rr = 5 + (i % 3) * 3.5 + lift * 5; E(g, X + Math.cos(a) * rr * 1.1, tip + 4 + Math.sin(a) * rr * 0.7, 3.2, 2.4, F('stone2') + `;stroke:${v('halo')};stroke-width:.9`); }
+      pushOut(g, X, tip - 10, (base < HARD ? 24 : 18) + 2, 2, { c: 'ok' });
+    }
     lbl = u < d1 ? (EN ? '1 · down: the soil is pushed aside' : '1 · lehajtás: a talaj oldalra szorul') : u < d2 ? (EN ? '2 · gravel in portions, compaction' : '2 · kavics adagolása, tömörítés') : (EN ? '3 · finished gravel column' : '3 · kész kavicscölöp');
     if (u >= d1 && !o.nar) { const ty = Math.min(BOT - 12, Math.max(HARD - 26, base + 14)); tg(X + 110, ty, 'tömörített kavics', { to: [X + (ty < HARD ? 26 : 20), ty] }); }
     if (!o.nar) { const ty = Math.min(GY - 34, vt + 64); tg(X - 70, ty, 'mélyvibrátor', { anchor: 'end', to: [X - 8, ty] }); }
