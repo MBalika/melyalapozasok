@@ -3,14 +3,6 @@ d65a779	Again
 5ce0396	Replacement
 6d5ac41	Other pile
 372e865	Well, box
-68d5b2e	very durable below water, needs treatment above it
-6d78a55	driving: noise, vibration
-2008344	hardwood only; must be protected against insects and fungi
-3fe7324	It is driven into the ground: noise and vibration.
-c333833	It cannot be driven through a hard, stony layer.
-018c770	A thin element (10–15 cm).
-ac7c889	At most 8–10 m long.
-d8bbac0	It needs a driving rig.
 766c3fc	Not excavation support.
 a885611	Steel tubular and H-pile
 c99fb5c	tube or “H” section
@@ -36,15 +28,7 @@ eb2f367	Even as a spun tubular pile at most 20–22 m.
 5349296	A small cross-section element.
 c518084	Typically at most 2–4 m long.
 8fb5010	Franki pile
-04b01ae	tube diameter 46–52 cm; the finished pile approx. 60 cm
-137da53	the casing is driven into the bearing stratum
-fb85a04	ramming with a 3 t drop hammer: noise, vibration
 ea7bef1	slow
-2f3173d	Ramming with the drop hammer comes with noise and vibration.
-bde2d1b	A driven technology: it gets through hard, stony layers with difficulty.
-4ca185f	The finished diameter is approx. 60 cm.
-3ed7e5e	At most 16–18 m long.
-fade35f	It needs a tall driving frame.
 463884b	no dynamic effect or noise
 ab58aea	little spoil; the smaller diameter limits the bearing capacity
 ee1daec	No dynamic effect or noise.
@@ -125,19 +109,6 @@ dc6b207	advantageous with high groundwater
 f84fcea	Large diameter (0.8–3.0 m).
 38d6c62	Today’s steel casing is installed by vibration.
 4469bc4	It needs a grab and a crane.
-148c3e1	Box foundation, caisson
-1109023	its plan is that of the structure
-6ed0bc7	open box down to 40–50 m
-6850147	soil that can be dredged easily
-393e93d	caisson: at most 3.2–3.5 bar excess pressure
-a090a3d	very slow (stages of 6–8 m)
-1d53b1d	tilting, subsidence crater: continuous monitoring; being pushed out
-9f924e0	In easily dredged soil it can be sunk to 40–50 m.
-bf399b9	Under the whole structure (e.g. a bridge pier).
-d970861	In hard soil that is difficult to dredge it gets stuck and may tilt.
-ceecfb8	A large structure built in stages.
-99838be	Underground car parks have also been built this way, but today the diaphragm wall is typical.
-a6cd65d	For a caisson the excess pressure is at most 3.2–3.5 bar – it does not work in deeper water.
 a66d827	Vibration and noise limit
 24e7e24	Groundwater above the base level
 1a0bf5c	saturated, loose layers
@@ -162,7 +133,7 @@ f42f22a	Speed, machinery
 6eac328	Site conditions – switch on what is true:
 4dde5d5	The best fits come first.
 dae982b	Under these conditions none of them works on its own – a combined solution or a different layout is needed.
-d2758bc	No condition switched on – all 15 technologies are shown. Switch on one or more conditions!
+5d49d14	No condition switched on – all 12 technologies are shown. Switch on one or more conditions!
 6d7cc01	possible
 8aa0290	More features ▾
 2e2b035	Is a shallow foundation adequate?
