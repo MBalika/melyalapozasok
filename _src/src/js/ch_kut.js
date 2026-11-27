@@ -198,7 +198,7 @@ register('kut-tipus', (root) => {
   const grs = TIP.map((tp, i) => {
     const g = G(fig, { transform: `translate(${i * pw} 0)`, class: 'kut-tip', tabindex: 0, role: 'button', 'aria-label': tp.t });
     R(g, 0, 0, pw, H, '', { style: 'fill:transparent' });
-    artTipus(G(g), i, pw, H, ['vízballaszt', 'a mederfenékre ül', 'rekeszfalak, víz alatti kotrás', 'légzsilip', 'munkakamra levegőnyomásban']);
+    artTipus(G(g), i, pw, H, ['vízballaszt', 'a mederfenékre ül', 'rekeszfalak, víz alatti kotrás', 'személyzsilip', 'munkakamra levegőnyomásban', 'anyagzsilip']);
     if (i) L(g, 0.5, 0, 0.5, H, 'stroke:var(--surface);stroke-width:2');
     R(g, 0, 0, pw, 34, '', { style: 'fill:var(--surface);opacity:.82' });
     T(g, pw / 2, 23, tp.t, 't-lab', { 'text-anchor': 'middle', style: 'font-weight:700' });

@@ -587,16 +587,18 @@ export function artTipus(g, i, pw, H, L) {
     P(g, `M4 ${WY + 6}h34l-4 -11h-26Z`, F('dark2') + `;stroke:${v('dark')};stroke-width:.8`); P(g, `M9 ${WY - 5}q11 -9 22 0Z`, F('sand2') + `;stroke:${v('layer')};stroke-width:.5`);
     lab(g, cx, H - 12, L[2], { anchor: 'middle', fs: 11 });
   } else {
-    const ye = BY + 72, top = WY - 6, ch = 30, x0 = cx - 62, x1 = cx + 62;
+    const ye = BY + 72, top = WY - 2, ch = 30, x0 = cx - 62, x1 = cx + 62;
     R(g, x0 + 8, ye - ch, x1 - x0 - 16, ch + 1, F('air')); R(g, x0 + 8, ye - ch, x1 - x0 - 16, ch + 1, F('lamp', 0.12));
     concP(g, `M${x0} ${top}H${x1}V${ye}h-4L${x1 - 12} ${ye - ch + 4}V${ye - ch}H${x0 + 12}v4L${x0 + 4} ${ye}H${x0}Z`);
-    R(g, cx - 6, top - 22, 12, ye - ch - top + 22, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:.9`);
-    R(g, cx - 22, top - 40, 44, 20, F('crane') + `;stroke:${v('dark')};stroke-width:1`, { rx: 7 }); C(g, cx - 12, top - 30, 4, 'fill:url(#pr-glass)' + `;stroke:${v('dark')};stroke-width:.8`);
     for (let yy = top + 14, q = 0; yy < ye - ch - 6; yy += 14, q++) { Ln(g, x0, yy, x1, yy, SK('concedge', 0.7, 'opacity:.5')); for (let xx = x0 + 18 + (q % 2) * 16; xx < x1 - 8; xx += 32) Ln(g, xx, yy - 14, xx, yy, SK('concedge', 0.6, 'opacity:.45')); }
-    R(g, cx - 6, top - 22, 12, ye - ch - top + 22, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:.9`);
+    // két aknacső két zsilippel: személyzsilip (létrával) és anyagzsilip (vödörrel)
+    for (const [k, col] of [[-1, 'crane'], [1, 'steel2']]) { const x = cx + k * 24;
+      R(g, x - 5.5, top - 8, 11, ye - ch - top + 8, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:.9`); for (let yy = top + 24; yy < ye - ch - 8; yy += 34) R(g, x - 7, yy, 14, 2.4, F('steel3'), { rx: 1 });
+      R(g, x - 19, top - 23, 38, 16, F(col) + `;stroke:${v('dark')};stroke-width:1`, { rx: 6 }); R(g, x - 13, top - 20.5, 26, 2.4, F('halo', 0.3), { rx: 1.2 }); C(g, x - 10, top - 14, 3.2, 'fill:url(#pr-glass)' + `;stroke:${v('dark')};stroke-width:.7`); R(g, x + 6, top - 19, 7, 9, F('dark2'), { rx: 2 }); }
+    Ln(g, cx + 24, ye - ch, cx + 24, ye - 13, SK('rope', 0.9)); P(g, `M${cx + 19} ${ye - 13}l1.6 9h6.8l1.6 -9Z`, 'fill:url(#pr-cyl)' + `;stroke:${v('dark')};stroke-width:.7`);
     { const S2 = 13, GYm = ye - 1; let x = cx - 34; P(g, `M${x + 0.1 * S2} ${GYm - 1.0 * S2}L${x + 0.95 * S2} ${GYm - 0.1 * S2}`, SK('timber2', 1.6, 'stroke-linecap:round')); man(g, { x, GY: GYm, S: S2, face: 1, lean: 30, squat: 0.3, hands: [[x + 0.24 * S2, GYm - 0.86 * S2], [x + 0.6 * S2, GYm - 0.5 * S2]] });
-      x = cx + 34; P(g, `M${x + 0.02 * S2} ${GYm - 1.76 * S2}L${x - 0.86 * S2} ${GYm - 1.28 * S2}`, SK('timber2', 1.6, 'stroke-linecap:round')); man(g, { x, GY: GYm, S: S2, face: -1, lean: 16, squat: 0.2, hands: [[x - 0.2 * S2, GYm - 1.62 * S2], [x - 0.42 * S2, GYm - 1.5 * S2]] }); }
+      x = cx + 46; P(g, `M${x + 0.02 * S2} ${GYm - 1.76 * S2}L${x - 0.86 * S2} ${GYm - 1.28 * S2}`, SK('timber2', 1.6, 'stroke-linecap:round')); man(g, { x, GY: GYm, S: S2, face: -1, lean: 16, squat: 0.2, hands: [[x - 0.2 * S2, GYm - 1.62 * S2], [x - 0.42 * S2, GYm - 1.5 * S2]] }); }
     for (const [x, k] of [[x0 - 3, -1], [x1 + 3, 1]]) for (let q = 0; q < 3; q++) C(g, x + k * (5 + q * 4), ye - 12 - q * 12, 1.8 + (q % 2), SK('water', 0.9) + ';fill:' + v('air'));
-    lab(g, cx + 30, top - 30, L[3], { to: [cx + 22, top - 30], fs: 11 }); lab(g, cx, H - 12, L[4], { anchor: 'middle', fs: 11 });
+    lab(g, cx - 4, top - 33, L[3], { anchor: 'end', fs: 10 }); lab(g, cx + 4, top - 33, L[5], { fs: 10 }); lab(g, cx, H - 12, L[4], { anchor: 'middle', fs: 11 });
   }
 }
