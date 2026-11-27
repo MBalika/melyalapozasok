@@ -85,7 +85,7 @@ eede980	Driving in the city centre
 3f1cb7e	An unsupported bored pile in profile A, where the groundwater is at 2 m. What happens to the bore? Which technology solves it – and why?
 efc0c45	Build the pile!
 134a977	<b class="t">What is the model based on?</b>
-3b1da0f	Every layer has a unit shaft resistance and a unit base resistance; these are summed over the shaft and the base of the pile. For the displacement technologies a higher value is used because of compaction (for precast piles at both the base and the shaft, for screw piles at the shaft), for the Franki pile the larger base area of the bulb counts, and for the micropile the base resistance is neglected. The classification follows the 2/3 rule. The numbers are <b>illustrative</b>: they help you see what load transfer depends on – the actual design of piles is taught in later geotechnical courses.
+4f41bbe	Every layer has a unit shaft resistance and a unit base resistance; these are summed over the shaft and the base of the pile. For the displacement technologies a higher value is used because of compaction (for precast piles at both the base and the shaft, for screw piles at the shaft). The classification follows the 2/3 rule. The numbers are <b>illustrative</b>: they help you see what load transfer depends on – the actual design of piles is taught in later geotechnical courses.
 bc95564	Summary
 ad450fc	Technologies at a glance
 b53157d	Support of the bore
@@ -101,19 +101,13 @@ c073df4	=
 0034144	<b>Driven precast RC</b>
 b2c95e0	displacement
 dfe0c76	high
-5b9da94	=
-15b91a7	recovered casing
-a4a0ee0	approx. 60 cm (tube 46–52 cm)
-c33dbed	=
 1541fa0	significant
 87b17ac	<b>Screw</b>
 ad956d6	the displacement head
-729dff1	bored, grouted
-40cbf39	continuous grouting for hollow bars
 0e1f464	<b class="t">Did you know?</b>
-e77c54b	The CFA rig automatically produces a record for every pile: metre by metre it logs the depth, the concrete pressure and the volume of concrete placed. If there is less concrete than expected, this points to necking; if much more, the wall of the bore has collapsed or widened somewhere. So the rig’s “log” is also an X-ray of the pile.
-e3c1eff	<span class="id">C10</span><span>Decision support · case studies · decision tree</span>
-060c419	There is no “best” deep foundation – only the one that best suits the given site, load and soil. The choice depends on the loads, the depth of the bearing stratum, the groundwater, the surroundings (neighbours, vibration, noise), the available space and finally the economy. In this chapter you decide: you can practise the choice on real situations, a filterable technology matrix and a decision tree.
+58d7201	The CFA piling rig (like most other technologies in general) automatically produces a record for every pile: metre by metre it logs the depth, the concrete pressure and the volume of concrete placed. If there is less concrete than expected, this points to necking; if much more, the wall of the bore has collapsed or widened somewhere. So the rig’s “log” is also an X-ray of the pile.
+38495aa	<span class="id">C10</span><span>Decision support · technology matrix · decision tree</span>
+46c3ef3	There is no “best” deep foundation – only the one that best suits the given site, load and soil. The choice depends on the loads, the depth of the bearing stratum, the groundwater, the surroundings (neighbours, vibration, noise), the available space and finally the economy. In this chapter you decide: you can practise the choice on a filterable technology matrix and a decision tree.
 b240fe9	Decision criteria
 e28d019	<b>Load</b><span>its magnitude and direction: compression, tension, horizontal force</span>
 42107c9	<b>Bearing stratum</b><span>how deep is it, how good is it?</span>
@@ -122,5 +116,7 @@ cfc3324	<b>Groundwater</b><span>above or below the bore, the trench, the base?</
 3404a42	<b>Surroundings</b><span>neighbours, vibration and noise limits, utilities</span>
 bfd3cd7	<b>Space</b><span>a big rig or a tight cellar, low headroom?</span>
 582fd93	<b>Time and money</b><span>speed, machinery, verifiability</span>
-fe18f2d	You are the designer!
-15e69f7	Nine situations from practice, starting with the city-centre infill site. Each has one best answer: choose, and read why it is right (and why the others are not).
+
+5de6f1d	vibration → cracks in the wall
+34932a4	vibration-sensitive neighbour
+b1f5893	pile hammer

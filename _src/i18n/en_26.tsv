@@ -1,6 +1,3 @@
-4ec0984	grouted cement body
-567a6b7	The micropile is finished
-fa905d6	A cement body of 20–50 mm forms around the bar, and outside it a cement-permeated soil sleeve of 30–80 mm. The tip resistance is neglected in the resistance.
 00e8b59	water in the bore
 38b22d3	necking
 41ede56	collapse → discontinuity
@@ -8,9 +5,7 @@ dbc9e68	${M.cls} pile · base ${Math.round(M.share * 100)} %
 dc2df84	reinforced concrete pile cap
 4759007	spacing here 3·D = ${fmt(s, 2)} m
 c416198	${M.cls} piles · L = ${fmt(M.Lact, 1)} m
-dacd17c	The tube is 46–52 cm; because of the displacement the finished pile is approx. 60 cm in diameter.
 ebab376	Square: 30×30 or 40×40 cm, L = 4–12 m · round (spun): D = 25–50 cm, L ≤ 20–22 m.
-f9bfa05	Micropile: bored shaft diameter at most 250–300 mm.
 3424139	Unsupported: to a depth of at most 8–10 m.
 528251d	Real recording
 8aed4c3	0<small>m³ – displaces it</small>
@@ -45,14 +40,6 @@ e6d0046	In cased drilling below the groundwater, what must be done in the bore?
 c4745a3	Grout the base with cement
 372b061	Nothing, the casing solves everything
 22f9d0a	If the water level inside falls below that outside, the water pressure difference breaks in and loosens the soil at the base.
-c99f44d	For which is the tip resistance neglected when calculating the resistance?
-0110126	Driven precast pile
-69986d3	For a slender micropile typically only the shaft resistance is taken into account.
-8a555a7	A widened base rammed out of batches of concrete
-630bd1a	The excess concrete left above the pile head
-b3e6fcb	A steel shoe welded onto the end of the casing
-4cda034	The top layer of concrete mixed with slurry
-10919ac	After the plug is driven out, further batches of concrete are rammed at the base – this “bulb” gives the high base resistance.
 9b177e1	Hard clay, the groundwater is deep, an 8 m bored pile is needed. What is the simplest support?
 114b06a	No support – but it must be concreted immediately
 06cdc2f	A casing with water replacement

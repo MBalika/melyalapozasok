@@ -103,8 +103,6 @@ de8cd37	Bentonite-supported bored
 f241cc0	Bored, unsupported
 ba837a0	Driven precast reinforced concrete
 1fb4163	Displacement screw
-8c5bae5	Micropile (hollow bar)
-83a4111	other (micropile)
 c60e26b	CFA pile too long
 0f785df	With a continuous auger a pile at most approx. <b>22–24 m</b> long can be made – here ${fmt(L, 1)} m would be needed. A longer pile needs a cased or slurry-supported bored pile.
 bc610b7	At the limit of CFA length

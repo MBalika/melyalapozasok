@@ -31,7 +31,6 @@ aa4b092	Limited use in hard or stony soil.
 dbe1169	quiet, minimal vibration (screwing)
 a4fa435	limited in hard, stony soil
 f05b8e9	steel shaft with a tapered threaded tip or a helical plate
-4e0e7f1	The ground screw is meant for founding lighter structures – lightweight family houses, outbuildings, smaller temporary industrial and commercial structures, lighting columns, signs: it can be installed quickly, quietly and with minimal vibration with a small machine or by hand, and it is recoverable. It is typically at most 2–4 m long; its use is limited in hard or stony soil.
 122c6ca	Ground screws and helical piles are screwed into the ground; there is no soil excavation or removal. They can be loaded in both compression and tension, but only for smaller loads: they are used for lightweight family houses, outbuildings and temporary structures.
 026692f	Screwed into the ground without soil excavation; can be loaded in both compression and tension
 c3f08dc	Installation method
@@ -119,8 +118,6 @@ ad57ca1	The reinforcement is set: the reinforcement cage is lowered into the tub
 1872027	Once the required base depth is reached, the tube is fixed to the driving frame, and the concrete is driven out of it by heavy ramming – approx. 30–40 cm stays in the tube.
 b358383	The 3 t drop hammer rams the plug inside the tube; through friction the plug drags the tube down with it into the bearing stratum. The tube displaces the soil – neither soil nor water gets into it.
 c42b6ad	Screw pile (e.g. FDP, Screwsol)
-3f5d687	At most 16–18 m long; a bearing capacity of 2000–3000 kN can be reached. In Hungary it has been pushed out of large-scale industrial use.
-f5e3d77	The rammed concrete bulb gives a large base resistance; a bearing capacity of 2000–3000 kN can be reached. In Hungary it has been pushed out of large-scale industrial use.
 a81cfb1	Displacement drilling head (FDP or Screwsol type) at the end of a hollow drill string, which pushes aside and compacts the soil while drilling; 300–700 mm, up to 18 (20) m.
 b22dbe9	It is effective in loose or medium-dense granular, intermediate or weakly cohesive (soft–firm) soil. It is typically used to found moderately loaded industrial buildings and 5–10-storey residential or office buildings; it is economical and fast. Its spread may be limited at most by the lower structural capacity due to the smaller diameter.
 e09d36b	Modern rigs continuously measure and record the rate of advance of the drill stem during installation and withdrawal, the engine power and the torque needed for rotation, and during concreting the concrete pressure and the volume of concrete placed, and they produce an automatic record for every single pile. This shows afterwards if less concrete reached the bore anywhere than the theoretical volume.
@@ -146,7 +143,6 @@ c828b44	With intermittent excavation
 3a8f321	With a continuous auger
 f15eb8e	The casing supports the wall of the bore until concreting, so it is safe even in silty soil with a high water content; it is made with diameters of 80–150 (350) cm and lengths up to approx. 100 m (in Hungary so far 30–40 m). CFA is at most 22–24 m.
 1ee17f6	Up to approx. 100 m long (in Hungary so far at most 30–40 m).
-9d70dda	The casing supports the wall of the bore all the way until concreting, so it can be used safely even in silty soil with high water content – with diameters of 80–150 (350) cm, to a depth of at most approx. 100 m (in Hungary so far 30–40 m). CFA is made only up to 22–24 m and is not suited to loose, flowing soils; without support the bore would collapse, and the ground screw is only a 2–4 m, lightly loaded element.
 ddfc883	The CFA pile has a diameter of 40–120 cm; cased and slurry-supported piles are made with diameters of 80–150 (350) cm.
 ecdb59c	${L0} m: within 15–100 m
 eeae9f0	Ø ${D} cm: within the 80–150 (350) cm range

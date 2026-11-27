@@ -39,15 +39,6 @@ edd062b	Round spun piles are at most 20–22 m long.
 5e426c5	Vibration-sensitive neighbour: the riskiest choice
 d092ae3	Noise and vibration
 0115ec2	 A bored (CFA) or screw pile is the better choice here.
-a4ce44c	Franki pile too long
-f876b99	The length of a Franki pile is at most approx. 16–18 m.
-56dc83b	At the limit of the Franki pile length
-7778308	It does not reach the bearing stratum
-14ae796	The casing is driven into the bearing stratum – that is where the bulb gives a high base resistance.
-0d43985	Widened base: the “bulb”
-7230801	Driving, ramming
-a5763ba	The casing is driven down with a drop hammer and the concrete is rammed – with dynamic effects and noise.
-bbc0353	 To be avoided next to a vibration-sensitive neighbour.
 1d7d643	Screw pile too long
 819f081	Not ideal in hard clay
 e99d789	The screw pile is popular and economical mainly in loose or medium-dense granular and intermediate, weakly cohesive soil.
@@ -55,12 +46,6 @@ f404364	Deep in the dense gravel
 c8cb72a	The displacement head progresses only with difficulty in a dense layer – the technology is for loose, medium-dense soil.
 0958d76	No vibration, hardly any spoil
 df5c5b4	While drilling, the head pushes aside and compacts the soil: the shaft resistance increases, little spoil comes to the surface, and there is no dynamic effect or noise.
-69d1ad1	Buckling!
-00f3ba0	In the ${weak.n} layer the undrained shear strength is below 10 kPa: the buckling of the slender micropile must be checked separately.
-f38f162	Only the shaft counts
-d19f0cf	For the resistance of a slender micropile the tip resistance is typically neglected. A resistance of 130–180 kN can be achieved with a hollow-bar grouted micropile.
-51b09f8	Small rig, tight space
-32b6ae3	It can be used in places with difficult access and low headroom, and for underpinning an existing building.
 4f0fc9e	Even next to a vibration-sensitive neighbour
 3a02e06	Drilling is not dynamic; installing the casing by rotation is gentler than by vibration.
 21571e6	Making a bored pile involves no vibration from driving.

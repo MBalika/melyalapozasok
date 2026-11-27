@@ -92,75 +92,10 @@ bec934f	A taller building is always lighter.
 5d98190	There is no groundwater in Dubai.
 1277336	The Burj Khalifa was built on a diaphragm wall.
 f6a7489	It is often not the height (load) of the building but the soil that decides how deep the foundation has to reach.
-5d0d10a	▽ groundwater
 75ab37c	fill
 c6f16a5	sensitive neighbour
-acda2cf	new office building
 f91361a	impermeable clay
-cf1a30d	old house
-044ac41	+ 2 new storeys
-a409610	flowing silt
-a7f1d57	dense gravel
-34c95a0	hard cohesive clay
-e34071a	no groundwater even down to 15 m
-349cc53	hard marl, rock
-60a04e7	topsoil
 579fcf4	medium-dense sand
-272b526	loose–medium sand
-ebdbe15	denser gravel
-30d39f2	Infill site in the city centre
-9375117	A six-storey office building is being built on a city-centre infill site; on both sides there are hundred-year-old apartment blocks sensitive to vibration. The sandy gravel bearing stratum is approx. 9 m deep.
-b446d28	Which piling technology is the <b>riskiest</b> here?
 fb4bb9f	Driven precast reinforced concrete pile
-487c999	Bored pile (CFA)
 109e91f	Displacement screw pile
-14175f0	Underground car park on the site boundary
-90adc0a	The excavation for a two-level underground car park has to be supported. The groundwater is 2 m below ground level, impermeable clay follows at a depth of 14 m, and old buildings stand directly on the site boundary.
-16ad1f1	Which structure would you choose?
-0af5157	A row of CFA piles
-159afbf	Gravel piles
-d88f907	The diaphragm wall is watertight and stiff, it is built relatively free of noise and vibration, no groundwater lowering is needed, and socketed into the impermeable clay it can also be the permanent side wall of the car park. A row of CFA piles does not keep out the water, the well foundation is a foundation and not excavation support, and the gravel pile is a ground improvement method.
-5a1623d	Adding storeys to an old apartment block
-99062cb	Two storeys are being added to an old apartment block, and the existing strip footings can no longer carry the extra load. Work is only possible from the cellar, where the headroom is barely more than two metres.
-cce01cb	How would you strengthen the foundations?
-b7d827a	With micropile underpinning
-3450186	With large-diameter cased piles
-6cdfa62	With Franki piles
-330313f	With driven precast reinforced concrete piles
-193b6e9	A micropile can be made even at a workplace with difficult access and limited headroom, and it transfers the loads of the existing foundations to the deeper, better layer (underpinning). Its base resistance is neglected, and in soft soil (c<sub>u</sub> < 10 kPa) buckling must also be checked. The other technologies need a large rig, and the vibration from driving and ramming would also damage the old building.
-2aec4e1	A bridge pier in the river bed
-2120798	The river pier of a long-span road bridge has to be founded. The sandy gravel of the bed may be scoured in a flood, the reliable bearing stratum is 25–30 m deep, and the loads are large.
-50af737	What is the most obvious solution today?
-14f2a9a	Large-diameter bentonite-supported bored piles
-1b517b9	A shallow foundation on the river bed
-612ccae	Timber piles
-cf1bd58	Because of the risk of scour, a shallow foundation is out of the question here: a deep foundation is needed. For large-diameter, deep piles of high bearing capacity, the slurry-supported bored pile has become widespread – in Hungary mainly for the foundations of long-span bridges, precisely. The older Danube bridges in Budapest were still built on box foundations (caissons); this has been pushed out today.
-34b6d5d	A crane hall on flowing silt
-e6b9597	A heavy hall with overhead cranes is being built. The top 25 m layer is flowing silt with a high water content, the groundwater is almost at the surface, and dense gravel lies below. Piles 120 cm in diameter and 30 m long are needed.
-4d49f39	Which technology would you choose?
-c5d0be7	A cased bored pile
-012cda8	A CFA pile
-176d765	An unsupported bored pile
-89462b8	A precast steel ground screw
-19152d1	A residential building on hard clay
-da07393	Piles 7 m long and 60 cm in diameter are needed under a smaller residential building. The soil is hard cohesive clay throughout; the investigation found no groundwater even down to 15 m.
-2d5d7c5	What is the simplest solution?
-ea10d6d	An unsupported bored pile, concreted immediately
 a61c7b3	A bentonite-supported bored pile
-16cb90c	A caisson foundation
-7117c7e	A diaphragm wall into rock
-1f1c234	The excavation of a metro station is enclosed by a 45 m deep diaphragm wall; the lower part of the wall goes into hard marl, rock.
-9e5cdac	What would you excavate the trench with?
-f449da6	With a rope-suspended mechanical grab
-787d545	With a Kelly-bar hydraulic grab
-7909617	Not at all: a driven steel sheet pile wall instead of a diaphragm wall
-f58bcd0	A solar park on farmland
-3b7030e	A solar park is being built with several thousand lightly loaded support posts. The soil is medium-dense sand, and the posts must be easy to remove decades later.
-caa4555	What would you found the posts on?
-ad5f791	On large-diameter bored piles
-6e24e38	On a diaphragm wall
-85abbf4	On Franki piles
-6c0ac28	A hall for moderate loads is being built with several hundred piles. The soil is loose to medium-dense sand, removing the spoil would be expensive, and the work has to progress quickly.
-53d5ba5	Which technology fits here best?
-3d0e389	A cast-in-place displacement screw pile
-76f168a	A cased large-diameter bored pile

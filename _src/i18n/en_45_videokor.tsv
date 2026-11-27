@@ -30,9 +30,6 @@ de1ff48	Only of limited use in rock, hard clay, or a cemented or blocky layer �
 2b398ee	only of limited use in rock, hard clay, cemented soil or blocky fill; vibration in most soil types
 d3bc9da	One element is typically 15–20 m; with splicing almost any length can be made.
 f598492	element 15–20 m; spliced almost any length
-89c1cd0	The drilling head of the screw pile pushes aside and compacts the soil while drilling: the shaft resistance increases, only a little spoil comes to the surface, and there is no dynamic effect or noise. In loose to medium-dense granular and intermediate soils it is a popular, economical and fast solution for moderately loaded industrial facilities (drilling head diameter 300–700 mm, maximum length 18 (20) m).
-48b5289	In cohesive soil, mainly above the groundwater, for piles that are not too long (approx. 8–10 m), the bore may remain stable for a short time even without support – but it must be concreted immediately after excavation. Slurry is an unnecessary cost here, and the caisson and the diaphragm wall are structures an order of magnitude larger.
-d8f26b1	Pile driving causes significant noise and vibration, so near structures it can only be used to a limited extent – next to vibration-sensitive neighbours it is the riskiest. CFA is chosen specifically where noise and vibration are restricted, the screw pile has no dynamic effect or noise, and the micropile is made with a small rig, without vibration.
 72dde39	What is the danger if the returning cement grout cannot escape to the surface during grouting?
 585902a	the air sucks out the returning grout
 aba7726	The returning cement grout cannot escape to the surface along the hole: the pressure of the 350–400 bar jet builds up in the soil. The soil fractures, and the surface – and the neighbouring building – may be lifted. The outflow must be watched all the time!
@@ -85,8 +82,6 @@ a3fd58e	Cutter Soil Mixing resembles diaphragm walling with a hydrofraise (cutte
 4747940	In Hungary the hydrofraise has so far been deployed in the construction of metro line 4 in Budapest: a diaphragm wall was built <b>40 m deep at Szent Gellért tér</b> and <b>48.3 m deep at Fővám tér</b>, right next to the Danube.
 ba1dbb6	In rock and very hard clay a diaphragm wall can only be built with a hydrofraise (a reverse-circulation trench cutter with cutter wheels). It is very expensive, but it gives an accurate trench to great depth, in any soil and rock.
 cd87a2a	In rock and very hard clay only with a hydrofraise – very expensive.
-c9229ae	In rock or very hard clay a diaphragm wall can only be built with a hydrofraise: the cutter wheels break up the material, which is pumped out together with the slurry and then separated outside. It is very expensive, but it gives an accurate trench to great depth, in any soil and rock. In Hungary it was used for the construction of metro line 4: diaphragm walls 48.3 m deep at Fővám tér and 40 m deep at Szent Gellért tér. Sheet piles cannot be driven into rock.
-a186584	With a hydrofraise (a trench cutter with cutter wheels)
 749c2f9	The slurry path in hydrofraise trenching: cutter wheel, suction pump, desander, tank, pumps, mixer, bentonite silo
 881a421	In rock or very hard clay a diaphragm wall can only be built with a hydrofraise; in Hungary it was used for the construction of metro line 4.
 e50e5b6	The cutter wheels of the hydrofraise close up

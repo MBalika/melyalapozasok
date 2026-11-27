@@ -42,14 +42,6 @@ d458549	The precast reinforced concrete pile is held vertical by the leader of t
 10dfb0d	The protruding part is cut off – but the pile has not reached the design base level.
 1fb6ed3	After driving, the pile head is broken back to the design level.
 26c04ce	Fast and of high bearing capacity – but driving comes with significant noise and vibration.
-0291169	Casing, concrete plug
-5b408e8	A dry concrete plug approx. 1 m high is placed in the bottom of the 46–52 cm casing.
-f6b4578	Driving with an internal drop hammer
-cda2cd8	The 3 t drop hammer rams the plug; through friction the plug drags the tube down to the bearing stratum.
-3763056	Driving out the plug, bulb
-7fe7218	The tube is fixed, the plug is driven out, and a widened base – the “bulb” – is rammed with further batches of concrete.
-02afeca	Concreting the shaft, withdrawing the casing
-b4fe0b7	The casing is withdrawn while concrete is added and rammed. Because of the displacement, the finished pile is approx. 60 cm in diameter.
 95561c6	At the end of the hollow drill stem there is a special displacement drilling head.
 85c7693	Drilling by rotation and thrust
 2d84e70	The head pushes aside and compacts the soil around itself – hardly any spoil comes to the surface.
@@ -58,12 +50,7 @@ b4fe0b7	The casing is withdrawn while concrete is added and rammed. Because of t
 f3bf1f5	The concrete is placed under pressure through the drill stem, and the stem is withdrawn with rotation.
 fbaa065	Reinforcement by vibration
 d60fd44	No dynamic effect or noise; the displacement increases the specific bearing capacity.
-b255ec1	Positioning with a small rig
-e73619b	The small rig can also work in places with difficult access and low headroom.
-9a32cfa	Drilling and grouting at once
-599ff9a	A hollow steel bar with a sacrificial drill bit is drilled down (with extensions), with continuous cement grouting meanwhile.
 c46dace	The prefabricated reinforcement cage is vibrated down into the fresh concrete.
-bca8b05	The reinforcement cage is lowered into the casing.
 1712ef5	The reinforcement cage is lowered into the bore immediately.
 6420b92	The base is cleaned, then the reinforcement cage is lowered into the slurry.
 17af54d	The reinforcement cage is lowered into the casing; spacers ensure the concrete cover.
