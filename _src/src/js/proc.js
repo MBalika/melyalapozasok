@@ -1516,7 +1516,7 @@ PROC.ko = {
 };
 
 /* ---------------- Résfal: szakaszos réselés (hosszmetszet) */
-const RF = { P1: [22, 98], S1: [98, 134], P2: [134, 210] };
+const RF = { P1: [22, 84], S1: [84, 148], P2: [148, 210] }; // a primer és a szekunder tábla hasonló hosszú
 function rfBase(g, M, n) {
   // résvezető gerenda a rés két oldalán (a metszet mögött)
   R(g, 14, M.GY - 3, n >= 1 ? 206 : 0, 14, 'fill:url(#pr-concg)' + `;stroke:${v('conc2')};stroke-width:.7`);
@@ -1540,35 +1540,35 @@ PROC.resfal = {
     } },
     { w: 240, t: 'Primer harapások', d: 'Szakaszos réselésnél minden második (primer) tábla készül először: két szélét kiharapják, a kiemelt föld helyét folyamatosan bentonitos résiszap tölti ki.', draw(g, M) {
       rfBase(g, M, 1);
-      slurry(g, 22, M.GY + 11, 30, 318 - M.GY - 11); slurry(g, 68, M.GY + 11, 30, 318 - M.GY - 11);
-      [22, 52, 68, 98].forEach((xx) => Ln(g, xx, M.GY + 11, xx, 318, SK('wall', 1)));
-      const gr = grab(g, 83, 300, 14, 0.5);
-      crane(g, M, 83, gr.top - 4, { reach: 104, tipY: 18 });
-      el('text', { x: 60, y: 310, 'text-anchor': 'middle', class: 'pr-tx pr-big', text: 'P' }, g);
+      slurry(g, 22, M.GY + 11, 27, 318 - M.GY - 11); slurry(g, 57, M.GY + 11, 27, 318 - M.GY - 11);
+      [22, 49, 57, 84].forEach((xx) => Ln(g, xx, M.GY + 11, xx, 318, SK('wall', 1)));
+      const gr = grab(g, 70.5, 300, 12.5, 0.5);
+      crane(g, M, 70.5, gr.top - 4, { reach: 104, tipY: 18 });
+      el('text', { x: 53, y: 310, 'text-anchor': 'middle', class: 'pr-tx pr-big', text: 'P' }, g);
     } },
     { w: 240, t: 'A tábla közepe', d: 'A középső harapás után a primer tábla teljes hosszában nyitva áll – zagy alatt.', draw(g, M) {
       rfBase(g, M, 1);
       rfPanel(g, M, 'P1', 'slurry', { lab: 'P' });
-      const gr = grab(g, 60, 276, 14, 0.2);
-      crane(g, M, 60, gr.top - 4, { reach: 110, tipY: 18 });
-      tag(g, 140, 246, 'zagy', { to: [92, 246] });
+      const gr = grab(g, 53, 276, 12.5, 0.2);
+      crane(g, M, 53, gr.top - 4, { reach: 110, tipY: 18 });
+      tag(g, 130, 246, 'zagy', { to: [79, 246] });
     } },
     { w: 240, t: 'Vasalás, betonozás', d: 'A tábla végére szakaszoló palló, a résbe a vasalási armatúra (hossztól függően 1–3 db) kerül, majd két betonozócsővel alulról betonoznak.', draw(g, M) {
       rfBase(g, M, 1);
       rfPanel(g, M, 'P1', 'slurry');
-      concrete(g, 22, 250, 76, 68);
-      for (let xx = 30; xx < 92; xx += 9) Ln(g, xx, M.GY - 10, xx, 314, SK('rebar', 1));
-      for (let yy = M.GY; yy < 314; yy += 12) Ln(g, 28, yy, 92, yy, SK('rebar2', 0.9));
-      tremie(g, 42, 96, 300, { full: true }); tremie(g, 78, 96, 300, { full: true });
-      mixer(g, M, 132, 1);
-      P(g, `M${134} ${M.GY - 34} L${95} ${97}`, SK('steel3', 3.4, 'stroke-linecap:round'));
-      el('text', { x: 60, y: 238, 'text-anchor': 'middle', class: 'pr-tx pr-big', text: 'P' }, g);
-      tag(g, 124, 286, 'friss beton', { to: [98, 286] });
+      concrete(g, 22, 250, 62, 68);
+      for (let xx = 29; xx < 80; xx += 8) Ln(g, xx, M.GY - 10, xx, 314, SK('rebar', 1));
+      for (let yy = M.GY; yy < 314; yy += 12) Ln(g, 27, yy, 79, yy, SK('rebar2', 0.9));
+      tremie(g, 38, 96, 300, { full: true }); tremie(g, 68, 96, 300, { full: true });
+      mixer(g, M, 120, 1);
+      P(g, `M${122} ${M.GY - 34} L${85} ${97}`, SK('steel3', 3.4, 'stroke-linecap:round'));
+      el('text', { x: 53, y: 238, 'text-anchor': 'middle', class: 'pr-tx pr-big', text: 'P' }, g);
+      tag(g, 112, 286, 'friss beton', { to: [84, 286] });
     } },
-    { w: 240, t: 'Közbenső tábla', d: 'Két kész primer tábla között kiharapják a közbenső (szekunder) táblát.', draw(g, M) {
+    { w: 240, t: 'Közbenső tábla', d: 'Két kész primer tábla között ugyanígy, harapásonként emelik ki a hasonló hosszúságú közbenső (szekunder) táblát.', draw(g, M) {
       rfBase(g, M, 1);
       rfPanel(g, M, 'P1', 'conc', { lab: 'P' }); rfPanel(g, M, 'P2', 'conc', { lab: 'P' }); rfPanel(g, M, 'S1', 'slurry', { lab: 'S' });
-      const gr = grab(g, 116, 290, 15, 0.3);
+      const gr = grab(g, 116, 290, 12.5, 0.3);
       crane(g, M, 116, gr.top - 4, { reach: 84, tipY: 18 });
     } },
     { w: 240, t: 'Vasalás, betonozás', d: 'A közbenső tábla vasalása és betonozása után a táblák összefüggő falat alkotnak.', draw(g, M) {
@@ -3876,8 +3876,8 @@ function init() { document.querySelectorAll('svg[data-pcard]').forEach((f) => me
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
 /* ================================================================== 7.2 – Réstábla-építő (felül felülnézet, alatta hosszmetszet a fal tengelyében) */
-export const PB = { W: 800, H: 566, X0: 84, PXM: 24, SY: 114, GY: 150, DM: 13, DEP: 20, PY: [26, 88], TY: [50, 66] };
-PB.BOT = PB.GY + PB.DM * PB.DEP; PB.GH = 27; // a zárt réskanál fél szélessége (nyitva 2,8 m)
+export const PB = { W: 800, H: 566, X0: 84, PXM: 21, LEN: 30, SY: 114, GY: 150, DM: 13, DEP: 20, PY: [26, 88], TY: [50, 66] };
+PB.BOT = PB.GY + PB.DM * PB.DEP; PB.GH = 24.5; // a zárt réskanál fél szélessége (nyitva 2,8–2,9 m)
  PB.X = (m) => PB.X0 + m * PB.PXM;
 const pbS = (x) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
 /** A réskanál egy harapása n menetben: leengedés nyitva – harapás – kiemelés – átfordulás – ürítés a billenőplatóra. f: 0…1 */
@@ -3937,7 +3937,7 @@ function pbCrane(g, M, x, hookY, side) {
   const k = 1.3, GY = M.GY; crane(pbBig(g, x, GY, k), M, x, GY + (hookY - GY) / k, { reach: side > 0 ? 62 : -116, tipY: GY + (5 - GY) / k });
 }
 function pbPlan(g, o) {
-  const { X, PY, TY } = PB, st = o.st, L = o.L, x0 = X(0), x1 = X(26.6), gw = (1 - st.gone) * st.guide;
+  const { X, PY, TY } = PB, st = o.st, L = o.L, x0 = X(0), x1 = X(PB.LEN), gw = (1 - st.gone) * st.guide;
   R(g, 0, 0, PB.W, PB.SY, F('labbg')); 
   R(g, 30, PY[0], PB.W - 60, PY[1] - PY[0], F('sand'), { rx: 3 }); R(g, 30, PY[0], PB.W - 60, PY[1] - PY[0], 'fill:url(#pr-p-sand)', { rx: 3 });
   R(g, 30, PY[0], PB.W - 60, PY[1] - PY[0], SK('layer', 1), { rx: 3 });
@@ -3948,18 +3948,18 @@ function pbPlan(g, o) {
     const s = st.pan[i];
     q.bites.forEach(([a, b], j) => { if (s.b[j] > 0) { R(g, X(a), TY[0], X(b) - X(a), TY[1] - TY[0], 'fill:url(#pr-slurryg)'); R(g, X(a), TY[0], X(b) - X(a), TY[1] - TY[0], 'fill:url(#pr-p-slurry)'); } });
     if (s.conc > 0) { const gg = g_(g, { opacity: clamp01(s.conc * 1.6).toFixed(2) }); concrete(gg, X(q.x0), TY[0], X(q.x1) - X(q.x0), TY[1] - TY[0], s.conc < 1); }
-    pbCages(q).forEach(([a, b], k) => { const c = clamp01(s.cage * (q.k === 'P' ? 2 : 1) - k); if (c > 0) { R(g, X(a), TY[0] + 3, X(b) - X(a), TY[1] - TY[0] - 6, SK('rebar', 1.3), { opacity: c }); for (let x = X(a) + 6; x < X(b) - 2; x += 7) Ln(g, x, TY[0] + 3, x, TY[1] - 3, SK('rebar2', 0.6, `opacity:${(c * 0.8).toFixed(2)}`)); } });
+    pbCages(q).forEach(([a, b], k) => { const c = clamp01(s.cage * 2 - k); if (c > 0) { R(g, X(a), TY[0] + 3, X(b) - X(a), TY[1] - TY[0] - 6, SK('rebar', 1.3), { opacity: c }); for (let x = X(a) + 6; x < X(b) - 2; x += 7) Ln(g, x, TY[0] + 3, x, TY[1] - 3, SK('rebar2', 0.6, `opacity:${(c * 0.8).toFixed(2)}`)); } });
     if (q.k === 'P') [q.x0, q.x1].forEach((xe, k) => { const c = st.pull ? s.stop : clamp01(s.stop * 2 - k); if (c > 0) R(g, X(xe) - (k ? 0 : 3.4), TY[0] - 1, 3.4, TY[1] - TY[0] + 2, F('steel3') + `;stroke:${v('dark')};stroke-width:.6`, { opacity: c }); });
     if (s.conc > 0 && s.conc < 1) pbTrem(q).forEach((xm) => { C(g, X(xm), (TY[0] + TY[1]) / 2, 3.6, F('steel1') + `;stroke:${v('steel3')};stroke-width:1`); });
     el('text', { x: (X(q.x0) + X(q.x1)) / 2, y: PY[1] - 6, 'text-anchor': 'middle', class: 'pr-tx', style: `font-size:12px;font-weight:800;paint-order:stroke;stroke:${v('sand')};stroke-width:3px;stroke-linejoin:round${q.k === 'S' ? `;fill:${v('ok')}` : ''}`, text: q.id }, g);
   });
   // a dolgozó réskanál felülről: a harapás körvonala
-  for (const [i, j, f, n] of st.grabs) { const [a, b] = PAN_[i].bites[j], K = biteKin(f, n); if (K.sw < 0.5) { const mx = (X(a) + X(b)) / 2; R(g, mx - 32.5, TY[0] + 1, 65, TY[1] - TY[0] - 2, F('mach', 0.85) + `;stroke:${v('mach3')};stroke-width:1`, { rx: 2 }); Ln(g, mx, TY[0] + 2, mx, TY[1] - 2, SK('mach3', 1.2)); for (const s of [-1, 1]) C(g, (X(a) + X(b)) / 2 + s * 5, (TY[0] + TY[1]) / 2, 2, F('dark')); } }
+  for (const [i, j, f, n] of st.grabs) { const [a, b] = PAN_[i].bites[j], K = biteKin(f, n); if (K.sw < 0.5) { const mx = (X(a) + X(b)) / 2; R(g, mx - 29.5, TY[0] + 1, 59, TY[1] - TY[0] - 2, F('mach', 0.85) + `;stroke:${v('mach3')};stroke-width:1`, { rx: 2 }); Ln(g, mx, TY[0] + 2, mx, TY[1] - 2, SK('mach3', 1.2)); for (const s of [-1, 1]) C(g, (X(a) + X(b)) / 2 + s * 5, (TY[0] + TY[1]) / 2, 2, F('dark')); } }
   if (st.top > 0.45) { const k = clamp01((st.top - 0.45) / 0.55); R(g, x0 - 3, TY[0] - 3, (x1 - x0 + 6) * k, TY[1] - TY[0] + 6, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:1.2`, { rx: 1 }); }
 }
 let PAN_ = [];
-const pbCages = (q) => q.k === 'P' ? [[q.x0 + 0.25, (q.x0 + q.x1) / 2 - 0.15], [(q.x0 + q.x1) / 2 + 0.15, q.x1 - 0.25]] : [[q.x0 + 0.25, q.x1 - 0.25]];
-const pbTrem = (q) => q.k === 'P' ? [q.x0 + 1.75, q.x1 - 1.75] : [(q.x0 + q.x1) / 2];
+const pbCages = (q) => [[q.x0 + 0.25, (q.x0 + q.x1) / 2 - 0.15], [(q.x0 + q.x1) / 2 + 0.15, q.x1 - 0.25]];
+const pbTrem = (q) => [q.x0 + 1.6, q.x1 - 1.6];
 function pbStatic(g, o) {
   const { W, GY, BOT, DM, X } = PB, M = { H: PB.H - PB.SY, GY, layers: [{ k: 'fill', y: GY }, { k: 'sand', y: GY + 20 }, { k: 'gravel', y: GY + 136 }, { k: 'clay2', y: GY + 218 }] };
   backdrop(g, M, 0, W);
@@ -3971,7 +3971,7 @@ function pbStatic(g, o) {
   return M;
 }
 function pbDyn(g, o, M) {
-  const { W, GY, BOT, DM, X } = PB, DY = BOT - GY, st = o.st, L = o.L, tt = o.t || 0, x0 = X(0), x1 = X(26.6), gw = (1 - st.gone) * st.guide;
+  const { W, GY, BOT, DM, X } = PB, DY = BOT - GY, st = o.st, L = o.L, tt = o.t || 0, x0 = X(0), x1 = X(PB.LEN), gw = (1 - st.gone) * st.guide;
   const back = g_(g), below = g_(g), front = g_(g);
   // résvezető gerenda (a rés mögötti gerenda belső oldala)
   if (gw > 0) { const w = (x1 - x0 + 16) * st.guide, gg = g_(below, { opacity: (1 - st.gone).toFixed(2) }); R(gg, x0 - 8, GY - 4, w, 20, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:.9`); R(gg, x0 - 8, GY - 4, w, 20, 'fill:url(#pr-p-conc)'); for (let x = x0 + 60; x < x0 - 8 + w; x += 96) Ln(gg, x, GY - 3, x, GY + 15, SK('concedge', 0.7, 'opacity:.6'));
@@ -3983,7 +3983,7 @@ function pbDyn(g, o, M) {
     const maxd = Math.max(...s.b);
     if (maxd > 0) { const a = Math.min(...q.bites.filter((_, j) => s.b[j] > 0).map((bb) => bb[0])), b = Math.max(...q.bites.filter((_, j) => s.b[j] > 0).map((bb) => bb[1])); if (s.b.every((d) => d >= 1)) P(below, `M${X(a)} ${GY + 2} V${BOT} H${X(b)} V${GY + 2}`, SK('wall', 1.1)); }
     // armatúrák
-    pbCages(q).forEach(([a, b], k) => { const c = clamp01(s.cage * (q.k === 'P' ? 2 : 1) - k); if (c <= 0) return;
+    pbCages(q).forEach(([a, b], k) => { const c = clamp01(s.cage * 2 - k); if (c <= 0) return;
       const top = GY + 4 - (1 - pbS(c)) * (DY + 30), bot = top + DY - 10, cg = g_(below);
       R(cg, X(a), top, X(b) - X(a), bot - top, SK('rebar', 1.7));
       for (let x = X(a) + 7; x < X(b) - 3; x += 8) Ln(cg, x, top, x, bot, SK('rebar', 0.8, 'opacity:.8'));
@@ -4015,7 +4015,7 @@ function pbDyn(g, o, M) {
     worker(front, cx0 + side * 46, { GY, dir: side > 0 ? 1 : -1, pose: 'signal' });
   }
   // fejgerenda
-  if (st.top > 0.45) { const k = clamp01((st.top - 0.45) / 0.55); R(front, x0 - 3, GY - 9, (x1 - x0 + 6) * k, 15, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:1.2`, { rx: 1 }); R(front, x0 - 3, GY - 9, (x1 - x0 + 6) * k, 15, 'fill:url(#pr-p-conc)'); if (k > 0.6) tag(front, X(13.3), GY - 26, L.cap, { fs: 12.5, anchor: 'middle', to: [X(13.3), GY - 4] }); }
+  if (st.top > 0.45) { const k = clamp01((st.top - 0.45) / 0.55); R(front, x0 - 3, GY - 9, (x1 - x0 + 6) * k, 15, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:1.2`, { rx: 1 }); R(front, x0 - 3, GY - 9, (x1 - x0 + 6) * k, 15, 'fill:url(#pr-p-conc)'); if (k > 0.6) tag(front, X(PB.LEN / 2), GY - 26, L.cap, { fs: 12.5, anchor: 'middle', to: [X(PB.LEN / 2), GY - 4] }); }
   // feliratok
   if (o.step >= 1 && o.step <= 8) tag(front, W - 8, GY + 30, L.slv, { fs: 12, anchor: 'end', to: [x1 + 2, GY + 6] });
   if (o.step === 9 && st.top < 0.45) tag(front, W - 8, GY + 30, L.head, { fs: 12, anchor: 'end', to: [x1 - 20, GY + 3] });

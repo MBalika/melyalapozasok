@@ -46,7 +46,7 @@ cab7251	Micropiles are used mainly for underpinning.
 753be75	Guide wall
 58d2236	The space of the excavated soil is immediately filled with slurry (ρ = 1.03–1.12 g/cm³). It presses on the wall of the trench from inside and keeps out the groundwater – until the concrete is in place.
 c09de56	Grab
-0d8ebe9	Cyclic work: lowering – bite – lifting – emptying – lowering again. A bite is typically 2.8 m long: this is the width of the open grab.
+a4c6ae5	Cyclic work: lowering – bite – lifting – emptying – lowering again. A bite is typically 2.8–2.9 m long: this is the width of the open grab.
 6297a54	The groundwater presses on the wall of the trench from outside; below the groundwater table the water pressure increases linearly with depth: σ<sub>v</sub> = (z − h)·γ<sub>v</sub>.
 eadd222	Head advantage
 e636eed	The slurry level in the trench must always be at least 1.0–1.5 m above the groundwater table. As the slurry is only slightly heavier than water, this level difference “wins” the pressure contest.
@@ -62,15 +62,15 @@ b50056b	FINISHED STATE
 129121e	P1 – first bite
 ed8265a	The grab starts at one end of the primary panel: lowering – bite – lifting – emptying. The space of the excavated soil is immediately filled with bentonite slurry, and the slurry level stays near the top of the guide wall throughout.
 de2051e	P1 – second bite
-f589659	The other end of the panel comes next. A bite is typically 2.8 m long – the width of the open grab.
+2890033	The other end of the panel comes next. A bite is typically 2.8–2.9 m long – the width of the open grab.
 81320a7	P1 – biting out the middle
-e36873b	The block of soil remaining between the two end bites is also removed: so this 7.0 m panel consists of three bites. (A 5.6 m panel can be completed with two bites.)
+9c00013	The block of soil remaining between the two end bites is also removed: so this 6.0 m panel consists of three bites.
 929ab3d	Concreting P1 with two tremie pipes
 de86759	Concreting proceeds continuously from the bottom up. The heavier concrete displaces the slurry, which is pumped back to the plant. The ends of the pipes stay immersed in the fresh concrete throughout.
 ba33386	The other primary panels: P2, P3
-ecef64c	P2 and P3 are made the same way. Between the primary panels one bite of soil stays in place – the secondary panels will be here.
+8061b7a	P2 and P3 are made the same way. Between the primary panels one panel length of soil stays in place – the secondary panels, of similar length, will be here.
 f4dc564	Biting out the secondary panels
-8ff44d0	S1 and S2 are opened with a single bite each. The stop ends guide the grab and protect the concrete of the finished primary panels.
+c45cf0e	S1 and S2 are opened the same way, with three bites each: the secondary panels are as long as the primary ones. The stop ends guide the grab and protect the concrete of the finished primary panels.
 e6daee7	Reinforcing and concreting the secondary panels
 1837b6c	The stop ends are pulled out – the joint is sealed by the swelling waterstop embedded in the concrete – the cages are lifted in, and concreting follows. The wall is now continuous.
 0cccf76	The wall is finished: capping beam

@@ -30,7 +30,7 @@ function soil(p, x, y, w, hh, cls = 'f-soilA', pat = 'pat-sand', op = 0.75) {
 const ANAT = [
   { n: 1, x: 228, y: 72, t: 'Résvezető gerenda', d: 'Két, 20–25 cm széles, 1,0–1,5 m magas vasbeton gerenda a rés két oldalán: vezeti a réskanalat, megtámasztja a laza felső talajt, megakadályozza a zagy elszivárgását, és ez a kitűzés alapja is.' },
   { n: 2, x: 200, y: 210, t: 'Bentonitzagy', d: 'A kiemelt föld helyét azonnal zagy tölti ki (ρ = 1,03–1,12 g/cm³). Belülről nyomja a rés falát, és kizárja a talajvizet – amíg a beton a helyére nem kerül.' },
-  { n: 3, x: 224, y: 318, t: 'Réskanál', d: 'Ciklikus munka: leengedés – harapás – kiemelés – ürítés – újra leengedés. Egy harapás jellemzően 2,8 m hosszú: ennyi a nyitott kanál szélessége.' },
+  { n: 3, x: 224, y: 318, t: 'Réskanál', d: 'Ciklikus munka: leengedés – harapás – kiemelés – ürítés – újra leengedés. Egy harapás jellemzően 2,8–2,9 m hosszú: ennyi a nyitott kanál szélessége.' },
   { n: 4, x: 66, y: 134, t: 'Talajvízszint', d: 'A talajvíz kívülről nyomja a rés falát; a víznyomás a talajvízszint alatt a mélységgel lineárisan nő: σ<sub>v</sub> = (z − h)·γ<sub>v</sub>.' },
   { n: 5, x: 150, y: 116, t: 'Szintelőny', d: 'A zagyszintnek a résben mindig legalább 1,0–1,5 m-rel a talajvízszint felett kell lennie. Mivel a zagy csak kicsit nehezebb a víznél, ez a szintkülönbség „nyeri meg” a nyomásversenyt.' },
   { n: 6, x: 438, y: 62, t: 'Fejgerenda', d: 'A fal felső 30–50 cm-e zaggyal keveredett, ezt visszavésik; a táblákat vasbeton fejgerenda fogja össze, erre csatlakozik a felszerkezet.' },
@@ -71,23 +71,24 @@ register('rf-anat', (root) => {
 });
 
 /* ================================================================== 2. Réstábla-építő */
+// öt, egyformán 6,0 m hosszú tábla (a primer és a szekunder tábla a valóságban is hasonló hosszú); mindegyik három harapás
 const PAN = [
-  { id: 'P1', k: 'P', x0: 0, x1: 7 },
-  { id: 'S1', k: 'S', x0: 7, x1: 9.8 },
-  { id: 'P2', k: 'P', x0: 9.8, x1: 16.8 },
-  { id: 'S2', k: 'S', x0: 16.8, x1: 19.6 },
-  { id: 'P3', k: 'P', x0: 19.6, x1: 26.6 },
+  { id: 'P1', k: 'P', x0: 0, x1: 6 },
+  { id: 'S1', k: 'S', x0: 6, x1: 12 },
+  { id: 'P2', k: 'P', x0: 12, x1: 18 },
+  { id: 'S2', k: 'S', x0: 18, x1: 24 },
+  { id: 'P3', k: 'P', x0: 24, x1: 30 },
 ];
-PAN.forEach((q) => { q.bites = q.k === 'P' ? [[q.x0, q.x0 + 2.8], [q.x1 - 2.8, q.x1], [q.x0 + 2.8, q.x1 - 2.8]] : [[q.x0, q.x1]]; });
+PAN.forEach((q) => { q.bites = [[q.x0, q.x0 + 2.8], [q.x1 - 2.8, q.x1], [q.x0 + 2.8, q.x1 - 2.8]]; });
 const EP_STEPS = [
   { t: 'Résvezető gerenda', d: 'A falvonal két oldalán vasbeton résvezető gerendák készülnek (20–25 cm széles, 1,0–1,5 m magas). Ezek vezetik a réskanalat, és ez a kitűzés alapja is.', dur: 2.4 },
   { t: 'P1 – első harapás', d: 'A réskanál a primer tábla egyik végén kezd: leengedés – harapás – kiemelés – ürítés. A kiemelt föld helyét azonnal bentonitzagy tölti ki, a zagyszint végig a résvezető gerenda teteje közelében marad.', dur: 6.0 },
-  { t: 'P1 – második harapás', d: 'A tábla másik vége következik. Egy harapás jellemzően 2,8 m hosszú – ennyi a nyitott réskanál szélessége.', dur: 6.0 },
-  { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt talajtömböt is kiemelik: ez a 7,0 m-es tábla így három harapásból áll. (Egy 5,6 m-es tábla két harapással is elkészül.)', dur: 6.0 },
+  { t: 'P1 – második harapás', d: 'A tábla másik vége következik. Egy harapás jellemzően 2,8–2,9 m hosszú – ennyi a nyitott réskanál szélessége.', dur: 6.0 },
+  { t: 'P1 – a közép kiharapása', d: 'A két szélső harapás között megmaradt talajtömböt is kiemelik: ez a 6,0 m-es tábla így három harapásból áll.', dur: 6.0 },
   { t: 'Szakaszoló pallók, vasalási armatúrák', d: 'Aljtisztítás után a tábla két végére szakaszoló palló kerül, majd daruval beemelik a két vasalási armatúrát.', dur: 5.0 },
   { t: 'P1 betonozása két kontraktorcsővel', d: 'Alulról felfelé, folyamatosan betonoznak. A nehezebb beton kiszorítja a zagyot, amelyet visszaszivattyúznak a telepre. A csövek vége végig a friss betonba merül.', dur: 4.0 },
-  { t: 'A többi primer tábla: P2, P3', d: 'Ugyanígy készül el P2 és P3. A primer táblák között egy-egy harapásnyi talaj marad a helyén – itt lesznek a közbenső táblák.', dur: 12.0 },
-  { t: 'Közbenső táblák kiharapása', d: 'S1 és S2 egyetlen harapással nyílik ki. A szakaszoló pallók vezetik a kanalat, és védik a már kész primer táblák betonját.', dur: 5.0 },
+  { t: 'A többi primer tábla: P2, P3', d: 'Ugyanígy készül el P2 és P3. A primer táblák között egy-egy táblányi talaj marad a helyén – itt lesznek a hasonló hosszúságú közbenső (szekunder) táblák.', dur: 12.0 },
+  { t: 'Közbenső táblák kiharapása', d: 'S1 és S2 ugyanúgy, három harapással nyílik ki: a közbenső táblák ugyanolyan hosszúak, mint a primerek. A szakaszoló pallók vezetik a kanalat, és védik a már kész primer táblák betonját.', dur: 10.0 },
   { t: 'Közbenső táblák vasalása, betonozása', d: 'A szakaszoló pallókat kihúzzák – a hézagot a betonba ágyazott duzzadószalag tömíti –, beemelik a vasalási armatúrákat, és betonoznak. A fal most már folytonos.', dur: 6.0 },
   { t: 'Kész a fal: fejgerenda', d: 'A táblák felső 30–50 cm-e zaggyal keveredett, gyenge beton: ezt visszavésik, és a falat vasbeton fejgerenda fogja össze. A résvezető gerendák elbonthatók.', dur: 2.8 },
 ];
@@ -108,7 +109,7 @@ function epState(s, p) {
         bite(i, 0, seq(i, f, 0, 0.17), 1); bite(i, 1, seq(i, f, 0.17, 0.34), 1); bite(i, 2, seq(i, f, 0.34, 0.5), 1);
         st.pan[i].stop = seq(i, f, 0.5, 0.6); st.pan[i].cage = seq(i, f, 0.6, 0.76); st.pan[i].conc = seq(i, f, 0.76, 1);
       } break;
-      case 7: for (const i of [1, 3]) bite(i, 0, f, 2); break;
+      case 7: for (const i of [1, 3]) { bite(i, 0, seq(i, f, 0, 0.36), 1); bite(i, 1, seq(i, f, 0.36, 0.72), 1); bite(i, 2, seq(i, f, 0.72, 1), 1); } break;
       case 8: st.pull = f < 1; for (const i of [0, 2, 4]) st.pan[i].stop = 1 - seq(i, f, 0, 0.2);
         for (const i of [1, 3]) { st.pan[i].cage = seq(i, f, 0.2, 0.5); st.pan[i].conc = seq(i, f, 0.5, 1); } break;
       case 9: st.top = f; st.gone = seq(0, f, 0, 0.4); break;
@@ -400,7 +401,7 @@ register('rf-lab', (root) => {
 /* ================================================================== kvíz */
 defineQuiz('rf', 'Kvíz – résfalak', [
   { q: 'Legalább mennyivel legyen a zagyszint a résben a talajvízszint felett?', a: ['1,0–1,5 m-rel', '10–20 cm-rel', 'Legalább 5 m-rel', 'Mindegy, ha elég sűrű a zagy'], c: 0, e: 'A zagy csak kicsit nehezebb a víznél (1,03–1,12 g/cm³), ezért szintelőny kell: legalább 1,0–1,5 m. Ez a többlet tartja egyensúlyban a földnyomást is.' },
-  { q: 'Mekkora egy résmarkolós „harapás” jellemző hossza?', a: ['2,8 m', '0,6 m', '8–10 m', '15 m'], c: 0, e: 'A réskanál nyitott szélessége kb. 2,8 m – ez egyben a legrövidebb kiemelhető réstábla. A szokásos táblák 2,8–6,5 (8) m hosszúak.' },
+  { q: 'Mekkora egy résmarkolós „harapás” jellemző hossza?', a: ['2,8–2,9 m', '0,6 m', '8–10 m', '15 m'], c: 0, e: 'A réskanál nyitott szélessége kb. 2,8–2,9 m – ez egyben a legrövidebb kiemelhető réstábla. A szokásos táblák 2,8–6,5 (8) m hosszúak.' },
   { q: 'Miért kisebb a rés falára ható földnyomás a Rankine-félénél?', a: ['A tábla két vége felé boltozódás alakul ki (silóhatás)', 'A zagy kémiailag megszilárdítja a talajt', 'A talajvíz felhajtóereje teljesen kiegyenlíti', 'Mert a résfal hajlékony'], c: 0, e: 'A véges hosszú rés mellett a talajék a tábla végeinél a nyugvó talajra támaszkodik; a földnyomás a mélységgel egy határértékhez tart (Schneebeli-képlet).' },
   { q: 'Mi történik, ha hosszabb réstáblát nyitunk ugyanabban a talajban?', a: ['Gyengül a boltozódás, nő a földnyomás, csökken az állékonyság', 'Nő az állékonyság', 'Nincs hatása, csak a betonozás tart tovább', 'A zagy sűrűsége megnő'], c: 0, e: 'Rövidebb tábla → erősebb boltozódás → kisebb földnyomás → állékonyabb rés. Ezért legfeljebb 8–10 m, jellemzően 2,8–5,6 m a táblahossz.' },
   { q: 'Milyen bentonit használható réseléshez?', a: ['Csak aktivált „Na” bentonit', 'Bármilyen helyi agyag', 'Kalciumbentonit cementtel', 'Kvarchomok és víz keveréke'], c: 0, e: 'A bentonit döntően montmorillonitból álló kolloid agyag; réseléshez csak aktivált Na-bentonit jó, a viszkozitás CMC-vel növelhető.' },

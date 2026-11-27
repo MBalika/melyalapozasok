@@ -228,7 +228,7 @@ function renderGW(el, kind) {
 /* ================================================================== 3. Réskanál és marótárcsák */
 function renderGrab(el) {
   const s = mk(el, 400, 280, 'Résmarkoló: a nyitott réskanál a zagyos résben');
-  rfGrabFig(s, { bite: '≈ 2,8 m – egy harapás', slurry: 'zagy', soil: 'talaj' });
+  rfGrabFig(s, { bite: '≈ 2,8–2,9 m – egy harapás', slurry: 'zagy', soil: 'talaj' });
 }
 function renderCutter(el) {
   const s = mk(el, 400, 280, 'Hydrofraise: két ellentétesen forgó marótárcsa, középen a szívócsonk');

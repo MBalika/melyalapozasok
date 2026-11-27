@@ -47,20 +47,20 @@ b7111d2	<b>Guide wall:</b> two reinforced concrete walls propped against each ot
 51d2495	Formwork for the guide wall pair
 152f894	Excavating the soil: grab or cutter
 f22b91f	Diaphragm wall grab (clamshell)
-e9ebad9	A rig with a rigid rod (<b>Kelly</b>) or suspended on ropes, with hydraulic or mechanical (rope) power transmission. The work is <b>cyclic</b>: lowering – bite – lifting – emptying – lowering again. A bite is typically <b>2.8 m</b> long: this is the open width of the grab, and also the shortest panel that can be excavated.
+bf5afaa	A rig with a rigid rod (<b>Kelly</b>) or suspended on ropes, with hydraulic or mechanical (rope) power transmission. The work is <b>cyclic</b>: lowering – bite – lifting – emptying – lowering again. A bite is typically <b>2.8–2.9 m</b> long: this is the open width of the grab, and also the shortest panel that can be excavated.
 28cb9df	A reverse-circulation cutting machine: counter-rotating <b>cutter wheels</b> break up the soil, which is pumped out together with the bentonite slurry; outside they are separated, the slurry is cleaned and returned to the trench. It can be used to great depth, in any soil and even in <b>rock</b>, and gives a more accurate, neater surface – but it is very expensive.
 db0f20c	The diaphragm walls of metro line 4
 1e8aeb8	Diaphragm wall construction in pictures
-442a203	Rope-suspended diaphragm wall grab
+cb2c1b4	Rope-operated trenching rig
 5bea3c0	Different grabs
 f9b76e2	Grabs: the width of the open grab gives the length of the bite
 3bc520e	Excavation with a grab from a slurry-filled trench
-6c274a7	The grab rises out of the slurry-filled trench
+d657282	The grab lifts the soil out of the slurry-filled trench
 9f83282	Cutter wheels with teeth – they work in rock too
 4732003	Two counter-rotating cutter wheels
 bba28e4	The two counter-rotating wheels direct the cuttings to the centre
 2ee36f8	Slurry treatment plant on site
-8206b8a	Slurry treatment plant: mixing, storage, cleaning
+0936fb1	Slurry treatment plant: mixing, storage, cleaning – in the car park in front of the CH building
 9b652ad	Stop end and reinforcement
 008410b	Placing a stop end in the trench
 3430ad0	Stop end
@@ -87,3 +87,4 @@ a1ec4a7	<i>10</i><span><b>Adding water</b> to the mixer</span>
 abe41c8	Reinforcement cage
 a2fcecb	Lifting a reinforcement cage with a crane
 e15f338	It has been used in Hungary <b>since the 1960s</b>. A diaphragm wall consists of a series of panels: each panel is excavated under the protection of bentonite slurry, then a reinforcement cage is lowered into it and it is filled by underwater concreting. It can be built to great depth, in practically any length and plan layout – in return it needs expensive, special equipment, so it is an <b>expensive technology</b>.
+6ec0b38	Between two finished primary panels the secondary panel, of similar length, is excavated in the same way, bite by bite.
