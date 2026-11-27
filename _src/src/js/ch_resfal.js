@@ -1,4 +1,5 @@
 // C07 – Résfalak: anatómia, réstábla-építő, gépválasztó, silóhatás, résállékonyság-labor, kvíz
+import { anatScene, RFA } from './proc.js';
 import { register, shell, slider, seg, toggle, stat, verdict, svg, figure, clear, fmt, clamp, lerp, pathD, h, loop } from './core.js';
 import { defineQuiz } from './ui.js';
 import './rf_figs.js';
@@ -49,75 +50,26 @@ function crane(p, x0, y, tip) {
 
 /* ================================================================== 1. Egy résfal anatómiája */
 const ANAT = [
-  { n: 1, x: 205, y: 46, t: 'Résvezető gerenda', d: 'Két, 20–25 cm széles, 1,0–1,5 m magas vasbeton gerenda a rés két oldalán: vezeti a réskanalat, megtámasztja a laza felső talajt, megakadályozza a zagy elszivárgását, és ez a kitűzés alapja is.' },
-  { n: 2, x: 185, y: 196, t: 'Bentonitzagy', d: 'A kiemelt föld helyét azonnal zagy tölti ki (ρ = 1,03–1,12 g/cm³). Belülről nyomja a rés falát, és kizárja a talajvizet – amíg a beton a helyére nem kerül.' },
-  { n: 3, x: 205, y: 300, t: 'Réskanál', d: 'Ciklikus munka: leengedés – harapás – kiemelés – ürítés – újra leengedés. Egy harapás jellemzően 2,8 m hosszú: ennyi a nyitott kanál szélessége.' },
-  { n: 4, x: 92, y: 110, t: 'Talajvízszint', d: 'A talajvíz kívülről nyomja a rés falát; a víznyomás a talajvízszint alatt a mélységgel lineárisan nő: σ<sub>v</sub> = (z − h)·γ<sub>v</sub>.' },
-  { n: 5, x: 146, y: 86, t: 'Szintelőny', d: 'A zagyszintnek a résben mindig legalább 1,0–1,5 m-rel a talajvízszint felett kell lennie. Mivel a zagy csak kicsit nehezebb a víznél, ez a szintkülönbség „nyeri meg” a nyomásversenyt.' },
-  { n: 6, x: 421, y: 40, t: 'Fejgerenda', d: 'A fal felső 30–50 cm-e zaggyal keveredett, ezt visszavésik; a táblákat vasbeton fejgerenda fogja össze, erre csatlakozik a felszerkezet.' },
-  { n: 7, x: 726, y: 300, t: 'Résfal', d: 'Vasbeton panelek folytonos, 40–120 cm vastag fala. Merev és vízzáró – itt egyben a mélygarázs végleges oldalfala, és a felette álló épület terhét is leviszi.' },
-  { n: 8, x: 565, y: 104, t: 'Födémek', d: 'A garázsszintek födémei támasztják meg a falat. Top-down építésnél felülről lefelé készülnek: a gödör kiemelése a födémek alatt halad.' },
-  { n: 9, x: 444, y: 330, t: 'Beágyazás', d: 'A fal lába a vízzáró agyagba kötve a talajvizet is kizárja a gödörből – így nincs szükség talajvízszint-süllyesztésre a környéken.' },
-  { n: 10, x: 382, y: 24, t: 'Szomszéd épület', d: 'A résfal viszonylag zaj- és rezgésmentesen készül, és merev fal: ezért építhető közvetlenül a telekhatáron álló épület mellett is.' },
+  { n: 1, x: 228, y: 72, t: 'Résvezető gerenda', d: 'Két, 20–25 cm széles, 1,0–1,5 m magas vasbeton gerenda a rés két oldalán: vezeti a réskanalat, megtámasztja a laza felső talajt, megakadályozza a zagy elszivárgását, és ez a kitűzés alapja is.' },
+  { n: 2, x: 200, y: 210, t: 'Bentonitzagy', d: 'A kiemelt föld helyét azonnal zagy tölti ki (ρ = 1,03–1,12 g/cm³). Belülről nyomja a rés falát, és kizárja a talajvizet – amíg a beton a helyére nem kerül.' },
+  { n: 3, x: 224, y: 318, t: 'Réskanál', d: 'Ciklikus munka: leengedés – harapás – kiemelés – ürítés – újra leengedés. Egy harapás jellemzően 2,8 m hosszú: ennyi a nyitott kanál szélessége.' },
+  { n: 4, x: 66, y: 134, t: 'Talajvízszint', d: 'A talajvíz kívülről nyomja a rés falát; a víznyomás a talajvízszint alatt a mélységgel lineárisan nő: σ<sub>v</sub> = (z − h)·γ<sub>v</sub>.' },
+  { n: 5, x: 150, y: 116, t: 'Szintelőny', d: 'A zagyszintnek a résben mindig legalább 1,0–1,5 m-rel a talajvízszint felett kell lennie. Mivel a zagy csak kicsit nehezebb a víznél, ez a szintkülönbség „nyeri meg” a nyomásversenyt.' },
+  { n: 6, x: 438, y: 62, t: 'Fejgerenda', d: 'A fal felső 30–50 cm-e zaggyal keveredett, ezt visszavésik; a táblákat vasbeton fejgerenda fogja össze, erre csatlakozik a felszerkezet.' },
+  { n: 7, x: 722, y: 320, t: 'Résfal', d: 'Vasbeton panelek folytonos, 40–120 cm vastag fala. Merev és vízzáró – itt egyben a mélygarázs végleges oldalfala, és a felette álló épület terhét is leviszi.' },
+  { n: 8, x: 600, y: 150, t: 'Födémek', d: 'A garázsszintek födémei támasztják meg a falat. Top-down építésnél felülről lefelé készülnek: a gödör kiemelése a födémek alatt halad.' },
+  { n: 9, x: 438, y: 334, t: 'Beágyazás', d: 'A fal lába a vízzáró agyagba kötve a talajvizet is kizárja a gödörből – így nincs szükség talajvízszint-süllyesztésre a környéken.' },
+  { n: 10, x: 389, y: 46, t: 'Szomszéd épület', d: 'A résfal viszonylag zaj- és rezgésmentesen készül, és merev fal: ezért építhető közvetlenül a telekhatáron álló épület mellett is.' },
 ];
 register('rf-anat', (root) => {
   const { viz } = shell(root, { layout: 'wide', out: false });
-  const W = 760, H = 400;
+  const W = RFA.W, H = RFA.H;
   const fig = figure(viz, W, H, 'fig rf-anatfig');
   const info = h('div', { class: 'rf-info' });
   const list = h('div', { class: 'rf-leg' });
   viz.append(info, list);
+  anatScene(fig);
   const g = G(fig);
-  R(g, 0, 0, W, 60, 'f-sky');
-  soil(g, 0, 60, W, 190, 'f-soilA', 'pat-sand');
-  soil(g, 0, 250, W, 150, 'f-soilB', 'pat-clay', 0.8);
-  T(g, 10, 244, 'homok, kavics', 't-sm halo');
-  T(g, 10, 392, 'vízzáró agyag', 't-sm halo');
-  // ---- bal fél: építés közben
-  const tip = [186, 6];
-  crane(g, 30, 60, tip);
-  L(g, tip[0], tip[1], 186, 286, 'stroke:var(--ink);stroke-width:1.2');
-  R(g, 176, 60, 20, 300, 'f-slurry', { opacity: 0.95 });
-  R(g, 176, 60, 20, 300, '', { fill: 'url(#pat-slurry)' });
-  R(g, 166, 57, 10, 19, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:1' });
-  R(g, 196, 57, 10, 19, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:1' });
-  grab(g, 186, 306, 20, 0.2);
-  L(g, 0, 110, 166, 110, 'stroke:var(--water);stroke-width:1.6;stroke-dasharray:6 4');
-  L(g, 206, 110, 345, 110, 'stroke:var(--water);stroke-width:1.6;stroke-dasharray:6 4');
-  P(g, 'M24 104 l6 -9 h-12 z', '', { style: 'fill:var(--water)' });
-  T(g, 34, 104, 'TV', 't-sm t-water');
-  // szintelőny
-  L(g, 158, 60, 158, 110, 'stroke:var(--grp);stroke-width:1.5');
-  L(g, 153, 60, 172, 60, 'stroke:var(--grp);stroke-width:1.5');
-  L(g, 153, 110, 163, 110, 'stroke:var(--grp);stroke-width:1.5');
-  T(g, 214, 72, 'zagyszint', 't-sm halo');
-  T(g, 214, 340, 'rés zaggyal', 't-sm halo');
-  // ---- jobb fél: kész állapot
-  L(g, 345, 0, 345, H, 'stroke:var(--line2);stroke-width:1.5;stroke-dasharray:5 5');
-  T(g, 334, 22, 'ÉPÍTÉS KÖZBEN', 't-big', { 'text-anchor': 'end', style: 'font-size:15px' });
-  T(g, 566, 22, 'KÉSZ ÁLLAPOT', 't-big', { 'text-anchor': 'middle', style: 'font-size:15px' });
-  // szomszéd épület síkalapon
-  R(g, 358, 6, 46, 54, 'f-bld', { style: 'stroke:var(--building2);stroke-width:1' });
-  for (let r = 0; r < 3; r++) for (let c = 0; c < 2; c++) R(g, 364 + c * 20, 12 + r * 16, 12, 9, 'f-bld2');
-  R(g, 354, 60, 54, 12, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:1' });
-  // munkagödör
-  R(g, 428, 60, 274, 190, 'f-bg2');
-  for (const y of [60, 110, 160, 210]) R(g, 428, y, 274, 6, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:.8' });
-  R(g, 428, 244, 274, 12, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:.8' });
-  for (const x of [520, 610]) for (const y of [66, 116, 166, 216]) R(g, x - 3, y, 6, y === 216 ? 28 : 44, 'f-conc2');
-  // falak
-  for (const x of [414, 702]) {
-    R(g, x, 58, 14, 302, 'f-conc', { style: 'stroke:var(--concrete2);stroke-width:1' });
-    R(g, x, 58, 14, 302, '', { fill: 'url(#pat-conc)' });
-    L(g, x + 4, 70, x + 4, 352, 'stroke:var(--rebar);stroke-width:1;stroke-dasharray:4 3');
-    L(g, x + 10, 70, x + 10, 352, 'stroke:var(--rebar);stroke-width:1;stroke-dasharray:4 3');
-    R(g, x - 4, 48, 22, 12, 'f-conc2', { style: 'stroke:var(--ink);stroke-width:.8' });
-  }
-  // talajvíz kívül + víznyomás-nyilak
-  L(g, 345, 110, 414, 110, 'stroke:var(--water);stroke-width:1.6;stroke-dasharray:6 4');
-  L(g, 716, 110, W, 110, 'stroke:var(--water);stroke-width:1.6;stroke-dasharray:6 4');
-  for (const y of [150, 190, 230]) { const l = 10 + (y - 110) * 0.12; ar(g, 716 + l + 10, y, 718, y, 'var(--water)', 2, 6); }
-  T(g, 566, 236, 'munkatér – száraz', 't-sm', { 'text-anchor': 'middle' });
   // hotspotok
   const hots = ANAT.map((a) => {
     const hg = G(g, { class: 'rf-hot', tabindex: 0, role: 'button', 'aria-label': a.t });

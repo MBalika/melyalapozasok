@@ -3718,6 +3718,77 @@ export function soilScene(fig, o) {
   while (fig._dy.firstChild) fig._dy.removeChild(fig._dy.firstChild);
   soilDyn(fig._dy, o);
 }
+/* ================================================================== 7.1 – Egy résfal anatómiája (bal: építés közben, jobb: kész mélygarázs) */
+export const RFA = { W: 760, H: 420, GY: 92, TV: 134, CL: 270, BOT: 376, TR: [190, 210], WL: [430, 446], WR: [714, 730] };
+function carSide(g, x, y, col) {
+  // oldalnézeti személyautó (x: bal szél, y: kerékalj)
+  P(g, `M${x} ${y - 6} Q${x} ${y - 12} ${x + 6} ${y - 12} L${x + 12} ${y - 12} L${x + 18} ${y - 19} H${x + 32} L${x + 38} ${y - 12} H${x + 44} Q${x + 48} ${y - 12} ${x + 48} ${y - 6} V${y - 3} H${x}Z`, F(col) + `;stroke:${v('dark2')};stroke-width:.7`);
+  P(g, `M${x + 19.5} ${y - 17.5} H${x + 24.5} V${y - 12.5} H${x + 14.5}Z M${x + 26} ${y - 17.5} H${x + 31.5} L${x + 36} ${y - 12.5} H${x + 26}Z`, 'fill:url(#pr-glass)');
+  for (const cx of [x + 10, x + 38]) { C(g, cx, y - 3, 4, F('dark')); C(g, cx, y - 3, 1.6, F('steel2')); }
+}
+export function anatScene(fig) {
+  defs();
+  fig.classList.add('pr-svg');
+  const { W, H, GY, TV, CL, BOT, TR, WL, WR } = RFA, g = g_(fig);
+  CUR.W = W;
+  const M = { H, GY, layers: [{ k: 'fill', y: GY }, { k: 'gravel', y: GY + 12 }, { k: 'clay2', y: CL }] };
+  backdrop(g, M, 0, W);
+  const tw = (x1, x2) => { Ln(g, x1, TV, x2, TV, SK('water', 1.6, 'stroke-dasharray:7 4')); };
+  // ---------------- bal fél: réselés zagy alatt
+  silo(g, M, 22, { w: 18, h: 70, band: 'slurry2' });
+  const pl = plant(g, M, 34, { w: 40, h: 22 });
+  R(g, TR[0], GY + 2, TR[1] - TR[0], BOT - GY - 2, F('bore'));
+  slurry(g, TR[0], GY + 6, TR[1] - TR[0], BOT - GY - 6);
+  Ln(g, TR[0], GY, TR[0], BOT, SK('wall', 1)); Ln(g, TR[1], GY, TR[1], BOT, SK('wall', 1)); Ln(g, TR[0], BOT, TR[1], BOT, SK('wall', 1));
+  // résvezető gerendák
+  for (const [x, w] of [[TR[0] - 16, 16], [TR[1], 16]]) { R(g, x, GY - 6, w, 26, 'fill:url(#pr-concg)' + `;stroke:${v('conc2')};stroke-width:.8`); R(g, x, GY - 6, w, 26, 'fill:url(#pr-p-conc)'); }
+  // réskanál a zagyban, kötélen a darugémről
+  const gx = (TR[0] + TR[1]) / 2, gr = grab(g, gx, 344, 9, 0.15);
+  crane(g, M, gx, gr.top - 4, { reach: -128, tipY: 12 });
+  hoseTo(g, pl.out[0], pl.out[1], TR[0] - 4, GY - 6, 10);
+  spoil(g, M, 236, 64, 13, 'gravel');
+  tw(0, TR[0] - 16); tw(TR[1] + 16, 352);
+  P(g, `M14 ${TV - 4} l6 -9 h-12z`, F('water'));
+  // szintelőny: zagyszint – talajvízszint
+  const dx = TR[0] - 26;
+  Ln(g, dx, GY + 6, dx, TV, SK('acc', 1.6)); Ln(g, dx - 5, GY + 6, dx + 5, GY + 6, SK('acc', 1.6)); Ln(g, dx - 5, TV, dx + 5, TV, SK('acc', 1.6));
+  tag(g, TR[1] + 44, GY + 26, 'zagyszint', { fs: 12, to: [TR[1] - 2, GY + 7] });
+  tag(g, 26, TV - 8, EN ? 'GWT' : 'TV', { fs: 12 });
+  tag(g, TR[1] + 26, 300, 'rés zaggyal', { fs: 12, to: [TR[1] - 3, 300] });
+  // ---------------- elválasztó és címek
+  Ln(g, 352, 0, 352, H, SK('labline', 1.2, 'stroke-dasharray:5 5'));
+  tag(g, 176, 20, 'ÉPÍTÉS KÖZBEN', { fs: 13.5, anchor: 'middle' });
+  tag(g, 572, 20, 'KÉSZ ÁLLAPOT', { fs: 13.5, anchor: 'middle' });
+  // ---------------- jobb fél: kész mélygarázs résfallal
+  facade(g, 362, 30, 54, GY - 30);
+  R(g, 358, GY, 62, 12, 'fill:url(#pr-concg)' + `;stroke:${v('conc2')};stroke-width:.8`);
+  const IX0 = WL[1], IX1 = WR[0], LV = [GY + 2, 146, 196], BS = [246, 262];
+  R(g, IX0, GY, IX1 - IX0, BS[0] - GY, F('wallh'));
+  for (let i = 0; i < LV.length; i++) {
+    const y = LV[i];
+    R(g, IX0, y, IX1 - IX0, 8, 'fill:url(#pr-concg)' + `;stroke:${v('conc2')};stroke-width:.7`);
+    const yb = i < LV.length - 1 ? LV[i + 1] : BS[0];
+    for (const cx of [IX0 + 90, IX0 + 180]) R(g, cx - 3.5, y + 8, 7, yb - y - 8, 'fill:url(#pr-concg)');
+    if (i === 1) { carSide(g, IX0 + 22, yb, 'acc'); carSide(g, IX0 + 112, yb, 'water'); carSide(g, IX0 + 204, yb, 'mach'); }
+    else if (i === 0) { carSide(g, IX0 + 30, yb, 'mach2'); carSide(g, IX0 + 196, yb, 'acc'); }
+    else { carSide(g, IX0 + 16, yb, 'water'); carSide(g, IX0 + 212, yb, 'mach2'); }
+  }
+  R(g, IX0, BS[0], IX1 - IX0, BS[1] - BS[0], 'fill:url(#pr-concg)' + `;stroke:${v('conc2')};stroke-width:.8`);
+  R(g, IX0, BS[0], IX1 - IX0, BS[1] - BS[0], 'fill:url(#pr-p-conc)');
+  // résfalak vasalással, fejgerendával; a láb a vízzáró agyagba kötve
+  for (const [x0, x1] of [WL, WR]) {
+    R(g, x0, GY - 4, x1 - x0, BOT - GY + 4, 'fill:url(#pr-concg)' + `;stroke:${v('concedge')};stroke-width:1`);
+    R(g, x0, GY - 4, x1 - x0, BOT - GY + 4, 'fill:url(#pr-p-conc)');
+    for (const k of [0.28, 0.72]) Ln(g, x0 + (x1 - x0) * k, GY + 6, x0 + (x1 - x0) * k, BOT - 6, SK('rebar', 1.1, 'stroke-dasharray:5 3'));
+    R(g, x0 - 5, GY - 16, x1 - x0 + 10, 13, F('conc2') + `;stroke:${v('concedge')};stroke-width:1`, { rx: 1 });
+  }
+  // talajvíz kívül, víznyomás a falon
+  tw(352, 358); tw(420, WL[0]); tw(WR[1], W);
+  for (const y of [170, 210, 250]) { const l = 10 + (y - TV) * 0.16; arrowH(g, WR[1] + l + 10, WR[1] + 3, y, { w: 2, s: 6, c: 'water' }); }
+  tag(g, (IX0 + IX1) / 2, BS[0] - 16, 'munkatér – száraz', { fs: 12, anchor: 'middle' });
+  tag(g, 10, CL - 14, 'homok, kavics', { fs: 12 });
+  tag(g, 10, H - 14, 'vízzáró agyag', { fs: 12 });
+}
 export function methodCard(s, kind) {
   defs(); CUR.W = CARD.W;
   const { W, H, GY } = CARD, tg = (g, x, y, t, o = {}) => tag(g, x, y, t, { fs: 13, ...o });
